@@ -6,6 +6,7 @@ export interface Chapter {
   description: string;
   topics: string[];
   pdfFile: string; // filename in /public/pdfs/
+  pdfAvailable: boolean; // set to true only when the PDF file exists in public/pdfs/
   readingTime: string;
   content: string; // HTML or MDX content for web reading
 }
@@ -33,6 +34,7 @@ export const chapters: Chapter[] = [
       "We establish the mathematical scaffolding: complex vector spaces, inner products, operators, and the spectral theorem — the language quantum mechanics speaks.",
     topics: ["Complex vector spaces", "Hilbert spaces", "Linear operators", "Eigenvalues & eigenvectors", "Dirac notation"],
     pdfFile: "chapter-01-mathematical-foundations.pdf",
+    pdfAvailable: false,
     readingTime: "45 min",
     content: `
 <p>Quantum mechanics is, at its core, a theory about linear algebra over complex numbers. Before we can speak meaningfully about particles, waves, or measurements, we must first build the mathematical stage on which the quantum drama unfolds.</p>
@@ -63,6 +65,7 @@ export const chapters: Chapter[] = [
       "The wavefunction emerges as the central object of non-relativistic quantum mechanics. We derive and analyze the time-dependent and time-independent Schrödinger equations.",
     topics: ["Wavefunction interpretation", "Time-dependent Schrödinger equation", "Probability currents", "Stationary states", "Free particle"],
     pdfFile: "chapter-02-wave-mechanics.pdf",
+    pdfAvailable: false,
     readingTime: "55 min",
     content: `
 <p>In 1926, Erwin Schrödinger wrote down an equation whose solutions — wavefunctions $\\psi(\\mathbf{x}, t)$ — would transform our understanding of nature at the smallest scales.</p>
@@ -91,6 +94,7 @@ export const chapters: Chapter[] = [
       "Perhaps the most important exactly-solvable system in all of physics. The algebraic method reveals a beautiful structure that reappears throughout quantum field theory.",
     topics: ["Algebraic method", "Creation & annihilation operators", "Energy spectrum", "Coherent states", "Applications"],
     pdfFile: "chapter-03-harmonic-oscillator.pdf",
+    pdfAvailable: false,
     readingTime: "50 min",
     content: `
 <p>The quantum harmonic oscillator stands as a cornerstone of modern physics. Its exact solution, elegant algebraic structure, and ubiquitous appearance — from molecular vibrations to quantum fields — make it indispensable.</p>
@@ -120,6 +124,7 @@ export const chapters: Chapter[] = [
       "Rotational symmetry gives birth to angular momentum quantization. We construct the general theory and encounter the radical concept of half-integer spin.",
     topics: ["Orbital angular momentum", "Commutation relations", "Spherical harmonics", "Spin-1/2 systems", "Clebsch-Gordan coefficients"],
     pdfFile: "chapter-04-angular-momentum.pdf",
+    pdfAvailable: false,
     readingTime: "60 min",
     content: `
 <p>Angular momentum is one of the most fundamental conserved quantities in physics. Its quantum theory reveals that angular momentum is quantized — and that nature harbors a surprising type that has no classical analogue: <em>spin</em>.</p>
@@ -145,6 +150,7 @@ export const chapters: Chapter[] = [
       "What happens when we look? The measurement postulate, collapse, and the EPR paradox lead us to the strangest phenomenon in physics: quantum entanglement.",
     topics: ["Measurement postulate", "Wavefunction collapse", "EPR paradox", "Bell inequalities", "Quantum entanglement"],
     pdfFile: "chapter-05-measurement-entanglement.pdf",
+    pdfAvailable: false,
     readingTime: "65 min",
     content: `
 <p>Of all the mysteries in quantum mechanics, measurement stands apart. Unlike the smooth, deterministic Schrödinger evolution, measurement is discontinuous, probabilistic, and deeply puzzling.</p>

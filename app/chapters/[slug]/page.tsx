@@ -148,27 +148,29 @@ export default function ChapterPage({ params }: Props) {
             >
               ⏱ {chapter.readingTime} read
             </span>
-            <a
-              href={`/pdfs/${chapter.pdfFile}`}
-              download
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                background: "rgba(245,158,11,0.1)",
-                border: "1px solid rgba(245,158,11,0.25)",
-                color: "var(--amber)",
-                padding: "0.45rem 1rem",
-                borderRadius: "4px",
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.78rem",
-                fontWeight: 500,
-                textDecoration: "none",
-                letterSpacing: "0.03em",
-              }}
-            >
-              ↓ Download PDF
-            </a>
+            {chapter.pdfAvailable && (
+              <a
+                href={`/pdfs/${chapter.pdfFile}`}
+                download
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  background: "rgba(245,158,11,0.1)",
+                  border: "1px solid rgba(245,158,11,0.25)",
+                  color: "var(--amber)",
+                  padding: "0.45rem 1rem",
+                  borderRadius: "4px",
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "0.78rem",
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  letterSpacing: "0.03em",
+                }}
+              >
+                ↓ Download PDF
+              </a>
+            )}
           </div>
         </div>
       </div>
