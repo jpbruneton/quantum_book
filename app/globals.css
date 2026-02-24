@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: 'Playfair Display', serif;
+  --font-crimson: 'Crimson Pro', serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+  --font-inter: 'Inter', sans-serif;
+
+  --bg-primary: #0a0b0f;
+  --bg-secondary: #0d1117;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2233;
+  --border: rgba(245, 158, 11, 0.15);
+  --border-bright: rgba(245, 158, 11, 0.4);
+  --amber: #f59e0b;
+  --amber-soft: #fbbf24;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-dim: #475569;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-crimson);
+  font-size: 18px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── Quantum Wave Background ─── */
+.wave-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wave-bg svg {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  opacity: 0.07;
+  animation: waveDrift 12s ease-in-out infinite;
+}
+
+.wave-bg svg:nth-child(2) {
+  opacity: 0.04;
+  animation-duration: 18s;
+  animation-direction: reverse;
+  transform: translateY(20px);
+}
+
+@keyframes waveDrift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-10%); }
+}
+
+/* ─── Stagger Animations ─── */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Amber glow ─── */
+.amber-glow {
+  text-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(245, 158, 11, 0.1);
+}
+
+.amber-line {
+  position: relative;
+}
+.amber-line::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+}
+
+/* ─── Chapter card hover ─── */
+.chapter-card {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chapter-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(245, 158, 11, 0.05);
+}
+
+/* ─── Prose / Chapter content ─── */
+.prose-quantum {
+  font-family: var(--font-crimson);
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: #cbd5e1;
+}
+
+.prose-quantum h2 {
+  font-family: var(--font-playfair);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--amber);
+  padding-left: 1rem;
+}
+
+.prose-quantum p {
+  margin-bottom: 1.25rem;
+}
+
+.prose-quantum ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+  list-style: none;
+}
+
+.prose-quantum ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-quantum ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  font-size: 0.875rem;
+}
+
+.prose-quantum strong {
+  color: var(--amber-soft);
+  font-weight: 600;
+}
+
+.prose-quantum em {
+  color: #e2e8f0;
+  font-style: italic;
+}
+
+/* Math display */
+.katex-display {
+  margin: 1.75rem 0;
+  overflow-x: auto;
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+/* ─── PDF Viewer ─── */
+.pdf-embed {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4a5568; }
+
+/* ─── Selection ─── */
+::selection { background: rgba(245, 158, 11, 0.2); color: #fff; }
