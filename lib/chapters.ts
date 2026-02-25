@@ -16,7 +16,7 @@ export const bookMeta = {
   subtitle: "A Modern Introduction",
   author: "Your Name",
   affiliation: "University / Institution",
-  year: "2025",
+  year: "2027",
   edition: "First Edition",
   description:
     "A rigorous yet accessible treatment of quantum mechanics, bridging classical intuition and the mathematical formalism of Hilbert spaces, operators, and measurement theory. Designed for advanced undergraduates and graduate students.",
