@@ -5,58 +5,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Dark mode (default) ─── */
+/* ─── Light mode (default) ─── */
 :root {
   --font-playfair: 'Playfair Display', serif;
   --font-crimson: 'Crimson Pro', serif;
   --font-jetbrains: 'JetBrains Mono', monospace;
   --font-inter: 'Inter', sans-serif;
 
-  /* Backgrounds */
-  --bg-primary: #0a0b0f;
-  --bg-secondary: #0d1117;
-  --bg-card: #111827;
-  --bg-card-hover: #1a2233;
-  --cover-bg: linear-gradient(145deg, #0f1a2e 0%, #0a0f1a 40%, #0d1525 100%);
-
-  /* Text */
-  --text-primary: #f1f5f9;
-  --text-heading: #f1f5f9;
-  --text-bright: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-dim: #475569;
-
-  /* Accent (amber in dark, blue in light) */
-  --amber: #f59e0b;
-  --amber-soft: #fbbf24;
-
-  /* Accent backgrounds / borders — CSS-variable-friendly */
-  --accent-bg-xs:     rgba(245, 158, 11, 0.03);
-  --accent-bg-sm:     rgba(245, 158, 11, 0.07);
-  --accent-bg-md:     rgba(245, 158, 11, 0.10);
-  --accent-border-sm: rgba(245, 158, 11, 0.12);
-  --accent-border-md: rgba(245, 158, 11, 0.20);
-  --accent-border-lg: rgba(245, 158, 11, 0.30);
-  --accent-border-hover: rgba(245, 158, 11, 0.35);
-  --accent-glow:      rgba(245, 158, 11, 0.06);
-  --accent-shadow:    rgba(245, 158, 11, 0.05);
-
-  /* Borders */
-  --border: rgba(245, 158, 11, 0.15);
-  --border-bright: rgba(245, 158, 11, 0.4);
-  --border-subtle: rgba(255, 255, 255, 0.06);
-
-  /* Nav */
-  --nav-bg: rgba(10, 11, 15, 0.85);
-
-  /* Glow */
-  --glow-text: rgba(245, 158, 11, 0.3);
-  --glow-text-wide: rgba(245, 158, 11, 0.1);
-  --glow-radial: rgba(245, 158, 11, 0.06);
-}
-
-/* ─── Light mode overrides ─── */
-[data-theme="light"] {
   /* Backgrounds */
   --bg-primary: #f8fafc;
   --bg-secondary: #f1f5f9;
@@ -75,7 +30,7 @@
   --amber: #2563eb;
   --amber-soft: #3b82f6;
 
-  /* Accent backgrounds / borders */
+  /* Accent backgrounds / borders — CSS-variable-friendly */
   --accent-bg-xs:     rgba(37, 99, 235, 0.03);
   --accent-bg-sm:     rgba(37, 99, 235, 0.07);
   --accent-bg-md:     rgba(37, 99, 235, 0.10);
@@ -98,6 +53,50 @@
   --glow-text: rgba(37, 99, 235, 0.25);
   --glow-text-wide: rgba(37, 99, 235, 0.08);
   --glow-radial: rgba(37, 99, 235, 0.06);
+}
+
+/* ─── Dark mode overrides ─── */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary: #0a0b0f;
+  --bg-secondary: #0d1117;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2233;
+  --cover-bg: linear-gradient(145deg, #0f1a2e 0%, #0a0f1a 40%, #0d1525 100%);
+
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-heading: #f1f5f9;
+  --text-bright: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-dim: #475569;
+
+  --amber: #f59e0b;
+  --amber-soft: #fbbf24;
+
+  /* Accent backgrounds / borders */
+  --accent-bg-xs:     rgba(245, 158, 11, 0.03);
+  --accent-bg-sm:     rgba(245, 158, 11, 0.07);
+  --accent-bg-md:     rgba(245, 158, 11, 0.10);
+  --accent-border-sm: rgba(245, 158, 11, 0.12);
+  --accent-border-md: rgba(245, 158, 11, 0.20);
+  --accent-border-lg: rgba(245, 158, 11, 0.30);
+  --accent-border-hover: rgba(245, 158, 11, 0.35);
+  --accent-glow:      rgba(245, 158, 11, 0.06);
+  --accent-shadow:    rgba(245, 158, 11, 0.05);
+
+  /* Borders */
+  --border: rgba(245, 158, 11, 0.15);
+  --border-bright: rgba(245, 158, 11, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Nav */
+  --nav-bg: rgba(10, 11, 15, 0.85);
+
+  /* Glow */
+  --glow-text: rgba(245, 158, 11, 0.3);
+  --glow-text-wide: rgba(245, 158, 11, 0.1);
+  --glow-radial: rgba(245, 158, 11, 0.06);
 }
 
 * {
@@ -282,11 +281,11 @@ body::before {
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #4a5568; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-[data-theme="light"] ::-webkit-scrollbar-thumb { background: #cbd5e1; }
-[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #2d3748; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #4a5568; }
 
 /* ─── Selection ─── */
 ::selection { background: var(--accent-bg-md); color: var(--text-heading); }

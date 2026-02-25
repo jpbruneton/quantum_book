@@ -64,6 +64,7 @@ export function Footer() {
             { href: "/", label: t.footer.home },
             { href: "/chapters", label: t.footer.allChapters },
             { href: "/about", label: t.footer.aboutBook },
+            { href: "/updates", label: t.footer.updates },
           ].map((l) => (
             <div key={l.href} style={{ marginBottom: "0.4rem" }}>
               <Link

@@ -28,7 +28,7 @@ function WaveBackground() {
 }
 
 export default function HomePage() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const book = t.book;
 
   const stats = [
@@ -459,7 +459,7 @@ export default function HomePage() {
                       lineHeight: 1.3,
                     }}
                   >
-                    {chapter.title}
+                    {lang === "fr" ? chapter.titleFr : chapter.titleEn}
                   </h3>
                   <p
                     style={{

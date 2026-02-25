@@ -14,6 +14,7 @@ export function NavBar() {
     { href: "/", label: t.nav.home },
     { href: "/chapters", label: t.nav.chapters },
     { href: "/about", label: t.nav.about },
+    { href: "/updates", label: t.nav.updates },
   ];
 
   return (
@@ -154,26 +155,6 @@ export function NavBar() {
             {theme === "dark" ? "☀" : "☾"}
           </button>
 
-          {/* Read Free CTA */}
-          <Link
-            href="/chapters"
-            style={{
-              background: "var(--accent-bg-md)",
-              border: "1px solid var(--accent-border-lg)",
-              color: "var(--amber)",
-              padding: "0.4rem 1rem",
-              borderRadius: "4px",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.8rem",
-              fontWeight: 500,
-              textDecoration: "none",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-              transition: "background 0.2s",
-            }}
-          >
-            {t.nav.readFree}
-          </Link>
         </div>
       </div>
     </nav>

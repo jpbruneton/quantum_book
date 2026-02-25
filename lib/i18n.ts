@@ -13,6 +13,7 @@ export const translations = {
       home: "Home",
       chapters: "Chapters",
       about: "About",
+      updates: "Journal",
       readFree: "Read Free",
     },
     home: {
@@ -94,11 +95,28 @@ export const translations = {
       aboutBookBody2:
         "The text develops quantum mechanics from first principles, assuming a solid background in classical mechanics, electrodynamics, and the mathematics of linear algebra and differential equations. Proofs are given in full where they illuminate the physics, and numerous worked examples complement the theoretical exposition.",
     },
+    updates: {
+      label: "UPDATES",
+      title: "Project Journal",
+      description:
+        "This page tracks release notes, content additions, corrections, and roadmap notes over time.",
+      latestTitle: "Latest updates",
+      entries: [
+        {
+          date: "2026-02-25",
+          title: "Bilingual mode and theming",
+          body:
+            "Added French/English language support, dark/light themes, and improved math rendering with KaTeX.",
+        },
+      ],
+      comingSoon: "More updates will be posted here regularly.",
+    },
     footer: {
       navigation: "Navigation",
       home: "Home",
       allChapters: "All Chapters",
       aboutBook: "About the Book",
+      updates: "Journal",
       author: "Author",
       copyright: (year: string, author: string) =>
         `© ${year} ${author}. All rights reserved.`,
@@ -116,6 +134,7 @@ export const translations = {
       home: "Accueil",
       chapters: "Chapitres",
       about: "À propos",
+      updates: "Journal",
       readFree: "Lire gratuitement",
     },
     home: {
@@ -197,11 +216,28 @@ export const translations = {
       aboutBookBody2:
         "Le texte développe la mécanique quantique à partir des premiers principes, en supposant une solide formation en mécanique classique, en électrodynamique et en mathématiques. Les preuves sont données en entier lorsqu'elles éclairent la physique, et de nombreux exemples travaillés complètent l'exposition théorique.",
     },
+    updates: {
+      label: "MISES À JOUR",
+      title: "Journal du projet",
+      description:
+        "Cette page regroupe les notes de version, ajouts de contenu, corrections et points de feuille de route au fil du temps.",
+      latestTitle: "Dernières mises à jour",
+      entries: [
+        {
+          date: "2026-02-25",
+          title: "Mode bilingue et thèmes",
+          body:
+            "Ajout de la prise en charge français/anglais, des thèmes sombre/clair et amélioration du rendu mathématique avec KaTeX.",
+        },
+      ],
+      comingSoon: "D'autres mises à jour seront publiées ici régulièrement.",
+    },
     footer: {
       navigation: "Navigation",
       home: "Accueil",
       allChapters: "Tous les chapitres",
       aboutBook: "À propos du livre",
+      updates: "Journal",
       author: "Auteur",
       copyright: (year: string, author: string) =>
         `© ${year} ${author}. Tous droits réservés.`,

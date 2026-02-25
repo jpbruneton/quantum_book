@@ -1,6 +1,8 @@
 export interface Chapter {
   slug: string;
   number: number;
+  titleFr: string;
+  titleEn: string;
   title: string;
   subtitle: string;
   description: string;
@@ -26,9 +28,11 @@ export const bookMeta = {
 
 export const chapters: Chapter[] = [
   {
-    slug: "mathematical-foundations",
+    slug: "introduction",
     number: 1,
-    title: "Mathematical Foundations",
+    titleFr: "Introduction",
+    titleEn: "Introduction",
+    title: "Introduction",
     subtitle: "Linear Algebra & Hilbert Spaces",
     description:
       "We establish the mathematical scaffolding: complex vector spaces, inner products, operators, and the spectral theorem — the language quantum mechanics speaks.",
@@ -57,9 +61,11 @@ export const chapters: Chapter[] = [
     `,
   },
   {
-    slug: "wave-mechanics",
+    slug: "espaces-de-hilbert",
     number: 2,
-    title: "Wave Mechanics",
+    titleFr: "Espaces de Hilbert",
+    titleEn: "Hilbert Spaces",
+    title: "Espaces de Hilbert",
     subtitle: "The Schrödinger Equation",
     description:
       "The wavefunction emerges as the central object of non-relativistic quantum mechanics. We derive and analyze the time-dependent and time-independent Schrödinger equations.",
@@ -86,9 +92,11 @@ export const chapters: Chapter[] = [
     `,
   },
   {
-    slug: "quantum-harmonic-oscillator",
+    slug: "postulats",
     number: 3,
-    title: "The Harmonic Oscillator",
+    titleFr: "Postulats",
+    titleEn: "Postulates",
+    title: "Postulats",
     subtitle: "Ladder Operators & Energy Spectra",
     description:
       "Perhaps the most important exactly-solvable system in all of physics. The algebraic method reveals a beautiful structure that reappears throughout quantum field theory.",
@@ -116,9 +124,11 @@ export const chapters: Chapter[] = [
     `,
   },
   {
-    slug: "angular-momentum",
+    slug: "theorie-des-operateurs-lineaires",
     number: 4,
-    title: "Angular Momentum",
+    titleFr: "Théorie des opérateurs linéaires",
+    titleEn: "Linear Operator Theory",
+    title: "Théorie des opérateurs linéaires",
     subtitle: "Rotational Symmetry & Spin",
     description:
       "Rotational symmetry gives birth to angular momentum quantization. We construct the general theory and encounter the radical concept of half-integer spin.",
@@ -139,31 +149,6 @@ export const chapters: Chapter[] = [
 <p>Using the algebraic method (ladder operators $\\hat{L}_\\pm = \\hat{L}_x \\pm i\\hat{L}_y$), one shows that $\\hat{\\mathbf{L}}^2$ and $\\hat{L}_z$ share eigenstates $|l, m\\rangle$:</p>
 <p style="text-align:center">$$\\hat{\\mathbf{L}}^2|l,m\\rangle = \\hbar^2 l(l+1)|l,m\\rangle, \\qquad \\hat{L}_z|l,m\\rangle = \\hbar m|l,m\\rangle$$</p>
 <p>where $l = 0, 1, 2, \\ldots$ and $m = -l, -l+1, \\ldots, l$.</p>
-    `,
-  },
-  {
-    slug: "measurement-and-entanglement",
-    number: 5,
-    title: "Measurement & Entanglement",
-    subtitle: "The Quantum Postulates",
-    description:
-      "What happens when we look? The measurement postulate, collapse, and the EPR paradox lead us to the strangest phenomenon in physics: quantum entanglement.",
-    topics: ["Measurement postulate", "Wavefunction collapse", "EPR paradox", "Bell inequalities", "Quantum entanglement"],
-    pdfFile: "chapter-05-measurement-entanglement.pdf",
-    pdfAvailable: false,
-    readingTime: "65 min",
-    content: `
-<p>Of all the mysteries in quantum mechanics, measurement stands apart. Unlike the smooth, deterministic Schrödinger evolution, measurement is discontinuous, probabilistic, and deeply puzzling.</p>
-
-<h2>5.1 The Measurement Postulate</h2>
-<p>When observable $\\hat{A}$ is measured on state $|\\psi\\rangle = \\sum_n c_n |a_n\\rangle$, the outcome is eigenvalue $a_n$ with probability:</p>
-<p style="text-align:center">$$P(a_n) = |c_n|^2 = |\\langle a_n | \\psi \\rangle|^2$$</p>
-<p>Immediately after the measurement, the state <em>collapses</em> to $|a_n\\rangle$. This irreversible, non-unitary process sits at the heart of the measurement problem.</p>
-
-<h2>5.2 Entanglement</h2>
-<p>A two-particle state that <em>cannot</em> be written as a tensor product $|\\psi\\rangle = |\\phi\\rangle_A \\otimes |\\chi\\rangle_B$ is said to be <strong>entangled</strong>. The canonical example is the Bell state:</p>
-<p style="text-align:center">$$|\\Phi^+\\rangle = \\frac{1}{\\sqrt{2}}\\left(|{\\uparrow}\\rangle_A|{\\uparrow}\\rangle_B + |{\\downarrow}\\rangle_A|{\\downarrow}\\rangle_B\\right)$$</p>
-<p>Measuring particle $A$ instantaneously determines the state of particle $B$, regardless of distance — what Einstein famously called "spooky action at a distance."</p>
     `,
   },
 ];

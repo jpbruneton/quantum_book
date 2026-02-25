@@ -4,7 +4,7 @@ import { chapters } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 export function ChapterList() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
@@ -68,7 +68,7 @@ export function ChapterList() {
                     marginBottom: "0.25rem",
                   }}
                 >
-                  {chapter.title}
+                  {lang === "fr" ? chapter.titleFr : chapter.titleEn}
                 </h2>
                 <p
                   style={{

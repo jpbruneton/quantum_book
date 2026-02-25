@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const chapter = getChapter(params.slug);
   if (!chapter) return {};
   return {
-    title: `Ch. ${chapter.number}: ${chapter.title}`,
+    title: `Ch. ${chapter.number}: ${chapter.titleFr}`,
     description: chapter.description,
   };
 }

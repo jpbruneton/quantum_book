@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function ChapterPageClient({ chapter, prev, next }: Props) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   return (
     <div style={{ position: "relative", zIndex: 1 }}>
@@ -80,7 +80,7 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
               lineHeight: 1.2,
             }}
           >
-            {chapter.title}
+            {lang === "fr" ? chapter.titleFr : chapter.titleEn}
           </h1>
           <p
             style={{
@@ -218,7 +218,7 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
                   color: "var(--text-heading)",
                 }}
               >
-                {prev.title}
+                {lang === "fr" ? prev.titleFr : prev.titleEn}
               </div>
             </div>
           </Link>
@@ -259,7 +259,7 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
                   color: "var(--text-heading)",
                 }}
               >
-                {next.title}
+                {lang === "fr" ? next.titleFr : next.titleEn}
               </div>
             </div>
           </Link>

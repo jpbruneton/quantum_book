@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
+import { LanguageGate } from "./components/LanguageGate";
 import { Providers } from "./providers";
 import { bookMeta } from "@/lib/chapters";
 
@@ -27,11 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning>
       <body>
         <Providers>
           <NavBar />
-          <main>{children}</main>
+          <main>
+            <LanguageGate>{children}</LanguageGate>
+          </main>
           <Footer />
         </Providers>
       </body>

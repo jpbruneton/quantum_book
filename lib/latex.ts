@@ -1,4 +1,5 @@
 import katex from "katex";
+import { KATEX_MACROS } from "@/lib/latexMacros";
 
 /**
  * Processes an HTML string and renders all $...$ (inline) and $$...$$ (display)
@@ -13,6 +14,7 @@ export function processLatex(html: string): string {
         displayMode: true,
         throwOnError: false,
         trust: false,
+        macros: KATEX_MACROS,
       });
     } catch {
       return match;
@@ -26,6 +28,7 @@ export function processLatex(html: string): string {
         displayMode: false,
         throwOnError: false,
         trust: false,
+        macros: KATEX_MACROS,
       });
     } catch {
       return match;
