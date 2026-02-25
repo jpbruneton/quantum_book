@@ -439,15 +439,6 @@ export default function HomePage() {
                     >
                       {t.home.chapterPrefix} {String(chapter.number).padStart(2, "0")}
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-inter)",
-                        fontSize: "0.7rem",
-                        color: "var(--text-dim)",
-                      }}
-                    >
-                      {chapter.readingTime}
-                    </span>
                   </div>
                   <h3
                     style={{

@@ -133,17 +133,8 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
             ))}
           </div>
 
-          {/* Reading time + download */}
+          {/* Download */}
           <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-            <span
-              style={{
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.8rem",
-                color: "var(--text-dim)",
-              }}
-            >
-              ⏱ {t.chapter.readTime(chapter.readingTime)}
-            </span>
             {chapter.pdfAvailable && (
               <a
                 href={`/pdfs/${chapter.pdfFile}`}

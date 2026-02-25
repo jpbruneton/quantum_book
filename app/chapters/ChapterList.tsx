@@ -107,19 +107,10 @@ export function ChapterList() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-end",
-                  gap: "0.5rem",
+                  gap: "0",
                   flexShrink: 0,
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "0.75rem",
-                    color: "var(--text-dim)",
-                  }}
-                >
-                  {chapter.readingTime}
-                </span>
                 <span
                   style={{
                     fontFamily: "var(--font-inter)",
