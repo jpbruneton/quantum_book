@@ -9,13 +9,13 @@ interface LangContextValue {
 }
 
 const LangContext = createContext<LangContextValue>({
-  lang: "en",
+  lang: "fr",
   setLang: () => {},
-  t: translations.en,
+  t: translations.fr as typeof translations.en,
 });
 
 export function LangProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
+  const [lang, setLangState] = useState<Lang>("fr");
 
   useEffect(() => {
     const stored = localStorage.getItem("lang") as Lang | null;
