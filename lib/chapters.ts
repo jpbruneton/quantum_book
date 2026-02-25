@@ -41,23 +41,21 @@ export const chapters: Chapter[] = [
     pdfAvailable: false,
     readingTime: "45 min",
     content: `
-<p>Quantum mechanics is, at its core, a theory about linear algebra over complex numbers. Before we can speak meaningfully about particles, waves, or measurements, we must first build the mathematical stage on which the quantum drama unfolds.</p>
+<h2>Le spin dans l'expérience de Stern et Gerlach</h2>
+<p>Nous commençons notre présentation de la mécanique quantique par les expériences portant sur le spin. Un spin se comporte comme un moment magnétique, et cette idée est au coeur de l'interprétation de Stern-Gerlach.</p>
 
-<h2>1.1 Complex Vector Spaces</h2>
-<p>A <strong>complex vector space</strong> $\\mathcal{V}$ is a set of vectors over the field $\\mathbb{C}$, equipped with addition and scalar multiplication satisfying the usual axioms. The central object of quantum mechanics is the <em>state vector</em> $|\\psi\\rangle \\in \\mathcal{H}$, where $\\mathcal{H}$ is a special kind of complex vector space called a <strong>Hilbert space</strong>.</p>
+<h2>Rappels sur le moment magnétique classique</h2>
+<p>Un moment magnétique $\\vec{\\mu}$ placé dans un champ magnétique externe $\\vec{B}$ subit un couple :</p>
+<p style="text-align:center">$$\\vec{\\tau} = \\vec{\\mu} \\wedge \\vec{B}$$</p>
+<p>Son énergie potentielle est donnée par :</p>
+<p style="text-align:center">$$E_p = -\\vec{\\mu} \\cdot \\vec{B}$$</p>
+<p>et donc la force globale associée vaut :</p>
+<p style="text-align:center">$$\\vec{F} = \\grad \\left(\\vec{\\mu} \\cdot \\vec{B}\\right)$$</p>
 
-<h2>1.2 The Hilbert Space</h2>
-<p>A Hilbert space $\\mathcal{H}$ is a complex inner product space that is also <em>complete</em> — every Cauchy sequence of vectors converges to a vector within the space. The inner product $\\langle \\phi | \\psi \\rangle \\in \\mathbb{C}$ satisfies:</p>
-<ul>
-  <li>Conjugate symmetry: $\\langle \\phi | \\psi \\rangle = \\langle \\psi | \\phi \\rangle^*$</li>
-  <li>Linearity in the second argument</li>
-  <li>Positive definiteness: $\\langle \\psi | \\psi \\rangle \\geq 0$, with equality iff $|\\psi\\rangle = 0$</li>
-</ul>
+<p>Dans un champ inhomogène, cette force entraîne une déviation mesurable des particules, ce qui est précisément exploité dans l'expérience de Stern et Gerlach.</p>
 
-<h2>1.3 Operators and Observables</h2>
-<p>Physical observables correspond to <strong>self-adjoint (Hermitian) operators</strong> $\\hat{A} = \\hat{A}^\\dagger$ on $\\mathcal{H}$. The spectral theorem guarantees that such operators have real eigenvalues $a_n$ and orthonormal eigenvectors $|a_n\\rangle$:</p>
-<p style="text-align:center">$$\\hat{A}|a_n\\rangle = a_n|a_n\\rangle$$</p>
-<p>These eigenvalues are the only possible outcomes of measuring $\\hat{A}$.</p>
+<p style="text-align:center"><img src="/figs/SGimage.jpg" alt="Expérience de Stern et Gerlach" style="max-width:100%;height:auto;" /></p>
+<p><em>Expérience de Stern et Gerlach : le faisceau est séparé en impacts discrets.</em></p>
     `,
   },
   {
@@ -74,21 +72,22 @@ export const chapters: Chapter[] = [
     pdfAvailable: false,
     readingTime: "55 min",
     content: `
-<p>In 1926, Erwin Schrödinger wrote down an equation whose solutions — wavefunctions $\\psi(\\mathbf{x}, t)$ — would transform our understanding of nature at the smallest scales.</p>
+<h2>Espaces vectoriels et espaces de Hilbert</h2>
+<p>Ce chapitre introduit les structures mathématiques nécessaires à la mécanique quantique : espaces vectoriels, normes, produits scalaires, topologie forte et complétude.</p>
 
-<h2>2.1 The Wavefunction</h2>
-<p>The quantum state of a particle is encoded in a complex-valued function $\\psi: \\mathbb{R}^3 \\times \\mathbb{R} \\to \\mathbb{C}$. Born's rule tells us that $|\\psi(\\mathbf{x},t)|^2$ is a <em>probability density</em>:</p>
-<p style="text-align:center">$$P(\\mathbf{x} \\in V, t) = \\int_V |\\psi(\\mathbf{x},t)|^2 \\, d^3x$$</p>
-<p>The wavefunction must be normalized: $\\int_{\\mathbb{R}^3} |\\psi|^2 d^3x = 1$.</p>
+<h2>Espace vectoriel</h2>
+<p>Un espace vectoriel $E$ sur un corps $\\mathbb{K}$ est muni d'une addition et d'une multiplication par un scalaire, satisfaisant les axiomes usuels.</p>
 
-<h2>2.2 The Time-Dependent Schrödinger Equation</h2>
-<p>The dynamical evolution of $\\psi$ is governed by:</p>
-<p style="text-align:center">$$i\\hbar \\frac{\\partial \\psi}{\\partial t} = \\hat{H}\\psi = \\left(-\\frac{\\hbar^2}{2m}\\nabla^2 + V(\\mathbf{x},t)\\right)\\psi$$</p>
-<p>This is a <em>linear, first-order</em> PDE in time — its linearity is what gives rise to superposition; its first-order nature in $t$ means the initial wavefunction completely determines the future evolution.</p>
+<h2>Espace préhilbertien et Hilbert</h2>
+<p>Un espace préhilbertien est un espace vectoriel muni d'un produit scalaire $\\langle \\cdot,\\cdot \\rangle$, qui induit la norme :</p>
+<p style="text-align:center">$$\\|x\\| = \\sqrt{\\langle x,x \\rangle}$$</p>
+<p>Un espace de Hilbert est un préhilbertien complet pour cette norme.</p>
 
-<h2>2.3 Stationary States</h2>
-<p>When the potential is time-independent, $V = V(\\mathbf{x})$, we may seek solutions of the form $\\psi(\\mathbf{x},t) = \\phi(\\mathbf{x})e^{-iEt/\\hbar}$. Substituting yields the <strong>time-independent Schrödinger equation</strong>:</p>
-<p style="text-align:center">$$\\hat{H}\\phi = E\\phi$$</p>
+<h2>Décomposition et base hilbertienne</h2>
+<p>Pour une base hilbertienne $(e_i)$, on a la décomposition (cas dénombrable) :</p>
+<p style="text-align:center">$$x = \\sum_i \\langle e_i, x \\rangle e_i$$</p>
+<p>et l'identité de Parseval :</p>
+<p style="text-align:center">$$\\|x\\|^2 = \\sum_i |\\langle e_i, x \\rangle|^2$$</p>
     `,
   },
   {
@@ -105,22 +104,21 @@ export const chapters: Chapter[] = [
     pdfAvailable: false,
     readingTime: "50 min",
     content: `
-<p>The quantum harmonic oscillator stands as a cornerstone of modern physics. Its exact solution, elegant algebraic structure, and ubiquitous appearance — from molecular vibrations to quantum fields — make it indispensable.</p>
+<h2>Postulats et étrangetés quantiques</h2>
+<p>Ce chapitre présente les postulats standards de la mécanique quantique (version dite orthodoxe/Copenhague) et leurs implications conceptuelles.</p>
 
-<h2>3.1 The Hamiltonian</h2>
-<p>We consider a particle of mass $m$ in a quadratic potential:</p>
-<p style="text-align:center">$$\\hat{H} = \\frac{\\hat{p}^2}{2m} + \\frac{1}{2}m\\omega^2 \\hat{x}^2$$</p>
+<h2>Postulat cinématique</h2>
+<p>L'état d'un système quantique isolé est décrit par un vecteur $\\kpsi$ d'un espace de Hilbert $\\Hilb$.</p>
 
-<h2>3.2 Ladder Operators</h2>
-<p>The key insight is to introduce dimensionless <strong>creation and annihilation operators</strong>:</p>
-<p style="text-align:center">$$\\hat{a} = \\sqrt{\\frac{m\\omega}{2\\hbar}}\\left(\\hat{x} + \\frac{i\\hat{p}}{m\\omega}\\right), \\qquad \\hat{a}^\\dagger = \\sqrt{\\frac{m\\omega}{2\\hbar}}\\left(\\hat{x} - \\frac{i\\hat{p}}{m\\omega}\\right)$$</p>
-<p>These satisfy the canonical commutation relation $[\\hat{a}, \\hat{a}^\\dagger] = 1$, and rewrite the Hamiltonian as:</p>
-<p style="text-align:center">$$\\hat{H} = \\hbar\\omega\\left(\\hat{a}^\\dagger\\hat{a} + \\frac{1}{2}\\right) = \\hbar\\omega\\left(\\hat{N} + \\frac{1}{2}\\right)$$</p>
+<h2>Mesure et règle de Born</h2>
+<p>Pour une observable auto-adjointe $\\hat{A}$, les résultats de mesure possibles sont ses valeurs propres. Après mesure donnant $a_n$, l'état se projette sur le sous-espace propre associé, et la probabilité de Born est :</p>
+<p style="text-align:center">$$P_{\\psi}(a_n) = |\\braket{a_n}{\\psi}|^2$$</p>
 
-<h2>3.3 The Energy Spectrum</h2>
-<p>The number operator $\\hat{N} = \\hat{a}^\\dagger\\hat{a}$ has non-negative integer eigenvalues $n = 0, 1, 2, \\ldots$, yielding the discrete energy spectrum:</p>
-<p style="text-align:center">$$E_n = \\hbar\\omega\\left(n + \\frac{1}{2}\\right)$$</p>
-<p>The ground state energy $E_0 = \\hbar\\omega/2$ is famously non-zero — a direct consequence of the uncertainty principle.</p>
+<h2>Dynamique de Schrödinger</h2>
+<p>L'évolution temporelle est donnée par :</p>
+<p style="text-align:center">$$i\\hbar \\frac{d}{dt}\\kpsi(t) = \\ham\\kpsi(t)$$</p>
+<p>et, pour un Hamiltonien indépendant du temps :</p>
+<p style="text-align:center">$$U(t,t_0)=e^{-i\\ham (t-t_0)/\\hbar}$$</p>
     `,
   },
   {
@@ -137,18 +135,18 @@ export const chapters: Chapter[] = [
     pdfAvailable: false,
     readingTime: "60 min",
     content: `
-<p>Angular momentum is one of the most fundamental conserved quantities in physics. Its quantum theory reveals that angular momentum is quantized — and that nature harbors a surprising type that has no classical analogue: <em>spin</em>.</p>
+<h2>Théorie des opérateurs linéaires</h2>
+<p>Ce chapitre cartographie les classes d'opérateurs utiles en mécanique quantique : bornés/non bornés, auto-adjoints, unitaires, compacts, et leurs propriétés spectrales.</p>
 
-<h2>4.1 Orbital Angular Momentum</h2>
-<p>The orbital angular momentum operator is defined by analogy with classical mechanics:</p>
-<p style="text-align:center">$$\\hat{\\mathbf{L}} = \\hat{\\mathbf{r}} \\times \\hat{\\mathbf{p}}$$</p>
-<p>The components satisfy the fundamental commutation relations:</p>
-<p style="text-align:center">$$[\\hat{L}_i, \\hat{L}_j] = i\\hbar \\varepsilon_{ijk} \\hat{L}_k$$</p>
+<h2>Pourquoi c'est crucial</h2>
+<p>La théorie spectrale permet d'interpréter correctement observables, valeurs propres, spectre continu, et calcul fonctionnel d'opérateurs (comme $e^{-i\\ham t/\\hbar}$ ou $V(\\hat{X})$).</p>
 
-<h2>4.2 Eigenvalues</h2>
-<p>Using the algebraic method (ladder operators $\\hat{L}_\\pm = \\hat{L}_x \\pm i\\hat{L}_y$), one shows that $\\hat{\\mathbf{L}}^2$ and $\\hat{L}_z$ share eigenstates $|l, m\\rangle$:</p>
-<p style="text-align:center">$$\\hat{\\mathbf{L}}^2|l,m\\rangle = \\hbar^2 l(l+1)|l,m\\rangle, \\qquad \\hat{L}_z|l,m\\rangle = \\hbar m|l,m\\rangle$$</p>
-<p>where $l = 0, 1, 2, \\ldots$ and $m = -l, -l+1, \\ldots, l$.</p>
+<h2>Topologie forte et convergence</h2>
+<p>Dans un espace normé, la convergence forte s'écrit :</p>
+<p style="text-align:center">$$\\|x_n-x\\| \\to 0$$</p>
+<p>La complétude de l'espace est essentielle pour garantir existence et stabilité des solutions d'évolution.</p>
+
+<p><a href="/figs/taxo.pdf" target="_blank" rel="noopener noreferrer">Ouvrir la carte de taxonomie des opérateurs (PDF)</a></p>
     `,
   },
 ];

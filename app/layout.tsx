@@ -4,6 +4,7 @@ import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { LanguageGate } from "./components/LanguageGate";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/next";
 import { bookMeta } from "@/lib/chapters";
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function RootLayout({
             <LanguageGate>{children}</LanguageGate>
           </main>
           <Footer />
+          <Analytics />
         </Providers>
       </body>
     </html>
