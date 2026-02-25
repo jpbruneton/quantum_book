@@ -5,11 +5,12 @@ import { useLang } from "@/app/context/LangContext";
 export default function AboutPage() {
   const { t } = useLang();
   const at = t.about;
+  const book = t.book;
 
   const detailItems = [
     { label: at.detailLabels.author, value: bookMeta.author },
     { label: at.detailLabels.affiliation, value: bookMeta.affiliation },
-    { label: at.detailLabels.edition, value: bookMeta.edition },
+    { label: at.detailLabels.edition, value: book.edition },
     { label: at.detailLabels.year, value: bookMeta.year },
     {
       label: at.detailLabels.chapters,
@@ -68,7 +69,7 @@ export default function AboutPage() {
               marginBottom: "1rem",
             }}
           >
-            {bookMeta.title}
+            {book.title}
           </h1>
           <p
             style={{
@@ -78,14 +79,14 @@ export default function AboutPage() {
               color: "var(--amber-soft)",
             }}
           >
-            {bookMeta.subtitle}
+            {book.subtitle}
           </p>
         </div>
 
         {/* Description */}
         <div style={sectionStyle}>
           <h2 style={h2Style}>{at.aboutBookTitle}</h2>
-          <p style={bodyStyle}>{bookMeta.description}</p>
+          <p style={bodyStyle}>{book.description}</p>
           <p style={{ ...bodyStyle, marginBottom: 0 }}>{at.aboutBookBody2}</p>
         </div>
 

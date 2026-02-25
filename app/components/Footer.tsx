@@ -5,6 +5,7 @@ import { useLang } from "@/app/context/LangContext";
 
 export function Footer() {
   const { t } = useLang();
+  const book = t.book;
 
   return (
     <footer
@@ -34,7 +35,7 @@ export function Footer() {
               marginBottom: "0.5rem",
             }}
           >
-            <span style={{ color: "var(--amber)" }}>Ψ</span> {bookMeta.title}
+            <span style={{ color: "var(--amber)" }}>Ψ</span> {book.title}
           </p>
           <p
             style={{
@@ -43,7 +44,7 @@ export function Footer() {
               fontFamily: "var(--font-inter)",
             }}
           >
-            {bookMeta.subtitle} &mdash; {bookMeta.edition}
+            {book.subtitle} &mdash; {book.edition}
           </p>
         </div>
         <div>

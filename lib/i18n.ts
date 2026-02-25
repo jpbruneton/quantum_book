@@ -2,6 +2,13 @@ export type Lang = "en" | "fr";
 
 export const translations = {
   en: {
+    book: {
+      title: "Quantum Mechanics",
+      subtitle: "A Modern Introduction",
+      description:
+        "A rigorous yet accessible treatment of quantum mechanics, bridging classical intuition and the mathematical formalism of Hilbert spaces, operators, and measurement theory. Designed for advanced undergraduates and graduate students.",
+      edition: "First Edition",
+    },
     nav: {
       home: "Home",
       chapters: "Chapters",
@@ -12,6 +19,7 @@ export const translations = {
       badge: "Free Online Edition",
       readOnline: "Read Online →",
       aboutBook: "About the Book",
+      chapterPrefix: "Ch",
       stats: {
         chapters: "Chapters",
         edition: "Edition",
@@ -97,6 +105,13 @@ export const translations = {
     },
   },
   fr: {
+    book: {
+      title: "Mécanique Quantique",
+      subtitle: "Une Introduction Moderne",
+      description:
+        "Un traité rigoureux mais accessible de la mécanique quantique, reliant l'intuition classique au formalisme mathématique des espaces de Hilbert, des opérateurs et de la théorie de la mesure. Conçu pour les étudiants de licence avancée et de master.",
+      edition: "Première Édition",
+    },
     nav: {
       home: "Accueil",
       chapters: "Chapitres",
@@ -107,6 +122,7 @@ export const translations = {
       badge: "Édition gratuite en ligne",
       readOnline: "Lire en ligne →",
       aboutBook: "À propos du livre",
+      chapterPrefix: "Ch",
       stats: {
         chapters: "Chapitres",
         edition: "Édition",

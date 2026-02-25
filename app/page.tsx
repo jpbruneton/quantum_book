@@ -29,10 +29,11 @@ function WaveBackground() {
 
 export default function HomePage() {
   const { t } = useLang();
+  const book = t.book;
 
   const stats = [
     { label: t.home.stats.chapters, value: `${chapters.length}` },
-    { label: t.home.stats.edition, value: bookMeta.edition },
+    { label: t.home.stats.edition, value: book.edition },
     { label: t.home.stats.format, value: t.home.stats.formatValue },
   ];
 
@@ -114,7 +115,7 @@ export default function HomePage() {
                 marginBottom: "1rem",
               }}
             >
-              {bookMeta.title}
+              {book.title}
             </h1>
 
             <p
@@ -128,7 +129,7 @@ export default function HomePage() {
                 marginBottom: "1.5rem",
               }}
             >
-              {bookMeta.subtitle}
+              {book.subtitle}
             </p>
 
             <p
@@ -142,7 +143,7 @@ export default function HomePage() {
                 marginBottom: "2.5rem",
               }}
             >
-              {bookMeta.description}
+              {book.description}
             </p>
 
             <div
@@ -285,7 +286,7 @@ export default function HomePage() {
                   letterSpacing: "0.05em",
                 }}
               >
-                {bookMeta.title}
+                {book.title}
               </p>
               <p
                 style={{
@@ -296,7 +297,7 @@ export default function HomePage() {
                   marginBottom: "3rem",
                 }}
               >
-                {bookMeta.subtitle}
+                {book.subtitle}
               </p>
               <div
                 style={{
@@ -436,7 +437,7 @@ export default function HomePage() {
                         letterSpacing: "0.05em",
                       }}
                     >
-                      Ch {String(chapter.number).padStart(2, "0")}
+                      {t.home.chapterPrefix} {String(chapter.number).padStart(2, "0")}
                     </span>
                     <span
                       style={{

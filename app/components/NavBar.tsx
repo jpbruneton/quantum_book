@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { bookMeta } from "@/lib/chapters";
 import { useTheme } from "@/app/context/ThemeContext";
 import { useLang } from "@/app/context/LangContext";
 
@@ -9,6 +8,7 @@ export function NavBar() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const { lang, setLang, t } = useLang();
+  const book = t.book;
 
   const links = [
     { href: "/", label: t.nav.home },
@@ -51,7 +51,7 @@ export function NavBar() {
             letterSpacing: "0.02em",
           }}
         >
-          <span style={{ color: "var(--amber)" }}>Ψ</span> {bookMeta.title}
+          <span style={{ color: "var(--amber)" }}>Ψ</span> {book.title}
         </Link>
 
         {/* Right side */}
