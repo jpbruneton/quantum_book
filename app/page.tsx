@@ -1,35 +1,41 @@
+"use client";
 import Link from "next/link";
 import { chapters, bookMeta } from "@/lib/chapters";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: `${bookMeta.title}: ${bookMeta.subtitle} — Free Online`,
-};
+import { useLang } from "@/app/context/LangContext";
 
 function WaveBackground() {
   return (
     <div className="wave-bg">
-      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M0,160 C180,80 360,240 540,160 C720,80 900,240 1080,160 C1260,80 1350,200 1440,160 L1440,320 L0,320 Z"
-          fill="#f59e0b"
-        />
-        <path
-          d="M0,200 C200,120 400,280 600,200 C800,120 1000,280 1200,200 C1350,140 1400,220 1440,200 L1440,320 L0,320 Z"
-          fill="#f59e0b"
-        />
+      <svg
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M0,160 C180,80 360,240 540,160 C720,80 900,240 1080,160 C1260,80 1350,200 1440,160 L1440,320 L0,320 Z" />
+        <path d="M0,200 C200,120 400,280 600,200 C800,120 1000,280 1200,200 C1350,140 1400,220 1440,200 L1440,320 L0,320 Z" />
       </svg>
-      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M0,120 C240,200 480,40 720,120 C960,200 1200,40 1440,120 L1440,320 L0,320 Z"
-          fill="#f59e0b"
-        />
+      <svg
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M0,120 C240,200 480,40 720,120 C960,200 1200,40 1440,120 L1440,320 L0,320 Z" />
       </svg>
     </div>
   );
 }
 
 export default function HomePage() {
+  const { t } = useLang();
+
+  const stats = [
+    { label: t.home.stats.chapters, value: `${chapters.length}` },
+    { label: t.home.stats.edition, value: bookMeta.edition },
+    { label: t.home.stats.format, value: t.home.stats.formatValue },
+  ];
+
   return (
     <div style={{ position: "relative", zIndex: 1 }}>
       {/* ─── Hero ─── */}
@@ -54,7 +60,8 @@ export default function HomePage() {
             transform: "translate(-50%, -50%)",
             width: "600px",
             height: "600px",
-            background: "radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, var(--glow-radial) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -80,8 +87,8 @@ export default function HomePage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.5rem",
-                background: "rgba(245,158,11,0.08)",
-                border: "1px solid rgba(245,158,11,0.2)",
+                background: "var(--accent-bg-sm)",
+                border: "1px solid var(--accent-border-md)",
                 borderRadius: "100px",
                 padding: "0.3rem 1rem",
                 marginBottom: "2rem",
@@ -92,7 +99,7 @@ export default function HomePage() {
                 color: "var(--amber)",
               }}
             >
-              <span>●</span> Free Online Edition
+              <span>●</span> {t.home.badge}
             </div>
 
             <h1
@@ -103,7 +110,7 @@ export default function HomePage() {
                 fontWeight: 900,
                 lineHeight: 1.05,
                 letterSpacing: "-0.02em",
-                color: "#f8fafc",
+                color: "var(--text-bright)",
                 marginBottom: "1rem",
               }}
             >
@@ -146,7 +153,7 @@ export default function HomePage() {
                 href="/chapters"
                 style={{
                   background: "var(--amber)",
-                  color: "#0a0b0f",
+                  color: "var(--bg-primary)",
                   padding: "0.85rem 2rem",
                   borderRadius: "6px",
                   fontFamily: "var(--font-inter)",
@@ -158,12 +165,12 @@ export default function HomePage() {
                   transition: "opacity 0.2s",
                 }}
               >
-                Read Online →
+                {t.home.readOnline}
               </Link>
               <Link
                 href="/about"
                 style={{
-                  border: "1px solid rgba(245,158,11,0.3)",
+                  border: "1px solid var(--accent-border-lg)",
                   color: "var(--amber)",
                   padding: "0.85rem 2rem",
                   borderRadius: "6px",
@@ -174,11 +181,11 @@ export default function HomePage() {
                   display: "inline-block",
                 }}
               >
-                About the Book
+                {t.home.aboutBook}
               </Link>
             </div>
 
-            {/* Meta info */}
+            {/* Meta stats */}
             <div
               className="animate-fade-up stagger-6"
               style={{
@@ -186,14 +193,10 @@ export default function HomePage() {
                 gap: "2rem",
                 marginTop: "3rem",
                 paddingTop: "2rem",
-                borderTop: "1px solid rgba(255,255,255,0.06)",
+                borderTop: "1px solid var(--border-subtle)",
               }}
             >
-              {[
-                { label: "Chapters", value: `${chapters.length}` },
-                { label: "Edition", value: bookMeta.edition },
-                { label: "Format", value: "Web + PDF" },
-              ].map((stat) => (
+              {stats.map((stat) => (
                 <div key={stat.label}>
                   <div
                     style={{
@@ -221,7 +224,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right: Book cover placeholder */}
+          {/* Right: Book cover */}
           <div
             className="animate-fade-up stagger-3"
             style={{
@@ -230,15 +233,14 @@ export default function HomePage() {
               borderRadius: "8px",
               overflow: "hidden",
               boxShadow:
-                "0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(245,158,11,0.2), inset 0 0 60px rgba(245,158,11,0.03)",
+                "0 40px 100px rgba(0,0,0,0.3), 0 0 0 1px var(--accent-border-md), inset 0 0 60px var(--accent-glow)",
             }}
           >
             <div
               style={{
                 width: "100%",
                 height: "100%",
-                background:
-                  "linear-gradient(145deg, #0f1a2e 0%, #0a0f1a 40%, #0d1525 100%)",
+                background: "var(--cover-bg)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -248,7 +250,7 @@ export default function HomePage() {
                 position: "relative",
               }}
             >
-              {/* Decorative math on the cover */}
+              {/* Decorative Ψ */}
               <div
                 style={{
                   position: "absolute",
@@ -278,7 +280,7 @@ export default function HomePage() {
                   fontFamily: "var(--font-playfair)",
                   fontSize: "1.6rem",
                   fontWeight: 700,
-                  color: "#f1f5f9",
+                  color: "var(--text-heading)",
                   marginBottom: "0.5rem",
                   letterSpacing: "0.05em",
                 }}
@@ -300,7 +302,7 @@ export default function HomePage() {
                 style={{
                   width: "40px",
                   height: "1px",
-                  background: "rgba(245,158,11,0.3)",
+                  background: "var(--accent-border-lg)",
                   marginBottom: "1.5rem",
                 }}
               />
@@ -325,7 +327,7 @@ export default function HomePage() {
               </p>
 
               {/* Corner decorations */}
-              {["top-left", "top-right", "bottom-left", "bottom-right"].map(
+              {(["top-left", "top-right", "bottom-left", "bottom-right"] as const).map(
                 (pos) => (
                   <div
                     key={pos}
@@ -338,16 +340,16 @@ export default function HomePage() {
                       width: "20px",
                       height: "20px",
                       borderTop: pos.startsWith("top")
-                        ? "1px solid rgba(245,158,11,0.3)"
+                        ? "1px solid var(--accent-border-lg)"
                         : "none",
                       borderBottom: pos.startsWith("bottom")
-                        ? "1px solid rgba(245,158,11,0.3)"
+                        ? "1px solid var(--accent-border-lg)"
                         : "none",
                       borderLeft: pos.endsWith("left")
-                        ? "1px solid rgba(245,158,11,0.3)"
+                        ? "1px solid var(--accent-border-lg)"
                         : "none",
                       borderRight: pos.endsWith("right")
-                        ? "1px solid rgba(245,158,11,0.3)"
+                        ? "1px solid var(--accent-border-lg)"
                         : "none",
                     }}
                   />
@@ -359,7 +361,13 @@ export default function HomePage() {
       </section>
 
       {/* ─── Chapters preview ─── */}
-      <section style={{ padding: "6rem 1.5rem", background: "var(--bg-secondary)" }}>
+      <section
+        style={{
+          padding: "6rem 1.5rem",
+          background: "var(--bg-secondary)",
+          transition: "background 0.25s ease",
+        }}
+      >
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ marginBottom: "3.5rem" }}>
             <p
@@ -372,18 +380,18 @@ export default function HomePage() {
                 marginBottom: "0.75rem",
               }}
             >
-              Contents
+              {t.home.contentsLabel}
             </p>
             <h2
               style={{
                 fontFamily: "var(--font-playfair)",
                 fontSize: "clamp(2rem, 4vw, 3rem)",
                 fontWeight: 700,
-                color: "#f1f5f9",
+                color: "var(--text-heading)",
                 lineHeight: 1.2,
               }}
             >
-              Explore the Chapters
+              {t.home.exploreTitle}
             </h2>
           </div>
 
@@ -394,7 +402,7 @@ export default function HomePage() {
               gap: "1.25rem",
             }}
           >
-            {chapters.map((chapter, i) => (
+            {chapters.map((chapter) => (
               <Link
                 key={chapter.slug}
                 href={`/chapters/${chapter.slug}`}
@@ -404,11 +412,12 @@ export default function HomePage() {
                   className="chapter-card"
                   style={{
                     background: "var(--bg-card)",
-                    border: "1px solid rgba(245,158,11,0.12)",
+                    border: "1px solid var(--accent-border-sm)",
                     borderRadius: "8px",
                     padding: "1.75rem",
                     cursor: "pointer",
                     height: "100%",
+                    transition: "background 0.25s ease",
                   }}
                 >
                   <div
@@ -444,7 +453,7 @@ export default function HomePage() {
                       fontFamily: "var(--font-playfair)",
                       fontSize: "1.15rem",
                       fontWeight: 600,
-                      color: "#f1f5f9",
+                      color: "var(--text-heading)",
                       marginBottom: "0.4rem",
                       lineHeight: 1.3,
                     }}
@@ -483,7 +492,7 @@ export default function HomePage() {
                       color: "var(--amber)",
                     }}
                   >
-                    Read chapter →
+                    {t.home.readChapter}
                   </div>
                 </div>
               </Link>
@@ -504,30 +513,15 @@ export default function HomePage() {
             textAlign: "center",
           }}
         >
-          {[
-            {
-              icon: "∫",
-              title: "Full Math Rendering",
-              body: "All equations rendered with KaTeX — crisp LaTeX-quality math in your browser.",
-            },
-            {
-              icon: "⬇",
-              title: "PDF Downloads",
-              body: "Every chapter available as a downloadable PDF for offline study.",
-            },
-            {
-              icon: "◎",
-              title: "Free & Open Access",
-              body: "Complete text freely available online. No paywalls, no sign-up required.",
-            },
-          ].map((f) => (
+          {t.home.features.map((f) => (
             <div
               key={f.title}
               style={{
                 padding: "2.5rem 2rem",
                 borderRadius: "8px",
-                border: "1px solid rgba(245,158,11,0.1)",
+                border: "1px solid var(--accent-border-sm)",
                 background: "var(--bg-secondary)",
+                transition: "background 0.25s ease",
               }}
             >
               <div
@@ -546,7 +540,7 @@ export default function HomePage() {
                   fontFamily: "var(--font-playfair)",
                   fontSize: "1.1rem",
                   fontWeight: 600,
-                  color: "#f1f5f9",
+                  color: "var(--text-heading)",
                   marginBottom: "0.75rem",
                 }}
               >

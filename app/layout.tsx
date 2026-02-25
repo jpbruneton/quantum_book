@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
+import { Providers } from "./providers";
 import { bookMeta } from "@/lib/chapters";
 
 export const metadata: Metadata = {
@@ -26,11 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
+        <Providers>
+          <NavBar />
+          <main>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

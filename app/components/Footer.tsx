@@ -1,14 +1,19 @@
+"use client";
 import Link from "next/link";
 import { bookMeta } from "@/lib/chapters";
+import { useLang } from "@/app/context/LangContext";
 
 export function Footer() {
+  const { t } = useLang();
+
   return (
     <footer
       style={{
-        borderTop: "1px solid rgba(245,158,11,0.1)",
+        borderTop: "1px solid var(--border)",
         background: "var(--bg-secondary)",
         padding: "3rem 1.5rem",
         marginTop: "6rem",
+        transition: "background 0.25s ease, border-color 0.25s ease",
       }}
     >
       <div
@@ -25,13 +30,19 @@ export function Footer() {
             style={{
               fontFamily: "var(--font-playfair)",
               fontSize: "1.1rem",
-              color: "#f1f5f9",
+              color: "var(--text-heading)",
               marginBottom: "0.5rem",
             }}
           >
             <span style={{ color: "var(--amber)" }}>Ψ</span> {bookMeta.title}
           </p>
-          <p style={{ color: "var(--text-dim)", fontSize: "0.875rem", fontFamily: "var(--font-inter)" }}>
+          <p
+            style={{
+              color: "var(--text-dim)",
+              fontSize: "0.875rem",
+              fontFamily: "var(--font-inter)",
+            }}
+          >
             {bookMeta.subtitle} &mdash; {bookMeta.edition}
           </p>
         </div>
@@ -46,12 +57,12 @@ export function Footer() {
               marginBottom: "0.75rem",
             }}
           >
-            Navigation
+            {t.footer.navigation}
           </p>
           {[
-            { href: "/", label: "Home" },
-            { href: "/chapters", label: "All Chapters" },
-            { href: "/about", label: "About the Book" },
+            { href: "/", label: t.footer.home },
+            { href: "/chapters", label: t.footer.allChapters },
+            { href: "/about", label: t.footer.aboutBook },
           ].map((l) => (
             <div key={l.href} style={{ marginBottom: "0.4rem" }}>
               <Link
@@ -79,12 +90,24 @@ export function Footer() {
               marginBottom: "0.75rem",
             }}
           >
-            Author
+            {t.footer.author}
           </p>
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", fontFamily: "var(--font-crimson)" }}>
+          <p
+            style={{
+              color: "var(--text-secondary)",
+              fontSize: "0.9rem",
+              fontFamily: "var(--font-crimson)",
+            }}
+          >
             {bookMeta.author}
           </p>
-          <p style={{ color: "var(--text-dim)", fontSize: "0.85rem", fontFamily: "var(--font-crimson)" }}>
+          <p
+            style={{
+              color: "var(--text-dim)",
+              fontSize: "0.85rem",
+              fontFamily: "var(--font-crimson)",
+            }}
+          >
             {bookMeta.affiliation}
           </p>
         </div>
@@ -94,14 +117,14 @@ export function Footer() {
           maxWidth: "1100px",
           margin: "2rem auto 0",
           paddingTop: "1.5rem",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
+          borderTop: "1px solid var(--border-subtle)",
           textAlign: "center",
           color: "var(--text-dim)",
           fontSize: "0.8rem",
           fontFamily: "var(--font-inter)",
         }}
       >
-        © {bookMeta.year} {bookMeta.author}. All rights reserved.
+        {t.footer.copyright(bookMeta.year, bookMeta.author)}
       </div>
     </footer>
   );

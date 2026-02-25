@@ -1,13 +1,11 @@
-import { bookMeta, chapters } from "@/lib/chapters";
-import type { Metadata } from "next";
+"use client";
+import { bookMeta } from "@/lib/chapters";
 import { ChapterList } from "./ChapterList";
-
-export const metadata: Metadata = {
-  title: "Chapters",
-  description: `Browse all ${chapters.length} chapters of ${bookMeta.title}`,
-};
+import { useLang } from "@/app/context/LangContext";
 
 export default function ChaptersPage() {
+  const { t } = useLang();
+
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
@@ -22,19 +20,19 @@ export default function ChaptersPage() {
               marginBottom: "0.75rem",
             }}
           >
-            TABLE OF CONTENTS
+            {t.chapters.label}
           </p>
           <h1
             style={{
               fontFamily: "var(--font-playfair)",
               fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
               fontWeight: 700,
-              color: "#f1f5f9",
+              color: "var(--text-heading)",
               lineHeight: 1.15,
               marginBottom: "1rem",
             }}
           >
-            All Chapters
+            {t.chapters.title}
           </h1>
           <p
             style={{
@@ -44,7 +42,7 @@ export default function ChaptersPage() {
               maxWidth: "520px",
             }}
           >
-            Each chapter is available to read online with full math rendering, or to download as a PDF.
+            {t.chapters.description}
           </p>
         </div>
 

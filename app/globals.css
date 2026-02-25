@@ -5,23 +5,99 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Dark mode (default) ─── */
 :root {
   --font-playfair: 'Playfair Display', serif;
   --font-crimson: 'Crimson Pro', serif;
   --font-jetbrains: 'JetBrains Mono', monospace;
   --font-inter: 'Inter', sans-serif;
 
+  /* Backgrounds */
   --bg-primary: #0a0b0f;
   --bg-secondary: #0d1117;
   --bg-card: #111827;
   --bg-card-hover: #1a2233;
-  --border: rgba(245, 158, 11, 0.15);
-  --border-bright: rgba(245, 158, 11, 0.4);
-  --amber: #f59e0b;
-  --amber-soft: #fbbf24;
+  --cover-bg: linear-gradient(145deg, #0f1a2e 0%, #0a0f1a 40%, #0d1525 100%);
+
+  /* Text */
   --text-primary: #f1f5f9;
+  --text-heading: #f1f5f9;
+  --text-bright: #f8fafc;
   --text-secondary: #94a3b8;
   --text-dim: #475569;
+
+  /* Accent (amber in dark, blue in light) */
+  --amber: #f59e0b;
+  --amber-soft: #fbbf24;
+
+  /* Accent backgrounds / borders — CSS-variable-friendly */
+  --accent-bg-xs:     rgba(245, 158, 11, 0.03);
+  --accent-bg-sm:     rgba(245, 158, 11, 0.07);
+  --accent-bg-md:     rgba(245, 158, 11, 0.10);
+  --accent-border-sm: rgba(245, 158, 11, 0.12);
+  --accent-border-md: rgba(245, 158, 11, 0.20);
+  --accent-border-lg: rgba(245, 158, 11, 0.30);
+  --accent-border-hover: rgba(245, 158, 11, 0.35);
+  --accent-glow:      rgba(245, 158, 11, 0.06);
+  --accent-shadow:    rgba(245, 158, 11, 0.05);
+
+  /* Borders */
+  --border: rgba(245, 158, 11, 0.15);
+  --border-bright: rgba(245, 158, 11, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Nav */
+  --nav-bg: rgba(10, 11, 15, 0.85);
+
+  /* Glow */
+  --glow-text: rgba(245, 158, 11, 0.3);
+  --glow-text-wide: rgba(245, 158, 11, 0.1);
+  --glow-radial: rgba(245, 158, 11, 0.06);
+}
+
+/* ─── Light mode overrides ─── */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #e2e8f0;
+  --cover-bg: linear-gradient(145deg, #dbeafe 0%, #eff6ff 40%, #e0f2fe 100%);
+
+  /* Text */
+  --text-primary: #334155;
+  --text-heading: #0f172a;
+  --text-bright: #0f172a;
+  --text-secondary: #475569;
+  --text-dim: #94a3b8;
+
+  /* Accent → blue */
+  --amber: #2563eb;
+  --amber-soft: #3b82f6;
+
+  /* Accent backgrounds / borders */
+  --accent-bg-xs:     rgba(37, 99, 235, 0.03);
+  --accent-bg-sm:     rgba(37, 99, 235, 0.07);
+  --accent-bg-md:     rgba(37, 99, 235, 0.10);
+  --accent-border-sm: rgba(37, 99, 235, 0.12);
+  --accent-border-md: rgba(37, 99, 235, 0.20);
+  --accent-border-lg: rgba(37, 99, 235, 0.30);
+  --accent-border-hover: rgba(37, 99, 235, 0.35);
+  --accent-glow:      rgba(37, 99, 235, 0.06);
+  --accent-shadow:    rgba(37, 99, 235, 0.05);
+
+  /* Borders */
+  --border: rgba(37, 99, 235, 0.15);
+  --border-bright: rgba(37, 99, 235, 0.4);
+  --border-subtle: rgba(0, 0, 0, 0.07);
+
+  /* Nav */
+  --nav-bg: rgba(248, 250, 252, 0.92);
+
+  /* Glow */
+  --glow-text: rgba(37, 99, 235, 0.25);
+  --glow-text-wide: rgba(37, 99, 235, 0.08);
+  --glow-radial: rgba(37, 99, 235, 0.06);
 }
 
 * {
@@ -39,6 +115,7 @@ body {
   font-size: 18px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Noise texture overlay */
@@ -66,6 +143,10 @@ body::before {
   height: 100%;
   opacity: 0.07;
   animation: waveDrift 12s ease-in-out infinite;
+}
+
+.wave-bg svg path {
+  fill: var(--amber);
 }
 
 .wave-bg svg:nth-child(2) {
@@ -98,9 +179,11 @@ body::before {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Amber glow ─── */
+/* ─── Accent glow ─── */
 .amber-glow {
-  text-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(245, 158, 11, 0.1);
+  text-shadow:
+    0 0 40px var(--glow-text),
+    0 0 80px var(--glow-text-wide);
 }
 
 .amber-line {
@@ -123,8 +206,8 @@ body::before {
 
 .chapter-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(245, 158, 11, 0.35);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(245, 158, 11, 0.05);
+  border-color: var(--accent-border-hover) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 30px var(--accent-shadow);
 }
 
 /* ─── Prose / Chapter content ─── */
@@ -132,14 +215,14 @@ body::before {
   font-family: var(--font-crimson);
   font-size: 1.125rem;
   line-height: 1.85;
-  color: #cbd5e1;
+  color: var(--text-secondary);
 }
 
 .prose-quantum h2 {
   font-family: var(--font-playfair);
   font-size: 1.5rem;
   font-weight: 600;
-  color: #f1f5f9;
+  color: var(--text-heading);
   margin-top: 2.5rem;
   margin-bottom: 1rem;
   border-left: 3px solid var(--amber);
@@ -175,7 +258,7 @@ body::before {
 }
 
 .prose-quantum em {
-  color: #e2e8f0;
+  color: var(--text-heading);
   font-style: italic;
 }
 
@@ -202,5 +285,8 @@ body::before {
 ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #4a5568; }
 
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
 /* ─── Selection ─── */
-::selection { background: rgba(245, 158, 11, 0.2); color: #fff; }
+::selection { background: var(--accent-bg-md); color: var(--text-heading); }

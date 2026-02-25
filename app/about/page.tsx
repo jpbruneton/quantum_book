@@ -1,12 +1,47 @@
+"use client";
 import { bookMeta, chapters } from "@/lib/chapters";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "About",
-  description: `About ${bookMeta.title}: ${bookMeta.subtitle} by ${bookMeta.author}`,
-};
+import { useLang } from "@/app/context/LangContext";
 
 export default function AboutPage() {
+  const { t } = useLang();
+  const at = t.about;
+
+  const detailItems = [
+    { label: at.detailLabels.author, value: bookMeta.author },
+    { label: at.detailLabels.affiliation, value: bookMeta.affiliation },
+    { label: at.detailLabels.edition, value: bookMeta.edition },
+    { label: at.detailLabels.year, value: bookMeta.year },
+    {
+      label: at.detailLabels.chapters,
+      value: `${chapters.length} ${at.chaptersUnit}`,
+    },
+    { label: at.detailLabels.isbn, value: bookMeta.isbn },
+  ];
+
+  const sectionStyle = {
+    marginBottom: "3.5rem",
+    paddingBottom: "3.5rem",
+    borderBottom: "1px solid var(--border-subtle)",
+  };
+
+  const h2Style = {
+    fontFamily: "var(--font-playfair)",
+    fontSize: "1.4rem",
+    fontWeight: 600,
+    color: "var(--text-heading)",
+    marginBottom: "1.25rem",
+    borderLeft: "3px solid var(--amber)",
+    paddingLeft: "1rem",
+  };
+
+  const bodyStyle = {
+    fontFamily: "var(--font-crimson)",
+    fontSize: "1.1rem",
+    color: "var(--text-secondary)",
+    lineHeight: 1.85,
+    marginBottom: "1.25rem",
+  };
+
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
@@ -21,14 +56,14 @@ export default function AboutPage() {
               marginBottom: "0.75rem",
             }}
           >
-            ABOUT THE BOOK
+            {at.label}
           </p>
           <h1
             style={{
               fontFamily: "var(--font-playfair)",
               fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
               fontWeight: 700,
-              color: "#f1f5f9",
+              color: "var(--text-heading)",
               lineHeight: 1.15,
               marginBottom: "1rem",
             }}
@@ -48,72 +83,16 @@ export default function AboutPage() {
         </div>
 
         {/* Description */}
-        <div
-          style={{
-            marginBottom: "3.5rem",
-            paddingBottom: "3.5rem",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "1.4rem",
-              fontWeight: 600,
-              color: "#f1f5f9",
-              marginBottom: "1.25rem",
-              borderLeft: "3px solid var(--amber)",
-              paddingLeft: "1rem",
-            }}
-          >
-            About This Book
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-crimson)",
-              fontSize: "1.1rem",
-              color: "var(--text-secondary)",
-              lineHeight: 1.85,
-              marginBottom: "1.25rem",
-            }}
-          >
-            {bookMeta.description}
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-crimson)",
-              fontSize: "1.1rem",
-              color: "var(--text-secondary)",
-              lineHeight: 1.85,
-            }}
-          >
-            The text develops quantum mechanics from first principles, assuming a solid background
-            in classical mechanics, electrodynamics, and the mathematics of linear algebra and
-            differential equations. Proofs are given in full where they illuminate the physics,
-            and numerous worked examples complement the theoretical exposition.
-          </p>
+        <div style={sectionStyle}>
+          <h2 style={h2Style}>{at.aboutBookTitle}</h2>
+          <p style={bodyStyle}>{bookMeta.description}</p>
+          <p style={{ ...bodyStyle, marginBottom: 0 }}>{at.aboutBookBody2}</p>
         </div>
 
         {/* Book details */}
-        <div
-          style={{
-            marginBottom: "3.5rem",
-            paddingBottom: "3.5rem",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "1.4rem",
-              fontWeight: 600,
-              color: "#f1f5f9",
-              marginBottom: "1.5rem",
-              borderLeft: "3px solid var(--amber)",
-              paddingLeft: "1rem",
-            }}
-          >
-            Book Details
+        <div style={sectionStyle}>
+          <h2 style={{ ...h2Style, marginBottom: "1.5rem" }}>
+            {at.bookDetails}
           </h2>
           <div
             style={{
@@ -122,21 +101,15 @@ export default function AboutPage() {
               gap: "1rem",
             }}
           >
-            {[
-              { label: "Author", value: bookMeta.author },
-              { label: "Affiliation", value: bookMeta.affiliation },
-              { label: "Edition", value: bookMeta.edition },
-              { label: "Year", value: bookMeta.year },
-              { label: "Chapters", value: `${chapters.length} chapters` },
-              { label: "ISBN", value: bookMeta.isbn },
-            ].map((item) => (
+            {detailItems.map((item) => (
               <div
                 key={item.label}
                 style={{
                   background: "var(--bg-card)",
-                  border: "1px solid rgba(245,158,11,0.1)",
+                  border: "1px solid var(--accent-border-sm)",
                   borderRadius: "6px",
                   padding: "1rem 1.25rem",
+                  transition: "background 0.25s ease",
                 }}
               >
                 <div
@@ -155,7 +128,7 @@ export default function AboutPage() {
                   style={{
                     fontFamily: "var(--font-crimson)",
                     fontSize: "1rem",
-                    color: "#f1f5f9",
+                    color: "var(--text-heading)",
                   }}
                 >
                   {item.value}
@@ -166,82 +139,30 @@ export default function AboutPage() {
         </div>
 
         {/* Author bio */}
-        <div
-          style={{
-            marginBottom: "3.5rem",
-            paddingBottom: "3.5rem",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "1.4rem",
-              fontWeight: 600,
-              color: "#f1f5f9",
-              marginBottom: "1.25rem",
-              borderLeft: "3px solid var(--amber)",
-              paddingLeft: "1rem",
-            }}
-          >
-            About the Author
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-crimson)",
-              fontSize: "1.1rem",
-              color: "var(--text-secondary)",
-              lineHeight: 1.85,
-            }}
-          >
-            <strong style={{ color: "var(--amber-soft)" }}>{bookMeta.author}</strong> is a
-            physicist at {bookMeta.affiliation}. Their research interests span quantum field
-            theory, quantum information, and the foundations of quantum mechanics. This book
-            grew from lecture notes developed over many years of teaching graduate and
-            advanced undergraduate courses.
+        <div style={sectionStyle}>
+          <h2 style={h2Style}>{at.authorTitle}</h2>
+          <p style={bodyStyle}>
+            <strong style={{ color: "var(--amber-soft)" }}>
+              {bookMeta.author}
+            </strong>{" "}
+            {at.authorBioSuffix} {bookMeta.affiliation}. {at.authorBioRest}
           </p>
-          {/* Replace with your actual bio */}
           <p
             style={{
-              marginTop: "0.5rem",
               fontFamily: "var(--font-inter)",
               fontSize: "0.8rem",
               color: "var(--text-dim)",
               fontStyle: "italic",
             }}
           >
-            ✏️ Replace this bio in <code>app/about/page.tsx</code>
+            {at.bioReplacePlaceholder}
           </p>
         </div>
 
         {/* How to use */}
         <div>
-          <h2
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "1.4rem",
-              fontWeight: 600,
-              color: "#f1f5f9",
-              marginBottom: "1.25rem",
-              borderLeft: "3px solid var(--amber)",
-              paddingLeft: "1rem",
-            }}
-          >
-            How to Use This Site
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-crimson)",
-              fontSize: "1.1rem",
-              color: "var(--text-secondary)",
-              lineHeight: 1.85,
-            }}
-          >
-            Each chapter can be read online via the <em>Read Online</em> tab, which renders
-            all mathematical equations using KaTeX. Alternatively, switch to the{" "}
-            <em>PDF Viewer</em> tab to view the typeset PDF directly in your browser, or
-            download it for offline reading. All content is free and open access.
-          </p>
+          <h2 style={h2Style}>{at.howToUse}</h2>
+          <p style={{ ...bodyStyle, marginBottom: 0 }}>{at.howToBody}</p>
         </div>
       </div>
     </div>

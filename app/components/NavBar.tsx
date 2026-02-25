@@ -1,18 +1,20 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { bookMeta } from "@/lib/chapters";
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/chapters", label: "Chapters" },
-  { href: "/about", label: "About" },
-];
+import { useTheme } from "@/app/context/ThemeContext";
+import { useLang } from "@/app/context/LangContext";
 
 export function NavBar() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const { lang, setLang, t } = useLang();
+
+  const links = [
+    { href: "/", label: t.nav.home },
+    { href: "/chapters", label: t.nav.chapters },
+    { href: "/about", label: t.nav.about },
+  ];
 
   return (
     <nav
@@ -20,9 +22,10 @@ export function NavBar() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "rgba(10,11,15,0.85)",
+        background: "var(--nav-bg)",
         backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(245,158,11,0.1)",
+        borderBottom: "1px solid var(--border)",
+        transition: "background 0.25s ease, border-color 0.25s ease",
       }}
     >
       <div
@@ -43,7 +46,7 @@ export function NavBar() {
             fontFamily: "var(--font-playfair)",
             fontSize: "1.15rem",
             fontWeight: 700,
-            color: "#f1f5f9",
+            color: "var(--text-heading)",
             textDecoration: "none",
             letterSpacing: "0.02em",
           }}
@@ -51,8 +54,9 @@ export function NavBar() {
           <span style={{ color: "var(--amber)" }}>Ψ</span> {bookMeta.title}
         </Link>
 
-        {/* Desktop links */}
-        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+        {/* Right side */}
+        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+          {/* Desktop nav links */}
           {links.map((link) => (
             <Link
               key={link.href}
@@ -83,11 +87,79 @@ export function NavBar() {
               {link.label}
             </Link>
           ))}
+
+          {/* Language toggle */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0",
+              border: "1px solid var(--border)",
+              borderRadius: "4px",
+              overflow: "hidden",
+              fontFamily: "var(--font-inter)",
+              fontSize: "0.75rem",
+              fontWeight: 500,
+            }}
+          >
+            {(["en", "fr"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                style={{
+                  background: lang === l ? "var(--amber)" : "transparent",
+                  color: lang === l ? (theme === "dark" ? "#0a0b0f" : "#ffffff") : "var(--text-secondary)",
+                  border: "none",
+                  padding: "0.3rem 0.6rem",
+                  cursor: "pointer",
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  transition: "background 0.2s, color 0.2s",
+                  lineHeight: 1,
+                }}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            style={{
+              background: "transparent",
+              border: "1px solid var(--border)",
+              borderRadius: "4px",
+              width: "34px",
+              height: "34px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              color: "var(--text-secondary)",
+              fontSize: "1rem",
+              transition: "border-color 0.2s, color 0.2s",
+              flexShrink: 0,
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--amber)";
+              (e.currentTarget as HTMLButtonElement).style.color = "var(--amber)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border)";
+              (e.currentTarget as HTMLButtonElement).style.color = "var(--text-secondary)";
+            }}
+          >
+            {theme === "dark" ? "☀" : "☾"}
+          </button>
+
+          {/* Read Free CTA */}
           <Link
             href="/chapters"
             style={{
-              background: "rgba(245,158,11,0.1)",
-              border: "1px solid rgba(245,158,11,0.3)",
+              background: "var(--accent-bg-md)",
+              border: "1px solid var(--accent-border-lg)",
               color: "var(--amber)",
               padding: "0.4rem 1rem",
               borderRadius: "4px",
@@ -100,7 +172,7 @@ export function NavBar() {
               transition: "background 0.2s",
             }}
           >
-            Read Free
+            {t.nav.readFree}
           </Link>
         </div>
       </div>

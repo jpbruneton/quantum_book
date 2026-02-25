@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
 import { chapters } from "@/lib/chapters";
+import { useLang } from "@/app/context/LangContext";
 
 export function ChapterList() {
+  const { t } = useLang();
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
       {chapters.map((chapter, i) => (
@@ -11,7 +14,7 @@ export function ChapterList() {
           style={{
             borderBottom:
               i < chapters.length - 1
-                ? "1px solid rgba(255,255,255,0.05)"
+                ? "1px solid var(--border-subtle)"
                 : "none",
           }}
         >
@@ -30,9 +33,10 @@ export function ChapterList() {
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLDivElement).style.background =
-                  "rgba(245,158,11,0.03)";
+                  "var(--accent-bg-xs)";
                 (e.currentTarget as HTMLDivElement).style.margin = "0 -1rem";
-                (e.currentTarget as HTMLDivElement).style.padding = "1.75rem 1rem";
+                (e.currentTarget as HTMLDivElement).style.padding =
+                  "1.75rem 1rem";
                 (e.currentTarget as HTMLDivElement).style.borderRadius = "6px";
               }}
               onMouseLeave={(e) => {
@@ -47,7 +51,7 @@ export function ChapterList() {
                   fontFamily: "var(--font-playfair)",
                   fontSize: "2.25rem",
                   fontWeight: 700,
-                  color: "rgba(245,158,11,0.25)",
+                  color: "var(--accent-border-lg)",
                   lineHeight: 1,
                 }}
               >
@@ -60,7 +64,7 @@ export function ChapterList() {
                     fontFamily: "var(--font-playfair)",
                     fontSize: "1.2rem",
                     fontWeight: 600,
-                    color: "#f1f5f9",
+                    color: "var(--text-heading)",
                     marginBottom: "0.25rem",
                   }}
                 >
@@ -78,12 +82,12 @@ export function ChapterList() {
                   {chapter.subtitle}
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-                  {chapter.topics.slice(0, 3).map((t) => (
+                  {chapter.topics.slice(0, 3).map((topic) => (
                     <span
-                      key={t}
+                      key={topic}
                       style={{
-                        background: "rgba(245,158,11,0.07)",
-                        border: "1px solid rgba(245,158,11,0.15)",
+                        background: "var(--accent-bg-sm)",
+                        border: "1px solid var(--accent-border-sm)",
                         borderRadius: "100px",
                         padding: "0.15rem 0.6rem",
                         fontFamily: "var(--font-inter)",
@@ -92,7 +96,7 @@ export function ChapterList() {
                         letterSpacing: "0.02em",
                       }}
                     >
-                      {t}
+                      {topic}
                     </span>
                   ))}
                 </div>
@@ -124,7 +128,7 @@ export function ChapterList() {
                     fontWeight: 500,
                   }}
                 >
-                  Read →
+                  {t.home.readChapter}
                 </span>
               </div>
             </div>

@@ -1,12 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { Chapter } from "@/lib/chapters";
-
-// Simple KaTeX-like math rendering using span markers
-// In production, install react-katex and import <InlineMath> / <BlockMath>
-// For now we render the HTML content with dangerouslySetInnerHTML
-// Math expressions inside the HTML are rendered inline by the browser
-// since we load KaTeX CSS globally. Full rendering requires katex.renderToString.
+import { processLatex } from "@/lib/latex";
+import { useLang } from "@/app/context/LangContext";
 
 interface Props {
   chapter: Chapter;
@@ -14,6 +10,12 @@ interface Props {
 
 export function ChapterContent({ chapter }: Props) {
   const [tab, setTab] = useState<"web" | "pdf">("web");
+  const { t } = useLang();
+
+  const renderedContent = useMemo(
+    () => processLatex(chapter.content),
+    [chapter.content]
+  );
 
   return (
     <>
@@ -25,13 +27,13 @@ export function ChapterContent({ chapter }: Props) {
           padding: "1.5rem 1.5rem 0",
           display: "flex",
           gap: "0",
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          borderBottom: "1px solid var(--border-subtle)",
         }}
       >
-        {(["web", "pdf"] as const).map((t) => (
+        {(["web", "pdf"] as const).map((tabKey) => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
+            key={tabKey}
+            onClick={() => setTab(tabKey)}
             style={{
               background: "none",
               border: "none",
@@ -41,14 +43,17 @@ export function ChapterContent({ chapter }: Props) {
               fontWeight: 500,
               letterSpacing: "0.05em",
               textTransform: "uppercase",
-              color: tab === t ? "var(--amber)" : "var(--text-dim)",
+              color: tab === tabKey ? "var(--amber)" : "var(--text-dim)",
               cursor: "pointer",
-              borderBottom: tab === t ? "2px solid var(--amber)" : "2px solid transparent",
+              borderBottom:
+                tab === tabKey
+                  ? "2px solid var(--amber)"
+                  : "2px solid transparent",
               marginBottom: "-1px",
               transition: "color 0.2s",
             }}
           >
-            {t === "web" ? "Read Online" : "PDF Viewer"}
+            {tabKey === "web" ? t.chapter.tabOnline : t.chapter.tabPdf}
           </button>
         ))}
       </div>
@@ -64,23 +69,24 @@ export function ChapterContent({ chapter }: Props) {
         >
           <div
             className="prose-quantum"
-            dangerouslySetInnerHTML={{ __html: chapter.content }}
+            dangerouslySetInnerHTML={{ __html: renderedContent }}
           />
           <div
             style={{
               marginTop: "3rem",
               padding: "1.5rem",
-              background: "rgba(245,158,11,0.04)",
-              border: "1px solid rgba(245,158,11,0.12)",
+              background: "var(--accent-bg-xs)",
+              border: "1px solid var(--accent-border-sm)",
               borderRadius: "6px",
               fontFamily: "var(--font-crimson)",
               fontSize: "0.95rem",
               color: "var(--text-secondary)",
             }}
           >
-            <strong style={{ color: "var(--amber)" }}>Note:</strong> This is a
-            preview excerpt. Download the full PDF for the complete chapter,
-            exercises, and solutions.
+            <strong style={{ color: "var(--amber)" }}>
+              {t.chapter.noteTitle}
+            </strong>{" "}
+            {t.chapter.noteBody}
           </div>
         </div>
       )}
@@ -100,7 +106,7 @@ export function ChapterContent({ chapter }: Props) {
               background: "var(--bg-card)",
               borderRadius: "8px",
               overflow: "hidden",
-              border: "1px solid rgba(245,158,11,0.12)",
+              border: "1px solid var(--accent-border-sm)",
             }}
           >
             {/* PDF toolbar */}
@@ -110,8 +116,8 @@ export function ChapterContent({ chapter }: Props) {
                 justifyContent: "space-between",
                 alignItems: "center",
                 padding: "0.75rem 1rem",
-                background: "rgba(245,158,11,0.05)",
-                borderBottom: "1px solid rgba(245,158,11,0.1)",
+                background: "var(--accent-bg-xs)",
+                borderBottom: "1px solid var(--accent-border-sm)",
               }}
             >
               <span
@@ -130,8 +136,8 @@ export function ChapterContent({ chapter }: Props) {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.4rem",
-                  background: "rgba(245,158,11,0.1)",
-                  border: "1px solid rgba(245,158,11,0.25)",
+                  background: "var(--accent-bg-md)",
+                  border: "1px solid var(--accent-border-md)",
                   color: "var(--amber)",
                   padding: "0.35rem 0.75rem",
                   borderRadius: "4px",
@@ -141,7 +147,7 @@ export function ChapterContent({ chapter }: Props) {
                   textDecoration: "none",
                 }}
               >
-                ↓ Download
+                {t.chapter.downloadBtn}
               </a>
             </div>
 
@@ -167,13 +173,13 @@ export function ChapterContent({ chapter }: Props) {
               textAlign: "center",
             }}
           >
-            If the PDF doesn't display,{" "}
+            {t.chapter.pdfFallback}{" "}
             <a
               href={`/pdfs/${chapter.pdfFile}`}
               download
               style={{ color: "var(--amber)", textDecoration: "underline" }}
             >
-              click here to download it
+              {t.chapter.pdfFallbackLink}
             </a>
             .
           </p>
