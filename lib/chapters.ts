@@ -33,12 +33,12 @@ export const chapters: Chapter[] = [
     titleFr: "Introduction",
     titleEn: "Introduction",
     title: "Introduction",
-    subtitle: "Linear Algebra & Hilbert Spaces",
+    subtitle: "Expérience de Stern et Gerlach",
     description:
-      "We establish the mathematical scaffolding: complex vector spaces, inner products, operators, and the spectral theorem — the language quantum mechanics speaks.",
-    topics: ["Complex vector spaces", "Hilbert spaces", "Linear operators", "Eigenvalues & eigenvectors", "Dirac notation"],
-    pdfFile: "chapter-01-mathematical-foundations.pdf",
-    pdfAvailable: false,
+      "Introduction expérimentale au spin, au moment magnétique, et à la quantification observée dans l'expérience de Stern et Gerlach.",
+    topics: ["Moment magnétique", "Stern-Gerlach", "Spin", "Précession de Larmor", "Quantification"],
+    pdfFile: "ch1.pdf",
+    pdfAvailable: true,
     readingTime: "45 min",
     content: `
 <h2>Le spin dans l'expérience de Stern et Gerlach</h2>
@@ -64,12 +64,12 @@ export const chapters: Chapter[] = [
     titleFr: "Espaces de Hilbert",
     titleEn: "Hilbert Spaces",
     title: "Espaces de Hilbert",
-    subtitle: "The Schrödinger Equation",
+    subtitle: "Fondements mathématiques",
     description:
-      "The wavefunction emerges as the central object of non-relativistic quantum mechanics. We derive and analyze the time-dependent and time-independent Schrödinger equations.",
-    topics: ["Wavefunction interpretation", "Time-dependent Schrödinger equation", "Probability currents", "Stationary states", "Free particle"],
-    pdfFile: "chapter-02-wave-mechanics.pdf",
-    pdfAvailable: false,
+      "Espaces vectoriels, normes, produit scalaire, topologie forte, complétude et bases hilbertiennes pour établir le cadre formel de la mécanique quantique.",
+    topics: ["Espaces vectoriels", "Normes", "Produit scalaire", "Topologie forte", "Espaces de Hilbert"],
+    pdfFile: "ch2.pdf",
+    pdfAvailable: true,
     readingTime: "55 min",
     content: `
 <h2>Espaces vectoriels et espaces de Hilbert</h2>
@@ -96,12 +96,12 @@ export const chapters: Chapter[] = [
     titleFr: "Postulats",
     titleEn: "Postulates",
     title: "Postulats",
-    subtitle: "Ladder Operators & Energy Spectra",
+    subtitle: "Mesure, dynamique et interprétation",
     description:
-      "Perhaps the most important exactly-solvable system in all of physics. The algebraic method reveals a beautiful structure that reappears throughout quantum field theory.",
-    topics: ["Algebraic method", "Creation & annihilation operators", "Energy spectrum", "Coherent states", "Applications"],
-    pdfFile: "chapter-03-harmonic-oscillator.pdf",
-    pdfAvailable: false,
+      "Présentation des postulats quantiques, de la règle de Born, de la réduction du paquet d'onde et de l'équation de Schrödinger.",
+    topics: ["Postulats", "Règle de Born", "Mesure", "Évolution unitaire", "Théorème d'Ehrenfest"],
+    pdfFile: "ch3.pdf",
+    pdfAvailable: true,
     readingTime: "50 min",
     content: `
 <h2>Postulats et étrangetés quantiques</h2>
@@ -127,12 +127,12 @@ export const chapters: Chapter[] = [
     titleFr: "Théorie des opérateurs linéaires",
     titleEn: "Linear Operator Theory",
     title: "Théorie des opérateurs linéaires",
-    subtitle: "Rotational Symmetry & Spin",
+    subtitle: "Structure et spectre",
     description:
-      "Rotational symmetry gives birth to angular momentum quantization. We construct the general theory and encounter the radical concept of half-integer spin.",
-    topics: ["Orbital angular momentum", "Commutation relations", "Spherical harmonics", "Spin-1/2 systems", "Clebsch-Gordan coefficients"],
-    pdfFile: "chapter-04-angular-momentum.pdf",
-    pdfAvailable: false,
+      "Taxonomie des opérateurs linéaires en dimension infinie: bornés/non bornés, auto-adjoints, unitaires, compacts, et conséquences spectrales.",
+    topics: ["Opérateurs linéaires", "Auto-adjonction", "Spectre", "Compacité", "Convergence forte/faible"],
+    pdfFile: "ch4.pdf",
+    pdfAvailable: true,
     readingTime: "60 min",
     content: `
 <h2>Théorie des opérateurs linéaires</h2>
