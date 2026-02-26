@@ -129,7 +129,7 @@ export const translations = {
       title: "Mécanique Quantique",
       subtitle: "Une Introduction Moderne",
       description:
-        "Un traité rigoureux mais accessible de la mécanique quantique, reliant l'intuition classique au formalisme mathématique des espaces de Hilbert, des opérateurs et de la théorie de la mesure. Conçu pour les étudiants de licence avancée et de master.",
+        "Ce livre est une présentation ambitieuse et moderne de la mécanique quantique, couvrant en profondeur les mathématiques qu'elle requiert — théorie spectrale, espaces de Hilbert, géométrie différentielle, algèbres d'opérateurs — avant d'aborder ses fondements conceptuels : problème de la mesure, décohérence, interprétations, théories alternatives et leurs contraintes expérimentales. Il s'ouvre également vers l'information et l'algorithmique quantique ainsi que les interprétations informationnelles. Idéal pour des étudiants ayant déjà suivi un premier module de mécanique quantique, il s'adresse plus largement aux étudiants de master, doctorants et chercheurs souhaitant une compréhension à la fois mathématiquement fondée et conceptuellement approfondie de la théorie.",
       edition: "Première Édition",
     },
     nav: {

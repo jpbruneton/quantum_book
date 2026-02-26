@@ -192,8 +192,6 @@ export default function HomePage() {
               style={{
                 display: "flex",
                 gap: "2rem",
-                alignItems: "center",
-                flexWrap: "wrap",
                 marginTop: "3rem",
                 paddingTop: "2rem",
                 borderTop: "1px solid var(--border-subtle)",
@@ -224,40 +222,40 @@ export default function HomePage() {
                   </div>
                 </div>
               ))}
-              <button
-                disabled
-                style={{
-                  marginLeft: "auto",
-                  background: "var(--accent-bg-md)",
-                  border: "1px solid var(--accent-border-lg)",
-                  color: "var(--amber)",
-                  padding: "0.65rem 1rem",
-                  borderRadius: "6px",
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.8rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.03em",
-                  opacity: 0.8,
-                  cursor: "not-allowed",
-                }}
-              >
-                {t.home.fullBookDownload}
-              </button>
             </div>
           </div>
 
           {/* Right: Book cover */}
-          <div
-            className="animate-fade-up stagger-3"
-            style={{
-              position: "relative",
-              aspectRatio: "3/4",
-              borderRadius: "8px",
-              overflow: "hidden",
-              boxShadow:
-                "0 40px 100px rgba(0,0,0,0.3), 0 0 0 1px var(--accent-border-md), inset 0 0 60px var(--accent-glow)",
-            }}
-          >
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.9rem" }}>
+            <button
+              disabled
+              style={{
+                background: "var(--accent-bg-md)",
+                border: "1px solid var(--accent-border-lg)",
+                color: "var(--amber)",
+                padding: "0.65rem 1rem",
+                borderRadius: "6px",
+                fontFamily: "var(--font-inter)",
+                fontSize: "0.8rem",
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+                opacity: 0.8,
+                cursor: "not-allowed",
+              }}
+            >
+              {t.home.fullBookDownload}
+            </button>
+            <div
+              className="animate-fade-up stagger-3"
+              style={{
+                position: "relative",
+                aspectRatio: "3/4",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow:
+                  "0 40px 100px rgba(0,0,0,0.3), 0 0 0 1px var(--accent-border-md), inset 0 0 60px var(--accent-glow)",
+              }}
+            >
             <div
               style={{
                 width: "100%",
@@ -378,6 +376,7 @@ export default function HomePage() {
                 )
               )}
             </div>
+          </div>
           </div>
         </div>
       </section>
