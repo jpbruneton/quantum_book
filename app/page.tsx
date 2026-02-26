@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { chapters, bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
@@ -231,131 +232,23 @@ export default function HomePage() {
                 aspectRatio: "3/4",
                 borderRadius: "8px",
                 overflow: "hidden",
+                background: "var(--bg-card)",
                 boxShadow:
                   "0 40px 100px rgba(0,0,0,0.3), 0 0 0 1px var(--accent-border-md), inset 0 0 60px var(--accent-glow)",
               }}
             >
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                background: "var(--cover-bg)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "2.5rem",
-                textAlign: "center",
-                position: "relative",
-              }}
-            >
-              {/* Decorative Ψ */}
-              <div
+              <Image
+                src="/front.png"
+                alt={book.title}
+                fill
+                priority
+                sizes="(max-width: 900px) 70vw, 380px"
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  opacity: 0.07,
-                  fontSize: "6rem",
-                  fontFamily: "var(--font-playfair)",
-                  userSelect: "none",
-                }}
-              >
-                Ψ
-              </div>
-              <div
-                style={{
-                  width: "60px",
-                  height: "2px",
-                  background:
-                    "linear-gradient(90deg, transparent, var(--amber), transparent)",
-                  marginBottom: "2rem",
+                  objectFit: "contain",
+                  padding: "0.5rem",
                 }}
               />
-              <p
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "1.6rem",
-                  fontWeight: 700,
-                  color: "var(--text-heading)",
-                  marginBottom: "0.5rem",
-                  letterSpacing: "0.05em",
-                }}
-              >
-                {book.title}
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontStyle: "italic",
-                  fontSize: "1rem",
-                  color: "var(--amber-soft)",
-                  marginBottom: "3rem",
-                }}
-              >
-                {book.subtitle}
-              </p>
-              <div
-                style={{
-                  width: "40px",
-                  height: "1px",
-                  background: "var(--accent-border-lg)",
-                  marginBottom: "1.5rem",
-                }}
-              />
-              <p
-                style={{
-                  fontFamily: "var(--font-crimson)",
-                  fontSize: "1rem",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                {bookMeta.author}
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.75rem",
-                  color: "var(--text-dim)",
-                  marginTop: "0.25rem",
-                }}
-              >
-                {bookMeta.year}
-              </p>
-
-              {/* Corner decorations */}
-              {(["top-left", "top-right", "bottom-left", "bottom-right"] as const).map(
-                (pos) => (
-                  <div
-                    key={pos}
-                    style={{
-                      position: "absolute",
-                      top: pos.startsWith("top") ? "1rem" : "auto",
-                      bottom: pos.startsWith("bottom") ? "1rem" : "auto",
-                      left: pos.endsWith("left") ? "1rem" : "auto",
-                      right: pos.endsWith("right") ? "1rem" : "auto",
-                      width: "20px",
-                      height: "20px",
-                      borderTop: pos.startsWith("top")
-                        ? "1px solid var(--accent-border-lg)"
-                        : "none",
-                      borderBottom: pos.startsWith("bottom")
-                        ? "1px solid var(--accent-border-lg)"
-                        : "none",
-                      borderLeft: pos.endsWith("left")
-                        ? "1px solid var(--accent-border-lg)"
-                        : "none",
-                      borderRight: pos.endsWith("right")
-                        ? "1px solid var(--accent-border-lg)"
-                        : "none",
-                    }}
-                  />
-                )
-              )}
             </div>
-          </div>
           </div>
         </div>
       </section>
