@@ -86,7 +86,9 @@ export default function AboutPage() {
         {/* Description */}
         <div style={sectionStyle}>
           <h2 style={h2Style}>{at.aboutBookTitle}</h2>
-          <p style={bodyStyle}>{book.description}</p>
+          <p style={{ ...bodyStyle, textAlign: "justify", whiteSpace: "pre-line" }}>
+            {book.description}
+          </p>
           <p style={{ ...bodyStyle, marginBottom: 0 }}>{at.aboutBookBody2}</p>
         </div>
 

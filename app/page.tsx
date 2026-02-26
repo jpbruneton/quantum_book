@@ -121,6 +121,8 @@ export default function HomePage() {
                 maxWidth: "520px",
                 lineHeight: 1.75,
                 marginBottom: "2.5rem",
+                textAlign: "justify",
+                whiteSpace: "pre-line",
               }}
             >
               {book.description}
@@ -282,12 +284,23 @@ export default function HomePage() {
                     fontSize: "1.5rem",
                     fontWeight: 700,
                     lineHeight: 1.2,
-                    marginBottom: "0.25rem",
+                    marginBottom: "0",
                     textShadow: "0 2px 14px rgba(0,0,0,0.5)",
                   }}
                 >
                   {book.title}
                 </p>
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  left: "1.1rem",
+                  right: "1.1rem",
+                  bottom: "1rem",
+                  textAlign: "center",
+                  color: "#f8fafc",
+                }}
+              >
                 <p
                   style={{
                     fontFamily: "var(--font-playfair)",
