@@ -87,12 +87,13 @@ export default function HomePage() {
               className="animate-fade-up stagger-2 amber-glow"
               style={{
                 fontFamily: "var(--font-playfair)",
-                fontSize: "clamp(3rem, 7vw, 5.5rem)",
+                fontSize: "clamp(2.35rem, 5.2vw, 4.1rem)",
                 fontWeight: 900,
-                lineHeight: 1.05,
+                lineHeight: 1.02,
                 letterSpacing: "-0.02em",
                 color: "var(--text-bright)",
                 marginBottom: "1rem",
+                whiteSpace: "nowrap",
               }}
             >
               {book.title}
@@ -102,7 +103,7 @@ export default function HomePage() {
               className="animate-fade-up stagger-3"
               style={{
                 fontFamily: "var(--font-playfair)",
-                fontSize: "clamp(1.2rem, 2.5vw, 1.75rem)",
+                fontSize: "clamp(1.1rem, 2.1vw, 1.55rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
                 color: "var(--amber-soft)",
