@@ -271,7 +271,7 @@ export default function HomePage() {
                   position: "absolute",
                   left: "1.1rem",
                   right: "1.1rem",
-                  bottom: "1rem",
+                  top: "1rem",
                   textAlign: "center",
                   color: "#f8fafc",
                 }}
@@ -293,7 +293,7 @@ export default function HomePage() {
                     fontFamily: "var(--font-playfair)",
                     fontStyle: "italic",
                     fontSize: "0.95rem",
-                    color: "var(--amber-soft)",
+                    color: "#f8fafc",
                     marginBottom: "0.55rem",
                     textShadow: "0 2px 10px rgba(0,0,0,0.45)",
                   }}
