@@ -206,7 +206,16 @@ export default function HomePage() {
           </div>
 
           {/* Right: Book cover */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.9rem" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "0.9rem",
+              width: "100%",
+              maxWidth: "380px",
+            }}
+          >
             <button
               disabled
               style={{
@@ -229,6 +238,7 @@ export default function HomePage() {
               className="animate-fade-up stagger-3"
               style={{
                 position: "relative",
+                width: "100%",
                 aspectRatio: "3/4",
                 borderRadius: "8px",
                 overflow: "hidden",
