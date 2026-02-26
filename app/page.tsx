@@ -48,7 +48,7 @@ export default function HomePage() {
           display: "flex",
           alignItems: "flex-start",
           overflow: "hidden",
-          padding: "4.5rem 1.5rem 3rem",
+          padding: "calc(4.5rem - 1cm) 1.5rem 3rem",
         }}
       >
         <WaveBackground />
@@ -69,11 +69,12 @@ export default function HomePage() {
         />
 
         <div
+          className="home-hero-grid"
           style={{
             maxWidth: "1100px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "1fr 380px",
+            gridTemplateColumns: "minmax(0, 1fr) 380px",
             gap: "5rem",
             alignItems: "center",
             width: "100%",
@@ -84,7 +85,7 @@ export default function HomePage() {
           {/* Left: Text */}
           <div>
             <h1
-              className="animate-fade-up stagger-2 amber-glow"
+              className="home-main-title animate-fade-up stagger-2 amber-glow"
               style={{
                 fontFamily: "var(--font-playfair)",
                 fontSize: "clamp(2.35rem, 5.2vw, 4.1rem)",
@@ -210,6 +211,7 @@ export default function HomePage() {
 
           {/* Right: Book cover */}
           <div
+            className="home-cover-column"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -217,7 +219,7 @@ export default function HomePage() {
               gap: "0.9rem",
               width: "100%",
               maxWidth: "380px",
-              marginTop: "-2cm",
+              transform: "translateY(-90px)",
             }}
           >
             <button
