@@ -45,9 +45,9 @@ export default function HomePage() {
           position: "relative",
           minHeight: "100vh",
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           overflow: "hidden",
-          padding: "6rem 1.5rem",
+          padding: "4.5rem 1.5rem 3rem",
         }}
       >
         <WaveBackground />
@@ -82,27 +82,6 @@ export default function HomePage() {
         >
           {/* Left: Text */}
           <div>
-            <div
-              className="animate-fade-up stagger-1"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                background: "var(--accent-bg-sm)",
-                border: "1px solid var(--accent-border-md)",
-                borderRadius: "100px",
-                padding: "0.3rem 1rem",
-                marginBottom: "2rem",
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.75rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--amber)",
-              }}
-            >
-              <span>●</span> {t.home.badge}
-            </div>
-
             <h1
               className="animate-fade-up stagger-2 amber-glow"
               style={{
@@ -226,7 +205,7 @@ export default function HomePage() {
           </div>
 
           {/* Right: Book cover */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.9rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.9rem" }}>
             <button
               disabled
               style={{
