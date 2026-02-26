@@ -254,10 +254,64 @@ export default function HomePage() {
                 priority
                 sizes="(max-width: 900px) 70vw, 380px"
                 style={{
-                  objectFit: "contain",
-                  padding: "0.5rem",
+                  objectFit: "cover",
                 }}
               />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 38%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0) 100%)",
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  left: "1.1rem",
+                  right: "1.1rem",
+                  bottom: "1rem",
+                  textAlign: "center",
+                  color: "#f8fafc",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "var(--font-playfair)",
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    lineHeight: 1.2,
+                    marginBottom: "0.25rem",
+                    textShadow: "0 2px 14px rgba(0,0,0,0.5)",
+                  }}
+                >
+                  {book.title}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-playfair)",
+                    fontStyle: "italic",
+                    fontSize: "0.95rem",
+                    color: "var(--amber-soft)",
+                    marginBottom: "0.55rem",
+                    textShadow: "0 2px 10px rgba(0,0,0,0.45)",
+                  }}
+                >
+                  {book.subtitle}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.08em",
+                    color: "#e2e8f0",
+                    textShadow: "0 2px 8px rgba(0,0,0,0.45)",
+                  }}
+                >
+                  {bookMeta.year}
+                </p>
+              </div>
             </div>
           </div>
         </div>
