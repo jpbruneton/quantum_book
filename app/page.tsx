@@ -217,6 +217,7 @@ export default function HomePage() {
               gap: "0.9rem",
               width: "100%",
               maxWidth: "380px",
+              marginTop: "-2cm",
             }}
           >
             <button
