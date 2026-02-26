@@ -192,6 +192,8 @@ export default function HomePage() {
               style={{
                 display: "flex",
                 gap: "2rem",
+                alignItems: "center",
+                flexWrap: "wrap",
                 marginTop: "3rem",
                 paddingTop: "2rem",
                 borderTop: "1px solid var(--border-subtle)",
@@ -222,6 +224,25 @@ export default function HomePage() {
                   </div>
                 </div>
               ))}
+              <button
+                disabled
+                style={{
+                  marginLeft: "auto",
+                  background: "var(--accent-bg-md)",
+                  border: "1px solid var(--accent-border-lg)",
+                  color: "var(--amber)",
+                  padding: "0.65rem 1rem",
+                  borderRadius: "6px",
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.03em",
+                  opacity: 0.8,
+                  cursor: "not-allowed",
+                }}
+              >
+                {t.home.fullBookDownload}
+              </button>
             </div>
           </div>
 

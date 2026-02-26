@@ -13,8 +13,9 @@ export function NavBar() {
   const links = [
     { href: "/", label: t.nav.home },
     { href: "/chapters", label: t.nav.chapters },
+    { href: "/exercises", label: t.nav.exercises },
+    { href: "/blog", label: t.nav.blog },
     { href: "/about", label: t.nav.about },
-    { href: "/updates", label: t.nav.updates },
   ];
 
   return (
@@ -40,20 +41,24 @@ export function NavBar() {
           justifyContent: "space-between",
         }}
       >
-        {/* Logo */}
-        <Link
-          href="/"
-          style={{
-            fontFamily: "var(--font-playfair)",
-            fontSize: "1.15rem",
-            fontWeight: 700,
-            color: "var(--text-heading)",
-            textDecoration: "none",
-            letterSpacing: "0.02em",
-          }}
-        >
-          <span style={{ color: "var(--amber)" }}>Ψ</span> {book.title}
-        </Link>
+        {/* Logo (hidden on home page) */}
+        {pathname === "/" ? (
+          <div style={{ width: "220px" }} />
+        ) : (
+          <Link
+            href="/"
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "1.15rem",
+              fontWeight: 700,
+              color: "var(--text-heading)",
+              textDecoration: "none",
+              letterSpacing: "0.02em",
+            }}
+          >
+            {book.title}
+          </Link>
+        )}
 
         {/* Right side */}
         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>

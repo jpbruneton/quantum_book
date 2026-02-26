@@ -12,9 +12,9 @@ export const translations = {
     nav: {
       home: "Home",
       chapters: "Chapters",
+      exercises: "Exercises",
+      blog: "Blog",
       about: "About",
-      updates: "Journal",
-      readFree: "Read Free",
     },
     home: {
       badge: "Free Online Edition",
@@ -30,6 +30,7 @@ export const translations = {
       contentsLabel: "Contents",
       exploreTitle: "Explore the Chapters",
       readChapter: "Read chapter →",
+      fullBookDownload: "Download the full edition (coming soon)",
       features: [
         {
           icon: "∫",
@@ -96,11 +97,11 @@ export const translations = {
         "The text develops quantum mechanics from first principles, assuming a solid background in classical mechanics, electrodynamics, and the mathematics of linear algebra and differential equations. Proofs are given in full where they illuminate the physics, and numerous worked examples complement the theoretical exposition.",
     },
     updates: {
-      label: "UPDATES",
-      title: "Project Journal",
+      label: "BLOG",
+      title: "Project Blog",
       description:
-        "This page tracks release notes, content additions, corrections, and roadmap notes over time.",
-      latestTitle: "Latest updates",
+        "Updates, release notes, roadmap decisions, and progress notes for the book project.",
+      latestTitle: "Latest posts",
       entries: [
         {
           date: "2026-02-25",
@@ -115,8 +116,9 @@ export const translations = {
       navigation: "Navigation",
       home: "Home",
       allChapters: "All Chapters",
+      exercises: "Exercises",
+      blog: "Blog",
       aboutBook: "About the Book",
-      updates: "Journal",
       author: "Author",
       copyright: (year: string, author: string) =>
         `© ${year} ${author}. All rights reserved.`,
@@ -133,9 +135,9 @@ export const translations = {
     nav: {
       home: "Accueil",
       chapters: "Chapitres",
+      exercises: "Exercices",
+      blog: "Blog",
       about: "À propos",
-      updates: "Journal",
-      readFree: "Lire gratuitement",
     },
     home: {
       badge: "Édition gratuite en ligne",
@@ -151,6 +153,7 @@ export const translations = {
       contentsLabel: "Sommaire",
       exploreTitle: "Explorer les chapitres",
       readChapter: "Lire le chapitre →",
+      fullBookDownload: "Télécharger l'édition complète (bientôt)",
       features: [
         {
           icon: "∫",
@@ -217,11 +220,11 @@ export const translations = {
         "Le texte développe la mécanique quantique à partir des premiers principes, en supposant une solide formation en mécanique classique, en électrodynamique et en mathématiques. Les preuves sont données en entier lorsqu'elles éclairent la physique, et de nombreux exemples travaillés complètent l'exposition théorique.",
     },
     updates: {
-      label: "MISES À JOUR",
-      title: "Journal du projet",
+      label: "BLOG",
+      title: "Blog du projet",
       description:
-        "Cette page regroupe les notes de version, ajouts de contenu, corrections et points de feuille de route au fil du temps.",
-      latestTitle: "Dernières mises à jour",
+        "Actualités, notes de version, décisions de feuille de route et avancées du projet de livre.",
+      latestTitle: "Derniers articles",
       entries: [
         {
           date: "2026-02-25",
@@ -236,8 +239,9 @@ export const translations = {
       navigation: "Navigation",
       home: "Accueil",
       allChapters: "Tous les chapitres",
+      exercises: "Exercices",
+      blog: "Blog",
       aboutBook: "À propos du livre",
-      updates: "Journal",
       author: "Auteur",
       copyright: (year: string, author: string) =>
         `© ${year} ${author}. Tous droits réservés.`,
