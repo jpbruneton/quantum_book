@@ -104,8 +104,8 @@ export const themes: Theme[] = [
         number: 1,
         titleFr: "Leçon n°1",
         titleEn: "Lesson #1",
-        subtitleFr: "Fondements mathématiques",
-        subtitleEn: "Mathematical Foundations",
+        subtitleFr: "Espaces de Hilbert",
+        subtitleEn: "Hilbert Spaces",
         descriptionFr:
           "Espaces vectoriels, normes, produit scalaire, topologie forte, complétude et bases hilbertiennes pour établir le cadre formel de la mécanique quantique.",
         descriptionEn:
@@ -134,6 +134,138 @@ export const themes: Theme[] = [
 <p>La physique établit des correspondances entre le monde sensible et des espaces mathématiques abstraits. C'est la phase de formalisation du problème physique. Mais la démarche ne s’arrête pas là : il s’agit aussi de tracer le chemin inverse, en faisant revenir ces abstractions vers le réel, sous forme de prédictions expérimentales, où les propriétés mathématiques se traduisent en nombres. On doit donc impérativement équiper ces structures mathématiques d'application vers les nombres réels\\footnote{Ou autres : on peut sans doute se convaincre que tout résultat expérimental peut se décomposer en une série de réponses à des questions binaires oui/non ; par exemple : la particule est-elle à gauche ou à droite de ceci? Par processus dichotomique, on peut reconstruire les nombres réels à l'aide de cette question. En soi, il semble que les seules applications vraiment nécessaires soient des applications vers les booléens.}. Ces \\og moteurs de prédiction \\fg sont par exemple les projecteurs, traces, produits scalaires, normes, formes quadratiques, etc.</p>
 
 <p>Cette étape est à peine nécessaire en mécanique classique qui manipule directement des nombres réels (ex : le temps) ou des vecteurs de nombres réels (ex : la position) qui sont supposées être directement accessibles expérimentalement; il y a tout au plus une étape de projection triviale à réaliser pour dire par exemple : \\og la particule à l'instant $t$ se trouve en $x$ sur l'axe $Ox$ \\fg. C'est donc suffisamment évident pour ne même pas être signalé.</p>
+        `,
+      },
+      {
+        slug: "espaces-de-hilbert-lecon-2",
+        number: 2,
+        titleFr: "Leçon n°2",
+        titleEn: "Lesson #2",
+        subtitleFr: "Topologie des espaces de Hilbert",
+        subtitleEn: "Topology of Hilbert Spaces",
+        descriptionFr:
+          "Convergences forte/faible, suites de Cauchy, complétude et structures topologiques des espaces de Hilbert.",
+        descriptionEn:
+          "Strong/weak convergences, Cauchy sequences, completeness, and topological structures of Hilbert spaces.",
+        topicsFr: [
+          "Convergence forte",
+          "Convergence faible",
+          "Complétude",
+          "Suites de Cauchy",
+          "Topologie",
+        ],
+        topicsEn: [
+          "Strong convergence",
+          "Weak convergence",
+          "Completeness",
+          "Cauchy sequences",
+          "Topology",
+        ],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: true,
+        readingTime: "40 min",
+        texFile: "chp2.tex",
+        content: `
+<p>Étude de la topologie des espaces de Hilbert : notions de convergence forte et faible, continuité, compacité et complétude.</p>
+        `,
+      },
+      {
+        slug: "espaces-de-hilbert-lecon-3",
+        number: 3,
+        titleFr: "Leçon n°3",
+        titleEn: "Lesson #3",
+        subtitleFr: "Dual et théorème de Riesz",
+        subtitleEn: "Dual Space and Riesz Theorem",
+        descriptionFr:
+          "Construction du dual topologique, identification au moyen du théorème de représentation de Riesz, et interprétation physique.",
+        descriptionEn:
+          "Construction of the topological dual, identification via the Riesz representation theorem, and physical interpretation.",
+        topicsFr: [
+          "Dual topologique",
+          "Formes linéaires continues",
+          "Théorème de Riesz",
+          "Isomorphisme canonique",
+          "Produit scalaire",
+        ],
+        topicsEn: [
+          "Topological dual",
+          "Continuous linear forms",
+          "Riesz theorem",
+          "Canonical isomorphism",
+          "Inner product",
+        ],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: true,
+        readingTime: "35 min",
+        texFile: "chp2.tex",
+        content: `
+<p>Présentation du dual des espaces de Hilbert et du théorème de Riesz, qui permet d'identifier chaque forme linéaire continue à un vecteur de l'espace.</p>
+        `,
+      },
+      {
+        slug: "espaces-de-hilbert-lecon-4",
+        number: 4,
+        titleFr: "Leçon n°4",
+        titleEn: "Lesson #4",
+        subtitleFr: "Notations de Dirac",
+        subtitleEn: "Dirac Notation",
+        descriptionFr:
+          "Introduction aux kets, bras, produits bra-ket, opérateurs et projecteurs dans le langage de Dirac.",
+        descriptionEn:
+          "Introduction to kets, bras, bra-ket products, operators, and projectors in Dirac notation.",
+        topicsFr: [
+          "Kets",
+          "Bras",
+          "Produits bra-ket",
+          "Projecteurs",
+          "Observables",
+        ],
+        topicsEn: [
+          "Kets",
+          "Bras",
+          "Bra-ket products",
+          "Projectors",
+          "Observables",
+        ],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: true,
+        readingTime: "30 min",
+        texFile: "chp2.tex",
+        content: `
+<p>Introduction pratique à la notation de Dirac pour manipuler les états quantiques, les amplitudes et les opérateurs de façon compacte.</p>
+        `,
+      },
+      {
+        slug: "espaces-de-hilbert-lecon-5",
+        number: 5,
+        titleFr: "Leçon n°5",
+        titleEn: "Lesson #5",
+        subtitleFr: "Théorie des opérateurs linéaires",
+        subtitleEn: "Linear Operator Theory",
+        descriptionFr:
+          "Opérateurs bornés et non bornés, auto-adjonction, spectre et opérateurs unitaires dans le cadre hilbertien.",
+        descriptionEn:
+          "Bounded and unbounded operators, self-adjointness, spectrum, and unitary operators in the Hilbert-space framework.",
+        topicsFr: [
+          "Opérateurs bornés",
+          "Opérateurs non bornés",
+          "Auto-adjonction",
+          "Spectre",
+          "Unitarité",
+        ],
+        topicsEn: [
+          "Bounded operators",
+          "Unbounded operators",
+          "Self-adjointness",
+          "Spectrum",
+          "Unitarity",
+        ],
+        pdfFile: "ch4.pdf",
+        pdfAvailable: true,
+        readingTime: "60 min",
+        texFile: "chp4.tex",
+        content: `
+<p>Étude structurée de la théorie des opérateurs linéaires en espace de Hilbert et de ses conséquences sur la dynamique et la mesure quantiques.</p>
         `,
       },
     ],
@@ -202,36 +334,131 @@ export const themes: Theme[] = [
         number: 1,
         titleFr: "Leçon n°1",
         titleEn: "Lesson #1",
-        subtitleFr: "Théorie des opérateurs linéaires",
-        subtitleEn: "Linear Operator Theory",
+        subtitleFr: "Barrières de potentiel",
+        subtitleEn: "Potential Barriers",
         descriptionFr:
-          "Taxonomie des opérateurs linéaires en dimension infinie: bornés/non bornés, auto-adjoints, unitaires, compacts, et conséquences spectrales.",
+          "Transmission, réflexion, effet tunnel et dépendance énergétique des états face aux barrières de potentiel.",
         descriptionEn:
-          "Taxonomy of linear operators in infinite dimension: bounded/unbounded, self-adjoint, unitary, compact, and spectral consequences.",
+          "Transmission, reflection, tunneling, and energy dependence of states across potential barriers.",
         topicsFr: [
-          "Opérateurs linéaires",
-          "Auto-adjonction",
-          "Spectre",
-          "Compacité",
-          "Convergence forte/faible",
+          "Effet tunnel",
+          "Transmission",
+          "Réflexion",
+          "États diffusés",
+          "Coefficients",
         ],
         topicsEn: [
-          "Linear operators",
-          "Self-adjointness",
-          "Spectrum",
-          "Compactness",
-          "Strong/weak convergence",
+          "Tunneling effect",
+          "Transmission",
+          "Reflection",
+          "Scattering states",
+          "Coefficients",
         ],
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
-        readingTime: "60 min",
+        readingTime: "45 min",
         texFile: "chp4.tex",
         content: `
-<p>Remarque initiale : en algèbre linéaire, on parle généralement d'applications linéaires entre deux espaces vectoriels. En analyse fonctionnelle (et dans un cadre quantique), on les appelle plutôt \\emph{opérateurs linéaires}, mais il s'agit de la même notion mathématique.</p>
-
-<p>Au premier regard, il ne semble pas nécessaire de savoir grand chose sur le sujet. La théorie des opérateurs étant difficile, un principe d'économie intellectuelle nous dit : ne suffit-il pas de savoir définir l'adjoint, et de savoir qu'un opérateur auto-adjoint a un spectre réel, ce qui le qualifie naturellement pour être une observable? Ne suffit-il pas de savoir qu'un opérateur unitaire conserve la norme et donc les probabilités, et sont en général associés soit à l'opérateur d'évolution, soit aux symétries du système?</p>
-
-<p>D'une certaine manière, c'est vrai. C'est d'ailleurs la raison pour laquelle ce chapitre peut être passé en toute première lecture. Mais si l'on veut vraiment comprendre la mécanique quantique en profondeur, la maîtrise de la théorie des opérateurs et de la théorie spectrale devient incontournable. Les points suivants en sont autant d'illustrations. L'ensemble des notions mathématiques ci-dessous seront développées dans ce chapitre.</p>
+<p>Cette leçon introduit l'étude des barrières de potentiel, avec les phénomènes de réflexion, transmission et effet tunnel.</p>
+        `,
+      },
+      {
+        slug: "applications-lecon-2",
+        number: 2,
+        titleFr: "Leçon n°2",
+        titleEn: "Lesson #2",
+        subtitleFr: "Oscillateur harmonique",
+        subtitleEn: "Harmonic Oscillator",
+        descriptionFr:
+          "Quantification des niveaux d'énergie, opérateurs de création/annihilation et états propres de l'oscillateur harmonique.",
+        descriptionEn:
+          "Energy level quantization, creation/annihilation operators, and eigenstates of the harmonic oscillator.",
+        topicsFr: [
+          "Niveaux d'énergie",
+          "Échelles quantiques",
+          "Opérateurs a et a†",
+          "États propres",
+          "Fonctions d'onde",
+        ],
+        topicsEn: [
+          "Energy levels",
+          "Quantum ladders",
+          "a and a† operators",
+          "Eigenstates",
+          "Wavefunctions",
+        ],
+        pdfFile: "ch4.pdf",
+        pdfAvailable: true,
+        readingTime: "50 min",
+        texFile: "chp4.tex",
+        content: `
+<p>Cette leçon traite de l'oscillateur harmonique quantique, de sa résolution algébrique et de son rôle central en physique quantique.</p>
+        `,
+      },
+      {
+        slug: "applications-lecon-3",
+        number: 3,
+        titleFr: "Leçon n°3",
+        titleEn: "Lesson #3",
+        subtitleFr: "Spin",
+        subtitleEn: "Spin",
+        descriptionFr:
+          "Matrices de Pauli, mesure de spin, dynamique dans un champ magnétique et applications à deux niveaux.",
+        descriptionEn:
+          "Pauli matrices, spin measurement, dynamics in magnetic fields, and two-level applications.",
+        topicsFr: [
+          "Matrices de Pauli",
+          "Spin 1/2",
+          "Mesure",
+          "Précession",
+          "Systèmes à deux niveaux",
+        ],
+        topicsEn: [
+          "Pauli matrices",
+          "Spin 1/2",
+          "Measurement",
+          "Precession",
+          "Two-level systems",
+        ],
+        pdfFile: "ch1.pdf",
+        pdfAvailable: true,
+        readingTime: "40 min",
+        texFile: "chp1.tex",
+        content: `
+<p>Cette leçon présente le spin quantique et ses outils de calcul, en particulier pour les systèmes à deux niveaux.</p>
+        `,
+      },
+      {
+        slug: "applications-lecon-4",
+        number: 4,
+        titleFr: "Leçon n°4",
+        titleEn: "Lesson #4",
+        subtitleFr: "Dynamique quantique",
+        subtitleEn: "Quantum Dynamics",
+        descriptionFr:
+          "Évolution unitaire, équation de Schrödinger, images de Schrödinger/Heisenberg et propagateurs.",
+        descriptionEn:
+          "Unitary evolution, Schrodinger equation, Schrodinger/Heisenberg pictures, and propagators.",
+        topicsFr: [
+          "Évolution unitaire",
+          "Équation de Schrödinger",
+          "Image de Heisenberg",
+          "Propagateurs",
+          "Hamiltonien",
+        ],
+        topicsEn: [
+          "Unitary evolution",
+          "Schrodinger equation",
+          "Heisenberg picture",
+          "Propagators",
+          "Hamiltonian",
+        ],
+        pdfFile: "ch3.pdf",
+        pdfAvailable: true,
+        readingTime: "50 min",
+        texFile: "chp3.tex",
+        content: `
+<p>Cette leçon couvre la dynamique quantique et les différentes formulations de l'évolution temporelle des états.</p>
         `,
       },
     ],

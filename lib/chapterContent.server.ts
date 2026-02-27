@@ -72,6 +72,11 @@ function extractFigureHtml(figureBlock: string): string {
   const altText = caption || "Figure";
 
   const figCaption = caption ? `<figcaption>${caption}</figcaption>` : "";
+  const isPdfFigure = imagePath.toLowerCase().endsWith(".pdf");
+  if (isPdfFigure) {
+    return `<figure class="latex-figure"><a class="latex-figure-pdf-link" href="${imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a>${figCaption}</figure>`;
+  }
+
   return `<figure class="latex-figure"><img src="${imagePath}" alt="${altText}" loading="lazy" />${figCaption}</figure>`;
 }
 
@@ -88,12 +93,18 @@ function normalizeLatexBlocks(input: string): string {
     return `\n\n<strong>${definitionTitle}.</strong> `;
   });
   result = result.replace(/\\end\{definition\}/g, "\n\n");
+  result = result.replace(/\\begin\{important\}(?:\[([^\]]+)\])?/g, (_match, label: string) => {
+    const importantTitle = label ? `Important (${label})` : "Important";
+    return `\n\n<strong>${importantTitle}.</strong> `;
+  });
+  result = result.replace(/\\end\{important\}/g, "\n\n");
 
   // Convert common display environments so processLatex() can render them.
   result = result.replace(/\\begin\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
   result = result.replace(/\\end\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
   result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\\\begin{aligned}\n");
   result = result.replace(/\\end\{eqnarray\*?\}/g, "\n\\\\end{aligned}\n$$\n\n");
+  result = result.replace(/\$(\s*\\begin\{aligned\}[\s\S]*?\\end\{aligned\}\s*)\$/g, "\n\n$$\n$1\n$$\n\n");
   result = result.replace(/\\nonumber/g, "");
   result = result.replace(/\\\[/g, "$$").replace(/\\\]/g, "$$");
   result = result.replace(/\\\(/g, "$").replace(/\\\)/g, "$");

@@ -280,6 +280,16 @@ body::before {
   color: var(--text-dim);
 }
 
+.prose-quantum .latex-figure-pdf-link {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--accent-border-md);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--amber);
+  background: var(--accent-bg-xs);
+}
+
 /* Math display */
 .katex-display {
   margin: 1.75rem 0;
