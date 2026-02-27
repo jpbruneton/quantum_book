@@ -289,12 +289,21 @@ body::before {
   text-align: center;
 }
 
+.prose-quantum .latex-figure-zoom-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
 .prose-quantum .latex-figure img {
-  width: min(75%, 900px);
-  max-width: 100%;
+  width: auto;
   height: auto;
+  max-width: min(100%, 8cm);
+  max-height: 8cm;
   border-radius: 8px;
   border: 1px solid var(--accent-border-sm);
+  cursor: zoom-in;
 }
 
 .prose-quantum .latex-figure figcaption {
@@ -326,7 +335,7 @@ body::before {
 @media (max-width: 900px) {
   .prose-quantum .latex-figure img,
   .prose-quantum .latex-figure-pdf {
-    width: 100%;
+    max-width: 100%;
   }
 }
 

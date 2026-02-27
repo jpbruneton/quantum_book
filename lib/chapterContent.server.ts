@@ -126,7 +126,7 @@ function extractFigureHtml(figureBlock: string, figureNumber: number): string {
     return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a></object>${figCaption}</figure>`;
   }
 
-  return `<figure class="latex-figure"><img src="${imagePath}" alt="${altText}" loading="lazy" />${figCaption}</figure>`;
+  return `<figure class="latex-figure"><a class="latex-figure-zoom-link" href="${imagePath}" target="_blank" rel="noreferrer"><img src="${imagePath}" alt="${altText}" loading="lazy" /></a>${figCaption}</figure>`;
 }
 
 function renderSectionHeading(
