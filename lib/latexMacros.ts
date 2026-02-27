@@ -53,5 +53,6 @@ export const KATEX_MACROS: Record<string, string> = {
 
   // Practical fallback for custom independence symbol
   "\\independent": "\\perp\\!\\!\\!\\perp",
+  "\\centernot": "\\not",
 };
 

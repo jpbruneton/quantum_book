@@ -60,6 +60,8 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/\\textit\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\textbf\{([^{}]+)\}/g, "<strong>$1</strong>");
   result = result.replace(/\\uline\{([^{}]+)\}/g, "<em>$1</em>");
+  result = result.replace(/\\underline\{([^{}]+)\}/g, "<span class=\"latex-uline\">$1</span>");
+  result = result.replace(/\\ldots/g, "...");
   result = result.replace(/\\og(?:\{\})?\s*/g, "« ");
   result = result.replace(/\s*\\fg(?:\{\})?/g, " »");
   result = result.replace(/---/g, "—");
@@ -123,12 +125,165 @@ function extractFigureHtml(figureBlock: string): string {
   return `<figure class="latex-figure"><img src="${imagePath}" alt="${altText}" loading="lazy" />${figCaption}</figure>`;
 }
 
-function normalizeLatexBlocks(input: string): string {
-  let result = input;
+function renderSectionHeading(
+  level: string,
+  rawTitle: string,
+  sectionIndex: number,
+  subsectionIndex: number,
+  subsubsectionIndex: number,
+  _paragraphIndex: number
+): string {
+  const titleWithoutLabel = rawTitle.replace(/\\label\{[^{}]*\}/g, "").trim();
+  const title = cleanLatexInline(titleWithoutLabel);
+
+  if (level === "section") return `\n\n<h2>${sectionIndex}. ${title}</h2>\n\n`;
+  if (level === "subsection") {
+    const prefix = sectionIndex > 0 ? `${sectionIndex}.${subsectionIndex}` : `${subsectionIndex}`;
+    return `\n\n<h3>${prefix}. ${title}</h3>\n\n`;
+  }
+  if (level === "subsubsection") {
+    const prefix = sectionIndex > 0
+      ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`
+      : `${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`;
+    return `\n\n<h4>${prefix}. ${title}</h4>\n\n`;
+  }
+
+  return `\n\n<h5>${title}</h5>\n\n`;
+}
+
+function replaceSectionCommands(input: string): string {
+  let output = "";
+  let index = 0;
   let sectionIndex = 0;
   let subsectionIndex = 0;
   let subsubsectionIndex = 0;
   let paragraphIndex = 0;
+
+  while (index < input.length) {
+    const slice = input.slice(index);
+    const commandMatch = slice.match(/^\\(section|subsection|subsubsection|paragraph)\*?/);
+    if (!commandMatch) {
+      output += input[index];
+      index += 1;
+      continue;
+    }
+
+    const level = commandMatch[1];
+    const commandText = commandMatch[0];
+    let cursor = index + commandText.length;
+    while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+
+    if (input[cursor] !== "{") {
+      output += commandText;
+      index = cursor;
+      continue;
+    }
+
+    cursor += 1;
+    let depth = 1;
+    let title = "";
+    while (cursor < input.length && depth > 0) {
+      const char = input[cursor];
+      const previous = cursor > 0 ? input[cursor - 1] : "";
+
+      if (char === "{" && previous !== "\\") {
+        depth += 1;
+        title += char;
+      } else if (char === "}" && previous !== "\\") {
+        depth -= 1;
+        if (depth > 0) title += char;
+      } else {
+        title += char;
+      }
+      cursor += 1;
+    }
+
+    if (level === "section") {
+      sectionIndex += 1;
+      subsectionIndex = 0;
+      subsubsectionIndex = 0;
+      paragraphIndex = 0;
+    } else if (level === "subsection") {
+      subsectionIndex += 1;
+      subsubsectionIndex = 0;
+      paragraphIndex = 0;
+    } else if (level === "subsubsection") {
+      subsubsectionIndex += 1;
+      paragraphIndex = 0;
+    } else {
+      paragraphIndex += 1;
+    }
+
+    output += renderSectionHeading(
+      level,
+      title,
+      sectionIndex,
+      subsectionIndex,
+      subsubsectionIndex,
+      paragraphIndex
+    );
+    index = cursor;
+  }
+
+  return output;
+}
+
+function replaceCommandBlock(
+  input: string,
+  command: string,
+  cssClass: string,
+  title: string
+): string {
+  let output = "";
+  let index = 0;
+
+  while (index < input.length) {
+    const marker = `\\${command}`;
+    const start = input.indexOf(marker, index);
+    if (start === -1) {
+      output += input.slice(index);
+      break;
+    }
+
+    output += input.slice(index, start);
+    let cursor = start + marker.length;
+    while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+
+    if (input[cursor] !== "{") {
+      output += marker;
+      index = cursor;
+      continue;
+    }
+
+    cursor += 1;
+    let depth = 1;
+    let body = "";
+    while (cursor < input.length && depth > 0) {
+      const char = input[cursor];
+      const previous = cursor > 0 ? input[cursor - 1] : "";
+
+      if (char === "{" && previous !== "\\") {
+        depth += 1;
+        body += char;
+      } else if (char === "}" && previous !== "\\") {
+        depth -= 1;
+        if (depth > 0) body += char;
+      } else {
+        body += char;
+      }
+      cursor += 1;
+    }
+
+    const cleanedBody = body.trim();
+    output += `\n\n<div class="latex-block ${cssClass}"><strong>${title}.</strong> ${cleanedBody}</div>\n\n`;
+    index = cursor;
+  }
+
+  return output;
+}
+
+function normalizeLatexBlocks(input: string): string {
+  let result = input;
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
   result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
@@ -147,42 +302,11 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/\\begin\{mdframed\}(?:\[[^\]]*\])?/g, "");
   result = result.replace(/\\end\{mdframed\}/g, "");
 
+  // Support command-style theorem blocks such as \proposition{...}.
+  result = replaceCommandBlock(result, "proposition", "latex-block-proposition", "Proposition");
+
   // Render section-like commands as headings in document order.
-  result = result.replace(
-    /\\(section|subsection|subsubsection|paragraph)\*?\{([\s\S]*?)\}/g,
-    (_m, level: string, title: string) => {
-      if (level === "section") {
-        sectionIndex += 1;
-        subsectionIndex = 0;
-        subsubsectionIndex = 0;
-        paragraphIndex = 0;
-        return `\n\n<h2>${sectionIndex}. ${cleanLatexInline(title)}</h2>\n\n`;
-      }
-
-      if (level === "subsection") {
-        subsectionIndex += 1;
-        subsubsectionIndex = 0;
-        paragraphIndex = 0;
-        const prefix = sectionIndex > 0 ? `${sectionIndex}.${subsectionIndex}` : `${subsectionIndex}`;
-        return `\n\n<h3>${prefix}. ${cleanLatexInline(title)}</h3>\n\n`;
-      }
-
-      if (level === "subsubsection") {
-        subsubsectionIndex += 1;
-        paragraphIndex = 0;
-        const prefix = sectionIndex > 0
-          ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`
-          : `${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`;
-        return `\n\n<h4>${prefix}. ${cleanLatexInline(title)}</h4>\n\n`;
-      }
-
-      paragraphIndex += 1;
-      const prefix = sectionIndex > 0
-        ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`
-        : `${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`;
-      return `\n\n<h5>${prefix}. ${cleanLatexInline(title)}</h5>\n\n`;
-    }
-  );
+  result = replaceSectionCommands(result);
 
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string }> = [
@@ -192,6 +316,8 @@ function normalizeLatexBlocks(input: string): string {
     { env: "lemma", title: "Lemma" },
     { env: "corollary", title: "Corollary" },
     { env: "remark", title: "Remarque" },
+    { env: "plusloin", title: "Plus loin" },
+    { env: "exemple", title: "Exemple" },
     { env: "example", title: "Example" },
     { env: "resume", title: "Résumé" },
     { env: "important", title: "Important" },
@@ -230,7 +356,7 @@ function normalizeLatexBlocks(input: string): string {
     return `\n\n$$\n${block.trim()}\n$$\n\n`;
   });
   result = result.replace(/\\nonumber/g, "");
-  result = result.replace(/\\\[/g, "$$").replace(/\\\]/g, "$$");
+  result = result.replace(/(?<!\\)\\\[/g, "$$").replace(/(?<!\\)\\\]/g, "$$");
   result = result.replace(/\\\(/g, "$").replace(/\\\)/g, "$");
 
   // Remove noisy reference commands from online prose.
@@ -243,6 +369,7 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/\\begin\{(center|flushleft|flushright)\}/g, "");
   result = result.replace(/\\end\{(center|flushleft|flushright)\}/g, "");
   result = result.replace(/\\vspace\*?\{[^{}]*\}/g, "");
+  result = result.replace(/\\noindent\b/g, "");
   return result;
 }
 
@@ -254,6 +381,23 @@ function renderParagraph(paragraph: string): string {
   if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return cleaned;
   if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return cleaned;
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return cleaned;
+  if (cleaned.includes("$$")) {
+    const chunks: string[] = [];
+    let cursor = 0;
+    const displayRegex = /\$\$[\s\S]*?\$\$/g;
+    let match: RegExpExecArray | null;
+
+    while ((match = displayRegex.exec(cleaned)) !== null) {
+      const textBefore = cleaned.slice(cursor, match.index).trim();
+      if (textBefore) chunks.push(`<p>${textBefore}</p>`);
+      chunks.push(match[0].trim());
+      cursor = match.index + match[0].length;
+    }
+
+    const textAfter = cleaned.slice(cursor).trim();
+    if (textAfter) chunks.push(`<p>${textAfter}</p>`);
+    return chunks.join("\n\n");
+  }
   return `<p>${cleaned}</p>`;
 }
 

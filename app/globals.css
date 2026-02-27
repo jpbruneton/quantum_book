@@ -337,7 +337,18 @@ body::before {
   color: #fbbf24;
 }
 
+.prose-quantum .latex-block-proposition {
+  border-color: #22c55e66;
+  background: #22c55e1a;
+}
+
+.prose-quantum .latex-block-proposition strong {
+  color: #166534;
+}
+
 .prose-quantum .latex-block-remark,
+.prose-quantum .latex-block-plusloin,
+.prose-quantum .latex-block-exemple,
 .prose-quantum .latex-block-example {
   border-color: #94a3b84d;
   background: #94a3b814;
@@ -347,9 +358,11 @@ body::before {
   color: var(--text-heading);
 }
 
-.prose-quantum .latex-block-remark strong {
+.prose-quantum .latex-block-remark strong,
+.prose-quantum .latex-block-plusloin strong,
+.prose-quantum .latex-block-exemple strong {
   color: var(--text-heading);
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .prose-quantum .latex-block-example strong {
