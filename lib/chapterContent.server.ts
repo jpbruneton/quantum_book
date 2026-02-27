@@ -541,6 +541,9 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/(?:^|\n)\s*\$\s*\n([\s\S]*?)\n\s*\$\s*(?=\n|$)/g, (_m, block: string) => {
     return `\n\n$$\n${block.trim()}\n$$\n\n`;
   });
+  result = result.replace(/(?<!\\)\\\[\s*([\s\S]*?)\s*(?<!\\)\\\]/g, (_m, block: string) => {
+    return `\n\n$$\n${block.trim()}\n$$\n\n`;
+  });
   result = result.replace(/\\nonumber/g, "");
   result = result.replace(/(?<!\\)\\\[/g, "$$").replace(/(?<!\\)\\\]/g, "$$");
   result = result.replace(/\\\(/g, "$").replace(/\\\)/g, "$");

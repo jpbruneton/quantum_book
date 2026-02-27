@@ -245,6 +245,7 @@ export default function HomePage() {
               className="animate-fade-up stagger-3"
               style={{
                 position: "relative",
+                marginTop: "0.5cm",
                 width: "100%",
                 aspectRatio: "3/4",
                 borderRadius: "8px",

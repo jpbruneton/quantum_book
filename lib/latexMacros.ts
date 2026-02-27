@@ -29,6 +29,7 @@ export const KATEX_MACROS: Record<string, string> = {
   "\\braket": "\\left\\langle #1 \\middle| #2 \\right\\rangle",
   "\\kphi": "\\ket{\\phi}",
   "\\kpsi": "\\ket{\\psi}",
+  "\\kspi": "\\ket{\\psi}",
   "\\bphi": "\\bra{\\phi}",
   "\\bpsi": "\\bra{\\psi}",
 

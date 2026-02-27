@@ -13,7 +13,8 @@ function normalizeDisplayAlignment(math: string): string {
   const hasExplicitAligned = /\\begin\{(aligned|align|align\*|gather|gather\*)\}/.test(result);
   if (hasExplicitAligned) return result;
 
-  const looksLikeAlignedSystem = result.includes("&") && result.includes("\\\\");
+  // align/align* rows can legitimately contain '&' even on a single line.
+  const looksLikeAlignedSystem = result.includes("&");
   if (looksLikeAlignedSystem) {
     result = result.replace(/\\\\\s*$/, "");
     return `\\begin{aligned}\n${result}\n\\end{aligned}`;
