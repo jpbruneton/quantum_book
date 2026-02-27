@@ -417,6 +417,18 @@ body::before {
 
 .katex {
   font-size: 1.05em;
+  line-height: 1.35;
+  overflow: visible;
+  vertical-align: -0.08em;
+  padding-top: 0.06em;
+  padding-bottom: 0.06em;
+}
+
+.katex-display > .katex {
+  line-height: 1.3;
+  padding-top: 0;
+  padding-bottom: 0;
+  vertical-align: 0;
 }
 
 /* ─── PDF Viewer ─── */

@@ -120,8 +120,17 @@ function extractFigureHtml(figureBlock: string, figureNumber: number): string {
   if (!includeGraphicsMatch) return "";
 
   const imagePath = normalizeFigurePath(includeGraphicsMatch[1].trim());
-  const captionMatch = figureBlock.match(/\\caption\{([\s\S]*?)\}/);
-  const captionRaw = captionMatch ? captionMatch[1].replace(/\s+/g, " ").trim() : "";
+  let captionRaw = "";
+  const captionCommandIndex = figureBlock.search(/\\caption\s*\{/);
+  if (captionCommandIndex !== -1) {
+    const firstBraceIndex = figureBlock.indexOf("{", captionCommandIndex);
+    if (firstBraceIndex !== -1) {
+      const captionBlock = readBalancedBraces(figureBlock, firstBraceIndex);
+      if (captionBlock) {
+        captionRaw = captionBlock.content.replace(/\s+/g, " ").trim();
+      }
+    }
+  }
   const caption = cleanLatexInline(captionRaw);
   const altTextRaw = (caption || "Figure").replace(/<[^>]*>/g, "");
   const altText = escapeHtmlAttribute(altTextRaw);

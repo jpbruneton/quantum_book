@@ -26,11 +26,12 @@ function sanitizeDisplayMath(math: string): string {
   let result = sanitizeMathCommon(math);
   // If paragraph tags/entities leaked into math content, strip them before KaTeX parsing.
   result = result
-    .replace(/<\/?p>/g, " ")
-    .replace(/<br\s*\/?>/g, " ")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
+  result = result
+    .replace(/<\s*\/?\s*p\b[^>]*>/gi, " ")
+    .replace(/<\s*br\b[^>]*>/gi, " ");
 
   // Prevent invalid nested inline math markers inside display blocks, e.g. \text{le $1$ ...}
   result = result.replace(/\\text\{([^{}]*)\}/g, (_match, textContent: string) => {
