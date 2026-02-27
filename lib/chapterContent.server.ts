@@ -13,6 +13,9 @@ function shouldSkipLatexLine(line: string): boolean {
   const trimmed = line.trim();
   if (!trimmed) return false;
 
+  if (/^\\input\s*\{/.test(trimmed)) return true;
+  if (/^\\include\s*\{/.test(trimmed)) return true;
+
   const skipPrefixes = [
     "\\documentclass",
     "\\usepackage",
@@ -30,8 +33,6 @@ function shouldSkipLatexLine(line: string): boolean {
     "\\title",
     "\\author",
     "\\date",
-    "\\input",
-    "\\include",
   ];
 
   for (const prefix of skipPrefixes) {
