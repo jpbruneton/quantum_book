@@ -24,6 +24,14 @@ function normalizeDisplayAlignment(math: string): string {
 
 function sanitizeDisplayMath(math: string): string {
   let result = sanitizeMathCommon(math);
+  // If paragraph tags/entities leaked into math content, strip them before KaTeX parsing.
+  result = result
+    .replace(/<\/?p>/g, " ")
+    .replace(/<br\s*\/?>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+
   // Prevent invalid nested inline math markers inside display blocks, e.g. \text{le $1$ ...}
   result = result.replace(/\\text\{([^{}]*)\}/g, (_match, textContent: string) => {
     const normalizedText = textContent.replace(/\$([^$\n]+?)\$/g, "$1");
@@ -45,6 +53,9 @@ export function processLatex(html: string): string {
   );
   normalizedHtml = normalizedHtml.replace(/\\{2}begin\{aligned\}/g, "\\begin{aligned}");
   normalizedHtml = normalizedHtml.replace(/\\{2}end\{aligned\}/g, "\\end{aligned}");
+  // Safety net: support display delimiters written as \[...\] if they leaked through.
+  normalizedHtml = normalizedHtml.replace(/(?<!\\)\\\[/g, "$$");
+  normalizedHtml = normalizedHtml.replace(/(?<!\\)\\\]/g, "$$");
 
   // 1. Display math: $$...$$
   let result = normalizedHtml.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {

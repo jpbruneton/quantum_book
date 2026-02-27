@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function ChapterContent({ lesson }: Props) {
-  const [tab, setTab] = useState<"web" | "pdf">("web");
+  const [tab, setTab] = useState<"web" | "refs" | "pdf">("web");
   const { t, lang } = useLang();
 
   const renderedContent = useMemo(
@@ -101,7 +101,7 @@ export function ChapterContent({ lesson }: Props) {
           borderBottom: "1px solid var(--border-subtle)",
         }}
       >
-        {(["web", "pdf"] as const).map((tabKey) => (
+        {(["web", "refs", "pdf"] as const).map((tabKey) => (
           <button
             key={tabKey}
             onClick={() => setTab(tabKey)}
@@ -124,7 +124,11 @@ export function ChapterContent({ lesson }: Props) {
               transition: "color 0.2s",
             }}
           >
-            {tabKey === "web" ? t.chapter.tabOnline : t.chapter.tabPdf}
+            {tabKey === "web"
+              ? t.chapter.tabOnline
+              : tabKey === "refs"
+                ? t.chapter.tabReferences
+                : t.chapter.tabPdf}
           </button>
         ))}
       </div>
@@ -159,6 +163,55 @@ export function ChapterContent({ lesson }: Props) {
             </strong>{" "}
             {t.chapter.noteBody}
           </div>
+        </div>
+      )}
+
+      {/* ─── References ─── */}
+      {tab === "refs" && (
+        <div
+          style={{
+            maxWidth: "800px",
+            margin: "0 auto",
+            padding: "2rem 1.5rem 3rem",
+          }}
+        >
+          {lesson.references.length === 0 ? (
+            <p
+              style={{
+                fontFamily: "var(--font-crimson)",
+                fontSize: "1rem",
+                color: "var(--text-secondary)",
+              }}
+            >
+              {t.chapter.refsEmpty}
+            </p>
+          ) : (
+            <ul
+              style={{
+                margin: 0,
+                paddingLeft: "1.2rem",
+                display: "grid",
+                gap: "0.8rem",
+              }}
+            >
+              {lesson.references.map((reference) => (
+                <li key={reference.url}>
+                  <a
+                    href={reference.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "var(--amber)",
+                      textDecoration: "underline",
+                      fontFamily: "var(--font-inter)",
+                    }}
+                  >
+                    {reference.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
 

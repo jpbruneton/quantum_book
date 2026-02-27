@@ -74,7 +74,9 @@ export const translations = {
       noteBody:
         "This is a preview excerpt. Download the full PDF for the complete chapter, exercises, and solutions.",
       tabOnline: "Read Online",
+      tabReferences: "References",
       tabPdf: "PDF Viewer",
+      refsEmpty: "No references added yet for this lesson.",
       downloadBtn: "↓ Download",
       pdfFallback: "If the PDF doesn't display,",
       pdfFallbackLink: "click here to download it",
@@ -208,7 +210,9 @@ export const translations = {
       noteBody:
         "Ceci est un extrait de prévisualisation. Téléchargez le PDF complet pour le chapitre entier, les exercices et les solutions.",
       tabOnline: "Lire en ligne",
+      tabReferences: "Références",
       tabPdf: "Visionneur PDF",
+      refsEmpty: "Aucune référence ajoutée pour cette leçon pour le moment.",
       downloadBtn: "↓ Télécharger",
       pdfFallback: "Si le PDF ne s'affiche pas,",
       pdfFallbackLink: "cliquez ici pour le télécharger",

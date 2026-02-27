@@ -107,6 +107,14 @@ function normalizeFigurePath(path: string): string {
   return `/figs/${withoutPrefix}`;
 }
 
+function escapeHtmlAttribute(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function extractFigureHtml(figureBlock: string, figureNumber: number): string {
   const includeGraphicsMatch = figureBlock.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
   if (!includeGraphicsMatch) return "";
@@ -115,7 +123,8 @@ function extractFigureHtml(figureBlock: string, figureNumber: number): string {
   const captionMatch = figureBlock.match(/\\caption\{([\s\S]*?)\}/);
   const captionRaw = captionMatch ? captionMatch[1].replace(/\s+/g, " ").trim() : "";
   const caption = cleanLatexInline(captionRaw);
-  const altText = caption || "Figure";
+  const altTextRaw = (caption || "Figure").replace(/<[^>]*>/g, "");
+  const altText = escapeHtmlAttribute(altTextRaw);
 
   const captionWithNumber = caption
     ? `Figure ${figureNumber}. ${caption}`
