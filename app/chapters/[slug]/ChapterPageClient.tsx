@@ -141,8 +141,8 @@ export function ChapterPageClient({ theme, prev, next }: Props) {
                     }}
                   >
                     {lang === "fr"
-                      ? `Leçon n°${lesson.number}`
-                      : `Lesson #${lesson.number}`}
+                      ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
+                      : `Lesson #${lesson.number}: ${lesson.subtitleEn}`}
                   </button>
                 ))}
               </div>
