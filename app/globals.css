@@ -280,6 +280,12 @@ body::before {
   font-style: italic;
 }
 
+.prose-quantum .latex-uline {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.16em;
+}
+
 .prose-quantum .latex-figure {
   margin: 2rem 0;
   text-align: center;
@@ -309,12 +315,51 @@ body::before {
   background: var(--accent-bg-xs);
 }
 
+.prose-quantum .latex-figure-pdf {
+  width: min(100%, 920px);
+  height: 520px;
+  border: 1px solid var(--accent-border-sm);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
 .prose-quantum .latex-block {
   margin: 1.25rem 0;
   padding: 0.9rem 1rem;
   border: 1px solid var(--accent-border-sm);
   border-radius: 8px;
   background: var(--accent-bg-xs);
+}
+
+/* Definition: keep default style */
+
+.prose-quantum .latex-block-theorem {
+  border-color: #f59e0b66;
+  background: #f59e0b1a;
+}
+
+.prose-quantum .latex-block-theorem strong {
+  color: #fbbf24;
+}
+
+.prose-quantum .latex-block-remark,
+.prose-quantum .latex-block-example {
+  border-color: #94a3b84d;
+  background: #94a3b814;
+}
+
+.prose-quantum .latex-block-remark strong,
+.prose-quantum .latex-block-example strong {
+  color: #cbd5e1;
+}
+
+.prose-quantum .latex-block-resume {
+  border-color: #a855f766;
+  background: #a855f71a;
+}
+
+.prose-quantum .latex-block-resume strong {
+  color: #d8b4fe;
 }
 
 .prose-quantum .latex-list {

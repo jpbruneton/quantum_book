@@ -21,20 +21,15 @@ export function processLatex(html: string): string {
     }
   });
 
-  // 2. Inline/single-dollar math: $...$ (including multiline snippets)
-  result = result.replace(/(^|[^$])\$(?!\$)([\s\S]*?)(?<!\$)\$(?!\$)/g, (match, prefix, math) => {
-    if (typeof math === "string" && (math.includes("<") || math.includes(">"))) {
-      return match;
-    }
-
+  // 2. Inline math: $...$ — keep it line-scoped to avoid swallowing prose.
+  result = result.replace(/\$([^$<>\n]+?)\$/g, (match, math) => {
     try {
-      const rendered = katex.renderToString(math.trim(), {
+      return katex.renderToString(math.trim(), {
         displayMode: false,
         throwOnError: false,
         trust: false,
         macros: KATEX_MACROS,
       });
-      return `${prefix}${rendered}`;
     } catch {
       return match;
     }

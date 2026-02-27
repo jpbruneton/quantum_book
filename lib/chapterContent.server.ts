@@ -46,8 +46,9 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/\\emph\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\textit\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\textbf\{([^{}]+)\}/g, "<strong>$1</strong>");
-  result = result.replace(/\\og\s*/g, "« ");
-  result = result.replace(/\s*\\fg/g, " »");
+  result = result.replace(/\\uline\{([^{}]+)\}/g, "<span class=\"latex-uline\">$1</span>");
+  result = result.replace(/\\og(?:\{\})?\s*/g, "« ");
+  result = result.replace(/\s*\\fg(?:\{\})?/g, " »");
   result = result.replace(/~+/g, " ");
   return result.trim();
 }
@@ -70,7 +71,7 @@ function extractFigureHtml(figureBlock: string): string {
   const figCaption = caption ? `<figcaption>${caption}</figcaption>` : "";
   const isPdfFigure = imagePath.toLowerCase().endsWith(".pdf");
   if (isPdfFigure) {
-    return `<figure class="latex-figure"><a class="latex-figure-pdf-link" href="${imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a>${figCaption}</figure>`;
+    return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a></object>${figCaption}</figure>`;
   }
 
   return `<figure class="latex-figure"><img src="${imagePath}" alt="${altText}" loading="lazy" />${figCaption}</figure>`;
@@ -78,6 +79,10 @@ function extractFigureHtml(figureBlock: string): string {
 
 function normalizeLatexBlocks(input: string): string {
   let result = input;
+  let sectionIndex = 0;
+  let subsectionIndex = 0;
+  let subsubsectionIndex = 0;
+  let paragraphIndex = 0;
 
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
@@ -86,16 +91,33 @@ function normalizeLatexBlocks(input: string): string {
 
   // Render section-like commands as headings.
   result = result.replace(/\\section\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    return `\n\n<h2>${cleanLatexInline(title)}</h2>\n\n`;
+    sectionIndex += 1;
+    subsectionIndex = 0;
+    subsubsectionIndex = 0;
+    paragraphIndex = 0;
+    return `\n\n<h2>${sectionIndex}. ${cleanLatexInline(title)}</h2>\n\n`;
   });
   result = result.replace(/\\subsection\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    return `\n\n<h3>${cleanLatexInline(title)}</h3>\n\n`;
+    subsectionIndex += 1;
+    subsubsectionIndex = 0;
+    paragraphIndex = 0;
+    const prefix = sectionIndex > 0 ? `${sectionIndex}.${subsectionIndex}` : `${subsectionIndex}`;
+    return `\n\n<h3>${prefix}. ${cleanLatexInline(title)}</h3>\n\n`;
   });
   result = result.replace(/\\subsubsection\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    return `\n\n<h4>${cleanLatexInline(title)}</h4>\n\n`;
+    subsubsectionIndex += 1;
+    paragraphIndex = 0;
+    const prefix = sectionIndex > 0
+      ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`
+      : `${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`;
+    return `\n\n<h4>${prefix}. ${cleanLatexInline(title)}</h4>\n\n`;
   });
   result = result.replace(/\\paragraph\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    return `\n\n<h5>${cleanLatexInline(title)}</h5>\n\n`;
+    paragraphIndex += 1;
+    const prefix = sectionIndex > 0
+      ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`
+      : `${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`;
+    return `\n\n<h5>${prefix}. ${cleanLatexInline(title)}</h5>\n\n`;
   });
 
   // Render theorem-like environments as styled blocks.
@@ -105,8 +127,9 @@ function normalizeLatexBlocks(input: string): string {
     { env: "proposition", title: "Proposition" },
     { env: "lemma", title: "Lemma" },
     { env: "corollary", title: "Corollary" },
-    { env: "remark", title: "Remark" },
+    { env: "remark", title: "Remarque" },
     { env: "example", title: "Example" },
+    { env: "resume", title: "Résumé" },
     { env: "important", title: "Important" },
   ];
 
@@ -132,6 +155,8 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/(<li>[\s\S]*?)(?=<li>|<\/ul>|<\/ol>)/g, "$1</li>\n");
 
   // Convert common display environments so processLatex() can render them.
+  result = result.replace(/\\beq\b/g, "\\begin{equation}");
+  result = result.replace(/\\eeq\b/g, "\\end{equation}");
   result = result.replace(/\\begin\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
   result = result.replace(/\\end\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
   result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\\\begin{aligned}\n");
@@ -148,7 +173,7 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/\\cite\{[^{}]*\}/g, "");
   result = result.replace(/\\footnote\{[\s\S]*?\}/g, "");
   result = result.replace(/\\label\{[^{}]*\}/g, "");
-  result = result.replace(/\\ref\{[^{}]*\}/g, "");
+  result = result.replace(/\\ref\{([^{}]*)\}/g, "[$1]");
 
   // Remove line-level environments that are not needed for web rendering.
   result = result.replace(/\\begin\{(center|flushleft|flushright)\}/g, "");
@@ -168,8 +193,35 @@ function renderParagraph(paragraph: string): string {
   return `<p>${cleaned}</p>`;
 }
 
+function countSingleDollarDelimiters(text: string): number {
+  let count = 0;
+  for (let index = 0; index < text.length; index += 1) {
+    if (text[index] !== "$") continue;
+    const previous = index > 0 ? text[index - 1] : "";
+    const next = index + 1 < text.length ? text[index + 1] : "";
+    if (previous === "\\") continue;
+    if (next === "$") {
+      index += 1;
+      continue;
+    }
+    count += 1;
+  }
+  return count;
+}
+
+function sanitizeUnbalancedDollarMath(paragraph: string): string {
+  const singleDollarCount = countSingleDollarDelimiters(paragraph);
+  if (singleDollarCount % 2 === 0) return paragraph;
+  // Fallback: prevent broken long-range math capture when TeX source has unmatched '$'.
+  return paragraph.replace(/(?<!\\)\$(?!\$)/g, "\\$");
+}
+
 function paragraphsToHtml(paragraphs: string[]): string {
-  return paragraphs.map((paragraph) => renderParagraph(paragraph)).filter((chunk) => chunk.length > 0).join("\n\n");
+  return paragraphs
+    .map((paragraph) => sanitizeUnbalancedDollarMath(paragraph))
+    .map((paragraph) => renderParagraph(paragraph))
+    .filter((chunk) => chunk.length > 0)
+    .join("\n\n");
 }
 
 function parseTexParagraphs(texSource: string): string[] {
