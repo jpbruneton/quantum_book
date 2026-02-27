@@ -20,9 +20,6 @@ function shouldSkipLatexLine(line: string): boolean {
     "\\end{document}",
     "\\tableofcontents",
     "\\chapter",
-    "\\section",
-    "\\subsection",
-    "\\subsubsection",
     "\\label",
     "\\bibliographystyle",
     "\\bibliography",
@@ -52,7 +49,6 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/\\og\s*/g, "« ");
   result = result.replace(/\s*\\fg/g, " »");
   result = result.replace(/~+/g, " ");
-  result = result.replace(/\\\\/g, "<br/>");
   return result.trim();
 }
 
@@ -88,16 +84,52 @@ function normalizeLatexBlocks(input: string): string {
     return `\n\n${extractFigureHtml(block)}\n\n`;
   });
 
-  result = result.replace(/\\begin\{definition\}(?:\[([^\]]+)\])?/g, (_match, label: string) => {
-    const definitionTitle = label ? `Definition (${label})` : "Definition";
-    return `\n\n<strong>${definitionTitle}.</strong> `;
+  // Render section-like commands as headings.
+  result = result.replace(/\\section\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
+    return `\n\n<h2>${cleanLatexInline(title)}</h2>\n\n`;
   });
-  result = result.replace(/\\end\{definition\}/g, "\n\n");
-  result = result.replace(/\\begin\{important\}(?:\[([^\]]+)\])?/g, (_match, label: string) => {
-    const importantTitle = label ? `Important (${label})` : "Important";
-    return `\n\n<strong>${importantTitle}.</strong> `;
+  result = result.replace(/\\subsection\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
+    return `\n\n<h3>${cleanLatexInline(title)}</h3>\n\n`;
   });
-  result = result.replace(/\\end\{important\}/g, "\n\n");
+  result = result.replace(/\\subsubsection\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
+    return `\n\n<h4>${cleanLatexInline(title)}</h4>\n\n`;
+  });
+  result = result.replace(/\\paragraph\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
+    return `\n\n<h5>${cleanLatexInline(title)}</h5>\n\n`;
+  });
+
+  // Render theorem-like environments as styled blocks.
+  const blockKinds: Array<{ env: string; title: string }> = [
+    { env: "definition", title: "Definition" },
+    { env: "theorem", title: "Theorem" },
+    { env: "proposition", title: "Proposition" },
+    { env: "lemma", title: "Lemma" },
+    { env: "corollary", title: "Corollary" },
+    { env: "remark", title: "Remark" },
+    { env: "example", title: "Example" },
+    { env: "important", title: "Important" },
+  ];
+
+  for (const blockKind of blockKinds) {
+    const beginRegex = new RegExp(`\\\\begin\\{${blockKind.env}\\}(?:\\[([^\\]]+)\\])?`, "g");
+    const endRegex = new RegExp(`\\\\end\\{${blockKind.env}\\}`, "g");
+    result = result.replace(beginRegex, (_m, label: string) => {
+      const suffix = label ? ` (${cleanLatexInline(label)})` : "";
+      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><strong>${blockKind.title}${suffix}.</strong> `;
+    });
+    result = result.replace(endRegex, "</div>\n\n");
+  }
+
+  // Render itemized/enumerated lists.
+  result = result.replace(/\\begin\{itemize\}/g, "\n\n<ul class=\"latex-list\">\n");
+  result = result.replace(/\\end\{itemize\}/g, "\n</ul>\n\n");
+  result = result.replace(/\\begin\{enumerate\}/g, "\n\n<ol class=\"latex-list\">\n");
+  result = result.replace(/\\end\{enumerate\}/g, "\n</ol>\n\n");
+  result = result.replace(/^\s*\\item(?:\s*\[([^\]]+)\])?\s*/gm, (_m, label: string) => {
+    const prefix = label ? `<strong>${cleanLatexInline(label)}.</strong> ` : "";
+    return `<li>${prefix}`;
+  });
+  result = result.replace(/(<li>[\s\S]*?)(?=<li>|<\/ul>|<\/ol>)/g, "$1</li>\n");
 
   // Convert common display environments so processLatex() can render them.
   result = result.replace(/\\begin\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
@@ -105,6 +137,9 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\\\begin{aligned}\n");
   result = result.replace(/\\end\{eqnarray\*?\}/g, "\n\\\\end{aligned}\n$$\n\n");
   result = result.replace(/\$(\s*\\begin\{aligned\}[\s\S]*?\\end\{aligned\}\s*)\$/g, "\n\n$$\n$1\n$$\n\n");
+  result = result.replace(/(?:^|\n)\s*\$\s*\n([\s\S]*?)\n\s*\$\s*(?=\n|$)/g, (_m, block: string) => {
+    return `\n\n$$\n${block.trim()}\n$$\n\n`;
+  });
   result = result.replace(/\\nonumber/g, "");
   result = result.replace(/\\\[/g, "$$").replace(/\\\]/g, "$$");
   result = result.replace(/\\\(/g, "$").replace(/\\\)/g, "$");
@@ -118,6 +153,7 @@ function normalizeLatexBlocks(input: string): string {
   // Remove line-level environments that are not needed for web rendering.
   result = result.replace(/\\begin\{(center|flushleft|flushright)\}/g, "");
   result = result.replace(/\\end\{(center|flushleft|flushright)\}/g, "");
+  result = result.replace(/\\vspace\*?\{[^{}]*\}/g, "");
   return result;
 }
 
@@ -125,6 +161,9 @@ function renderParagraph(paragraph: string): string {
   const cleaned = cleanLatexInline(paragraph);
   if (!cleaned) return "";
   if (cleaned.startsWith("<figure")) return cleaned;
+  if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return cleaned;
+  if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return cleaned;
+  if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return cleaned;
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return cleaned;
   return `<p>${cleaned}</p>`;
 }

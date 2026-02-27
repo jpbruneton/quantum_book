@@ -228,6 +228,25 @@ body::before {
   padding-left: 1rem;
 }
 
+.prose-quantum h3 {
+  font-family: var(--font-playfair);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-quantum h4,
+.prose-quantum h5 {
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .prose-quantum p {
   margin-bottom: 1.25rem;
 }
@@ -288,6 +307,24 @@ body::before {
   text-decoration: none;
   color: var(--amber);
   background: var(--accent-bg-xs);
+}
+
+.prose-quantum .latex-block {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--accent-border-sm);
+  border-radius: 8px;
+  background: var(--accent-bg-xs);
+}
+
+.prose-quantum .latex-list {
+  margin: 1rem 0 1.25rem 1.5rem;
+  padding-left: 0.5rem;
+  list-style: inherit;
+}
+
+.prose-quantum .latex-list li {
+  margin-bottom: 0.45rem;
 }
 
 /* Math display */
