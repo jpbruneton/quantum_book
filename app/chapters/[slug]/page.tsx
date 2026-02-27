@@ -1,40 +1,48 @@
 import { notFound } from "next/navigation";
-import { chapters, getChapter } from "@/lib/chapters";
+import { getTheme, themes } from "@/lib/chapters";
 import { ChapterPageClient } from "./ChapterPageClient";
 import type { Metadata } from "next";
-import { getChapterWebContent } from "@/lib/chapterContent.server";
+import { getLessonWebContent } from "@/lib/chapterContent.server";
 
 interface Props {
   params: { slug: string };
 }
 
 export async function generateStaticParams() {
-  return chapters.map((c) => ({ slug: c.slug }));
+  return themes.map((theme) => ({ slug: theme.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const chapter = getChapter(params.slug);
-  if (!chapter) return {};
+  const theme = getTheme(params.slug);
+  if (!theme) return {};
   return {
-    title: `Ch. ${chapter.number}: ${chapter.titleFr}`,
-    description: chapter.description,
+    title: `Theme ${theme.number}: ${theme.titleEn}`,
+    description: theme.descriptionEn,
   };
 }
 
 export default function ChapterPage({ params }: Props) {
-  const chapter = getChapter(params.slug);
-  if (!chapter) notFound();
+  const theme = getTheme(params.slug);
+  if (!theme) notFound();
 
-  const webContent = getChapterWebContent(chapter.slug, -1);
-  const chapterWithDynamicContent = {
-    ...chapter,
-    content: webContent || chapter.content,
+  const themeWithDynamicContent = {
+    ...theme,
+    lessons: theme.lessons.map((lesson) => ({
+      ...lesson,
+      content: getLessonWebContent(lesson.texFile, -1) || lesson.content,
+    })),
   };
 
-  const currentIndex = chapters.findIndex((c) => c.slug === chapter.slug);
-  const prev = currentIndex > 0 ? chapters[currentIndex - 1] : null;
+  const currentIndex = themes.findIndex((item) => item.slug === theme.slug);
+  const prev = currentIndex > 0 ? themes[currentIndex - 1] : null;
   const next =
-    currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null;
+    currentIndex < themes.length - 1 ? themes[currentIndex + 1] : null;
 
-  return <ChapterPageClient chapter={chapterWithDynamicContent} prev={prev} next={next} />;
+  return (
+    <ChapterPageClient
+      theme={themeWithDynamicContent}
+      prev={prev}
+      next={next}
+    />
+  );
 }

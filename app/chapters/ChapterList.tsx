@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { chapters } from "@/lib/chapters";
+import { themes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 export function ChapterList() {
@@ -8,18 +8,18 @@ export function ChapterList() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-      {chapters.map((chapter, i) => (
+      {themes.map((theme, i) => (
         <div
-          key={chapter.slug}
+          key={theme.slug}
           style={{
             borderBottom:
-              i < chapters.length - 1
+              i < themes.length - 1
                 ? "1px solid var(--border-subtle)"
                 : "none",
           }}
         >
           <Link
-            href={`/chapters/${chapter.slug}`}
+            href={`/chapters/${theme.slug}`}
             style={{ textDecoration: "none", display: "block" }}
           >
             <div
@@ -55,7 +55,7 @@ export function ChapterList() {
                   lineHeight: 1,
                 }}
               >
-                {String(chapter.number).padStart(2, "0")}
+                {String(theme.number).padStart(2, "0")}
               </div>
 
               <div>
@@ -68,7 +68,7 @@ export function ChapterList() {
                     marginBottom: "0.25rem",
                   }}
                 >
-                  {lang === "fr" ? chapter.titleFr : chapter.titleEn}
+                  {lang === "fr" ? theme.titleFr : theme.titleEn}
                 </h2>
                 <p
                   style={{
@@ -79,12 +79,12 @@ export function ChapterList() {
                     marginBottom: "0.5rem",
                   }}
                 >
-                  {chapter.subtitle}
+                  {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-                  {chapter.topics.slice(0, 3).map((topic) => (
+                  {theme.lessons.slice(0, 4).map((lesson) => (
                     <span
-                      key={topic}
+                      key={lesson.slug}
                       style={{
                         background: "var(--accent-bg-sm)",
                         border: "1px solid var(--accent-border-sm)",
@@ -96,9 +96,25 @@ export function ChapterList() {
                         letterSpacing: "0.02em",
                       }}
                     >
-                      {topic}
+                      {lang === "fr" ? `Leçon n°${lesson.number}` : `Lesson #${lesson.number}`}
                     </span>
                   ))}
+                  {theme.lessons.length === 0 && (
+                    <span
+                      style={{
+                        background: "var(--accent-bg-xs)",
+                        border: "1px solid var(--accent-border-sm)",
+                        borderRadius: "100px",
+                        padding: "0.15rem 0.6rem",
+                        fontFamily: "var(--font-inter)",
+                        fontSize: "0.7rem",
+                        color: "var(--text-dim)",
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      {t.chapters.emptyTheme}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -119,7 +135,7 @@ export function ChapterList() {
                     fontWeight: 500,
                   }}
                 >
-                  {t.home.readChapter}
+                  {t.home.readTheme}
                 </span>
               </div>
             </div>

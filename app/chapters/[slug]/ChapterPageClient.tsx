@@ -1,17 +1,23 @@
 "use client";
 import Link from "next/link";
-import type { Chapter } from "@/lib/chapters";
+import { useMemo, useState } from "react";
+import type { Theme } from "@/lib/chapters";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
 
 interface Props {
-  chapter: Chapter;
-  prev: Chapter | null;
-  next: Chapter | null;
+  theme: Theme;
+  prev: Theme | null;
+  next: Theme | null;
 }
 
-export function ChapterPageClient({ chapter, prev, next }: Props) {
+export function ChapterPageClient({ theme, prev, next }: Props) {
   const { t, lang } = useLang();
+  const [activeLessonIndex, setActiveLessonIndex] = useState(0);
+  const activeLesson = useMemo(
+    () => theme.lessons[activeLessonIndex] || null,
+    [theme.lessons, activeLessonIndex]
+  );
 
   return (
     <div style={{ position: "relative", zIndex: 1 }}>
@@ -48,13 +54,13 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
               href="/chapters"
               style={{ color: "var(--text-dim)", textDecoration: "none" }}
             >
-              {t.chapter.breadcrumbChapters}
+              {t.chapter.breadcrumbThemes}
             </Link>
             <span>/</span>
             <span style={{ color: "var(--amber)" }}>
-              {t.chapter.chapterLabel.charAt(0) +
-                t.chapter.chapterLabel.slice(1).toLowerCase()}{" "}
-              {chapter.number}
+              {t.chapter.themeLabel.charAt(0) +
+                t.chapter.themeLabel.slice(1).toLowerCase()}{" "}
+              {theme.number}
             </span>
           </div>
 
@@ -67,7 +73,7 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
               marginBottom: "0.75rem",
             }}
           >
-            {t.chapter.chapterLabel} {String(chapter.number).padStart(2, "0")}
+            {t.chapter.themeLabel} {String(theme.number).padStart(2, "0")}
           </div>
 
           <h1
@@ -80,7 +86,7 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
               lineHeight: 1.2,
             }}
           >
-            {lang === "fr" ? chapter.titleFr : chapter.titleEn}
+            {lang === "fr" ? theme.titleFr : theme.titleEn}
           </h1>
           <p
             style={{
@@ -91,79 +97,93 @@ export function ChapterPageClient({ chapter, prev, next }: Props) {
               marginBottom: "1.5rem",
             }}
           >
-            {chapter.subtitle}
+            {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
           </p>
+
+          {/* Lesson tabs */}
+          {theme.lessons.length > 0 && (
+            <div style={{ marginTop: "1.75rem" }}>
+              <div
+                style={{
+                  fontFamily: "var(--font-jetbrains)",
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.12em",
+                  color: "var(--text-dim)",
+                  textTransform: "uppercase",
+                  marginBottom: "0.8rem",
+                }}
+              >
+                {t.chapter.lessonsTabsLabel}
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                {theme.lessons.map((lesson, index) => (
+                  <button
+                    key={lesson.slug}
+                    onClick={() => setActiveLessonIndex(index)}
+                    style={{
+                      background:
+                        index === activeLessonIndex
+                          ? "var(--accent-bg-md)"
+                          : "var(--accent-bg-xs)",
+                      border:
+                        index === activeLessonIndex
+                          ? "1px solid var(--accent-border-md)"
+                          : "1px solid var(--accent-border-sm)",
+                      borderRadius: "999px",
+                      padding: "0.35rem 0.85rem",
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "0.78rem",
+                      color:
+                        index === activeLessonIndex
+                          ? "var(--amber)"
+                          : "var(--text-secondary)",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {lang === "fr"
+                      ? `Leçon n°${lesson.number}`
+                      : `Lesson #${lesson.number}`}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ─── Tabs: Web / PDF ─── */}
+      {activeLesson ? (
+        <ChapterContent lesson={activeLesson} />
+      ) : (
+        <div
+          style={{
+            maxWidth: "800px",
+            margin: "0 auto",
+            padding: "3rem 1.5rem 4rem",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "1.6rem",
+              color: "var(--text-heading)",
+              marginBottom: "0.7rem",
+            }}
+          >
+            {t.chapter.noLessonTitle}
+          </h2>
           <p
             style={{
               fontFamily: "var(--font-crimson)",
               fontSize: "1.05rem",
               color: "var(--text-secondary)",
-              maxWidth: "580px",
               lineHeight: 1.75,
-              marginBottom: "1.5rem",
             }}
           >
-            {chapter.description}
+            {t.chapter.noLessonBody}
           </p>
-
-          {/* Topics */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "0.5rem",
-              marginBottom: "1.5rem",
-            }}
-          >
-            {chapter.topics.map((topic) => (
-              <span
-                key={topic}
-                style={{
-                  background: "var(--accent-bg-sm)",
-                  border: "1px solid var(--accent-border-sm)",
-                  borderRadius: "100px",
-                  padding: "0.25rem 0.75rem",
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.75rem",
-                  color: "var(--amber)",
-                }}
-              >
-                {topic}
-              </span>
-            ))}
-          </div>
-
-          {/* Download */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-            {chapter.pdfAvailable && (
-              <a
-                href={`/pdfs/${chapter.pdfFile}`}
-                download
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  background: "var(--accent-bg-md)",
-                  border: "1px solid var(--accent-border-md)",
-                  color: "var(--amber)",
-                  padding: "0.45rem 1rem",
-                  borderRadius: "4px",
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.78rem",
-                  fontWeight: 500,
-                  textDecoration: "none",
-                  letterSpacing: "0.03em",
-                }}
-              >
-                {t.chapter.downloadPdf}
-              </a>
-            )}
-          </div>
         </div>
-      </div>
-
-      {/* ─── Tabs: Web / PDF ─── */}
-      <ChapterContent chapter={chapter} />
+      )}
 
       {/* ─── Prev / Next navigation ─── */}
       <div

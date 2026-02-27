@@ -1,24 +1,95 @@
 "use client";
 import { useMemo, useState } from "react";
-import type { Chapter } from "@/lib/chapters";
+import type { Lesson } from "@/lib/chapters";
 import { processLatex } from "@/lib/latex";
 import { useLang } from "@/app/context/LangContext";
 
 interface Props {
-  chapter: Chapter;
+  lesson: Lesson;
 }
 
-export function ChapterContent({ chapter }: Props) {
+export function ChapterContent({ lesson }: Props) {
   const [tab, setTab] = useState<"web" | "pdf">("web");
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   const renderedContent = useMemo(
-    () => processLatex(chapter.content),
-    [chapter.content]
+    () => processLatex(lesson.content),
+    [lesson.content]
   );
 
   return (
     <>
+      <div
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          padding: "2rem 1.5rem 0",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-jetbrains)",
+            fontSize: "0.72rem",
+            letterSpacing: "0.12em",
+            color: "var(--amber)",
+            textTransform: "uppercase",
+            marginBottom: "0.65rem",
+          }}
+        >
+          {t.chapter.lessonLabel} {String(lesson.number).padStart(2, "0")}
+        </div>
+        <h2
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: "1.45rem",
+            color: "var(--text-heading)",
+            marginBottom: "0.45rem",
+          }}
+        >
+          {lang === "fr" ? lesson.titleFr : lesson.titleEn}
+        </h2>
+        <p
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontStyle: "italic",
+            fontSize: "1.05rem",
+            color: "var(--amber-soft)",
+            marginBottom: "0.9rem",
+          }}
+        >
+          {lang === "fr" ? lesson.subtitleFr : lesson.subtitleEn}
+        </p>
+        <p
+          style={{
+            fontFamily: "var(--font-crimson)",
+            fontSize: "1rem",
+            color: "var(--text-secondary)",
+            lineHeight: 1.7,
+            marginBottom: "1rem",
+          }}
+        >
+          {lang === "fr" ? lesson.descriptionFr : lesson.descriptionEn}
+        </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.5rem" }}>
+          {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic) => (
+            <span
+              key={topic}
+              style={{
+                background: "var(--accent-bg-sm)",
+                border: "1px solid var(--accent-border-sm)",
+                borderRadius: "100px",
+                padding: "0.2rem 0.75rem",
+                fontFamily: "var(--font-inter)",
+                fontSize: "0.74rem",
+                color: "var(--amber)",
+              }}
+            >
+              {topic}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* Tab switcher */}
       <div
         style={{
@@ -127,10 +198,10 @@ export function ChapterContent({ chapter }: Props) {
                   color: "var(--text-dim)",
                 }}
               >
-                {chapter.pdfFile}
+                {lesson.pdfFile}
               </span>
               <a
-                href={`/pdfs/${chapter.pdfFile}`}
+                href={`/pdfs/${lesson.pdfFile}`}
                 download
                 style={{
                   display: "inline-flex",
@@ -153,7 +224,7 @@ export function ChapterContent({ chapter }: Props) {
 
             {/* The actual embed */}
             <iframe
-              src={`/pdfs/${chapter.pdfFile}#toolbar=0`}
+              src={`/pdfs/${lesson.pdfFile}#toolbar=0`}
               style={{
                 width: "100%",
                 height: "80vh",
@@ -161,7 +232,7 @@ export function ChapterContent({ chapter }: Props) {
                 border: "none",
                 background: "#fff",
               }}
-              title={`${chapter.title} - PDF`}
+              title={`${lang === "fr" ? lesson.titleFr : lesson.titleEn} - PDF`}
             />
           </div>
           <p
@@ -175,7 +246,7 @@ export function ChapterContent({ chapter }: Props) {
           >
             {t.chapter.pdfFallback}{" "}
             <a
-              href={`/pdfs/${chapter.pdfFile}`}
+              href={`/pdfs/${lesson.pdfFile}`}
               download
               style={{ color: "var(--amber)", textDecoration: "underline" }}
             >

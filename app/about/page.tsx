@@ -1,5 +1,5 @@
 "use client";
-import { bookMeta, chapters } from "@/lib/chapters";
+import { bookMeta, themes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 export default function AboutPage() {
@@ -14,7 +14,7 @@ export default function AboutPage() {
     { label: at.detailLabels.year, value: bookMeta.year },
     {
       label: at.detailLabels.chapters,
-      value: `${chapters.length} ${at.chaptersUnit}`,
+      value: `${themes.length} ${at.chaptersUnit}`,
     },
     { label: at.detailLabels.isbn, value: bookMeta.isbn },
   ];

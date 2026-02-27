@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { chapters, bookMeta } from "@/lib/chapters";
+import { themes, bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 function WaveBackground() {
@@ -33,7 +33,7 @@ export default function HomePage() {
   const book = t.book;
 
   const stats = [
-    { label: t.home.stats.chapters, value: `${chapters.length}` },
+    { label: t.home.stats.chapters, value: `${themes.length}` },
     { label: t.home.stats.edition, value: book.edition },
     { label: t.home.stats.format, value: t.home.stats.formatValue },
   ];
@@ -376,10 +376,10 @@ export default function HomePage() {
               gap: "1.25rem",
             }}
           >
-            {chapters.map((chapter) => (
+            {themes.map((theme) => (
               <Link
-                key={chapter.slug}
-                href={`/chapters/${chapter.slug}`}
+                key={theme.slug}
+                href={`/chapters/${theme.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <div
@@ -410,7 +410,7 @@ export default function HomePage() {
                         letterSpacing: "0.05em",
                       }}
                     >
-                      {t.home.chapterPrefix} {String(chapter.number).padStart(2, "0")}
+                      {t.home.themePrefix} {String(theme.number).padStart(2, "0")}
                     </span>
                   </div>
                   <h3
@@ -423,7 +423,7 @@ export default function HomePage() {
                       lineHeight: 1.3,
                     }}
                   >
-                    {lang === "fr" ? chapter.titleFr : chapter.titleEn}
+                    {lang === "fr" ? theme.titleFr : theme.titleEn}
                   </h3>
                   <p
                     style={{
@@ -434,17 +434,7 @@ export default function HomePage() {
                       marginBottom: "0.875rem",
                     }}
                   >
-                    {chapter.subtitle}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-crimson)",
-                      fontSize: "0.9rem",
-                      color: "var(--text-secondary)",
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {chapter.description}
+                    {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
                   </p>
                   <div
                     style={{
@@ -457,7 +447,7 @@ export default function HomePage() {
                       color: "var(--amber)",
                     }}
                   >
-                    {t.home.readChapter}
+                    {t.home.readTheme}
                   </div>
                 </div>
               </Link>

@@ -2,13 +2,6 @@ import "server-only";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const TEX_FILE_BY_SLUG: Record<string, string> = {
-  introduction: "chp1.tex",
-  "espaces-de-hilbert": "chp2.tex",
-  postulats: "chp3.tex",
-  "theorie-des-operateurs-lineaires": "chp4.tex",
-};
-
 function stripComment(line: string): string {
   const protectedPercent = "__ESCAPED_PERCENT__";
   const escaped = line.replace(/\\%/g, protectedPercent);
@@ -63,8 +56,70 @@ function cleanLatexInline(text: string): string {
   return result.trim();
 }
 
+function normalizeFigurePath(path: string): string {
+  const withoutPrefix = path.replace(/^\.?\/*/, "").replace(/^figs\//, "");
+  return `/figs/${withoutPrefix}`;
+}
+
+function extractFigureHtml(figureBlock: string): string {
+  const includeGraphicsMatch = figureBlock.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
+  if (!includeGraphicsMatch) return "";
+
+  const imagePath = normalizeFigurePath(includeGraphicsMatch[1].trim());
+  const captionMatch = figureBlock.match(/\\caption\{([\s\S]*?)\}/);
+  const captionRaw = captionMatch ? captionMatch[1].replace(/\s+/g, " ").trim() : "";
+  const caption = cleanLatexInline(captionRaw);
+  const altText = caption || "Figure";
+
+  const figCaption = caption ? `<figcaption>${caption}</figcaption>` : "";
+  return `<figure class="latex-figure"><img src="${imagePath}" alt="${altText}" loading="lazy" />${figCaption}</figure>`;
+}
+
+function normalizeLatexBlocks(input: string): string {
+  let result = input;
+
+  // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
+  result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
+    return `\n\n${extractFigureHtml(block)}\n\n`;
+  });
+
+  result = result.replace(/\\begin\{definition\}(?:\[([^\]]+)\])?/g, (_match, label: string) => {
+    const definitionTitle = label ? `Definition (${label})` : "Definition";
+    return `\n\n<strong>${definitionTitle}.</strong> `;
+  });
+  result = result.replace(/\\end\{definition\}/g, "\n\n");
+
+  // Convert common display environments so processLatex() can render them.
+  result = result.replace(/\\begin\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
+  result = result.replace(/\\end\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
+  result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\\\begin{aligned}\n");
+  result = result.replace(/\\end\{eqnarray\*?\}/g, "\n\\\\end{aligned}\n$$\n\n");
+  result = result.replace(/\\nonumber/g, "");
+  result = result.replace(/\\\[/g, "$$").replace(/\\\]/g, "$$");
+  result = result.replace(/\\\(/g, "$").replace(/\\\)/g, "$");
+
+  // Remove noisy reference commands from online prose.
+  result = result.replace(/\\cite\{[^{}]*\}/g, "");
+  result = result.replace(/\\footnote\{[\s\S]*?\}/g, "");
+  result = result.replace(/\\label\{[^{}]*\}/g, "");
+  result = result.replace(/\\ref\{[^{}]*\}/g, "");
+
+  // Remove line-level environments that are not needed for web rendering.
+  result = result.replace(/\\begin\{(center|flushleft|flushright)\}/g, "");
+  result = result.replace(/\\end\{(center|flushleft|flushright)\}/g, "");
+  return result;
+}
+
+function renderParagraph(paragraph: string): string {
+  const cleaned = cleanLatexInline(paragraph);
+  if (!cleaned) return "";
+  if (cleaned.startsWith("<figure")) return cleaned;
+  if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return cleaned;
+  return `<p>${cleaned}</p>`;
+}
+
 function paragraphsToHtml(paragraphs: string[]): string {
-  return paragraphs.map((paragraph) => `<p>${cleanLatexInline(paragraph)}</p>`).join("\n\n");
+  return paragraphs.map((paragraph) => renderParagraph(paragraph)).filter((chunk) => chunk.length > 0).join("\n\n");
 }
 
 function parseTexParagraphs(texSource: string): string[] {
@@ -78,7 +133,7 @@ function parseTexParagraphs(texSource: string): string[] {
     keptLines.push(line);
   }
 
-  const body = keptLines.join("\n").trim();
+  const body = normalizeLatexBlocks(keptLines.join("\n")).trim();
   if (!body) return [];
 
   const paragraphs = body
@@ -89,14 +144,13 @@ function parseTexParagraphs(texSource: string): string[] {
   return paragraphs;
 }
 
-function getTexPathBySlug(slug: string): string {
-  const fileName = TEX_FILE_BY_SLUG[slug];
-  if (!fileName) return "";
-  return join(process.cwd(), "content", "tex", fileName);
+function getTexPathByFileName(texFile: string): string {
+  if (!texFile) return "";
+  return join(process.cwd(), "content", "tex", texFile);
 }
 
-export function getChapterWebContent(slug: string, paragraphCount: number): string {
-  const texPath = getTexPathBySlug(slug);
+export function getLessonWebContent(texFile: string, paragraphCount: number): string {
+  const texPath = getTexPathByFileName(texFile);
   if (!texPath) return "";
 
   try {

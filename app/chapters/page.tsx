@@ -1,5 +1,4 @@
 "use client";
-import { bookMeta } from "@/lib/chapters";
 import { ChapterList } from "./ChapterList";
 import { useLang } from "@/app/context/LangContext";
 
