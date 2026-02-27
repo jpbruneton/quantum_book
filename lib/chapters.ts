@@ -88,7 +88,7 @@ export const themes: Theme[] = [
         pdfFile: "ch1.pdf",
         pdfAvailable: true,
         readingTime: "45 min",
-        texFile: "chp1.tex",
+        texFile: "theme1_1.tex",
         references: [],
         content: `
 <p>Nous commençons notre présentation de la mécanique quantique par les expériences portant sur le spin, et l'introduction même de ce concept. C'est en réalité tardif dans le développement historique, puisque Otto Stern et Walther Gerlach réalisent leur expérience fondamentale en 1922; tandis Samuel Goudsmit et George Uhlenbeck proposent l'hypothèse du spin électronique en 1925.</p>
@@ -140,7 +140,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "55 min",
-        texFile: "chp2.tex",
+        texFile: "theme2_1.tex",
         references: [],
         content: `
 <p>Les cours de mathématiques font souvent des maths sans s'expliquer, comme si les mathématiques se suffisaient à elles-même, ce qui n'est d'ailleurs pas faux. Les cours de physique les utilisent souvent sans les expliciter suffisamment. Dans ce chapitre, on essaiera de trouver au mieux cet équilibre entre mathématiques et physique. Ce chapitre est en particulier basé sur diverses notes de cours de mathématiques, de l'agrégation de mathématiques \\cite{hilbert_agreg, hilbert_agreg2} ou de notes de cours universitaires condensées \\cite{hilbert_lyon, hilbert_x}. La référence la plus complète est \\cite{hilbert_orsay}, où l'on y trouvera de nombreuses démonstrations.</p>
@@ -332,7 +332,7 @@ export const themes: Theme[] = [
         pdfFile: "ch3.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "chp3.tex",
+        texFile: "theme3_1.tex",
         references: [],
         content: `
 <p>Ce chapitre présente les postulats de la mécanique quantique et en propose une première discussion. L'objectif est double : établir le formalisme standard, et souligner à quel point ces postulats proposent une vision du monde radicalement différente de celle de la physique classique. Nous présenterons ici la version dite \\og orthodoxe\\fg, bien connue sous le nom d'« interprétation de Copenhague\\footnote{Du nom de l'école de pensée développée à l'Université de Copenhague dans les années 1920-1930, principalement par Bohr, qui y enseignait, et par Heisenberg, qui y était de passage.} », de la mécanique quantique. Cette formulation inclut notamment le postulat de la réduction du paquet d'onde (postulat 3) ainsi que le caractère fondamentalement probabiliste des résultats de mesure (postulat 4).</p>
@@ -384,7 +384,7 @@ export const themes: Theme[] = [
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
         readingTime: "45 min",
-        texFile: "chp4.tex",
+        texFile: "theme4_1.tex",
         references: [],
         content: `
 <p>Cette leçon introduit l'étude des barrières de potentiel, avec les phénomènes de réflexion, transmission et effet tunnel.</p>
