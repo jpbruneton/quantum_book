@@ -21,8 +21,11 @@ export function processLatex(html: string): string {
     }
   });
 
-  // 2. Inline math: $...$ — keep it line-scoped to avoid swallowing prose.
-  result = result.replace(/\$([^$<>\n]+?)\$/g, (match, math) => {
+  // 2. Inline math: $...$ — line-scoped to avoid swallowing prose.
+  result = result.replace(/\$([^$\n]+?)\$/g, (match, math) => {
+    // Guard against accidental capture of HTML fragments.
+    if (/<\/?[a-z][^>]*>/i.test(math)) return match;
+
     try {
       return katex.renderToString(math.trim(), {
         displayMode: false,

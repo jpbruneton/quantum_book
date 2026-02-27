@@ -43,14 +43,60 @@ function shouldSkipLatexLine(line: string): boolean {
 
 function cleanLatexInline(text: string): string {
   let result = text;
+  const accentMap: Record<string, Record<string, string>> = {
+    "'": { a: "á", e: "é", i: "í", o: "ó", u: "ú", y: "ý", A: "Á", E: "É", I: "Í", O: "Ó", U: "Ú", Y: "Ý" },
+    "`": { a: "à", e: "è", i: "ì", o: "ò", u: "ù", A: "À", E: "È", I: "Ì", O: "Ò", U: "Ù" },
+    "^": { a: "â", e: "ê", i: "î", o: "ô", u: "û", A: "Â", E: "Ê", I: "Î", O: "Ô", U: "Û" },
+    '"': { a: "ä", e: "ë", i: "ï", o: "ö", u: "ü", y: "ÿ", A: "Ä", E: "Ë", I: "Ï", O: "Ö", U: "Ü" },
+  };
+
+  result = result.replace(/\\([`'^"])\{?([A-Za-z])\}?/g, (_m, accent: string, letter: string) => {
+    const replacement = accentMap[accent]?.[letter];
+    return replacement ?? letter;
+  });
+  result = result.replace(/\\c\{([cC])\}/g, (_m, letter: string) => (letter === "c" ? "ç" : "Ç"));
+
   result = result.replace(/\\emph\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\textit\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\textbf\{([^{}]+)\}/g, "<strong>$1</strong>");
-  result = result.replace(/\\uline\{([^{}]+)\}/g, "<span class=\"latex-uline\">$1</span>");
+  result = result.replace(/\\uline\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\og(?:\{\})?\s*/g, "« ");
   result = result.replace(/\s*\\fg(?:\{\})?/g, " »");
+  result = result.replace(/---/g, "—");
+  result = result.replace(/--/g, "—");
   result = result.replace(/~+/g, " ");
   return result.trim();
+}
+
+function stripFootnotes(input: string): string {
+  const marker = "\\footnote{";
+  let result = "";
+  let cursor = 0;
+
+  while (cursor < input.length) {
+    const start = input.indexOf(marker, cursor);
+    if (start === -1) {
+      result += input.slice(cursor);
+      break;
+    }
+
+    result += input.slice(cursor, start);
+    let index = start + marker.length;
+    let depth = 1;
+
+    while (index < input.length && depth > 0) {
+      const char = input[index];
+      const previous = index > 0 ? input[index - 1] : "";
+
+      if (char === "{" && previous !== "\\") depth += 1;
+      if (char === "}" && previous !== "\\") depth -= 1;
+      index += 1;
+    }
+
+    cursor = index;
+  }
+
+  return result;
 }
 
 function normalizeFigurePath(path: string): string {
@@ -84,46 +130,64 @@ function normalizeLatexBlocks(input: string): string {
   let subsubsectionIndex = 0;
   let paragraphIndex = 0;
 
+  // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
+  result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
+  result = result.replace(/\\\$/g, "$");
+  result = result.replace(/\\,/g, " ");
+  result = result.replace(/\\:/g, " ");
+  result = result.replace(/\\;/g, " ");
+  result = result.replace(/\\\./g, ".");
+
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
     return `\n\n${extractFigureHtml(block)}\n\n`;
   });
 
-  // Render section-like commands as headings.
-  result = result.replace(/\\section\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    sectionIndex += 1;
-    subsectionIndex = 0;
-    subsubsectionIndex = 0;
-    paragraphIndex = 0;
-    return `\n\n<h2>${sectionIndex}. ${cleanLatexInline(title)}</h2>\n\n`;
-  });
-  result = result.replace(/\\subsection\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    subsectionIndex += 1;
-    subsubsectionIndex = 0;
-    paragraphIndex = 0;
-    const prefix = sectionIndex > 0 ? `${sectionIndex}.${subsectionIndex}` : `${subsectionIndex}`;
-    return `\n\n<h3>${prefix}. ${cleanLatexInline(title)}</h3>\n\n`;
-  });
-  result = result.replace(/\\subsubsection\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    subsubsectionIndex += 1;
-    paragraphIndex = 0;
-    const prefix = sectionIndex > 0
-      ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`
-      : `${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`;
-    return `\n\n<h4>${prefix}. ${cleanLatexInline(title)}</h4>\n\n`;
-  });
-  result = result.replace(/\\paragraph\*?\{([\s\S]*?)\}/g, (_m, title: string) => {
-    paragraphIndex += 1;
-    const prefix = sectionIndex > 0
-      ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`
-      : `${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`;
-    return `\n\n<h5>${prefix}. ${cleanLatexInline(title)}</h5>\n\n`;
-  });
+  // Ignore mdframed wrappers while preserving their inner content.
+  result = result.replace(/\\begin\{mdframed\}(?:\[[^\]]*\])?/g, "");
+  result = result.replace(/\\end\{mdframed\}/g, "");
+
+  // Render section-like commands as headings in document order.
+  result = result.replace(
+    /\\(section|subsection|subsubsection|paragraph)\*?\{([\s\S]*?)\}/g,
+    (_m, level: string, title: string) => {
+      if (level === "section") {
+        sectionIndex += 1;
+        subsectionIndex = 0;
+        subsubsectionIndex = 0;
+        paragraphIndex = 0;
+        return `\n\n<h2>${sectionIndex}. ${cleanLatexInline(title)}</h2>\n\n`;
+      }
+
+      if (level === "subsection") {
+        subsectionIndex += 1;
+        subsubsectionIndex = 0;
+        paragraphIndex = 0;
+        const prefix = sectionIndex > 0 ? `${sectionIndex}.${subsectionIndex}` : `${subsectionIndex}`;
+        return `\n\n<h3>${prefix}. ${cleanLatexInline(title)}</h3>\n\n`;
+      }
+
+      if (level === "subsubsection") {
+        subsubsectionIndex += 1;
+        paragraphIndex = 0;
+        const prefix = sectionIndex > 0
+          ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`
+          : `${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`;
+        return `\n\n<h4>${prefix}. ${cleanLatexInline(title)}</h4>\n\n`;
+      }
+
+      paragraphIndex += 1;
+      const prefix = sectionIndex > 0
+        ? `${sectionIndex}.${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`
+        : `${Math.max(subsectionIndex, 1)}.${Math.max(subsubsectionIndex, 1)}.${paragraphIndex}`;
+      return `\n\n<h5>${prefix}. ${cleanLatexInline(title)}</h5>\n\n`;
+    }
+  );
 
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string }> = [
     { env: "definition", title: "Definition" },
-    { env: "theorem", title: "Theorem" },
+    { env: "theorem", title: "Théorème" },
     { env: "proposition", title: "Proposition" },
     { env: "lemma", title: "Lemma" },
     { env: "corollary", title: "Corollary" },
@@ -171,7 +235,7 @@ function normalizeLatexBlocks(input: string): string {
 
   // Remove noisy reference commands from online prose.
   result = result.replace(/\\cite\{[^{}]*\}/g, "");
-  result = result.replace(/\\footnote\{[\s\S]*?\}/g, "");
+  result = stripFootnotes(result);
   result = result.replace(/\\label\{[^{}]*\}/g, "");
   result = result.replace(/\\ref\{([^{}]*)\}/g, "[$1]");
 
@@ -213,7 +277,7 @@ function sanitizeUnbalancedDollarMath(paragraph: string): string {
   const singleDollarCount = countSingleDollarDelimiters(paragraph);
   if (singleDollarCount % 2 === 0) return paragraph;
   // Fallback: prevent broken long-range math capture when TeX source has unmatched '$'.
-  return paragraph.replace(/(?<!\\)\$(?!\$)/g, "\\$");
+  return paragraph.replace(/(?<!\\)\$(?!\$)/g, "&#36;");
 }
 
 function paragraphsToHtml(paragraphs: string[]): string {
@@ -231,6 +295,7 @@ function parseTexParagraphs(texSource: string): string[] {
   const keptLines: string[] = [];
   for (const rawLine of lines) {
     const line = stripComment(rawLine);
+    if (line.trim() === "\\\\") continue;
     if (shouldSkipLatexLine(line)) continue;
     keptLines.push(line);
   }

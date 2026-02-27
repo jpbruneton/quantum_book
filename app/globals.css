@@ -253,21 +253,16 @@ body::before {
 
 .prose-quantum ul {
   margin: 1rem 0 1.5rem 1.5rem;
-  list-style: none;
+  list-style: disc;
 }
 
 .prose-quantum ul li {
-  position: relative;
-  padding-left: 1.25rem;
+  padding-left: 0;
   margin-bottom: 0.5rem;
 }
 
 .prose-quantum ul li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--amber);
-  font-size: 0.875rem;
+  content: none;
 }
 
 .prose-quantum strong {
@@ -348,7 +343,15 @@ body::before {
   background: #94a3b814;
 }
 
-.prose-quantum .latex-block-remark strong,
+.prose-quantum .latex-block-remark {
+  color: var(--text-heading);
+}
+
+.prose-quantum .latex-block-remark strong {
+  color: var(--text-heading);
+  font-weight: 400;
+}
+
 .prose-quantum .latex-block-example strong {
   color: #cbd5e1;
 }
