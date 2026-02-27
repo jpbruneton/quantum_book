@@ -115,6 +115,15 @@ function escapeHtmlAttribute(value: string): string {
     .replace(/>/g, "&gt;");
 }
 
+function latexToPlainTextForAlt(value: string): string {
+  return value
+    .replace(/\$+/g, "")
+    .replace(/\\[a-zA-Z]+\*?(?:\[[^\]]*\])?/g, " ")
+    .replace(/[{}]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function extractFigureHtml(figureBlock: string, figureNumber: number): string {
   const includeGraphicsMatch = figureBlock.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
   if (!includeGraphicsMatch) return "";
@@ -132,7 +141,7 @@ function extractFigureHtml(figureBlock: string, figureNumber: number): string {
     }
   }
   const caption = cleanLatexInline(captionRaw);
-  const altTextRaw = (caption || "Figure").replace(/<[^>]*>/g, "");
+  const altTextRaw = latexToPlainTextForAlt(captionRaw || "Figure");
   const altText = escapeHtmlAttribute(altTextRaw);
 
   const captionWithNumber = caption
