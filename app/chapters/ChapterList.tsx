@@ -1,19 +1,20 @@
 "use client";
 import Link from "next/link";
-import { themes } from "@/lib/chapters";
+import { getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 export function ChapterList() {
   const { t, lang } = useLang();
+  const webThemes = getWebThemes();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-      {themes.map((theme, i) => (
+      {webThemes.map((theme, i) => (
         <div
           key={theme.slug}
           style={{
             borderBottom:
-              i < themes.length - 1
+              i < webThemes.length - 1
                 ? "1px solid var(--border-subtle)"
                 : "none",
           }}

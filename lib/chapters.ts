@@ -1,6 +1,7 @@
 export interface Lesson {
   slug: string;
   number: number;
+  display_on_web: boolean;
   titleFr: string;
   titleEn: string;
   subtitleFr: string;
@@ -19,6 +20,7 @@ export interface Lesson {
 export interface Theme {
   slug: string;
   number: number;
+  display_on_web: boolean;
   titleFr: string;
   titleEn: string;
   descriptionFr: string;
@@ -43,6 +45,7 @@ export const themes: Theme[] = [
   {
     slug: "experiences-fondatrices",
     number: 1,
+    display_on_web: true,
     titleFr: "Expériences fondatrices",
     titleEn: "Foundational Experiments",
     descriptionFr:
@@ -53,6 +56,7 @@ export const themes: Theme[] = [
       {
         slug: "introduction",
         number: 1,
+        display_on_web: true,
         titleFr: "Leçon n°1",
         titleEn: "Lesson #1",
         subtitleFr: "Expérience de Stern et Gerlach",
@@ -92,6 +96,7 @@ export const themes: Theme[] = [
   {
     slug: "espaces-de-hilbert",
     number: 2,
+    display_on_web: true,
     titleFr: "Espaces de Hilbert",
     titleEn: "Hilbert Spaces",
     descriptionFr:
@@ -102,6 +107,7 @@ export const themes: Theme[] = [
       {
         slug: "espaces-de-hilbert-lecon-1",
         number: 1,
+        display_on_web: true,
         titleFr: "Leçon n°1",
         titleEn: "Lesson #1",
         subtitleFr: "Espaces de Hilbert",
@@ -139,6 +145,7 @@ export const themes: Theme[] = [
       {
         slug: "espaces-de-hilbert-lecon-2",
         number: 2,
+        display_on_web: true,
         titleFr: "Leçon n°2",
         titleEn: "Lesson #2",
         subtitleFr: "Topologie des espaces de Hilbert",
@@ -172,6 +179,7 @@ export const themes: Theme[] = [
       {
         slug: "espaces-de-hilbert-lecon-3",
         number: 3,
+        display_on_web: true,
         titleFr: "Leçon n°3",
         titleEn: "Lesson #3",
         subtitleFr: "Dual et théorème de Riesz",
@@ -205,6 +213,7 @@ export const themes: Theme[] = [
       {
         slug: "espaces-de-hilbert-lecon-4",
         number: 4,
+        display_on_web: true,
         titleFr: "Leçon n°4",
         titleEn: "Lesson #4",
         subtitleFr: "Notations de Dirac",
@@ -238,6 +247,7 @@ export const themes: Theme[] = [
       {
         slug: "espaces-de-hilbert-lecon-5",
         number: 5,
+        display_on_web: true,
         titleFr: "Leçon n°5",
         titleEn: "Lesson #5",
         subtitleFr: "Théorie des opérateurs linéaires",
@@ -273,6 +283,7 @@ export const themes: Theme[] = [
   {
     slug: "postulats",
     number: 3,
+    display_on_web: true,
     titleFr: "Postulats",
     titleEn: "Postulates",
     descriptionFr:
@@ -283,6 +294,7 @@ export const themes: Theme[] = [
       {
         slug: "postulats-lecon-1",
         number: 1,
+        display_on_web: true,
         titleFr: "Leçon n°1",
         titleEn: "Lesson #1",
         subtitleFr: "Mesure, dynamique et interprétation",
@@ -322,6 +334,7 @@ export const themes: Theme[] = [
   {
     slug: "applications",
     number: 4,
+    display_on_web: true,
     titleFr: "Applications",
     titleEn: "Applications",
     descriptionFr:
@@ -332,6 +345,7 @@ export const themes: Theme[] = [
       {
         slug: "applications-lecon-1",
         number: 1,
+        display_on_web: true,
         titleFr: "Leçon n°1",
         titleEn: "Lesson #1",
         subtitleFr: "Barrières de potentiel",
@@ -365,6 +379,7 @@ export const themes: Theme[] = [
       {
         slug: "applications-lecon-2",
         number: 2,
+        display_on_web: true,
         titleFr: "Leçon n°2",
         titleEn: "Lesson #2",
         subtitleFr: "Oscillateur harmonique",
@@ -398,6 +413,7 @@ export const themes: Theme[] = [
       {
         slug: "applications-lecon-3",
         number: 3,
+        display_on_web: true,
         titleFr: "Leçon n°3",
         titleEn: "Lesson #3",
         subtitleFr: "Spin",
@@ -431,6 +447,7 @@ export const themes: Theme[] = [
       {
         slug: "applications-lecon-4",
         number: 4,
+        display_on_web: true,
         titleFr: "Leçon n°4",
         titleEn: "Lesson #4",
         subtitleFr: "Dynamique quantique",
@@ -466,6 +483,7 @@ export const themes: Theme[] = [
   {
     slug: "systemes-en-interaction",
     number: 5,
+    display_on_web: true,
     titleFr: "Systèmes en interaction",
     titleEn: "Interacting Systems",
     descriptionFr:
@@ -477,6 +495,7 @@ export const themes: Theme[] = [
   {
     slug: "decoherence-et-mesure-quantique",
     number: 6,
+    display_on_web: true,
     titleFr: "Décohérence et mesure quantique",
     titleEn: "Decoherence and Quantum Measurement",
     descriptionFr:
@@ -491,6 +510,22 @@ export function getTheme(slug: string): Theme | undefined {
   return themes.find((theme) => theme.slug === slug);
 }
 
+export function getWebThemes(): Theme[] {
+  return themes
+    .filter((theme) => theme.display_on_web)
+    .map((theme) => ({
+      ...theme,
+      lessons: theme.lessons.filter((lesson) => lesson.display_on_web),
+    }));
+}
+
+export function getWebTheme(slug: string): Theme | undefined {
+  return getWebThemes().find((theme) => theme.slug === slug);
+}
+
 export function getTotalLessonsCount(): number {
-  return themes.reduce((count, theme) => count + theme.lessons.length, 0);
+  return getWebThemes().reduce(
+    (count, theme) => count + theme.lessons.length,
+    0
+  );
 }

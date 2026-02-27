@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { themes, bookMeta } from "@/lib/chapters";
+import { getWebThemes, bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 function WaveBackground() {
@@ -31,9 +31,10 @@ function WaveBackground() {
 export default function HomePage() {
   const { t, lang } = useLang();
   const book = t.book;
+  const webThemes = getWebThemes();
 
   const stats = [
-    { label: t.home.stats.chapters, value: `${themes.length}` },
+    { label: t.home.stats.chapters, value: `${webThemes.length}` },
     { label: t.home.stats.edition, value: book.edition },
     { label: t.home.stats.format, value: t.home.stats.formatValue },
   ];
@@ -376,7 +377,7 @@ export default function HomePage() {
               gap: "1.25rem",
             }}
           >
-            {themes.map((theme) => (
+            {webThemes.map((theme) => (
               <Link
                 key={theme.slug}
                 href={`/chapters/${theme.slug}`}

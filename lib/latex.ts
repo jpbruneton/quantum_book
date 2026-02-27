@@ -38,11 +38,13 @@ function sanitizeDisplayMath(math: string): string {
  * double-matching the inner dollar signs.
  */
 export function processLatex(html: string): string {
-  // Recover aligned systems that were accidentally split across <p> tags.
-  const normalizedHtml = html.replace(
-    /<p>\s*\\begin\{aligned\}\s*<\/p>\s*<p>([\s\S]*?)<\/p>\s*<p>\s*\\end\{aligned\}\s*<\/p>/g,
+  // Recover aligned systems accidentally split across <p> tags.
+  let normalizedHtml = html.replace(
+    /<p>\s*\\{1,2}begin\{aligned\}\s*<\/p>\s*<p>([\s\S]*?)<\/p>\s*<p>\s*\\{1,2}end\{aligned\}\s*<\/p>/g,
     (_match, body: string) => `$$\\begin{aligned} ${body.trim()} \\end{aligned}$$`
   );
+  normalizedHtml = normalizedHtml.replace(/\\{2}begin\{aligned\}/g, "\\begin{aligned}");
+  normalizedHtml = normalizedHtml.replace(/\\{2}end\{aligned\}/g, "\\end{aligned}");
 
   // 1. Display math: $$...$$
   let result = normalizedHtml.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {

@@ -107,7 +107,7 @@ function normalizeFigurePath(path: string): string {
   return `/figs/${withoutPrefix}`;
 }
 
-function extractFigureHtml(figureBlock: string): string {
+function extractFigureHtml(figureBlock: string, figureNumber: number): string {
   const includeGraphicsMatch = figureBlock.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
   if (!includeGraphicsMatch) return "";
 
@@ -117,7 +117,10 @@ function extractFigureHtml(figureBlock: string): string {
   const caption = cleanLatexInline(captionRaw);
   const altText = caption || "Figure";
 
-  const figCaption = caption ? `<figcaption>${caption}</figcaption>` : "";
+  const captionWithNumber = caption
+    ? `Figure ${figureNumber}. ${caption}`
+    : `Figure ${figureNumber}`;
+  const figCaption = `<figcaption>${captionWithNumber}</figcaption>`;
   const isPdfFigure = imagePath.toLowerCase().endsWith(".pdf");
   if (isPdfFigure) {
     return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a></object>${figCaption}</figure>`;
@@ -423,6 +426,7 @@ function replaceCommandBlock(
 
 function normalizeLatexBlocks(input: string): string {
   let result = input;
+  let figureRenderIndex = 0;
   const references = collectReferenceMap(result);
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
@@ -438,7 +442,8 @@ function normalizeLatexBlocks(input: string): string {
 
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
-    return `\n\n${extractFigureHtml(block)}\n\n`;
+    figureRenderIndex += 1;
+    return `\n\n${extractFigureHtml(block, figureRenderIndex)}\n\n`;
   });
 
   // Ignore mdframed wrappers while preserving their inner content.
@@ -503,8 +508,8 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/\\eeq\b/g, "\\end{equation}");
   result = result.replace(/\\begin\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
   result = result.replace(/\\end\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
-  result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\\\begin{aligned}\n");
-  result = result.replace(/\\end\{eqnarray\*?\}/g, "\n\\\\end{aligned}\n$$\n\n");
+  result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\begin{aligned}\n");
+  result = result.replace(/\\end\{eqnarray\*?\}/g, "\n\\end{aligned}\n$$\n\n");
   result = result.replace(/\$(\s*\\begin\{aligned\}[\s\S]*?\\end\{aligned\}\s*)\$/g, "\n\n$$\n$1\n$$\n\n");
   result = result.replace(/(?:^|\n)\s*\$\s*\n([\s\S]*?)\n\s*\$\s*(?=\n|$)/g, (_m, block: string) => {
     return `\n\n$$\n${block.trim()}\n$$\n\n`;

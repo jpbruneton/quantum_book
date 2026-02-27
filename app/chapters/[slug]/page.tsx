@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getTheme, themes } from "@/lib/chapters";
+import { getWebTheme, getWebThemes } from "@/lib/chapters";
 import { ChapterPageClient } from "./ChapterPageClient";
 import type { Metadata } from "next";
 import { getLessonWebContent } from "@/lib/chapterContent.server";
@@ -9,11 +9,11 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return themes.map((theme) => ({ slug: theme.slug }));
+  return getWebThemes().map((theme) => ({ slug: theme.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const theme = getTheme(params.slug);
+  const theme = getWebTheme(params.slug);
   if (!theme) return {};
   return {
     title: `Theme ${theme.number}: ${theme.titleEn}`,
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function ChapterPage({ params }: Props) {
-  const theme = getTheme(params.slug);
+  const theme = getWebTheme(params.slug);
   if (!theme) notFound();
 
   const themeWithDynamicContent = {
@@ -33,10 +33,11 @@ export default function ChapterPage({ params }: Props) {
     })),
   };
 
-  const currentIndex = themes.findIndex((item) => item.slug === theme.slug);
-  const prev = currentIndex > 0 ? themes[currentIndex - 1] : null;
+  const webThemes = getWebThemes();
+  const currentIndex = webThemes.findIndex((item) => item.slug === theme.slug);
+  const prev = currentIndex > 0 ? webThemes[currentIndex - 1] : null;
   const next =
-    currentIndex < themes.length - 1 ? themes[currentIndex + 1] : null;
+    currentIndex < webThemes.length - 1 ? webThemes[currentIndex + 1] : null;
 
   return (
     <ChapterPageClient

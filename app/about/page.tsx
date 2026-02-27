@@ -1,11 +1,12 @@
 "use client";
-import { bookMeta, themes } from "@/lib/chapters";
+import { bookMeta, getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 export default function AboutPage() {
   const { t } = useLang();
   const at = t.about;
   const book = t.book;
+  const webThemes = getWebThemes();
 
   const detailItems = [
     { label: at.detailLabels.author, value: bookMeta.author },
@@ -14,7 +15,7 @@ export default function AboutPage() {
     { label: at.detailLabels.year, value: bookMeta.year },
     {
       label: at.detailLabels.chapters,
-      value: `${themes.length} ${at.chaptersUnit}`,
+      value: `${webThemes.length} ${at.chaptersUnit}`,
     },
     { label: at.detailLabels.isbn, value: bookMeta.isbn },
   ];
