@@ -228,6 +228,142 @@ function replaceSectionCommands(input: string): string {
   return output;
 }
 
+function readBalancedBraces(input: string, startIndex: number): { content: string; endIndex: number } | null {
+  if (input[startIndex] !== "{") return null;
+  let depth = 1;
+  let cursor = startIndex + 1;
+  let content = "";
+
+  while (cursor < input.length && depth > 0) {
+    const char = input[cursor];
+    const previous = cursor > 0 ? input[cursor - 1] : "";
+
+    if (char === "{" && previous !== "\\") {
+      depth += 1;
+      content += char;
+    } else if (char === "}" && previous !== "\\") {
+      depth -= 1;
+      if (depth > 0) content += char;
+    } else {
+      content += char;
+    }
+    cursor += 1;
+  }
+
+  if (depth !== 0) return null;
+  return { content, endIndex: cursor };
+}
+
+function collectReferenceMap(input: string): Record<string, string> {
+  const references: Record<string, string> = {};
+  let sectionIndex = 0;
+  let subsectionIndex = 0;
+  let subsubsectionIndex = 0;
+  let figureIndex = 0;
+  let theoremIndex = 0;
+  let propositionIndex = 0;
+  let definitionIndex = 0;
+  let remarkIndex = 0;
+
+  const envStack: Array<{ env: string; refText: string }> = [];
+  let index = 0;
+
+  while (index < input.length) {
+    const slice = input.slice(index);
+
+    const sectionMatch = slice.match(/^\\(section|subsection|subsubsection)\*?/);
+    if (sectionMatch) {
+      const level = sectionMatch[1];
+      let cursor = index + sectionMatch[0].length;
+      while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+      const titleBlock = readBalancedBraces(input, cursor);
+      if (!titleBlock) {
+        index += 1;
+        continue;
+      }
+
+      if (level === "section") {
+        sectionIndex += 1;
+        subsectionIndex = 0;
+        subsubsectionIndex = 0;
+      } else if (level === "subsection") {
+        subsectionIndex += 1;
+        subsubsectionIndex = 0;
+      } else {
+        subsubsectionIndex += 1;
+      }
+
+      const sectionNumber = level === "section"
+        ? `${sectionIndex}`
+        : level === "subsection"
+          ? `${Math.max(sectionIndex, 1)}.${subsectionIndex}`
+          : `${Math.max(sectionIndex, 1)}.${Math.max(subsectionIndex, 1)}.${subsubsectionIndex}`;
+
+      const inlineLabelMatch = titleBlock.content.match(/\\label\{([^{}]+)\}/);
+      if (inlineLabelMatch) references[inlineLabelMatch[1]] = sectionNumber;
+
+      let afterTitle = titleBlock.endIndex;
+      while (afterTitle < input.length && /\s/.test(input[afterTitle])) afterTitle += 1;
+      const followingLabelMatch = input.slice(afterTitle).match(/^\\label\{([^{}]+)\}/);
+      if (followingLabelMatch) references[followingLabelMatch[1]] = sectionNumber;
+
+      index = titleBlock.endIndex;
+      continue;
+    }
+
+    const beginMatch = slice.match(/^\\begin\{([A-Za-z*]+)\}/);
+    if (beginMatch) {
+      const env = beginMatch[1].replace(/\*$/, "");
+      let refText = "";
+      if (env === "figure") {
+        figureIndex += 1;
+        refText = `Figure ${figureIndex}`;
+      } else if (env === "theorem") {
+        theoremIndex += 1;
+        refText = `Théorème ${theoremIndex}`;
+      } else if (env === "proposition") {
+        propositionIndex += 1;
+        refText = `Proposition ${propositionIndex}`;
+      } else if (env === "definition") {
+        definitionIndex += 1;
+        refText = `Définition ${definitionIndex}`;
+      } else if (env === "remark") {
+        remarkIndex += 1;
+        refText = `Remarque ${remarkIndex}`;
+      }
+      envStack.push({ env, refText });
+      index += beginMatch[0].length;
+      continue;
+    }
+
+    const endMatch = slice.match(/^\\end\{([A-Za-z*]+)\}/);
+    if (endMatch) {
+      const env = endMatch[1].replace(/\*$/, "");
+      for (let i = envStack.length - 1; i >= 0; i -= 1) {
+        if (envStack[i].env === env) {
+          envStack.splice(i, 1);
+          break;
+        }
+      }
+      index += endMatch[0].length;
+      continue;
+    }
+
+    const labelMatch = slice.match(/^\\label\{([^{}]+)\}/);
+    if (labelMatch) {
+      const label = labelMatch[1];
+      const nearest = envStack[envStack.length - 1];
+      if (nearest?.refText) references[label] = nearest.refText;
+      index += labelMatch[0].length;
+      continue;
+    }
+
+    index += 1;
+  }
+
+  return references;
+}
+
 function replaceCommandBlock(
   input: string,
   command: string,
@@ -236,6 +372,7 @@ function replaceCommandBlock(
 ): string {
   let output = "";
   let index = 0;
+  let blockIndex = 0;
 
   while (index < input.length) {
     const marker = `\\${command}`;
@@ -275,7 +412,8 @@ function replaceCommandBlock(
     }
 
     const cleanedBody = body.trim();
-    output += `\n\n<div class="latex-block ${cssClass}"><strong>${title}.</strong> ${cleanedBody}</div>\n\n`;
+    blockIndex += 1;
+    output += `\n\n<div class="latex-block ${cssClass}"><strong>${title} ${blockIndex}.</strong> ${cleanedBody}</div>\n\n`;
     index = cursor;
   }
 
@@ -284,6 +422,7 @@ function replaceCommandBlock(
 
 function normalizeLatexBlocks(input: string): string {
   let result = input;
+  const references = collectReferenceMap(result);
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
   result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
@@ -292,6 +431,9 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/\\:/g, " ");
   result = result.replace(/\\;/g, " ");
   result = result.replace(/\\\./g, ".");
+
+  // Common typo tolerance.
+  result = result.replace(/\\bgin\{figure\*?\}/g, "\\begin{figure}");
 
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
@@ -322,13 +464,24 @@ function normalizeLatexBlocks(input: string): string {
     { env: "resume", title: "Résumé" },
     { env: "important", title: "Important" },
   ];
+  const blockCounters: Record<string, number> = {
+    definition: 0,
+    theorem: 0,
+    proposition: 0,
+    remark: 0,
+  };
 
   for (const blockKind of blockKinds) {
     const beginRegex = new RegExp(`\\\\begin\\{${blockKind.env}\\}(?:\\[([^\\]]+)\\])?`, "g");
     const endRegex = new RegExp(`\\\\end\\{${blockKind.env}\\}`, "g");
     result = result.replace(beginRegex, (_m, label: string) => {
       const suffix = label ? ` (${cleanLatexInline(label)})` : "";
-      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><strong>${blockKind.title}${suffix}.</strong> `;
+      let numberedTitle = blockKind.title;
+      if (blockKind.env in blockCounters) {
+        blockCounters[blockKind.env] += 1;
+        numberedTitle = `${blockKind.title} ${blockCounters[blockKind.env]}`;
+      }
+      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><strong>${numberedTitle}${suffix}.</strong> `;
     });
     result = result.replace(endRegex, "</div>\n\n");
   }
@@ -362,8 +515,8 @@ function normalizeLatexBlocks(input: string): string {
   // Remove noisy reference commands from online prose.
   result = result.replace(/\\cite\{[^{}]*\}/g, "");
   result = stripFootnotes(result);
+  result = result.replace(/\\ref\{([^{}]*)\}/g, (_m, label: string) => references[label] ?? `[${label}]`);
   result = result.replace(/\\label\{[^{}]*\}/g, "");
-  result = result.replace(/\\ref\{([^{}]*)\}/g, "[$1]");
 
   // Remove line-level environments that are not needed for web rendering.
   result = result.replace(/\\begin\{(center|flushleft|flushright)\}/g, "");

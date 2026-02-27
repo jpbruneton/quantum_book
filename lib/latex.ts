@@ -38,8 +38,14 @@ function sanitizeDisplayMath(math: string): string {
  * double-matching the inner dollar signs.
  */
 export function processLatex(html: string): string {
+  // Recover aligned systems that were accidentally split across <p> tags.
+  const normalizedHtml = html.replace(
+    /<p>\s*\\begin\{aligned\}\s*<\/p>\s*<p>([\s\S]*?)<\/p>\s*<p>\s*\\end\{aligned\}\s*<\/p>/g,
+    (_match, body: string) => `$$\\begin{aligned} ${body.trim()} \\end{aligned}$$`
+  );
+
   // 1. Display math: $$...$$
-  let result = html.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {
+  let result = normalizedHtml.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {
     const safeMath = sanitizeDisplayMath(math.trim());
     try {
       return katex.renderToString(safeMath, {
