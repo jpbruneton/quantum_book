@@ -59,7 +59,7 @@ function cleanLatexInline(text: string): string {
 
   result = result.replace(/\\emph\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\textit\{([^{}]+)\}/g, "<em>$1</em>");
-  result = result.replace(/\\textbf\{([^{}]+)\}/g, "<strong>$1</strong>");
+  result = result.replace(/\\textbf\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\uline\{([^{}]+)\}/g, "<em>$1</em>");
   result = result.replace(/\\underline\{([^{}]+)\}/g, "<span class=\"latex-uline\">$1</span>");
   result = result.replace(/\\ldots/g, "...");
