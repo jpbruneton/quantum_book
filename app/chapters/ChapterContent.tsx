@@ -8,6 +8,27 @@ interface Props {
   lesson: Lesson;
 }
 
+interface TocEntry {
+  id: string;
+  text: string;
+  level: 2 | 3 | 4;
+}
+
+function stripHtml(value: string): string {
+  return value.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+}
+
+function slugify(value: string): string {
+  const normalized = value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+  return normalized || "section";
+}
+
 export function ChapterContent({ lesson }: Props) {
   const [tab, setTab] = useState<"web" | "refs" | "pdf">("web");
   const { t, lang } = useLang();
@@ -18,6 +39,28 @@ export function ChapterContent({ lesson }: Props) {
     () => processLatex(lesson.content),
     [lesson.content]
   );
+  const webContentWithToc = useMemo(() => {
+    const toc: TocEntry[] = [];
+    const usedIds: Record<string, number> = {};
+    const headingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
+
+    const content = renderedContent.replace(
+      headingRegex,
+      (_fullMatch, tag: string, headingInner: string) => {
+        const level = Number(tag.slice(1)) as 2 | 3 | 4;
+        const text = stripHtml(headingInner);
+        const baseId = slugify(text);
+        const current = usedIds[baseId] ?? 0;
+        usedIds[baseId] = current + 1;
+        const id = current > 0 ? `${baseId}-${current + 1}` : baseId;
+
+        toc.push({ id, text, level });
+        return `<${tag} id="${id}">${headingInner}</${tag}>`;
+      }
+    );
+
+    return { content, toc };
+  }, [renderedContent]);
 
   return (
     <>
@@ -144,9 +187,34 @@ export function ChapterContent({ lesson }: Props) {
             padding: "3rem 1.5rem",
           }}
         >
+          {webContentWithToc.toc.length > 0 && (
+            <nav className="lesson-toc" aria-label={t.chapter.tocTitle}>
+              <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>
+              <ul className="lesson-toc-list">
+                {webContentWithToc.toc.map((entry) => (
+                  <li
+                    key={entry.id}
+                    className="lesson-toc-item"
+                    style={{
+                      marginLeft:
+                        entry.level === 2
+                          ? "0"
+                          : entry.level === 3
+                            ? "1rem"
+                            : "2rem",
+                    }}
+                  >
+                    <a href={`#${entry.id}`} className="lesson-toc-link">
+                      {entry.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
           <div
             className="prose-quantum"
-            dangerouslySetInnerHTML={{ __html: renderedContent }}
+            dangerouslySetInnerHTML={{ __html: webContentWithToc.content }}
           />
           <div
             style={{

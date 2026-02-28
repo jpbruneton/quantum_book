@@ -555,7 +555,15 @@ function normalizeLatexBlocks(input: string): string {
   // Remove noisy reference commands from online prose.
   result = result.replace(/\\cite\{[^{}]*\}/g, "");
   result = stripFootnotes(result);
-  result = result.replace(/\\ref\{([^{}]*)\}/g, (_m, label: string) => references[label] ?? `[${label}]`);
+  result = result.replace(/\\ref\{([^{}]*)\}/g, (_m, label: string) => {
+    const resolved = references[label];
+    if (!resolved) return `[${label}]`;
+    // Keep \ref output numeric to avoid duplicating prefixes already present in prose
+    // (e.g. "cf Figure \ref{magnet}" -> "cf Figure 1", not "cf Figure Figure 1").
+    return resolved
+      .replace(/^(Figure|Théorème|Proposition|Définition|Remarque)\s+/i, "")
+      .trim();
+  });
   result = result.replace(/\\label\{[^{}]*\}/g, "");
 
   // Remove line-level environments that are not needed for web rendering.
