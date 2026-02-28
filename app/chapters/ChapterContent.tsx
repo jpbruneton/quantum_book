@@ -263,17 +263,7 @@ export function ChapterContent({ lesson }: Props) {
             padding: "3rem 1.5rem",
           }}
         >
-          {webContentWithToc.toc.length > 0 && (
-            <div className="lesson-web-controls">
-              <button
-                className="lesson-toc-toggle"
-                onClick={() => setTocVisible((current) => !current)}
-              >
-                {tocVisible ? t.chapter.hideToc : t.chapter.showToc}
-              </button>
-            </div>
-          )}
-          <div className={`lesson-web-layout ${tocVisible ? "" : "toc-hidden"}`}>
+          <div className="lesson-web-layout">
             <div className="lesson-web-main">
               <div
                 className="prose-quantum"
@@ -297,33 +287,43 @@ export function ChapterContent({ lesson }: Props) {
                 {t.chapter.noteBody}
               </div>
             </div>
-            {webContentWithToc.toc.length > 0 && tocVisible && (
+            {webContentWithToc.toc.length > 0 && (
               <aside className="lesson-toc lesson-toc-sticky">
-                <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>
-                <ul className="lesson-toc-list">
-                  {webContentWithToc.toc.map((entry) => (
-                    <li
-                      key={entry.id}
-                      className="lesson-toc-item"
-                      style={{
-                        marginLeft:
-                          entry.level === 2
-                            ? "0"
-                            : entry.level === 3
-                              ? "0.7rem"
-                              : "1.4rem",
-                      }}
-                    >
-                      <a
-                        href={`#${entry.id}`}
-                        className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
-                        onClick={() => setActiveTocId(entry.id)}
+                <div className="lesson-toc-header">
+                  {tocVisible && <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>}
+                  <button
+                    className="lesson-toc-toggle"
+                    onClick={() => setTocVisible((current) => !current)}
+                  >
+                    {tocVisible ? t.chapter.hideToc : t.chapter.showToc}
+                  </button>
+                </div>
+                {tocVisible && (
+                  <ul className="lesson-toc-list">
+                    {webContentWithToc.toc.map((entry) => (
+                      <li
+                        key={entry.id}
+                        className="lesson-toc-item"
+                        style={{
+                          marginLeft:
+                            entry.level === 2
+                              ? "0"
+                              : entry.level === 3
+                                ? "0.7rem"
+                                : "1.4rem",
+                        }}
                       >
-                        {entry.text}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                        <a
+                          href={`#${entry.id}`}
+                          className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
+                          onClick={() => setActiveTocId(entry.id)}
+                        >
+                          {entry.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </aside>
             )}
           </div>

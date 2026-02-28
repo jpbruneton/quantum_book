@@ -236,16 +236,6 @@ body::before {
   min-width: 0;
 }
 
-.lesson-web-layout.toc-hidden {
-  grid-template-columns: minmax(0, 920px);
-}
-
-.lesson-web-controls {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.9rem;
-}
-
 .lesson-toc-toggle {
   background: var(--accent-bg-xs);
   border: 1px solid var(--accent-border-sm);
@@ -266,11 +256,19 @@ body::before {
 }
 
 .lesson-toc-title {
-  margin: 0 0 0.7rem;
+  margin: 0;
   font-family: var(--font-playfair);
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-heading);
+}
+
+.lesson-toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
 }
 
 .lesson-toc-list {
