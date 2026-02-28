@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getWebTheme, getWebThemes } from "@/lib/chapters";
 import { ChapterPageClient } from "./ChapterPageClient";
 import type { Metadata } from "next";
-import { getLessonWebContent } from "@/lib/chapterContent.server";
+import { getLessonReferences, getLessonWebContent } from "@/lib/chapterContent.server";
 
 interface Props {
   params: { slug: string };
@@ -30,6 +30,7 @@ export default function ChapterPage({ params }: Props) {
     lessons: theme.lessons.map((lesson) => ({
       ...lesson,
       content: getLessonWebContent(lesson.texFile, -1) || lesson.content,
+      references: getLessonReferences(theme.number, lesson.number, lesson.references),
     })),
   };
 

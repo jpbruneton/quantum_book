@@ -11,6 +11,8 @@ interface Props {
 export function ChapterContent({ lesson }: Props) {
   const [tab, setTab] = useState<"web" | "refs" | "pdf">("web");
   const { t, lang } = useLang();
+  const englishReferences = lesson.references.filter((reference) => reference.language === "en");
+  const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
 
   const renderedContent = useMemo(
     () => processLatex(lesson.content),
@@ -186,31 +188,71 @@ export function ChapterContent({ lesson }: Props) {
               {t.chapter.refsEmpty}
             </p>
           ) : (
-            <ul
-              style={{
-                margin: 0,
-                paddingLeft: "1.2rem",
-                display: "grid",
-                gap: "0.8rem",
-              }}
-            >
-              {lesson.references.map((reference) => (
-                <li key={reference.url}>
-                  <a
-                    href={reference.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+            <div style={{ display: "grid", gap: "1.75rem" }}>
+              {([
+                {
+                  index: 1,
+                  title: t.chapter.refsEnglishTitle,
+                  references: englishReferences,
+                },
+                {
+                  index: 2,
+                  title: t.chapter.refsFrenchTitle,
+                  references: frenchReferences,
+                },
+              ] as const).map((section) => (
+                <div key={section.index}>
+                  <h3
                     style={{
-                      color: "var(--amber)",
-                      textDecoration: "underline",
-                      fontFamily: "var(--font-inter)",
+                      fontFamily: "var(--font-playfair)",
+                      fontSize: "1.05rem",
+                      color: "var(--text-heading)",
+                      marginBottom: "0.65rem",
                     }}
                   >
-                    {reference.label}
-                  </a>
-                </li>
+                    {section.index}. {section.title}
+                  </h3>
+                  {section.references.length === 0 ? (
+                    <p
+                      style={{
+                        fontFamily: "var(--font-crimson)",
+                        fontSize: "0.98rem",
+                        color: "var(--text-secondary)",
+                        margin: 0,
+                      }}
+                    >
+                      {t.chapter.refsSectionEmpty}
+                    </p>
+                  ) : (
+                    <ul
+                      style={{
+                        margin: 0,
+                        paddingLeft: "1.2rem",
+                        display: "grid",
+                        gap: "0.8rem",
+                      }}
+                    >
+                      {section.references.map((reference) => (
+                        <li key={`${reference.language}:${reference.url}:${reference.label}`}>
+                          <a
+                            href={reference.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              color: "var(--amber)",
+                              textDecoration: "underline",
+                              fontFamily: "var(--font-inter)",
+                            }}
+                          >
+                            {reference.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       )}

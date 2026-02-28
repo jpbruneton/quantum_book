@@ -217,6 +217,44 @@ body::before {
   color: var(--text-secondary);
 }
 
+.lesson-toc {
+  margin-bottom: 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--accent-border-sm);
+  border-radius: 8px;
+  background: var(--accent-bg-xs);
+}
+
+.lesson-toc-title {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-playfair);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.lesson-toc-list {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.lesson-toc-item {
+  margin: 0;
+}
+
+.lesson-toc-link {
+  font-family: var(--font-inter);
+  font-size: 0.88rem;
+  color: var(--amber);
+  text-decoration: none;
+}
+
+.lesson-toc-link:hover {
+  text-decoration: underline;
+}
+
 .prose-quantum h2 {
   font-family: var(--font-playfair);
   font-size: 1.5rem;

@@ -1,6 +1,7 @@
 import "server-only";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import type { LessonReference } from "@/lib/chapters";
 
 function stripComment(line: string): string {
   const protectedPercent = "__ESCAPED_PERCENT__";
@@ -23,7 +24,6 @@ function shouldSkipLatexLine(line: string): boolean {
     "\\end{document}",
     "\\tableofcontents",
     "\\chapter",
-    "\\label",
     "\\bibliographystyle",
     "\\bibliography",
     "\\appendix",
@@ -291,6 +291,7 @@ function collectReferenceMap(input: string): Record<string, string> {
   let subsectionIndex = 0;
   let subsubsectionIndex = 0;
   let figureIndex = 0;
+  let equationIndex = 0;
   let theoremIndex = 0;
   let propositionIndex = 0;
   let definitionIndex = 0;
@@ -349,6 +350,9 @@ function collectReferenceMap(input: string): Record<string, string> {
       if (env === "figure") {
         figureIndex += 1;
         refText = `Figure ${figureIndex}`;
+      } else if (["equation", "align", "gather", "multline", "eqnarray"].includes(env)) {
+        equationIndex += 1;
+        refText = `${equationIndex}`;
       } else if (env === "theorem") {
         theoremIndex += 1;
         refText = `Théorème ${theoremIndex}`;
@@ -649,6 +653,66 @@ function getTexPathByFileName(texFile: string): string {
   return join(process.cwd(), "content", "tex", texFile);
 }
 
+function cleanReferenceLabel(text: string): string {
+  return cleanLatexInline(text).replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+}
+
+function normalizeReferenceUrl(url: string): string {
+  const trimmed = url.trim();
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  if (/^www\./i.test(trimmed)) return `https://${trimmed}`;
+  if (/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:\/.*)?$/.test(trimmed)) return `https://${trimmed}`;
+  return trimmed;
+}
+
+function parseReferencesTex(source: string): LessonReference[] {
+  const refs: LessonReference[] = [];
+  const lines = source.replace(/\r\n/g, "\n").split("\n");
+  let currentLanguage: "en" | "fr" = "en";
+
+  for (const rawLine of lines) {
+    const line = stripComment(rawLine).trim();
+    if (!line) continue;
+
+    if (
+      /(?:^1\..*anglais|\\(?:sub)?section\*?\{[^{}]*(?:anglais|english)[^{}]*\})/i.test(line)
+    ) {
+      currentLanguage = "en";
+      continue;
+    }
+
+    if (
+      /(?:^2\..*fran|\\(?:sub)?section\*?\{[^{}]*(?:fran|french)[^{}]*\})/i.test(line)
+    ) {
+      currentLanguage = "fr";
+      continue;
+    }
+
+    const hrefRegex = /\\href\{([^{}]+)\}\{([^{}]+)\}/g;
+    let hrefMatch: RegExpExecArray | null;
+    while ((hrefMatch = hrefRegex.exec(line)) !== null) {
+      refs.push({
+        url: normalizeReferenceUrl(hrefMatch[1]),
+        label: cleanReferenceLabel(hrefMatch[2]) || normalizeReferenceUrl(hrefMatch[1]),
+        language: currentLanguage,
+      });
+    }
+
+    const urlRegex = /\\url\{([^{}]+)\}/g;
+    let urlMatch: RegExpExecArray | null;
+    while ((urlMatch = urlRegex.exec(line)) !== null) {
+      const normalizedUrl = normalizeReferenceUrl(urlMatch[1]);
+      refs.push({
+        url: normalizedUrl,
+        label: normalizedUrl,
+        language: currentLanguage,
+      });
+    }
+  }
+
+  return refs;
+}
+
 export function getLessonWebContent(texFile: string, paragraphCount: number): string {
   const texPath = getTexPathByFileName(texFile);
   if (!texPath) return "";
@@ -661,5 +725,24 @@ export function getLessonWebContent(texFile: string, paragraphCount: number): st
     return paragraphsToHtml(limitedParagraphs);
   } catch {
     return "";
+  }
+}
+
+export function getLessonReferences(
+  themeNumber: number,
+  lessonNumber: number,
+  fallbackReferences: LessonReference[]
+): LessonReference[] {
+  const fileName = `ref_${themeNumber}_${lessonNumber}.tex`;
+  const refPath = getTexPathByFileName(fileName);
+  if (!refPath) return fallbackReferences;
+
+  try {
+    const source = readFileSync(refPath, "utf-8");
+    const parsed = parseReferencesTex(source);
+    if (parsed.length > 0) return parsed;
+    return fallbackReferences;
+  } catch {
+    return fallbackReferences;
   }
 }

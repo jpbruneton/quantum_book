@@ -1,6 +1,7 @@
 export interface LessonReference {
   label: string;
   url: string;
+  language: "en" | "fr";
 }
 
 export interface Lesson {
