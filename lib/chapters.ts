@@ -90,7 +90,7 @@ export const themes: Theme[] = [
         pdfFile: "ch1.pdf",
         pdfAvailable: true,
         readingTime: "45 min",
-        texFile: "theme1_1.tex",
+        texFile: "theme1_fr/lecon1.tex",
         references: [],
         content: `
 <p>Nous commençons notre présentation de la mécanique quantique par les expériences portant sur le spin, et l'introduction même de ce concept. C'est en réalité tardif dans le développement historique, puisque Otto Stern et Walther Gerlach réalisent leur expérience fondamentale en 1922; tandis Samuel Goudsmit et George Uhlenbeck proposent l'hypothèse du spin électronique en 1925.</p>
@@ -142,7 +142,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "55 min",
-        texFile: "theme2_1.tex",
+        texFile: "theme2_fr/lecon1.tex",
         references: [],
         content: `
 <p>Les cours de mathématiques font souvent des maths sans s'expliquer, comme si les mathématiques se suffisaient à elles-même, ce qui n'est d'ailleurs pas faux. Les cours de physique les utilisent souvent sans les expliciter suffisamment. Dans ce chapitre, on essaiera de trouver au mieux cet équilibre entre mathématiques et physique. Ce chapitre est en particulier basé sur diverses notes de cours de mathématiques, de l'agrégation de mathématiques \\cite{hilbert_agreg, hilbert_agreg2} ou de notes de cours universitaires condensées \\cite{hilbert_lyon, hilbert_x}. La référence la plus complète est \\cite{hilbert_orsay}, où l'on y trouvera de nombreuses démonstrations.</p>
@@ -158,6 +158,76 @@ export const themes: Theme[] = [
         display_on_web: true,
         titleFr: "Leçon n°2",
         titleEn: "Lesson #2",
+        subtitleFr: "Espace dual, kets, bras, adjoint",
+        subtitleEn: "Dual Space, Kets, Bras, Adjoint",
+        descriptionFr:
+          "Construction du dual topologique, identification au moyen du théorème de représentation de Riesz, et interprétation physique.",
+        descriptionEn:
+          "Construction of the topological dual, identification via the Riesz representation theorem, and physical interpretation.",
+        topicsFr: [
+          "Dual topologique",
+          "Formes linéaires continues",
+          "Théorème de Riesz",
+          "Isomorphisme canonique",
+          "Produit scalaire",
+        ],
+        topicsEn: [
+          "Topological dual",
+          "Continuous linear forms",
+          "Riesz theorem",
+          "Canonical isomorphism",
+          "Inner product",
+        ],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: true,
+        readingTime: "35 min",
+        texFile: "theme2_fr/lecon2.tex",
+        references: [],
+        content: `
+<p>Présentation du dual des espaces de Hilbert et du théorème de Riesz, qui permet d'identifier chaque forme linéaire continue à un vecteur de l'espace.</p>
+        `,
+      },
+      {
+        slug: "espaces-de-hilbert-lecon-3",
+        number: 3,
+        display_on_web: true,
+        titleFr: "Leçon n°3",
+        titleEn: "Lesson #3",
+        subtitleFr: "Notations de Dirac en dimension finie",
+        subtitleEn: "Dirac Notation in Finite Dimension",
+        descriptionFr:
+          "Introduction aux kets, bras, produits bra-ket, opérateurs et projecteurs dans le langage de Dirac en dimension finie.",
+        descriptionEn:
+          "Introduction to kets, bras, bra-ket products, operators, and projectors in finite-dimensional Dirac notation.",
+        topicsFr: [
+          "Kets",
+          "Bras",
+          "Produits bra-ket",
+          "Projecteurs",
+          "Observables",
+        ],
+        topicsEn: [
+          "Kets",
+          "Bras",
+          "Bra-ket products",
+          "Projectors",
+          "Observables",
+        ],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: true,
+        readingTime: "30 min",
+        texFile: "theme2_fr/lecon3.tex",
+        references: [],
+        content: `
+<p>Introduction pratique à la notation de Dirac en dimension finie pour manipuler les états quantiques, les amplitudes et les opérateurs de façon compacte.</p>
+        `,
+      },
+      {
+        slug: "espaces-de-hilbert-lecon-4",
+        number: 4,
+        display_on_web: true,
+        titleFr: "Leçon n°4",
+        titleEn: "Lesson #4",
         subtitleFr: "Topologie des espaces de Hilbert",
         subtitleEn: "Topology of Hilbert Spaces",
         descriptionFr:
@@ -181,80 +251,10 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "40 min",
-        texFile: "chp2.tex",
+        texFile: "theme2_fr/lecon4.tex",
         references: [],
         content: `
 <p>Étude de la topologie des espaces de Hilbert : notions de convergence forte et faible, continuité, compacité et complétude.</p>
-        `,
-      },
-      {
-        slug: "espaces-de-hilbert-lecon-3",
-        number: 3,
-        display_on_web: true,
-        titleFr: "Leçon n°3",
-        titleEn: "Lesson #3",
-        subtitleFr: "Dual et théorème de Riesz",
-        subtitleEn: "Dual Space and Riesz Theorem",
-        descriptionFr:
-          "Construction du dual topologique, identification au moyen du théorème de représentation de Riesz, et interprétation physique.",
-        descriptionEn:
-          "Construction of the topological dual, identification via the Riesz representation theorem, and physical interpretation.",
-        topicsFr: [
-          "Dual topologique",
-          "Formes linéaires continues",
-          "Théorème de Riesz",
-          "Isomorphisme canonique",
-          "Produit scalaire",
-        ],
-        topicsEn: [
-          "Topological dual",
-          "Continuous linear forms",
-          "Riesz theorem",
-          "Canonical isomorphism",
-          "Inner product",
-        ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: true,
-        readingTime: "35 min",
-        texFile: "chp2.tex",
-        references: [],
-        content: `
-<p>Présentation du dual des espaces de Hilbert et du théorème de Riesz, qui permet d'identifier chaque forme linéaire continue à un vecteur de l'espace.</p>
-        `,
-      },
-      {
-        slug: "espaces-de-hilbert-lecon-4",
-        number: 4,
-        display_on_web: true,
-        titleFr: "Leçon n°4",
-        titleEn: "Lesson #4",
-        subtitleFr: "Notations de Dirac",
-        subtitleEn: "Dirac Notation",
-        descriptionFr:
-          "Introduction aux kets, bras, produits bra-ket, opérateurs et projecteurs dans le langage de Dirac.",
-        descriptionEn:
-          "Introduction to kets, bras, bra-ket products, operators, and projectors in Dirac notation.",
-        topicsFr: [
-          "Kets",
-          "Bras",
-          "Produits bra-ket",
-          "Projecteurs",
-          "Observables",
-        ],
-        topicsEn: [
-          "Kets",
-          "Bras",
-          "Bra-ket products",
-          "Projectors",
-          "Observables",
-        ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: true,
-        readingTime: "30 min",
-        texFile: "chp2.tex",
-        references: [],
-        content: `
-<p>Introduction pratique à la notation de Dirac pour manipuler les états quantiques, les amplitudes et les opérateurs de façon compacte.</p>
         `,
       },
       {
@@ -286,10 +286,45 @@ export const themes: Theme[] = [
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
         readingTime: "60 min",
-        texFile: "chp4.tex",
+        texFile: "theme2_fr/lecon5.tex",
         references: [],
         content: `
 <p>Étude structurée de la théorie des opérateurs linéaires en espace de Hilbert et de ses conséquences sur la dynamique et la mesure quantiques.</p>
+        `,
+      },
+      {
+        slug: "espaces-de-hilbert-lecon-6",
+        number: 6,
+        display_on_web: true,
+        titleFr: "Leçon n°6",
+        titleEn: "Lesson #6",
+        subtitleFr: "Notations de Dirac en dimension finie",
+        subtitleEn: "Dirac Notation in Finite Dimension",
+        descriptionFr:
+          "Approfondissement des notations de Dirac en dimension finie, calcul matriciel et changements de base.",
+        descriptionEn:
+          "Further finite-dimensional Dirac notation, matrix calculations, and basis changes.",
+        topicsFr: [
+          "Kets",
+          "Bras",
+          "Produits bra-ket",
+          "Changements de base",
+          "Matrices",
+        ],
+        topicsEn: [
+          "Kets",
+          "Bras",
+          "Bra-ket products",
+          "Basis changes",
+          "Matrices",
+        ],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: true,
+        readingTime: "30 min",
+        texFile: "theme2_fr/lecon6.tex",
+        references: [],
+        content: `
+<p>Approfondissement de la notation de Dirac en dimension finie avec des exemples de calcul matriciel et de changement de base.</p>
         `,
       },
     ],
@@ -334,7 +369,7 @@ export const themes: Theme[] = [
         pdfFile: "ch3.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "theme3_1.tex",
+        texFile: "theme3_fr/lecon1.tex",
         references: [],
         content: `
 <p>Ce chapitre présente les postulats de la mécanique quantique et en propose une première discussion. L'objectif est double : établir le formalisme standard, et souligner à quel point ces postulats proposent une vision du monde radicalement différente de celle de la physique classique. Nous présenterons ici la version dite \\og orthodoxe\\fg, bien connue sous le nom d'« interprétation de Copenhague\\footnote{Du nom de l'école de pensée développée à l'Université de Copenhague dans les années 1920-1930, principalement par Bohr, qui y enseignait, et par Heisenberg, qui y était de passage.} », de la mécanique quantique. Cette formulation inclut notamment le postulat de la réduction du paquet d'onde (postulat 3) ainsi que le caractère fondamentalement probabiliste des résultats de mesure (postulat 4).</p>
@@ -386,7 +421,7 @@ export const themes: Theme[] = [
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
         readingTime: "45 min",
-        texFile: "theme4_1.tex",
+        texFile: "theme4_fr/lecon1.tex",
         references: [],
         content: `
 <p>Cette leçon introduit l'étude des barrières de potentiel, avec les phénomènes de réflexion, transmission et effet tunnel.</p>
@@ -421,7 +456,7 @@ export const themes: Theme[] = [
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "chp4.tex",
+        texFile: "theme4_fr/lecon2.tex",
         references: [],
         content: `
 <p>Cette leçon traite de l'oscillateur harmonique quantique, de sa résolution algébrique et de son rôle central en physique quantique.</p>
@@ -456,7 +491,7 @@ export const themes: Theme[] = [
         pdfFile: "ch1.pdf",
         pdfAvailable: true,
         readingTime: "40 min",
-        texFile: "chp1.tex",
+        texFile: "theme4_fr/lecon3.tex",
         references: [],
         content: `
 <p>Cette leçon présente le spin quantique et ses outils de calcul, en particulier pour les systèmes à deux niveaux.</p>
@@ -491,7 +526,7 @@ export const themes: Theme[] = [
         pdfFile: "ch3.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "chp3.tex",
+        texFile: "theme4_fr/lecon4.tex",
         references: [],
         content: `
 <p>Cette leçon couvre la dynamique quantique et les différentes formulations de l'évolution temporelle des états.</p>
