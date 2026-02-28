@@ -1,4 +1,5 @@
 export interface LessonReference {
+  key: string;
   label: string;
   url: string;
   language: "en" | "fr";

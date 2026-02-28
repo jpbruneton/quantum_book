@@ -455,7 +455,49 @@ function replaceCommandBlock(
   return output;
 }
 
-function normalizeLatexBlocks(input: string): string {
+interface CitationNumberMaps {
+  en: Record<string, number>;
+  fr: Record<string, number>;
+}
+
+function buildCitationNumberMaps(references: LessonReference[]): CitationNumberMaps {
+  const maps: CitationNumberMaps = { en: {}, fr: {} };
+  const counters: Record<"en" | "fr", number> = { en: 0, fr: 0 };
+
+  for (const reference of references) {
+    const language = reference.language;
+    if (maps[language][reference.key] !== undefined) continue;
+    counters[language] += 1;
+    maps[language][reference.key] = counters[language];
+  }
+
+  return maps;
+}
+
+function replaceCitations(input: string, citationMaps: CitationNumberMaps): string {
+  return input.replace(/\\cite\{([^{}]+)\}/g, (_match, rawKeys: string) => {
+    const keys = rawKeys
+      .split(",")
+      .map((key) => key.trim())
+      .filter((key) => key.length > 0);
+
+    if (keys.length === 0) return "[?]";
+
+    const enNumbers = keys
+      .map((key) => citationMaps.en[key])
+      .filter((value): value is number => typeof value === "number");
+    const frNumbers = keys
+      .map((key) => citationMaps.fr[key])
+      .filter((value): value is number => typeof value === "number");
+
+    const enValue = enNumbers.length > 0 ? enNumbers.join(",") : "?";
+    const frValue = frNumbers.length > 0 ? frNumbers.join(",") : "?";
+    const fallback = enValue !== "?" ? enValue : frValue;
+    return `<sup class="lesson-cite" data-cite-en="${enValue}" data-cite-fr="${frValue}">[${fallback}]</sup>`;
+  });
+}
+
+function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): string {
   let result = input;
   let figureRenderIndex = 0;
   const references = collectReferenceMap(result);
@@ -552,8 +594,8 @@ function normalizeLatexBlocks(input: string): string {
   result = result.replace(/(?<!\\)\\\[/g, "$$").replace(/(?<!\\)\\\]/g, "$$");
   result = result.replace(/\\\(/g, "$").replace(/\\\)/g, "$");
 
-  // Remove noisy reference commands from online prose.
-  result = result.replace(/\\cite\{[^{}]*\}/g, "");
+  // Render bibliography citations as numbered markers.
+  result = replaceCitations(result, citationMaps);
   result = stripFootnotes(result);
   result = result.replace(/\\ref\{([^{}]*)\}/g, (_m, label: string) => {
     const resolved = references[label];
@@ -633,7 +675,7 @@ function paragraphsToHtml(paragraphs: string[]): string {
     .join("\n\n");
 }
 
-function parseTexParagraphs(texSource: string): string[] {
+function parseTexParagraphs(texSource: string, citationMaps: CitationNumberMaps): string[] {
   const normalized = texSource.replace(/\r\n/g, "\n");
   const lines = normalized.split("\n");
 
@@ -645,7 +687,7 @@ function parseTexParagraphs(texSource: string): string[] {
     keptLines.push(line);
   }
 
-  const body = normalizeLatexBlocks(keptLines.join("\n")).trim();
+  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps).trim();
   if (!body) return [];
 
   const paragraphs = body
@@ -677,6 +719,7 @@ function parseReferencesTex(source: string): LessonReference[] {
   const refs: LessonReference[] = [];
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   let currentLanguage: "en" | "fr" = "en";
+  const autoCounters: Record<"en" | "fr", number> = { en: 0, fr: 0 };
 
   for (const rawLine of lines) {
     const line = stripComment(rawLine).trim();
@@ -696,10 +739,23 @@ function parseReferencesTex(source: string): LessonReference[] {
       continue;
     }
 
+    const refEntryRegex = /\\refentry\{([^{}]+)\}\{([^{}]+)\}\{([^{}]+)\}/g;
+    let refEntryMatch: RegExpExecArray | null;
+    while ((refEntryMatch = refEntryRegex.exec(line)) !== null) {
+      refs.push({
+        key: refEntryMatch[1].trim(),
+        url: normalizeReferenceUrl(refEntryMatch[2]),
+        label: cleanReferenceLabel(refEntryMatch[3]) || normalizeReferenceUrl(refEntryMatch[2]),
+        language: currentLanguage,
+      });
+    }
+
     const hrefRegex = /\\href\{([^{}]+)\}\{([^{}]+)\}/g;
     let hrefMatch: RegExpExecArray | null;
     while ((hrefMatch = hrefRegex.exec(line)) !== null) {
+      autoCounters[currentLanguage] += 1;
       refs.push({
+        key: `auto_${currentLanguage}_${autoCounters[currentLanguage]}`,
         url: normalizeReferenceUrl(hrefMatch[1]),
         label: cleanReferenceLabel(hrefMatch[2]) || normalizeReferenceUrl(hrefMatch[1]),
         language: currentLanguage,
@@ -710,7 +766,9 @@ function parseReferencesTex(source: string): LessonReference[] {
     let urlMatch: RegExpExecArray | null;
     while ((urlMatch = urlRegex.exec(line)) !== null) {
       const normalizedUrl = normalizeReferenceUrl(urlMatch[1]);
+      autoCounters[currentLanguage] += 1;
       refs.push({
+        key: `auto_${currentLanguage}_${autoCounters[currentLanguage]}`,
         url: normalizedUrl,
         label: normalizedUrl,
         language: currentLanguage,
@@ -721,13 +779,18 @@ function parseReferencesTex(source: string): LessonReference[] {
   return refs;
 }
 
-export function getLessonWebContent(texFile: string, paragraphCount: number): string {
+export function getLessonWebContent(
+  texFile: string,
+  paragraphCount: number,
+  references: LessonReference[]
+): string {
   const texPath = getTexPathByFileName(texFile);
   if (!texPath) return "";
 
   try {
     const source = readFileSync(texPath, "utf-8");
-    const paragraphs = parseTexParagraphs(source);
+    const citationMaps = buildCitationNumberMaps(references);
+    const paragraphs = parseTexParagraphs(source, citationMaps);
     const limitedParagraphs = paragraphCount > 0 ? paragraphs.slice(0, paragraphCount) : paragraphs;
     if (limitedParagraphs.length === 0) return "";
     return paragraphsToHtml(limitedParagraphs);

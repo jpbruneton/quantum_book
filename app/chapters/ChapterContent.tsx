@@ -71,6 +71,17 @@ export function ChapterContent({ lesson }: Props) {
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
 
   const renderedContent = useMemo(() => processLatex(lesson.content), [lesson.content]);
+  const localizedRenderedContent = useMemo(() => {
+    return renderedContent.replace(
+      /<sup class="lesson-cite" data-cite-en="([^"]*)" data-cite-fr="([^"]*)">\[[^\]]*\]<\/sup>/g,
+      (_match, enRaw: string, frRaw: string) => {
+        const preferred = lang === "fr" ? frRaw : enRaw;
+        const fallback = lang === "fr" ? enRaw : frRaw;
+        const value = preferred && preferred !== "?" ? preferred : fallback && fallback !== "?" ? fallback : "?";
+        return `<sup class="lesson-cite">[${value}]</sup>`;
+      }
+    );
+  }, [renderedContent, lang]);
   const sourceHeadingTexts = useMemo(() => {
     const sourceHeadingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
     const headings: string[] = [];
@@ -90,7 +101,7 @@ export function ChapterContent({ lesson }: Props) {
     const headingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
     let headingIndex = 0;
 
-    const content = renderedContent.replace(
+    const content = localizedRenderedContent.replace(
       headingRegex,
       (_fullMatch, tag: string, headingInner: string) => {
         const level = Number(tag.slice(1)) as 2 | 3 | 4;
@@ -107,7 +118,7 @@ export function ChapterContent({ lesson }: Props) {
     );
 
     return { content, toc };
-  }, [renderedContent, sourceHeadingTexts]);
+  }, [localizedRenderedContent, sourceHeadingTexts]);
 
   useEffect(() => {
     if (tab !== "web" || webContentWithToc.toc.length === 0) return;
@@ -394,8 +405,18 @@ export function ChapterContent({ lesson }: Props) {
                         gap: "0.8rem",
                       }}
                     >
-                      {section.references.map((reference) => (
-                        <li key={`${reference.language}:${reference.url}:${reference.label}`}>
+                      {section.references.map((reference, index) => (
+                        <li key={`${reference.language}:${reference.key}`}>
+                          <span
+                            style={{
+                              fontFamily: "var(--font-jetbrains)",
+                              fontSize: "0.8rem",
+                              color: "var(--text-dim)",
+                              marginRight: "0.5rem",
+                            }}
+                          >
+                            [{index + 1}]
+                          </span>
                           <a
                             href={reference.url}
                             target="_blank"

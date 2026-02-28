@@ -27,11 +27,14 @@ export default function ChapterPage({ params }: Props) {
 
   const themeWithDynamicContent = {
     ...theme,
-    lessons: theme.lessons.map((lesson) => ({
-      ...lesson,
-      content: getLessonWebContent(lesson.texFile, -1) || lesson.content,
-      references: getLessonReferences(theme.number, lesson.number, lesson.references),
-    })),
+    lessons: theme.lessons.map((lesson) => {
+      const resolvedReferences = getLessonReferences(theme.number, lesson.number, lesson.references);
+      return {
+        ...lesson,
+        content: getLessonWebContent(lesson.texFile, -1, resolvedReferences) || lesson.content,
+        references: resolvedReferences,
+      };
+    }),
   };
 
   const webThemes = getWebThemes();
