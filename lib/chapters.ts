@@ -122,7 +122,7 @@ export const themes: Theme[] = [
         subtitleFr: "Espaces de Hilbert",
         subtitleEn: "Hilbert Spaces",
         descriptionFr:
-          "Espaces vectoriels, normes, produit scalaire, topologie forte, complétude et bases hilbertiennes pour établir le cadre formel de la mécanique quantique.",
+          "Structures mathématiques : Espaces vectoriels, espaces métriques, norme, espaces vectoriels normés, produit scalaire, espace préhilbertien, espace hilbertien, base algébrique, base Hilbertienne, dimensionnalité, classification, espaces modèles, isomorphismes",
         descriptionEn:
           "Vector spaces, norms, inner products, strong topology, completeness, and Hilbert bases to establish quantum mechanics' formal framework.",
         topicsFr: [
