@@ -226,13 +226,36 @@ body::before {
 
 .lesson-web-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-columns: minmax(0, 860px) 300px;
   align-items: start;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: 3.6rem;
 }
 
 .lesson-web-main {
   min-width: 0;
+}
+
+.lesson-web-layout.toc-hidden {
+  grid-template-columns: minmax(0, 920px);
+}
+
+.lesson-web-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.9rem;
+}
+
+.lesson-toc-toggle {
+  background: var(--accent-bg-xs);
+  border: 1px solid var(--accent-border-sm);
+  border-radius: 6px;
+  color: var(--amber);
+  font-family: var(--font-inter);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
 }
 
 .lesson-toc-sticky {
@@ -245,7 +268,7 @@ body::before {
 .lesson-toc-title {
   margin: 0 0 0.7rem;
   font-family: var(--font-playfair);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-heading);
 }
@@ -263,7 +286,7 @@ body::before {
 
 .lesson-toc-link {
   font-family: var(--font-inter);
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   color: var(--amber);
   text-decoration: none;
   opacity: 0.78;
@@ -284,6 +307,7 @@ body::before {
 @media (max-width: 980px) {
   .lesson-web-layout {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .lesson-toc-sticky {
@@ -394,6 +418,9 @@ body::before {
   font-family: var(--font-inter);
   font-size: 0.82rem;
   color: var(--text-dim);
+  text-align: left;
+  width: min(75%, 900px);
+  max-width: 100%;
 }
 
 .prose-quantum .latex-figure-pdf-link {
@@ -500,11 +527,11 @@ body::before {
 
 .katex {
   font-size: 1.05em;
-  line-height: 1.35;
+  line-height: 1.2;
   overflow: visible;
-  vertical-align: -0.08em;
-  padding-top: 0.06em;
-  padding-bottom: 0.06em;
+  vertical-align: baseline;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .katex-display > .katex {

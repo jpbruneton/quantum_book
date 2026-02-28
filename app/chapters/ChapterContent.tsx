@@ -28,6 +28,9 @@ function simplifyLatexForToc(value: string): string {
   result = result.replace(/[_^]([A-Za-z0-9]+)/g, "$1");
   result = result.replace(/\\[a-zA-Z]+/g, "");
   result = result.replace(/[{}]/g, "");
+  result = result.replace(/\s*([()])/g, "$1").replace(/([()])\s*/g, "$1");
+  result = result.replace(/([A-Za-zℓ])\s+(\d)/g, "$1$2");
+  result = result.replace(/(\d)\s+([A-Za-z])/g, "$1$2");
   return result.replace(/\s+/g, " ").trim();
 }
 
@@ -40,7 +43,12 @@ function stripHtmlForToc(value: string): string {
   const withoutInlineMathDelimiters = htmlStripped.replace(/\$+([\s\S]*?)\$+/g, (_m, math: string) =>
     simplifyLatexForToc(math)
   );
-  return withoutInlineMathDelimiters.replace(/\s+/g, " ").trim();
+  const compact = withoutInlineMathDelimiters
+    .replace(/\s*([()])/g, "$1")
+    .replace(/([()])\s*/g, "$1")
+    .replace(/([A-Za-zℓ])\s+(\d)/g, "$1$2")
+    .replace(/(\d)\s+([A-Za-z])/g, "$1$2");
+  return compact.replace(/\s+/g, " ").trim();
 }
 
 function slugify(value: string): string {
@@ -57,24 +65,37 @@ function slugify(value: string): string {
 export function ChapterContent({ lesson }: Props) {
   const [tab, setTab] = useState<"web" | "refs" | "pdf">("web");
   const [activeTocId, setActiveTocId] = useState("");
+  const [tocVisible, setTocVisible] = useState(true);
   const { t, lang } = useLang();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
 
-  const renderedContent = useMemo(
-    () => processLatex(lesson.content),
-    [lesson.content]
-  );
+  const renderedContent = useMemo(() => processLatex(lesson.content), [lesson.content]);
+  const sourceHeadingTexts = useMemo(() => {
+    const sourceHeadingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
+    const headings: string[] = [];
+    lesson.content.replace(sourceHeadingRegex, (_fullMatch, _tag: string, headingInner: string) => {
+      const withoutInlineMathDelimiters = headingInner.replace(/\$+([\s\S]*?)\$+/g, (_m, math: string) =>
+        simplifyLatexForToc(math)
+      );
+      const text = stripHtmlForToc(withoutInlineMathDelimiters);
+      headings.push(text);
+      return "";
+    });
+    return headings;
+  }, [lesson.content]);
   const webContentWithToc = useMemo(() => {
     const toc: TocEntry[] = [];
     const usedIds: Record<string, number> = {};
     const headingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
+    let headingIndex = 0;
 
     const content = renderedContent.replace(
       headingRegex,
       (_fullMatch, tag: string, headingInner: string) => {
         const level = Number(tag.slice(1)) as 2 | 3 | 4;
-        const text = stripHtmlForToc(headingInner);
+        const text = sourceHeadingTexts[headingIndex] || stripHtmlForToc(headingInner);
+        headingIndex += 1;
         const baseId = slugify(text);
         const current = usedIds[baseId] ?? 0;
         usedIds[baseId] = current + 1;
@@ -86,7 +107,7 @@ export function ChapterContent({ lesson }: Props) {
     );
 
     return { content, toc };
-  }, [renderedContent]);
+  }, [renderedContent, sourceHeadingTexts]);
 
   useEffect(() => {
     if (tab !== "web" || webContentWithToc.toc.length === 0) return;
@@ -237,12 +258,22 @@ export function ChapterContent({ lesson }: Props) {
       {tab === "web" && (
         <div
           style={{
-            maxWidth: "1120px",
+            maxWidth: "1320px",
             margin: "0 auto",
             padding: "3rem 1.5rem",
           }}
         >
-          <div className="lesson-web-layout">
+          {webContentWithToc.toc.length > 0 && (
+            <div className="lesson-web-controls">
+              <button
+                className="lesson-toc-toggle"
+                onClick={() => setTocVisible((current) => !current)}
+              >
+                {tocVisible ? t.chapter.hideToc : t.chapter.showToc}
+              </button>
+            </div>
+          )}
+          <div className={`lesson-web-layout ${tocVisible ? "" : "toc-hidden"}`}>
             <div className="lesson-web-main">
               <div
                 className="prose-quantum"
@@ -266,7 +297,7 @@ export function ChapterContent({ lesson }: Props) {
                 {t.chapter.noteBody}
               </div>
             </div>
-            {webContentWithToc.toc.length > 0 && (
+            {webContentWithToc.toc.length > 0 && tocVisible && (
               <aside className="lesson-toc lesson-toc-sticky">
                 <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>
                 <ul className="lesson-toc-list">
