@@ -500,6 +500,7 @@ function replaceCitations(input: string, citationMaps: CitationNumberMaps): stri
 function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): string {
   let result = input;
   let figureRenderIndex = 0;
+  let equationRenderIndex = 0;
   const references = collectReferenceMap(result);
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
@@ -579,8 +580,12 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
   // Convert common display environments so processLatex() can render them.
   result = result.replace(/\\beq\b/g, "\\begin{equation}");
   result = result.replace(/\\eeq\b/g, "\\end{equation}");
-  result = result.replace(/\\begin\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
-  result = result.replace(/\\end\{(equation\*?|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
+  result = result.replace(/\\begin\{equation\}([\s\S]*?)\\end\{equation\}/g, (_m, body: string) => {
+    equationRenderIndex += 1;
+    return `\n\n<div class="latex-equation"><div class="latex-equation-math">$$\n${body.trim()}\n$$</div><span class="latex-equation-number">(${equationRenderIndex})</span></div>\n\n`;
+  });
+  result = result.replace(/\\begin\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
+  result = result.replace(/\\end\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
   result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\begin{aligned}\n");
   result = result.replace(/\\end\{eqnarray\*?\}/g, "\n\\end{aligned}\n$$\n\n");
   result = result.replace(/\$(\s*\\begin\{aligned\}[\s\S]*?\\end\{aligned\}\s*)\$/g, "\n\n$$\n$1\n$$\n\n");
@@ -613,6 +618,7 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
   result = result.replace(/\\end\{(center|flushleft|flushright)\}/g, "");
   result = result.replace(/\\vspace\*?\{[^{}]*\}/g, "");
   result = result.replace(/\\medskip\b/g, "");
+  result = result.replace(/\\newpage\b/g, "");
   result = result.replace(/\\noindent\b/g, "");
   return result;
 }
