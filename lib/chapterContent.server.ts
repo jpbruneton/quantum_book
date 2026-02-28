@@ -10,6 +10,72 @@ function stripComment(line: string): string {
   return withoutComment.replace(new RegExp(protectedPercent, "g"), "\\%");
 }
 
+function readBalancedBracesAt(input: string, startIndex: number): { content: string; endIndex: number } | null {
+  if (input[startIndex] !== "{") return null;
+  let depth = 1;
+  let cursor = startIndex + 1;
+  let content = "";
+
+  while (cursor < input.length && depth > 0) {
+    const char = input[cursor];
+    const previous = cursor > 0 ? input[cursor - 1] : "";
+
+    if (char === "{" && previous !== "\\") {
+      depth += 1;
+      content += char;
+    } else if (char === "}" && previous !== "\\") {
+      depth -= 1;
+      if (depth > 0) content += char;
+    } else {
+      content += char;
+    }
+    cursor += 1;
+  }
+
+  if (depth !== 0) return null;
+  return { content, endIndex: cursor };
+}
+
+function replaceInlineCommand(
+  input: string,
+  command: string,
+  render: (content: string) => string
+): string {
+  const marker = `\\${command}`;
+  let output = "";
+  let index = 0;
+
+  while (index < input.length) {
+    const start = input.indexOf(marker, index);
+    if (start === -1) {
+      output += input.slice(index);
+      break;
+    }
+
+    output += input.slice(index, start);
+    let cursor = start + marker.length;
+    while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+
+    if (input[cursor] !== "{") {
+      output += marker;
+      index = cursor;
+      continue;
+    }
+
+    const block = readBalancedBracesAt(input, cursor);
+    if (!block) {
+      output += marker;
+      index = cursor + 1;
+      continue;
+    }
+
+    output += render(block.content);
+    index = block.endIndex;
+  }
+
+  return output;
+}
+
 function shouldSkipLatexLine(line: string): boolean {
   const trimmed = line.trim();
   if (!trimmed) return false;
@@ -57,11 +123,11 @@ function cleanLatexInline(text: string): string {
   });
   result = result.replace(/\\c\{([cC])\}/g, (_m, letter: string) => (letter === "c" ? "ç" : "Ç"));
 
-  result = result.replace(/\\emph\{([^{}]+)\}/g, "<em>$1</em>");
-  result = result.replace(/\\textit\{([^{}]+)\}/g, "<em>$1</em>");
-  result = result.replace(/\\textbf\{([^{}]+)\}/g, "<strong>$1</strong>");
-  result = result.replace(/\\uline\{([^{}]+)\}/g, "<em>$1</em>");
-  result = result.replace(/\\underline\{([^{}]+)\}/g, "<span class=\"latex-uline\">$1</span>");
+  result = replaceInlineCommand(result, "emph", (content) => `<em>${content}</em>`);
+  result = replaceInlineCommand(result, "textit", (content) => `<em>${content}</em>`);
+  result = replaceInlineCommand(result, "textbf", (content) => `<strong>${content}</strong>`);
+  result = replaceInlineCommand(result, "uline", (content) => `<em>${content}</em>`);
+  result = replaceInlineCommand(result, "underline", (content) => `<span class="latex-uline">${content}</span>`);
   result = result.replace(/\\ldots/g, "...");
   result = result.replace(/\\og(?:\{\})?\s*/g, "« ");
   result = result.replace(/\s*\\fg(?:\{\})?/g, " »");
