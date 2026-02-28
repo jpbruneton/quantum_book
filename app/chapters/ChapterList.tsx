@@ -82,41 +82,22 @@ export function ChapterList() {
                 >
                   {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
                 </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-                  {theme.lessons.slice(0, 4).map((lesson) => (
-                    <span
-                      key={lesson.slug}
-                      style={{
-                        background: "var(--accent-bg-sm)",
-                        border: "1px solid var(--accent-border-sm)",
-                        borderRadius: "100px",
-                        padding: "0.15rem 0.6rem",
-                        fontFamily: "var(--font-inter)",
-                        fontSize: "0.7rem",
-                        color: "var(--amber)",
-                        letterSpacing: "0.02em",
-                      }}
-                    >
-                      {lang === "fr" ? `Leçon n°${lesson.number}` : `Lesson #${lesson.number}`}
-                    </span>
-                  ))}
-                  {theme.lessons.length === 0 && (
-                    <span
-                      style={{
-                        background: "var(--accent-bg-xs)",
-                        border: "1px solid var(--accent-border-sm)",
-                        borderRadius: "100px",
-                        padding: "0.15rem 0.6rem",
-                        fontFamily: "var(--font-inter)",
-                        fontSize: "0.7rem",
-                        color: "var(--text-dim)",
-                        letterSpacing: "0.02em",
-                      }}
-                    >
-                      {t.chapters.emptyTheme}
-                    </span>
-                  )}
-                </div>
+                <span
+                  style={{
+                    background: theme.lessons.length > 0 ? "var(--accent-bg-sm)" : "var(--accent-bg-xs)",
+                    border: "1px solid var(--accent-border-sm)",
+                    borderRadius: "100px",
+                    padding: "0.15rem 0.6rem",
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "0.7rem",
+                    color: theme.lessons.length > 0 ? "var(--amber)" : "var(--text-dim)",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {theme.lessons.length > 0
+                    ? t.chapters.lessonsAvailable(theme.lessons.length)
+                    : t.chapters.emptyTheme}
+                </span>
               </div>
 
               <div
