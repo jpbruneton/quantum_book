@@ -214,7 +214,7 @@ body::before {
   font-family: var(--font-crimson);
   font-size: 1.125rem;
   line-height: 1.85;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .lesson-toc {
@@ -354,6 +354,9 @@ body::before {
 
 .prose-quantum p {
   margin-bottom: 1.25rem;
+  line-height: 1.72;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .prose-quantum ul {
@@ -415,7 +418,7 @@ body::before {
   margin-top: 0.65rem;
   font-family: var(--font-inter);
   font-size: 0.82rem;
-  color: var(--text-dim);
+  color: var(--text-secondary);
   text-align: left;
   width: min(75%, 900px);
   max-width: 100%;
