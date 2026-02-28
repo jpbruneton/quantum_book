@@ -523,7 +523,14 @@ body::before {
 /* Math display */
 .katex-display {
   margin: 1.75rem 0;
-  overflow-x: auto;
+  overflow: visible;
+}
+
+@media (max-width: 900px) {
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 }
 
 .katex {

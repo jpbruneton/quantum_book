@@ -612,6 +612,7 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
   result = result.replace(/\\begin\{(center|flushleft|flushright)\}/g, "");
   result = result.replace(/\\end\{(center|flushleft|flushright)\}/g, "");
   result = result.replace(/\\vspace\*?\{[^{}]*\}/g, "");
+  result = result.replace(/\\medskip\b/g, "");
   result = result.replace(/\\noindent\b/g, "");
   return result;
 }
