@@ -161,7 +161,7 @@ export const themes: Theme[] = [
         subtitleFr: "Espace dual, kets, bras, adjoint",
         subtitleEn: "Dual Space, Kets, Bras, Adjoint",
         descriptionFr:
-          "Construction du dual topologique, identification au moyen du théorème de représentation de Riesz, et interprétation physique.",
+          "Construction du dual topologique, théorème de représentation de Riesz, introduction des kets, des bras, et de l'adjoint",
         descriptionEn:
           "Construction of the topological dual, identification via the Riesz representation theorem, and physical interpretation.",
         topicsFr: [
@@ -196,7 +196,7 @@ export const themes: Theme[] = [
         subtitleFr: "Notations de Dirac en dimension finie",
         subtitleEn: "Dirac Notation in Finite Dimension",
         descriptionFr:
-          "Introduction aux kets, bras, produits bra-ket, opérateurs et projecteurs dans le langage de Dirac en dimension finie.",
+          "Kets, bras, produits bra-ket, opérateurs et projecteurs dans le cas de la dimension finie.",
         descriptionEn:
           "Introduction to kets, bras, bra-ket products, operators, and projectors in finite-dimensional Dirac notation.",
         topicsFr: [
@@ -231,7 +231,7 @@ export const themes: Theme[] = [
         subtitleFr: "Topologie des espaces de Hilbert",
         subtitleEn: "Topology of Hilbert Spaces",
         descriptionFr:
-          "Convergences forte/faible, suites de Cauchy, complétude et structures topologiques des espaces de Hilbert.",
+          "Topologie générale : ouverts et fermés, convergences forte et faible, suites de Cauchy, somme infinie de vecteurs, complétude, densité, ensembles bornés et ensembles compact",
         descriptionEn:
           "Strong/weak convergences, Cauchy sequences, completeness, and topological structures of Hilbert spaces.",
         topicsFr: [
