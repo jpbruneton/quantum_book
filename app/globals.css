@@ -68,7 +68,7 @@
   --text-primary: #f1f5f9;
   --text-heading: #f1f5f9;
   --text-bright: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-secondary: #a3b1c4;
   --text-dim: #475569;
 
   --amber: #f59e0b;
@@ -218,11 +218,28 @@ body::before {
 }
 
 .lesson-toc {
-  margin-bottom: 2rem;
   padding: 1rem 1.1rem;
   border: 1px solid var(--accent-border-sm);
   border-radius: 8px;
   background: var(--accent-bg-xs);
+}
+
+.lesson-web-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.lesson-web-main {
+  min-width: 0;
+}
+
+.lesson-toc-sticky {
+  position: sticky;
+  top: 86px;
+  max-height: calc(100vh - 110px);
+  overflow: auto;
 }
 
 .lesson-toc-title {
@@ -249,10 +266,32 @@ body::before {
   font-size: 0.88rem;
   color: var(--amber);
   text-decoration: none;
+  opacity: 0.78;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .lesson-toc-link:hover {
   text-decoration: underline;
+  opacity: 1;
+}
+
+.lesson-toc-link-active {
+  opacity: 1;
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+@media (max-width: 980px) {
+  .lesson-web-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-toc-sticky {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    margin-bottom: 1.2rem;
+  }
 }
 
 .prose-quantum h2 {
@@ -283,6 +322,12 @@ body::before {
   color: var(--text-heading);
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
+}
+
+.prose-quantum h2[id],
+.prose-quantum h3[id],
+.prose-quantum h4[id] {
+  scroll-margin-top: 96px;
 }
 
 .prose-quantum p {

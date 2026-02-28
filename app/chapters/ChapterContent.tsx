@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { processLatex } from "@/lib/latex";
 import { useLang } from "@/app/context/LangContext";
@@ -14,8 +14,33 @@ interface TocEntry {
   level: 2 | 3 | 4;
 }
 
-function stripHtml(value: string): string {
-  return value.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+function simplifyLatexForToc(value: string): string {
+  let result = value;
+  result = result.replace(/\\mathbb\{([^{}]+)\}/g, "$1");
+  result = result.replace(/\\mathcal\{([^{}]+)\}/g, "$1");
+  result = result.replace(/\\ell/g, "ℓ");
+  result = result.replace(/\\C/g, "C");
+  result = result.replace(/\\N/g, "N");
+  result = result.replace(/\\R/g, "R");
+  result = result.replace(/\\to/g, "→");
+  result = result.replace(/\\rightarrow/g, "→");
+  result = result.replace(/[_^]\{([^{}]+)\}/g, "$1");
+  result = result.replace(/[_^]([A-Za-z0-9]+)/g, "$1");
+  result = result.replace(/\\[a-zA-Z]+/g, "");
+  result = result.replace(/[{}]/g, "");
+  return result.replace(/\s+/g, " ").trim();
+}
+
+function stripHtmlForToc(value: string): string {
+  const withoutKatexMathMl = value.replace(
+    /<span class="katex-mathml">[\s\S]*?<\/span>/g,
+    ""
+  );
+  const htmlStripped = withoutKatexMathMl.replace(/<[^>]+>/g, " ");
+  const withoutInlineMathDelimiters = htmlStripped.replace(/\$+([\s\S]*?)\$+/g, (_m, math: string) =>
+    simplifyLatexForToc(math)
+  );
+  return withoutInlineMathDelimiters.replace(/\s+/g, " ").trim();
 }
 
 function slugify(value: string): string {
@@ -31,6 +56,7 @@ function slugify(value: string): string {
 
 export function ChapterContent({ lesson }: Props) {
   const [tab, setTab] = useState<"web" | "refs" | "pdf">("web");
+  const [activeTocId, setActiveTocId] = useState("");
   const { t, lang } = useLang();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
@@ -48,7 +74,7 @@ export function ChapterContent({ lesson }: Props) {
       headingRegex,
       (_fullMatch, tag: string, headingInner: string) => {
         const level = Number(tag.slice(1)) as 2 | 3 | 4;
-        const text = stripHtml(headingInner);
+        const text = stripHtmlForToc(headingInner);
         const baseId = slugify(text);
         const current = usedIds[baseId] ?? 0;
         usedIds[baseId] = current + 1;
@@ -61,6 +87,35 @@ export function ChapterContent({ lesson }: Props) {
 
     return { content, toc };
   }, [renderedContent]);
+
+  useEffect(() => {
+    if (tab !== "web" || webContentWithToc.toc.length === 0) return;
+
+    const orderedIds = webContentWithToc.toc.map((entry) => entry.id);
+    const activateFromViewport = () => {
+      const offset = 120;
+      let current = orderedIds[0];
+
+      for (const id of orderedIds) {
+        const element = document.getElementById(id);
+        if (!element) continue;
+        const top = element.getBoundingClientRect().top;
+        if (top - offset <= 0) current = id;
+        else break;
+      }
+
+      setActiveTocId(current);
+    };
+
+    activateFromViewport();
+    window.addEventListener("scroll", activateFromViewport, { passive: true });
+    window.addEventListener("resize", activateFromViewport);
+
+    return () => {
+      window.removeEventListener("scroll", activateFromViewport);
+      window.removeEventListener("resize", activateFromViewport);
+    };
+  }, [tab, webContentWithToc.toc]);
 
   return (
     <>
@@ -182,56 +237,64 @@ export function ChapterContent({ lesson }: Props) {
       {tab === "web" && (
         <div
           style={{
-            maxWidth: "800px",
+            maxWidth: "1120px",
             margin: "0 auto",
             padding: "3rem 1.5rem",
           }}
         >
-          {webContentWithToc.toc.length > 0 && (
-            <nav className="lesson-toc" aria-label={t.chapter.tocTitle}>
-              <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>
-              <ul className="lesson-toc-list">
-                {webContentWithToc.toc.map((entry) => (
-                  <li
-                    key={entry.id}
-                    className="lesson-toc-item"
-                    style={{
-                      marginLeft:
-                        entry.level === 2
-                          ? "0"
-                          : entry.level === 3
-                            ? "1rem"
-                            : "2rem",
-                    }}
-                  >
-                    <a href={`#${entry.id}`} className="lesson-toc-link">
-                      {entry.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
-          <div
-            className="prose-quantum"
-            dangerouslySetInnerHTML={{ __html: webContentWithToc.content }}
-          />
-          <div
-            style={{
-              marginTop: "3rem",
-              padding: "1.5rem",
-              background: "var(--accent-bg-xs)",
-              border: "1px solid var(--accent-border-sm)",
-              borderRadius: "6px",
-              fontFamily: "var(--font-crimson)",
-              fontSize: "0.95rem",
-              color: "var(--text-secondary)",
-            }}
-          >
-            <strong style={{ color: "var(--amber)" }}>
-              {t.chapter.noteTitle}
-            </strong>{" "}
-            {t.chapter.noteBody}
+          <div className="lesson-web-layout">
+            <div className="lesson-web-main">
+              <div
+                className="prose-quantum"
+                dangerouslySetInnerHTML={{ __html: webContentWithToc.content }}
+              />
+              <div
+                style={{
+                  marginTop: "3rem",
+                  padding: "1.5rem",
+                  background: "var(--accent-bg-xs)",
+                  border: "1px solid var(--accent-border-sm)",
+                  borderRadius: "6px",
+                  fontFamily: "var(--font-crimson)",
+                  fontSize: "0.95rem",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                <strong style={{ color: "var(--amber)" }}>
+                  {t.chapter.noteTitle}
+                </strong>{" "}
+                {t.chapter.noteBody}
+              </div>
+            </div>
+            {webContentWithToc.toc.length > 0 && (
+              <aside className="lesson-toc lesson-toc-sticky">
+                <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>
+                <ul className="lesson-toc-list">
+                  {webContentWithToc.toc.map((entry) => (
+                    <li
+                      key={entry.id}
+                      className="lesson-toc-item"
+                      style={{
+                        marginLeft:
+                          entry.level === 2
+                            ? "0"
+                            : entry.level === 3
+                              ? "0.7rem"
+                              : "1.4rem",
+                      }}
+                    >
+                      <a
+                        href={`#${entry.id}`}
+                        className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
+                        onClick={() => setActiveTocId(entry.id)}
+                      >
+                        {entry.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )}
           </div>
         </div>
       )}
