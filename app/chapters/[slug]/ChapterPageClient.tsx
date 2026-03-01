@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import type { Theme } from "@/lib/chapters";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
@@ -12,7 +12,7 @@ interface Props {
   next: Theme | null;
 }
 
-export function ChapterPageClient({ theme, prev, next }: Props) {
+function ChapterPageClientInner({ theme, prev, next }: Props) {
   const { t, lang } = useLang();
   const searchParams = useSearchParams();
   const requestedLessonNumber = Number(searchParams.get("lesson") || "");
@@ -393,5 +393,13 @@ export function ChapterPageClient({ theme, prev, next }: Props) {
         )}
       </div>
     </div>
+  );
+}
+
+export function ChapterPageClient({ theme, prev, next }: Props) {
+  return (
+    <Suspense fallback={null}>
+      <ChapterPageClientInner theme={theme} prev={prev} next={next} />
+    </Suspense>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
@@ -23,7 +23,7 @@ function normalizeKeyword(value: string): string {
   return value.trim().toLowerCase();
 }
 
-export default function GlossaryPage() {
+function GlossaryPageContent() {
   const { lang } = useLang();
   const searchParams = useSearchParams();
   const selectedKeywordRaw = searchParams.get("q") || "";
@@ -223,5 +223,13 @@ export default function GlossaryPage() {
         </div>
       )}
     </main>
+  );
+}
+
+export default function GlossaryPage() {
+  return (
+    <Suspense fallback={null}>
+      <GlossaryPageContent />
+    </Suspense>
   );
 }
