@@ -298,7 +298,7 @@ export const themes: Theme[] = [
         display_on_web: true,
         titleFr: "Leçon n°6",
         titleEn: "Lesson #6",
-        subtitleFr: "Représentation Hilbertienne de la mécanique quantique du point, opérateur position et impulsion, delta de Dirac",
+        subtitleFr: "Notations de Dirac en dimension infinie",
         subtitleEn: "Hilbert Representation of Point-Particle Quantum Mechanics, Position and Momentum Operators, Dirac Delta",
         descriptionFr:
           "Représentation Hilbertienne de la mécanique quantique du point, opérateur position et impulsion, delta de Dirac",

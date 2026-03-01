@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import type { Theme } from "@/lib/chapters";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
@@ -13,7 +14,21 @@ interface Props {
 
 export function ChapterPageClient({ theme, prev, next }: Props) {
   const { t, lang } = useLang();
-  const [activeLessonIndex, setActiveLessonIndex] = useState(0);
+  const searchParams = useSearchParams();
+  const requestedLessonNumber = Number(searchParams.get("lesson") || "");
+  const requestedLessonIndex =
+    Number.isFinite(requestedLessonNumber) && requestedLessonNumber >= 1
+      ? Math.min(
+          Math.max(requestedLessonNumber - 1, 0),
+          Math.max(theme.lessons.length - 1, 0)
+        )
+      : 0;
+  const [activeLessonIndex, setActiveLessonIndex] = useState(requestedLessonIndex);
+
+  useEffect(() => {
+    setActiveLessonIndex(requestedLessonIndex);
+  }, [requestedLessonIndex]);
+
   const activeLesson = useMemo(
     () => theme.lessons[activeLessonIndex] || null,
     [theme.lessons, activeLessonIndex]
@@ -206,7 +221,9 @@ export function ChapterPageClient({ theme, prev, next }: Props) {
       >
         {previousLesson ? (
           <button
-            onClick={() => setActiveLessonIndex((index) => Math.max(index - 1, 0))}
+            onClick={() =>
+              setActiveLessonIndex(() => Math.max(activeLessonIndex - 1, 0))
+            }
             style={{
               textAlign: "left",
               border: "none",
@@ -289,8 +306,8 @@ export function ChapterPageClient({ theme, prev, next }: Props) {
         {nextLesson ? (
           <button
             onClick={() =>
-              setActiveLessonIndex((index) =>
-                Math.min(index + 1, Math.max(theme.lessons.length - 1, 0))
+              setActiveLessonIndex(() =>
+                Math.min(activeLessonIndex + 1, Math.max(theme.lessons.length - 1, 0))
               )
             }
             style={{

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { processLatex } from "@/lib/latex";
@@ -216,8 +217,9 @@ export function ChapterContent({ lesson }: Props) {
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.5rem" }}>
           {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic) => (
-            <span
+            <Link
               key={topic}
+              href={`/glossary?q=${encodeURIComponent(topic)}`}
               style={{
                 background: "var(--accent-bg-sm)",
                 border: "1px solid var(--accent-border-sm)",
@@ -226,10 +228,11 @@ export function ChapterContent({ lesson }: Props) {
                 fontFamily: "var(--font-inter)",
                 fontSize: "0.74rem",
                 color: "var(--amber)",
+                textDecoration: "none",
               }}
             >
               {topic}
-            </span>
+            </Link>
           ))}
         </div>
       </div>
