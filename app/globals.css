@@ -458,6 +458,25 @@ body::before {
   background: var(--accent-bg-xs);
 }
 
+.prose-quantum .latex-proof {
+  margin: 1.25rem 0;
+  padding: 0.65rem 0 0.65rem 1rem;
+  border-left: 2px solid var(--accent-border-md);
+  color: var(--text-secondary);
+}
+
+.prose-quantum .latex-proof em {
+  font-style: italic;
+  color: var(--text-heading);
+}
+
+.prose-quantum .latex-proof-qed {
+  float: right;
+  font-family: var(--font-jetbrains);
+  color: var(--text-dim);
+  margin-left: 0.5rem;
+}
+
 /* Definition: keep default style */
 
 .prose-quantum .latex-block-theorem {
@@ -476,6 +495,15 @@ body::before {
 
 .prose-quantum .latex-block-proposition strong {
   color: #166534;
+}
+
+.prose-quantum .latex-block-corollary {
+  border-color: #0ea5e966;
+  background: #0ea5e91a;
+}
+
+.prose-quantum .latex-block-corollary strong {
+  color: #0f766e;
 }
 
 .prose-quantum .latex-block-remark,

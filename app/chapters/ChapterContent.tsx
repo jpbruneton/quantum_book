@@ -66,6 +66,7 @@ export function ChapterContent({ lesson }: Props) {
   const [tab, setTab] = useState<"web" | "refs" | "pdf">("web");
   const [activeTocId, setActiveTocId] = useState("");
   const [tocVisible, setTocVisible] = useState(true);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const { t, lang } = useLang();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
@@ -148,6 +149,17 @@ export function ChapterContent({ lesson }: Props) {
       window.removeEventListener("resize", activateFromViewport);
     };
   }, [tab, webContentWithToc.toc]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setShowBackToTop(window.scrollY > 280);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -280,23 +292,6 @@ export function ChapterContent({ lesson }: Props) {
                 className="prose-quantum"
                 dangerouslySetInnerHTML={{ __html: webContentWithToc.content }}
               />
-              <div
-                style={{
-                  marginTop: "3rem",
-                  padding: "1.5rem",
-                  background: "var(--accent-bg-xs)",
-                  border: "1px solid var(--accent-border-sm)",
-                  borderRadius: "6px",
-                  fontFamily: "var(--font-crimson)",
-                  fontSize: "0.95rem",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                <strong style={{ color: "var(--amber)" }}>
-                  {t.chapter.noteTitle}
-                </strong>{" "}
-                {t.chapter.noteBody}
-              </div>
             </div>
             {webContentWithToc.toc.length > 0 && (
               <aside className="lesson-toc lesson-toc-sticky">
@@ -533,6 +528,31 @@ export function ChapterContent({ lesson }: Props) {
             .
           </p>
         </div>
+      )}
+      {showBackToTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label={lang === "fr" ? "Revenir en haut" : "Back to top"}
+          title={lang === "fr" ? "Revenir en haut" : "Back to top"}
+          style={{
+            position: "fixed",
+            right: "1.2rem",
+            bottom: "1.2rem",
+            width: "42px",
+            height: "42px",
+            borderRadius: "999px",
+            border: "1px solid var(--accent-border-md)",
+            background: "var(--bg-card)",
+            color: "var(--amber)",
+            boxShadow: "0 10px 25px rgba(0,0,0,0.18)",
+            cursor: "pointer",
+            zIndex: 40,
+            fontSize: "1.1rem",
+            lineHeight: 1,
+          }}
+        >
+          ↑
+        </button>
       )}
     </>
   );

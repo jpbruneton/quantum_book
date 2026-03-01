@@ -76,6 +76,46 @@ function replaceInlineCommand(
   return output;
 }
 
+function replaceTexorpdfstring(input: string): string {
+  const marker = "\\texorpdfstring";
+  let output = "";
+  let index = 0;
+
+  while (index < input.length) {
+    const start = input.indexOf(marker, index);
+    if (start === -1) {
+      output += input.slice(index);
+      break;
+    }
+
+    output += input.slice(index, start);
+    let cursor = start + marker.length;
+    while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+
+    const first = readBalancedBracesAt(input, cursor);
+    if (!first) {
+      output += marker;
+      index = cursor;
+      continue;
+    }
+
+    cursor = first.endIndex;
+    while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+    const second = readBalancedBracesAt(input, cursor);
+    if (!second) {
+      output += first.content;
+      index = first.endIndex;
+      continue;
+    }
+
+    const chosen = second.content.trim().length > 0 ? second.content : first.content;
+    output += chosen;
+    index = second.endIndex;
+  }
+
+  return output;
+}
+
 function shouldSkipLatexLine(line: string): boolean {
   const trimmed = line.trim();
   if (!trimmed) return false;
@@ -110,6 +150,7 @@ function shouldSkipLatexLine(line: string): boolean {
 
 function cleanLatexInline(text: string): string {
   let result = text;
+  result = replaceTexorpdfstring(result);
   const accentMap: Record<string, Record<string, string>> = {
     "'": { a: "á", e: "é", i: "í", o: "ó", u: "ú", y: "ý", A: "Á", E: "É", I: "Í", O: "Ó", U: "Ú", Y: "Ý" },
     "`": { a: "à", e: "è", i: "ì", o: "ò", u: "ù", A: "À", E: "È", I: "Ì", O: "Ò", U: "Ù" },
@@ -592,9 +633,20 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
 
   // Support command-style theorem blocks such as \proposition{...}.
   result = replaceCommandBlock(result, "proposition", "latex-block-proposition", "Proposition");
+  result = replaceCommandBlock(result, "coro", "latex-block-corollary", "Corollaire");
 
   // Render section-like commands as headings in document order.
   result = replaceSectionCommands(result);
+
+  // Render proof environments with dedicated styling and QED marker.
+  result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
+    const suffix = label ? ` (${cleanLatexInline(label)})` : "";
+    return `\n\n<div class="latex-proof"><em>Démonstration${suffix}.</em> `;
+  });
+  result = result.replace(
+    /\\end\{proof\}/g,
+    ` <span class="latex-proof-qed" aria-hidden="true">□</span></div>\n\n`
+  );
 
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string }> = [

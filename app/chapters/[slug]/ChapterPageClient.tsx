@@ -18,6 +18,14 @@ export function ChapterPageClient({ theme, prev, next }: Props) {
     () => theme.lessons[activeLessonIndex] || null,
     [theme.lessons, activeLessonIndex]
   );
+  const previousLesson =
+    theme.lessons.length > 0 && activeLessonIndex > 0
+      ? theme.lessons[activeLessonIndex - 1]
+      : null;
+  const nextLesson =
+    theme.lessons.length > 0 && activeLessonIndex < theme.lessons.length - 1
+      ? theme.lessons[activeLessonIndex + 1]
+      : null;
 
   return (
     <div style={{ position: "relative", zIndex: 1 }}>
@@ -196,11 +204,53 @@ export function ChapterPageClient({ theme, prev, next }: Props) {
           gap: "1rem",
         }}
       >
-        {prev ? (
-          <Link
-            href={`/chapters/${prev.slug}`}
-            style={{ textDecoration: "none" }}
+        {previousLesson ? (
+          <button
+            onClick={() => setActiveLessonIndex((index) => Math.max(index - 1, 0))}
+            style={{
+              textAlign: "left",
+              border: "none",
+              background: "none",
+              padding: 0,
+              cursor: "pointer",
+            }}
           >
+            <div
+              className="chapter-card"
+              style={{
+                background: "var(--bg-card)",
+                border: "1px solid var(--accent-border-sm)",
+                borderRadius: "8px",
+                padding: "1.25rem 1.5rem",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "0.7rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: "var(--text-dim)",
+                  marginBottom: "0.4rem",
+                }}
+              >
+                {t.chapter.prev}
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontSize: "0.95rem",
+                  color: "var(--text-heading)",
+                }}
+              >
+                {lang === "fr"
+                  ? `Leçon n°${previousLesson.number} : ${previousLesson.subtitleFr}`
+                  : `Lesson #${previousLesson.number}: ${previousLesson.subtitleEn}`}
+              </div>
+            </div>
+          </button>
+        ) : prev ? (
+          <Link href={`/chapters/${prev.slug}`} style={{ textDecoration: "none" }}>
             <div
               className="chapter-card"
               style={{
@@ -236,11 +286,58 @@ export function ChapterPageClient({ theme, prev, next }: Props) {
         ) : (
           <div />
         )}
-        {next ? (
-          <Link
-            href={`/chapters/${next.slug}`}
-            style={{ textDecoration: "none" }}
+        {nextLesson ? (
+          <button
+            onClick={() =>
+              setActiveLessonIndex((index) =>
+                Math.min(index + 1, Math.max(theme.lessons.length - 1, 0))
+              )
+            }
+            style={{
+              textAlign: "left",
+              border: "none",
+              background: "none",
+              padding: 0,
+              cursor: "pointer",
+            }}
           >
+            <div
+              className="chapter-card"
+              style={{
+                background: "var(--bg-card)",
+                border: "1px solid var(--accent-border-sm)",
+                borderRadius: "8px",
+                padding: "1.25rem 1.5rem",
+                textAlign: "right",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "0.7rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: "var(--text-dim)",
+                  marginBottom: "0.4rem",
+                }}
+              >
+                {t.chapter.next}
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontSize: "0.95rem",
+                  color: "var(--text-heading)",
+                }}
+              >
+                {lang === "fr"
+                  ? `Leçon n°${nextLesson.number} : ${nextLesson.subtitleFr}`
+                  : `Lesson #${nextLesson.number}: ${nextLesson.subtitleEn}`}
+              </div>
+            </div>
+          </button>
+        ) : next ? (
+          <Link href={`/chapters/${next.slug}`} style={{ textDecoration: "none" }}>
             <div
               className="chapter-card"
               style={{

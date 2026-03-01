@@ -298,12 +298,12 @@ export const themes: Theme[] = [
         display_on_web: true,
         titleFr: "Leçon n°6",
         titleEn: "Lesson #6",
-        subtitleFr: "Notations de Dirac en dimension finie",
-        subtitleEn: "Dirac Notation in Finite Dimension",
+        subtitleFr: "Représentation Hilbertienne de la mécanique quantique du point, opérateur position et impulsion, delta de Dirac",
+        subtitleEn: "Hilbert Representation of Point-Particle Quantum Mechanics, Position and Momentum Operators, Dirac Delta",
         descriptionFr:
-          "Approfondissement des notations de Dirac en dimension finie, calcul matriciel et changements de base.",
+          "Représentation Hilbertienne de la mécanique quantique du point, opérateur position et impulsion, delta de Dirac",
         descriptionEn:
-          "Further finite-dimensional Dirac notation, matrix calculations, and basis changes.",
+          "Hilbert representation of point-particle quantum mechanics, position and momentum operators, and Dirac delta.",
         topicsFr: [
           "Kets",
           "Bras",
