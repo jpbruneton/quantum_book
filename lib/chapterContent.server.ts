@@ -670,10 +670,19 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
   };
 
   for (const blockKind of blockKinds) {
-    const beginRegex = new RegExp(`\\\\begin\\{${blockKind.env}\\}(?:\\[([^\\]]+)\\])?`, "g");
+    const beginRegex = new RegExp(
+      `\\\\begin\\{${blockKind.env}\\}(?:\\[([^\\]]+)\\])?(?:\\{([^{}]+)\\})?`,
+      "g"
+    );
     const endRegex = new RegExp(`\\\\end\\{${blockKind.env}\\}`, "g");
-    result = result.replace(beginRegex, (_m, label: string) => {
-      const suffix = label ? ` (${cleanLatexInline(label)})` : "";
+    result = result.replace(beginRegex, (_m, bracketArg: string, braceArg: string) => {
+      // Some custom tcolorbox theorem styles use:
+      // \begin{definition}[Displayed title]{technical_label}
+      // Keep the displayed title, but drop technical labels from rendering.
+      const fallbackArg = braceArg?.trim() ?? "";
+      const looksLikeTechnicalLabel = /^[A-Za-z0-9_.:-]+$/.test(fallbackArg);
+      const displayLabel = bracketArg?.trim() || (looksLikeTechnicalLabel ? "" : fallbackArg);
+      const suffix = displayLabel ? ` (${cleanLatexInline(displayLabel)})` : "";
       let numberedTitle = blockKind.title;
       if (blockKind.env in blockCounters) {
         blockCounters[blockKind.env] += 1;
