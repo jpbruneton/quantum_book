@@ -556,6 +556,24 @@ function collectReferenceMap(input: string): Record<string, string> {
   return references;
 }
 
+function latexVspaceToCssHeight(rawValue: string): string {
+  const value = rawValue.trim();
+  const baselineMatch = value.match(/^([+-]?\d*\.?\d+)\s*\\baselineskip$/);
+  if (baselineMatch) {
+    const factor = Number(baselineMatch[1]);
+    if (Number.isFinite(factor) && factor > 0) return `${factor}em`;
+    return "0.5em";
+  }
+
+  const cssLengthMatch = value.match(/^([+-]?\d*\.?\d+)\s*(px|em|rem|vh|vw|%)$/i);
+  if (cssLengthMatch) {
+    const amount = Number(cssLengthMatch[1]);
+    if (Number.isFinite(amount) && amount > 0) return `${amount}${cssLengthMatch[2]}`;
+  }
+
+  return "0.5em";
+}
+
 function replaceCommandBlock(
   input: string,
   command: string,
@@ -793,7 +811,10 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
   // Remove line-level environments that are not needed for web rendering.
   result = result.replace(/\\begin\{(center|flushleft|flushright)\}/g, "");
   result = result.replace(/\\end\{(center|flushleft|flushright)\}/g, "");
-  result = result.replace(/\\vspace\*?\{[^{}]*\}/g, "");
+  result = result.replace(/\\vspace\*?\{([^{}]*)\}/g, (_m, rawAmount: string) => {
+    const height = latexVspaceToCssHeight(rawAmount);
+    return `\n\n<div class="latex-vspace" style="height:${height};"></div>\n\n`;
+  });
   result = result.replace(/\\medskip\b/g, "");
   result = result.replace(/\\newpage\b/g, "");
   result = result.replace(/\\noindent\b/g, "");
@@ -805,6 +826,7 @@ function renderParagraph(paragraph: string): string {
   if (!cleaned) return "";
   if (cleaned.startsWith("<figure")) return cleaned;
   if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return cleaned;
+  if (cleaned.startsWith("<div class=\"latex-vspace\"")) return cleaned;
   if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return cleaned;
   if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return cleaned;
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return cleaned;
