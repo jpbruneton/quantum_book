@@ -169,6 +169,8 @@ function cleanLatexInline(text: string): string {
   result = replaceInlineCommand(result, "textbf", (content) => `<strong>${content}</strong>`);
   result = replaceInlineCommand(result, "uline", (content) => `<em>${content}</em>`);
   result = replaceInlineCommand(result, "underline", (content) => `<span class="latex-uline">${content}</span>`);
+  // Convert TeX opening/closing double quotes to typographic quotes.
+  result = result.replace(/``/g, "“").replace(/''/g, "”");
   result = result.replace(/\\ldots/g, "...");
   result = result.replace(/\\og(?:\{\})?\s*/g, "« ");
   result = result.replace(/\s*\\fg(?:\{\})?/g, " »");
@@ -635,6 +637,8 @@ interface CitationNumberMaps {
   fr: Record<string, number>;
 }
 
+type ContentLanguage = "en" | "fr";
+
 function buildCitationNumberMaps(references: LessonReference[]): CitationNumberMaps {
   const maps: CitationNumberMaps = { en: {}, fr: {} };
   const counters: Record<"en" | "fr", number> = { en: 0, fr: 0 };
@@ -672,11 +676,16 @@ function replaceCitations(input: string, citationMaps: CitationNumberMaps): stri
   });
 }
 
-function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): string {
+function normalizeLatexBlocks(
+  input: string,
+  citationMaps: CitationNumberMaps,
+  contentLanguage: ContentLanguage
+): string {
   let result = input;
   let figureRenderIndex = 0;
   let equationRenderIndex = 0;
   const references = collectReferenceMap(result);
+  const isEnglish = contentLanguage === "en";
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
   result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
@@ -701,7 +710,12 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
 
   // Support command-style theorem blocks such as \proposition{...}.
   result = replaceCommandBlock(result, "proposition", "latex-block-proposition", "Proposition");
-  result = replaceCommandBlock(result, "coro", "latex-block-corollary", "Corollaire");
+  result = replaceCommandBlock(
+    result,
+    "coro",
+    "latex-block-corollary",
+    isEnglish ? "Corollary" : "Corollaire"
+  );
 
   // Render section-like commands as headings in document order.
   result = replaceSectionCommands(result);
@@ -709,7 +723,7 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
   // Render proof environments with dedicated styling and QED marker.
   result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
     const suffix = label ? ` (${cleanLatexInline(label)})` : "";
-    return `\n\n<div class="latex-proof"><em>Démonstration${suffix}.</em> `;
+    return `\n\n<div class="latex-proof"><em>Proof${suffix}.</em> `;
   });
   result = result.replace(
     /\\end\{proof\}/g,
@@ -719,15 +733,15 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string }> = [
     { env: "definition", title: "Definition" },
-    { env: "theorem", title: "Théorème" },
+    { env: "theorem", title: isEnglish ? "Theorem" : "Théorème" },
     { env: "proposition", title: "Proposition" },
     { env: "lemma", title: "Lemma" },
-    { env: "corollary", title: "Corollary" },
-    { env: "remark", title: "Remarque" },
-    { env: "plusloin", title: "Plus loin" },
-    { env: "exemple", title: "Exemple" },
+    { env: "corollary", title: isEnglish ? "Corollary" : "Corollaire" },
+    { env: "remark", title: isEnglish ? "Remark" : "Remarque" },
+    { env: "plusloin", title: isEnglish ? "To Go Further" : "Plus loin" },
+    { env: "exemple", title: isEnglish ? "Example" : "Exemple" },
     { env: "example", title: "Example" },
-    { env: "resume", title: "Résumé" },
+    { env: "resume", title: isEnglish ? "Summary" : "Résumé" },
     { env: "important", title: "Important" },
   ];
   const blockCounters: Record<string, number> = {
@@ -803,7 +817,10 @@ function normalizeLatexBlocks(input: string, citationMaps: CitationNumberMaps): 
     // Keep \ref output numeric to avoid duplicating prefixes already present in prose
     // (e.g. "cf Figure \ref{magnet}" -> "cf Figure 1", not "cf Figure Figure 1").
     return resolved
-      .replace(/^(Figure|Théorème|Proposition|Définition|Remarque)\s+/i, "")
+      .replace(
+        /^(Figure|Théorème|Theorem|Proposition|Définition|Definition|Remarque|Remark|Corollaire|Corollary)\s+/i,
+        ""
+      )
       .trim();
   });
   result = result.replace(/\\label\{[^{}]*\}/g, "");
@@ -883,7 +900,11 @@ function paragraphsToHtml(paragraphs: string[]): string {
     .join("\n\n");
 }
 
-function parseTexParagraphs(texSource: string, citationMaps: CitationNumberMaps): string[] {
+function parseTexParagraphs(
+  texSource: string,
+  citationMaps: CitationNumberMaps,
+  contentLanguage: ContentLanguage
+): string[] {
   const normalized = texSource.replace(/\r\n/g, "\n");
   const lines = normalized.split("\n");
 
@@ -895,7 +916,7 @@ function parseTexParagraphs(texSource: string, citationMaps: CitationNumberMaps)
     keptLines.push(line);
   }
 
-  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps).trim();
+  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage).trim();
   if (!body) return [];
 
   const paragraphs = body
@@ -998,7 +1019,8 @@ export function getLessonWebContent(
   try {
     const source = readFileSync(texPath, "utf-8");
     const citationMaps = buildCitationNumberMaps(references);
-    const paragraphs = parseTexParagraphs(source, citationMaps);
+    const contentLanguage: ContentLanguage = /_en\//.test(texFile) ? "en" : "fr";
+    const paragraphs = parseTexParagraphs(source, citationMaps, contentLanguage);
     const limitedParagraphs = paragraphCount > 0 ? paragraphs.slice(0, paragraphCount) : paragraphs;
     if (limitedParagraphs.length === 0) return "";
     return paragraphsToHtml(limitedParagraphs);
