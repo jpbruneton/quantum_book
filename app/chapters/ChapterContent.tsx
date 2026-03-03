@@ -97,14 +97,25 @@ export function ChapterContent({ lesson }: Props) {
     return { before, url: linkUrl, after };
   };
   const formatReferenceLines = (label: string, url: string) => {
+    const structuredSeparator = "|||";
+    if (label.includes(structuredSeparator)) {
+      const [rawAuthor, rawDescription] = label.split(structuredSeparator);
+      return {
+        author: (rawAuthor || "").replace(/\s+/g, " ").trim(),
+        url: url.trim(),
+        description: (rawDescription || "").replace(/\s+/g, " ").trim(),
+      };
+    }
+
     const normalized = label.replace(/\s+/g, " ").trim();
     let author = normalized;
     let description = "";
 
-    const firstDot = normalized.indexOf(".");
+    const firstSentenceEnd = normalized.match(/\.\s+/);
+    const firstDot = firstSentenceEnd ? firstSentenceEnd.index ?? -1 : -1;
     if (firstDot !== -1) {
       author = normalized.slice(0, firstDot).trim();
-      description = normalized.slice(firstDot + 1).trim();
+      description = normalized.slice(firstDot + 1).trim().replace(/^\s+/, "");
     }
 
     // Safety fallback when old labels still contain inline URLs.
@@ -468,10 +479,10 @@ export function ChapterContent({ lesson }: Props) {
                         <li
                           key={`${reference.language}:${reference.key}`}
                           style={{
-                            fontFamily: "var(--font-crimson)",
-                            fontSize: "1rem",
-                            color: "var(--text-heading)",
-                            lineHeight: 1.6,
+                            display: "grid",
+                            gridTemplateColumns: "2.2rem 1fr",
+                            alignItems: "start",
+                            columnGap: "0.25rem",
                           }}
                         >
                           <span
@@ -479,7 +490,7 @@ export function ChapterContent({ lesson }: Props) {
                               fontFamily: "var(--font-jetbrains)",
                               fontSize: "0.8rem",
                               color: "var(--text-dim)",
-                              marginRight: "0.5rem",
+                              lineHeight: 1.6,
                             }}
                           >
                             [{index + 1}]
@@ -492,6 +503,10 @@ export function ChapterContent({ lesson }: Props) {
                                   display: "inline-grid",
                                   gap: "0.15rem",
                                   verticalAlign: "top",
+                                  fontFamily: "var(--font-crimson)",
+                                  fontSize: "1rem",
+                                  color: "var(--text-heading)",
+                                  lineHeight: 1.6,
                                 }}
                               >
                                 <span>{parts.author}</span>

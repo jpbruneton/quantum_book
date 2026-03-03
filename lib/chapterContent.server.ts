@@ -952,6 +952,27 @@ function parseReferencesTex(source: string): LessonReference[] {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   let currentLanguage: "en" | "fr" = "en";
   const autoCounters: Record<"en" | "fr", number> = { en: 0, fr: 0 };
+  let pendingStructuredRef: { name: string; url: string; description: string } | null = null;
+
+  const pushStructuredRefIfComplete = () => {
+    if (!pendingStructuredRef) return;
+    if (
+      pendingStructuredRef.name.trim().length === 0 ||
+      pendingStructuredRef.url.trim().length === 0 ||
+      pendingStructuredRef.description.trim().length === 0
+    ) {
+      return;
+    }
+    autoCounters[currentLanguage] += 1;
+    refs.push({
+      key: `structured_${currentLanguage}_${autoCounters[currentLanguage]}`,
+      url: normalizeReferenceUrl(pendingStructuredRef.url),
+      // Use a structured separator consumed by the chapter references renderer.
+      label: `${cleanReferenceLabel(pendingStructuredRef.name)}|||${cleanReferenceLabel(pendingStructuredRef.description)}`,
+      language: currentLanguage,
+    });
+    pendingStructuredRef = null;
+  };
 
   for (const rawLine of lines) {
     const line = stripComment(rawLine).trim();
@@ -960,6 +981,7 @@ function parseReferencesTex(source: string): LessonReference[] {
     if (
       /(?:^1\..*anglais|\\(?:sub)?section\*?\{[^{}]*(?:anglais|english)[^{}]*\})/i.test(line)
     ) {
+      pushStructuredRefIfComplete();
       currentLanguage = "en";
       continue;
     }
@@ -967,8 +989,29 @@ function parseReferencesTex(source: string): LessonReference[] {
     if (
       /(?:^2\..*fran|\\(?:sub)?section\*?\{[^{}]*(?:fran|french)[^{}]*\})/i.test(line)
     ) {
+      pushStructuredRefIfComplete();
       currentLanguage = "fr";
       continue;
+    }
+
+    const nameRegex = /\\name\{([^{}]+)\}/g;
+    let nameMatch: RegExpExecArray | null;
+    while ((nameMatch = nameRegex.exec(line)) !== null) {
+      if (!pendingStructuredRef) {
+        pendingStructuredRef = { name: "", url: "", description: "" };
+      }
+      pendingStructuredRef.name = nameMatch[1];
+      pushStructuredRefIfComplete();
+    }
+
+    const descriptionRegex = /\\description\{([^{}]+)\}/g;
+    let descriptionMatch: RegExpExecArray | null;
+    while ((descriptionMatch = descriptionRegex.exec(line)) !== null) {
+      if (!pendingStructuredRef) {
+        pendingStructuredRef = { name: "", url: "", description: "" };
+      }
+      pendingStructuredRef.description = descriptionMatch[1];
+      pushStructuredRefIfComplete();
     }
 
     const refEntryRegex = /\\refentry\{([^{}]+)\}\{([^{}]+)\}\{([^{}]+)\}/g;
@@ -998,16 +1041,22 @@ function parseReferencesTex(source: string): LessonReference[] {
     let urlMatch: RegExpExecArray | null;
     while ((urlMatch = urlRegex.exec(line)) !== null) {
       const normalizedUrl = normalizeReferenceUrl(urlMatch[1]);
-      autoCounters[currentLanguage] += 1;
-      refs.push({
-        key: `auto_${currentLanguage}_${autoCounters[currentLanguage]}`,
-        url: normalizedUrl,
-        label: normalizedUrl,
-        language: currentLanguage,
-      });
+      if (pendingStructuredRef && pendingStructuredRef.url.trim().length === 0) {
+        pendingStructuredRef.url = normalizedUrl;
+        pushStructuredRefIfComplete();
+      } else {
+        autoCounters[currentLanguage] += 1;
+        refs.push({
+          key: `auto_${currentLanguage}_${autoCounters[currentLanguage]}`,
+          url: normalizedUrl,
+          label: normalizedUrl,
+          language: currentLanguage,
+        });
+      }
     }
   }
 
+  pushStructuredRefIfComplete();
   return refs;
 }
 
