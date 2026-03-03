@@ -96,6 +96,30 @@ export function ChapterContent({ lesson }: Props) {
     const after = normalizedLabel.slice(index + linkUrl.length);
     return { before, url: linkUrl, after };
   };
+  const formatReferenceLines = (label: string, url: string) => {
+    const normalized = label.replace(/\s+/g, " ").trim();
+    let author = normalized;
+    let description = "";
+
+    const firstDot = normalized.indexOf(".");
+    if (firstDot !== -1) {
+      author = normalized.slice(0, firstDot).trim();
+      description = normalized.slice(firstDot + 1).trim();
+    }
+
+    // Safety fallback when old labels still contain inline URLs.
+    const legacy = splitReferenceLabel(normalized, url);
+    if (legacy.before && legacy.before.length > 0 && legacy.before.length < author.length) {
+      author = legacy.before.replace(/[,\s]+$/, "").trim();
+      description = legacy.after.replace(/^[,.;:\s]+/, "").trim() || description;
+    }
+
+    return {
+      author,
+      url: url.trim(),
+      description,
+    };
+  };
   const localizedRenderedContent = useMemo(() => {
     return renderedContent.replace(
       /<sup class="lesson-cite" data-cite-en="([^"]*)" data-cite-fr="([^"]*)">\[[^\]]*\]<\/sup>/g,
@@ -461,10 +485,16 @@ export function ChapterContent({ lesson }: Props) {
                             [{index + 1}]
                           </span>
                           {(() => {
-                            const parts = splitReferenceLabel(reference.label, reference.url);
+                            const parts = formatReferenceLines(reference.label, reference.url);
                             return (
-                              <>
-                                {parts.before}
+                              <span
+                                style={{
+                                  display: "inline-grid",
+                                  gap: "0.15rem",
+                                  verticalAlign: "top",
+                                }}
+                              >
+                                <span>{parts.author}</span>
                                 {parts.url ? (
                                   <a
                                     href={reference.url}
@@ -480,8 +510,8 @@ export function ChapterContent({ lesson }: Props) {
                                     {parts.url}
                                   </a>
                                 ) : null}
-                                {parts.after}
-                              </>
+                                {parts.description ? <span>{parts.description}</span> : null}
+                              </span>
                             );
                           })()}
                         </li>
