@@ -108,7 +108,10 @@ function replaceTexorpdfstring(input: string): string {
       continue;
     }
 
-    const chosen = second.content.trim().length > 0 ? second.content : first.content;
+    // For web rendering, prefer the TeX variant (first argument) so math
+    // in headings remains properly rendered (e.g. L^2(R^3), \ell^2(N), etc.).
+    // The second argument is typically a plain-text fallback for PDF bookmarks.
+    const chosen = first.content.trim().length > 0 ? first.content : second.content;
     output += chosen;
     index = second.endIndex;
   }
