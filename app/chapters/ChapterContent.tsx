@@ -80,6 +80,20 @@ export function ChapterContent({ lesson }: Props) {
   const hasLessonContent = lessonContent.trim().length > 0;
 
   const renderedContent = useMemo(() => processLatex(lessonContent), [lessonContent]);
+  const formatReferenceText = (label: string, url: string) => {
+    const normalizedUrl = url.trim();
+    let text = label.trim();
+    if (normalizedUrl.length > 0) {
+      const escaped = normalizedUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      text = text.replace(new RegExp(escaped, "gi"), "").trim();
+    }
+    text = text.replace(/\s+/g, " ").trim();
+    text = text.replace(/\s+([,.;:!?])/g, "$1");
+    text = text.replace(/^[,.;:\s]+/, "").trim();
+    text = text.replace(/[,.;:\s]+$/, "").trim();
+    if (text.length > 0) text = `${text}.`;
+    return text;
+  };
   const localizedRenderedContent = useMemo(() => {
     return renderedContent.replace(
       /<sup class="lesson-cite" data-cite-en="([^"]*)" data-cite-fr="([^"]*)">\[[^\]]*\]<\/sup>/g,
@@ -436,17 +450,27 @@ export function ChapterContent({ lesson }: Props) {
                           >
                             [{index + 1}]
                           </span>
+                          <span
+                            style={{
+                              fontFamily: "var(--font-crimson)",
+                              fontSize: "1rem",
+                              color: "var(--text-heading)",
+                            }}
+                          >
+                            {formatReferenceText(reference.label, reference.url)}
+                          </span>{" "}
                           <a
                             href={reference.url}
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
-                              color: "var(--amber)",
-                              textDecoration: "underline",
+                              color: "#2563eb",
+                              textDecoration: "none",
                               fontFamily: "var(--font-inter)",
+                              fontSize: "0.95rem",
                             }}
                           >
-                            {reference.label}
+                            {reference.url}
                           </a>
                         </li>
                       ))}
