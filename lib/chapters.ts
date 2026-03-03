@@ -138,6 +138,7 @@ export const themes: Theme[] = [
         topicsFr: [
           "Espace de Hilbert",
           "Espace normé",
+          "Produit scalaire hermitien",
           "Dimension algébrique",
           "Dimension hilbertienne",
           "Base Hilbertienne",
