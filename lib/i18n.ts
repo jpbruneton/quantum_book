@@ -85,6 +85,8 @@ export const translations = {
       refsEnglishTitle: "English references",
       refsFrenchTitle: "French references",
       refsSectionEmpty: "No link added in this section yet.",
+      contentUnavailable:
+        "English lesson content is not available yet for this lesson.",
       downloadBtn: "↓ Download",
       pdfFallback: "If the PDF doesn't display,",
       pdfFallbackLink: "click here to download it",
@@ -229,6 +231,8 @@ export const translations = {
       refsEnglishTitle: "Références anglaises",
       refsFrenchTitle: "Références françaises",
       refsSectionEmpty: "Aucun lien ajouté dans cette section pour le moment.",
+      contentUnavailable:
+        "Le contenu de cette leçon n'est pas encore disponible dans cette langue.",
       downloadBtn: "↓ Télécharger",
       pdfFallback: "Si le PDF ne s'affiche pas,",
       pdfFallbackLink: "cliquez ici pour le télécharger",

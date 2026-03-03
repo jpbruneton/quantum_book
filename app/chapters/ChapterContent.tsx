@@ -76,9 +76,8 @@ export function ChapterContent({ lesson }: Props) {
   const { t, lang } = useLang();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
-  const lessonContent = lang === "en"
-    ? (lesson.contentEn || lesson.contentFr || lesson.content)
-    : (lesson.contentFr || lesson.contentEn || lesson.content);
+  const lessonContent = lang === "en" ? lesson.contentEn : lesson.contentFr;
+  const hasLessonContent = lessonContent.trim().length > 0;
 
   const renderedContent = useMemo(() => processLatex(lessonContent), [lessonContent]);
   const localizedRenderedContent = useMemo(() => {
@@ -297,53 +296,67 @@ export function ChapterContent({ lesson }: Props) {
             padding: "3rem 1.5rem",
           }}
         >
-          <div className="lesson-web-layout">
-            <div className="lesson-web-main">
-              <div
-                className="prose-quantum"
-                dangerouslySetInnerHTML={{ __html: webContentWithToc.content }}
-              />
-            </div>
-            {webContentWithToc.toc.length > 0 && (
-              <aside className="lesson-toc lesson-toc-sticky">
-                <div className="lesson-toc-header">
-                  {tocVisible && <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>}
-                  <button
-                    className="lesson-toc-toggle"
-                    onClick={() => setTocVisible((current) => !current)}
-                  >
-                    {tocVisible ? t.chapter.hideToc : t.chapter.showToc}
-                  </button>
-                </div>
-                {tocVisible && (
-                  <ul className="lesson-toc-list">
-                    {webContentWithToc.toc.map((entry) => (
-                      <li
-                        key={entry.id}
-                        className="lesson-toc-item"
-                        style={{
-                          marginLeft:
-                            entry.level === 2
-                              ? "0"
-                              : entry.level === 3
-                                ? "0.7rem"
-                                : "1.4rem",
-                        }}
-                      >
-                        <a
-                          href={`#${entry.id}`}
-                          className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
-                          onClick={() => setActiveTocId(entry.id)}
+          {hasLessonContent ? (
+            <div className="lesson-web-layout">
+              <div className="lesson-web-main">
+                <div
+                  className="prose-quantum"
+                  dangerouslySetInnerHTML={{ __html: webContentWithToc.content }}
+                />
+              </div>
+              {webContentWithToc.toc.length > 0 && (
+                <aside className="lesson-toc lesson-toc-sticky">
+                  <div className="lesson-toc-header">
+                    {tocVisible && <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>}
+                    <button
+                      className="lesson-toc-toggle"
+                      onClick={() => setTocVisible((current) => !current)}
+                    >
+                      {tocVisible ? t.chapter.hideToc : t.chapter.showToc}
+                    </button>
+                  </div>
+                  {tocVisible && (
+                    <ul className="lesson-toc-list">
+                      {webContentWithToc.toc.map((entry) => (
+                        <li
+                          key={entry.id}
+                          className="lesson-toc-item"
+                          style={{
+                            marginLeft:
+                              entry.level === 2
+                                ? "0"
+                                : entry.level === 3
+                                  ? "0.7rem"
+                                  : "1.4rem",
+                          }}
                         >
-                          {entry.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </aside>
-            )}
-          </div>
+                          <a
+                            href={`#${entry.id}`}
+                            className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
+                            onClick={() => setActiveTocId(entry.id)}
+                          >
+                            {entry.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </aside>
+              )}
+            </div>
+          ) : (
+            <p
+              style={{
+                fontFamily: "var(--font-crimson)",
+                fontSize: "1.05rem",
+                color: "var(--text-secondary)",
+                lineHeight: 1.75,
+                maxWidth: "760px",
+              }}
+            >
+              {t.chapter.contentUnavailable}
+            </p>
+          )}
         </div>
       )}
 

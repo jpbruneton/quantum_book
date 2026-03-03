@@ -36,7 +36,7 @@ export default function ChapterPage({ params }: Props) {
       const resolvedReferences = getLessonReferences(theme.number, lesson.number, lesson.references);
       const frContent = getLessonWebContent(lesson.texFile, -1, resolvedReferences) || lesson.content;
       const enTexFile = getEnglishTexFilePath(lesson.texFile);
-      const enContent = getLessonWebContent(enTexFile, -1, resolvedReferences) || frContent;
+      const enContent = getLessonWebContent(enTexFile, -1, resolvedReferences);
       return {
         ...lesson,
         content: frContent,
