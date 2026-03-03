@@ -80,19 +80,21 @@ export function ChapterContent({ lesson }: Props) {
   const hasLessonContent = lessonContent.trim().length > 0;
 
   const renderedContent = useMemo(() => processLatex(lessonContent), [lessonContent]);
-  const formatReferenceText = (label: string, url: string) => {
-    const normalizedUrl = url.trim();
-    let text = label.trim();
-    if (normalizedUrl.length > 0) {
-      const escaped = normalizedUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      text = text.replace(new RegExp(escaped, "gi"), "").trim();
+  const splitReferenceLabel = (label: string, fallbackUrl: string) => {
+    const normalizedLabel = label.replace(/\s+/g, " ").trim();
+    const inlineUrlMatch = normalizedLabel.match(/https?:\/\/[^\s]+/i);
+    const linkUrl = inlineUrlMatch ? inlineUrlMatch[0] : fallbackUrl.trim();
+
+    if (!linkUrl) return { before: normalizedLabel, url: "", after: "" };
+
+    const index = normalizedLabel.indexOf(linkUrl);
+    if (index === -1) {
+      return { before: normalizedLabel, url: linkUrl, after: "" };
     }
-    text = text.replace(/\s+/g, " ").trim();
-    text = text.replace(/\s+([,.;:!?])/g, "$1");
-    text = text.replace(/^[,.;:\s]+/, "").trim();
-    text = text.replace(/[,.;:\s]+$/, "").trim();
-    if (text.length > 0) text = `${text}.`;
-    return text;
+
+    const before = normalizedLabel.slice(0, index);
+    const after = normalizedLabel.slice(index + linkUrl.length);
+    return { before, url: linkUrl, after };
   };
   const localizedRenderedContent = useMemo(() => {
     return renderedContent.replace(
@@ -439,7 +441,15 @@ export function ChapterContent({ lesson }: Props) {
                       }}
                     >
                       {section.references.map((reference, index) => (
-                        <li key={`${reference.language}:${reference.key}`}>
+                        <li
+                          key={`${reference.language}:${reference.key}`}
+                          style={{
+                            fontFamily: "var(--font-crimson)",
+                            fontSize: "1rem",
+                            color: "var(--text-heading)",
+                            lineHeight: 1.6,
+                          }}
+                        >
                           <span
                             style={{
                               fontFamily: "var(--font-jetbrains)",
@@ -450,28 +460,30 @@ export function ChapterContent({ lesson }: Props) {
                           >
                             [{index + 1}]
                           </span>
-                          <span
-                            style={{
-                              fontFamily: "var(--font-crimson)",
-                              fontSize: "1rem",
-                              color: "var(--text-heading)",
-                            }}
-                          >
-                            {formatReferenceText(reference.label, reference.url)}
-                          </span>{" "}
-                          <a
-                            href={reference.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              color: "#2563eb",
-                              textDecoration: "none",
-                              fontFamily: "var(--font-inter)",
-                              fontSize: "0.95rem",
-                            }}
-                          >
-                            {reference.url}
-                          </a>
+                          {(() => {
+                            const parts = splitReferenceLabel(reference.label, reference.url);
+                            return (
+                              <>
+                                {parts.before}
+                                {parts.url ? (
+                                  <a
+                                    href={reference.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                      color: "#2563eb",
+                                      textDecoration: "none",
+                                      fontFamily: "inherit",
+                                      fontSize: "inherit",
+                                    }}
+                                  >
+                                    {parts.url}
+                                  </a>
+                                ) : null}
+                                {parts.after}
+                              </>
+                            );
+                          })()}
                         </li>
                       ))}
                     </ul>
