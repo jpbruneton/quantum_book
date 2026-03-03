@@ -6,7 +6,12 @@ import { processLatex } from "@/lib/latex";
 import { useLang } from "@/app/context/LangContext";
 
 interface Props {
-  lesson: Lesson;
+  lesson: LessonWithLocalizedContent;
+}
+
+interface LessonWithLocalizedContent extends Lesson {
+  contentFr: string;
+  contentEn: string;
 }
 
 interface TocEntry {
@@ -71,8 +76,11 @@ export function ChapterContent({ lesson }: Props) {
   const { t, lang } = useLang();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
+  const lessonContent = lang === "en"
+    ? (lesson.contentEn || lesson.contentFr || lesson.content)
+    : (lesson.contentFr || lesson.contentEn || lesson.content);
 
-  const renderedContent = useMemo(() => processLatex(lesson.content), [lesson.content]);
+  const renderedContent = useMemo(() => processLatex(lessonContent), [lessonContent]);
   const localizedRenderedContent = useMemo(() => {
     return renderedContent.replace(
       /<sup class="lesson-cite" data-cite-en="([^"]*)" data-cite-fr="([^"]*)">\[[^\]]*\]<\/sup>/g,
@@ -87,7 +95,7 @@ export function ChapterContent({ lesson }: Props) {
   const sourceHeadingTexts = useMemo(() => {
     const sourceHeadingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
     const headings: string[] = [];
-    lesson.content.replace(sourceHeadingRegex, (_fullMatch, _tag: string, headingInner: string) => {
+    lessonContent.replace(sourceHeadingRegex, (_fullMatch, _tag: string, headingInner: string) => {
       const withoutInlineMathDelimiters = headingInner.replace(/\$+([\s\S]*?)\$+/g, (_m, math: string) =>
         simplifyLatexForToc(math)
       );
@@ -96,7 +104,7 @@ export function ChapterContent({ lesson }: Props) {
       return "";
     });
     return headings;
-  }, [lesson.content]);
+  }, [lessonContent]);
   const webContentWithToc = useMemo(() => {
     const toc: TocEntry[] = [];
     const usedIds: Record<string, number> = {};

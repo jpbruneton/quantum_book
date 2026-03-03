@@ -8,6 +8,11 @@ interface Props {
   params: { slug: string };
 }
 
+function getEnglishTexFilePath(frTexFile: string): string {
+  const mapped = frTexFile.replace(/_fr\/lecon(\d+)\.tex$/, "_en/lesson$1.tex");
+  return mapped || frTexFile;
+}
+
 export async function generateStaticParams() {
   return getWebThemes().map((theme) => ({ slug: theme.slug }));
 }
@@ -29,9 +34,14 @@ export default function ChapterPage({ params }: Props) {
     ...theme,
     lessons: theme.lessons.map((lesson) => {
       const resolvedReferences = getLessonReferences(theme.number, lesson.number, lesson.references);
+      const frContent = getLessonWebContent(lesson.texFile, -1, resolvedReferences) || lesson.content;
+      const enTexFile = getEnglishTexFilePath(lesson.texFile);
+      const enContent = getLessonWebContent(enTexFile, -1, resolvedReferences) || frContent;
       return {
         ...lesson,
-        content: getLessonWebContent(lesson.texFile, -1, resolvedReferences) || lesson.content,
+        content: frContent,
+        contentFr: frContent,
+        contentEn: enContent,
         references: resolvedReferences,
       };
     }),

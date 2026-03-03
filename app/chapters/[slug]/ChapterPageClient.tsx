@@ -6,8 +6,17 @@ import type { Theme } from "@/lib/chapters";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
 
+type LocalizedLesson = Theme["lessons"][number] & {
+  contentFr: string;
+  contentEn: string;
+};
+
+type ThemeWithLocalizedLessonContent = Omit<Theme, "lessons"> & {
+  lessons: LocalizedLesson[];
+};
+
 interface Props {
-  theme: Theme;
+  theme: ThemeWithLocalizedLessonContent;
   prev: Theme | null;
   next: Theme | null;
 }
