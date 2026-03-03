@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
-import { LanguageGate } from "./components/LanguageGate";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next";
 import { bookMeta } from "@/lib/chapters";
@@ -33,9 +32,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <NavBar />
-          <main>
-            <LanguageGate>{children}</LanguageGate>
-          </main>
+          <main>{children}</main>
           <Footer />
           <Analytics />
         </Providers>
