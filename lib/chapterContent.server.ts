@@ -392,6 +392,32 @@ function readBalancedBraces(input: string, startIndex: number): { content: strin
   return { content, endIndex: cursor };
 }
 
+function readBalancedSquareBrackets(input: string, startIndex: number): { content: string; endIndex: number } | null {
+  if (input[startIndex] !== "[") return null;
+  let depth = 1;
+  let cursor = startIndex + 1;
+  let content = "";
+
+  while (cursor < input.length && depth > 0) {
+    const char = input[cursor];
+    const previous = cursor > 0 ? input[cursor - 1] : "";
+
+    if (char === "[" && previous !== "\\") {
+      depth += 1;
+      content += char;
+    } else if (char === "]" && previous !== "\\") {
+      depth -= 1;
+      if (depth > 0) content += char;
+    } else {
+      content += char;
+    }
+    cursor += 1;
+  }
+
+  if (depth !== 0) return null;
+  return { content, endIndex: cursor };
+}
+
 function collectReferenceMap(input: string): Record<string, string> {
   const references: Record<string, string> = {};
   let sectionIndex = 0;
@@ -473,8 +499,32 @@ function collectReferenceMap(input: string): Record<string, string> {
         remarkIndex += 1;
         refText = `Remarque ${remarkIndex}`;
       }
+
+      // Support custom theorem box syntax:
+      // \begin{definition}[Displayed title]{def:my_label}
+      // and map the brace argument label to the generated numbered reference.
+      let cursor = index + beginMatch[0].length;
+      while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+      if (input[cursor] === "[") {
+        const bracketBlock = readBalancedSquareBrackets(input, cursor);
+        if (bracketBlock) cursor = bracketBlock.endIndex;
+      }
+      while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+      if (input[cursor] === "{") {
+        const braceBlock = readBalancedBraces(input, cursor);
+        const braceValue = braceBlock?.content.trim() ?? "";
+        if (
+          braceBlock &&
+          refText &&
+          /^[A-Za-z0-9_.:-]+$/.test(braceValue)
+        ) {
+          references[braceValue] = refText;
+          cursor = braceBlock.endIndex;
+        }
+      }
+
       envStack.push({ env, refText });
-      index += beginMatch[0].length;
+      index = cursor;
       continue;
     }
 

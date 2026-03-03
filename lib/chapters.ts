@@ -136,16 +136,13 @@ export const themes: Theme[] = [
         descriptionEn:
           "Vector spaces, norms, inner products, strong topology, completeness, and Hilbert bases to establish quantum mechanics' formal framework.",
         topicsFr: [
-          "Espaces vectoriels",
-          "Normes",
-          "Produit scalaire",
-          "Espaces de Hilbert",
-          "Espaces préhilbertiens",
-          "Complétude",
-          "Base hilbertienne",
+          "Espace de Hilbert",
+          "Espace normé",
+          "Dimension algébrique",
           "Dimension hilbertienne",
-          "Espaces modèles",
-          "Isomorphismes",
+          "Base Hilbertienne",
+          "Complétude",
+          "Classification des Hilbert",
         ],
         topicsEn: [
           "Vector spaces",
