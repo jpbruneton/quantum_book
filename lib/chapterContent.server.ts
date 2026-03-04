@@ -179,6 +179,16 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/\s*\\fg(?:\{\})?/g, " »");
   result = result.replace(/---/g, "—");
   result = result.replace(/--/g, "—");
+  // Keep French typography groups unbreakable around guillemets and high punctuation.
+  result = result.replace(/«\s+/g, "«&nbsp;");
+  result = result.replace(/\s+»/g, "&nbsp;»");
+  // Keep English typographic quotes unbreakable at boundaries as well.
+  result = result.replace(/“\s+/g, "“&nbsp;");
+  result = result.replace(/\s+”/g, "&nbsp;”");
+  result = result.replace(/\s+:/g, "&nbsp;:");
+  result = result.replace(/\s+;/g, "&nbsp;;");
+  result = result.replace(/\s+\?/g, "&nbsp;?");
+  result = result.replace(/\s+!/g, "&nbsp;!");
   result = result.replace(/~+/g, " ");
   return result.trim();
 }
@@ -930,7 +940,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
   const footnotesHtml = assignedFootnotes
     .map(
       (footnote) =>
-        `<div class="latex-footnote-item"><span class="latex-footnote-label">Note ${footnote.number}:</span> ${footnote.text}</div>`
+        `<div class="latex-footnote-item"><span class="latex-footnote-label">Note ${footnote.number} :</span> ${footnote.text}</div>`
     )
     .join("");
   return `${paragraphHtml}\n<div class="latex-footnotes">${footnotesHtml}</div>`;
