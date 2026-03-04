@@ -370,7 +370,7 @@ body::before {
   margin: -0.5rem 0 1rem;
   display: grid;
   gap: 0.2rem;
-  font-size: 0.82rem; /* ~13px on default 16px root */
+  font-size: 0.875rem; /* ~14px on default 16px root */
   line-height: 1.45;
   color: var(--text-dim);
 }
@@ -384,8 +384,10 @@ body::before {
 }
 
 .prose-quantum .latex-footnote-label {
-  font-family: var(--font-inter);
-  color: var(--text-secondary);
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .prose-quantum ul {
