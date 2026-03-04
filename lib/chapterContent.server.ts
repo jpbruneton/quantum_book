@@ -930,7 +930,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
   const footnotesHtml = assignedFootnotes
     .map(
       (footnote) =>
-        `<div class="latex-footnote-item"><span class="latex-footnote-label">Note #${footnote.number}:</span> ${footnote.text}</div>`
+        `<div class="latex-footnote-item"><span class="latex-footnote-label">Note ${footnote.number}:</span> ${footnote.text}</div>`
     )
     .join("");
   return `${paragraphHtml}\n<div class="latex-footnotes">${footnotesHtml}</div>`;
