@@ -765,7 +765,7 @@ function normalizeLatexBlocks(
   // Render proof environments with dedicated styling and QED marker.
   result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
     const suffix = label ? ` (${cleanLatexInline(label)})` : "";
-    return `\n\n<div class="latex-proof"><em>Proof${suffix}.</em> `;
+    return `\n\n<div class="latex-proof"><em>${isEnglish ? "Proof" : "Démonstration"}${suffix}.</em> `;
   });
   result = result.replace(
     /\\end\{proof\}/g,
