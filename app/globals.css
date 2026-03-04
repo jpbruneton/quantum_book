@@ -370,7 +370,7 @@ body::before {
   margin: -0.5rem 0 1rem;
   display: grid;
   gap: 0.2rem;
-  font-size: 0.56rem; /* ~9px on default 16px root */
+  font-size: 0.69rem; /* ~11px on default 16px root */
   line-height: 1.45;
   color: var(--text-dim);
 }
