@@ -1050,6 +1050,7 @@ function parseReferencesTex(source: string): LessonReference[] {
   };
 
   for (const rawLine of lines) {
+    const rawTrimmedLine = rawLine.trim();
     const line = stripComment(rawLine).trim();
     if (!line) continue;
 
@@ -1089,9 +1090,11 @@ function parseReferencesTex(source: string): LessonReference[] {
       pushStructuredRefIfComplete();
     }
 
+    // Parse refentry from raw line so URL-encoded '%' does not get truncated
+    // by comment stripping (e.g. ...Polyn%C3%B4me...).
     const refEntryRegex = /\\refentry\{([^{}]+)\}\{([^{}]+)\}\{([^{}]+)\}/g;
     let refEntryMatch: RegExpExecArray | null;
-    while ((refEntryMatch = refEntryRegex.exec(line)) !== null) {
+    while ((refEntryMatch = refEntryRegex.exec(rawTrimmedLine)) !== null) {
       refs.push({
         key: refEntryMatch[1].trim(),
         url: normalizeReferenceUrl(refEntryMatch[2]),
@@ -1112,9 +1115,10 @@ function parseReferencesTex(source: string): LessonReference[] {
       });
     }
 
+    // Same rationale for \url{}: keep percent-encoded URLs intact.
     const urlRegex = /\\url\{([^{}]+)\}/g;
     let urlMatch: RegExpExecArray | null;
-    while ((urlMatch = urlRegex.exec(line)) !== null) {
+    while ((urlMatch = urlRegex.exec(rawTrimmedLine)) !== null) {
       const normalizedUrl = normalizeReferenceUrl(urlMatch[1]);
       if (pendingStructuredRef && pendingStructuredRef.url.trim().length === 0) {
         pendingStructuredRef.url = normalizedUrl;
