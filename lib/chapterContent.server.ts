@@ -153,6 +153,7 @@ function shouldSkipLatexLine(line: string): boolean {
 
 function cleanLatexInline(text: string): string {
   let result = text;
+  const nbsp = "\u00A0";
   result = replaceTexorpdfstring(result);
   const accentMap: Record<string, Record<string, string>> = {
     "'": { a: "á", e: "é", i: "í", o: "ó", u: "ú", y: "ý", A: "Á", E: "É", I: "Í", O: "Ó", U: "Ú", Y: "Ý" },
@@ -180,15 +181,15 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/---/g, "—");
   result = result.replace(/--/g, "—");
   // Keep French typography groups unbreakable around guillemets and high punctuation.
-  result = result.replace(/«\s+/g, "«&nbsp;");
-  result = result.replace(/\s+»/g, "&nbsp;»");
+  result = result.replace(/«\s+/g, `«${nbsp}`);
+  result = result.replace(/\s+»/g, `${nbsp}»`);
   // Keep English typographic quotes unbreakable at boundaries as well.
-  result = result.replace(/“\s+/g, "“&nbsp;");
-  result = result.replace(/\s+”/g, "&nbsp;”");
-  result = result.replace(/\s+:/g, "&nbsp;:");
-  result = result.replace(/\s+;/g, "&nbsp;;");
-  result = result.replace(/\s+\?/g, "&nbsp;?");
-  result = result.replace(/\s+!/g, "&nbsp;!");
+  result = result.replace(/“\s+/g, `“${nbsp}`);
+  result = result.replace(/\s+”/g, `${nbsp}”`);
+  result = result.replace(/\s+:/g, `${nbsp}:`);
+  result = result.replace(/\s+;/g, `${nbsp};`);
+  result = result.replace(/\s+\?/g, `${nbsp}?`);
+  result = result.replace(/\s+!/g, `${nbsp}!`);
   result = result.replace(/~+/g, " ");
   return result.trim();
 }
