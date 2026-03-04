@@ -359,6 +359,31 @@ body::before {
   text-justify: inter-word;
 }
 
+.prose-quantum .latex-footnote-ref {
+  font-size: 0.65em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--text-dim);
+}
+
+.prose-quantum .latex-footnotes {
+  margin: -0.5rem 0 1rem;
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.56rem; /* ~9px on default 16px root */
+  line-height: 1.45;
+  color: var(--text-dim);
+}
+
+.prose-quantum .latex-footnote-item {
+  text-align: left;
+}
+
+.prose-quantum .latex-footnote-label {
+  font-family: var(--font-inter);
+  color: var(--text-secondary);
+}
+
 .prose-quantum ul {
   margin: 1rem 0 1.5rem 1.5rem;
   list-style: disc;

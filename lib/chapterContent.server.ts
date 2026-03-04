@@ -214,6 +214,45 @@ function stripFootnotes(input: string): string {
   return result;
 }
 
+function extractFootnotesFromParagraph(input: string): { text: string; footnotes: string[] } {
+  const marker = "\\footnote";
+  const footnotes: string[] = [];
+  let output = "";
+  let cursor = 0;
+
+  while (cursor < input.length) {
+    const start = input.indexOf(marker, cursor);
+    if (start === -1) {
+      output += input.slice(cursor);
+      break;
+    }
+
+    output += input.slice(cursor, start);
+    let next = start + marker.length;
+    while (next < input.length && /\s/.test(input[next])) next += 1;
+
+    if (input[next] !== "{") {
+      output += marker;
+      cursor = next;
+      continue;
+    }
+
+    const block = readBalancedBraces(input, next);
+    if (!block) {
+      output += marker;
+      cursor = next + 1;
+      continue;
+    }
+
+    const footnoteIndex = footnotes.length;
+    footnotes.push(block.content);
+    output += `__FOOTNOTE_${footnoteIndex}__`;
+    cursor = block.endIndex;
+  }
+
+  return { text: output, footnotes };
+}
+
 function normalizeFigurePath(path: string): string {
   const withoutPrefix = path.replace(/^\.?\/*/, "").replace(/^figs\//, "");
   return `/figs/${withoutPrefix}`;
@@ -813,7 +852,6 @@ function normalizeLatexBlocks(
 
   // Render bibliography citations as numbered markers.
   result = replaceCitations(result, citationMaps);
-  result = stripFootnotes(result);
   result = result.replace(/\\ref\{([^{}]*)\}/g, (_m, label: string) => {
     const resolved = references[label];
     if (!resolved) return `[${label}]`;
@@ -841,8 +879,23 @@ function normalizeLatexBlocks(
   return result;
 }
 
-function renderParagraph(paragraph: string): string {
-  const cleaned = cleanLatexInline(paragraph);
+function renderParagraph(paragraph: string, footnoteCounter: { value: number }): string {
+  const extracted = extractFootnotesFromParagraph(paragraph);
+  let cleaned = cleanLatexInline(extracted.text);
+  const assignedFootnotes = extracted.footnotes.map((rawFootnote) => {
+    const number = footnoteCounter.value;
+    footnoteCounter.value += 1;
+    return {
+      number,
+      text: cleanLatexInline(rawFootnote),
+    };
+  });
+  cleaned = cleaned.replace(/__FOOTNOTE_(\d+)__/g, (_m, indexText: string) => {
+    const index = Number(indexText);
+    if (!Number.isFinite(index) || index < 0 || index >= assignedFootnotes.length) return "";
+    return `<sup class="latex-footnote-ref">${assignedFootnotes[index].number}</sup>`;
+  });
+
   if (!cleaned) return "";
   if (cleaned.startsWith("<figure")) return cleaned;
   if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return cleaned;
@@ -850,6 +903,7 @@ function renderParagraph(paragraph: string): string {
   if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return cleaned;
   if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return cleaned;
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return cleaned;
+  let paragraphHtml = "";
   if (cleaned.includes("$$")) {
     const chunks: string[] = [];
     let cursor = 0;
@@ -865,11 +919,21 @@ function renderParagraph(paragraph: string): string {
 
     const textAfter = cleaned.slice(cursor).trim();
     if (textAfter) chunks.push(`<p>${textAfter}</p>`);
-    return chunks.join("\n\n");
+    paragraphHtml = chunks.join("\n\n");
+  } else {
+    // Keep explicit LaTeX line breaks in prose paragraphs.
+    const proseWithLineBreaks = cleaned.replace(/\\\\(?=\s|$)/g, "<br/>");
+    paragraphHtml = `<p>${proseWithLineBreaks}</p>`;
   }
-  // Keep explicit LaTeX line breaks in prose paragraphs.
-  const proseWithLineBreaks = cleaned.replace(/\\\\(?=\s|$)/g, "<br/>");
-  return `<p>${proseWithLineBreaks}</p>`;
+
+  if (assignedFootnotes.length === 0) return paragraphHtml;
+  const footnotesHtml = assignedFootnotes
+    .map(
+      (footnote) =>
+        `<div class="latex-footnote-item"><span class="latex-footnote-label">Note #${footnote.number}:</span> ${footnote.text}</div>`
+    )
+    .join("");
+  return `${paragraphHtml}\n<div class="latex-footnotes">${footnotesHtml}</div>`;
 }
 
 function countSingleDollarDelimiters(text: string): number {
@@ -896,9 +960,10 @@ function sanitizeUnbalancedDollarMath(paragraph: string): string {
 }
 
 function paragraphsToHtml(paragraphs: string[]): string {
+  const footnoteCounter = { value: 1 };
   return paragraphs
     .map((paragraph) => sanitizeUnbalancedDollarMath(paragraph))
-    .map((paragraph) => renderParagraph(paragraph))
+    .map((paragraph) => renderParagraph(paragraph, footnoteCounter))
     .filter((chunk) => chunk.length > 0)
     .join("\n\n");
 }
