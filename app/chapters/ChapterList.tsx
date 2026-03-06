@@ -3,6 +3,11 @@ import Link from "next/link";
 import { getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
+function getFrenchThemeCategory(slug: string): string {
+  if (slug === "espaces-de-hilbert") return "Thème mathématique";
+  return "Thème physique";
+}
+
 export function ChapterList() {
   const { t, lang } = useLang();
   const webThemes = getWebThemes();
@@ -26,7 +31,7 @@ export function ChapterList() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "80px 1fr auto",
+                gridTemplateColumns: "130px 1fr auto",
                 alignItems: "center",
                 gap: "1.5rem",
                 padding: "1.75rem 0",
@@ -49,14 +54,40 @@ export function ChapterList() {
             >
               <div
                 style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "2.25rem",
-                  fontWeight: 700,
-                  color: "var(--accent-border-lg)",
-                  lineHeight: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "0.5rem",
                 }}
               >
-                {String(theme.number).padStart(2, "0")}
+                {lang === "fr" ? (
+                  <span
+                    style={{
+                      border: "1px solid var(--accent-border-sm)",
+                      background: "var(--accent-bg-xs)",
+                      borderRadius: "999px",
+                      padding: "0.12rem 0.55rem",
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "0.65rem",
+                      letterSpacing: "0.02em",
+                      color: "var(--text-dim)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {getFrenchThemeCategory(theme.slug)}
+                  </span>
+                ) : null}
+                <div
+                  style={{
+                    fontFamily: "var(--font-playfair)",
+                    fontSize: "2.25rem",
+                    fontWeight: 700,
+                    color: "var(--accent-border-lg)",
+                    lineHeight: 1,
+                  }}
+                >
+                  {String(theme.number).padStart(2, "0")}
+                </div>
               </div>
 
               <div>
