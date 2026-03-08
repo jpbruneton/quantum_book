@@ -1029,6 +1029,7 @@ function parseReferencesTex(source: string): LessonReference[] {
   let currentLanguage: "en" | "fr" = "en";
   const autoCounters: Record<"en" | "fr", number> = { en: 0, fr: 0 };
   let pendingStructuredRef: { name: string; url: string; description: string } | null = null;
+  let pendingStructuredKey = "";
 
   const pushStructuredRefIfComplete = () => {
     if (!pendingStructuredRef) return;
@@ -1040,14 +1041,16 @@ function parseReferencesTex(source: string): LessonReference[] {
       return;
     }
     autoCounters[currentLanguage] += 1;
+    const explicitKey = pendingStructuredKey.trim();
     refs.push({
-      key: `structured_${currentLanguage}_${autoCounters[currentLanguage]}`,
+      key: explicitKey.length > 0 ? explicitKey : `structured_${currentLanguage}_${autoCounters[currentLanguage]}`,
       url: normalizeReferenceUrl(pendingStructuredRef.url),
       // Use a structured separator consumed by the chapter references renderer.
       label: `${cleanReferenceLabel(pendingStructuredRef.name)}|||${cleanReferenceLabel(pendingStructuredRef.description)}`,
       language: currentLanguage,
     });
     pendingStructuredRef = null;
+    pendingStructuredKey = "";
   };
 
   for (const rawLine of lines) {
@@ -1079,6 +1082,13 @@ function parseReferencesTex(source: string): LessonReference[] {
       }
       pendingStructuredRef.name = nameMatch[1];
       pushStructuredRefIfComplete();
+    }
+
+    // Optional explicit citation key for a structured reference block.
+    const keyRegex = /\\key\{([^{}]+)\}/g;
+    let keyMatch: RegExpExecArray | null;
+    while ((keyMatch = keyRegex.exec(line)) !== null) {
+      pendingStructuredKey = keyMatch[1].trim();
     }
 
     const descriptionRegex = /\\description\{([^{}]+)\}/g;
