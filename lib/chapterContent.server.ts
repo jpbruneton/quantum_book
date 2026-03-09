@@ -908,12 +908,26 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
   });
 
   if (!cleaned) return "";
-  if (cleaned.startsWith("<figure")) return cleaned;
-  if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return cleaned;
-  if (cleaned.startsWith("<div class=\"latex-vspace\"")) return cleaned;
-  if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return cleaned;
-  if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return cleaned;
-  if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return cleaned;
+
+  // Helper: append footnotes to any pre-built HTML chunk (including block envs,
+  // headings, figures, etc.) so footnotes inside boxes are always rendered.
+  const withFootnotes = (html: string): string => {
+    if (assignedFootnotes.length === 0) return html;
+    const footnotesHtml = assignedFootnotes
+      .map(
+        (fn) =>
+          `<div class="latex-footnote-item"><span class="latex-footnote-label">Note ${fn.number} :</span> ${fn.text}</div>`
+      )
+      .join("");
+    return `${html}\n<div class="latex-footnotes">${footnotesHtml}</div>`;
+  };
+
+  if (cleaned.startsWith("<figure")) return withFootnotes(cleaned);
+  if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return withFootnotes(cleaned);
+  if (cleaned.startsWith("<div class=\"latex-vspace\"")) return withFootnotes(cleaned);
+  if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return withFootnotes(cleaned);
+  if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return withFootnotes(cleaned);
+  if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return withFootnotes(cleaned);
   let paragraphHtml = "";
   if (cleaned.includes("$$")) {
     const chunks: string[] = [];
@@ -937,14 +951,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
     paragraphHtml = `<p>${proseWithLineBreaks}</p>`;
   }
 
-  if (assignedFootnotes.length === 0) return paragraphHtml;
-  const footnotesHtml = assignedFootnotes
-    .map(
-      (footnote) =>
-        `<div class="latex-footnote-item"><span class="latex-footnote-label">Note ${footnote.number} :</span> ${footnote.text}</div>`
-    )
-    .join("");
-  return `${paragraphHtml}\n<div class="latex-footnotes">${footnotesHtml}</div>`;
+  return withFootnotes(paragraphHtml);
 }
 
 function countSingleDollarDelimiters(text: string): number {

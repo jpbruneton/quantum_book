@@ -3,9 +3,10 @@ import Link from "next/link";
 import { getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
-function getFrenchThemeCategory(slug: string): string {
-  if (slug === "espaces-de-hilbert") return "Thème mathématique";
-  return "Thème physique";
+function getThemeCategory(slug: string, lang: "fr" | "en"): string {
+  const isMath = slug === "espaces-de-hilbert";
+  if (lang === "fr") return isMath ? "Thème mathématique" : "Thème physique";
+  return isMath ? "Mathematics" : "Physics";
 }
 
 export function ChapterList() {
@@ -60,23 +61,21 @@ export function ChapterList() {
                   gap: "0.5rem",
                 }}
               >
-                {lang === "fr" ? (
-                  <span
-                    style={{
-                      border: "1px solid var(--accent-border-sm)",
-                      background: "var(--accent-bg-xs)",
-                      borderRadius: "999px",
-                      padding: "0.12rem 0.55rem",
-                      fontFamily: "var(--font-inter)",
-                      fontSize: "0.65rem",
-                      letterSpacing: "0.02em",
-                      color: "var(--text-dim)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {getFrenchThemeCategory(theme.slug)}
-                  </span>
-                ) : null}
+                <span
+                  style={{
+                    border: "1px solid var(--accent-border-sm)",
+                    background: "var(--accent-bg-xs)",
+                    borderRadius: "999px",
+                    padding: "0.12rem 0.55rem",
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.02em",
+                    color: "var(--text-dim)",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {getThemeCategory(theme.slug, lang)}
+                </span>
                 <div
                   style={{
                     fontFamily: "var(--font-playfair)",
