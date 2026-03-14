@@ -1,14 +1,18 @@
 # PDFs Folder
 
-Place your chapter PDF files here. The filenames must match the `pdfFile` field in `lib/chapters.ts`.
+Store lesson PDFs in per-theme/per-language directories:
 
-Expected files:
-- chapter-01-mathematical-foundations.pdf
-- chapter-02-wave-mechanics.pdf
-- chapter-03-harmonic-oscillator.pdf
-- chapter-04-angular-momentum.pdf
-- chapter-05-measurement-entanglement.pdf
+- `theme1_fr/`, `theme1_en/`
+- `theme2_fr/`, `theme2_en/`
+- ...
+- `theme6_fr/`, `theme6_en/`
 
-To add a new chapter:
-1. Add the PDF here with the matching filename
-2. Add the chapter entry to `lib/chapters.ts`
+Naming convention:
+
+- French lessons: `leconN.pdf` (example: `theme2_fr/lecon1.pdf`)
+- English lessons: `lessonN.pdf` (example: `theme2_en/lesson1.pdf`)
+
+The PDF viewer resolves links from the lesson `texFile` and current language:
+
+- `themeX_fr/leconY.tex` -> `themeX_fr/leconY.pdf`
+- `themeX_en/lessonY.tex` -> `themeX_en/lessonY.pdf`

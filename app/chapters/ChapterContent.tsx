@@ -20,6 +20,16 @@ interface TocEntry {
   level: 2 | 3 | 4;
 }
 
+function getLessonPdfRelativePath(lesson: Lesson, lang: "fr" | "en"): string {
+  const match = lesson.texFile.match(/theme(\d+)_(?:fr|en)\/(?:lecon|lesson)(\d+)\.tex$/);
+  if (!match) return lesson.pdfFile;
+  const themeNumber = match[1];
+  const lessonNumber = lesson.number;
+  const directory = `theme${themeNumber}_${lang}`;
+  const fileName = lang === "fr" ? `lecon${lessonNumber}.pdf` : `lesson${lessonNumber}.pdf`;
+  return `${directory}/${fileName}`;
+}
+
 function simplifyLatexForToc(value: string): string {
   let result = value;
   result = result.replace(/\\mathbb\{([^{}]+)\}/g, "$1");
@@ -77,6 +87,10 @@ export function ChapterContent({ lesson }: Props) {
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
   const lessonContent = lang === "en" ? lesson.contentEn : lesson.contentFr;
+  const pdfRelativePath = useMemo(() => getLessonPdfRelativePath(lesson, lang), [lesson, lang]);
+  const pdfFileLabel = pdfRelativePath.includes("/")
+    ? pdfRelativePath.slice(pdfRelativePath.lastIndexOf("/") + 1)
+    : pdfRelativePath;
   const hasLessonContent = lessonContent.trim().length > 0;
 
   const renderedContent = useMemo(() => processLatex(lessonContent), [lessonContent]);
@@ -576,10 +590,10 @@ export function ChapterContent({ lesson }: Props) {
                   color: "var(--text-dim)",
                 }}
               >
-                {lesson.pdfFile}
+                {pdfFileLabel}
               </span>
               <a
-                href={`/pdfs/${lesson.pdfFile}`}
+                href={`/pdfs/${pdfRelativePath}`}
                 download
                 style={{
                   display: "inline-flex",
@@ -602,7 +616,7 @@ export function ChapterContent({ lesson }: Props) {
 
             {/* The actual embed */}
             <iframe
-              src={`/pdfs/${lesson.pdfFile}#toolbar=0`}
+              src={`/pdfs/${pdfRelativePath}#toolbar=0`}
               style={{
                 width: "100%",
                 height: "80vh",
@@ -624,7 +638,7 @@ export function ChapterContent({ lesson }: Props) {
           >
             {t.chapter.pdfFallback}{" "}
             <a
-              href={`/pdfs/${lesson.pdfFile}`}
+              href={`/pdfs/${pdfRelativePath}`}
               download
               style={{ color: "var(--amber)", textDecoration: "underline" }}
             >
