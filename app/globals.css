@@ -420,6 +420,11 @@ body::before {
   text-underline-offset: 0.16em;
 }
 
+.prose-quantum .latex-inline-blue-strong {
+  color: #3b82f6;
+  font-weight: 700;
+}
+
 .prose-quantum .latex-figure {
   margin: 2rem 0;
   display: flex;

@@ -168,9 +168,9 @@ function cleanLatexInline(text: string): string {
   });
   result = result.replace(/\\c\{([cC])\}/g, (_m, letter: string) => (letter === "c" ? "ç" : "Ç"));
 
-  result = replaceInlineCommand(result, "emph", (content) => `<em>${content}</em>`);
-  result = replaceInlineCommand(result, "textit", (content) => `<em>${content}</em>`);
-  result = replaceInlineCommand(result, "textbf", (content) => `<strong>${content}</strong>`);
+  result = replaceInlineCommand(result, "emph", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
+  result = replaceInlineCommand(result, "textit", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
+  result = replaceInlineCommand(result, "textbf", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
   result = replaceInlineCommand(result, "uline", (content) => `<em>${content}</em>`);
   result = replaceInlineCommand(result, "underline", (content) => `<span class="latex-uline">${content}</span>`);
   // Convert TeX opening/closing double quotes to typographic quotes.
