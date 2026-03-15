@@ -33,12 +33,6 @@ export default function HomePage() {
   const book = t.book;
   const webThemes = getWebThemes();
 
-  const stats = [
-    { label: t.home.stats.chapters, value: `${webThemes.length}` },
-    { label: t.home.stats.edition, value: book.edition },
-    { label: t.home.stats.format, value: t.home.stats.formatValue },
-  ];
-
   return (
     <div style={{ position: "relative", zIndex: 1 }}>
       {/* ─── Hero ─── */}
@@ -171,43 +165,6 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Meta stats */}
-            <div
-              className="animate-fade-up stagger-6"
-              style={{
-                display: "flex",
-                gap: "2rem",
-                marginTop: "3rem",
-                paddingTop: "2rem",
-                borderTop: "1px solid var(--border-subtle)",
-              }}
-            >
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-playfair)",
-                      fontSize: "1.5rem",
-                      fontWeight: 700,
-                      color: "var(--amber)",
-                    }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-inter)",
-                      fontSize: "0.75rem",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      color: "var(--text-dim)",
-                    }}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: Book cover */}
@@ -458,65 +415,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Features strip ─── */}
-      <section style={{ padding: "5rem 1.5rem" }}>
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "2rem",
-            textAlign: "center",
-          }}
-        >
-          {t.home.features.map((f) => (
-            <div
-              key={f.title}
-              style={{
-                padding: "2.5rem 2rem",
-                borderRadius: "8px",
-                border: "1px solid var(--accent-border-sm)",
-                background: "var(--bg-secondary)",
-                transition: "background 0.25s ease",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "2.5rem",
-                  color: "var(--amber)",
-                  marginBottom: "1rem",
-                  opacity: 0.8,
-                }}
-              >
-                {f.icon}
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "1.1rem",
-                  fontWeight: 600,
-                  color: "var(--text-heading)",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                {f.title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "var(--font-crimson)",
-                  fontSize: "1rem",
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.65,
-                }}
-              >
-                {f.body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
