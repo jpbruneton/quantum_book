@@ -6,7 +6,7 @@ export const translations = {
       title: "Quantum Mechanics",
       subtitle: "A Modern Introduction",
       description:
-        "A rigorous yet accessible treatment of quantum mechanics, bridging classical intuition and the mathematical formalism of Hilbert spaces, operators, and measurement theory. Designed for advanced undergraduates and graduate students.",
+        "This book proposes a rigorous formalization of modern quantum mechanics. Going beyond the scope of conventional introductory textbooks, it develops the essential tools of mathematical physics, from Hilbert spaces to advanced spectral theory, including topology and geometry.\n\nThis treatise is intended for readers who seek, beyond computational practice, to understand the logical necessity and foundation of the structures in use. The text addresses interpretational issues directly, with a detailed analysis of the measurement problem and decoherence, while also presenting alternative theories and their experimental constraints.\n\nIntended for master's students, doctoral students, and researchers, it aims at a comprehensive command of the theory, uniting technical rigor with conceptual depth.",
       edition: "First Edition",
     },
     nav: {
@@ -117,7 +117,9 @@ export const translations = {
         "Their research interests span quantum field theory, quantum information, and the foundations of quantum mechanics. This book grew from lecture notes developed over many years of teaching graduate and advanced undergraduate courses.",
       bioReplacePlaceholder: "✏️ Replace this bio in app/about/page.tsx",
       aboutBookBody2:
-        "The text develops quantum mechanics from first principles, assuming a solid background in classical mechanics, electrodynamics, and the mathematics of linear algebra and differential equations. Proofs are given in full where they illuminate the physics, and numerous worked examples complement the theoretical exposition.",
+        "The text develops quantum mechanics from first principles, assuming a strong background in classical mechanics, electrodynamics, and mathematics. Proofs are given in full whenever they clarify the physics, and many worked examples complement the theoretical exposition.",
+      translationWarning:
+        "Warning: this book is primarily written in French; the English version is automatically translated using Claude 4.6.",
     },
     updates: {
       label: "BLOG",
@@ -264,6 +266,8 @@ export const translations = {
       bioReplacePlaceholder: "✏️ Remplacez cette biographie dans app/about/page.tsx",
       aboutBookBody2:
         "Le texte développe la mécanique quantique à partir des premiers principes, en supposant une solide formation en mécanique classique, en électrodynamique et en mathématiques. Les preuves sont données en entier lorsqu'elles éclairent la physique, et de nombreux exemples travaillés complètent l'exposition théorique.",
+      translationWarning:
+        "Note : ce livre est principalement rédigé en français ; la version anglaise est traduite automatiquement avec Claude 4.6.",
     },
     updates: {
       label: "BLOG",

@@ -3,7 +3,7 @@ import { bookMeta, getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 export default function AboutPage() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const at = t.about;
   const book = t.book;
   const webThemes = getWebThemes();
@@ -87,6 +87,11 @@ export default function AboutPage() {
         {/* Description */}
         <div style={sectionStyle}>
           <h2 style={h2Style}>{at.aboutBookTitle}</h2>
+          {lang === "en" ? (
+            <p style={{ ...bodyStyle, fontWeight: 700, color: "var(--text-heading)" }}>
+              {at.translationWarning}
+            </p>
+          ) : null}
           <p style={{ ...bodyStyle, textAlign: "justify", whiteSpace: "pre-line" }}>
             {book.description}
           </p>
