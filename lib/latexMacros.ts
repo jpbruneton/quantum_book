@@ -11,6 +11,7 @@ export const KATEX_MACROS: Record<string, string> = {
   "\\Hilb": "\\mathcal{H}",
   "\\Dom": "\\mathcal{D}",
   "\\L": "\\mathcal{L}",
+  "\\G": "\\mathcal{G}",
   "\\H": "\\mathcal{H}",
   "\\ham": "\\hat{H}",
   "\\X": "\\hat{X}",
