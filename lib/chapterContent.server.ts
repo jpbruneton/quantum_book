@@ -995,11 +995,61 @@ function paragraphsToHtml(paragraphs: string[]): string {
 }
 
 /**
- * Paragraph split uses \\n\\n+. Align/equation replacements insert \\n\\n before $$ inside proofs, which would split
- * one proof into several chunks: the first chunk keeps <details> open without </details>, nesting the rest of the lesson.
+ * Paragraph split uses \\n\\n+. Align/equation replacements insert \\n\\n before $$, which splits blocks so the first
+ * chunk keeps <details> or <div class="latex-block"> open without a closing tag, nesting the rest of the lesson.
  */
 function collapseDoubleNewlinesInsideProofDetails(html: string): string {
   return html.replace(/<details class="latex-proof">[\s\S]*?<\/details>/g, (block) => block.replace(/\n\n+/g, "\n"));
+}
+
+/** Match closing </div> for a latex-block, accounting for nested <div> (e.g. latex-equation inside definition). */
+function findLatexBlockClose(html: string, innerStart: number): { closeTagStart: number; afterClose: number } | null {
+  let depth = 1;
+  let pos = innerStart;
+  while (pos < html.length && depth > 0) {
+    const openAt = html.indexOf("<div", pos);
+    const closeAt = html.indexOf("</div>", pos);
+    if (closeAt === -1) return null;
+    if (openAt !== -1 && openAt < closeAt) {
+      depth += 1;
+      pos = openAt + 4;
+    } else {
+      depth -= 1;
+      if (depth === 0) return { closeTagStart: closeAt, afterClose: closeAt + 6 };
+      pos = closeAt + 6;
+    }
+  }
+  return null;
+}
+
+/**
+ * Same issue as proof details: align* → $$\begin{aligned}...\end{aligned}$$ inserts \n\n, which splits
+ * paragraphs and leaves <div class="latex-block-..."> open so the rest of the lesson nests inside the box.
+ */
+function collapseDoubleNewlinesInsideLatexBlockDivs(html: string): string {
+  let out = "";
+  let cursor = 0;
+  const re = /<div class="latex-block[^"]*">/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(html)) !== null) {
+    if (m.index < cursor) continue;
+    out += html.slice(cursor, m.index);
+    const openTag = m[0];
+    const innerStart = m.index + openTag.length;
+    const close = findLatexBlockClose(html, innerStart);
+    if (!close) {
+      out += html.slice(m.index);
+      cursor = html.length;
+      break;
+    }
+    const inner = html.slice(innerStart, close.closeTagStart);
+    const collapsedInner = inner.replace(/\n\n+/g, "\n");
+    out += openTag + collapsedInner + "</div>";
+    cursor = close.afterClose;
+    re.lastIndex = cursor;
+  }
+  out += html.slice(cursor);
+  return out;
 }
 
 /** Collapse newlines to spaces for prose only; keep newlines inside $$...$$ so aligned/gather blocks stay valid for KaTeX. */
@@ -1039,6 +1089,7 @@ function parseTexParagraphs(
   body = body.replace(/\$\$\s*\n+\s*\$\$/g, "");
 
   body = collapseDoubleNewlinesInsideProofDetails(body);
+  body = collapseDoubleNewlinesInsideLatexBlockDivs(body);
 
   const paragraphs = body
     .split(/\n\s*\n+/)
