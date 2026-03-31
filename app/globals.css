@@ -25,6 +25,8 @@
   --text-bright: #0f172a;
   --text-secondary: #475569;
   --text-dim: #94a3b8;
+  /* Footnotes: slightly darker than --text-dim for readability */
+  --text-footnote: #64748b;
 
   /* Accent → blue */
   --amber: #2563eb;
@@ -70,6 +72,8 @@
   --text-bright: #f8fafc;
   --text-secondary: #a3b1c4;
   --text-dim: #475569;
+  /* Footnotes: darker than --text-dim (#475569) */
+  --text-footnote: #334155;
 
   --amber: #f59e0b;
   --amber-soft: #fbbf24;
@@ -363,7 +367,7 @@ body::before {
   font-size: 0.65em;
   vertical-align: super;
   line-height: 0;
-  color: var(--text-dim);
+  color: var(--text-footnote);
 }
 
 .prose-quantum .latex-footnotes {
@@ -372,7 +376,7 @@ body::before {
   gap: 0.2rem;
   font-size: 0.875rem; /* ~14px on default 16px root */
   line-height: 1.45;
-  color: var(--text-dim);
+  color: var(--text-footnote);
 }
 
 .prose-quantum .latex-footnotes * {
@@ -513,15 +517,49 @@ body::before {
   margin-left: 0.5rem;
 }
 
-/* Definition: keep default style */
+/* Definition / lemma / important — align with other theorem-like cards */
+.prose-quantum .latex-block-definition {
+  border-color: #3b82f666;
+  background: #3b82f61a;
+}
+
+.prose-quantum .latex-block-definition strong,
+.prose-quantum .latex-block-definition .latex-inline-blue-strong {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.prose-quantum .latex-block-lemma {
+  border-color: #9333ea66;
+  background: #9333ea1a;
+}
+
+.prose-quantum .latex-block-lemma strong,
+.prose-quantum .latex-block-lemma .latex-inline-blue-strong {
+  color: #6b21a8;
+  font-weight: 700;
+}
+
+.prose-quantum .latex-block-important {
+  border-color: #ef444466;
+  background: #ef44441a;
+}
+
+.prose-quantum .latex-block-important strong,
+.prose-quantum .latex-block-important .latex-inline-blue-strong {
+  color: #b91c1c;
+  font-weight: 700;
+}
 
 .prose-quantum .latex-block-theorem {
   border-color: #f59e0b66;
   background: #f59e0b1a;
 }
 
-.prose-quantum .latex-block-theorem strong {
+.prose-quantum .latex-block-theorem strong,
+.prose-quantum .latex-block-theorem .latex-inline-blue-strong {
   color: #f59e0b;
+  font-weight: 700;
 }
 
 .prose-quantum .latex-block-proposition {
@@ -529,8 +567,10 @@ body::before {
   background: #22c55e1a;
 }
 
-.prose-quantum .latex-block-proposition strong {
+.prose-quantum .latex-block-proposition strong,
+.prose-quantum .latex-block-proposition .latex-inline-blue-strong {
   color: #166534;
+  font-weight: 700;
 }
 
 .prose-quantum .latex-block-corollary,
@@ -540,8 +580,11 @@ body::before {
 }
 
 .prose-quantum .latex-block-corollary strong,
-.prose-quantum .latex-block-corollaire strong {
+.prose-quantum .latex-block-corollaire strong,
+.prose-quantum .latex-block-corollary .latex-inline-blue-strong,
+.prose-quantum .latex-block-corollaire .latex-inline-blue-strong {
   color: #0f766e;
+  font-weight: 700;
 }
 
 .prose-quantum .latex-block-remark,
@@ -558,13 +601,18 @@ body::before {
 
 .prose-quantum .latex-block-remark strong,
 .prose-quantum .latex-block-plusloin strong,
-.prose-quantum .latex-block-exemple strong {
+.prose-quantum .latex-block-exemple strong,
+.prose-quantum .latex-block-remark .latex-inline-blue-strong,
+.prose-quantum .latex-block-plusloin .latex-inline-blue-strong,
+.prose-quantum .latex-block-exemple .latex-inline-blue-strong {
   color: var(--text-heading);
   font-weight: 700;
 }
 
-.prose-quantum .latex-block-example strong {
+.prose-quantum .latex-block-example strong,
+.prose-quantum .latex-block-example .latex-inline-blue-strong {
   color: #cbd5e1;
+  font-weight: 700;
 }
 
 .prose-quantum .latex-block-resume {
@@ -572,8 +620,10 @@ body::before {
   background: #a855f71a;
 }
 
-.prose-quantum .latex-block-resume strong {
+.prose-quantum .latex-block-resume strong,
+.prose-quantum .latex-block-resume .latex-inline-blue-strong {
   color: #d8b4fe;
+  font-weight: 700;
 }
 
 .prose-quantum .latex-list {
