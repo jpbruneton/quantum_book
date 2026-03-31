@@ -789,6 +789,7 @@ function normalizeLatexBlocks(
     { env: "theorem", title: isEnglish ? "Theorem" : "Théorème" },
     { env: "proposition", title: "Proposition" },
     { env: "lemma", title: "Lemma" },
+    { env: "corollaire", title: isEnglish ? "Corollary" : "Corollaire" },
     { env: "corollary", title: isEnglish ? "Corollary" : "Corollaire" },
     { env: "remark", title: isEnglish ? "Remark" : "Remarque" },
     { env: "plusloin", title: isEnglish ? "To Go Further" : "Plus loin" },

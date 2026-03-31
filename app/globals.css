@@ -533,12 +533,14 @@ body::before {
   color: #166534;
 }
 
-.prose-quantum .latex-block-corollary {
+.prose-quantum .latex-block-corollary,
+.prose-quantum .latex-block-corollaire {
   border-color: #0ea5e966;
   background: #0ea5e91a;
 }
 
-.prose-quantum .latex-block-corollary strong {
+.prose-quantum .latex-block-corollary strong,
+.prose-quantum .latex-block-corollaire strong {
   color: #0f766e;
 }
 

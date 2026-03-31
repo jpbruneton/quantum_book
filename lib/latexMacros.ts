@@ -52,6 +52,7 @@ export const KATEX_MACROS: Record<string, string> = {
 
   // Simple operator-like helpers
   "\\dagg": "\\hat{#1}^{\\dagger}",
+  "\\transpose": "#1^{\\top}",
 
   // Practical fallback for custom independence symbol
   "\\independent": "\\perp\\!\\!\\!\\perp",
