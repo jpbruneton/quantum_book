@@ -773,15 +773,14 @@ function normalizeLatexBlocks(
   // Render section-like commands as headings in document order.
   result = replaceSectionCommands(result);
 
-  // Render proof environments as collapsible <details> with QED marker.
+  // Render proof environments with dedicated styling and QED marker.
   result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
     const suffix = label ? ` (${cleanLatexInline(label)})` : "";
-    const title = `${isEnglish ? "Proof" : "Démonstration"}${suffix}.`;
-    return `\n\n<details class="latex-proof"><summary class="latex-proof-summary"><em>${title}</em></summary><div class="latex-proof-body">`;
+    return `\n\n<div class="latex-proof"><em>${isEnglish ? "Proof" : "Démonstration"}${suffix}.</em> `;
   });
   result = result.replace(
     /\\end\{proof\}/g,
-    ` <span class="latex-proof-qed" aria-hidden="true">□</span></div></details>\n\n`
+    ` <span class="latex-proof-qed" aria-hidden="true">□</span></div>\n\n`
   );
 
   // Render theorem-like environments as styled blocks.
@@ -848,10 +847,6 @@ function normalizeLatexBlocks(
     equationRenderIndex += 1;
     return `\n\n<div class="latex-equation"><div class="latex-equation-math">$$\n${body.trim()}\n$$</div><span class="latex-equation-number">(${equationRenderIndex})</span></div>\n\n`;
   });
-  // align / align* need \begin{aligned}...\end{aligned} inside $$ so KaTeX accepts & column tabs.
-  result = result.replace(/\\begin\{align\*?\}([\s\S]*?)\\end\{align\*?\}/g, (_m, body: string) => {
-    return `\n\n$$\n\\begin{aligned}\n${body.trim()}\n\\end{aligned}\n$$\n\n`;
-  });
   result = result.replace(/\\begin\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
   result = result.replace(/\\end\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
   result = result.replace(/\\begin\{eqnarray\*?\}/g, "\n\n$$\n\\begin{aligned}\n");
@@ -912,7 +907,6 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
     if (!Number.isFinite(index) || index < 0 || index >= assignedFootnotes.length) return "";
     return `<sup class="latex-footnote-ref">${assignedFootnotes[index].number}</sup>`;
   });
-  cleaned = cleaned.replace(/\$\$\s*\n+\s*\$\$/g, "");
 
   if (!cleaned) return "";
 
@@ -933,7 +927,6 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
   if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<div class=\"latex-vspace\"")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return withFootnotes(cleaned);
-  if (cleaned.startsWith("<details")) return withFootnotes(cleaned);
   if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return withFootnotes(cleaned);
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return withFootnotes(cleaned);
   let paragraphHtml = "";
@@ -994,78 +987,6 @@ function paragraphsToHtml(paragraphs: string[]): string {
     .join("\n\n");
 }
 
-/**
- * Paragraph split uses \\n\\n+. Align/equation replacements insert \\n\\n before $$, which splits blocks so the first
- * chunk keeps <details> or <div class="latex-block"> open without a closing tag, nesting the rest of the lesson.
- */
-function collapseDoubleNewlinesInsideProofDetails(html: string): string {
-  return html.replace(/<details class="latex-proof">[\s\S]*?<\/details>/g, (block) => block.replace(/\n\n+/g, "\n"));
-}
-
-/** Match closing </div> for a latex-block, accounting for nested <div> (e.g. latex-equation inside definition). */
-function findLatexBlockClose(html: string, innerStart: number): { closeTagStart: number; afterClose: number } | null {
-  let depth = 1;
-  let pos = innerStart;
-  while (pos < html.length && depth > 0) {
-    const openAt = html.indexOf("<div", pos);
-    const closeAt = html.indexOf("</div>", pos);
-    if (closeAt === -1) return null;
-    if (openAt !== -1 && openAt < closeAt) {
-      depth += 1;
-      pos = openAt + 4;
-    } else {
-      depth -= 1;
-      if (depth === 0) return { closeTagStart: closeAt, afterClose: closeAt + 6 };
-      pos = closeAt + 6;
-    }
-  }
-  return null;
-}
-
-/**
- * Same issue as proof details: align* → $$\begin{aligned}...\end{aligned}$$ inserts \n\n, which splits
- * paragraphs and leaves <div class="latex-block-..."> open so the rest of the lesson nests inside the box.
- */
-function collapseDoubleNewlinesInsideLatexBlockDivs(html: string): string {
-  let out = "";
-  let cursor = 0;
-  const re = /<div class="latex-block[^"]*">/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(html)) !== null) {
-    if (m.index < cursor) continue;
-    out += html.slice(cursor, m.index);
-    const openTag = m[0];
-    const innerStart = m.index + openTag.length;
-    const close = findLatexBlockClose(html, innerStart);
-    if (!close) {
-      out += html.slice(m.index);
-      cursor = html.length;
-      break;
-    }
-    const inner = html.slice(innerStart, close.closeTagStart);
-    const collapsedInner = inner.replace(/\n\n+/g, "\n");
-    out += openTag + collapsedInner + "</div>";
-    cursor = close.afterClose;
-    re.lastIndex = cursor;
-  }
-  out += html.slice(cursor);
-  return out;
-}
-
-/** Collapse newlines to spaces for prose only; keep newlines inside $$...$$ so aligned/gather blocks stay valid for KaTeX. */
-function collapseNewlinesOutsideDisplayMath(paragraph: string): string {
-  const parts = paragraph.split("$$");
-  let out = "";
-  for (let i = 0; i < parts.length; i++) {
-    if (i % 2 === 0) {
-      out += parts[i].replace(/\n+/g, " ");
-    } else {
-      out += "$$" + parts[i] + "$$";
-    }
-  }
-  return out.trim();
-}
-
 function parseTexParagraphs(
   texSource: string,
   citationMaps: CitationNumberMaps,
@@ -1082,18 +1003,12 @@ function parseTexParagraphs(
     keptLines.push(line);
   }
 
-  let body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage).trim();
+  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage).trim();
   if (!body) return [];
-
-  // Remove empty display-math pairs that can make KaTeX consume $$\n$$ first and leave \begin{aligned} as raw text.
-  body = body.replace(/\$\$\s*\n+\s*\$\$/g, "");
-
-  body = collapseDoubleNewlinesInsideProofDetails(body);
-  body = collapseDoubleNewlinesInsideLatexBlockDivs(body);
 
   const paragraphs = body
     .split(/\n\s*\n+/)
-    .map((paragraph) => collapseNewlinesOutsideDisplayMath(paragraph))
+    .map((paragraph) => paragraph.replace(/\n+/g, " ").trim())
     .filter((paragraph) => paragraph.length > 0);
 
   return paragraphs;
