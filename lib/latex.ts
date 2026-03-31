@@ -34,7 +34,9 @@ function sanitizeDisplayMath(math: string): string {
     .replace(/<\s*\/?\s*p\b[^>]*>/gi, " ")
     .replace(/<\s*br\b[^>]*>/gi, " ");
 
-  // Prevent invalid nested inline math markers inside display blocks, e.g. \text{le $1$ ...}
+  // Strip nested $...$ inside \text{...} so KaTeX does not see $ as math delimiters.
+  // After stripping, commands like \C or \Phi must stay in math mode: prefer
+  // \text{(... }\C^n\text{)} over \text{(... $\C^n$)} in source.
   result = result.replace(/\\text\{([^{}]*)\}/g, (_match, textContent: string) => {
     const normalizedText = textContent.replace(/\$([^$\n]+?)\$/g, "$1");
     return `\\text{${normalizedText}}`;

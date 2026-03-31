@@ -500,14 +500,54 @@ body::before {
 
 .prose-quantum .latex-proof {
   margin: 1.25rem 0;
-  padding: 0.65rem 0 0.65rem 1rem;
+  border: 1px solid var(--accent-border-sm);
+  border-radius: 8px;
+  background: var(--accent-bg-xs);
   border-left: 2px solid var(--accent-border-md);
   color: var(--text-secondary);
 }
 
-.prose-quantum .latex-proof em {
+.prose-quantum .latex-proof-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.65rem 0.75rem 0.65rem 1.35rem;
+  position: relative;
+  user-select: none;
+}
+
+.prose-quantum .latex-proof-summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose-quantum .latex-proof-summary::before {
+  content: "▶";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.55rem;
+  color: var(--amber);
+  transition: transform 0.15s ease;
+}
+
+.prose-quantum .latex-proof[open] > .latex-proof-summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.prose-quantum .latex-proof-summary:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.prose-quantum .latex-proof-summary em {
   font-style: italic;
   color: var(--text-heading);
+}
+
+.prose-quantum .latex-proof-body {
+  padding: 0 0.75rem 0.65rem 1rem;
+  border-top: 1px solid var(--accent-border-sm);
 }
 
 .prose-quantum .latex-proof-qed {

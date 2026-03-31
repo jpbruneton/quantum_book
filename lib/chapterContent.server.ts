@@ -773,14 +773,15 @@ function normalizeLatexBlocks(
   // Render section-like commands as headings in document order.
   result = replaceSectionCommands(result);
 
-  // Render proof environments with dedicated styling and QED marker.
+  // Render proof environments as collapsible <details> with QED marker.
   result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
     const suffix = label ? ` (${cleanLatexInline(label)})` : "";
-    return `\n\n<div class="latex-proof"><em>${isEnglish ? "Proof" : "Démonstration"}${suffix}.</em> `;
+    const title = `${isEnglish ? "Proof" : "Démonstration"}${suffix}.`;
+    return `\n\n<details class="latex-proof"><summary class="latex-proof-summary"><em>${title}</em></summary><div class="latex-proof-body">`;
   });
   result = result.replace(
     /\\end\{proof\}/g,
-    ` <span class="latex-proof-qed" aria-hidden="true">□</span></div>\n\n`
+    ` <span class="latex-proof-qed" aria-hidden="true">□</span></div></details>\n\n`
   );
 
   // Render theorem-like environments as styled blocks.
@@ -846,6 +847,10 @@ function normalizeLatexBlocks(
   result = result.replace(/\\begin\{equation\}([\s\S]*?)\\end\{equation\}/g, (_m, body: string) => {
     equationRenderIndex += 1;
     return `\n\n<div class="latex-equation"><div class="latex-equation-math">$$\n${body.trim()}\n$$</div><span class="latex-equation-number">(${equationRenderIndex})</span></div>\n\n`;
+  });
+  // align / align* need \begin{aligned}...\end{aligned} inside $$ so KaTeX accepts & column tabs.
+  result = result.replace(/\\begin\{align\*?\}([\s\S]*?)\\end\{align\*?\}/g, (_m, body: string) => {
+    return `\n\n$$\n\\begin{aligned}\n${body.trim()}\n\\end{aligned}\n$$\n\n`;
   });
   result = result.replace(/\\begin\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
   result = result.replace(/\\end\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
