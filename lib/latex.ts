@@ -2,10 +2,9 @@ import katex from "katex";
 import { KATEX_MACROS } from "@/lib/latexMacros";
 
 function sanitizeMathCommon(math: string): string {
-  let result = math;
+  const result = math;
   // Tolerate malformed one-argument braket usage.
-  result = result.replace(/\\braket\{([^{}]+)\}(?!\{)/g, "\\left\\langle $1 \\right\\rangle");
-  return result;
+  return result.replace(/\\braket\{([^{}]+)\}(?!\{)/g, "\\left\\langle $1 \\right\\rangle");
 }
 
 function normalizeDisplayAlignment(math: string): string {
@@ -23,6 +22,27 @@ function normalizeDisplayAlignment(math: string): string {
   return result;
 }
 
+/**
+ * TeX allows breaking pmatrix rows across physical lines; those newlines must become \\ for KaTeX.
+ * If \\ is already present, only collapse whitespace/newlines.
+ */
+function normalizeMultilineMatrixEnvironmentsInMathFragment(fragment: string): string {
+  const matrixEnv = "pmatrix|bmatrix|Bmatrix|vmatrix|Vmatrix|matrix|smallmatrix";
+  return fragment.replace(
+    new RegExp(`\\\\begin\\{(${matrixEnv})\\}([\\s\\S]*?)\\\\end\\{\\1\\}`, "g"),
+    (full, env: string, inner: string) => {
+      const t = inner.trim();
+      if (!/\n/.test(t)) return full;
+      if (t.includes("\\\\")) {
+        const collapsed = t.replace(/\s+/g, " ");
+        return `\\begin{${env}}${collapsed}\\end{${env}}`;
+      }
+      const rows = t.split(/\n+/).map((s) => s.trim()).filter(Boolean);
+      return `\\begin{${env}}${rows.join("\\\\")}\\end{${env}}`;
+    }
+  );
+}
+
 function sanitizeDisplayMath(math: string): string {
   let result = sanitizeMathCommon(math);
   // If paragraph tags/entities leaked into math content, strip them before KaTeX parsing.
@@ -35,12 +55,11 @@ function sanitizeDisplayMath(math: string): string {
     .replace(/<\s*br\b[^>]*>/gi, " ");
 
   // Strip nested $...$ inside \text{...} so KaTeX does not see $ as math delimiters.
-  // After stripping, commands like \C or \Phi must stay in math mode: prefer
-  // \text{(... }\C^n\text{)} over \text{(... $\C^n$)} in source.
   result = result.replace(/\\text\{([^{}]*)\}/g, (_match, textContent: string) => {
     const normalizedText = textContent.replace(/\$([^$\n]+?)\$/g, "$1");
     return `\\text{${normalizedText}}`;
   });
+  result = normalizeMultilineMatrixEnvironmentsInMathFragment(result);
   return normalizeDisplayAlignment(result);
 }
 
@@ -60,6 +79,8 @@ export function processLatex(html: string): string {
   // Safety net: support display delimiters written as \[...\] if they leaked through.
   normalizedHtml = normalizedHtml.replace(/(?<!\\)\\\[/g, "$$");
   normalizedHtml = normalizedHtml.replace(/(?<!\\)\\\]/g, "$$");
+  // Empty display pairs break non-greedy $$...$$ (first match closes on second line, leaves \begin{aligned} raw).
+  normalizedHtml = normalizedHtml.replace(/\$\$\s*\n+\s*\$\$/g, "");
 
   // 1. Display math: $$...$$
   let result = normalizedHtml.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {
@@ -76,13 +97,15 @@ export function processLatex(html: string): string {
     }
   });
 
-  // 2. Inline math: $...$ — line-scoped to avoid swallowing prose.
-  result = result.replace(/\$([^$\n]+?)\$/g, (match, math) => {
-    // Guard against accidental capture of HTML fragments.
+  // 2. Inline math: $...$ — allow newlines inside (e.g. \begin{pmatrix} 1\n i \end{pmatrix}).
+  result = result.replace(/\$([^$]+?)\$/g, (match, math) => {
     if (/<\/?[a-z][^>]*>/i.test(math)) return match;
 
+    let body = math.trim();
+    body = normalizeMultilineMatrixEnvironmentsInMathFragment(body);
+
     try {
-      return katex.renderToString(sanitizeMathCommon(math.trim()), {
+      return katex.renderToString(sanitizeMathCommon(body), {
         displayMode: false,
         throwOnError: false,
         trust: false,

@@ -912,6 +912,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
     if (!Number.isFinite(index) || index < 0 || index >= assignedFootnotes.length) return "";
     return `<sup class="latex-footnote-ref">${assignedFootnotes[index].number}</sup>`;
   });
+  cleaned = cleaned.replace(/\$\$\s*\n+\s*\$\$/g, "");
 
   if (!cleaned) return "";
 
@@ -932,6 +933,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
   if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<div class=\"latex-vspace\"")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return withFootnotes(cleaned);
+  if (cleaned.startsWith("<details")) return withFootnotes(cleaned);
   if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return withFootnotes(cleaned);
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return withFootnotes(cleaned);
   let paragraphHtml = "";
@@ -992,6 +994,28 @@ function paragraphsToHtml(paragraphs: string[]): string {
     .join("\n\n");
 }
 
+/**
+ * Paragraph split uses \\n\\n+. Align/equation replacements insert \\n\\n before $$ inside proofs, which would split
+ * one proof into several chunks: the first chunk keeps <details> open without </details>, nesting the rest of the lesson.
+ */
+function collapseDoubleNewlinesInsideProofDetails(html: string): string {
+  return html.replace(/<details class="latex-proof">[\s\S]*?<\/details>/g, (block) => block.replace(/\n\n+/g, "\n"));
+}
+
+/** Collapse newlines to spaces for prose only; keep newlines inside $$...$$ so aligned/gather blocks stay valid for KaTeX. */
+function collapseNewlinesOutsideDisplayMath(paragraph: string): string {
+  const parts = paragraph.split("$$");
+  let out = "";
+  for (let i = 0; i < parts.length; i++) {
+    if (i % 2 === 0) {
+      out += parts[i].replace(/\n+/g, " ");
+    } else {
+      out += "$$" + parts[i] + "$$";
+    }
+  }
+  return out.trim();
+}
+
 function parseTexParagraphs(
   texSource: string,
   citationMaps: CitationNumberMaps,
@@ -1008,12 +1032,17 @@ function parseTexParagraphs(
     keptLines.push(line);
   }
 
-  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage).trim();
+  let body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage).trim();
   if (!body) return [];
+
+  // Remove empty display-math pairs that can make KaTeX consume $$\n$$ first and leave \begin{aligned} as raw text.
+  body = body.replace(/\$\$\s*\n+\s*\$\$/g, "");
+
+  body = collapseDoubleNewlinesInsideProofDetails(body);
 
   const paragraphs = body
     .split(/\n\s*\n+/)
-    .map((paragraph) => paragraph.replace(/\n+/g, " ").trim())
+    .map((paragraph) => collapseNewlinesOutsideDisplayMath(paragraph))
     .filter((paragraph) => paragraph.length > 0);
 
   return paragraphs;
