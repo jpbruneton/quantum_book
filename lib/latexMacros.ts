@@ -52,7 +52,9 @@ export const KATEX_MACROS: Record<string, string> = {
 
   // Simple operator-like helpers
   "\\dagg": "\\hat{#1}^{\\dagger}",
-  "\\transpose": "#1^{\\top}",
+  "\\transpose": "{#1}^{\\top}",
+  // Mirror header_fr/header_en renewcommand for web KaTeX rendering.
+  "\\equiv": "\\;\\stackrel{\\text{def}}{=}\\;",
   "\\Aboxed": "\\boxed{#1}",
 
   // Practical fallback for custom independence symbol
