@@ -773,14 +773,14 @@ function normalizeLatexBlocks(
   // Render section-like commands as headings in document order.
   result = replaceSectionCommands(result);
 
-  // Render proof environments with dedicated styling and QED marker.
+  // Render proof environments as collapsible details blocks.
   result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
     const suffix = label ? ` (${cleanLatexInline(label)})` : "";
-    return `\n\n<div class="latex-proof"><em>${isEnglish ? "Proof" : "Démonstration"}${suffix}.</em> `;
+    return `\n\n<details class="latex-proof"><summary class="latex-proof-summary"><em>${isEnglish ? "Proof" : "Démonstration"}${suffix}.</em></summary><div class="latex-proof-body">`;
   });
   result = result.replace(
     /\\end\{proof\}/g,
-    ` <span class="latex-proof-qed" aria-hidden="true">□</span></div>\n\n`
+    ` <span class="latex-proof-qed" aria-hidden="true">□</span></div></details>\n\n`
   );
 
   // Render theorem-like environments as styled blocks.
@@ -926,7 +926,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
   if (cleaned.startsWith("<figure")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<div class=\"latex-vspace\"")) return withFootnotes(cleaned);
-  if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<div class=\"latex-block")) return withFootnotes(cleaned);
+  if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<details class=\"latex-proof\"") || cleaned.startsWith("<div class=\"latex-block")) return withFootnotes(cleaned);
   if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return withFootnotes(cleaned);
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return withFootnotes(cleaned);
   let paragraphHtml = "";
