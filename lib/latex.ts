@@ -2,7 +2,8 @@ import katex from "katex";
 import { KATEX_MACROS } from "@/lib/latexMacros";
 
 function sanitizeMathCommon(math: string): string {
-  const result = math;
+  // NBSP (U+00A0, "character 160") triggers KaTeX strict-mode warnings; TeX expects normal spaces.
+  let result = math.replace(/\u00a0/g, " ");
   // Tolerate malformed one-argument braket usage.
   return result.replace(/\\braket\{([^{}]+)\}(?!\{)/g, "\\left\\langle $1 \\right\\rangle");
 }

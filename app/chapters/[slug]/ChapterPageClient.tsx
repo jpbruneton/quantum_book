@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useMemo } from "react";
 import type { Theme } from "@/lib/chapters";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
@@ -23,6 +23,8 @@ interface Props {
 
 function ChapterPageClientInner({ theme, prev, next }: Props) {
   const { t, lang } = useLang();
+  const pathname = usePathname();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const requestedLessonNumber = Number(searchParams.get("lesson") || "");
   const requestedLessonIndex =
@@ -32,11 +34,20 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
           Math.max(theme.lessons.length - 1, 0)
         )
       : 0;
-  const [activeLessonIndex, setActiveLessonIndex] = useState(requestedLessonIndex);
+  const activeLessonIndex = requestedLessonIndex;
 
-  useEffect(() => {
-    setActiveLessonIndex(requestedLessonIndex);
-  }, [requestedLessonIndex]);
+  const navigateToLesson = (lessonIndex: number) => {
+    const maxIndex = Math.max(theme.lessons.length - 1, 0);
+    const clamped = Math.min(Math.max(lessonIndex, 0), maxIndex);
+    const params = new URLSearchParams(searchParams.toString());
+    if (clamped === 0) {
+      params.delete("lesson");
+    } else {
+      params.set("lesson", String(clamped + 1));
+    }
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  };
 
   const activeLesson = useMemo(
     () => theme.lessons[activeLessonIndex] || null,
@@ -151,7 +162,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
                 {theme.lessons.map((lesson, index) => (
                   <button
                     key={lesson.slug}
-                    onClick={() => setActiveLessonIndex(index)}
+                    onClick={() => navigateToLesson(index)}
                     style={{
                       background:
                         index === activeLessonIndex
@@ -230,9 +241,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
       >
         {previousLesson ? (
           <button
-            onClick={() =>
-              setActiveLessonIndex(() => Math.max(activeLessonIndex - 1, 0))
-            }
+            onClick={() => navigateToLesson(activeLessonIndex - 1)}
             style={{
               textAlign: "left",
               border: "none",
@@ -314,11 +323,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
         )}
         {nextLesson ? (
           <button
-            onClick={() =>
-              setActiveLessonIndex(() =>
-                Math.min(activeLessonIndex + 1, Math.max(theme.lessons.length - 1, 0))
-              )
-            }
+            onClick={() => navigateToLesson(activeLessonIndex + 1)}
             style={{
               textAlign: "left",
               border: "none",

@@ -93,6 +93,10 @@ export function ChapterContent({ lesson }: Props) {
     : pdfRelativePath;
   const hasLessonContent = lessonContent.trim().length > 0;
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [lesson.slug]);
+
   const renderedContent = useMemo(() => processLatex(lessonContent), [lessonContent]);
   const splitReferenceLabel = (label: string, fallbackUrl: string) => {
     const normalizedLabel = label.replace(/\s+/g, " ").trim();
