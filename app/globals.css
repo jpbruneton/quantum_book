@@ -447,8 +447,8 @@ body::before {
 .prose-quantum .latex-figure img {
   width: auto;
   height: auto;
-  max-width: min(100%, 8cm);
-  max-height: 8cm;
+  max-width: min(100%, 10.4cm);
+  max-height: 10.4cm;
   border-radius: 8px;
   border: 1px solid var(--accent-border-sm);
   cursor: zoom-in;
