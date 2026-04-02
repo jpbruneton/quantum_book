@@ -38,12 +38,11 @@ Edit **`lib/chapters.ts`** — the `bookMeta` object at the top:
 export const bookMeta = {
   title: "Quantum Mechanics",
   subtitle: "A Modern Introduction",
-  author: "Your Name",           // ← Your name
-  affiliation: "Your University",
-  year: "2024",
-  edition: "First Edition",
+  author: "Jean-Philippe Bruneton",
+  affiliation: "Université Paris Cité, France",
+  year: "2026",
   description: "...",
-  isbn: "978-...",
+  keywords: ["quantum mechanics", "..."],
 };
 ```
 
@@ -188,4 +187,4 @@ quantum-mechanics-book/
 
 ## License
 
-© 2024 Your Name. All rights reserved.
+© 2026 Jean-Philippe Bruneton. All rights reserved.

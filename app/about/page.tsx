@@ -1,23 +1,16 @@
 "use client";
-import { bookMeta, getWebThemes } from "@/lib/chapters";
+import { bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 export default function AboutPage() {
   const { t, lang } = useLang();
   const at = t.about;
   const book = t.book;
-  const webThemes = getWebThemes();
-
   const detailItems = [
     { label: at.detailLabels.author, value: bookMeta.author },
     { label: at.detailLabels.affiliation, value: bookMeta.affiliation },
     { label: at.detailLabels.edition, value: book.edition },
     { label: at.detailLabels.year, value: bookMeta.year },
-    {
-      label: at.detailLabels.chapters,
-      value: `${webThemes.length} ${at.chaptersUnit}`,
-    },
-    { label: at.detailLabels.isbn, value: bookMeta.isbn },
   ];
 
   const sectionStyle = {
@@ -155,16 +148,6 @@ export default function AboutPage() {
               {bookMeta.author}
             </strong>{" "}
             {at.authorBioSuffix} {bookMeta.affiliation}. {at.authorBioRest}
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.8rem",
-              color: "var(--text-dim)",
-              fontStyle: "italic",
-            }}
-          >
-            {at.bioReplacePlaceholder}
           </p>
         </div>
 

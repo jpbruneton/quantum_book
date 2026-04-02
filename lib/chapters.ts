@@ -39,13 +39,11 @@ export interface Theme {
 export const bookMeta = {
   title: "Quantum Mechanics",
   subtitle: "A Modern Introduction",
-  author: "Your Name",
-  affiliation: "University / Institution",
+  author: "Jean-Philippe Bruneton",
+  affiliation: "Université Paris Cité, France",
   year: "2026",
-  edition: "First Edition",
   description:
     "A rigorous yet accessible treatment of quantum mechanics, bridging classical intuition and the mathematical formalism of Hilbert spaces, operators, and measurement theory. Designed for advanced undergraduates and graduate students.",
-  isbn: "978-X-XXXX-XXXX-X",
   keywords: ["quantum mechanics", "wave functions", "Schrödinger equation", "Hilbert space", "quantum field theory"],
 };
 

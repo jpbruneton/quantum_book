@@ -104,18 +104,14 @@ export const translations = {
         affiliation: "Affiliation",
         edition: "Edition",
         year: "Year",
-        chapters: "Themes",
-        isbn: "ISBN",
       },
-      chaptersUnit: "themes",
       authorTitle: "About the Author",
       howToUse: "How to Use This Site",
       howToBody:
         "Each chapter can be read online via the Read Online tab, which renders all mathematical equations using KaTeX. Alternatively, switch to the PDF Viewer tab to view the typeset PDF directly in your browser, or download it for offline reading. All content is free and open access.",
       authorBioSuffix: "is a physicist at",
       authorBioRest:
-        "Their research interests span quantum field theory, quantum information, and the foundations of quantum mechanics. This book grew from lecture notes developed over many years of teaching graduate and advanced undergraduate courses.",
-      bioReplacePlaceholder: "✏️ Replace this bio in app/about/page.tsx",
+        "His research interests include the laws of gravitation, quantum mechanics and its foundations, and artificial intelligence. This book grew from lecture notes developed over many years of teaching at graduate and advanced undergraduate level.",
       aboutBookBody2:
         "The text develops quantum mechanics from first principles, assuming a strong background in classical mechanics, electrodynamics, and mathematics. Proofs are given in full whenever they clarify the physics, and many worked examples complement the theoretical exposition.",
       translationWarning:
@@ -252,18 +248,14 @@ export const translations = {
         affiliation: "Établissement",
         edition: "Édition",
         year: "Année",
-        chapters: "Thèmes",
-        isbn: "ISBN",
       },
-      chaptersUnit: "thèmes",
       authorTitle: "À propos de l'auteur",
       howToUse: "Comment utiliser ce site",
       howToBody:
         "Chaque chapitre peut être lu en ligne via l'onglet Lire en ligne, qui affiche toutes les équations mathématiques avec KaTeX. Vous pouvez également basculer vers l'onglet Visionneur PDF pour consulter le PDF directement dans votre navigateur, ou le télécharger pour une lecture hors ligne. Tout le contenu est en accès libre.",
-      authorBioSuffix: "est physicien(ne) à",
+      authorBioSuffix: "est physicien à l'",
       authorBioRest:
-        "Ses intérêts de recherche couvrent la théorie quantique des champs, l'information quantique et les fondements de la mécanique quantique. Ce livre est issu de notes de cours développées au fil de nombreuses années d'enseignement aux cycles supérieurs.",
-      bioReplacePlaceholder: "✏️ Remplacez cette biographie dans app/about/page.tsx",
+        "Ses intérêts de recherche couvrent les lois de la gravitation, la mécanique quantique et ses fondements, et l'IA. Ce livre est issu de notes de cours développées au fil de nombreuses années d'enseignement aux cycles supérieurs.",
       aboutBookBody2:
         "Le texte développe la mécanique quantique à partir des premiers principes, en supposant une solide formation en mécanique classique, en électrodynamique et en mathématiques. Les preuves sont données en entier lorsqu'elles éclairent la physique, et de nombreux exemples travaillés complètent l'exposition théorique.",
       translationWarning:
