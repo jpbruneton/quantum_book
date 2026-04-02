@@ -10,21 +10,10 @@ export default function ChaptersPage() {
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
         {/* Header */}
         <div style={{ marginBottom: "4rem" }}>
-          <p
-            style={{
-              fontFamily: "var(--font-jetbrains)",
-              fontSize: "0.75rem",
-              letterSpacing: "0.15em",
-              color: "var(--amber)",
-              marginBottom: "0.75rem",
-            }}
-          >
-            {t.chapters.label}
-          </p>
           <h1
             style={{
               fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
+              fontSize: "clamp(2.15rem, 4.6vw, 3.1rem)",
               fontWeight: 700,
               color: "var(--text-heading)",
               lineHeight: 1.15,
@@ -33,16 +22,18 @@ export default function ChaptersPage() {
           >
             {t.chapters.title}
           </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-crimson)",
-              fontSize: "1.1rem",
-              color: "var(--text-secondary)",
-              maxWidth: "520px",
-            }}
-          >
-            {t.chapters.description}
-          </p>
+          {t.chapters.description.trim() ? (
+            <p
+              style={{
+                fontFamily: "var(--font-crimson)",
+                fontSize: "1.1rem",
+                color: "var(--text-secondary)",
+                maxWidth: "520px",
+              }}
+            >
+              {t.chapters.description}
+            </p>
+          ) : null}
         </div>
 
         {/* Chapter list */}

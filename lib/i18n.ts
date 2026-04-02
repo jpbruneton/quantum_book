@@ -55,8 +55,7 @@ export const translations = {
     chapters: {
       label: "THEMES",
       title: "All Themes",
-      description:
-        "Each theme contains one or more lessons, each available online with full math rendering or in PDF viewer mode.",
+      description: "",
       emptyTheme: "No lesson available yet for this theme.",
       lessonsAvailable: (count: number) =>
         count === 1 ? "1 lesson available" : `${count} lessons available`,
@@ -199,8 +198,7 @@ export const translations = {
     chapters: {
       label: "THÈMES",
       title: "Tous les thèmes",
-      description:
-        "Chaque thème contient une ou plusieurs leçons, disponibles en lecture en ligne avec rendu mathématique complet ou en mode visionneur PDF.",
+      description: "",
       emptyTheme: "Aucune leçon disponible pour ce thème pour le moment.",
       lessonsAvailable: (count: number) =>
         count <= 1 ? `${count} leçon disponible` : `${count} leçons disponibles`,
