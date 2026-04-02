@@ -618,18 +618,32 @@ export function ChapterContent({ lesson }: Props) {
               </a>
             </div>
 
-            {/* The actual embed */}
-            <iframe
-              src={`/pdfs/${pdfRelativePath}#toolbar=0`}
+            {/* object + iframe fallback: some browsers render PDF poorly in iframe alone */}
+            <object
+              data={`/pdfs/${pdfRelativePath}#toolbar=0`}
+              type="application/pdf"
               style={{
                 width: "100%",
                 height: "80vh",
                 minHeight: "600px",
                 border: "none",
+                display: "block",
                 background: "#fff",
               }}
-              title={`${lang === "fr" ? lesson.titleFr : lesson.titleEn} - PDF`}
-            />
+              aria-label={`${lang === "fr" ? lesson.titleFr : lesson.titleEn} - PDF`}
+            >
+              <iframe
+                src={`/pdfs/${pdfRelativePath}#toolbar=0`}
+                style={{
+                  width: "100%",
+                  height: "80vh",
+                  minHeight: "600px",
+                  border: "none",
+                  background: "#fff",
+                }}
+                title={`${lang === "fr" ? lesson.titleFr : lesson.titleEn} - PDF`}
+              />
+            </object>
           </div>
           <p
             style={{
