@@ -4,6 +4,8 @@ import { KATEX_MACROS } from "@/lib/latexMacros";
 function sanitizeMathCommon(math: string): string {
   // NBSP (U+00A0, "character 160") triggers KaTeX strict-mode warnings; TeX expects normal spaces.
   let result = math.replace(/\u00a0/g, " ");
+  // KaTeX does not reliably support \mathbb on digits; only rewrite the identity symbol form.
+  result = result.replace(/\\mathbb\s*\{\s*1\s*\}/g, "\\mathbf{1}");
   // Tolerate malformed one-argument braket usage.
   return result.replace(/\\braket\{([^{}]+)\}(?!\{)/g, "\\left\\langle $1 \\right\\rangle");
 }
