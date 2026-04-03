@@ -105,9 +105,9 @@ export const translations = {
         year: "Year",
       },
       authorTitle: "About the Author",
-      authorBioSuffix: "is a physicist at",
+      authorBioSuffix: "is a physicist at ",
       authorBioRest:
-        "His research interests include the laws of gravitation, quantum mechanics and its foundations, and artificial intelligence. This book grew from lecture notes developed over many years of teaching at graduate and advanced undergraduate level.",
+        "His research interests include the laws of gravitation, quantum mechanics and its foundations, and symbolic regression as a machine learning task. This book grew from lecture notes developed over many years of teaching at graduate and advanced undergraduate level.",
       authorLinksHeading: "Profiles",
       authorLinkLinkedIn: "LinkedIn",
       authorLinkGoogleScholar: "Google Scholar",
@@ -251,7 +251,7 @@ export const translations = {
       authorTitle: "À propos de l'auteur",
       authorBioSuffix: "est physicien à l'",
       authorBioRest:
-        "Ses intérêts de recherche couvrent les lois de la gravitation, la mécanique quantique et ses fondements, et l'IA. Ce livre est issu de notes de cours développées au fil de nombreuses années d'enseignement aux cycles supérieurs.",
+        "Ses intérêts de recherche couvrent les lois de la gravitation, la mécanique quantique et ses fondements, ainsi que la régression symbolique comme tâche d'apprentissage automatique. Ce livre est issu de notes de cours développées au fil de nombreuses années d'enseignement aux cycles supérieurs.",
       authorLinksHeading: "Liens",
       authorLinkLinkedIn: "LinkedIn",
       authorLinkGoogleScholar: "Google Scholar",

@@ -162,7 +162,7 @@ export default function AboutPage() {
             <strong style={{ color: "var(--amber-soft)" }}>
               {bookMeta.author}
             </strong>{" "}
-            {at.authorBioSuffix} {bookMeta.affiliation}. {at.authorBioRest}
+            {at.authorBioSuffix}{bookMeta.affiliation}. {at.authorBioRest}
           </p>
           <p
             style={{
