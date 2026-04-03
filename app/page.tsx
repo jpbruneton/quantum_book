@@ -88,7 +88,8 @@ export default function HomePage() {
                 lineHeight: 1.02,
                 letterSpacing: "-0.02em",
                 color: "var(--text-bright)",
-                marginBottom: "0.75rem",
+                marginTop: "calc(-1cm)",
+                marginBottom: "1cm",
                 whiteSpace: "nowrap",
               }}
             >
