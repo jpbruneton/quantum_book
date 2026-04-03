@@ -88,7 +88,7 @@ export default function HomePage() {
                 lineHeight: 1.02,
                 letterSpacing: "-0.02em",
                 color: "var(--text-bright)",
-                marginBottom: "1rem",
+                marginBottom: "0.75rem",
                 whiteSpace: "nowrap",
               }}
             >
@@ -103,27 +103,34 @@ export default function HomePage() {
                 fontWeight: 400,
                 fontStyle: "italic",
                 color: "var(--amber-soft)",
-                marginBottom: "1.5rem",
+                marginBottom: "1rem",
               }}
             >
               {book.subtitle}
             </p>
 
-            <p
-              className="animate-fade-up stagger-4"
-              style={{
-                fontFamily: "var(--font-crimson)",
-                fontSize: "1.15rem",
-                color: "var(--text-secondary)",
-                maxWidth: "520px",
-                lineHeight: 1.75,
-                marginBottom: "2.5rem",
-                textAlign: "justify",
-                whiteSpace: "pre-line",
-              }}
-            >
-              {book.description}
-            </p>
+            <div className="animate-fade-up stagger-4">
+              {book.description
+                .split(/\n\n+/)
+                .map((block) => block.trim())
+                .filter(Boolean)
+                .map((paragraph, index, arr) => (
+                  <p
+                    key={index}
+                    style={{
+                      fontFamily: "var(--font-crimson)",
+                      fontSize: "1.15rem",
+                      color: "var(--text-secondary)",
+                      maxWidth: "520px",
+                      lineHeight: 1.65,
+                      marginBottom: index < arr.length - 1 ? "0.65rem" : "1.75rem",
+                      textAlign: "justify",
+                    }}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+            </div>
 
             <div
               className="animate-fade-up stagger-5"

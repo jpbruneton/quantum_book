@@ -2,6 +2,21 @@
 import { bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
+const AUTHOR_EXTERNAL_LINKS = [
+  {
+    href: "https://www.linkedin.com/in/jean-philippe-bruneton-a5014822/",
+    labelKey: "linkedin" as const,
+  },
+  {
+    href: "https://scholar.google.com/citations?user=_IWT-z0AAAAJ&hl=en&oi=sra",
+    labelKey: "scholar" as const,
+  },
+  {
+    href: "https://github.com/jpbruneton",
+    labelKey: "github" as const,
+  },
+];
+
 export default function AboutPage() {
   const { t, lang } = useLang();
   const at = t.about;
@@ -143,18 +158,55 @@ export default function AboutPage() {
         {/* Author bio */}
         <div style={sectionStyle}>
           <h2 style={h2Style}>{at.authorTitle}</h2>
-          <p style={bodyStyle}>
+          <p style={{ ...bodyStyle, marginBottom: "1rem" }}>
             <strong style={{ color: "var(--amber-soft)" }}>
               {bookMeta.author}
             </strong>{" "}
             {at.authorBioSuffix} {bookMeta.affiliation}. {at.authorBioRest}
           </p>
-        </div>
-
-        {/* How to use */}
-        <div>
-          <h2 style={h2Style}>{at.howToUse}</h2>
-          <p style={{ ...bodyStyle, marginBottom: 0 }}>{at.howToBody}</p>
+          <p
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "0.72rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              color: "var(--text-dim)",
+              marginBottom: "0.5rem",
+            }}
+          >
+            {at.authorLinksHeading}
+          </p>
+          <ul
+            style={{
+              margin: 0,
+              paddingLeft: "1.25rem",
+              fontFamily: "var(--font-crimson)",
+              fontSize: "1.05rem",
+              color: "var(--text-secondary)",
+              lineHeight: 1.9,
+            }}
+          >
+            {AUTHOR_EXTERNAL_LINKS.map((item) => {
+              const label =
+                item.labelKey === "linkedin"
+                  ? at.authorLinkLinkedIn
+                  : item.labelKey === "scholar"
+                    ? at.authorLinkGoogleScholar
+                    : at.authorLinkGitHub;
+              return (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "var(--amber)", textDecoration: "underline" }}
+                  >
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </div>

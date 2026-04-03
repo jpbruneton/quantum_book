@@ -17,6 +17,11 @@ export function NavBar() {
     { href: "/about", label: t.nav.about },
   ];
 
+  const langLabels: Record<"en" | "fr", string> = {
+    fr: "Français",
+    en: "English",
+  };
+
   return (
     <nav
       style={{
@@ -38,13 +43,55 @@ export function NavBar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          gap: "1rem",
         }}
       >
-        <div style={{ width: "220px" }} />
+        <div
+          style={{
+            display: "flex",
+            gap: "1.5rem",
+            alignItems: "center",
+            flexWrap: "wrap",
+            minWidth: 0,
+          }}
+        >
+          {/* Language toggle: left of Home */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0",
+              border: "1px solid var(--border)",
+              borderRadius: "4px",
+              overflow: "hidden",
+              fontFamily: "var(--font-inter)",
+              fontSize: "0.75rem",
+              fontWeight: 500,
+              flexShrink: 0,
+            }}
+          >
+            {(["fr", "en"] as const).map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => setLang(l)}
+                style={{
+                  background: lang === l ? "var(--amber)" : "transparent",
+                  color: lang === l ? (theme === "dark" ? "#0a0b0f" : "#ffffff") : "var(--text-secondary)",
+                  border: "none",
+                  padding: "0.35rem 0.65rem",
+                  cursor: "pointer",
+                  letterSpacing: "0.02em",
+                  transition: "background 0.2s, color 0.2s",
+                  lineHeight: 1,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {langLabels[l]}
+              </button>
+            ))}
+          </div>
 
-        {/* Right side */}
-        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-          {/* Desktop nav links */}
           {links.map((link) => (
             <Link
               key={link.href}
@@ -75,42 +122,9 @@ export function NavBar() {
               {link.label}
             </Link>
           ))}
+        </div>
 
-          {/* Language toggle */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0",
-              border: "1px solid var(--border)",
-              borderRadius: "4px",
-              overflow: "hidden",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.75rem",
-              fontWeight: 500,
-            }}
-          >
-            {(["en", "fr"] as const).map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                style={{
-                  background: lang === l ? "var(--amber)" : "transparent",
-                  color: lang === l ? (theme === "dark" ? "#0a0b0f" : "#ffffff") : "var(--text-secondary)",
-                  border: "none",
-                  padding: "0.3rem 0.6rem",
-                  cursor: "pointer",
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  transition: "background 0.2s, color 0.2s",
-                  lineHeight: 1,
-                }}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
-
+        <div style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
           {/* Theme toggle */}
           <button
             onClick={toggleTheme}
@@ -141,7 +155,6 @@ export function NavBar() {
           >
             {theme === "dark" ? "☀" : "☾"}
           </button>
-
         </div>
       </div>
     </nav>
