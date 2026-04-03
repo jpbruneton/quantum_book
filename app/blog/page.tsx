@@ -11,17 +11,6 @@ export default function BlogPage() {
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
       <div style={{ maxWidth: "980px", margin: "0 auto" }}>
         <header style={{ marginBottom: "2.5rem" }}>
-          <p
-            style={{
-              fontFamily: "var(--font-jetbrains)",
-              fontSize: "0.75rem",
-              letterSpacing: "0.15em",
-              color: "var(--amber)",
-              marginBottom: "0.75rem",
-            }}
-          >
-            {updates.label}
-          </p>
           <h1
             style={{
               fontFamily: "var(--font-playfair)",

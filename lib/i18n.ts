@@ -112,10 +112,16 @@ export const translations = {
       authorLinkLinkedIn: "LinkedIn",
       authorLinkGoogleScholar: "Google Scholar",
       authorLinkGitHub: "GitHub",
+      aboutProjectTitle: "About the Project",
+      aboutProjectLead:
+        "This site and the book are under development. Lessons and exercises will be added gradually.",
+      aboutProjectOutlineLabel: "Planned content:",
+      aboutProjectOutlineBody:
+        "Part I, isolated systems: mathematical formalism (mathematical physics), postulates, basic applications. Part II, interacting systems: entanglement, decoherence, measurement theory. Part III: interpretations of quantum mechanics and alternative theories. Part IV: quantum information, quantum algorithms. Part V: quantum gravity.",
       aboutBookBody2:
         "The text develops quantum mechanics from first principles, assuming a strong background in classical mechanics, electrodynamics, and mathematics. Proofs are given in full whenever they clarify the physics, and many worked examples complement the theoretical exposition.",
       translationWarning:
-        "Warning: this book is primarily written in French; the English version is automatically translated using Claude 4.6.",
+        "Warning: this book is primarily written in French; the English version is automatically translated using Claude Sonnet 4.6.",
     },
     updates: {
       label: "BLOG",
@@ -256,10 +262,16 @@ export const translations = {
       authorLinkLinkedIn: "LinkedIn",
       authorLinkGoogleScholar: "Google Scholar",
       authorLinkGitHub: "GitHub",
+      aboutProjectTitle: "À propos du projet",
+      aboutProjectLead:
+        "Ce site et cet ouvrage sont en cours de développement. Les leçons et les exercices seront publiés progressivement.",
+      aboutProjectOutlineLabel: "Contenu prévu :",
+      aboutProjectOutlineBody:
+        "Partie I, systèmes isolés : formalisme mathématique (physique mathématique), postulats, applications de base. Partie II, systèmes en interaction : intrication, décohérence, théorie de la mesure. Partie III : interprétations de la mécanique quantique et théories alternatives. Partie IV : information quantique, algorithmique quantique. Partie V : gravitation quantique.",
       aboutBookBody2:
         "Le texte développe la mécanique quantique à partir des premiers principes, en supposant une solide formation en mécanique classique, en électrodynamique et en mathématiques. Les preuves sont données en entier lorsqu'elles éclairent la physique, et de nombreux exemples travaillés complètent l'exposition théorique.",
       translationWarning:
-        "Note : ce livre est principalement rédigé en français ; la version anglaise est traduite automatiquement avec Claude 4.6.",
+        "Note : ce livre est principalement rédigé en français ; la version anglaise est traduite automatiquement avec Claude Sonnet 4.6.",
     },
     updates: {
       label: "BLOG",

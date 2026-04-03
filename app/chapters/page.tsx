@@ -6,10 +6,16 @@ export default function ChaptersPage() {
   const { t } = useLang();
 
   return (
-    <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
+    <div
+      style={{
+        position: "relative",
+        zIndex: 1,
+        padding: "calc(5rem - 1cm) 1.5rem 5rem",
+      }}
+    >
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
         {/* Header */}
-        <div style={{ marginBottom: "4rem" }}>
+        <div style={{ marginBottom: "calc(4rem - 1cm)" }}>
           <h1
             style={{
               fontFamily: "var(--font-playfair)",

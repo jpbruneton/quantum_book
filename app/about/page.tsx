@@ -29,8 +29,8 @@ export default function AboutPage() {
   ];
 
   const sectionStyle = {
-    marginBottom: "3.5rem",
-    paddingBottom: "3.5rem",
+    marginBottom: "2.35rem",
+    paddingBottom: "2.35rem",
     borderBottom: "1px solid var(--border-subtle)",
   };
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
     fontSize: "1.4rem",
     fontWeight: 600,
     color: "var(--text-heading)",
-    marginBottom: "1.25rem",
+    marginBottom: "0.75rem",
     borderLeft: "3px solid var(--amber)",
     paddingLeft: "1rem",
   };
@@ -48,47 +48,26 @@ export default function AboutPage() {
     fontFamily: "var(--font-crimson)",
     fontSize: "1.1rem",
     color: "var(--text-secondary)",
-    lineHeight: 1.85,
-    marginBottom: "1.25rem",
+    lineHeight: 1.68,
+    marginBottom: "0.65rem",
   };
 
   return (
-    <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
+    <div
+      style={{
+        position: "relative",
+        zIndex: 1,
+        padding: "calc(5rem - 1cm) 1.5rem 5rem",
+      }}
+    >
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-        {/* Header */}
-        <div style={{ marginBottom: "4rem" }}>
-          <p
-            style={{
-              fontFamily: "var(--font-jetbrains)",
-              fontSize: "0.75rem",
-              letterSpacing: "0.15em",
-              color: "var(--amber)",
-              marginBottom: "0.75rem",
-            }}
-          >
-            {at.label}
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
-              fontWeight: 700,
-              color: "var(--text-heading)",
-              lineHeight: 1.15,
-              marginBottom: "1rem",
-            }}
-          >
-            {book.title}
-          </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontStyle: "italic",
-              fontSize: "1.3rem",
-              color: "var(--amber-soft)",
-            }}
-          >
-            {book.subtitle}
+        {/* Project status */}
+        <div style={sectionStyle}>
+          <h2 style={h2Style}>{at.aboutProjectTitle}</h2>
+          <p style={{ ...bodyStyle, textAlign: "justify" }}>{at.aboutProjectLead}</p>
+          <p style={{ ...bodyStyle, marginBottom: 0, textAlign: "justify" }}>
+            <strong style={{ fontWeight: 700 }}>{at.aboutProjectOutlineLabel}</strong>{" "}
+            {at.aboutProjectOutlineBody}
           </p>
         </div>
 
@@ -100,15 +79,29 @@ export default function AboutPage() {
               {at.translationWarning}
             </p>
           ) : null}
-          <p style={{ ...bodyStyle, textAlign: "justify", whiteSpace: "pre-line" }}>
-            {book.description}
-          </p>
-          <p style={{ ...bodyStyle, marginBottom: 0 }}>{at.aboutBookBody2}</p>
+          {book.description
+            .split(/\n\n+/)
+            .map((block) => block.trim())
+            .filter(Boolean)
+            .map((paragraph, index, arr) => (
+              <p
+                key={index}
+                style={{
+                  ...bodyStyle,
+                  textAlign: "justify",
+                  marginBottom:
+                    index < arr.length - 1 ? "0.4rem" : "0.65rem",
+                }}
+              >
+                {paragraph}
+              </p>
+            ))}
+          <p style={{ ...bodyStyle, marginBottom: 0, textAlign: "justify" }}>{at.aboutBookBody2}</p>
         </div>
 
         {/* Book details */}
         <div style={sectionStyle}>
-          <h2 style={{ ...h2Style, marginBottom: "1.5rem" }}>
+          <h2 style={{ ...h2Style, marginBottom: "0.85rem" }}>
             {at.bookDetails}
           </h2>
           <div
@@ -158,7 +151,7 @@ export default function AboutPage() {
         {/* Author bio */}
         <div style={sectionStyle}>
           <h2 style={h2Style}>{at.authorTitle}</h2>
-          <p style={{ ...bodyStyle, marginBottom: "1rem" }}>
+          <p style={{ ...bodyStyle, marginBottom: "0.65rem" }}>
             <strong style={{ color: "var(--amber-soft)" }}>
               {bookMeta.author}
             </strong>{" "}
@@ -183,7 +176,7 @@ export default function AboutPage() {
               fontFamily: "var(--font-crimson)",
               fontSize: "1.05rem",
               color: "var(--text-secondary)",
-              lineHeight: 1.9,
+              lineHeight: 1.55,
             }}
           >
             {AUTHOR_EXTERNAL_LINKS.map((item) => {

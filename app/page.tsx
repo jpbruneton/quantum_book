@@ -134,7 +134,12 @@ export default function HomePage() {
 
             <div
               className="animate-fade-up stagger-5"
-              style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
+              style={{
+                display: "flex",
+                gap: "1rem",
+                flexWrap: "wrap",
+                marginTop: "calc(-0.4cm)",
+              }}
             >
               <Link
                 href="/chapters"
@@ -184,7 +189,7 @@ export default function HomePage() {
               gap: "0.9rem",
               width: "100%",
               maxWidth: "380px",
-              marginTop: "2cm",
+              marginTop: "3cm",
               transform: "translateY(-90px)",
             }}
           >
