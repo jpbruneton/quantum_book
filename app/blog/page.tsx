@@ -1,19 +1,22 @@
 "use client";
 
 import { useLang } from "@/app/context/LangContext";
+import type { UpdateEntry } from "@/lib/i18n";
+
+function sortEntriesNewestFirst(entries: readonly UpdateEntry[]): UpdateEntry[] {
+  return [...entries].sort((a, b) => b.date.localeCompare(a.date));
+}
 
 export default function BlogPage() {
   const { t } = useLang();
   const updates = t.updates;
   const lead = updates.description || updates.comingSoon;
-  const entries = updates.entries;
-  const featured = entries[0];
-  const posts = entries.slice(1);
+  const sorted = sortEntriesNewestFirst(updates.entries);
 
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
-      <div style={{ maxWidth: "980px", margin: "0 auto" }}>
-        <header style={{ marginBottom: "2.5rem" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
+        <header style={{ marginBottom: "2.25rem" }}>
           <h1
             style={{
               fontFamily: "var(--font-playfair)",
@@ -41,119 +44,87 @@ export default function BlogPage() {
           ) : null}
         </header>
 
-        {featured && (
-          <section style={{ marginBottom: "2rem" }}>
-            <article
+        {sorted.length > 0 ? (
+          <section>
+            <p
               style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--accent-border-sm)",
-                borderRadius: "10px",
-                padding: "1.5rem 1.75rem",
+                fontFamily: "var(--font-inter)",
+                fontSize: "0.78rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "var(--text-dim)",
+                marginBottom: "1.35rem",
               }}
             >
-              <div
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.72rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  color: "var(--amber)",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                {updates.latestTitle}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-jetbrains)",
-                  fontSize: "0.75rem",
-                  color: "var(--text-dim)",
-                  marginBottom: "0.6rem",
-                }}
-              >
-                {featured.date}
-              </div>
-              <h2
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "1.35rem",
-                  color: "var(--text-heading)",
-                  marginBottom: "0.6rem",
-                }}
-              >
-                {featured.title}
-              </h2>
-              <p
-                style={{
-                  fontFamily: "var(--font-crimson)",
-                  fontSize: "1.02rem",
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.75,
-                  marginBottom: "0.8rem",
-                }}
-              >
-                {featured.body}
-              </p>
-              <span
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.8rem",
-                  color: "var(--amber)",
-                  fontWeight: 600,
-                }}
-              >
-                Lire l'article →
-              </span>
-            </article>
+              {updates.timelineLabel}
+            </p>
+            <div
+              style={{
+                position: "relative",
+                paddingLeft: "1.35rem",
+                borderLeft: "2px solid var(--accent-border-md)",
+              }}
+            >
+              {sorted.map((entry, index) => (
+                <article
+                  key={`${entry.date}-${entry.title}`}
+                  style={{
+                    position: "relative",
+                    marginBottom: index < sorted.length - 1 ? "1.5rem" : 0,
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "calc(-1.35rem - 1px)",
+                      top: "0.4rem",
+                      width: "10px",
+                      height: "10px",
+                      transform: "translateX(-50%)",
+                      borderRadius: "50%",
+                      background: "var(--amber)",
+                      boxShadow: "0 0 0 3px var(--bg-primary)",
+                    }}
+                    aria-hidden
+                  />
+                  <div
+                    style={{
+                      fontFamily: "var(--font-jetbrains)",
+                      fontSize: "0.75rem",
+                      color: "var(--text-dim)",
+                      marginBottom: "0.45rem",
+                    }}
+                  >
+                    {entry.date}
+                  </div>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-playfair)",
+                      fontSize: "1.2rem",
+                      fontWeight: 600,
+                      color: "var(--text-heading)",
+                      marginBottom: "0.5rem",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {entry.title}
+                  </h2>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-crimson)",
+                      fontSize: "1.02rem",
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.75,
+                      textAlign: "justify",
+                    }}
+                  >
+                    {entry.body}
+                  </p>
+                </article>
+              ))}
+            </div>
           </section>
-        )}
-
-        {posts.length > 0 && (
-          <section style={{ display: "grid", gap: "1rem" }}>
-            {posts.map((entry) => (
-              <article
-                key={`${entry.date}-${entry.title}`}
-                style={{
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--accent-border-sm)",
-                  borderRadius: "8px",
-                  padding: "1.2rem 1.4rem",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-jetbrains)",
-                    fontSize: "0.75rem",
-                    color: "var(--text-dim)",
-                    marginBottom: "0.55rem",
-                  }}
-                >
-                  {entry.date}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-playfair)",
-                    fontSize: "1.12rem",
-                    color: "var(--text-heading)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  {entry.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "var(--font-crimson)",
-                    fontSize: "0.98rem",
-                    color: "var(--text-secondary)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {entry.body}
-                </p>
-              </article>
-            ))}
-          </section>
-        )}
+        ) : null}
 
         {updates.description && updates.comingSoon ? (
           <p

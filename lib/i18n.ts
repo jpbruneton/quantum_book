@@ -134,9 +134,16 @@ export const translations = {
       title: "Project Blog",
       description: "",
       latestTitle: "Latest posts",
-      entries: [] as UpdateEntry[],
-      comingSoon:
-        "Acquisition of quantum-book.org; theme 2 lessons and exercises are being rolled out (English page translation in progress).",
+      timelineLabel: "Timeline",
+      entries: [
+        {
+          date: "2026-03-31",
+          title: "Domain acquisition and theme 2",
+          body:
+            "Acquisition of quantum-book.org; theme 2 lessons and exercises are being rolled out (English page translation in progress).",
+        },
+      ] as UpdateEntry[],
+      comingSoon: "",
     },
     footer: {
       navigation: "Navigation",
@@ -277,9 +284,16 @@ export const translations = {
       title: "Blog du projet",
       description: "",
       latestTitle: "Derniers articles",
-      entries: [] as UpdateEntry[],
-      comingSoon:
-        "Acquisition de quantum-book.org ; déploiement des leçons du thème 2 et de ses exercices en cours (+ traduction sur la page anglaise).",
+      timelineLabel: "Fil chronologique",
+      entries: [
+        {
+          date: "2026-03-31",
+          title: "Acquisition du domaine et thème 2",
+          body:
+            "Acquisition de quantum-book.org ; déploiement des leçons du thème 2 et de ses exercices en cours (+ traduction sur la page anglaise).",
+        },
+      ] as UpdateEntry[],
+      comingSoon: "",
     },
     footer: {
       navigation: "Navigation",
