@@ -1,0 +1,17 @@
+import type { Metadata } from "next";
+import { bookMeta } from "@/lib/chapters";
+
+export const metadata: Metadata = {
+  title: "Exercises",
+  description: `Practice problems and exercises for ${bookMeta.title}: ${bookMeta.subtitle} — covering Hilbert spaces, operators, measurement, and more.`,
+  alternates: { canonical: "https://quantum-book.org/exercises" },
+  openGraph: {
+    title: `Exercises | ${bookMeta.title}`,
+    description: `Practice problems for ${bookMeta.title}: Hilbert spaces, operators, measurement theory, and more.`,
+    url: "https://quantum-book.org/exercises",
+  },
+};
+
+export default function ExercisesLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}

@@ -39,6 +39,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  verification: {
+    google: "SkUSdSJzNk1KmUUkEocmv9MOt8Z5dhVdLVTKLEfWw_Q",
+  },
   openGraph: {
     type: "book",
     siteName: `${bookMeta.title}: ${bookMeta.subtitle}`,
