@@ -232,68 +232,24 @@ export default function HomePage() {
               <div
                 style={{
                   position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 38%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0) 100%)",
-                  pointerEvents: "none",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  left: "1.1rem",
-                  right: "1.1rem",
-                  top: "1rem",
-                  textAlign: "center",
-                  color: "#f8fafc",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: "var(--font-playfair)",
-                    fontSize: "1.5rem",
-                    fontWeight: 700,
-                    lineHeight: 1.2,
-                    marginBottom: "0",
-                    textShadow: "0 2px 14px rgba(0,0,0,0.5)",
-                  }}
-                >
-                  {book.title}
-                </p>
-              </div>
-              <div
-                style={{
-                  position: "absolute",
-                  left: "1.1rem",
-                  right: "1.1rem",
+                  left: "1rem",
+                  right: "1rem",
                   bottom: "1rem",
                   textAlign: "center",
-                  color: "#f8fafc",
+                  pointerEvents: "none",
                 }}
               >
-                <p
-                  style={{
-                    fontFamily: "var(--font-playfair)",
-                    fontStyle: "italic",
-                    fontSize: "0.95rem",
-                    color: "#f8fafc",
-                    marginBottom: "0.55rem",
-                    textShadow: "0 2px 10px rgba(0,0,0,0.45)",
-                  }}
-                >
-                  {book.subtitle}
-                </p>
-                <p
+                <span
                   style={{
                     fontFamily: "var(--font-inter)",
                     fontSize: "0.75rem",
-                    letterSpacing: "0.08em",
-                    color: "#e2e8f0",
-                    textShadow: "0 2px 8px rgba(0,0,0,0.45)",
+                    letterSpacing: "0.1em",
+                    color: "#f8fafc",
+                    textShadow: "0 1px 10px rgba(0,0,0,0.85), 0 0 1px rgba(0,0,0,0.9)",
                   }}
                 >
                   {bookMeta.year}
-                </p>
+                </span>
               </div>
             </div>
           </div>
