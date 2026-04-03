@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { bookMeta } from "@/lib/chapters";
+import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 
 export const metadata: Metadata = {
   title: "Updates",
-  description: `Latest news and updates about ${bookMeta.title}: ${bookMeta.subtitle} — new chapters, corrections, and announcements.`,
+  description: `Latest news and updates about ${bookMetaDisplayTitle()} — new chapters, corrections, and announcements.`,
   alternates: { canonical: "https://quantum-book.org/blog" },
   openGraph: {
     title: `Updates | ${bookMeta.title}`,

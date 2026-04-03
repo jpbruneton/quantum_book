@@ -44,7 +44,9 @@ export function Footer() {
               fontFamily: "var(--font-inter)",
             }}
           >
-            {book.subtitle} &mdash; {book.edition}
+            {book.subtitle.trim()
+              ? `${book.subtitle} — ${book.edition}`
+              : book.edition}
           </p>
         </div>
         <div>

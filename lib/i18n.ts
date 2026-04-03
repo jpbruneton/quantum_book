@@ -10,7 +10,7 @@ export const translations = {
   en: {
     book: {
       title: "Quantum Mechanics",
-      subtitle: "A Modern Introduction",
+      subtitle: "",
       description:
         "This book proposes a rigorous formalization of modern quantum mechanics. Going beyond the scope of conventional introductory textbooks, it develops the essential tools of mathematical physics, from Hilbert spaces to advanced spectral theory, including topology and geometry.\n\nThis treatise is intended for readers who seek, beyond computational practice, to understand the logical necessity and foundation of the structures in use. The text addresses interpretational issues directly, with a detailed analysis of the measurement problem and decoherence, while also presenting alternative theories and their experimental constraints.\n\nIntended for master's students, doctoral students, and researchers, it aims at a comprehensive command of the theory, uniting technical rigor with conceptual depth.",
       edition: "First Edition",
@@ -160,7 +160,7 @@ export const translations = {
   fr: {
     book: {
       title: "Mécanique Quantique",
-      subtitle: "Une introduction moderne",
+      subtitle: "",
       description:
         "Cet ouvrage propose une formalisation rigoureuse de la mécanique quantique moderne. Dépassant le cadre des manuels d'introduction conventionnels, il approfondit les outils essentiels de la physique mathématique, des espaces de Hilbert à la théorie spectrale avancée en passant par la topologie et la géométrie.\n\nCe traité s’adresse à ceux qui cherchent, au-delà de la simple pratique du calcul, à saisir la nécessité logique et le fondement des structures employées. Le texte aborde de front les enjeux de l’interprétation, analysant en détail le problème de la mesure et de la décohérence, tout en présentant les théories alternatives et leurs contraintes expérimentales.\n\nDestiné aux étudiants de second cycle, doctorants et chercheurs, il vise une maîtrise exhaustive de la théorie, unissant rigueur technique et profondeur conceptuelle.",
       edition: "Première Édition",

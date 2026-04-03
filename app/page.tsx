@@ -95,19 +95,21 @@ export default function HomePage() {
               {book.title}
             </h1>
 
-            <p
-              className="animate-fade-up stagger-3"
-              style={{
-                fontFamily: "var(--font-playfair)",
-                fontSize: "clamp(1.1rem, 2.1vw, 1.55rem)",
-                fontWeight: 400,
-                fontStyle: "italic",
-                color: "var(--amber-soft)",
-                marginBottom: "1rem",
-              }}
-            >
-              {book.subtitle}
-            </p>
+            {book.subtitle.trim() ? (
+              <p
+                className="animate-fade-up stagger-3"
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontSize: "clamp(1.1rem, 2.1vw, 1.55rem)",
+                  fontWeight: 400,
+                  fontStyle: "italic",
+                  color: "var(--amber-soft)",
+                  marginBottom: "1rem",
+                }}
+              >
+                {book.subtitle}
+              </p>
+            ) : null}
 
             <div className="animate-fade-up stagger-4">
               {book.description

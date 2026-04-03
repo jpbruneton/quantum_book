@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { bookMeta } from "@/lib/chapters";
+import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 
 export const metadata: Metadata = {
   title: "Exercises",
-  description: `Practice problems and exercises for ${bookMeta.title}: ${bookMeta.subtitle} — covering Hilbert spaces, operators, measurement, and more.`,
+  description: `Practice problems and exercises for ${bookMetaDisplayTitle()} — covering Hilbert spaces, operators, measurement, and more.`,
   alternates: { canonical: "https://quantum-book.org/exercises" },
   openGraph: {
     title: `Exercises | ${bookMeta.title}`,

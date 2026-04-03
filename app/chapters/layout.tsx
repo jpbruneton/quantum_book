@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { bookMeta } from "@/lib/chapters";
+import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 
 // This metadata applies to /chapters (the listing page).
 // Individual /chapters/[slug] pages override it via their own generateMetadata.
 export const metadata: Metadata = {
   title: "Chapters",
-  description: `Browse all themes and lessons of ${bookMeta.title}: ${bookMeta.subtitle} — covering Hilbert spaces, quantum postulates, measurement, and more.`,
+  description: `Browse all themes and lessons of ${bookMetaDisplayTitle()} — covering Hilbert spaces, quantum postulates, measurement, and more.`,
   alternates: { canonical: "https://quantum-book.org/chapters" },
   openGraph: {
     title: `Chapters | ${bookMeta.title}`,

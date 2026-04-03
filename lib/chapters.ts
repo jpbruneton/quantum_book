@@ -38,7 +38,7 @@ export interface Theme {
 
 export const bookMeta = {
   title: "Quantum Mechanics",
-  subtitle: "A Modern Introduction",
+  subtitle: "",
   author: "Jean-Philippe Bruneton",
   affiliation: "Université Paris Cité, France",
   year: "2026",
@@ -46,6 +46,12 @@ export const bookMeta = {
     "A rigorous yet accessible treatment of quantum mechanics, bridging classical intuition and the mathematical formalism of Hilbert spaces, operators, and measurement theory. Designed for advanced undergraduates and graduate students.",
   keywords: ["quantum mechanics", "wave functions", "Schrödinger equation", "Hilbert space", "quantum field theory"],
 };
+
+/** Title plus optional subtitle, for SEO and Open Graph (no trailing colon if subtitle empty). */
+export function bookMetaDisplayTitle(): string {
+  const sub = bookMeta.subtitle.trim();
+  return sub.length > 0 ? `${bookMeta.title}: ${sub}` : bookMeta.title;
+}
 
 export const themes: Theme[] = [
   {

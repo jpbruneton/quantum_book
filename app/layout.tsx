@@ -4,14 +4,14 @@ import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next";
-import { bookMeta } from "@/lib/chapters";
+import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 
 const SITE_URL = "https://quantum-book.org";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Book",
-  name: `${bookMeta.title}: ${bookMeta.subtitle}`,
+  name: bookMetaDisplayTitle(),
   description: bookMeta.description,
   author: {
     "@type": "Person",
@@ -30,7 +30,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${bookMeta.title}: ${bookMeta.subtitle}`,
+    default: bookMetaDisplayTitle(),
     template: `%s | ${bookMeta.title}`,
   },
   description: bookMeta.description,
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "book",
-    siteName: `${bookMeta.title}: ${bookMeta.subtitle}`,
-    title: `${bookMeta.title}: ${bookMeta.subtitle}`,
+    siteName: bookMetaDisplayTitle(),
+    title: bookMetaDisplayTitle(),
     description: bookMeta.description,
     authors: [bookMeta.author],
     url: SITE_URL,
@@ -54,13 +54,13 @@ export const metadata: Metadata = {
         url: "/figs/front.png",
         width: 800,
         height: 1100,
-        alt: `${bookMeta.title}: ${bookMeta.subtitle}`,
+        alt: bookMetaDisplayTitle(),
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${bookMeta.title}: ${bookMeta.subtitle}`,
+    title: bookMetaDisplayTitle(),
     description: bookMeta.description,
     images: ["/figs/front.png"],
   },
