@@ -78,7 +78,7 @@ export default function HomePage() {
           }}
         >
           {/* Left: Text */}
-          <div>
+          <div style={{ marginTop: "calc(-0.5cm)" }}>
             <h1
               className="home-main-title animate-fade-up stagger-2 amber-glow"
               style={{
