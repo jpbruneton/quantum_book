@@ -5,7 +5,10 @@ import { useLang } from "@/app/context/LangContext";
 export default function BlogPage() {
   const { t } = useLang();
   const updates = t.updates;
-  const [featured, ...posts] = updates.entries;
+  const lead = updates.description || updates.comingSoon;
+  const entries = updates.entries;
+  const featured = entries[0];
+  const posts = entries.slice(1);
 
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
@@ -23,17 +26,19 @@ export default function BlogPage() {
           >
             {updates.title}
           </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-crimson)",
-              fontSize: "1.1rem",
-              color: "var(--text-secondary)",
-              lineHeight: 1.8,
-              maxWidth: "760px",
-            }}
-          >
-            {updates.description}
-          </p>
+          {lead ? (
+            <p
+              style={{
+                fontFamily: "var(--font-crimson)",
+                fontSize: "1.1rem",
+                color: "var(--text-secondary)",
+                lineHeight: 1.8,
+                maxWidth: "760px",
+              }}
+            >
+              {lead}
+            </p>
+          ) : null}
         </header>
 
         {featured && (
@@ -150,16 +155,18 @@ export default function BlogPage() {
           </section>
         )}
 
-        <p
-          style={{
-            marginTop: "1.5rem",
-            fontFamily: "var(--font-inter)",
-            fontSize: "0.85rem",
-            color: "var(--text-dim)",
-          }}
-        >
-          {updates.comingSoon}
-        </p>
+        {updates.description && updates.comingSoon ? (
+          <p
+            style={{
+              marginTop: "1.5rem",
+              fontFamily: "var(--font-inter)",
+              fontSize: "0.85rem",
+              color: "var(--text-dim)",
+            }}
+          >
+            {updates.comingSoon}
+          </p>
+        ) : null}
       </div>
     </div>
   );

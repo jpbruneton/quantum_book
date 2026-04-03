@@ -1,5 +1,11 @@
 export type Lang = "en" | "fr";
 
+export type UpdateEntry = {
+  date: string;
+  title: string;
+  body: string;
+};
+
 export const translations = {
   en: {
     book: {
@@ -126,18 +132,11 @@ export const translations = {
     updates: {
       label: "BLOG",
       title: "Project Blog",
-      description:
-        "Updates, release notes, roadmap decisions, and progress notes for the book project.",
+      description: "",
       latestTitle: "Latest posts",
-      entries: [
-        {
-          date: "2026-02-25",
-          title: "Bilingual mode and theming",
-          body:
-            "Added French/English language support, dark/light themes, and improved math rendering with KaTeX.",
-        },
-      ],
-      comingSoon: "More updates will be posted here regularly.",
+      entries: [] as UpdateEntry[],
+      comingSoon:
+        "Acquisition of quantum-book.org; theme 2 lessons and exercises are being rolled out (English page translation in progress).",
     },
     footer: {
       navigation: "Navigation",
@@ -276,18 +275,11 @@ export const translations = {
     updates: {
       label: "BLOG",
       title: "Blog du projet",
-      description:
-        "Actualités, notes de version, décisions de feuille de route et avancées du projet de livre.",
+      description: "",
       latestTitle: "Derniers articles",
-      entries: [
-        {
-          date: "2026-02-25",
-          title: "Mode bilingue et thèmes",
-          body:
-            "Ajout de la prise en charge français/anglais, des thèmes sombre/clair et amélioration du rendu mathématique avec KaTeX.",
-        },
-      ],
-      comingSoon: "D'autres mises à jour seront publiées ici régulièrement.",
+      entries: [] as UpdateEntry[],
+      comingSoon:
+        "Acquisition de quantum-book.org ; déploiement des leçons du thème 2 et de ses exercices en cours (+ traduction sur la page anglaise).",
     },
     footer: {
       navigation: "Navigation",
