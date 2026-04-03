@@ -4,6 +4,7 @@ import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 
 const SITE_URL = "https://quantum-book.org";
@@ -85,6 +86,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <Analytics />
+          <SpeedInsights />
         </Providers>
       </body>
     </html>
