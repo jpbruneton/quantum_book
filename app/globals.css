@@ -655,6 +655,80 @@ body::before {
   font-weight: 700;
 }
 
+/* Collapsible details blocks (indice / solution) */
+.prose-quantum details.latex-block {
+  cursor: default;
+}
+
+.prose-quantum details.latex-block summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.prose-quantum details.latex-block summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose-quantum details.latex-block summary::before {
+  content: "▶";
+  font-size: 0.65rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.prose-quantum details.latex-block[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.prose-quantum .latex-block-collapsible-body {
+  margin-top: 0.75rem;
+}
+
+/* Exercise / Hint / Solution blocks */
+.prose-quantum .latex-block-exercice,
+.prose-quantum .latex-block-exercise {
+  border-color: #06b6d466;
+  background: #06b6d41a;
+}
+
+.prose-quantum .latex-block-exercice strong,
+.prose-quantum .latex-block-exercise strong,
+.prose-quantum .latex-block-exercice .latex-inline-blue-strong,
+.prose-quantum .latex-block-exercise .latex-inline-blue-strong {
+  color: #0e7490;
+  font-weight: 700;
+}
+
+.prose-quantum .latex-block-indice,
+.prose-quantum .latex-block-hint {
+  border-color: #f59e0b55;
+  background: #fef9c314;
+}
+
+.prose-quantum .latex-block-indice strong,
+.prose-quantum .latex-block-hint strong,
+.prose-quantum .latex-block-indice .latex-inline-blue-strong,
+.prose-quantum .latex-block-hint .latex-inline-blue-strong {
+  color: #b45309;
+  font-weight: 700;
+}
+
+.prose-quantum .latex-block-solution {
+  border-color: #22c55e55;
+  background: #f0fdf414;
+}
+
+.prose-quantum .latex-block-solution strong,
+.prose-quantum .latex-block-solution .latex-inline-blue-strong {
+  color: #166534;
+  font-weight: 700;
+}
+
 .prose-quantum .latex-block-resume {
   border-color: #a855f766;
   background: #a855f71a;

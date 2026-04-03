@@ -784,7 +784,7 @@ function normalizeLatexBlocks(
   );
 
   // Render theorem-like environments as styled blocks.
-  const blockKinds: Array<{ env: string; title: string }> = [
+  const blockKinds: Array<{ env: string; title: string; collapsible?: boolean }> = [
     { env: "definition", title: "Definition" },
     { env: "theorem", title: isEnglish ? "Theorem" : "Théorème" },
     { env: "proposition", title: "Proposition" },
@@ -797,12 +797,19 @@ function normalizeLatexBlocks(
     { env: "example", title: "Example" },
     { env: "resume", title: isEnglish ? "Summary" : "Résumé" },
     { env: "important", title: "Important" },
+    { env: "exercice", title: isEnglish ? "Exercise" : "Exercice" },
+    { env: "exercise", title: isEnglish ? "Exercise" : "Exercice" },
+    { env: "indice", title: isEnglish ? "Hint" : "Indice", collapsible: true },
+    { env: "hint", title: isEnglish ? "Hint" : "Indice", collapsible: true },
+    { env: "solution", title: isEnglish ? "Solution" : "Solution", collapsible: true },
   ];
   const blockCounters: Record<string, number> = {
     definition: 0,
     theorem: 0,
     proposition: 0,
     remark: 0,
+    exercice: 0,
+    exercise: 0,
   };
 
   for (const blockKind of blockKinds) {
@@ -824,9 +831,15 @@ function normalizeLatexBlocks(
         blockCounters[blockKind.env] += 1;
         numberedTitle = `${blockKind.title} ${blockCounters[blockKind.env]}`;
       }
+      if (blockKind.collapsible) {
+        return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><strong>${numberedTitle}${suffix}</strong></summary><div class="latex-block-collapsible-body">`;
+      }
       return `\n\n<div class="latex-block latex-block-${blockKind.env}"><strong>${numberedTitle}${suffix}.</strong> `;
     });
-    result = result.replace(endRegex, "</div>\n\n");
+    result = result.replace(
+      endRegex,
+      blockKind.collapsible ? "</div></details>\n\n" : "</div>\n\n"
+    );
   }
 
   // Render itemized/enumerated lists.
