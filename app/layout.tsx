@@ -6,7 +6,29 @@ import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next";
 import { bookMeta } from "@/lib/chapters";
 
+const SITE_URL = "https://quantum-book.org";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: `${bookMeta.title}: ${bookMeta.subtitle}`,
+  description: bookMeta.description,
+  author: {
+    "@type": "Person",
+    name: bookMeta.author,
+    affiliation: {
+      "@type": "Organization",
+      name: bookMeta.affiliation,
+    },
+  },
+  datePublished: bookMeta.year,
+  inLanguage: ["en", "fr"],
+  url: SITE_URL,
+  image: `${SITE_URL}/figs/front.png`,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${bookMeta.title}: ${bookMeta.subtitle}`,
     template: `%s | ${bookMeta.title}`,
@@ -14,11 +36,30 @@ export const metadata: Metadata = {
   description: bookMeta.description,
   keywords: bookMeta.keywords,
   authors: [{ name: bookMeta.author }],
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     type: "book",
+    siteName: `${bookMeta.title}: ${bookMeta.subtitle}`,
     title: `${bookMeta.title}: ${bookMeta.subtitle}`,
     description: bookMeta.description,
     authors: [bookMeta.author],
+    url: SITE_URL,
+    images: [
+      {
+        url: "/figs/front.png",
+        width: 800,
+        height: 1100,
+        alt: `${bookMeta.title}: ${bookMeta.subtitle}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${bookMeta.title}: ${bookMeta.subtitle}`,
+    description: bookMeta.description,
+    images: ["/figs/front.png"],
   },
 };
 
@@ -29,6 +70,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <Providers>
           <NavBar />

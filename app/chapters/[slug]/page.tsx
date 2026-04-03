@@ -20,9 +20,19 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const theme = getWebTheme(params.slug);
   if (!theme) return {};
+  const keywords = theme.lessons.flatMap((l) => l.topicsEn).slice(0, 15);
+  const url = `https://quantum-book.org/chapters/${theme.slug}`;
   return {
     title: `Theme ${theme.number}: ${theme.titleEn}`,
     description: theme.descriptionEn,
+    keywords,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      title: `Theme ${theme.number}: ${theme.titleEn}`,
+      description: theme.descriptionEn,
+      url,
+    },
   };
 }
 

@@ -609,7 +609,7 @@ export const themes: Theme[] = [
   {
     slug: "systemes-en-interaction",
     number: 5,
-    display_on_web: true,
+    display_on_web: false,
     titleFr: "Systèmes en interaction",
     titleEn: "Interacting Systems",
     descriptionFr:
@@ -621,7 +621,7 @@ export const themes: Theme[] = [
   {
     slug: "decoherence-et-mesure-quantique",
     number: 6,
-    display_on_web: true,
+    display_on_web: false,
     titleFr: "Décohérence et mesure quantique",
     titleEn: "Decoherence and Quantum Measurement",
     descriptionFr:
