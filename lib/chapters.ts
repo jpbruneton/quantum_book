@@ -34,6 +34,9 @@ export interface Theme {
   descriptionFr: string;
   descriptionEn: string;
   lessons: Lesson[];
+  /** If set, a section heading is shown above this theme on the chapters index (e.g. Part I / Part II). */
+  partHeadingFr?: string;
+  partHeadingEn?: string;
 }
 
 export const bookMeta = {
@@ -58,12 +61,14 @@ export const themes: Theme[] = [
     slug: "experiences-fondatrices",
     number: 1,
     display_on_web: true,
-    titleFr: "Expériences fondatrices",
-    titleEn: "Foundational Experiments",
+    partHeadingFr: "Partie I : Systèmes isolés",
+    partHeadingEn: "Part I: Isolated Systems",
+    titleFr: "Introduction générale et expériences fondatrices",
+    titleEn: "General Introduction and Foundational Experiments",
     descriptionFr:
-      "Des expériences historiques qui révèlent la quantification et motivent le formalisme de la mécanique quantique.",
+      "Quelques expériences historiques invalidant la mécanique classique.",
     descriptionEn:
-      "Historical experiments revealing quantization and motivating the formalism of quantum mechanics.",
+      "Historical experiments that invalidate classical mechanics.",
     lessons: [
       {
         slug: "introduction",
@@ -120,12 +125,12 @@ export const themes: Theme[] = [
     slug: "espaces-de-hilbert",
     number: 2,
     display_on_web: true,
-    titleFr: "Espaces de Hilbert",
-    titleEn: "Hilbert Spaces",
+    titleFr: "Espaces de Hilbert et opérateurs linéaires",
+    titleEn: "Hilbert Spaces and Linear Operators",
     descriptionFr:
-      "Algèbre, topologie, et géométrie de espaces de Hilbert. Cadre mathématique des états et des observables quantiques.",
+      "Algèbre & topologie, théorie des opérateurs linéaires & théorie spectrale. Notation de Dirac.",
     descriptionEn:
-      "The mathematical framework for quantum states and observables: inner products, completeness, and bases.",
+      "Algebra & topology, linear operator theory & spectral theory. Dirac notation.",
     lessons: [
       {
         slug: "espaces-de-hilbert-lecon-1",

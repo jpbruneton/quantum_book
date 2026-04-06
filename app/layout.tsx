@@ -3,8 +3,7 @@ import "./globals.css";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { Providers } from "./providers";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { VercelInstrumentation } from "./components/VercelInstrumentation";
 import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 
 const SITE_URL = "https://quantum-book.org";
@@ -85,8 +84,7 @@ export default function RootLayout({
           <NavBar />
           <main>{children}</main>
           <Footer />
-          <Analytics />
-          <SpeedInsights />
+          <VercelInstrumentation />
         </Providers>
       </body>
     </html>

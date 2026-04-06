@@ -107,18 +107,6 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
             </span>
           </div>
 
-          <div
-            style={{
-              fontFamily: "var(--font-jetbrains)",
-              fontSize: "0.75rem",
-              letterSpacing: "0.15em",
-              color: "var(--amber)",
-              marginBottom: "0.75rem",
-            }}
-          >
-            {t.chapter.themeLabel} {String(theme.number).padStart(2, "0")}
-          </div>
-
           <h1
             style={{
               fontFamily: "var(--font-playfair)",
@@ -146,18 +134,6 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
           {/* Lesson tabs */}
           {theme.lessons.length > 0 && (
             <div style={{ marginTop: "1.75rem" }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-jetbrains)",
-                  fontSize: "0.72rem",
-                  letterSpacing: "0.12em",
-                  color: "var(--text-dim)",
-                  textTransform: "uppercase",
-                  marginBottom: "0.8rem",
-                }}
-              >
-                {t.chapter.lessonsTabsLabel}
-              </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
                 {theme.lessons.map((lesson, index) => (
                   <button

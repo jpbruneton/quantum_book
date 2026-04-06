@@ -25,6 +25,31 @@ export function ChapterList() {
                 : "none",
           }}
         >
+          {theme.partHeadingFr ? (
+            <div
+              style={{
+                marginTop: i > 0 ? "2rem" : 0,
+                paddingTop: i > 0 ? "1.75rem" : 0,
+                borderTop:
+                  i > 0 ? "1px solid var(--border-subtle)" : "none",
+                marginBottom: "1rem",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontSize: "1.05rem",
+                  fontWeight: 600,
+                  color: "var(--text-heading)",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {lang === "fr"
+                  ? theme.partHeadingFr
+                  : theme.partHeadingEn}
+              </p>
+            </div>
+          ) : null}
           <Link
             href={`/chapters/${theme.slug}`}
             style={{ textDecoration: "none", display: "block" }}
@@ -107,27 +132,11 @@ export function ChapterList() {
                     fontStyle: "italic",
                     fontSize: "0.9rem",
                     color: "var(--amber-soft)",
-                    marginBottom: "0.5rem",
+                    marginBottom: 0,
                   }}
                 >
                   {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
                 </p>
-                <span
-                  style={{
-                    background: theme.lessons.length > 0 ? "var(--accent-bg-sm)" : "var(--accent-bg-xs)",
-                    border: "1px solid var(--accent-border-sm)",
-                    borderRadius: "100px",
-                    padding: "0.15rem 0.6rem",
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "0.7rem",
-                    color: theme.lessons.length > 0 ? "var(--amber)" : "var(--text-dim)",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {theme.lessons.length > 0
-                    ? t.chapters.lessonsAvailable(theme.lessons.length)
-                    : t.chapters.emptyTheme}
-                </span>
               </div>
 
               <div

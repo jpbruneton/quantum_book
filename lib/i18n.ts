@@ -62,9 +62,6 @@ export const translations = {
       label: "THEMES",
       title: "All Themes",
       description: "",
-      emptyTheme: "No lesson available yet for this theme.",
-      lessonsAvailable: (count: number) =>
-        count === 1 ? "1 lesson available" : `${count} lessons available`,
     },
     chapter: {
       chapterLabel: "LESSON",
@@ -95,7 +92,6 @@ export const translations = {
       downloadBtn: "↓ Download",
       pdfFallback: "If the PDF doesn't display,",
       pdfFallbackLink: "click here to download it",
-      lessonsTabsLabel: "Lessons",
       noLessonTitle: "No lesson available",
       noLessonBody:
         "This theme is listed in the structure, but lesson content has not been published yet.",
@@ -212,9 +208,6 @@ export const translations = {
       label: "THÈMES",
       title: "Tous les thèmes",
       description: "",
-      emptyTheme: "Aucune leçon disponible pour ce thème pour le moment.",
-      lessonsAvailable: (count: number) =>
-        count <= 1 ? `${count} leçon disponible` : `${count} leçons disponibles`,
     },
     chapter: {
       chapterLabel: "LEÇON",
@@ -245,7 +238,6 @@ export const translations = {
       downloadBtn: "↓ Télécharger",
       pdfFallback: "Si le PDF ne s'affiche pas,",
       pdfFallbackLink: "cliquez ici pour le télécharger",
-      lessonsTabsLabel: "Leçons",
       noLessonTitle: "Aucune leçon disponible",
       noLessonBody:
         "Ce thème est bien présent dans la structure, mais son contenu de leçon n'est pas encore publié.",

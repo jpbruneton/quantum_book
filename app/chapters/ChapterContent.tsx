@@ -92,6 +92,9 @@ export function ChapterContent({ lesson }: Props) {
     ? pdfRelativePath.slice(pdfRelativePath.lastIndexOf("/") + 1)
     : pdfRelativePath;
   const hasLessonContent = lessonContent.trim().length > 0;
+  const lessonHeadingFr = lesson.subtitleFr.trim() || lesson.titleFr;
+  const lessonHeadingEn = lesson.subtitleEn.trim() || lesson.titleEn;
+  const lessonHeading = lang === "fr" ? lessonHeadingFr : lessonHeadingEn;
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -247,39 +250,17 @@ export function ChapterContent({ lesson }: Props) {
           padding: "2rem 1.5rem 0",
         }}
       >
-        <div
-          style={{
-            fontFamily: "var(--font-jetbrains)",
-            fontSize: "0.72rem",
-            letterSpacing: "0.12em",
-            color: "var(--amber)",
-            textTransform: "uppercase",
-            marginBottom: "0.65rem",
-          }}
-        >
-          {t.chapter.lessonLabel} {String(lesson.number).padStart(2, "0")}
-        </div>
         <h2
           style={{
             fontFamily: "var(--font-playfair)",
             fontSize: "1.45rem",
             color: "var(--text-heading)",
-            marginBottom: "0.45rem",
+            marginBottom: "0.65rem",
+            lineHeight: 1.3,
           }}
         >
-          {lang === "fr" ? lesson.titleFr : lesson.titleEn}
+          {lessonHeading}
         </h2>
-        <p
-          style={{
-            fontFamily: "var(--font-playfair)",
-            fontStyle: "italic",
-            fontSize: "1.05rem",
-            color: "var(--amber-soft)",
-            marginBottom: "0.9rem",
-          }}
-        >
-          {lang === "fr" ? lesson.subtitleFr : lesson.subtitleEn}
-        </p>
         <p
           style={{
             fontFamily: "var(--font-crimson)",
