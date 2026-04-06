@@ -132,41 +132,94 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
           </p>
 
           {/* Lesson tabs */}
-          {theme.lessons.length > 0 && (
-            <div style={{ marginTop: "1.75rem" }}>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {theme.lessons.map((lesson, index) => (
-                  <button
-                    key={lesson.slug}
-                    onClick={() => navigateToLesson(index)}
-                    style={{
-                      background:
-                        index === activeLessonIndex
-                          ? "var(--accent-bg-md)"
-                          : "var(--accent-bg-xs)",
-                      border:
-                        index === activeLessonIndex
-                          ? "1px solid var(--accent-border-md)"
-                          : "1px solid var(--accent-border-sm)",
-                      borderRadius: "999px",
-                      padding: "0.35rem 0.85rem",
-                      fontFamily: "var(--font-inter)",
-                      fontSize: "0.78rem",
-                      color:
-                        index === activeLessonIndex
-                          ? "var(--amber)"
-                          : "var(--text-secondary)",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {lang === "fr"
-                      ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
-                      : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
-                  </button>
-                ))}
+          {theme.lessons.length > 0 && (() => {
+            const normalLessons = theme.lessons
+              .map((lesson, index) => ({ lesson, index }))
+              .filter(({ lesson }) => lesson.kind !== "fiche");
+            const fiches = theme.lessons
+              .map((lesson, index) => ({ lesson, index }))
+              .filter(({ lesson }) => lesson.kind === "fiche");
+            return (
+              <div style={{ marginTop: "1.75rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                  {normalLessons.map(({ lesson, index }) => (
+                    <button
+                      key={lesson.slug}
+                      onClick={() => navigateToLesson(index)}
+                      style={{
+                        background:
+                          index === activeLessonIndex
+                            ? "var(--accent-bg-md)"
+                            : "var(--accent-bg-xs)",
+                        border:
+                          index === activeLessonIndex
+                            ? "1px solid var(--accent-border-md)"
+                            : "1px solid var(--accent-border-sm)",
+                        borderRadius: "999px",
+                        padding: "0.35rem 0.85rem",
+                        fontFamily: "var(--font-inter)",
+                        fontSize: "0.78rem",
+                        color:
+                          index === activeLessonIndex
+                            ? "var(--amber)"
+                            : "var(--text-secondary)",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {lang === "fr"
+                        ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
+                        : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
+                    </button>
+                  ))}
+                </div>
+                {fiches.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        fontSize: "0.7rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        color: "var(--text-dim)",
+                        marginRight: "0.15rem",
+                      }}
+                    >
+                      {lang === "fr" ? "Fiches de révision" : "Revision Sheets"}
+                    </span>
+                    {fiches.map(({ lesson, index }) => (
+                      <button
+                        key={lesson.slug}
+                        onClick={() => navigateToLesson(index)}
+                        style={{
+                          background:
+                            index === activeLessonIndex
+                              ? "var(--accent-bg-md)"
+                              : "var(--accent-bg-xs)",
+                          border:
+                            index === activeLessonIndex
+                              ? "1px solid var(--accent-border-md)"
+                              : "1px solid var(--accent-border-sm)",
+                          borderRadius: "999px",
+                          padding: "0.35rem 0.85rem",
+                          fontFamily: "var(--font-inter)",
+                          fontSize: "0.78rem",
+                          color:
+                            index === activeLessonIndex
+                              ? "var(--amber)"
+                              : "var(--text-secondary)",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {lang === "fr"
+                          ? `Fiche n°${lesson.number} : ${lesson.subtitleFr}`
+                          : `Sheet ${lesson.number}: ${lesson.subtitleEn}`}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
-          )}
+            );
+          })()}
         </div>
       </div>
 
@@ -254,9 +307,13 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
                   color: "var(--text-heading)",
                 }}
               >
-                {lang === "fr"
-                  ? `Leçon n°${previousLesson.number} : ${previousLesson.subtitleFr}`
-                  : `Lesson ${previousLesson.number}: ${previousLesson.subtitleEn}`}
+                {previousLesson.kind === "fiche"
+                  ? (lang === "fr"
+                      ? `Fiche n°${previousLesson.number} : ${previousLesson.subtitleFr}`
+                      : `Sheet ${previousLesson.number}: ${previousLesson.subtitleEn}`)
+                  : (lang === "fr"
+                      ? `Leçon n°${previousLesson.number} : ${previousLesson.subtitleFr}`
+                      : `Lesson ${previousLesson.number}: ${previousLesson.subtitleEn}`)}
               </div>
             </div>
           </button>
@@ -337,9 +394,13 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
                   color: "var(--text-heading)",
                 }}
               >
-                {lang === "fr"
-                  ? `Leçon n°${nextLesson.number} : ${nextLesson.subtitleFr}`
-                  : `Lesson ${nextLesson.number}: ${nextLesson.subtitleEn}`}
+                {nextLesson.kind === "fiche"
+                  ? (lang === "fr"
+                      ? `Fiche n°${nextLesson.number} : ${nextLesson.subtitleFr}`
+                      : `Sheet ${nextLesson.number}: ${nextLesson.subtitleEn}`)
+                  : (lang === "fr"
+                      ? `Leçon n°${nextLesson.number} : ${nextLesson.subtitleFr}`
+                      : `Lesson ${nextLesson.number}: ${nextLesson.subtitleEn}`)}
               </div>
             </div>
           </button>

@@ -21,9 +21,15 @@ interface TocEntry {
 }
 
 function getLessonPdfRelativePath(lesson: Lesson, lang: "fr" | "en"): string {
-  const match = lesson.texFile.match(/theme(\d+)_(?:fr|en)\/(?:lecon|lesson)(\d+)\.tex$/);
-  if (!match) return lesson.pdfFile;
-  const themeNumber = match[1];
+  const ficheMatch = lesson.texFile.match(/theme(\d+)_(?:fr|en)\/(fiche\d+)\.tex$/);
+  if (ficheMatch) {
+    const themeNumber = ficheMatch[1];
+    const ficheName = ficheMatch[2];
+    return `theme${themeNumber}_${lang}/${ficheName}.pdf`;
+  }
+  const lessonMatch = lesson.texFile.match(/theme(\d+)_(?:fr|en)\/(?:lecon|lesson)(\d+)\.tex$/);
+  if (!lessonMatch) return lesson.pdfFile;
+  const themeNumber = lessonMatch[1];
   const lessonNumber = lesson.number;
   const directory = `theme${themeNumber}_${lang}`;
   const fileName = lang === "fr" ? `lecon${lessonNumber}.pdf` : `lesson${lessonNumber}.pdf`;

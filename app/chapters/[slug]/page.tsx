@@ -9,8 +9,10 @@ interface Props {
 }
 
 function getEnglishTexFilePath(frTexFile: string): string {
-  const mapped = frTexFile.replace(/_fr\/lecon(\d+)\.tex$/, "_en/lesson$1.tex");
-  return mapped || frTexFile;
+  const lessonMapped = frTexFile.replace(/_fr\/lecon(\d+)\.tex$/, "_en/lesson$1.tex");
+  if (lessonMapped !== frTexFile) return lessonMapped;
+  const ficheMapped = frTexFile.replace(/_fr\/(fiche\d+)\.tex$/, "_en/$1.tex");
+  return ficheMapped;
 }
 
 export async function generateStaticParams() {

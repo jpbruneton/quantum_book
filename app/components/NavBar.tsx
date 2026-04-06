@@ -11,10 +11,20 @@ export function NavBar() {
   const { lang, setLang, t } = useLang();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const links = [
+  const desktopLinks = [
     { href: "/", label: t.nav.home },
     { href: "/chapters", label: t.nav.chapters },
     { href: "/exercises", label: t.nav.exercises },
+    { href: "/glossary", label: t.nav.glossary },
+    { href: "/blog", label: t.nav.blog },
+    { href: "/about", label: t.nav.about },
+  ];
+
+  const mobileLinks = [
+    { href: "/", label: t.nav.home },
+    { href: "/chapters", label: t.nav.chapters },
+    { href: "/exercises", label: t.nav.exercises },
+    { href: "/glossary", label: t.nav.glossary },
     { href: "/blog", label: t.nav.blog },
     { href: "/about", label: t.nav.about },
   ];
@@ -108,7 +118,7 @@ export function NavBar() {
             {/* Language toggle: left of Home */}
             <LangToggle />
 
-            {links.map((link) => (
+            {desktopLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -245,7 +255,7 @@ export function NavBar() {
               gap: "0.75rem",
             }}
           >
-            {links.map((link) => (
+            {mobileLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
