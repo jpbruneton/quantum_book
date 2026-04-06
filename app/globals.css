@@ -781,6 +781,14 @@ body::before {
     overflow-y: hidden;
   }
 
+  .prose-quantum .latex-block {
+    overflow-x: auto;
+  }
+
+  .prose-quantum .latex-proof {
+    overflow-x: auto;
+  }
+
   .prose-quantum .latex-equation {
     grid-template-columns: 1fr;
     row-gap: 0.25rem;
