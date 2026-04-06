@@ -161,7 +161,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
                   >
                     {lang === "fr"
                       ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
-                      : `Lesson #${lesson.number}: ${lesson.subtitleEn}`}
+                      : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
                   </button>
                 ))}
               </div>
@@ -256,7 +256,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
               >
                 {lang === "fr"
                   ? `Leçon n°${previousLesson.number} : ${previousLesson.subtitleFr}`
-                  : `Lesson #${previousLesson.number}: ${previousLesson.subtitleEn}`}
+                  : `Lesson ${previousLesson.number}: ${previousLesson.subtitleEn}`}
               </div>
             </div>
           </button>
@@ -339,7 +339,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
               >
                 {lang === "fr"
                   ? `Leçon n°${nextLesson.number} : ${nextLesson.subtitleFr}`
-                  : `Lesson #${nextLesson.number}: ${nextLesson.subtitleEn}`}
+                  : `Lesson ${nextLesson.number}: ${nextLesson.subtitleEn}`}
               </div>
             </div>
           </button>

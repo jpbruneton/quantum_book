@@ -75,7 +75,7 @@ export const themes: Theme[] = [
         number: 1,
         display_on_web: true,
         titleFr: "Leçon n°1",
-        titleEn: "Lesson #1",
+        titleEn: "Lesson 1",
         subtitleFr: "Expérience de Stern et Gerlach",
         subtitleEn: "Stern-Gerlach Experiment",
         descriptionFr:
@@ -137,7 +137,7 @@ export const themes: Theme[] = [
         number: 1,
         display_on_web: true,
         titleFr: "Leçon n°1",
-        titleEn: "Lesson #1",
+        titleEn: "Lesson 1",
         subtitleFr: "Espaces de Hilbert",
         subtitleEn: "Hilbert Spaces",
         descriptionFr:
@@ -184,7 +184,7 @@ export const themes: Theme[] = [
         number: 2,
         display_on_web: true,
         titleFr: "Leçon n°2",
-        titleEn: "Lesson #2",
+        titleEn: "Lesson 2",
         subtitleFr: "Espace dual, kets, bras, adjoint",
         subtitleEn: "Dual Space, Kets, Bras, Adjoint",
         descriptionFr:
@@ -225,7 +225,7 @@ export const themes: Theme[] = [
         number: 3,
         display_on_web: true,
         titleFr: "Leçon n°3",
-        titleEn: "Lesson #3",
+        titleEn: "Lesson 3",
         subtitleFr: "Notations de Dirac en dimension finie",
         subtitleEn: "Dirac Notation in Finite Dimension",
         descriptionFr:
@@ -270,7 +270,7 @@ export const themes: Theme[] = [
         number: 4,
         display_on_web: true,
         titleFr: "Leçon n°4",
-        titleEn: "Lesson #4",
+        titleEn: "Lesson 4",
         subtitleFr: "Topologie des espaces de Hilbert",
         subtitleEn: "Topology of Hilbert Spaces",
         descriptionFr:
@@ -315,7 +315,7 @@ export const themes: Theme[] = [
         number: 5,
         display_on_web: true,
         titleFr: "Leçon n°5",
-        titleEn: "Lesson #5",
+        titleEn: "Lesson 5",
         subtitleFr: "Théorie des opérateurs linéaires",
         subtitleEn: "Linear Operator Theory",
         descriptionFr:
@@ -360,7 +360,7 @@ export const themes: Theme[] = [
         number: 6,
         display_on_web: true,
         titleFr: "Leçon n°6",
-        titleEn: "Lesson #6",
+        titleEn: "Lesson 6",
         subtitleFr: "Notations de Dirac en dimension infinie",
         subtitleEn: "Hilbert Representation of Point-Particle Quantum Mechanics, Position and Momentum Operators, Dirac Delta",
         descriptionFr:
@@ -418,7 +418,7 @@ export const themes: Theme[] = [
         number: 1,
         display_on_web: true,
         titleFr: "Leçon n°1",
-        titleEn: "Lesson #1",
+        titleEn: "Lesson 1",
         subtitleFr: "Mesure, dynamique et interprétation",
         subtitleEn: "Measurement, Dynamics, and Interpretation",
         descriptionFr:
@@ -480,7 +480,7 @@ export const themes: Theme[] = [
         number: 1,
         display_on_web: true,
         titleFr: "Leçon n°1",
-        titleEn: "Lesson #1",
+        titleEn: "Lesson 1",
         subtitleFr: "Barrières de potentiel",
         subtitleEn: "Potential Barriers",
         descriptionFr:
@@ -515,7 +515,7 @@ export const themes: Theme[] = [
         number: 2,
         display_on_web: true,
         titleFr: "Leçon n°2",
-        titleEn: "Lesson #2",
+        titleEn: "Lesson 2",
         subtitleFr: "Oscillateur harmonique",
         subtitleEn: "Harmonic Oscillator",
         descriptionFr:
@@ -550,7 +550,7 @@ export const themes: Theme[] = [
         number: 3,
         display_on_web: true,
         titleFr: "Leçon n°3",
-        titleEn: "Lesson #3",
+        titleEn: "Lesson 3",
         subtitleFr: "Spin",
         subtitleEn: "Spin",
         descriptionFr:
@@ -585,7 +585,7 @@ export const themes: Theme[] = [
         number: 4,
         display_on_web: true,
         titleFr: "Leçon n°4",
-        titleEn: "Lesson #4",
+        titleEn: "Lesson 4",
         subtitleFr: "Dynamique quantique",
         subtitleEn: "Quantum Dynamics",
         descriptionFr:

@@ -214,7 +214,7 @@ function GlossaryPageContent() {
                   >
                     {lang === "fr"
                       ? `Thème ${occurrence.themeNumber} (${occurrence.themeTitle}) - Leçon n°${occurrence.lessonNumber} : ${occurrence.lessonSubtitle}`
-                      : `Theme ${occurrence.themeNumber} (${occurrence.themeTitle}) - Lesson #${occurrence.lessonNumber}: ${occurrence.lessonSubtitle}`}
+                      : `Theme ${occurrence.themeNumber} (${occurrence.themeTitle}) - Lesson ${occurrence.lessonNumber}: ${occurrence.lessonSubtitle}`}
                   </Link>
                 ))}
               </div>
