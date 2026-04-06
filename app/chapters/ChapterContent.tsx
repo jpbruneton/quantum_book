@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
-import { processLatex } from "@/lib/latex";
 import { useLang } from "@/app/context/LangContext";
 
 interface Props {
@@ -12,6 +11,8 @@ interface Props {
 interface LessonWithLocalizedContent extends Lesson {
   contentFr: string;
   contentEn: string;
+  renderedFr: string;
+  renderedEn: string;
 }
 
 interface TocEntry {
@@ -106,7 +107,10 @@ export function ChapterContent({ lesson }: Props) {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [lesson.slug]);
 
-  const renderedContent = useMemo(() => processLatex(lessonContent), [lessonContent]);
+  const renderedContent = useMemo(
+    () => (lang === "en" ? lesson.renderedEn || lesson.renderedFr : lesson.renderedFr),
+    [lang, lesson.renderedFr, lesson.renderedEn]
+  );
   const splitReferenceLabel = (label: string, fallbackUrl: string) => {
     const normalizedLabel = label.replace(/\s+/g, " ").trim();
     const inlineUrlMatch = normalizedLabel.match(/https?:\/\/[^\s]+/i);

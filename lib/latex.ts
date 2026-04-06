@@ -4,6 +4,10 @@ import { KATEX_MACROS } from "@/lib/latexMacros";
 function sanitizeMathCommon(math: string): string {
   // NBSP (U+00A0, "character 160") triggers KaTeX strict-mode warnings; TeX expects normal spaces.
   let result = math.replace(/\u00a0/g, " ");
+  // Curly/smart quotes (U+201C " U+201D ") are invalid in LaTeX math mode; replace with ASCII ".
+  result = result.replace(/[\u201c\u201d]/g, '"');
+  // Left/right single curly quotes (U+2018 ' U+2019 ') → ASCII apostrophe.
+  result = result.replace(/[\u2018\u2019]/g, "'");
   // KaTeX does not reliably support \mathbb on digits; only rewrite the identity symbol form.
   result = result.replace(/\\mathbb\s*\{\s*1\s*\}/g, "\\mathbf{1}");
   // Tolerate malformed one-argument braket usage.

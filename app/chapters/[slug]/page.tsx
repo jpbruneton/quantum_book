@@ -3,6 +3,7 @@ import { getWebTheme, getWebThemes } from "@/lib/chapters";
 import { ChapterPageClient } from "./ChapterPageClient";
 import type { Metadata } from "next";
 import { getLessonReferences, getLessonWebContent } from "@/lib/chapterContent.server";
+import { processLatex } from "@/lib/latex";
 
 interface Props {
   params: { slug: string };
@@ -49,11 +50,15 @@ export default function ChapterPage({ params }: Props) {
       const frContent = getLessonWebContent(lesson.texFile, -1, resolvedReferences) || lesson.content;
       const enTexFile = getEnglishTexFilePath(lesson.texFile);
       const enContent = getLessonWebContent(enTexFile, -1, resolvedReferences);
+      const renderedFr = processLatex(frContent);
+      const renderedEn = enContent ? processLatex(enContent) : "";
       return {
         ...lesson,
         content: frContent,
         contentFr: frContent,
-        contentEn: enContent,
+        contentEn: enContent ?? "",
+        renderedFr,
+        renderedEn,
         references: resolvedReferences,
       };
     }),

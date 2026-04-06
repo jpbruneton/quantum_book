@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useMemo } from "react";
+import { Suspense, useMemo, useTransition } from "react";
 import type { Theme } from "@/lib/chapters";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
@@ -9,6 +9,8 @@ import { useLang } from "@/app/context/LangContext";
 type LocalizedLesson = Theme["lessons"][number] & {
   contentFr: string;
   contentEn: string;
+  renderedFr: string;
+  renderedEn: string;
 };
 
 type ThemeWithLocalizedLessonContent = Omit<Theme, "lessons"> & {
@@ -26,6 +28,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [, startTransition] = useTransition();
   const requestedLessonNumber = Number(searchParams.get("lesson") || "");
   const requestedLessonIndex =
     Number.isFinite(requestedLessonNumber) && requestedLessonNumber >= 1
@@ -46,7 +49,9 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
       params.set("lesson", String(clamped + 1));
     }
     const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    startTransition(() => {
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    });
   };
 
   const activeLesson = useMemo(
