@@ -831,7 +831,7 @@ function normalizeLatexBlocks(
 
   for (const blockKind of blockKinds) {
     const beginRegex = new RegExp(
-      `\\\\begin\\{${blockKind.env}\\}(?:\\[([^\\]]+)\\])?(?:\\{([^{}]+)\\})?`,
+      `\\\\begin\\{${blockKind.env}\\}(?:\\[([^\\]]*)\\])?(?:\\{([^{}]+)\\})?`,
       "g"
     );
     const endRegex = new RegExp(`\\\\end\\{${blockKind.env}\\}`, "g");
