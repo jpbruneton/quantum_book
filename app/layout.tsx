@@ -40,7 +40,10 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   verification: {
-    google: "SkUSdSJzNk1KmUUkEocmv9MOt8Z5dhVdLVTKLEfWw_Q",
+    google: [
+      "SkUSdSJzNk1KmUUkEocmv9MOt8Z5dhVdLVTKLEfWw_Q",
+      "aCLhKbXa-E1sdaL-9q8LrOaKugUSiEIYAy8TTXX7F4g",
+    ],
   },
   openGraph: {
     type: "book",

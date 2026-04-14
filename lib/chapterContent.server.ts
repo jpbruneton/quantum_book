@@ -483,6 +483,9 @@ function collectReferenceMap(input: string): Record<string, string> {
   let theoremIndex = 0;
   let propositionIndex = 0;
   let definitionIndex = 0;
+  let lemmaIndex = 0;
+  let corollaireIndex = 0;
+  let exempleIndex = 0;
   let remarkIndex = 0;
 
   const envStack: Array<{ env: string; refText: string }> = [];
@@ -550,6 +553,15 @@ function collectReferenceMap(input: string): Record<string, string> {
       } else if (env === "definition") {
         definitionIndex += 1;
         refText = `Définition ${definitionIndex}`;
+      } else if (env === "lemma") {
+        lemmaIndex += 1;
+        refText = `Lemme ${lemmaIndex}`;
+      } else if (env === "corollaire" || env === "corollary") {
+        corollaireIndex += 1;
+        refText = `Corollaire ${corollaireIndex}`;
+      } else if (env === "exemple" || env === "example") {
+        exempleIndex += 1;
+        refText = `Exemple ${exempleIndex}`;
       } else if (env === "remark") {
         remarkIndex += 1;
         refText = `Remarque ${remarkIndex}`;
@@ -807,6 +819,11 @@ function normalizeLatexBlocks(
     definition: 0,
     theorem: 0,
     proposition: 0,
+    lemma: 0,
+    corollaire: 0,
+    corollary: 0,
+    exemple: 0,
+    example: 0,
     remark: 0,
     exercice: 0,
     exercise: 0,
@@ -884,7 +901,7 @@ function normalizeLatexBlocks(
     // (e.g. "cf Figure \ref{magnet}" -> "cf Figure 1", not "cf Figure Figure 1").
     return resolved
       .replace(
-        /^(Figure|Théorème|Theorem|Proposition|Définition|Definition|Remarque|Remark|Corollaire|Corollary)\s+/i,
+        /^(Figure|Théorème|Theorem|Proposition|Définition|Definition|Lemme|Lemma|Corollaire|Corollary|Exemple|Example|Remarque|Remark)\s+/i,
         ""
       )
       .trim();
