@@ -260,7 +260,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "40 min",
-        texFile: "theme2_fr/lecon4.tex",
+        texFile: "theme2_fr/lecon3.tex",
         references: [],
         content: `
 <p>Étude de la topologie des espaces de Hilbert : notions de convergence forte et faible, continuité, compacité et complétude.</p>
@@ -299,7 +299,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "theme2_fr/lecon5.tex",
+        texFile: "theme2_fr/lecon4.tex",
         references: [],
         content: `
 <p>Étude structurée de la théorie des opérateurs linéaires en espace de Hilbert.</p>
@@ -344,7 +344,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "30 min",
-        texFile: "theme2_fr/lecon6.tex",
+        texFile: "theme2_fr/lecon5.tex",
         references: [],
         content: `
 <p>Notation de Dirac en dimension infinie : représentations position et impulsion, delta de Dirac et relations de commutation canoniques.</p>
@@ -381,7 +381,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
         readingTime: "",
-        texFile: "theme2_fr/lecon7.tex",
+        texFile: "theme2_fr/lecon6.tex",
         references: [],
         content: "",
       },
@@ -416,7 +416,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
         readingTime: "",
-        texFile: "theme2_fr/lecon8.tex",
+        texFile: "theme2_fr/lecon7.tex",
         references: [],
         content: "",
       },
@@ -453,7 +453,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
         readingTime: "",
-        texFile: "theme2_fr/lecon9.tex",
+        texFile: "theme2_fr/lecon8.tex",
         references: [],
         content: "",
       },
