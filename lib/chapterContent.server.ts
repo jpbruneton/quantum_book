@@ -849,11 +849,11 @@ function normalizeLatexBlocks(
         numberedTitle = `${blockKind.title} ${blockCounters[blockKind.env]}`;
       }
       if (blockKind.env === "plusloin") {
-        const heading = isEnglish ? "To go further:" : "Pour aller plus loin :";
-        const topic = displayLabel
-          ? ` <span class="latex-plusloin-topic">${cleanLatexInline(displayLabel)}</span>`
+        const label = isEnglish ? "To go further" : "Pour aller plus loin";
+        const topicHtml = displayLabel
+          ? `<strong class="latex-plusloin-topic"> (${cleanLatexInline(displayLabel)})</strong>`
           : "";
-        return `\n\n<div class="latex-block latex-block-plusloin"><div class="latex-block-heading"><strong>${heading}</strong>${topic}</div><div class="latex-block-body">`;
+        return `\n\n<div class="latex-block latex-block-plusloin"><div class="latex-block-heading"><span class="latex-plusloin-label">${label}</span>${topicHtml}</div><div class="latex-block-body">`;
       }
       if (blockKind.collapsible) {
         return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${numberedTitle}${suffix}</strong></div></summary><div class="latex-block-collapsible-body">`;

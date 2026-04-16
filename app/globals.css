@@ -653,19 +653,23 @@ body::before {
 }
 
 .prose-quantum .latex-block-plusloin {
+  --plusloin-heading-color: rgba(88, 28, 135, 0.92);
   border-color: rgba(107, 33, 168, 0.22);
   background: rgba(107, 33, 168, 0.06);
   color: var(--text-heading);
 }
 
-.prose-quantum .latex-block-plusloin strong {
-  color: rgba(88, 28, 135, 0.92);
+.prose-quantum .latex-block-plusloin .latex-plusloin-label,
+.prose-quantum .latex-block-plusloin .latex-plusloin-topic {
+  color: var(--plusloin-heading-color);
+}
+
+.prose-quantum .latex-block-plusloin .latex-plusloin-label {
   font-weight: 600;
 }
 
 .prose-quantum .latex-block-plusloin .latex-plusloin-topic {
-  color: var(--text-secondary);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .prose-quantum .latex-block-remark {
@@ -681,7 +685,7 @@ body::before {
 }
 
 .prose-quantum .latex-block-plusloin .latex-inline-blue-strong {
-  color: rgba(88, 28, 135, 0.85);
+  color: var(--plusloin-heading-color);
   font-weight: 600;
 }
 
