@@ -690,7 +690,7 @@ function replaceCommandBlock(
 
     const cleanedBody = body.trim();
     blockIndex += 1;
-    output += `\n\n<div class="latex-block ${cssClass}"><div class="latex-block-heading"><strong>${title} ${blockIndex}.</strong></div><div class="latex-block-body">${cleanedBody}</div></div>\n\n`;
+    output += `\n\n<div class="latex-block ${cssClass}"><div class="latex-block-heading"><strong>${title} ${blockIndex}</strong></div><div class="latex-block-body">${cleanedBody}</div></div>\n\n`;
     index = cursor;
   }
 
@@ -856,9 +856,9 @@ function normalizeLatexBlocks(
         return `\n\n<div class="latex-block latex-block-plusloin"><div class="latex-block-heading"><strong>${heading}</strong>${topic}</div><div class="latex-block-body">`;
       }
       if (blockKind.collapsible) {
-        return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${numberedTitle}${suffix}.</strong></div></summary><div class="latex-block-collapsible-body">`;
+        return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${numberedTitle}${suffix}</strong></div></summary><div class="latex-block-collapsible-body">`;
       }
-      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><div class="latex-block-heading"><strong>${numberedTitle}${suffix}.</strong></div><div class="latex-block-body">`;
+      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><div class="latex-block-heading"><strong>${numberedTitle}${suffix}</strong></div><div class="latex-block-body">`;
     });
     result = result.replace(
       endRegex,
