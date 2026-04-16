@@ -498,6 +498,20 @@ body::before {
   background: var(--accent-bg-xs);
 }
 
+.prose-quantum .latex-block > .latex-block-heading {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.prose-quantum .latex-block > .latex-block-body {
+  display: block;
+}
+
+.prose-quantum details.latex-block summary .latex-block-heading {
+  flex: 1;
+  min-width: 0;
+}
+
 .prose-quantum .latex-proof {
   margin: 1.25rem 0;
   border: 1px solid var(--accent-border-sm);
