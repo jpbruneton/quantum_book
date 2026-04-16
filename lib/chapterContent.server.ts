@@ -804,7 +804,7 @@ function normalizeLatexBlocks(
     { env: "corollaire", title: isEnglish ? "Corollary" : "Corollaire" },
     { env: "corollary", title: isEnglish ? "Corollary" : "Corollaire" },
     { env: "remark", title: isEnglish ? "Remark" : "Remarque" },
-    { env: "plusloin", title: isEnglish ? "To Go Further" : "Plus loin" },
+    { env: "plusloin", title: isEnglish ? "To go further" : "Pour aller plus loin" },
     { env: "exemple", title: isEnglish ? "Example" : "Exemple" },
     { env: "example", title: "Example" },
     { env: "resume", title: isEnglish ? "Summary" : "Résumé" },
@@ -847,6 +847,13 @@ function normalizeLatexBlocks(
       if (blockKind.env in blockCounters) {
         blockCounters[blockKind.env] += 1;
         numberedTitle = `${blockKind.title} ${blockCounters[blockKind.env]}`;
+      }
+      if (blockKind.env === "plusloin") {
+        const heading = isEnglish ? "To go further:" : "Pour aller plus loin :";
+        const topic = displayLabel
+          ? ` <span class="latex-plusloin-topic">${cleanLatexInline(displayLabel)}</span>`
+          : "";
+        return `\n\n<div class="latex-block latex-block-plusloin"><strong>${heading}</strong>${topic} `;
       }
       if (blockKind.collapsible) {
         return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><strong>${numberedTitle}${suffix}</strong></summary><div class="latex-block-collapsible-body">`;
