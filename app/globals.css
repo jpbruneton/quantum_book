@@ -571,6 +571,10 @@ body::before {
   margin-left: 0.5rem;
 }
 
+.prose-quantum .latex-proof-body .latex-footnotes {
+  margin: 0.75rem 0 0.35rem;
+}
+
 /* Definition / lemma / important — align with other theorem-like cards */
 .prose-quantum .latex-block-definition {
   border-color: #3b82f666;

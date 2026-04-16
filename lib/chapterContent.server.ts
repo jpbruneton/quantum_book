@@ -949,6 +949,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
 
   // Helper: append footnotes to any pre-built HTML chunk (including block envs,
   // headings, figures, etc.) so footnotes inside boxes are always rendered.
+  // For proofs, keep footnotes inside the collapsible body (before □), not below </details>.
   const withFootnotes = (html: string): string => {
     if (assignedFootnotes.length === 0) return html;
     const footnotesHtml = assignedFootnotes
@@ -957,7 +958,18 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
           `<div class="latex-footnote-item"><span class="latex-footnote-label">Note ${fn.number} :</span> ${fn.text}</div>`
       )
       .join("");
-    return `${html}\n<div class="latex-footnotes">${footnotesHtml}</div>`;
+    const footnotesBlock = `\n<div class="latex-footnotes">${footnotesHtml}</div>`;
+
+    if (html.startsWith('<details class="latex-proof"')) {
+      const withQed = html.replace(
+        /(\s*)(<span\b[^>]*\blatex-proof-qed\b[^>]*>)/,
+        `${footnotesBlock}$1$2`
+      );
+      if (withQed !== html) return withQed;
+      return html.replace(/(<\/div>\s*)(<\/details>)/, `${footnotesBlock}$1$2`);
+    }
+
+    return `${html}\n${footnotesBlock}`;
   };
 
   if (cleaned.startsWith("<figure")) return withFootnotes(cleaned);
