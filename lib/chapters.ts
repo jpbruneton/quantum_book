@@ -740,13 +740,20 @@ export const themes: Theme[] = [
   },
 ];
 
+/** Part II (themes 4–7): kept out of the public site until removed from this set. */
+const THEME_NUMBERS_EXCLUDED_FROM_WEB = new Set<number>([4, 5, 6, 7]);
+
 export function getTheme(slug: string): Theme | undefined {
   return themes.find((theme) => theme.slug === slug);
 }
 
 export function getWebThemes(): Theme[] {
   return themes
-    .filter((theme) => theme.display_on_web)
+    .filter(
+      (theme) =>
+        theme.display_on_web &&
+        !THEME_NUMBERS_EXCLUDED_FROM_WEB.has(theme.number)
+    )
     .map((theme) => ({
       ...theme,
       lessons: theme.lessons.filter((lesson) => lesson.display_on_web),
