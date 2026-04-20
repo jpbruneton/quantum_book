@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getWebTheme, getWebThemes, bookMeta } from "@/lib/chapters";
 import { getLessonWebContent } from "@/lib/chapterContent.server";
+import { absoluteUrl } from "@/lib/siteUrl";
 import { ExerciseThemeClient } from "./ExerciseThemeClient";
 
 interface Props {
@@ -25,7 +26,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const theme = getWebTheme(params.slug);
   if (!theme) return {};
-  const url = `https://quantum-book.org/exercises/${theme.slug}`;
+  const url = absoluteUrl(`/exercises/${theme.slug}`);
   return {
     title: `Exercises – Theme ${theme.number}: ${theme.titleEn} | ${bookMeta.title}`,
     description: `Solved exercises for Theme ${theme.number}: ${theme.titleEn} — ${theme.descriptionEn}`,

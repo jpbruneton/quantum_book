@@ -4,6 +4,7 @@ import { ChapterPageClient } from "./ChapterPageClient";
 import type { Metadata } from "next";
 import { getLessonReferences, getLessonWebContent } from "@/lib/chapterContent.server";
 import { processLatex } from "@/lib/latex";
+import { absoluteUrl } from "@/lib/siteUrl";
 
 interface Props {
   params: { slug: string };
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const theme = getWebTheme(params.slug);
   if (!theme) return {};
   const keywords = theme.lessons.flatMap((l) => l.topicsEn).slice(0, 15);
-  const url = `https://quantum-book.org/chapters/${theme.slug}`;
+  const url = absoluteUrl(`/chapters/${theme.slug}`);
   return {
     title: `Theme ${theme.number}: ${theme.titleEn}`,
     description: theme.descriptionEn,

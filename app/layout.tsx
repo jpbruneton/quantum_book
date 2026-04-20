@@ -5,8 +5,9 @@ import { Footer } from "./components/Footer";
 import { Providers } from "./providers";
 import { VercelInstrumentation } from "./components/VercelInstrumentation";
 import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
+import { getSiteUrl } from "@/lib/siteUrl";
 
-const SITE_URL = "https://quantum-book.org";
+const SITE_URL = getSiteUrl();
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -36,9 +37,6 @@ export const metadata: Metadata = {
   description: bookMeta.description,
   keywords: bookMeta.keywords,
   authors: [{ name: bookMeta.author }],
-  alternates: {
-    canonical: SITE_URL,
-  },
   verification: {
     google: [
       "SkUSdSJzNk1KmUUkEocmv9MOt8Z5dhVdLVTKLEfWw_Q",

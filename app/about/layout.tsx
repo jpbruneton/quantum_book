@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
+import { absoluteUrl } from "@/lib/siteUrl";
 
 export const metadata: Metadata = {
   title: "About",
   description: `${bookMetaDisplayTitle()} — by ${bookMeta.author} (${bookMeta.affiliation}). ${bookMeta.description}`,
-  alternates: { canonical: "https://quantum-book.org/about" },
+  alternates: { canonical: absoluteUrl("/about") },
   openGraph: {
     title: `About | ${bookMeta.title}`,
     description: `${bookMetaDisplayTitle()} by ${bookMeta.author}, ${bookMeta.affiliation}.`,
-    url: "https://quantum-book.org/about",
+    url: absoluteUrl("/about"),
   },
 };
 

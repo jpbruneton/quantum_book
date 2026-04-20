@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { MetadataRoute } from "next";
 import { getWebThemes } from "@/lib/chapters";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 function hasExoTex(themeNumber: number): boolean {
   const frPath = join(process.cwd(), "content", "tex", `theme${themeNumber}_fr`, "exo.tex");
@@ -9,7 +10,7 @@ function hasExoTex(themeNumber: number): boolean {
   return existsSync(frPath) || existsSync(enPath);
 }
 
-const SITE_URL = "https://quantum-book.org";
+const SITE_URL = getSiteUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -42,6 +43,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/updates`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
     },
   ];
 

@@ -137,7 +137,7 @@ export const translations = {
           date: "2026-03-31",
           title: "Domain acquisition and theme 2",
           body:
-            "Acquisition of quantum-book.org; theme 2 lessons and exercises are being rolled out (English page translation in progress).",
+            "Acquisition of the production domain; theme 2 lessons and exercises are being rolled out (English page translation in progress).",
         },
       ] as UpdateEntry[],
       comingSoon: "",
@@ -284,7 +284,7 @@ export const translations = {
           date: "2026-03-31",
           title: "Acquisition du domaine et thème 2",
           body:
-            "Acquisition de quantum-book.org ; déploiement des leçons du thème 2 et de ses exercices en cours (+ traduction sur la page anglaise).",
+            "Acquisition du nom de domaine de production ; déploiement des leçons du thème 2 et de ses exercices en cours (+ traduction sur la page anglaise).",
         },
       ] as UpdateEntry[],
       comingSoon: "",
