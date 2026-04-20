@@ -4,7 +4,7 @@ import { getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 
 function getThemeCategory(slug: string, lang: "fr" | "en"): string {
-  const isMath = slug === "espaces-de-hilbert";
+  const isMath = slug === "hilbert-spaces";
   if (lang === "fr") return isMath ? "Thème mathématique" : "Thème physique";
   return isMath ? "Mathematics" : "Physics";
 }

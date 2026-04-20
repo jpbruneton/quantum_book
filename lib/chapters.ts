@@ -59,7 +59,7 @@ export function bookMetaDisplayTitle(): string {
 
 export const themes: Theme[] = [
   {
-    slug: "experiences-fondatrices",
+    slug: "foundational-experiments",
     number: 1,
     display_on_web: true,
     partHeadingFr: "Partie I : Systèmes isolés",
@@ -123,7 +123,7 @@ export const themes: Theme[] = [
     ],
   },
   {
-    slug: "espaces-de-hilbert",
+    slug: "hilbert-spaces",
     number: 2,
     display_on_web: true,
     titleFr: "Espaces de Hilbert et opérateurs linéaires",
@@ -500,7 +500,7 @@ export const themes: Theme[] = [
     ],
   },
   {
-    slug: "postulats",
+    slug: "postulates",
     number: 3,
     display_on_web: true,
     titleFr: "Postulats",
@@ -715,7 +715,7 @@ export const themes: Theme[] = [
     ],
   },
   {
-    slug: "systemes-en-interaction",
+    slug: "interacting-systems",
     number: 5,
     display_on_web: false,
     titleFr: "Systèmes en interaction",
@@ -727,7 +727,7 @@ export const themes: Theme[] = [
     lessons: [],
   },
   {
-    slug: "decoherence-et-mesure-quantique",
+    slug: "decoherence-and-quantum-measurement",
     number: 6,
     display_on_web: false,
     titleFr: "Décohérence et mesure quantique",
