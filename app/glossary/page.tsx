@@ -23,7 +23,42 @@ function normalizeKeyword(value: string): string {
   return value.trim().toLowerCase();
 }
 
-function GlossaryPageContent() {
+function GlossaryIntro() {
+  const { lang } = useLang();
+  const title = lang === "fr" ? "Glossaire des mots-clés" : "Keyword Glossary";
+  const subtitle =
+    lang === "fr"
+      ? "Cliquez sur un mot-clé pour voir toutes les leçons qui l'utilisent."
+      : "Click a keyword to see every lesson that uses it.";
+
+  return (
+    <div style={{ maxWidth: "850px" }}>
+      <h1
+        style={{
+          fontFamily: "var(--font-playfair)",
+          fontSize: "clamp(1.9rem, 4vw, 2.5rem)",
+          color: "var(--text-heading)",
+          marginBottom: "0.6rem",
+        }}
+      >
+        {title}
+      </h1>
+      <p
+        style={{
+          fontFamily: "var(--font-crimson)",
+          fontSize: "1.05rem",
+          color: "var(--text-secondary)",
+          lineHeight: 1.7,
+          marginBottom: "1.2rem",
+        }}
+      >
+        {subtitle}
+      </p>
+    </div>
+  );
+}
+
+function GlossaryFilterAndList() {
   const { lang } = useLang();
   const searchParams = useSearchParams();
   const selectedKeywordRaw = searchParams.get("q") || "";
@@ -70,11 +105,6 @@ function GlossaryPageContent() {
     );
   }, [glossaryItems, selectedKeywordNormalized]);
 
-  const title = lang === "fr" ? "Glossaire des mots-clés" : "Keyword Glossary";
-  const subtitle =
-    lang === "fr"
-      ? "Cliquez sur un mot-clé pour voir toutes les leçons qui l'utilisent."
-      : "Click a keyword to see every lesson that uses it.";
   const allKeywordsLabel = lang === "fr" ? "Tous les mots-clés" : "All keywords";
   const relatedLessonsLabel = lang === "fr" ? "Leçons associées" : "Related lessons";
   const noResultLabel =
@@ -83,37 +113,7 @@ function GlossaryPageContent() {
       : "No keyword found for this filter.";
 
   return (
-    <main
-      style={{
-        maxWidth: "1100px",
-        margin: "0 auto",
-        padding: "3rem 1.5rem 4rem",
-      }}
-    >
-      <div style={{ maxWidth: "850px" }}>
-        <h1
-          style={{
-            fontFamily: "var(--font-playfair)",
-            fontSize: "clamp(1.9rem, 4vw, 2.5rem)",
-            color: "var(--text-heading)",
-            marginBottom: "0.6rem",
-          }}
-        >
-          {title}
-        </h1>
-        <p
-          style={{
-            fontFamily: "var(--font-crimson)",
-            fontSize: "1.05rem",
-            color: "var(--text-secondary)",
-            lineHeight: 1.7,
-            marginBottom: "1.2rem",
-          }}
-        >
-          {subtitle}
-        </p>
-      </div>
-
+    <>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.75rem" }}>
         <Link
           href="/glossary"
@@ -222,14 +222,23 @@ function GlossaryPageContent() {
           ))}
         </div>
       )}
-    </main>
+    </>
   );
 }
 
 export default function GlossaryPage() {
   return (
-    <Suspense fallback={null}>
-      <GlossaryPageContent />
-    </Suspense>
+    <main
+      style={{
+        maxWidth: "1100px",
+        margin: "0 auto",
+        padding: "3rem 1.5rem 4rem",
+      }}
+    >
+      <GlossaryIntro />
+      <Suspense fallback={null}>
+        <GlossaryFilterAndList />
+      </Suspense>
+    </main>
   );
 }

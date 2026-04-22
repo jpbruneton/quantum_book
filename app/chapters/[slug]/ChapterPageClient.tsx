@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import type { CSSProperties } from "react";
 import { Suspense, useMemo, useTransition } from "react";
 import type { Theme } from "@/lib/chapters";
 import { ChapterContent } from "../ChapterContent";
@@ -23,21 +24,225 @@ interface Props {
   next: Theme | null;
 }
 
-function ChapterPageClientInner({ theme, prev, next }: Props) {
-  const { t, lang } = useLang();
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [, startTransition] = useTransition();
+const headerBoxStyle: CSSProperties = {
+  borderBottom: "1px solid var(--border)",
+  padding: "4rem 1.5rem 3rem",
+  background: "var(--bg-secondary)",
+  transition: "background 0.25s ease",
+};
+
+const maxWStyle: CSSProperties = {
+  maxWidth: "800px",
+  margin: "0 auto",
+};
+
+function getActiveLessonIndex(
+  searchParams: ReturnType<typeof useSearchParams>,
+  lessonCount: number
+): number {
   const requestedLessonNumber = Number(searchParams.get("lesson") || "");
   const requestedLessonIndex =
     Number.isFinite(requestedLessonNumber) && requestedLessonNumber >= 1
       ? Math.min(
           Math.max(requestedLessonNumber - 1, 0),
-          Math.max(theme.lessons.length - 1, 0)
+          Math.max(lessonCount - 1, 0)
         )
       : 0;
-  const activeLessonIndex = requestedLessonIndex;
+  return requestedLessonIndex;
+}
+
+function ChapterThemeHeadingBlock({ theme }: { theme: ThemeWithLocalizedLessonContent }) {
+  const { t, lang } = useLang();
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
+          marginBottom: "2rem",
+          fontFamily: "var(--font-inter)",
+          fontSize: "0.8rem",
+          color: "var(--text-dim)",
+        }}
+      >
+        <Link href="/" style={{ color: "var(--text-dim)", textDecoration: "none" }}>
+          {t.chapter.breadcrumbHome}
+        </Link>
+        <span>/</span>
+        <Link href="/chapters" style={{ color: "var(--text-dim)", textDecoration: "none" }}>
+          {t.chapter.breadcrumbThemes}
+        </Link>
+        <span>/</span>
+        <span style={{ color: "var(--amber)" }}>
+          {t.chapter.themeLabel.charAt(0) + t.chapter.themeLabel.slice(1).toLowerCase()}{" "}
+          {theme.number}
+        </span>
+      </div>
+
+      <h1
+        style={{
+          fontFamily: "var(--font-playfair)",
+          fontSize: "clamp(2rem, 5vw, 3rem)",
+          fontWeight: 700,
+          color: "var(--text-heading)",
+          marginBottom: "0.5rem",
+          lineHeight: 1.2,
+        }}
+      >
+        {lang === "fr" ? theme.titleFr : theme.titleEn}
+      </h1>
+      <p
+        style={{
+          fontFamily: "var(--font-playfair)",
+          fontStyle: "italic",
+          fontSize: "1.2rem",
+          color: "var(--amber-soft)",
+          marginBottom: "1.5rem",
+        }}
+      >
+        {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
+      </p>
+    </>
+  );
+}
+
+function ChapterLessonTabButtons({ theme }: { theme: ThemeWithLocalizedLessonContent }) {
+  const { lang } = useLang();
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [, startTransition] = useTransition();
+  const activeLessonIndex = getActiveLessonIndex(
+    searchParams,
+    Math.max(theme.lessons.length, 0)
+  );
+
+  const navigateToLesson = (lessonIndex: number) => {
+    const maxIndex = Math.max(theme.lessons.length - 1, 0);
+    const clamped = Math.min(Math.max(lessonIndex, 0), maxIndex);
+    const params = new URLSearchParams(searchParams.toString());
+    if (clamped === 0) {
+      params.delete("lesson");
+    } else {
+      params.set("lesson", String(clamped + 1));
+    }
+    const query = params.toString();
+    startTransition(() => {
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    });
+  };
+
+  if (theme.lessons.length === 0) return null;
+
+  const normalLessons = theme.lessons
+    .map((lesson, index) => ({ lesson, index }))
+    .filter(({ lesson }) => lesson.kind !== "fiche");
+  const fiches = theme.lessons
+    .map((lesson, index) => ({ lesson, index }))
+    .filter(({ lesson }) => lesson.kind === "fiche");
+
+  return (
+    <div
+      style={{
+        marginTop: "1.75rem",
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.6rem",
+      }}
+    >
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+        {normalLessons.map(({ lesson, index }) => (
+          <button
+            key={lesson.slug}
+            type="button"
+            onClick={() => navigateToLesson(index)}
+            style={{
+              background:
+                index === activeLessonIndex
+                  ? "var(--accent-bg-md)"
+                  : "var(--accent-bg-xs)",
+              border:
+                index === activeLessonIndex
+                  ? "1px solid var(--accent-border-md)"
+                  : "1px solid var(--accent-border-sm)",
+              borderRadius: "999px",
+              padding: "0.35rem 0.85rem",
+              fontFamily: "var(--font-inter)",
+              fontSize: "0.78rem",
+              color:
+                index === activeLessonIndex
+                  ? "var(--amber)"
+                  : "var(--text-secondary)",
+              cursor: "pointer",
+            }}
+          >
+            {lang === "fr"
+              ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
+              : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
+          </button>
+        ))}
+      </div>
+      {fiches.length > 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
+          <span
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "0.7rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              color: "var(--text-dim)",
+              marginRight: "0.15rem",
+            }}
+          >
+            {lang === "fr" ? "Fiches de révision" : "Revision Sheets"}
+          </span>
+          {fiches.map(({ lesson, index }) => (
+            <button
+              key={lesson.slug}
+              type="button"
+              onClick={() => navigateToLesson(index)}
+              style={{
+                background:
+                  index === activeLessonIndex
+                    ? "var(--accent-bg-md)"
+                    : "var(--accent-bg-xs)",
+                border:
+                  index === activeLessonIndex
+                    ? "1px solid var(--accent-border-md)"
+                    : "1px solid var(--accent-border-sm)",
+                borderRadius: "999px",
+                padding: "0.35rem 0.85rem",
+                fontFamily: "var(--font-inter)",
+                fontSize: "0.78rem",
+                color:
+                  index === activeLessonIndex
+                    ? "var(--amber)"
+                    : "var(--text-secondary)",
+                cursor: "pointer",
+              }}
+            >
+              {lang === "fr"
+                ? `Fiche n°${lesson.number} : ${lesson.subtitleFr}`
+                : `Sheet ${lesson.number}: ${lesson.subtitleEn}`}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
+  const { t, lang } = useLang();
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [, startTransition] = useTransition();
+  const activeLessonIndex = getActiveLessonIndex(
+    searchParams,
+    Math.max(theme.lessons.length, 0)
+  );
 
   const navigateToLesson = (lessonIndex: number) => {
     const maxIndex = Math.max(theme.lessons.length - 1, 0);
@@ -68,167 +273,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
       : null;
 
   return (
-    <div style={{ position: "relative", zIndex: 1 }}>
-      {/* Chapter Header */}
-      <div
-        style={{
-          borderBottom: "1px solid var(--border)",
-          padding: "4rem 1.5rem 3rem",
-          background: "var(--bg-secondary)",
-          transition: "background 0.25s ease",
-        }}
-      >
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          {/* Breadcrumb */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              marginBottom: "2rem",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.8rem",
-              color: "var(--text-dim)",
-            }}
-          >
-            <Link
-              href="/"
-              style={{ color: "var(--text-dim)", textDecoration: "none" }}
-            >
-              {t.chapter.breadcrumbHome}
-            </Link>
-            <span>/</span>
-            <Link
-              href="/chapters"
-              style={{ color: "var(--text-dim)", textDecoration: "none" }}
-            >
-              {t.chapter.breadcrumbThemes}
-            </Link>
-            <span>/</span>
-            <span style={{ color: "var(--amber)" }}>
-              {t.chapter.themeLabel.charAt(0) +
-                t.chapter.themeLabel.slice(1).toLowerCase()}{" "}
-              {theme.number}
-            </span>
-          </div>
-
-          <h1
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(2rem, 5vw, 3rem)",
-              fontWeight: 700,
-              color: "var(--text-heading)",
-              marginBottom: "0.5rem",
-              lineHeight: 1.2,
-            }}
-          >
-            {lang === "fr" ? theme.titleFr : theme.titleEn}
-          </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontStyle: "italic",
-              fontSize: "1.2rem",
-              color: "var(--amber-soft)",
-              marginBottom: "1.5rem",
-            }}
-          >
-            {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
-          </p>
-
-          {/* Lesson tabs */}
-          {theme.lessons.length > 0 && (() => {
-            const normalLessons = theme.lessons
-              .map((lesson, index) => ({ lesson, index }))
-              .filter(({ lesson }) => lesson.kind !== "fiche");
-            const fiches = theme.lessons
-              .map((lesson, index) => ({ lesson, index }))
-              .filter(({ lesson }) => lesson.kind === "fiche");
-            return (
-              <div style={{ marginTop: "1.75rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                  {normalLessons.map(({ lesson, index }) => (
-                    <button
-                      key={lesson.slug}
-                      onClick={() => navigateToLesson(index)}
-                      style={{
-                        background:
-                          index === activeLessonIndex
-                            ? "var(--accent-bg-md)"
-                            : "var(--accent-bg-xs)",
-                        border:
-                          index === activeLessonIndex
-                            ? "1px solid var(--accent-border-md)"
-                            : "1px solid var(--accent-border-sm)",
-                        borderRadius: "999px",
-                        padding: "0.35rem 0.85rem",
-                        fontFamily: "var(--font-inter)",
-                        fontSize: "0.78rem",
-                        color:
-                          index === activeLessonIndex
-                            ? "var(--amber)"
-                            : "var(--text-secondary)",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {lang === "fr"
-                        ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
-                        : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
-                    </button>
-                  ))}
-                </div>
-                {fiches.length > 0 && (
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-inter)",
-                        fontSize: "0.7rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.08em",
-                        color: "var(--text-dim)",
-                        marginRight: "0.15rem",
-                      }}
-                    >
-                      {lang === "fr" ? "Fiches de révision" : "Revision Sheets"}
-                    </span>
-                    {fiches.map(({ lesson, index }) => (
-                      <button
-                        key={lesson.slug}
-                        onClick={() => navigateToLesson(index)}
-                        style={{
-                          background:
-                            index === activeLessonIndex
-                              ? "var(--accent-bg-md)"
-                              : "var(--accent-bg-xs)",
-                          border:
-                            index === activeLessonIndex
-                              ? "1px solid var(--accent-border-md)"
-                              : "1px solid var(--accent-border-sm)",
-                          borderRadius: "999px",
-                          padding: "0.35rem 0.85rem",
-                          fontFamily: "var(--font-inter)",
-                          fontSize: "0.78rem",
-                          color:
-                            index === activeLessonIndex
-                              ? "var(--amber)"
-                              : "var(--text-secondary)",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {lang === "fr"
-                          ? `Fiche n°${lesson.number} : ${lesson.subtitleFr}`
-                          : `Sheet ${lesson.number}: ${lesson.subtitleEn}`}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })()}
-        </div>
-      </div>
-
-      {/* ─── Tabs: Web / PDF ─── */}
+    <>
       {activeLesson ? (
         <ChapterContent lesson={activeLesson} />
       ) : (
@@ -262,7 +307,6 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
         </div>
       )}
 
-      {/* ─── Prev / Next navigation ─── */}
       <div
         style={{
           maxWidth: "800px",
@@ -275,6 +319,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
       >
         {previousLesson ? (
           <button
+            type="button"
             onClick={() => navigateToLesson(activeLessonIndex - 1)}
             style={{
               textAlign: "left",
@@ -313,12 +358,12 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
                 }}
               >
                 {previousLesson.kind === "fiche"
-                  ? (lang === "fr"
-                      ? `Fiche n°${previousLesson.number} : ${previousLesson.subtitleFr}`
-                      : `Sheet ${previousLesson.number}: ${previousLesson.subtitleEn}`)
-                  : (lang === "fr"
-                      ? `Leçon n°${previousLesson.number} : ${previousLesson.subtitleFr}`
-                      : `Lesson ${previousLesson.number}: ${previousLesson.subtitleEn}`)}
+                  ? lang === "fr"
+                    ? `Fiche n°${previousLesson.number} : ${previousLesson.subtitleFr}`
+                    : `Sheet ${previousLesson.number}: ${previousLesson.subtitleEn}`
+                  : lang === "fr"
+                    ? `Leçon n°${previousLesson.number} : ${previousLesson.subtitleFr}`
+                    : `Lesson ${previousLesson.number}: ${previousLesson.subtitleEn}`}
               </div>
             </div>
           </button>
@@ -361,6 +406,7 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
         )}
         {nextLesson ? (
           <button
+            type="button"
             onClick={() => navigateToLesson(activeLessonIndex + 1)}
             style={{
               textAlign: "left",
@@ -400,12 +446,12 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
                 }}
               >
                 {nextLesson.kind === "fiche"
-                  ? (lang === "fr"
-                      ? `Fiche n°${nextLesson.number} : ${nextLesson.subtitleFr}`
-                      : `Sheet ${nextLesson.number}: ${nextLesson.subtitleEn}`)
-                  : (lang === "fr"
-                      ? `Leçon n°${nextLesson.number} : ${nextLesson.subtitleFr}`
-                      : `Lesson ${nextLesson.number}: ${nextLesson.subtitleEn}`)}
+                  ? lang === "fr"
+                    ? `Fiche n°${nextLesson.number} : ${nextLesson.subtitleFr}`
+                    : `Sheet ${nextLesson.number}: ${nextLesson.subtitleEn}`
+                  : lang === "fr"
+                    ? `Leçon n°${nextLesson.number} : ${nextLesson.subtitleFr}`
+                    : `Lesson ${nextLesson.number}: ${nextLesson.subtitleEn}`}
               </div>
             </div>
           </button>
@@ -448,14 +494,29 @@ function ChapterPageClientInner({ theme, prev, next }: Props) {
           <div />
         )}
       </div>
+    </>
+  );
+}
+
+function ChapterPageView({ theme, prev, next }: Props) {
+  return (
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <div style={headerBoxStyle}>
+        <div style={maxWStyle}>
+          <ChapterThemeHeadingBlock theme={theme} />
+          <Suspense fallback={null}>
+            <ChapterLessonTabButtons theme={theme} />
+          </Suspense>
+        </div>
+      </div>
+
+      <Suspense fallback={null}>
+        <ChapterContentAndPrevNext theme={theme} prev={prev} next={next} />
+      </Suspense>
     </div>
   );
 }
 
-export function ChapterPageClient({ theme, prev, next }: Props) {
-  return (
-    <Suspense fallback={null}>
-      <ChapterPageClientInner theme={theme} prev={prev} next={next} />
-    </Suspense>
-  );
+export function ChapterPageClient(props: Props) {
+  return <ChapterPageView {...props} />;
 }

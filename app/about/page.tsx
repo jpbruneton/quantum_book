@@ -52,6 +52,15 @@ export default function AboutPage() {
     marginBottom: "0.65rem",
   };
 
+  const h1Style = {
+    fontFamily: "var(--font-playfair)",
+    fontSize: "clamp(2rem, 4.2vw, 2.75rem)",
+    fontWeight: 700,
+    color: "var(--text-heading)",
+    lineHeight: 1.2,
+    marginBottom: "2rem",
+  };
+
   return (
     <div
       style={{
@@ -61,6 +70,7 @@ export default function AboutPage() {
       }}
     >
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+        <h1 style={h1Style}>{t.nav.about}</h1>
         {/* Project status */}
         <div style={sectionStyle}>
           <h2 style={h2Style}>{at.aboutProjectTitle}</h2>
