@@ -5,9 +5,9 @@ export type ExerciseIndexSource = "library" | "legacy";
 
 export interface ExerciseIndexEntry {
   source: ExerciseIndexSource;
-  /** Stable id: optional brace after \\begin{exercice}, or synthetic legacy key. */
+  /** Stable id: optional brace after \\begin{exo} (ou exercice), ou clé legacy. */
   id: string;
-  /** Bracket title from \\begin{exercice}[...] (raw TeX). */
+  /** Titre entre crochets après \\begin{exo}[...] (TeX brut). */
   titleTex: string;
   keywords: string[];
   themeNumber: number;
@@ -89,7 +89,8 @@ export function listExerciseLibraryFiles(lang: "fr" | "en"): string[] {
 }
 
 export function parseFirstExerciceHeader(source: string): { titleTex: string; id: string | null } {
-  const re = /\\begin\s*\{\s*exercice\s*\}\s*(?:\[([^\]]*)\])?\s*(?:\{([^}]*)\})?/i;
+  const re =
+    /\\begin\s*\{\s*(?:exo|exercice|exercise)\s*\}\s*(?:\[([^\]]*)\])?\s*(?:\{([^}]*)\})?/i;
   const m = re.exec(source);
   if (!m) return { titleTex: "", id: null };
   const titleTex = (m[1] ?? "").trim();
@@ -132,7 +133,8 @@ export function buildLegacyExoIndexEntries(themeNumber: number, lang: "fr" | "en
   const full = join(texRoot(), folder, "exo.tex");
   if (!existsSync(full)) return [];
   const source = readFileSync(full, "utf-8");
-  const re = /\\begin\s*\{\s*exercice\s*\}\s*(?:\[([^\]]*)\])?\s*(?:\{([^}]*)\})?/gi;
+  const re =
+    /\\begin\s*\{\s*(?:exo|exercice|exercise)\s*\}\s*(?:\[([^\]]*)\])?\s*(?:\{([^}]*)\})?/gi;
   const entries: ExerciseIndexEntry[] = [];
   let match: RegExpExecArray | null;
   let serial = 0;

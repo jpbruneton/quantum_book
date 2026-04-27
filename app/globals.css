@@ -729,21 +729,28 @@ body::before {
   margin-top: 0.75rem;
 }
 
-/* Exercise / Hint / Solution blocks */
-.prose-quantum .latex-block-exercice,
-.prose-quantum .latex-block-exercise {
-  border-color: #06b6d466;
-  background: #06b6d41a;
+/* Exercises : titre seul (pas de cadre), aligné PDF / web */
+.prose-quantum .latex-exo {
+  margin: 1.25rem 0 1rem;
 }
 
-.prose-quantum .latex-block-exercice strong,
-.prose-quantum .latex-block-exercise strong,
-.prose-quantum .latex-block-exercice .latex-inline-blue-strong,
-.prose-quantum .latex-block-exercise .latex-inline-blue-strong {
-  color: #0e7490;
+.prose-quantum .latex-exo-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-crimson), serif;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--text-heading);
+}
+
+.prose-quantum .latex-exo-title strong {
   font-weight: 700;
 }
 
+.prose-quantum .latex-exo-content {
+  margin: 0;
+}
+
+/* Hint / Solution blocks */
 .prose-quantum .latex-block-indice,
 .prose-quantum .latex-block-hint {
   border-color: #f59e0b55;
@@ -788,7 +795,7 @@ body::before {
 }
 
 .prose-quantum .latex-exercise-question {
-  border-left: 3px solid #06b6d440;
+  border-left: 3px solid var(--border, #e2e8f0);
   padding-left: 0.85rem;
 }
 

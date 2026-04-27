@@ -940,6 +940,12 @@ function normalizeLatexBlocks(
 
   result = transformQuestionsEnvironments(result, isEnglish);
 
+  // Un seul compteur / style « léger » pour exercice, exercise et exo.
+  result = result.replace(/\\begin\{exercice\}/g, "\\begin{exo}");
+  result = result.replace(/\\end\{exercice\}/g, "\\end{exo}");
+  result = result.replace(/\\begin\{exercise\}/g, "\\begin{exo}");
+  result = result.replace(/\\end\{exercise\}/g, "\\end{exo}");
+
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string; collapsible?: boolean }> = [
     { env: "definition", title: "Definition" },
@@ -954,8 +960,7 @@ function normalizeLatexBlocks(
     { env: "example", title: "Example" },
     { env: "resume", title: isEnglish ? "Summary" : "Résumé" },
     { env: "important", title: "Important" },
-    { env: "exercice", title: isEnglish ? "Exercise" : "Exercice" },
-    { env: "exercise", title: isEnglish ? "Exercise" : "Exercice" },
+    { env: "exo", title: isEnglish ? "Exercise" : "Exercice" },
     { env: "indice", title: isEnglish ? "Hint" : "Indice", collapsible: true },
     { env: "indication", title: isEnglish ? "Hint" : "Indication", collapsible: true },
     { env: "hint", title: isEnglish ? "Hint" : "Indice", collapsible: true },
@@ -971,8 +976,7 @@ function normalizeLatexBlocks(
     exemple: 0,
     example: 0,
     remark: 0,
-    exercice: 0,
-    exercise: 0,
+    exo: 0,
   };
 
   for (const blockKind of blockKinds) {
@@ -990,7 +994,10 @@ function normalizeLatexBlocks(
       const displayLabel = bracketArg?.trim() || (looksLikeTechnicalLabel ? "" : fallbackArg);
       const suffix = displayLabel ? ` (${cleanLatexInline(displayLabel)})` : "";
       let numberedTitle = blockKind.title;
-      if (blockKind.env in blockCounters) {
+      if (blockKind.env === "exo") {
+        blockCounters.exo += 1;
+        numberedTitle = `${blockKind.title} ${blockCounters.exo}`;
+      } else if (blockKind.env in blockCounters) {
         blockCounters[blockKind.env] += 1;
         numberedTitle = `${blockKind.title} ${blockCounters[blockKind.env]}`;
       }
@@ -1001,15 +1008,13 @@ function normalizeLatexBlocks(
           : "";
         return `\n\n<div class="latex-block latex-block-plusloin"><div class="latex-block-heading"><span class="latex-plusloin-label">${label}</span>${topicHtml}</div><div class="latex-block-body">`;
       }
-      const isExo = blockKind.env === "exercice" || blockKind.env === "exercise";
-      let headingStrongInner: string;
+      const isExo = blockKind.env === "exo";
       if (isExo) {
-        // Optional brace label (e.g. exo:demo-1) is kept for TeX / index only, not shown on the web.
-        const titleFrag = bracketArg?.trim() ? ` — ${cleanLatexInline(bracketArg.trim())}` : "";
-        headingStrongInner = `${numberedTitle}${titleFrag}`;
-      } else {
-        headingStrongInner = `${numberedTitle}${suffix}`;
+        const titlePart = bracketArg?.trim() ? ` : ${cleanLatexInline(bracketArg.trim())}` : "";
+        return `\n\n<div class="latex-exo"><p class="latex-exo-title"><strong>${numberedTitle}${titlePart}</strong></p><div class="latex-exo-content">`;
       }
+      let headingStrongInner: string;
+      headingStrongInner = `${numberedTitle}${suffix}`;
       if (blockKind.collapsible) {
         return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div></summary><div class="latex-block-collapsible-body">`;
       }
@@ -1135,7 +1140,8 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
     cleaned.startsWith("<ol") ||
     cleaned.startsWith("<details class=\"latex-proof\"") ||
     cleaned.startsWith("<div class=\"latex-block") ||
-    cleaned.startsWith("<div class=\"latex-exercise-questions\"")
+    cleaned.startsWith("<div class=\"latex-exercise-questions\"") ||
+    cleaned.startsWith("<div class=\"latex-exo\"")
   ) {
     return withFootnotes(cleaned);
   }
