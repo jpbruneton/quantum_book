@@ -14,7 +14,14 @@
  */
 
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -124,20 +131,41 @@ function buildWrapperTex(themeNumber, lang, chapterTitle) {
 `;
 }
 
-function runPdflatex(jobname, wrapperPath) {
-  const outDir = join(repoRoot, "public", "pdfs");
-  mkdirSync(outDir, { recursive: true });
+function runPdflatex(jobname, wrapperPath, latexOutDir) {
+  mkdirSync(latexOutDir, { recursive: true });
   const pdflatex = resolvePdflatex();
   const commonArgs = [
     "-interaction=nonstopmode",
     "-halt-on-error",
-    `-output-directory=${outDir}`,
+    `-output-directory=${latexOutDir}`,
     `-jobname=${jobname}`,
     wrapperPath,
   ];
   const r1 = spawnSync(pdflatex, commonArgs, { cwd: repoRoot, stdio: "inherit", env: process.env });
   if (r1.status !== 0) {
     console.error(`Échec de ${pdflatex} (code ${r1.status ?? r1.error})`);
+    process.exit(1);
+  }
+}
+
+/**
+ * pdflatex écrit d'abord dans latex-tmp pour éviter l'erreur Windows
+ * « I can't write on file `exo_theme…pdf' » quand le PDF dans public/pdfs est ouvert
+ * (Cursor, navigateur, lecteur PDF). La copie finale peut encore échouer si le fichier
+ * reste verrouillé : il faut alors fermer le PDF cible.
+ */
+function publishPdf(jobname, latexOutDir, publicPdfDir) {
+  const src = join(latexOutDir, `${jobname}.pdf`);
+  const dest = join(publicPdfDir, `${jobname}.pdf`);
+  mkdirSync(publicPdfDir, { recursive: true });
+  try {
+    copyFileSync(src, dest);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error(
+      `Impossible d'écrire ${dest}. Fermez ce PDF (aperçu dans l'éditeur, navigateur ou lecteur), puis relancez.`,
+    );
+    console.error(msg);
     process.exit(1);
   }
 }
@@ -161,13 +189,17 @@ function main() {
   const chapterTitle =
     lang === "fr" ? `Exercices — Thème ${themeNumber}` : `Exercises — Theme ${themeNumber}`;
 
+  const publicPdfDir = join(repoRoot, "public", "pdfs");
+
   const buildOne = (bodyText, jobnameSuffix) => {
     writeFileSync(join(tmpDir, "body_frag.tex"), bodyText, "utf8");
     const wrapperPath = join(tmpDir, `wrapper_theme${themeNumber}_${lang}${jobnameSuffix}.tex`);
     writeFileSync(wrapperPath, buildWrapperTex(themeNumber, lang, chapterTitle), "utf8");
     const jobname = `exo_theme${themeNumber}_${lang}${jobnameSuffix}`;
-    console.log(`Compilation → public/pdfs/${jobname}.pdf …`);
-    runPdflatex(jobname, wrapperPath);
+    console.log(`Compilation (${jobname}) dans scripts/latex-tmp …`);
+    runPdflatex(jobname, wrapperPath, tmpDir);
+    console.log(`Copie → public/pdfs/${jobname}.pdf …`);
+    publishPdf(jobname, tmpDir, publicPdfDir);
     console.log(`OK: public/pdfs/${jobname}.pdf`);
   };
 
