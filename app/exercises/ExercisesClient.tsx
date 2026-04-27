@@ -18,6 +18,8 @@ export interface ThemeCard {
 
 export interface ExerciseIndexCard {
   id: string;
+  /** Numéro global dans la bibliothèque (1, 2, …) pour l'affichage web. */
+  displayNumber: number;
   titleHtml: string;
   titleTex: string;
   keywords: string[];
@@ -48,8 +50,8 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       searchLabel: "Recherche dans la bibliothèque",
       byTheme: "Par thème",
       noMatch: "Aucun exercice ne correspond à cette requête.",
-      exerciseWord: "Exercice",
       keywordsLabel: "Mots-clés",
+      exercisePrefix: "Exercice",
     },
     en: {
       title: "Solved Exercises",
@@ -61,8 +63,8 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       searchLabel: "Search the library",
       byTheme: "By theme",
       noMatch: "No exercises match this query.",
-      exerciseWord: "Exercise",
       keywordsLabel: "Keywords",
+      exercisePrefix: "Exercise",
     },
   }[lang];
 
@@ -278,12 +280,10 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                         }}
                       >
                         <span style={{ color: "var(--accent)", fontWeight: 600 }}>
-                          {t.exerciseWord} {card.id}
+                          {t.exercisePrefix} {card.displayNumber}
                         </span>
-                        <span style={{ color: "var(--text-secondary)", margin: "0 0.35rem" }}>
-                          —
-                        </span>
-                        <span dangerouslySetInnerHTML={{ __html: card.titleHtml }} />
+                        <span style={{ color: "var(--text-secondary)", margin: "0 0.35rem" }}>—</span>
+                        <span style={{ fontWeight: 600 }} dangerouslySetInnerHTML={{ __html: card.titleHtml }} />
                       </div>
                       {card.keywords.length > 0 ? (
                         <div

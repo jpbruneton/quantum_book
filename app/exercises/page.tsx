@@ -9,8 +9,9 @@ function exoTexExists(themeNumber: number, lang: "fr" | "en"): boolean {
 
 function buildIndexCards(lang: "fr" | "en") {
   const slugByNumber = new Map(getWebThemes().map((t) => [t.number, t.slug]));
-  return buildAllExerciseIndexEntries(lang).map((e) => ({
+  return buildAllExerciseIndexEntries(lang).map((e, index) => ({
     id: e.id,
+    displayNumber: index + 1,
     titleHtml: exerciseTitleToPlainHtml(e.titleTex),
     titleTex: e.titleTex,
     keywords: e.keywords,

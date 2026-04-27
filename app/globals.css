@@ -780,13 +780,6 @@ body::before {
   font-weight: 700;
 }
 
-.prose-quantum .latex-exo-id {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.88em;
-  font-weight: 600;
-  color: var(--text-secondary, #64748b);
-}
-
 .prose-quantum .latex-exercise-questions {
   display: flex;
   flex-direction: column;

@@ -152,14 +152,38 @@ export function buildLegacyExoIndexEntries(themeNumber: number, lang: "fr" | "en
   return entries;
 }
 
+function compareLibraryEntriesByPath(a: ExerciseIndexEntry, b: ExerciseIndexEntry): number {
+  const pa = a.libraryRelPath ?? "";
+  const pb = b.libraryRelPath ?? "";
+  return pa.localeCompare(pb, undefined, { numeric: true, sensitivity: "base" });
+}
+
+/**
+ * Ordre d'affichage et de numérotation globale : pour chaque thème (1…20),
+ * d'abord les exercices du fichier legacy exo.tex s'il existe, puis les fiches
+ * bibliothèque de ce thème (tri par nom de fichier).
+ */
 export function buildAllExerciseIndexEntries(lang: "fr" | "en"): ExerciseIndexEntry[] {
-  const out: ExerciseIndexEntry[] = [];
-  for (const e of buildLibraryIndexEntries(lang)) {
-    out.push(e);
+  const libraryAll = buildLibraryIndexEntries(lang);
+  const libraryByTheme = new Map<number, ExerciseIndexEntry[]>();
+  for (const e of libraryAll) {
+    const list = libraryByTheme.get(e.themeNumber);
+    if (list) list.push(e);
+    else libraryByTheme.set(e.themeNumber, [e]);
   }
-  for (let n = 1; n <= 20; n += 1) {
-    for (const e of buildLegacyExoIndexEntries(n, lang)) {
+  for (const list of libraryByTheme.values()) {
+    list.sort(compareLibraryEntriesByPath);
+  }
+  const out: ExerciseIndexEntry[] = [];
+  for (let theme = 1; theme <= 20; theme += 1) {
+    for (const e of buildLegacyExoIndexEntries(theme, lang)) {
       out.push(e);
+    }
+    const libs = libraryByTheme.get(theme);
+    if (libs) {
+      for (const e of libs) {
+        out.push(e);
+      }
     }
   }
   return out;

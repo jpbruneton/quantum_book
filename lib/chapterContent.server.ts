@@ -1004,9 +1004,9 @@ function normalizeLatexBlocks(
       const isExo = blockKind.env === "exercice" || blockKind.env === "exercise";
       let headingStrongInner: string;
       if (isExo) {
-        const idFrag = fallbackArg ? ` <span class="latex-exo-id">${cleanLatexInline(fallbackArg)}</span>` : "";
+        // Optional brace label (e.g. exo:demo-1) is kept for TeX / index only, not shown on the web.
         const titleFrag = bracketArg?.trim() ? ` — ${cleanLatexInline(bracketArg.trim())}` : "";
-        headingStrongInner = `${numberedTitle}${idFrag}${titleFrag}`;
+        headingStrongInner = `${numberedTitle}${titleFrag}`;
       } else {
         headingStrongInner = `${numberedTitle}${suffix}`;
       }
