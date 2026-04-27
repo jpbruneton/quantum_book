@@ -171,7 +171,7 @@ export function buildAllExerciseIndexEntries(lang: "fr" | "en"): ExerciseIndexEn
     if (list) list.push(e);
     else libraryByTheme.set(e.themeNumber, [e]);
   }
-  for (const list of libraryByTheme.values()) {
+  for (const list of Array.from(libraryByTheme.values())) {
     list.sort(compareLibraryEntriesByPath);
   }
   const out: ExerciseIndexEntry[] = [];
