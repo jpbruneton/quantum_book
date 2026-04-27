@@ -1,9 +1,8 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getWebTheme, getWebThemes, bookMeta } from "@/lib/chapters";
-import { getLessonWebContent } from "@/lib/chapterContent.server";
+import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
+import { getTexWebHtmlFromSource } from "@/lib/chapterContent.server";
+import { combineThemeExerciseSources, themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
 import { absoluteUrl } from "@/lib/siteUrl";
 import { ExerciseThemeClient } from "./ExerciseThemeClient";
 
@@ -11,15 +10,9 @@ interface Props {
   params: { slug: string };
 }
 
-function hasExoTex(themeNumber: number): boolean {
-  const frPath = join(process.cwd(), "content", "tex", `theme${themeNumber}_fr`, "exo.tex");
-  const enPath = join(process.cwd(), "content", "tex", `theme${themeNumber}_en`, "exo.tex");
-  return existsSync(frPath) || existsSync(enPath);
-}
-
 export function generateStaticParams() {
   return getWebThemes()
-    .filter((theme) => hasExoTex(theme.number))
+    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
     .map((theme) => ({ slug: theme.slug }));
 }
 
@@ -43,8 +36,11 @@ export default function ExerciseThemePage({ params }: Props) {
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();
 
-  const contentFr = getLessonWebContent(`theme${theme.number}_fr/exo.tex`, -1, []);
-  const contentEn = getLessonWebContent(`theme${theme.number}_en/exo.tex`, -1, []);
+  const mergedFr = combineThemeExerciseSources(theme.number, "fr");
+  const mergedEn = combineThemeExerciseSources(theme.number, "en");
+
+  const contentFr = getTexWebHtmlFromSource(mergedFr, "fr", []);
+  const contentEn = getTexWebHtmlFromSource(mergedEn, "en", []);
 
   if (!contentFr && !contentEn) notFound();
 

@@ -1,12 +1,23 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { getWebThemes } from "@/lib/chapters";
+import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
+import { buildAllExerciseIndexEntries, themeHasAnyExercises } from "@/lib/exercisesLibrary.server";
 import { ExercisesClient } from "./ExercisesClient";
 
 function exoTexExists(themeNumber: number, lang: "fr" | "en"): boolean {
-  const fileName = lang === "fr" ? "exo.tex" : "exo.tex";
-  const path = join(process.cwd(), "content", "tex", `theme${themeNumber}_${lang}`, fileName);
-  return existsSync(path);
+  return themeHasAnyExercises(themeNumber, lang);
+}
+
+function buildIndexCards(lang: "fr" | "en") {
+  const slugByNumber = new Map(getWebThemes().map((t) => [t.number, t.slug]));
+  return buildAllExerciseIndexEntries(lang).map((e) => ({
+    id: e.id,
+    titleHtml: exerciseTitleToPlainHtml(e.titleTex),
+    titleTex: e.titleTex,
+    keywords: e.keywords,
+    themeNumber: e.themeNumber,
+    themeSlug: slugByNumber.get(e.themeNumber) ?? "",
+    source: e.source,
+  }));
 }
 
 export default function ExercisesPage() {
@@ -21,5 +32,8 @@ export default function ExercisesPage() {
     hasContentEn: exoTexExists(theme.number, "en"),
   }));
 
-  return <ExercisesClient themes={themes} />;
+  const indexFr = buildIndexCards("fr");
+  const indexEn = buildIndexCards("en");
+
+  return <ExercisesClient themes={themes} indexFr={indexFr} indexEn={indexEn} />;
 }

@@ -741,6 +741,145 @@ function replaceCitations(input: string, citationMaps: CitationNumberMaps): stri
   });
 }
 
+function stripLatexCommandsWithSimpleArg(input: string, command: string): string {
+  const marker = `\\${command}`;
+  let output = "";
+  let index = 0;
+  while (index < input.length) {
+    const start = input.indexOf(marker, index);
+    if (start === -1) {
+      output += input.slice(index);
+      break;
+    }
+    output += input.slice(index, start);
+    let cursor = start + marker.length;
+    while (cursor < input.length && /\s/.test(input[cursor])) cursor += 1;
+    if (input[cursor] !== "{") {
+      output += marker;
+      index = cursor;
+      continue;
+    }
+    const block = readBalancedBracesAt(input, cursor);
+    if (!block) {
+      output += marker;
+      index = cursor + 1;
+      continue;
+    }
+    index = block.endIndex;
+  }
+  return output;
+}
+
+function peelTrailingEnvironmentBlock(
+  body: string,
+  envName: string
+): { rest: string; inner: string | null } {
+  const endTag = `\\end{${envName}}`;
+  const endIdx = body.lastIndexOf(endTag);
+  if (endIdx === -1) return { rest: body, inner: null };
+  const after = body.slice(endIdx + endTag.length).trim();
+  if (after.length > 0) return { rest: body, inner: null };
+  const beginTag = `\\begin{${envName}}`;
+  const beginIdx = body.lastIndexOf(beginTag, endIdx);
+  if (beginIdx === -1) return { rest: body, inner: null };
+  const inner = body.slice(beginIdx + beginTag.length, endIdx);
+  const rest = body.slice(0, beginIdx).trim();
+  return { rest, inner };
+}
+
+function transformQuestionsInner(body: string, isEnglish: boolean): string {
+  const trimmed = body.trim();
+  if (!/\\question\b/.test(trimmed)) {
+    return `\n\n${trimmed}\n\n`;
+  }
+  const chunks = trimmed
+    .split(/\\question\b/)
+    .slice(1)
+    .map((c) => c.trim())
+    .filter((c) => c.length > 0);
+  const qWord = isEnglish ? "Question" : "Question";
+  let out = `\n\n<div class="latex-exercise-questions">`;
+  for (let i = 0; i < chunks.length; i += 1) {
+    let chunk = chunks[i];
+    const sol = peelTrailingEnvironmentBlock(chunk, "solution");
+    chunk = sol.rest;
+    let hintInner: string | null = null;
+    const indA = peelTrailingEnvironmentBlock(chunk, "indication");
+    if (indA.inner !== null) {
+      hintInner = indA.inner;
+      chunk = indA.rest;
+    } else {
+      const indB = peelTrailingEnvironmentBlock(chunk, "indice");
+      if (indB.inner !== null) {
+        hintInner = indB.inner;
+        chunk = indB.rest;
+      } else {
+        const indC = peelTrailingEnvironmentBlock(chunk, "hint");
+        if (indC.inner !== null) {
+          hintInner = indC.inner;
+          chunk = indC.rest;
+        }
+      }
+    }
+    const stem = chunk.trim();
+    out += `<div class="latex-exercise-question"><div class="latex-exercise-q-heading"><strong>${qWord} ${i + 1}</strong></div><div class="latex-exercise-q-stem">${stem}</div>`;
+    if (hintInner !== null) {
+      out += `\n\\begin{indice}${hintInner}\\end{indice}`;
+    }
+    if (sol.inner !== null) {
+      out += `\n\\begin{solution}${sol.inner}\\end{solution}`;
+    }
+    out += `</div>`;
+  }
+  out += `</div>\n\n`;
+  return out;
+}
+
+function transformQuestionsEnvironments(input: string, isEnglish: boolean): string {
+  const beginTag = "\\begin{questions}";
+  const endTag = "\\end{questions}";
+  let result = "";
+  let cursor = 0;
+  while (cursor < input.length) {
+    const start = input.indexOf(beginTag, cursor);
+    if (start === -1) {
+      result += input.slice(cursor);
+      break;
+    }
+    result += input.slice(cursor, start);
+    let depth = 1;
+    let pos = start + beginTag.length;
+    let closedAt = -1;
+    while (pos < input.length && depth > 0) {
+      const nb = input.indexOf(beginTag, pos);
+      const ne = input.indexOf(endTag, pos);
+      if (ne === -1) {
+        depth = -1;
+        break;
+      }
+      if (nb !== -1 && nb < ne) {
+        depth += 1;
+        pos = nb + beginTag.length;
+      } else {
+        depth -= 1;
+        if (depth === 0) {
+          closedAt = ne;
+          break;
+        }
+        pos = ne + endTag.length;
+      }
+    }
+    if (closedAt === -1) {
+      result += input.slice(start);
+      break;
+    }
+    const inner = input.slice(start + beginTag.length, closedAt);
+    result += transformQuestionsInner(inner, isEnglish);
+    cursor = closedAt + endTag.length;
+  }
+  return result;
+}
+
 function normalizeLatexBlocks(
   input: string,
   citationMaps: CitationNumberMaps,
@@ -773,6 +912,10 @@ function normalizeLatexBlocks(
   result = result.replace(/\\begin\{mdframed\}(?:\[[^\]]*\])?/g, "");
   result = result.replace(/\\end\{mdframed\}/g, "");
 
+  // Exercise library metadata (web only; not rendered as prose).
+  result = stripLatexCommandsWithSimpleArg(result, "keywords");
+  result = stripLatexCommandsWithSimpleArg(result, "theme");
+
   // Support command-style theorem blocks such as \proposition{...}.
   result = replaceCommandBlock(result, "proposition", "latex-block-proposition", "Proposition");
   result = replaceCommandBlock(
@@ -795,6 +938,8 @@ function normalizeLatexBlocks(
     ` <span class="latex-proof-qed" aria-hidden="true">□</span></div></details>\n\n`
   );
 
+  result = transformQuestionsEnvironments(result, isEnglish);
+
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string; collapsible?: boolean }> = [
     { env: "definition", title: "Definition" },
@@ -812,6 +957,7 @@ function normalizeLatexBlocks(
     { env: "exercice", title: isEnglish ? "Exercise" : "Exercice" },
     { env: "exercise", title: isEnglish ? "Exercise" : "Exercice" },
     { env: "indice", title: isEnglish ? "Hint" : "Indice", collapsible: true },
+    { env: "indication", title: isEnglish ? "Hint" : "Indication", collapsible: true },
     { env: "hint", title: isEnglish ? "Hint" : "Indice", collapsible: true },
     { env: "solution", title: isEnglish ? "Solution" : "Solution", collapsible: true },
   ];
@@ -855,10 +1001,19 @@ function normalizeLatexBlocks(
           : "";
         return `\n\n<div class="latex-block latex-block-plusloin"><div class="latex-block-heading"><span class="latex-plusloin-label">${label}</span>${topicHtml}</div><div class="latex-block-body">`;
       }
-      if (blockKind.collapsible) {
-        return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${numberedTitle}${suffix}</strong></div></summary><div class="latex-block-collapsible-body">`;
+      const isExo = blockKind.env === "exercice" || blockKind.env === "exercise";
+      let headingStrongInner: string;
+      if (isExo) {
+        const idFrag = fallbackArg ? ` <span class="latex-exo-id">${cleanLatexInline(fallbackArg)}</span>` : "";
+        const titleFrag = bracketArg?.trim() ? ` — ${cleanLatexInline(bracketArg.trim())}` : "";
+        headingStrongInner = `${numberedTitle}${idFrag}${titleFrag}`;
+      } else {
+        headingStrongInner = `${numberedTitle}${suffix}`;
       }
-      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><div class="latex-block-heading"><strong>${numberedTitle}${suffix}</strong></div><div class="latex-block-body">`;
+      if (blockKind.collapsible) {
+        return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div></summary><div class="latex-block-collapsible-body">`;
+      }
+      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div><div class="latex-block-body">`;
     });
     result = result.replace(
       endRegex,
@@ -975,7 +1130,15 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
   if (cleaned.startsWith("<figure")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<div class=\"latex-vspace\"")) return withFootnotes(cleaned);
-  if (cleaned.startsWith("<ul") || cleaned.startsWith("<ol") || cleaned.startsWith("<details class=\"latex-proof\"") || cleaned.startsWith("<div class=\"latex-block")) return withFootnotes(cleaned);
+  if (
+    cleaned.startsWith("<ul") ||
+    cleaned.startsWith("<ol") ||
+    cleaned.startsWith("<details class=\"latex-proof\"") ||
+    cleaned.startsWith("<div class=\"latex-block") ||
+    cleaned.startsWith("<div class=\"latex-exercise-questions\"")
+  ) {
+    return withFootnotes(cleaned);
+  }
   if (cleaned.includes("<ul") || cleaned.includes("<ol") || cleaned.includes("<li>")) return withFootnotes(cleaned);
   if (cleaned.startsWith("$$") && cleaned.endsWith("$$")) return withFootnotes(cleaned);
   let paragraphHtml = "";
@@ -1226,6 +1389,23 @@ export function getLessonWebContent(
   } catch {
     return "";
   }
+}
+
+/** Plain HTML for exercise titles in search cards (no block-level TeX). */
+export function exerciseTitleToPlainHtml(texTitle: string): string {
+  return cleanLatexInline(texTitle);
+}
+
+export function getTexWebHtmlFromSource(
+  source: string,
+  contentLanguage: "en" | "fr",
+  references: LessonReference[]
+): string {
+  const lang: ContentLanguage = contentLanguage === "en" ? "en" : "fr";
+  const citationMaps = buildCitationNumberMaps(references);
+  const paragraphs = parseTexParagraphs(source, citationMaps, lang);
+  if (paragraphs.length === 0) return "";
+  return paragraphsToHtml(paragraphs);
 }
 
 export function getLessonReferences(

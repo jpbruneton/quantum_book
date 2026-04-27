@@ -1,14 +1,7 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { MetadataRoute } from "next";
 import { getWebThemes } from "@/lib/chapters";
+import { themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
 import { getSiteUrl } from "@/lib/siteUrl";
-
-function hasExoTex(themeNumber: number): boolean {
-  const frPath = join(process.cwd(), "content", "tex", `theme${themeNumber}_fr`, "exo.tex");
-  const enPath = join(process.cwd(), "content", "tex", `theme${themeNumber}_en`, "exo.tex");
-  return existsSync(frPath) || existsSync(enPath);
-}
 
 const SITE_URL = getSiteUrl();
 
@@ -82,7 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   const exerciseRoutes: MetadataRoute.Sitemap = getWebThemes()
-    .filter((theme) => hasExoTex(theme.number))
+    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
     .map((theme) => ({
       url: `${SITE_URL}/exercises/${theme.slug}`,
       lastModified: new Date(),

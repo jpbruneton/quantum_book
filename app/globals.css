@@ -769,6 +769,44 @@ body::before {
   font-weight: 700;
 }
 
+.prose-quantum .latex-block-indication {
+  border-color: #f59e0b55;
+  background: #fef9c314;
+}
+
+.prose-quantum .latex-block-indication strong,
+.prose-quantum .latex-block-indication .latex-inline-blue-strong {
+  color: #b45309;
+  font-weight: 700;
+}
+
+.prose-quantum .latex-exo-id {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.88em;
+  font-weight: 600;
+  color: var(--text-secondary, #64748b);
+}
+
+.prose-quantum .latex-exercise-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.prose-quantum .latex-exercise-question {
+  border-left: 3px solid #06b6d440;
+  padding-left: 0.85rem;
+}
+
+.prose-quantum .latex-exercise-q-heading {
+  margin-bottom: 0.35rem;
+}
+
+.prose-quantum .latex-exercise-q-stem {
+  margin-bottom: 0.35rem;
+}
+
 .prose-quantum .latex-block-resume {
   border-color: #a855f766;
   background: #a855f71a;
