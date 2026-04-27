@@ -50,7 +50,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
     fr: {
       title: "Exercices corrigés",
       subtitle:
-        "Bibliothèque d'exercices : recherche par titre ou mots-clés, puis accès par thème du livre.",
+        "Bibliothèque d'exercices : recherche par titre ou mots-clés, ou accès par thème du livre.",
       themePrefix: "Thème",
       open: "Ouvrir la série →",
       comingSoon: "À venir",
@@ -67,7 +67,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
     },
     en: {
       title: "Solved Exercises",
-      subtitle: "Exercise library: search by title or keywords, then open the matching book theme.",
+      subtitle: "Exercise library: search by title or keywords, or browse by book theme.",
       themePrefix: "Theme",
       open: "Open set →",
       comingSoon: "Coming soon",
