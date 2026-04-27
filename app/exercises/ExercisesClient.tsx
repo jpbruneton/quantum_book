@@ -61,11 +61,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "Aucun exercice ne correspond à cette requête.",
       keywordsLabel: "Mots-clés",
       exercisePrefix: "Exercice",
-      /** Libellés des liens `exo_themeN_fr*.pdf` / `exo_themeN_en.pdf` (site FR : pas de mention « français »). */
+      /** PDF d’exercices : uniquement les fichiers FR sur le site FR. */
       pdfFrSans: "Tous les exercices du thème — sans corrigés (PDF)",
       pdfFrAvec: "Tous les exercices du thème — avec corrigés (PDF)",
-      pdfEnSans: "Version anglaise — sans corrigés (PDF)",
-      pdfEnAvec: "Version anglaise — avec corrigés (PDF)",
     },
     en: {
       title: "Solved Exercises",
@@ -79,10 +77,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "No exercises match this query.",
       keywordsLabel: "Keywords",
       exercisePrefix: "Exercise",
+      /** PDF d’exercices : uniquement les fichiers EN sur le site EN. */
       pdfEnSans: "All exercises for this theme — statements only (PDF)",
       pdfEnAvec: "All exercises for this theme — with solutions (PDF)",
-      pdfFrSans: "French — all exercises, statements only (PDF)",
-      pdfFrAvec: "French — all exercises, with solutions (PDF)",
     },
   }[lang];
 
@@ -206,10 +203,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
             const pdf = theme.pdfLinks;
             const hasPdf =
-              pdf.frAvecSolutions !== null ||
-              pdf.frSansSolutions !== null ||
-              pdf.enAvecSolutions !== null ||
-              pdf.enSansSolutions !== null;
+              lang === "fr"
+                ? pdf.frAvecSolutions !== null || pdf.frSansSolutions !== null
+                : pdf.enAvecSolutions !== null || pdf.enSansSolutions !== null;
 
             const linkStyle: CSSProperties = {
               fontFamily: "var(--font-crimson)",
@@ -318,16 +314,6 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                                 {t.pdfFrAvec}
                               </a>
                             ) : null}
-                            {pdf.enSansSolutions !== null ? (
-                              <a href={pdf.enSansSolutions} download style={linkStyle}>
-                                {t.pdfEnSans}
-                              </a>
-                            ) : null}
-                            {pdf.enAvecSolutions !== null ? (
-                              <a href={pdf.enAvecSolutions} download style={linkStyle}>
-                                {t.pdfEnAvec}
-                              </a>
-                            ) : null}
                           </>
                         ) : (
                           <>
@@ -339,16 +325,6 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                             {pdf.enAvecSolutions !== null ? (
                               <a href={pdf.enAvecSolutions} download style={linkStyle}>
                                 {t.pdfEnAvec}
-                              </a>
-                            ) : null}
-                            {pdf.frSansSolutions !== null ? (
-                              <a href={pdf.frSansSolutions} download style={linkStyle}>
-                                {t.pdfFrSans}
-                              </a>
-                            ) : null}
-                            {pdf.frAvecSolutions !== null ? (
-                              <a href={pdf.frAvecSolutions} download style={linkStyle}>
-                                {t.pdfFrAvec}
                               </a>
                             ) : null}
                           </>
