@@ -134,6 +134,12 @@ export const translations = {
       timelineLabel: "Timeline",
       entries: [
         {
+          date: "2026-04-27",
+          title: "Exercise pages architecture finalized",
+          body:
+            "The /exercises hub is in place: library TeX with metadata and search, grouping by book theme, clickable cards that deep-link to each exercise on the theme page, and PDF downloads (with or without solutions — English and French) wired from public/pdfs. The build script can batch all themes (--all) and strips solutions plus hints/indications for the statements-only PDFs.",
+        },
+        {
           date: "2026-03-31",
           title: "Domain acquisition and theme 2",
           body:
@@ -280,6 +286,12 @@ export const translations = {
       latestTitle: "Derniers articles",
       timelineLabel: "Fil chronologique",
       entries: [
+        {
+          date: "2026-04-27",
+          title: "Architecture des pages exercices finalisée",
+          body:
+            "La page /exercices est en place : bibliothèque TeX avec métadonnées et recherche, regroupement par thème du livre, cartes cliquables avec lien direct vers chaque exercice sur la page du thème, et téléchargements PDF (avec ou sans corrigés — français et anglais) branchés sur public/pdfs. Le script de build peut traiter tous les thèmes (--all) et retire corrigés, indices et indications pour les PDF « énoncés seuls ».",
+        },
         {
           date: "2026-03-31",
           title: "Acquisition du domaine et thème 2",

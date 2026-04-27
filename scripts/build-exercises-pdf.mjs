@@ -6,6 +6,9 @@
  *   node scripts/build-exercises-pdf.mjs <themeNumber> [fr|en]
  *   node scripts/build-exercises-pdf.mjs <themeNumber> fr --sans-solutions
  *   node scripts/build-exercises-pdf.mjs <themeNumber> fr --both
+ *   node scripts/build-exercises-pdf.mjs --all [fr|en]   (tous les thèmes non vides ; fr puis en si pas de 2e arg ;
+ *     par défaut : PDF avec corrigés + PDF sans corrigés/indications pour chaque paire thème×langue)
+ *   node scripts/build-exercises-pdf.mjs --all --sans-solutions   (uniquement les PDF « sans » pour chaque paire)
  *
  * MiKTeX ailleurs : définir la commande complète, ex. PowerShell
  *   $env:PDFLATEX = "C:\Program Files\MiKTeX\miktex\bin\x64\pdflatex.exe"
@@ -28,18 +31,28 @@ import { fileURLToPath } from "node:url";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const repoRoot = join(__dirname, "..");
 
+const MAX_THEME_SCAN = 24;
+
 function parseArgs(argv) {
   const raw = argv.slice(2);
-  const flags = new Set(raw.filter((a) => a.startsWith("--")));
+  const allMode = raw.includes("--all");
+  const flags = new Set(raw.filter((a) => a.startsWith("--") && a !== "--all"));
   const pos = raw.filter((a) => !a.startsWith("--"));
+  const sansOnly = flags.has("--sans-solutions");
+  const both = flags.has("--both");
+
+  if (allMode) {
+    const which = pos[0];
+    let langs;
+    if (which === "en") langs = ["en"];
+    else if (which === "fr") langs = ["fr"];
+    else langs = ["fr", "en"];
+    return { mode: "all", langs, sansOnly, both };
+  }
+
   const themeNumber = Number.parseInt(pos[0], 10);
   const lang = pos[1] === "en" ? "en" : "fr";
-  return {
-    themeNumber,
-    lang,
-    sansOnly: flags.has("--sans-solutions"),
-    both: flags.has("--both"),
-  };
+  return { mode: "single", themeNumber, lang, sansOnly, both };
 }
 
 function texRoot() {
@@ -87,11 +100,18 @@ function stripEnvironmentBlocks(source, envName) {
   return source.replace(re, "\n");
 }
 
+/** Environnements à retirer pour les PDF « sans corrigés » : corrigés + aides (indices / indications). */
+const STRIP_FOR_STATEMENTS_ONLY = ["solution", "indice", "indication", "hint"];
+
 function stripSolutionsAndHints(source) {
   let out = source;
-  for (const env of ["solution", "indice", "indication", "hint"]) {
-    out = stripEnvironmentBlocks(out, env);
-  }
+  let prev;
+  do {
+    prev = out;
+    for (const env of STRIP_FOR_STATEMENTS_ONLY) {
+      out = stripEnvironmentBlocks(out, env);
+    }
+  } while (out !== prev);
   return out.replace(/\n{3,}/g, "\n\n").trim();
 }
 
@@ -170,26 +190,14 @@ function publishPdf(jobname, latexOutDir, publicPdfDir) {
   }
 }
 
-function main() {
-  const { themeNumber, lang, sansOnly, both } = parseArgs(process.argv);
-  if (!Number.isFinite(themeNumber) || themeNumber < 1) {
-    console.error("Usage: node scripts/build-exercises-pdf.mjs <themeNumber> [fr|en] [--sans-solutions | --both]");
-    process.exit(1);
-  }
-
+function buildThemeLanguage(themeNumber, lang, sansOnly, bothPdf, tmpDir, publicPdfDir) {
   const merged = combineThemeExerciseSources(themeNumber, lang);
   if (!merged.trim()) {
-    console.error(`Aucun fichier TeX trouvé pour le thème ${themeNumber} (${lang}).`);
-    process.exit(1);
+    return false;
   }
-
-  const tmpDir = join(repoRoot, "scripts", "latex-tmp");
-  mkdirSync(tmpDir, { recursive: true });
 
   const chapterTitle =
     lang === "fr" ? `Exercices — Thème ${themeNumber}` : `Exercises — Theme ${themeNumber}`;
-
-  const publicPdfDir = join(repoRoot, "public", "pdfs");
 
   const buildOne = (bodyText, jobnameSuffix) => {
     writeFileSync(join(tmpDir, "body_frag.tex"), bodyText, "utf8");
@@ -205,13 +213,55 @@ function main() {
 
   if (sansOnly) {
     buildOne(stripSolutionsAndHints(merged), "_sans_solutions");
-    return;
+    return true;
   }
 
   buildOne(merged, "");
 
-  if (both) {
+  if (bothPdf) {
     buildOne(stripSolutionsAndHints(merged), "_sans_solutions");
+  }
+  return true;
+}
+
+function main() {
+  const parsed = parseArgs(process.argv);
+  const tmpDir = join(repoRoot, "scripts", "latex-tmp");
+  mkdirSync(tmpDir, { recursive: true });
+  const publicPdfDir = join(repoRoot, "public", "pdfs");
+
+  if (parsed.mode === "all") {
+    let built = 0;
+    const bothPdf = parsed.sansOnly ? false : true;
+    for (let themeNumber = 1; themeNumber <= MAX_THEME_SCAN; themeNumber += 1) {
+      for (const lang of parsed.langs) {
+        if (buildThemeLanguage(themeNumber, lang, parsed.sansOnly, bothPdf, tmpDir, publicPdfDir)) {
+          built += 1;
+        }
+      }
+    }
+    if (built === 0) {
+      console.error("Aucun thème avec du contenu TeX trouvé pour les langues demandées.");
+      process.exit(1);
+    }
+    console.log(`Terminé : ${built} compilation(s).`);
+    return;
+  }
+
+  const { themeNumber, lang, sansOnly, both: bothPdf } = parsed;
+  if (!Number.isFinite(themeNumber) || themeNumber < 1) {
+    console.error(
+      "Usage: node scripts/build-exercises-pdf.mjs <themeNumber> [fr|en] [--sans-solutions | --both]",
+    );
+    console.error(
+      "   ou: node scripts/build-exercises-pdf.mjs --all [fr|en] [--sans-solutions]  (--all → avec + sans corrigés par défaut)",
+    );
+    process.exit(1);
+  }
+
+  if (!buildThemeLanguage(themeNumber, lang, sansOnly, bothPdf, tmpDir, publicPdfDir)) {
+    console.error(`Aucun fichier TeX trouvé pour le thème ${themeNumber} (${lang}).`);
+    process.exit(1);
   }
 }
 

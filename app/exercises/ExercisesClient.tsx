@@ -9,7 +9,8 @@ import { exerciseMatchesQuery } from "@/lib/exerciseIndexUtils";
 export interface ThemePdfLinks {
   frAvecSolutions: string | null;
   frSansSolutions: string | null;
-  en: string | null;
+  enAvecSolutions: string | null;
+  enSansSolutions: string | null;
 }
 
 export interface ThemeCard {
@@ -60,10 +61,11 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "Aucun exercice ne correspond à cette requête.",
       keywordsLabel: "Mots-clés",
       exercisePrefix: "Exercice",
-      downloads: "Téléchargements PDF",
-      pdfFrAvec: "Français — avec corrigés",
-      pdfFrSans: "Français — sans corrigés",
-      pdfEn: "Anglais",
+      /** Libellés des liens `exo_themeN_fr*.pdf` / `exo_themeN_en.pdf` (site FR : pas de mention « français »). */
+      pdfFrSans: "Tous les exercices du thème — sans corrigés (PDF)",
+      pdfFrAvec: "Tous les exercices du thème — avec corrigés (PDF)",
+      pdfEnSans: "Version anglaise — sans corrigés (PDF)",
+      pdfEnAvec: "Version anglaise — avec corrigés (PDF)",
     },
     en: {
       title: "Solved Exercises",
@@ -77,10 +79,10 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "No exercises match this query.",
       keywordsLabel: "Keywords",
       exercisePrefix: "Exercise",
-      downloads: "PDF downloads",
-      pdfFrAvec: "French — with solutions",
-      pdfFrSans: "French — statements only",
-      pdfEn: "English",
+      pdfEnSans: "All exercises for this theme — statements only (PDF)",
+      pdfEnAvec: "All exercises for this theme — with solutions (PDF)",
+      pdfFrSans: "French — all exercises, statements only (PDF)",
+      pdfFrAvec: "French — all exercises, with solutions (PDF)",
     },
   }[lang];
 
@@ -206,7 +208,8 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             const hasPdf =
               pdf.frAvecSolutions !== null ||
               pdf.frSansSolutions !== null ||
-              pdf.en !== null;
+              pdf.enAvecSolutions !== null ||
+              pdf.enSansSolutions !== null;
 
             const linkStyle: CSSProperties = {
               fontFamily: "var(--font-crimson)",
@@ -297,47 +300,59 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     >
                       <div
                         style={{
-                          fontFamily: "var(--font-crimson)",
-                          fontSize: "0.72rem",
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                          color: "var(--text-secondary)",
-                          marginBottom: "0.45rem",
-                        }}
-                      >
-                        {t.downloads}
-                      </div>
-                      <div
-                        style={{
                           display: "flex",
                           flexDirection: "column",
-                          gap: "0.35rem",
+                          gap: "0.4rem",
                           alignItems: "flex-start",
                         }}
                       >
-                        {pdf.frAvecSolutions !== null ? (
-                          <a
-                            href={pdf.frAvecSolutions}
-                            download
-                            style={linkStyle}
-                          >
-                            {t.pdfFrAvec}
-                          </a>
-                        ) : null}
-                        {pdf.frSansSolutions !== null ? (
-                          <a
-                            href={pdf.frSansSolutions}
-                            download
-                            style={linkStyle}
-                          >
-                            {t.pdfFrSans}
-                          </a>
-                        ) : null}
-                        {pdf.en !== null ? (
-                          <a href={pdf.en} download style={linkStyle}>
-                            {t.pdfEn}
-                          </a>
-                        ) : null}
+                        {lang === "fr" ? (
+                          <>
+                            {pdf.frSansSolutions !== null ? (
+                              <a href={pdf.frSansSolutions} download style={linkStyle}>
+                                {t.pdfFrSans}
+                              </a>
+                            ) : null}
+                            {pdf.frAvecSolutions !== null ? (
+                              <a href={pdf.frAvecSolutions} download style={linkStyle}>
+                                {t.pdfFrAvec}
+                              </a>
+                            ) : null}
+                            {pdf.enSansSolutions !== null ? (
+                              <a href={pdf.enSansSolutions} download style={linkStyle}>
+                                {t.pdfEnSans}
+                              </a>
+                            ) : null}
+                            {pdf.enAvecSolutions !== null ? (
+                              <a href={pdf.enAvecSolutions} download style={linkStyle}>
+                                {t.pdfEnAvec}
+                              </a>
+                            ) : null}
+                          </>
+                        ) : (
+                          <>
+                            {pdf.enSansSolutions !== null ? (
+                              <a href={pdf.enSansSolutions} download style={linkStyle}>
+                                {t.pdfEnSans}
+                              </a>
+                            ) : null}
+                            {pdf.enAvecSolutions !== null ? (
+                              <a href={pdf.enAvecSolutions} download style={linkStyle}>
+                                {t.pdfEnAvec}
+                              </a>
+                            ) : null}
+                            {pdf.frSansSolutions !== null ? (
+                              <a href={pdf.frSansSolutions} download style={linkStyle}>
+                                {t.pdfFrSans}
+                              </a>
+                            ) : null}
+                            {pdf.frAvecSolutions !== null ? (
+                              <a href={pdf.frAvecSolutions} download style={linkStyle}>
+                                {t.pdfFrAvec}
+                              </a>
+                            ) : null}
+                          </>
+                        )}
                       </div>
                     </div>
                   ) : null}

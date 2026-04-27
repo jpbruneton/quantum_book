@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 import { getWebThemes } from "@/lib/chapters";
+import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import { themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
-import { getSiteUrl } from "@/lib/siteUrl";
+import { absoluteUrl, getSiteUrl } from "@/lib/siteUrl";
 
 const SITE_URL = getSiteUrl();
 
@@ -34,8 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${SITE_URL}/exercises`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
+      changeFrequency: "weekly",
+      priority: 0.75,
     },
     {
       url: `${SITE_URL}/updates`,
@@ -74,14 +75,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
   });
 
+  // Pages série par thème (les ancres #exo:… ne vont pas dans le sitemap : les moteurs les ignorent en général).
   const exerciseRoutes: MetadataRoute.Sitemap = getWebThemes()
     .filter((theme) => themeHasExercisesFrOrEn(theme.number))
     .map((theme) => ({
       url: `${SITE_URL}/exercises/${theme.slug}`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
+      changeFrequency: "weekly",
+      priority: 0.75,
     }));
 
-  return [...staticRoutes, ...themeRoutes, ...exerciseRoutes];
+  const exercisePdfRoutes: MetadataRoute.Sitemap = getWebThemes()
+    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
+    .flatMap((theme) => {
+      const links = getExerciseThemePdfLinks(theme.number);
+      const out: MetadataRoute.Sitemap = [];
+      const push = (path: string | null) => {
+        if (!path) return;
+        out.push({
+          url: absoluteUrl(path),
+          lastModified: new Date(),
+          changeFrequency: "monthly" as const,
+          priority: 0.55,
+        });
+      };
+      push(links.frAvecSolutions);
+      push(links.frSansSolutions);
+      push(links.enAvecSolutions);
+      push(links.enSansSolutions);
+      return out;
+    });
+
+  return [...staticRoutes, ...themeRoutes, ...exerciseRoutes, ...exercisePdfRoutes];
 }

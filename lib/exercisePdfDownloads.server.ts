@@ -7,8 +7,10 @@ export interface ExerciseThemePdfLinks {
   frAvecSolutions: string | null;
   /** Fichier attendu : `public/pdfs/exo_theme{N}_fr_sans_solutions.pdf` (énoncés seuls). */
   frSansSolutions: string | null;
-  /** Fichier attendu : `public/pdfs/exo_theme{N}_en.pdf` (traduction). */
-  en: string | null;
+  /** Fichier attendu : `public/pdfs/exo_theme{N}_en.pdf` (énoncés + corrigés, EN). */
+  enAvecSolutions: string | null;
+  /** Fichier attendu : `public/pdfs/exo_theme{N}_en_sans_solutions.pdf` (énoncés seuls, EN). */
+  enSansSolutions: string | null;
 }
 
 function publicFilePath(relativeUnderPublic: string): string {
@@ -24,9 +26,11 @@ export function getExerciseThemePdfLinks(themeNumber: number): ExerciseThemePdfL
   const fr = `pdfs/exo_theme${themeNumber}_fr.pdf`;
   const frSans = `pdfs/exo_theme${themeNumber}_fr_sans_solutions.pdf`;
   const en = `pdfs/exo_theme${themeNumber}_en.pdf`;
+  const enSans = `pdfs/exo_theme${themeNumber}_en_sans_solutions.pdf`;
   return {
     frAvecSolutions: hrefIfExists(fr),
     frSansSolutions: hrefIfExists(frSans),
-    en: hrefIfExists(en),
+    enAvecSolutions: hrefIfExists(en),
+    enSansSolutions: hrefIfExists(enSans),
   };
 }
