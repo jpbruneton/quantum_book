@@ -1,9 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import { useLang } from "@/app/context/LangContext";
 import { exerciseMatchesQuery } from "@/lib/exerciseIndexUtils";
+
+export interface ThemePdfLinks {
+  frAvecSolutions: string | null;
+  frSansSolutions: string | null;
+  en: string | null;
+}
 
 export interface ThemeCard {
   slug: string;
@@ -14,6 +21,7 @@ export interface ThemeCard {
   descriptionEn: string;
   hasContentFr: boolean;
   hasContentEn: boolean;
+  pdfLinks: ThemePdfLinks;
 }
 
 export interface ExerciseIndexCard {
@@ -52,6 +60,10 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "Aucun exercice ne correspond à cette requête.",
       keywordsLabel: "Mots-clés",
       exercisePrefix: "Exercice",
+      downloads: "Téléchargements PDF",
+      pdfFrAvec: "Français — avec corrigés",
+      pdfFrSans: "Français — sans corrigés",
+      pdfEn: "Anglais",
     },
     en: {
       title: "Solved Exercises",
@@ -65,6 +77,10 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "No exercises match this query.",
       keywordsLabel: "Keywords",
       exercisePrefix: "Exercise",
+      downloads: "PDF downloads",
+      pdfFrAvec: "French — with solutions",
+      pdfFrSans: "French — statements only",
+      pdfEn: "English",
     },
   }[lang];
 
@@ -186,6 +202,19 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             if (!cards || cards.length === 0) return null;
             const title = lang === "fr" ? theme.titleFr : theme.titleEn;
             const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
+            const pdf = theme.pdfLinks;
+            const hasPdf =
+              pdf.frAvecSolutions !== null ||
+              pdf.frSansSolutions !== null ||
+              pdf.en !== null;
+
+            const linkStyle: CSSProperties = {
+              fontFamily: "var(--font-crimson)",
+              fontSize: "0.88rem",
+              color: "var(--accent)",
+              textDecoration: "underline",
+              textUnderlineOffset: "2px",
+            };
 
             return (
               <section key={themeNumber}>
@@ -258,6 +287,60 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                       </span>
                     )}
                   </div>
+                  {hasPdf ? (
+                    <div
+                      style={{
+                        marginTop: "0.85rem",
+                        paddingTop: "0.85rem",
+                        borderTop: "1px solid var(--border)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "var(--font-crimson)",
+                          fontSize: "0.72rem",
+                          letterSpacing: "0.1em",
+                          textTransform: "uppercase",
+                          color: "var(--text-secondary)",
+                          marginBottom: "0.45rem",
+                        }}
+                      >
+                        {t.downloads}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.35rem",
+                          alignItems: "flex-start",
+                        }}
+                      >
+                        {pdf.frAvecSolutions !== null ? (
+                          <a
+                            href={pdf.frAvecSolutions}
+                            download
+                            style={linkStyle}
+                          >
+                            {t.pdfFrAvec}
+                          </a>
+                        ) : null}
+                        {pdf.frSansSolutions !== null ? (
+                          <a
+                            href={pdf.frSansSolutions}
+                            download
+                            style={linkStyle}
+                          >
+                            {t.pdfFrSans}
+                          </a>
+                        ) : null}
+                        {pdf.en !== null ? (
+                          <a href={pdf.en} download style={linkStyle}>
+                            {t.pdfEn}
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>

@@ -1,5 +1,6 @@
 import { getWebThemes } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
+import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import { buildAllExerciseIndexEntries, themeHasAnyExercises } from "@/lib/exercisesLibrary.server";
 import { ExercisesClient } from "./ExercisesClient";
 
@@ -31,6 +32,7 @@ export default function ExercisesPage() {
     descriptionEn: theme.descriptionEn,
     hasContentFr: exoTexExists(theme.number, "fr"),
     hasContentEn: exoTexExists(theme.number, "en"),
+    pdfLinks: getExerciseThemePdfLinks(theme.number),
   }));
 
   const indexFr = buildIndexCards("fr");
