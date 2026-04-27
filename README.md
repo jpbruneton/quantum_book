@@ -185,6 +185,9 @@ quantum-mechanics-book/
 
 ---
 
+## recompile exo pdfs :
+node scripts/build-exercises-pdf.mjs 2 fr
+ds le terminal
 ## License
 
 © 2026 Jean-Philippe Bruneton. All rights reserved.

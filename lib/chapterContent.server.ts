@@ -1011,7 +1011,11 @@ function normalizeLatexBlocks(
       const isExo = blockKind.env === "exo";
       if (isExo) {
         const titlePart = bracketArg?.trim() ? ` : ${cleanLatexInline(bracketArg.trim())}` : "";
-        return `\n\n<div class="latex-exo"><p class="latex-exo-title"><strong>${numberedTitle}${titlePart}</strong></p><div class="latex-exo-content">`;
+        const exoIdAttr =
+          looksLikeTechnicalLabel && fallbackArg.length > 0
+            ? ` id="${fallbackArg.replace(/"/g, "&quot;")}"`
+            : "";
+        return `\n\n<div class="latex-exo"${exoIdAttr}><p class="latex-exo-title"><strong>${numberedTitle}${titlePart}</strong></p><div class="latex-exo-content">`;
       }
       let headingStrongInner: string;
       headingStrongInner = `${numberedTitle}${suffix}`;

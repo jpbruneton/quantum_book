@@ -344,46 +344,74 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-                  {cards.map((card) => (
-                    <div
-                      key={`${card.themeSlug}-${card.id}-${card.titleTex}`}
-                      style={{
-                        border: "1px solid var(--border)",
-                        borderRadius: "6px",
-                        padding: "0.9rem 1.1rem",
-                        background: "var(--bg-primary)",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontFamily: "var(--font-crimson)",
-                          fontSize: "0.95rem",
-                          color: "var(--text-heading)",
-                          lineHeight: 1.5,
-                        }}
-                      >
-                        <span style={{ color: "var(--accent)", fontWeight: 600 }}>
-                          {t.exercisePrefix} {card.displayNumber}
-                        </span>
-                        <span style={{ color: "var(--text-secondary)", margin: "0 0.35rem" }}>—</span>
-                        <span style={{ fontWeight: 600 }} dangerouslySetInnerHTML={{ __html: card.titleHtml }} />
-                      </div>
-                      {card.keywords.length > 0 ? (
+                  {cards.map((card) => {
+                    const href =
+                      hasContent && theme.slug.length > 0
+                        ? `/exercises/${theme.slug}#${card.id}`
+                        : null;
+                    const cardInner = (
+                      <>
                         <div
                           style={{
                             fontFamily: "var(--font-crimson)",
-                            fontSize: "0.85rem",
-                            color: "var(--text-secondary)",
-                            marginTop: "0.45rem",
-                            lineHeight: 1.45,
+                            fontSize: "0.95rem",
+                            color: "var(--text-heading)",
+                            lineHeight: 1.5,
                           }}
                         >
-                          <span style={{ fontWeight: 600 }}>{t.keywordsLabel} : </span>
-                          {card.keywords.join(" · ")}
+                          <span style={{ color: "var(--accent)", fontWeight: 600 }}>
+                            {t.exercisePrefix} {card.displayNumber}
+                          </span>
+                          <span style={{ color: "var(--text-secondary)", margin: "0 0.35rem" }}>—</span>
+                          <span style={{ fontWeight: 600 }} dangerouslySetInnerHTML={{ __html: card.titleHtml }} />
                         </div>
-                      ) : null}
-                    </div>
-                  ))}
+                        {card.keywords.length > 0 ? (
+                          <div
+                            style={{
+                              fontFamily: "var(--font-crimson)",
+                              fontSize: "0.85rem",
+                              color: "var(--text-secondary)",
+                              marginTop: "0.45rem",
+                              lineHeight: 1.45,
+                            }}
+                          >
+                            <span style={{ fontWeight: 600 }}>{t.keywordsLabel} : </span>
+                            {card.keywords.join(" · ")}
+                          </div>
+                        ) : null}
+                      </>
+                    );
+                    const cardShellStyle: CSSProperties = {
+                      border: "1px solid var(--border)",
+                      borderRadius: "6px",
+                      padding: "0.9rem 1.1rem",
+                      background: "var(--bg-primary)",
+                      display: "block",
+                      textDecoration: "none",
+                      color: "inherit",
+                    };
+                    return href ? (
+                      <Link
+                        key={`${card.themeSlug}-${card.id}-${card.titleTex}`}
+                        href={href}
+                        scroll={false}
+                        className="exercise-index-card-link"
+                        style={cardShellStyle}
+                      >
+                        {cardInner}
+                      </Link>
+                    ) : (
+                      <div
+                        key={`${card.themeSlug}-${card.id}-${card.titleTex}`}
+                        style={{
+                          ...cardShellStyle,
+                          display: "block",
+                        }}
+                      >
+                        {cardInner}
+                      </div>
+                    );
+                  })}
                 </div>
               </section>
             );

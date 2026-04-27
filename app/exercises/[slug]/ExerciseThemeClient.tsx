@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useLang } from "@/app/context/LangContext";
 import { processLatex } from "@/lib/latex";
@@ -18,6 +18,22 @@ export function ExerciseThemeClient({ number, titleFr, titleEn, contentFr, conte
 
   const rawContent = lang === "fr" ? contentFr : contentEn;
   const rendered = useMemo(() => (rawContent ? processLatex(rawContent) : ""), [rawContent]);
+
+  useEffect(() => {
+    function scrollToHash() {
+      if (typeof window === "undefined") return;
+      const raw = window.location.hash.replace(/^#/, "");
+      if (!raw) return;
+      const id = decodeURIComponent(raw);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+    return () => window.removeEventListener("hashchange", scrollToHash);
+  }, [rendered]);
 
   const title = lang === "fr" ? titleFr : titleEn;
   const themePrefix = lang === "fr" ? "Thème" : "Theme";
