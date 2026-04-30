@@ -1,16 +1,11 @@
 /** @type {import('next').NextConfig} */
+const legacyExerciseSlugRedirects = require("./lib/legacyExerciseSlugRedirects.json");
+
 const nextConfig = {
-  output: 'standalone',
+  output: "standalone",
   async redirects() {
-    const chapterRedirects = [
-      ["experiences-fondatrices", "foundational-experiments"],
-      ["espaces-de-hilbert", "hilbert-spaces"],
-      ["postulats", "postulates"],
-      ["systemes-en-interaction", "interacting-systems"],
-      ["decoherence-et-mesure-quantique", "decoherence-and-quantum-measurement"],
-    ];
     const out = [];
-    for (const [from, to] of chapterRedirects) {
+    for (const [from, to] of Object.entries(legacyExerciseSlugRedirects)) {
       out.push({
         source: `/chapters/${from}`,
         destination: `/chapters/${to}`,

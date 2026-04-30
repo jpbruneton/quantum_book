@@ -1,10 +1,13 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
 import { getTexWebHtmlFromSource } from "@/lib/chapterContent.server";
 import { combineThemeExerciseSources, themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
 import { absoluteUrl } from "@/lib/siteUrl";
+import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
 import { ExerciseThemeClient } from "./ExerciseThemeClient";
+
+const legacySlugs = legacyExerciseSlugRedirects as Record<string, string>;
 
 interface Props {
   params: { slug: string };
@@ -33,6 +36,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function ExerciseThemePage({ params }: Props) {
+  const canonicalSlug = legacySlugs[params.slug];
+  if (canonicalSlug) {
+    redirect(`/exercises/${canonicalSlug}`);
+  }
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();
 
