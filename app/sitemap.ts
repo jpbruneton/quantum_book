@@ -38,12 +38,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.75,
     },
-    {
-      url: `${SITE_URL}/updates`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.6,
-    },
   ];
 
   // One URL per lesson: first lesson uses bare /chapters/[slug]; others use ?lesson=N (1-based index in theme.lessons).

@@ -16,7 +16,6 @@ export function NavBar() {
     { href: "/chapters", label: t.nav.chapters },
     { href: "/exercises", label: t.nav.exercises },
     { href: "/glossary", label: t.nav.glossary },
-    { href: "/updates", label: t.nav.updates },
     { href: "/about", label: t.nav.about },
   ];
 
@@ -25,7 +24,6 @@ export function NavBar() {
     { href: "/chapters", label: t.nav.chapters },
     { href: "/exercises", label: t.nav.exercises },
     { href: "/glossary", label: t.nav.glossary },
-    { href: "/updates", label: t.nav.updates },
     { href: "/about", label: t.nav.about },
   ];
 

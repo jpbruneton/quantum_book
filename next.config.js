@@ -5,8 +5,8 @@ const nextConfig = {
   output: "standalone",
   async redirects() {
     const out = [
-      { source: "/blog", destination: "/updates", permanent: true },
-      { source: "/blog/:path*", destination: "/updates", permanent: true },
+      { source: "/blog", destination: "/", permanent: true },
+      { source: "/blog/:path*", destination: "/", permanent: true },
     ];
     for (const [from, to] of Object.entries(legacyExerciseSlugRedirects)) {
       out.push({

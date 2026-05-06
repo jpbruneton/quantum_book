@@ -20,7 +20,6 @@ export const translations = {
       chapters: "Themes",
       exercises: "Exercises",
       glossary: "Glossary",
-      updates: "Updates",
       about: "About",
     },
     home: {
@@ -153,7 +152,6 @@ export const translations = {
       home: "Home",
       allChapters: "All Themes",
       exercises: "Exercises",
-      updates: "Updates",
       aboutBook: "About the Book",
       author: "Author",
       copyright: (year: string, author: string) =>
@@ -173,7 +171,6 @@ export const translations = {
       chapters: "Thèmes",
       exercises: "Exercices",
       glossary: "Glossaire",
-      updates: "Actualités",
       about: "À propos",
     },
     home: {
@@ -306,7 +303,6 @@ export const translations = {
       home: "Accueil",
       allChapters: "Tous les thèmes",
       exercises: "Exercices",
-      updates: "Actualités",
       aboutBook: "À propos du livre",
       author: "Auteur",
       copyright: (year: string, author: string) =>
