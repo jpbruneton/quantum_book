@@ -66,7 +66,7 @@ export function Footer() {
             { href: "/", label: t.footer.home },
             { href: "/chapters", label: t.footer.allChapters },
             { href: "/exercises", label: t.footer.exercises },
-            { href: "/blog", label: t.footer.blog },
+            { href: "/updates", label: t.footer.updates },
             { href: "/about", label: t.footer.aboutBook },
           ].map((l) => (
             <div key={l.href} style={{ marginBottom: "0.4rem" }}>

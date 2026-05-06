@@ -20,7 +20,7 @@ export const translations = {
       chapters: "Themes",
       exercises: "Exercises",
       glossary: "Glossary",
-      blog: "Blog",
+      updates: "Updates",
       about: "About",
     },
     home: {
@@ -127,8 +127,8 @@ export const translations = {
         "Warning: this book is primarily written in French; the English version is automatically translated using Claude Sonnet 4.6.",
     },
     updates: {
-      label: "BLOG",
-      title: "Project Blog",
+      label: "UPDATES",
+      title: "Project updates",
       description: "",
       latestTitle: "Latest posts",
       timelineLabel: "Timeline",
@@ -153,7 +153,7 @@ export const translations = {
       home: "Home",
       allChapters: "All Themes",
       exercises: "Exercises",
-      blog: "Blog",
+      updates: "Updates",
       aboutBook: "About the Book",
       author: "Author",
       copyright: (year: string, author: string) =>
@@ -173,7 +173,7 @@ export const translations = {
       chapters: "Thèmes",
       exercises: "Exercices",
       glossary: "Glossaire",
-      blog: "Blog",
+      updates: "Actualités",
       about: "À propos",
     },
     home: {
@@ -280,8 +280,8 @@ export const translations = {
         "Note : ce livre est principalement rédigé en français ; la version anglaise est traduite automatiquement avec Claude Sonnet 4.6.",
     },
     updates: {
-      label: "BLOG",
-      title: "Blog du projet",
+      label: "ACTUALITÉS",
+      title: "Actualités du projet",
       description: "",
       latestTitle: "Derniers articles",
       timelineLabel: "Fil chronologique",
@@ -306,7 +306,7 @@ export const translations = {
       home: "Accueil",
       allChapters: "Tous les thèmes",
       exercises: "Exercices",
-      blog: "Blog",
+      updates: "Actualités",
       aboutBook: "À propos du livre",
       author: "Auteur",
       copyright: (year: string, author: string) =>
