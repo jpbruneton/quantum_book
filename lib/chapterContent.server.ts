@@ -277,6 +277,13 @@ function escapeHtmlAttribute(value: string): string {
     .replace(/>/g, "&gt;");
 }
 
+function escapeHtmlText(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function latexToPlainTextForAlt(value: string): string {
   return value
     .replace(/\$+/g, "")
@@ -286,7 +293,28 @@ function latexToPlainTextForAlt(value: string): string {
     .trim();
 }
 
-function extractFigureHtml(figureBlock: string, figureNumber: number): string {
+function extractFigureSourceHtml(figureBlock: string, isEnglish: boolean): string {
+  const beginTag = "\\begin{figuresource}";
+  const endTag = "\\end{figuresource}";
+  const start = figureBlock.indexOf(beginTag);
+  if (start === -1) return "";
+  const end = figureBlock.indexOf(endTag, start + beginTag.length);
+  if (end === -1) return "";
+  const inner = figureBlock.slice(start + beginTag.length, end).trim();
+  const urlMatch = inner.match(/\\url\{([^}]*)\}/);
+  const prefix = isEnglish ? "Figure taken from " : "Figure tirée de ";
+  if (urlMatch) {
+    const rawUrl = urlMatch[1];
+    const safeHref = escapeHtmlAttribute(rawUrl);
+    const displayUrl = escapeHtmlText(rawUrl);
+    return `<br /><span class="latex-figure-source"><small><em>${prefix}</em><a href="${safeHref}" target="_blank" rel="noreferrer">${displayUrl}</a></small></span>`;
+  }
+  const plain = cleanLatexInline(inner);
+  if (!plain) return "";
+  return `<br /><span class="latex-figure-source"><small><em>${prefix}</em>${plain}</small></span>`;
+}
+
+function extractFigureHtml(figureBlock: string, figureNumber: number, isEnglish: boolean): string {
   const includeGraphicsMatch = figureBlock.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
   if (!includeGraphicsMatch) return "";
 
@@ -309,7 +337,8 @@ function extractFigureHtml(figureBlock: string, figureNumber: number): string {
   const captionWithNumber = caption
     ? `Figure ${figureNumber}. ${caption}`
     : `Figure ${figureNumber}`;
-  const figCaption = `<figcaption>${captionWithNumber}</figcaption>`;
+  const sourceHtml = extractFigureSourceHtml(figureBlock, isEnglish);
+  const figCaption = `<figcaption>${captionWithNumber}${sourceHtml}</figcaption>`;
   const isPdfFigure = imagePath.toLowerCase().endsWith(".pdf");
   if (isPdfFigure) {
     return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a></object>${figCaption}</figure>`;
@@ -905,7 +934,7 @@ function normalizeLatexBlocks(
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
     figureRenderIndex += 1;
-    return `\n\n${extractFigureHtml(block, figureRenderIndex)}\n\n`;
+    return `\n\n${extractFigureHtml(block, figureRenderIndex, isEnglish)}\n\n`;
   });
 
   // Ignore mdframed wrappers while preserving their inner content.
