@@ -923,9 +923,7 @@ function normalizeLatexBlocks(
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
   result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
   result = result.replace(/\\\$/g, "$");
-  result = result.replace(/\\,/g, " ");
-  result = result.replace(/\\:/g, " ");
-  result = result.replace(/\\;/g, " ");
+  // Do not strip \, \: \; — they are meaningful math spacing for KaTeX ($...$ / $$...$$).
   result = result.replace(/\\\./g, ".");
 
   // Common typo tolerance.
