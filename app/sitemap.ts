@@ -1,14 +1,9 @@
 import { MetadataRoute } from "next";
 import { getWebThemes } from "@/lib/chapters";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
-import {
-  listThemeExerciseIds,
-  themeHasExercisesFrOrEn,
-} from "@/lib/exercisesLibrary.server";
-import { exerciseDetailPath } from "@/lib/exerciseRoutes";
+import { themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
 import { lessonToPathSegment } from "@/lib/lessonRoutes";
-import { SITE_LANGS } from "@/lib/localeRoutes";
-import { sitemapEntriesForLogicalPath, sitemapHreflangAlternates } from "@/lib/sitemapHelpers";
+import { sitemapEntriesForLogicalPath } from "@/lib/sitemapHelpers";
 import { absoluteUrl } from "@/lib/siteUrl";
 
 const STATIC_LOGICAL_PATHS: { path: string; priority: number; changeFrequency: "monthly" | "weekly" }[] = [
@@ -46,21 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       })
     );
 
-  const exerciseDetailRoutes: MetadataRoute.Sitemap = getWebThemes()
-    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
-    .flatMap((theme) =>
-      listThemeExerciseIds(theme.number).flatMap((exerciseId) => {
-        const logicalPath = `/exercises/${theme.slug}/${exerciseId.replace(/:/g, "-")}`;
-        return SITE_LANGS.map((lang) => ({
-          url: absoluteUrl(exerciseDetailPath(lang, theme.slug, exerciseId)),
-          lastModified: new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-          alternates: sitemapHreflangAlternates(logicalPath),
-        }));
-      })
-    );
-
   const exercisePdfRoutes: MetadataRoute.Sitemap = getWebThemes()
     .filter((theme) => themeHasExercisesFrOrEn(theme.number))
     .flatMap((theme) => {
@@ -86,7 +66,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...lessonRoutes,
     ...exerciseThemeRoutes,
-    ...exerciseDetailRoutes,
     ...exercisePdfRoutes,
   ];
 }
