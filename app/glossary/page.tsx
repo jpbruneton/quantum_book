@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { getWebThemes } from "@/lib/chapters";
+import { chapterLessonPath } from "@/lib/lessonRoutes";
 import { useLang } from "@/app/context/LangContext";
 
 interface GlossaryOccurrence {
@@ -12,6 +13,7 @@ interface GlossaryOccurrence {
   themeTitle: string;
   lessonNumber: number;
   lessonSubtitle: string;
+  lessonHref: string;
 }
 
 interface GlossaryItem {
@@ -86,6 +88,7 @@ function GlossaryFilterAndList() {
             themeTitle: lang === "fr" ? theme.titleFr : theme.titleEn,
             lessonNumber: lesson.number,
             lessonSubtitle: lang === "fr" ? lesson.subtitleFr : lesson.subtitleEn,
+            lessonHref: chapterLessonPath(theme.slug, lesson),
           });
         }
       }
@@ -203,7 +206,7 @@ function GlossaryFilterAndList() {
                 {item.occurrences.map((occurrence, index) => (
                   <Link
                     key={`${occurrence.themeSlug}-${occurrence.lessonNumber}-${index}`}
-                    href={`/chapters/${occurrence.themeSlug}?lesson=${occurrence.lessonNumber}`}
+                    href={occurrence.lessonHref}
                     style={{
                       display: "block",
                       color: "var(--text-secondary)",

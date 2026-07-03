@@ -1,9 +1,13 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { CSSProperties } from "react";
-import { Suspense, useMemo, useTransition } from "react";
+import { useMemo } from "react";
 import type { Theme } from "@/lib/chapters";
+import {
+  chapterLessonPath,
+  findLessonIndexByRef,
+  getFirstLessonRef,
+} from "@/lib/lessonRoutes";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
 
@@ -22,6 +26,7 @@ interface Props {
   theme: ThemeWithLocalizedLessonContent;
   prev: Theme | null;
   next: Theme | null;
+  activeLessonRef: string;
 }
 
 const headerBoxStyle: CSSProperties = {
@@ -36,19 +41,18 @@ const maxWStyle: CSSProperties = {
   margin: "0 auto",
 };
 
-function getActiveLessonIndex(
-  searchParams: ReturnType<typeof useSearchParams>,
-  lessonCount: number
-): number {
-  const requestedLessonNumber = Number(searchParams.get("lesson") || "");
-  const requestedLessonIndex =
-    Number.isFinite(requestedLessonNumber) && requestedLessonNumber >= 1
-      ? Math.min(
-          Math.max(requestedLessonNumber - 1, 0),
-          Math.max(lessonCount - 1, 0)
-        )
-      : 0;
-  return requestedLessonIndex;
+function lessonTabStyle(active: boolean): CSSProperties {
+  return {
+    background: active ? "var(--accent-bg-md)" : "var(--accent-bg-xs)",
+    border: active ? "1px solid var(--accent-border-md)" : "1px solid var(--accent-border-sm)",
+    borderRadius: "999px",
+    padding: "0.35rem 0.85rem",
+    fontFamily: "var(--font-inter)",
+    fontSize: "0.78rem",
+    color: active ? "var(--amber)" : "var(--text-secondary)",
+    textDecoration: "none",
+    display: "inline-block",
+  };
 }
 
 function ChapterThemeHeadingBlock({ theme }: { theme: ThemeWithLocalizedLessonContent }) {
@@ -107,40 +111,19 @@ function ChapterThemeHeadingBlock({ theme }: { theme: ThemeWithLocalizedLessonCo
   );
 }
 
-function ChapterLessonTabButtons({ theme }: { theme: ThemeWithLocalizedLessonContent }) {
+function ChapterLessonTabButtons({
+  theme,
+  activeLessonRef,
+}: {
+  theme: ThemeWithLocalizedLessonContent;
+  activeLessonRef: string;
+}) {
   const { lang } = useLang();
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [, startTransition] = useTransition();
-  const activeLessonIndex = getActiveLessonIndex(
-    searchParams,
-    Math.max(theme.lessons.length, 0)
-  );
-
-  const navigateToLesson = (lessonIndex: number) => {
-    const maxIndex = Math.max(theme.lessons.length - 1, 0);
-    const clamped = Math.min(Math.max(lessonIndex, 0), maxIndex);
-    const params = new URLSearchParams(searchParams.toString());
-    if (clamped === 0) {
-      params.delete("lesson");
-    } else {
-      params.set("lesson", String(clamped + 1));
-    }
-    const query = params.toString();
-    startTransition(() => {
-      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-    });
-  };
 
   if (theme.lessons.length === 0) return null;
 
-  const normalLessons = theme.lessons
-    .map((lesson, index) => ({ lesson, index }))
-    .filter(({ lesson }) => lesson.kind !== "fiche");
-  const fiches = theme.lessons
-    .map((lesson, index) => ({ lesson, index }))
-    .filter(({ lesson }) => lesson.kind === "fiche");
+  const normalLessons = theme.lessons.filter((lesson) => lesson.kind !== "fiche");
+  const fiches = theme.lessons.filter((lesson) => lesson.kind === "fiche");
 
   return (
     <div
@@ -152,38 +135,19 @@ function ChapterLessonTabButtons({ theme }: { theme: ThemeWithLocalizedLessonCon
       }}
     >
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-        {normalLessons.map(({ lesson, index }) => (
-          <button
-            key={lesson.slug}
-            type="button"
-            onClick={() => navigateToLesson(index)}
-            style={{
-              background:
-                index === activeLessonIndex
-                  ? "var(--accent-bg-md)"
-                  : "var(--accent-bg-xs)",
-              border:
-                index === activeLessonIndex
-                  ? "1px solid var(--accent-border-md)"
-                  : "1px solid var(--accent-border-sm)",
-              borderRadius: "999px",
-              padding: "0.35rem 0.85rem",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.78rem",
-              color:
-                index === activeLessonIndex
-                  ? "var(--amber)"
-                  : "var(--text-secondary)",
-              cursor: "pointer",
-            }}
-          >
-            {lang === "fr"
-              ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
-              : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
-          </button>
-        ))}
+        {normalLessons.map((lesson) => {
+          const href = chapterLessonPath(theme.slug, lesson);
+          const active = href.endsWith(`/${activeLessonRef}`);
+          return (
+            <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
+              {lang === "fr"
+                ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
+                : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
+            </Link>
+          );
+        })}
       </div>
-      {fiches.length > 0 && (
+      {fiches.length > 0 ? (
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
           <span
             style={{
@@ -197,79 +161,45 @@ function ChapterLessonTabButtons({ theme }: { theme: ThemeWithLocalizedLessonCon
           >
             {lang === "fr" ? "Fiches de révision" : "Revision Sheets"}
           </span>
-          {fiches.map(({ lesson, index }) => (
-            <button
-              key={lesson.slug}
-              type="button"
-              onClick={() => navigateToLesson(index)}
-              style={{
-                background:
-                  index === activeLessonIndex
-                    ? "var(--accent-bg-md)"
-                    : "var(--accent-bg-xs)",
-                border:
-                  index === activeLessonIndex
-                    ? "1px solid var(--accent-border-md)"
-                    : "1px solid var(--accent-border-sm)",
-                borderRadius: "999px",
-                padding: "0.35rem 0.85rem",
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.78rem",
-                color:
-                  index === activeLessonIndex
-                    ? "var(--amber)"
-                    : "var(--text-secondary)",
-                cursor: "pointer",
-              }}
-            >
-              {lang === "fr"
-                ? `Fiche n°${lesson.number} : ${lesson.subtitleFr}`
-                : `Sheet ${lesson.number}: ${lesson.subtitleEn}`}
-            </button>
-          ))}
+          {fiches.map((lesson) => {
+            const href = chapterLessonPath(theme.slug, lesson);
+            const active = href.endsWith(`/${activeLessonRef}`);
+            return (
+              <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
+                {lang === "fr"
+                  ? `Fiche n°${lesson.number} : ${lesson.subtitleFr}`
+                  : `Sheet ${lesson.number}: ${lesson.subtitleEn}`}
+              </Link>
+            );
+          })}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
 
-function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
+function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props) {
   const { t, lang } = useLang();
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [, startTransition] = useTransition();
-  const activeLessonIndex = getActiveLessonIndex(
-    searchParams,
-    Math.max(theme.lessons.length, 0)
-  );
-
-  const navigateToLesson = (lessonIndex: number) => {
-    const maxIndex = Math.max(theme.lessons.length - 1, 0);
-    const clamped = Math.min(Math.max(lessonIndex, 0), maxIndex);
-    const params = new URLSearchParams(searchParams.toString());
-    if (clamped === 0) {
-      params.delete("lesson");
-    } else {
-      params.set("lesson", String(clamped + 1));
-    }
-    const query = params.toString();
-    startTransition(() => {
-      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-    });
-  };
+  const activeLessonIndex = findLessonIndexByRef(theme.lessons, activeLessonRef);
 
   const activeLesson = useMemo(
-    () => theme.lessons[activeLessonIndex] || null,
+    () => (activeLessonIndex >= 0 ? theme.lessons[activeLessonIndex] : null),
     [theme.lessons, activeLessonIndex]
   );
   const previousLesson =
-    theme.lessons.length > 0 && activeLessonIndex > 0
-      ? theme.lessons[activeLessonIndex - 1]
-      : null;
+    activeLessonIndex > 0 ? theme.lessons[activeLessonIndex - 1] : null;
   const nextLesson =
-    theme.lessons.length > 0 && activeLessonIndex < theme.lessons.length - 1
+    activeLessonIndex >= 0 && activeLessonIndex < theme.lessons.length - 1
       ? theme.lessons[activeLessonIndex + 1]
+      : null;
+
+  const prevThemeHref =
+    prev && getFirstLessonRef(prev.lessons)
+      ? `/chapters/${prev.slug}/${getFirstLessonRef(prev.lessons)}`
+      : null;
+  const nextThemeHref =
+    next && getFirstLessonRef(next.lessons)
+      ? `/chapters/${next.slug}/${getFirstLessonRef(next.lessons)}`
       : null;
 
   return (
@@ -318,16 +248,9 @@ function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
         }}
       >
         {previousLesson ? (
-          <button
-            type="button"
-            onClick={() => navigateToLesson(activeLessonIndex - 1)}
-            style={{
-              textAlign: "left",
-              border: "none",
-              background: "none",
-              padding: 0,
-              cursor: "pointer",
-            }}
+          <Link
+            href={chapterLessonPath(theme.slug, previousLesson)}
+            style={{ textDecoration: "none" }}
           >
             <div
               className="chapter-card"
@@ -366,9 +289,9 @@ function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
                     : `Lesson ${previousLesson.number}: ${previousLesson.subtitleEn}`}
               </div>
             </div>
-          </button>
-        ) : prev ? (
-          <Link href={`/chapters/${prev.slug}`} style={{ textDecoration: "none" }}>
+          </Link>
+        ) : prevThemeHref ? (
+          <Link href={prevThemeHref} style={{ textDecoration: "none" }}>
             <div
               className="chapter-card"
               style={{
@@ -397,7 +320,7 @@ function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
                   color: "var(--text-heading)",
                 }}
               >
-                {lang === "fr" ? prev.titleFr : prev.titleEn}
+                {lang === "fr" ? prev!.titleFr : prev!.titleEn}
               </div>
             </div>
           </Link>
@@ -405,16 +328,9 @@ function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
           <div />
         )}
         {nextLesson ? (
-          <button
-            type="button"
-            onClick={() => navigateToLesson(activeLessonIndex + 1)}
-            style={{
-              textAlign: "left",
-              border: "none",
-              background: "none",
-              padding: 0,
-              cursor: "pointer",
-            }}
+          <Link
+            href={chapterLessonPath(theme.slug, nextLesson)}
+            style={{ textDecoration: "none" }}
           >
             <div
               className="chapter-card"
@@ -454,9 +370,9 @@ function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
                     : `Lesson ${nextLesson.number}: ${nextLesson.subtitleEn}`}
               </div>
             </div>
-          </button>
-        ) : next ? (
-          <Link href={`/chapters/${next.slug}`} style={{ textDecoration: "none" }}>
+          </Link>
+        ) : nextThemeHref ? (
+          <Link href={nextThemeHref} style={{ textDecoration: "none" }}>
             <div
               className="chapter-card"
               style={{
@@ -486,7 +402,7 @@ function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
                   color: "var(--text-heading)",
                 }}
               >
-                {lang === "fr" ? next.titleFr : next.titleEn}
+                {lang === "fr" ? next!.titleFr : next!.titleEn}
               </div>
             </div>
           </Link>
@@ -498,25 +414,22 @@ function ChapterContentAndPrevNext({ theme, prev, next }: Props) {
   );
 }
 
-function ChapterPageView({ theme, prev, next }: Props) {
+export function ChapterPageClient({ theme, prev, next, activeLessonRef }: Props) {
   return (
     <div style={{ position: "relative", zIndex: 1 }}>
       <div style={headerBoxStyle}>
         <div style={maxWStyle}>
           <ChapterThemeHeadingBlock theme={theme} />
-          <Suspense fallback={null}>
-            <ChapterLessonTabButtons theme={theme} />
-          </Suspense>
+          <ChapterLessonTabButtons theme={theme} activeLessonRef={activeLessonRef} />
         </div>
       </div>
 
-      <Suspense fallback={null}>
-        <ChapterContentAndPrevNext theme={theme} prev={prev} next={next} />
-      </Suspense>
+      <ChapterContentAndPrevNext
+        theme={theme}
+        prev={prev}
+        next={next}
+        activeLessonRef={activeLessonRef}
+      />
     </div>
   );
-}
-
-export function ChapterPageClient(props: Props) {
-  return <ChapterPageView {...props} />;
 }

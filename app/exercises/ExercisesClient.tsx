@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import { useLang } from "@/app/context/LangContext";
 import { exerciseMatchesQuery } from "@/lib/exerciseIndexUtils";
+import { exerciseDetailPath } from "@/lib/exerciseRoutes";
 
 export interface ThemePdfLinks {
   frAvecSolutions: string | null;
@@ -338,7 +339,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                   {cards.map((card) => {
                     const href =
                       hasContent && theme.slug.length > 0
-                        ? `/exercises/${theme.slug}#${card.id}`
+                        ? exerciseDetailPath(theme.slug, card.id)
                         : null;
                     const cardInner = (
                       <>
@@ -385,7 +386,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                       <Link
                         key={`${card.themeSlug}-${card.id}-${card.titleTex}`}
                         href={href}
-                        scroll={false}
+                        scroll={true}
                         className="exercise-index-card-link"
                         style={cardShellStyle}
                       >

@@ -224,3 +224,74 @@ export function themeHasAnyExercises(themeNumber: number, lang: "fr" | "en"): bo
 export function themeHasExercisesFrOrEn(themeNumber: number): boolean {
   return themeHasAnyExercises(themeNumber, "fr") || themeHasAnyExercises(themeNumber, "en");
 }
+
+interface ParsedExoBlock {
+  id: string;
+  titleTex: string;
+  source: string;
+}
+
+function parseExoBlocksFromSource(source: string): ParsedExoBlock[] {
+  const beginRe =
+    /\\begin\s*\{\s*(?:exo|exercice|exercise)\s*\}\s*(?:\[([^\]]*)\])?\s*(?:\{([^}]*)\})?/gi;
+  const blocks: ParsedExoBlock[] = [];
+  let match: RegExpExecArray | null;
+  let serial = 0;
+  while ((match = beginRe.exec(source)) !== null) {
+    const start = match.index;
+    const titleTex = (match[1] ?? "").trim();
+    const idRaw = (match[2] ?? "").trim();
+    const endMarker = /\\end\s*\{\s*(?:exo|exercice|exercise)\s*\}/gi;
+    endMarker.lastIndex = beginRe.lastIndex;
+    const endMatch = endMarker.exec(source);
+    if (!endMatch) continue;
+    serial += 1;
+    const id = idRaw.length > 0 ? idRaw : `legacy-block-${String(serial)}`;
+    blocks.push({
+      id,
+      titleTex,
+      source: source.slice(start, endMatch.index + endMatch[0].length),
+    });
+    beginRe.lastIndex = endMatch.index + endMatch[0].length;
+  }
+  return blocks;
+}
+
+export function listThemeExerciseIds(themeNumber: number): string[] {
+  const ids = new Set<string>();
+  for (const lang of ["fr", "en"] as const) {
+    const combined = combineThemeExerciseSources(themeNumber, lang);
+    for (const block of parseExoBlocksFromSource(combined)) {
+      ids.add(block.id);
+    }
+  }
+  return Array.from(ids);
+}
+
+export function extractThemeExerciseSourceById(
+  themeNumber: number,
+  lang: "fr" | "en",
+  exerciseId: string
+): string | null {
+  const combined = combineThemeExerciseSources(themeNumber, lang);
+  for (const block of parseExoBlocksFromSource(combined)) {
+    if (block.id === exerciseId) {
+      return block.source;
+    }
+  }
+  return null;
+}
+
+export function findThemeExerciseEntry(
+  themeNumber: number,
+  exerciseId: string
+): ExerciseIndexEntry | null {
+  for (const lang of ["fr", "en"] as const) {
+    for (const entry of buildAllExerciseIndexEntries(lang)) {
+      if (entry.themeNumber === themeNumber && entry.id === exerciseId) {
+        return entry;
+      }
+    }
+  }
+  return null;
+}

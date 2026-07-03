@@ -1,7 +1,12 @@
 import { MetadataRoute } from "next";
 import { getWebThemes } from "@/lib/chapters";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
-import { themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
+import {
+  listThemeExerciseIds,
+  themeHasExercisesFrOrEn,
+} from "@/lib/exercisesLibrary.server";
+import { exerciseDetailPath } from "@/lib/exerciseRoutes";
+import { chapterLessonPath } from "@/lib/lessonRoutes";
 import { absoluteUrl, getSiteUrl } from "@/lib/siteUrl";
 
 const SITE_URL = getSiteUrl();
@@ -40,16 +45,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // One URL per theme; lesson tabs use ?lesson=N client-side (canonical matches bare /chapters/[slug]).
-  const themeRoutes: MetadataRoute.Sitemap = getWebThemes().map((theme) => ({
-    url: `${SITE_URL}/chapters/${theme.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.85,
-  }));
+  const lessonRoutes: MetadataRoute.Sitemap = getWebThemes().flatMap((theme) =>
+    theme.lessons.map((lesson) => ({
+      url: absoluteUrl(chapterLessonPath(theme.slug, lesson)),
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+    }))
+  );
 
-  // Pages série par thème (les ancres #exo:… ne vont pas dans le sitemap : les moteurs les ignorent en général).
-  const exerciseRoutes: MetadataRoute.Sitemap = getWebThemes()
+  const exerciseThemeRoutes: MetadataRoute.Sitemap = getWebThemes()
     .filter((theme) => themeHasExercisesFrOrEn(theme.number))
     .map((theme) => ({
       url: `${SITE_URL}/exercises/${theme.slug}`,
@@ -57,6 +62,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.75,
     }));
+
+  const exerciseDetailRoutes: MetadataRoute.Sitemap = getWebThemes()
+    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
+    .flatMap((theme) =>
+      listThemeExerciseIds(theme.number).map((exerciseId) => ({
+        url: absoluteUrl(exerciseDetailPath(theme.slug, exerciseId)),
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      }))
+    );
 
   const exercisePdfRoutes: MetadataRoute.Sitemap = getWebThemes()
     .filter((theme) => themeHasExercisesFrOrEn(theme.number))
@@ -79,5 +95,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       return out;
     });
 
-  return [...staticRoutes, ...themeRoutes, ...exerciseRoutes, ...exercisePdfRoutes];
+  return [
+    ...staticRoutes,
+    ...lessonRoutes,
+    ...exerciseThemeRoutes,
+    ...exerciseDetailRoutes,
+    ...exercisePdfRoutes,
+  ];
 }
