@@ -752,6 +752,26 @@ a.exercise-index-card-link:focus-visible {
   outline-offset: 2px;
 }
 
+/* ─── Theme square card (exercises hub) ─── */
+.theme-square-card {
+  position: relative;
+}
+
+.theme-square-link {
+  text-decoration: none;
+}
+
+.theme-square-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.theme-square-pdf-link {
+  position: relative;
+  z-index: 1;
+}
+
 .prose-quantum .latex-exo-title {
   margin: 0 0 0.5rem;
   font-family: var(--font-crimson), serif;

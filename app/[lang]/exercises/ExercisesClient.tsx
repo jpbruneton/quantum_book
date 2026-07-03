@@ -67,6 +67,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       /** PDF d’exercices : uniquement les fichiers FR sur le site FR. */
       pdfFrSans: "Tous les exercices du thème — sans corrigés (PDF)",
       pdfFrAvec: "Tous les exercices du thème — avec corrigés (PDF)",
+      pdfLabel: "PDF",
+      pdfSans: "sans corrigés",
+      pdfAvec: "avec corrigés",
     },
     en: {
       title: "Solved Exercises",
@@ -83,10 +86,14 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       /** PDF d’exercices : uniquement les fichiers EN sur le site EN. */
       pdfEnSans: "All exercises for this theme — statements only (PDF)",
       pdfEnAvec: "All exercises for this theme — with solutions (PDF)",
+      pdfLabel: "PDF",
+      pdfSans: "without solutions",
+      pdfAvec: "with solutions",
     },
   }[lang];
 
   const index = lang === "fr" ? indexFr : indexEn;
+  const hasQuery = query.trim().length > 0;
 
   const filtered = useMemo(
     () => index.filter((e) => exerciseMatchesQuery(e, query)),
@@ -171,30 +178,181 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
           }}
         />
 
-        {filtered.length === 0 ? (
-          <p
+        {!hasQuery ? (
+          <div
             style={{
-              fontFamily: "var(--font-crimson)",
-              color: "var(--text-secondary)",
-              fontStyle: "italic",
-              marginBottom: "2.5rem",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+              gap: "1.25rem",
             }}
           >
-            {t.noMatch}
-          </p>
-        ) : null}
+            {themes.map((theme) => {
+              const title = lang === "fr" ? theme.titleFr : theme.titleEn;
+              const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
+              const pdf = theme.pdfLinks;
+              const pdfEntries =
+                lang === "fr"
+                  ? [
+                      pdf.frSansSolutions
+                        ? { href: pdf.frSansSolutions, label: t.pdfSans, full: t.pdfFrSans }
+                        : null,
+                      pdf.frAvecSolutions
+                        ? { href: pdf.frAvecSolutions, label: t.pdfAvec, full: t.pdfFrAvec }
+                        : null,
+                    ]
+                  : [
+                      pdf.enSansSolutions
+                        ? { href: pdf.enSansSolutions, label: t.pdfSans, full: t.pdfEnSans }
+                        : null,
+                      pdf.enAvecSolutions
+                        ? { href: pdf.enAvecSolutions, label: t.pdfAvec, full: t.pdfEnAvec }
+                        : null,
+                    ];
+              const pdfLinks = pdfEntries.filter(
+                (e): e is { href: string; label: string; full: string } => e !== null
+              );
 
-        <h2
-          style={{
-            fontFamily: "var(--font-playfair)",
-            fontSize: "1.35rem",
-            fontWeight: 600,
-            color: "var(--text-heading)",
-            marginBottom: "1.25rem",
-          }}
-        >
-          {t.byTheme}
-        </h2>
+              return (
+                <div
+                  key={theme.number}
+                  className="theme-square-card chapter-card"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    minHeight: "190px",
+                    border: "1px solid var(--accent-border-sm)",
+                    borderRadius: "8px",
+                    padding: "1.4rem 1.5rem",
+                    background: "var(--bg-card)",
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-crimson)",
+                        fontSize: "0.78rem",
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        color: "var(--text-secondary)",
+                        marginBottom: "0.4rem",
+                      }}
+                    >
+                      {t.themePrefix} {theme.number}
+                    </div>
+                    {hasContent ? (
+                      <Link
+                        href={lp(`/exercises/${theme.slug}`)}
+                        className="theme-square-link"
+                        style={{
+                          display: "block",
+                          fontFamily: "var(--font-playfair)",
+                          fontSize: "1.1rem",
+                          fontWeight: 600,
+                          color: "var(--text-heading)",
+                          lineHeight: 1.35,
+                        }}
+                      >
+                        {title}
+                      </Link>
+                    ) : (
+                      <>
+                        <div
+                          style={{
+                            fontFamily: "var(--font-playfair)",
+                            fontSize: "1.1rem",
+                            fontWeight: 600,
+                            color: "var(--text-heading)",
+                            lineHeight: 1.35,
+                          }}
+                        >
+                          {title}
+                        </div>
+                        <div
+                          style={{
+                            fontFamily: "var(--font-crimson)",
+                            fontSize: "0.85rem",
+                            color: "var(--text-secondary)",
+                            marginTop: "0.5rem",
+                          }}
+                        >
+                          {t.comingSoon}
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  {pdfLinks.length > 0 ? (
+                    <div
+                      style={{
+                        marginTop: "1rem",
+                        paddingTop: "0.85rem",
+                        borderTop: "1px solid var(--border)",
+                        display: "flex",
+                        gap: "1rem",
+                      }}
+                    >
+                      {pdfLinks.map((entry) => (
+                        <a
+                          key={entry.href}
+                          href={entry.href}
+                          download
+                          aria-label={entry.full}
+                          className="theme-square-pdf-link"
+                          style={{
+                            fontFamily: "var(--font-crimson)",
+                            color: "var(--accent)",
+                            textDecoration: "none",
+                            lineHeight: 1.35,
+                          }}
+                        >
+                          <span style={{ display: "block", fontSize: "0.85rem", fontWeight: 600 }}>
+                            {t.pdfLabel}
+                          </span>
+                          <span
+                            style={{
+                              display: "block",
+                              fontSize: "0.75rem",
+                              textDecoration: "underline",
+                              textUnderlineOffset: "2px",
+                            }}
+                          >
+                            {entry.label}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <>
+            {filtered.length === 0 ? (
+              <p
+                style={{
+                  fontFamily: "var(--font-crimson)",
+                  color: "var(--text-secondary)",
+                  fontStyle: "italic",
+                  marginBottom: "2.5rem",
+                }}
+              >
+                {t.noMatch}
+              </p>
+            ) : null}
+
+            <h2
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "1.35rem",
+                fontWeight: 600,
+                color: "var(--text-heading)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              {t.byTheme}
+            </h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
           {orderedThemeNumbers.map((themeNumber) => {
@@ -410,7 +568,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
               </section>
             );
           })}
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
