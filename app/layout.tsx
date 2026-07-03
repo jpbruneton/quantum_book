@@ -38,10 +38,7 @@ export const metadata: Metadata = {
   keywords: bookMeta.keywords,
   authors: [{ name: bookMeta.author }],
   verification: {
-    google: [
-      "SkUSdSJzNk1KmUUkEocmv9MOt8Z5dhVdLVTKLEfWw_Q",
-      "aCLhKbXa-E1sdaL-9q8LrOaKugUSiEIYAy8TTXX7F4g",
-    ],
+    google: "aCLhKbXa-E1sdaL-9q8LrOaKugUSiEIYAy8TTXX7F4g",
   },
   openGraph: {
     type: "book",
