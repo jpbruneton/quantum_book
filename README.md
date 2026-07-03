@@ -1,235 +1,47 @@
-# Quantum Mechanics Book Website
+# Quantum Mechanics — A Modern Introduction
 
-A Next.js website for hosting your quantum mechanics book — free online reading with KaTeX math rendering + per-chapter PDF download.
+**Read online: [quantumlectures.org](https://quantumlectures.org)**
 
-## Tech Stack
+A free, rigorous yet accessible course on quantum mechanics, bridging classical
+physical intuition with the mathematical formalism of Hilbert spaces, linear
+operators, and measurement theory. Written for advanced undergraduates and
+graduate students, and freely readable in the browser (French and English),
+with KaTeX-rendered mathematics and downloadable per-theme PDFs.
 
-- **Next.js 14** (App Router) — framework
-- **TypeScript** — type safety
-- **Tailwind CSS** — utility styling
-- **KaTeX** — math rendering (via CDN in globals.css)
-- **Vercel** — deployment target
-- **GitHub** — source hosting
+Each lesson is paired with a library of worked exercises — statements,
+hints, and full solutions — also available as a single downloadable PDF per
+theme.
 
----
+## Contents so far
 
-## Getting Started
+**Part I — Isolated systems**
 
-### 1. Clone & Install
+- **Foundational experiments** — the historical experiments (Stern–Gerlach,
+  spin) that break classical mechanics and motivate quantization.
+- **Hilbert spaces and linear operators** — the mathematical backbone: inner
+  product spaces, duality, bras and kets, bounded and unbounded operators,
+  spectral theory.
+- **Postulates** — measurement, dynamics, and the interpretation of quantum
+  states built on that formalism.
+- **Applications** — potential barriers, the harmonic oscillator, spin, and
+  quantum dynamics, connecting the postulates to concrete, solvable problems.
 
-```bash
-git clone https://github.com/YOUR_USERNAME/quantum-mechanics-book.git
-cd quantum-mechanics-book
-npm install
-npm run dev
-```
+## Where the book is going
 
-Open [http://localhost:3000](http://localhost:3000).
+The course is under active development. Two further themes are planned to
+extend the material from isolated, idealized systems toward open, realistic
+ones:
 
----
+- **Interacting systems** — composite states, entanglement, and the dynamics
+  of quantum systems that are no longer isolated.
+- **Decoherence and quantum measurement** — how classical behavior emerges
+  from quantum dynamics, the role of the environment, and the measurement
+  problem.
 
-## Customising the Book
+Further themes and a growing exercise library are expected to follow as the
+book continues to expand.
 
-### Update Book Metadata
+## By the same author
 
-Edit **`lib/chapters.ts`** — the `bookMeta` object at the top:
-
-```ts
-export const bookMeta = {
-  title: "Quantum Mechanics",
-  subtitle: "A Modern Introduction",
-  author: "Jean-Philippe Bruneton",
-  affiliation: "Université Paris Cité, France",
-  year: "2026",
-  description: "...",
-  keywords: ["quantum mechanics", "..."],
-};
-```
-
-### Add / Edit Chapters
-
-Each chapter is an object in the `chapters` array in `lib/chapters.ts`:
-
-```ts
-{
-  slug: "my-chapter-slug",         // URL: /chapters/my-chapter-slug
-  number: 6,
-  title: "Perturbation Theory",
-  subtitle: "Time-independent methods",
-  description: "Short description shown on cards",
-  topics: ["First-order", "Second-order", "Degenerate"],
-  pdfFile: "chapter-06-perturbation.pdf",   // place PDF in /public/pdfs/
-  readingTime: "50 min",
-  content: `<p>HTML content with inline math $E = mc^2$ and display math ...</p>`,
-}
-```
-
-### Add PDFs
-
-Place your PDF files in **`public/pdfs/`**:
-
-```
-public/
-  pdfs/
-    chapter-01-mathematical-foundations.pdf
-    chapter-02-wave-mechanics.pdf
-    ...
-```
-
-The filename must match the `pdfFile` field in `lib/chapters.ts`.
-
-### Convert LaTeX to HTML Content (Web version)
-
-Use **pandoc** to convert your `.tex` files:
-
-```bash
-# Install pandoc: https://pandoc.org/installing.html
-
-pandoc chapter-01.tex -o chapter-01.html \
-  --mathml \
-  --standalone=false
-
-# Or with KaTeX-compatible output:
-pandoc chapter-01.tex -o chapter-01.html \
-  --mathjax \
-  --standalone=false
-```
-
-Then paste the output HTML into the `content` field of the chapter object.
-
-For **full KaTeX rendering** in the browser, the project loads the KaTeX CSS globally. To enable server-side rendering of math, install `react-katex`:
-
-```bash
-npm install katex react-katex
-```
-
-And update the `ChapterContent.tsx` component to use `<InlineMath>` and `<BlockMath>` components.
-
-### Update the Author Bio
-
-Edit **`app/about/page.tsx`** — find the author bio section and replace with your own text.
-
-### Add a Book Cover
-
-Replace the placeholder cover on the homepage by adding your image to `public/images/cover.jpg` and updating `app/page.tsx`:
-
-```tsx
-// Replace the placeholder div with:
-<Image src="/images/cover.jpg" alt="Book cover" fill style={{ objectFit: 'cover' }} />
-```
-
----
-
-## Deployment (Vercel + GitHub)
-
-### Step 1: Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
-git push -u origin main
-```
-
-### Step 2: Deploy on Vercel
-
-1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
-2. Click **"Add New Project"**
-3. Import your GitHub repository
-4. Leave all settings as default (Next.js is auto-detected)
-5. Click **"Deploy"**
-
-That's it — Vercel auto-deploys on every `git push` to `main`.
-
----
-
-## Project Structure
-
-```
-quantum-mechanics-book/
-├── app/
-│   ├── page.tsx              # Homepage (hero, chapters preview)
-│   ├── layout.tsx            # Root layout (navbar, footer)
-│   ├── globals.css           # Global styles, fonts, animations
-│   ├── not-found.tsx         # 404 page
-│   ├── about/
-│   │   └── page.tsx          # About the book + author
-│   ├── chapters/
-│   │   ├── page.tsx          # Chapter listing
-│   │   ├── ChapterContent.tsx # Web/PDF tab switcher (client)
-│   │   └── [slug]/
-│   │       └── page.tsx      # Individual chapter page
-│   └── components/
-│       ├── NavBar.tsx
-│       └── Footer.tsx
-├── lib/
-│   └── chapters.ts           # ← ALL your book data lives here
-├── public/
-│   ├── pdfs/                 # ← Place your PDF files here
-│   └── images/               # ← Book cover, author photo, etc.
-├── package.json
-├── tailwind.config.js
-├── next.config.js
-└── tsconfig.json
-```
-
----
-
-## Math Rendering Notes
-
-- The site loads **KaTeX CSS** via Google Fonts CDN in `globals.css`
-- Web chapter content uses HTML with inline `$...$` and display `$$...$$` notation
-- For full client-side rendering, consider adding the `katex` npm package and rendering math expressions in a `useEffect` hook, or use `react-katex`
-
----
-
-## Exercise PDFs (library + legacy `exo.tex`)
-
-The script merges, for a given book theme number `N`, all exercise sources in order: legacy `content/tex/themeN_fr/exo.tex` (or `_en`) if present, then every `exercices*.tex` in `exercises_library_fr` (or `_en`) whose `\theme{N}` matches. It runs `pdflatex` twice (a `\tableofcontents` needs two passes), writes first under `scripts/latex-tmp/`, then copies the PDF to `public/pdfs/`.
-
-Each theme now produces a **single PDF** structured in three parts, in this order, each starting with a fresh exercise numbering so the same number designates the same exercise in every part:
-
-1. **Énoncés / Statements** — the exercise statements, keywords included.
-2. **Indications / Hints** — only the `indication`/`indice`/`hint` content per exercise (a placeholder sentence is shown when an exercise has none).
-3. **Solutions** — only the `solution` content per exercise.
-
-A `\tableofcontents` at the very start links to each part.
-
-**Output**
-
-| File | Meaning |
-|------|---------|
-| `public/pdfs/exo_themeN_fr.pdf` | French, all three parts |
-| `public/pdfs/exo_themeN_en.pdf` | English, all three parts |
-
-**Requirements**
-
-- A LaTeX install (e.g. MiKTeX) with `pdflatex` on your `PATH`, **or** set `PDFLATEX` / `MIKTEX_PDFLATEX` to the full path of `pdflatex.exe` (PowerShell: `$env:PDFLATEX = "C:\...\pdflatex.exe"`).
-- Close the target PDF in viewers (Adobe, IDE preview) before rebuilding; otherwise the copy step to `public/pdfs/` can fail on Windows.
-
-**Commands** (from repo root) — run on request, whenever exercise `.tex` sources change:
-
-```bash
-# One theme, French (default)
-npm run build:exo-pdf -- 2 fr
-
-# One theme, English
-npm run build:exo-pdf -- 2 en
-
-# All non-empty themes, FR + EN
-npm run build:exo-pdf -- --all
-
-# All themes, French only (or English only)
-npm run build:exo-pdf -- --all fr
-npm run build:exo-pdf -- --all en
-```
-
-Equivalent without npm: `node scripts/build-exercises-pdf.mjs …` with the same arguments after `--` when using `npm run`.
-
-Commit generated PDFs under `public/pdfs/` if the site should offer downloads in production (the app checks that files exist at build time).
-
-## License
-
-© 2026 Jean-Philippe Bruneton. All rights reserved.
+**[Learn Thermo](https://learnthermo.org)** — a companion course on
+thermodynamics, by Jean-Philippe Bruneton (Université Paris Cité, France).
