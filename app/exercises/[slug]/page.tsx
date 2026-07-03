@@ -1,16 +1,51 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
-import { getTexWebHtmlFromSource } from "@/lib/chapterContent.server";
-import { combineThemeExerciseSources, themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
+import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
+import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
+import {
+  buildAllExerciseIndexEntries,
+  themeHasExercisesFrOrEn,
+} from "@/lib/exercisesLibrary.server";
 import { absoluteUrl } from "@/lib/siteUrl";
 import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
-import { ExerciseThemeClient } from "./ExerciseThemeClient";
+import { ExerciseThemeClient, type ThemeExerciseCard } from "./ExerciseThemeClient";
 
 const legacySlugs = legacyExerciseSlugRedirects as Record<string, string>;
 
 interface Props {
   params: { slug: string };
+}
+
+function buildThemeExerciseCards(themeNumber: number): {
+  exercisesFr: ThemeExerciseCard[];
+  exercisesEn: ThemeExerciseCard[];
+} {
+  const exercisesFr: ThemeExerciseCard[] = [];
+  const exercisesEn: ThemeExerciseCard[] = [];
+  let frIndex = 0;
+  let enIndex = 0;
+  for (const entry of buildAllExerciseIndexEntries("fr")) {
+    if (entry.themeNumber !== themeNumber) continue;
+    frIndex += 1;
+    exercisesFr.push({
+      id: entry.id,
+      displayNumber: frIndex,
+      titleHtml: exerciseTitleToPlainHtml(entry.titleTex),
+      keywords: entry.keywords,
+    });
+  }
+  for (const entry of buildAllExerciseIndexEntries("en")) {
+    if (entry.themeNumber !== themeNumber) continue;
+    enIndex += 1;
+    exercisesEn.push({
+      id: entry.id,
+      displayNumber: enIndex,
+      titleHtml: exerciseTitleToPlainHtml(entry.titleTex),
+      keywords: entry.keywords,
+    });
+  }
+  return { exercisesFr, exercisesEn };
 }
 
 export function generateStaticParams() {
@@ -43,21 +78,18 @@ export default function ExerciseThemePage({ params }: Props) {
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();
 
-  const mergedFr = combineThemeExerciseSources(theme.number, "fr");
-  const mergedEn = combineThemeExerciseSources(theme.number, "en");
-
-  const contentFr = getTexWebHtmlFromSource(mergedFr, "fr", []);
-  const contentEn = getTexWebHtmlFromSource(mergedEn, "en", []);
-
-  if (!contentFr && !contentEn) notFound();
+  const { exercisesFr, exercisesEn } = buildThemeExerciseCards(theme.number);
+  if (exercisesFr.length === 0 && exercisesEn.length === 0) notFound();
 
   return (
     <ExerciseThemeClient
+      themeSlug={theme.slug}
       number={theme.number}
       titleFr={theme.titleFr}
       titleEn={theme.titleEn}
-      contentFr={contentFr}
-      contentEn={contentEn}
+      exercisesFr={exercisesFr}
+      exercisesEn={exercisesEn}
+      pdfLinks={getExerciseThemePdfLinks(theme.number)}
     />
   );
 }
