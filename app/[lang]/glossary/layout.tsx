@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bookMeta } from "@/lib/chapters";
+import { hubPageSeo } from "@/lib/hubPageSeo";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, localizedPath } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
@@ -11,14 +11,15 @@ interface Props {
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   if (!isSiteLang(params.lang)) return {};
+  const seo = hubPageSeo("glossary", params.lang);
   const url = absoluteUrl(localizedPath(params.lang, "/glossary"));
   return {
-    title: "Glossary",
-    description: `Key terms and concepts from ${bookMeta.title}: Hilbert spaces, operators, Born rule, Dirac notation, wave functions, entanglement, and more.`,
+    title: { absolute: seo.title },
+    description: seo.description,
     alternates: localeAlternates(params.lang, "/glossary"),
     openGraph: {
-      title: `Glossary | ${bookMeta.title}`,
-      description: `Key concepts in quantum mechanics: Hilbert spaces, operators, Born rule, Dirac notation, entanglement, and more.`,
+      title: seo.title,
+      description: seo.description,
       url,
     },
   };

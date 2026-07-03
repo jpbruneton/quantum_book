@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
+import { hubPageSeo } from "@/lib/hubPageSeo";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, localizedPath } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
@@ -11,14 +11,15 @@ interface Props {
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   if (!isSiteLang(params.lang)) return {};
+  const seo = hubPageSeo("about", params.lang);
   const url = absoluteUrl(localizedPath(params.lang, "/about"));
   return {
-    title: "About",
-    description: `${bookMetaDisplayTitle()} — by ${bookMeta.author} (${bookMeta.affiliation}). ${bookMeta.description}`,
+    title: { absolute: seo.title },
+    description: seo.description,
     alternates: localeAlternates(params.lang, "/about"),
     openGraph: {
-      title: `About | ${bookMeta.title}`,
-      description: `${bookMetaDisplayTitle()} by ${bookMeta.author}, ${bookMeta.affiliation}.`,
+      title: seo.title,
+      description: seo.description,
       url,
     },
   };

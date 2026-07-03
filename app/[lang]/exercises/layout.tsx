@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
+import { hubPageSeo } from "@/lib/hubPageSeo";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, localizedPath } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
@@ -11,14 +11,15 @@ interface Props {
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   if (!isSiteLang(params.lang)) return {};
+  const seo = hubPageSeo("exercises", params.lang);
   const url = absoluteUrl(localizedPath(params.lang, "/exercises"));
   return {
-    title: "Exercises",
-    description: `Practice problems and exercises for ${bookMetaDisplayTitle()} — covering Hilbert spaces, operators, measurement, and more.`,
+    title: { absolute: seo.title },
+    description: seo.description,
     alternates: localeAlternates(params.lang, "/exercises"),
     openGraph: {
-      title: `Exercises | ${bookMeta.title}`,
-      description: `Practice problems for ${bookMeta.title}: Hilbert spaces, operators, measurement theory, and more.`,
+      title: seo.title,
+      description: seo.description,
       url,
     },
   };

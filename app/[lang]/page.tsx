@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
+import { hubPageSeo } from "@/lib/hubPageSeo";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
@@ -11,10 +12,17 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isSiteLang(params.lang)) return {};
+  const seo = hubPageSeo("home", params.lang);
   const url = absoluteUrl(`/${params.lang}`);
   return {
+    title: { absolute: seo.title },
+    description: seo.description,
     alternates: localeAlternates(params.lang, "/"),
-    openGraph: { url },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url,
+    },
   };
 }
 
