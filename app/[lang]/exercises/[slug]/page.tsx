@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
@@ -10,10 +10,7 @@ import {
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
-import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
 import { ExerciseThemeClient, type ThemeExerciseCard } from "./ExerciseThemeClient";
-
-const legacySlugs = legacyExerciseSlugRedirects as Record<string, string>;
 
 interface Props {
   params: { lang: string; slug: string };
@@ -81,10 +78,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function ExerciseThemePage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
-  const canonicalSlug = legacySlugs[params.slug];
-  if (canonicalSlug) {
-    redirect(localizedPath(params.lang, `/exercises/${canonicalSlug}`));
-  }
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();
 

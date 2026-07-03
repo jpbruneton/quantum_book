@@ -1,11 +1,16 @@
 import type { Lesson } from "@/lib/chapters";
 import { localizedPath, type SiteLang } from "@/lib/localeRoutes";
+import { lessonRefToCanonical, lessonRefToPublic } from "@/lib/themePublicSlugs";
 
 export function lessonToPathSegment(lesson: Lesson): string {
   if (lesson.kind === "fiche") {
     return `fiche-${String(lesson.number)}`;
   }
   return `lesson-${String(lesson.number)}`;
+}
+
+export function lessonToPublicPathSegment(lang: SiteLang, lesson: Lesson): string {
+  return lessonRefToPublic(lang, lessonToPathSegment(lesson));
 }
 
 export function chapterLessonPath(lang: SiteLang, themeSlug: string, lesson: Lesson): string {
@@ -15,11 +20,12 @@ export function chapterLessonPath(lang: SiteLang, themeSlug: string, lesson: Les
 export function parseLessonPathSegment(
   segment: string
 ): { number: number; kind: "lesson" | "fiche" } | null {
-  const lessonMatch = /^lesson-(\d+)$/.exec(segment);
+  const canonical = lessonRefToCanonical(segment);
+  const lessonMatch = /^lesson-(\d+)$/.exec(canonical);
   if (lessonMatch) {
     return { number: Number.parseInt(lessonMatch[1], 10), kind: "lesson" };
   }
-  const ficheMatch = /^fiche-(\d+)$/.exec(segment);
+  const ficheMatch = /^fiche-(\d+)$/.exec(canonical);
   if (ficheMatch) {
     return { number: Number.parseInt(ficheMatch[1], 10), kind: "fiche" };
   }
@@ -27,8 +33,9 @@ export function parseLessonPathSegment(
 }
 
 export function findLessonIndexByRef(lessons: Lesson[], lessonRef: string): number {
+  const canonicalRef = lessonRefToCanonical(lessonRef);
   for (let index = 0; index < lessons.length; index += 1) {
-    if (lessonToPathSegment(lessons[index]) === lessonRef) {
+    if (lessonToPathSegment(lessons[index]) === canonicalRef) {
       return index;
     }
   }

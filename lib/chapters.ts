@@ -1,3 +1,5 @@
+import { themeSlugToCanonical } from "@/lib/themePublicSlugs";
+
 export interface LessonReference {
   key: string;
   label: string;
@@ -761,7 +763,8 @@ export function getWebThemes(): Theme[] {
 }
 
 export function getWebTheme(slug: string): Theme | undefined {
-  return getWebThemes().find((theme) => theme.slug === slug);
+  const canonicalSlug = themeSlugToCanonical(slug);
+  return getWebThemes().find((theme) => theme.slug === canonicalSlug);
 }
 
 export function getTotalLessonsCount(): number {

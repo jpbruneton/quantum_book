@@ -10,9 +10,7 @@ import {
   type SiteLang,
 } from "@/lib/localeRoutes";
 import { lessonToPathSegment } from "@/lib/lessonRoutes";
-import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
-
-const legacy = legacyExerciseSlugRedirects as Record<string, string>;
+import { themeSlugToCanonical } from "@/lib/themePublicSlugs";
 
 const STATIC_PREFIXES = ["/_next", "/pdfs", "/figs", "/favicon", "/robots.txt", "/sitemap.xml"];
 
@@ -77,7 +75,7 @@ export function middleware(request: NextRequest) {
   if (chapterMatch) {
     const lessonQuery = request.nextUrl.searchParams.get("lesson");
     if (lessonQuery) {
-      const theme = getWebTheme(chapterMatch[1]);
+      const theme = getWebTheme(themeSlugToCanonical(chapterMatch[1]));
       const lessonIndex = Number.parseInt(lessonQuery, 10) - 1;
       if (
         theme &&
@@ -94,23 +92,6 @@ export function middleware(request: NextRequest) {
         url.search = "";
         return NextResponse.redirect(url, 308);
       }
-    }
-  }
-
-  if (logicalPath.startsWith("/exercises/")) {
-    const rest = logicalPath.slice("/exercises/".length).replace(/\/$/, "");
-    const slashIndex = rest.indexOf("/");
-    const themeSlug = slashIndex === -1 ? rest : rest.slice(0, slashIndex);
-    const to = legacy[themeSlug];
-    if (to) {
-      const url = request.nextUrl.clone();
-      if (slashIndex === -1) {
-        url.pathname = localizedPath(lang, `/exercises/${to}`);
-        return NextResponse.redirect(url, 308);
-      }
-      const exoSegment = rest.slice(slashIndex + 1);
-      url.pathname = localizedPath(lang, `/exercises/${to}/${exoSegment}`);
-      return NextResponse.redirect(url, 308);
     }
   }
 

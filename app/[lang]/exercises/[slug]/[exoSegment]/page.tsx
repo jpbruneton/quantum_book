@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml, getTexWebHtmlFromSource } from "@/lib/chapterContent.server";
@@ -12,10 +12,7 @@ import { exerciseDetailPath, exerciseSegmentToId } from "@/lib/exerciseRoutes";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, SITE_LANGS } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
-import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
 import { ExerciseSingleClient } from "./ExerciseSingleClient";
-
-const legacySlugs = legacyExerciseSlugRedirects as Record<string, string>;
 
 interface Props {
   params: { lang: string; slug: string; exoSegment: string };
@@ -65,12 +62,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function ExerciseDetailPage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
-  const canonicalSlug = legacySlugs[params.slug];
-  if (canonicalSlug) {
-    redirect(
-      exerciseDetailPath(params.lang, canonicalSlug, exerciseSegmentToId(params.exoSegment))
-    );
-  }
 
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();

@@ -1,4 +1,8 @@
 import type { Lang } from "@/lib/i18n";
+import {
+  canonicalizeChapterExercisePath,
+  localizeChapterExercisePath,
+} from "@/lib/themePublicSlugs";
 
 export type SiteLang = Lang;
 
@@ -35,29 +39,30 @@ function resolveSectionFromPublicSlug(slug: string): RouteSection | null {
   return null;
 }
 
-/** Canonical internal path used by the Next.js app directory (always English section slugs). */
+/** Canonical internal path used by the Next.js app directory. */
 export function toLogicalPath(path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
-  const parts = splitPath(normalized);
+  let parts = splitPath(normalized);
   if (parts.length === 0) {
     return "/";
   }
   const section = resolveSectionFromPublicSlug(parts[0]);
-  if (!section) {
-    return normalized;
+  if (section) {
+    parts[0] = section;
+    parts = canonicalizeChapterExercisePath(parts);
   }
-  parts[0] = section;
   return `/${parts.join("/")}`;
 }
 
 function toPublicPath(lang: SiteLang, logicalPath: string): string {
   const normalized = logicalPath.startsWith("/") ? logicalPath : `/${logicalPath}`;
-  const parts = splitPath(normalized);
+  let parts = splitPath(normalized);
   if (parts.length === 0) {
     return "/";
   }
   if (isRouteSection(parts[0])) {
     parts[0] = publicSectionSlug(lang, parts[0]);
+    parts = localizeChapterExercisePath(parts, lang);
   }
   return `/${parts.join("/")}`;
 }
