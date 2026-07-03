@@ -40,28 +40,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // One URL per lesson: first lesson uses bare /chapters/[slug]; others use ?lesson=N (1-based index in theme.lessons).
-  const themeRoutes: MetadataRoute.Sitemap = getWebThemes().flatMap((theme) => {
-    if (theme.lessons.length === 0) {
-      return [
-        {
-          url: `${SITE_URL}/chapters/${theme.slug}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-        },
-      ];
-    }
-    return theme.lessons.map((_, lessonIndex) => ({
-      url:
-        lessonIndex === 0
-          ? `${SITE_URL}/chapters/${theme.slug}`
-          : `${SITE_URL}/chapters/${theme.slug}?lesson=${String(lessonIndex + 1)}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.85,
-    }));
-  });
+  // One URL per theme; lesson tabs use ?lesson=N client-side (canonical matches bare /chapters/[slug]).
+  const themeRoutes: MetadataRoute.Sitemap = getWebThemes().map((theme) => ({
+    url: `${SITE_URL}/chapters/${theme.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
 
   // Pages série par thème (les ancres #exo:… ne vont pas dans le sitemap : les moteurs les ignorent en général).
   const exerciseRoutes: MetadataRoute.Sitemap = getWebThemes()
