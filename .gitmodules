@@ -1,0 +1,3 @@
+[submodule "content/tex"]
+	path = content/tex
+	url = https://github.com/jpbruneton/quantum-book-tex.git
