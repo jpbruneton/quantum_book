@@ -6,87 +6,60 @@ import {
   themeHasExercisesFrOrEn,
 } from "@/lib/exercisesLibrary.server";
 import { exerciseDetailPath } from "@/lib/exerciseRoutes";
-import { chapterLessonPath } from "@/lib/lessonRoutes";
-import { localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
-import { absoluteUrl, getSiteUrl } from "@/lib/siteUrl";
+import { lessonToPathSegment } from "@/lib/lessonRoutes";
+import { SITE_LANGS } from "@/lib/localeRoutes";
+import { sitemapEntriesForLogicalPath, sitemapHreflangAlternates } from "@/lib/sitemapHelpers";
+import { absoluteUrl } from "@/lib/siteUrl";
 
-const SITE_URL = getSiteUrl();
-
-function localizedStaticRoutes(): MetadataRoute.Sitemap {
-  const paths = ["/", "/chapters", "/exercises", "/about", "/glossary"];
-  return SITE_LANGS.flatMap((lang) =>
-    paths.map((path) => ({
-      url: absoluteUrl(localizedPath(lang, path)),
-      lastModified: new Date(),
-      changeFrequency: path === "/" ? ("monthly" as const) : path === "/exercises" ? ("weekly" as const) : ("monthly" as const),
-      priority: path === "/" ? 1 : path === "/chapters" ? 0.9 : path === "/exercises" ? 0.75 : 0.6,
-      alternates: {
-        languages: {
-          en: absoluteUrl(localizedPath("en", path)),
-          fr: absoluteUrl(localizedPath("fr", path)),
-          "x-default": absoluteUrl(localizedPath("en", path)),
-        },
-      },
-    }))
-  );
-}
+const STATIC_LOGICAL_PATHS: { path: string; priority: number; changeFrequency: "monthly" | "weekly" }[] = [
+  { path: "/", priority: 1, changeFrequency: "monthly" },
+  { path: "/chapters", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/exercises", priority: 0.75, changeFrequency: "weekly" },
+  { path: "/about", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/glossary", priority: 0.5, changeFrequency: "monthly" },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lessonRoutes: MetadataRoute.Sitemap = SITE_LANGS.flatMap((lang) =>
-    getWebThemes().flatMap((theme) =>
-      theme.lessons.map((lesson) => ({
-          url: absoluteUrl(chapterLessonPath(lang, theme.slug, lesson)),
-          lastModified: new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.85,
-          alternates: {
-            languages: {
-              en: absoluteUrl(chapterLessonPath("en", theme.slug, lesson)),
-              fr: absoluteUrl(chapterLessonPath("fr", theme.slug, lesson)),
-              "x-default": absoluteUrl(chapterLessonPath("en", theme.slug, lesson)),
-            },
-          },
-        }))
-    )
+  const staticRoutes: MetadataRoute.Sitemap = STATIC_LOGICAL_PATHS.flatMap((item) =>
+    sitemapEntriesForLogicalPath(item.path, {
+      priority: item.priority,
+      changeFrequency: item.changeFrequency,
+    })
   );
 
-  const exerciseThemeRoutes: MetadataRoute.Sitemap = SITE_LANGS.flatMap((lang) =>
-    getWebThemes()
-      .filter((theme) => themeHasExercisesFrOrEn(theme.number))
-      .map((theme) => ({
-        url: absoluteUrl(localizedPath(lang, `/exercises/${theme.slug}`)),
-        lastModified: new Date(),
-        changeFrequency: "weekly" as const,
+  const lessonRoutes: MetadataRoute.Sitemap = getWebThemes().flatMap((theme) =>
+    theme.lessons.flatMap((lesson) => {
+      const logicalPath = `/chapters/${theme.slug}/${lessonToPathSegment(lesson)}`;
+      return sitemapEntriesForLogicalPath(logicalPath, {
+        changeFrequency: "weekly",
+        priority: 0.85,
+      });
+    })
+  );
+
+  const exerciseThemeRoutes: MetadataRoute.Sitemap = getWebThemes()
+    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
+    .flatMap((theme) =>
+      sitemapEntriesForLogicalPath(`/exercises/${theme.slug}`, {
+        changeFrequency: "weekly",
         priority: 0.75,
-        alternates: {
-          languages: {
-            en: absoluteUrl(localizedPath("en", `/exercises/${theme.slug}`)),
-            fr: absoluteUrl(localizedPath("fr", `/exercises/${theme.slug}`)),
-            "x-default": absoluteUrl(localizedPath("en", `/exercises/${theme.slug}`)),
-          },
-        },
-      }))
-  );
+      })
+    );
 
-  const exerciseDetailRoutes: MetadataRoute.Sitemap = SITE_LANGS.flatMap((lang) =>
-    getWebThemes()
-      .filter((theme) => themeHasExercisesFrOrEn(theme.number))
-      .flatMap((theme) =>
-        listThemeExerciseIds(theme.number).map((exerciseId) => ({
+  const exerciseDetailRoutes: MetadataRoute.Sitemap = getWebThemes()
+    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
+    .flatMap((theme) =>
+      listThemeExerciseIds(theme.number).flatMap((exerciseId) => {
+        const logicalPath = `/exercises/${theme.slug}/${exerciseId.replace(/:/g, "-")}`;
+        return SITE_LANGS.map((lang) => ({
           url: absoluteUrl(exerciseDetailPath(lang, theme.slug, exerciseId)),
           lastModified: new Date(),
           changeFrequency: "weekly" as const,
           priority: 0.8,
-          alternates: {
-            languages: {
-              en: absoluteUrl(exerciseDetailPath("en", theme.slug, exerciseId)),
-              fr: absoluteUrl(exerciseDetailPath("fr", theme.slug, exerciseId)),
-              "x-default": absoluteUrl(exerciseDetailPath("en", theme.slug, exerciseId)),
-            },
-          },
-        }))
-      )
-  );
+          alternates: sitemapHreflangAlternates(logicalPath),
+        }));
+      })
+    );
 
   const exercisePdfRoutes: MetadataRoute.Sitemap = getWebThemes()
     .filter((theme) => themeHasExercisesFrOrEn(theme.number))
@@ -110,7 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
 
   return [
-    ...localizedStaticRoutes(),
+    ...staticRoutes,
     ...lessonRoutes,
     ...exerciseThemeRoutes,
     ...exerciseDetailRoutes,

@@ -61,8 +61,8 @@ function toPublicPath(lang: SiteLang, logicalPath: string): string {
     return "/";
   }
   if (isRouteSection(parts[0])) {
-    parts[0] = publicSectionSlug(lang, parts[0]);
     parts = localizeChapterExercisePath(parts, lang);
+    parts[0] = publicSectionSlug(lang, parts[0] as RouteSection);
   }
   return `/${parts.join("/")}`;
 }
