@@ -182,7 +182,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
               return (
                 <div
                   key={theme.number}
-                  className="theme-square-card chapter-card"
+                  className="theme-square-card"
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -212,7 +212,10 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                         href={lp(`/exercises/${theme.slug}`)}
                         className="theme-square-link"
                         style={{
-                          display: "block",
+                          display: "flex",
+                          alignItems: "baseline",
+                          justifyContent: "space-between",
+                          gap: "0.6rem",
                           fontFamily: "var(--font-playfair)",
                           fontSize: "1.1rem",
                           fontWeight: 600,
@@ -220,7 +223,10 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                           lineHeight: 1.35,
                         }}
                       >
-                        {title}
+                        <span>{title}</span>
+                        <span className="theme-square-arrow" aria-hidden="true">
+                          ↗
+                        </span>
                       </Link>
                     ) : (
                       <>
@@ -263,24 +269,33 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                         aria-label={t.pdfFull}
                         className="theme-square-pdf-link"
                         style={{
+                          display: "flex",
+                          alignItems: "baseline",
+                          justifyContent: "space-between",
+                          gap: "0.6rem",
                           fontFamily: "var(--font-crimson)",
                           color: "var(--accent)",
                           textDecoration: "none",
                           lineHeight: 1.35,
                         }}
                       >
-                        <span style={{ display: "block", fontSize: "0.85rem", fontWeight: 600 }}>
-                          {t.pdfLabel}
+                        <span>
+                          <span style={{ display: "block", fontSize: "0.85rem", fontWeight: 600 }}>
+                            {t.pdfLabel}
+                          </span>
+                          <span
+                            style={{
+                              display: "block",
+                              fontSize: "0.75rem",
+                              textDecoration: "underline",
+                              textUnderlineOffset: "2px",
+                            }}
+                          >
+                            {t.pdfSub}
+                          </span>
                         </span>
-                        <span
-                          style={{
-                            display: "block",
-                            fontSize: "0.75rem",
-                            textDecoration: "underline",
-                            textUnderlineOffset: "2px",
-                          }}
-                        >
-                          {t.pdfSub}
+                        <span className="theme-square-arrow" aria-hidden="true">
+                          ↓
                         </span>
                       </a>
                     </div>

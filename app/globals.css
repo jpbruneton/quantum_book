@@ -755,6 +755,7 @@ a.exercise-index-card-link:focus-visible {
 /* ─── Theme square card (exercises hub) ─── */
 .theme-square-card {
   position: relative;
+  transition: border-color 0.15s ease;
 }
 
 .theme-square-link {
@@ -770,6 +771,44 @@ a.exercise-index-card-link:focus-visible {
 .theme-square-pdf-link {
   position: relative;
   z-index: 1;
+}
+
+.theme-square-arrow {
+  flex: none;
+  color: var(--accent);
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  opacity: 0.55;
+}
+
+.theme-square-link:hover .theme-square-arrow,
+.theme-square-link:focus-visible .theme-square-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.theme-square-pdf-link:hover .theme-square-arrow,
+.theme-square-pdf-link:focus-visible .theme-square-arrow {
+  opacity: 1;
+  transform: translateY(2px);
+}
+
+.theme-square-card:has(.theme-square-link:hover),
+.theme-square-card:has(.theme-square-link:focus-visible) {
+  border-color: var(--accent-border-hover, var(--accent));
+}
+
+.theme-square-pdf-link:hover,
+.theme-square-pdf-link:focus-visible {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.theme-square-pdf-link:focus-visible,
+.theme-square-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .prose-quantum .latex-exo-title {
