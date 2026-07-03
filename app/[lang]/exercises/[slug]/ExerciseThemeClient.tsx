@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useLang } from "@/app/context/LangContext";
 import { exerciseDetailPath } from "@/lib/exerciseRoutes";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
-import type { ThemePdfLinks } from "../ExercisesClient";
+import type { ExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 
 export interface ThemeExerciseCard {
   id: string;
@@ -22,7 +22,7 @@ interface Props {
   titleEn: string;
   exercisesFr: ThemeExerciseCard[];
   exercisesEn: ThemeExerciseCard[];
-  pdfLinks: ThemePdfLinks;
+  pdfLinks: ExerciseThemePdfLinks;
 }
 
 export function ExerciseThemeClient({
@@ -52,10 +52,10 @@ export function ExerciseThemeClient({
     lang === "fr"
       ? "Les exercices de ce thème ne sont pas encore disponibles dans cette langue."
       : "Exercises for this theme are not yet available in this language.";
-  const pdfFrSans = lang === "fr" ? "Tous les exercices du thème — sans corrigés (PDF)" : "";
-  const pdfFrAvec = lang === "fr" ? "Tous les exercices du thème — avec corrigés (PDF)" : "";
-  const pdfEnSans = lang === "en" ? "All exercises for this theme — statements only (PDF)" : "";
-  const pdfEnAvec = lang === "en" ? "All exercises for this theme — with solutions (PDF)" : "";
+  const pdfLabel =
+    lang === "fr"
+      ? "Tous les exercices du thème — énoncés, indications et solutions (PDF)"
+      : "All exercises for this theme — statements, hints and solutions (PDF)";
 
   useEffect(() => {
     const raw = window.location.hash.replace(/^#/, "");
@@ -189,10 +189,7 @@ export function ExerciseThemeClient({
           </p>
         )}
 
-        {(pdfLinks.frAvecSolutions ||
-          pdfLinks.frSansSolutions ||
-          pdfLinks.enAvecSolutions ||
-          pdfLinks.enSansSolutions) && (
+        {(lang === "fr" ? pdfLinks.fr : pdfLinks.en) && (
           <div
             style={{
               marginTop: "2rem",
@@ -204,33 +201,9 @@ export function ExerciseThemeClient({
               alignItems: "flex-start",
             }}
           >
-            {lang === "fr" ? (
-              <>
-                {pdfLinks.frSansSolutions ? (
-                  <a href={pdfLinks.frSansSolutions} download style={linkStyle}>
-                    {pdfFrSans}
-                  </a>
-                ) : null}
-                {pdfLinks.frAvecSolutions ? (
-                  <a href={pdfLinks.frAvecSolutions} download style={linkStyle}>
-                    {pdfFrAvec}
-                  </a>
-                ) : null}
-              </>
-            ) : (
-              <>
-                {pdfLinks.enSansSolutions ? (
-                  <a href={pdfLinks.enSansSolutions} download style={linkStyle}>
-                    {pdfEnSans}
-                  </a>
-                ) : null}
-                {pdfLinks.enAvecSolutions ? (
-                  <a href={pdfLinks.enAvecSolutions} download style={linkStyle}>
-                    {pdfEnAvec}
-                  </a>
-                ) : null}
-              </>
-            )}
+            <a href={(lang === "fr" ? pdfLinks.fr : pdfLinks.en) ?? undefined} download style={linkStyle}>
+              {pdfLabel}
+            </a>
           </div>
         )}
       </div>

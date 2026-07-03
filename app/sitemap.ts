@@ -55,10 +55,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
           priority: 0.55,
         });
       };
-      push(links.frAvecSolutions);
-      push(links.frSansSolutions);
-      push(links.enAvecSolutions);
-      push(links.enSansSolutions);
+      push(links.fr);
+      push(links.en);
       return out;
     });
 

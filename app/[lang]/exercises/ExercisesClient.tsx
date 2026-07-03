@@ -7,13 +7,7 @@ import { useLang } from "@/app/context/LangContext";
 import { exerciseMatchesQuery } from "@/lib/exerciseIndexUtils";
 import { exerciseDetailPath } from "@/lib/exerciseRoutes";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
-
-export interface ThemePdfLinks {
-  frAvecSolutions: string | null;
-  frSansSolutions: string | null;
-  enAvecSolutions: string | null;
-  enSansSolutions: string | null;
-}
+import type { ExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 
 export interface ThemeCard {
   slug: string;
@@ -24,7 +18,7 @@ export interface ThemeCard {
   descriptionEn: string;
   hasContentFr: boolean;
   hasContentEn: boolean;
-  pdfLinks: ThemePdfLinks;
+  pdfLinks: ExerciseThemePdfLinks;
 }
 
 export interface ExerciseIndexCard {
@@ -64,12 +58,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "Aucun exercice ne correspond à cette requête.",
       keywordsLabel: "Mots-clés",
       exercisePrefix: "Exercice",
-      /** PDF d’exercices : uniquement les fichiers FR sur le site FR. */
-      pdfFrSans: "Tous les exercices du thème — sans corrigés (PDF)",
-      pdfFrAvec: "Tous les exercices du thème — avec corrigés (PDF)",
+      pdfFull: "Tous les exercices du thème — énoncés, indications et solutions (PDF)",
       pdfLabel: "PDF",
-      pdfSans: "sans corrigés",
-      pdfAvec: "avec corrigés",
+      pdfSub: "énoncés + solutions",
     },
     en: {
       title: "Solved Exercises",
@@ -83,12 +74,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       noMatch: "No exercises match this query.",
       keywordsLabel: "Keywords",
       exercisePrefix: "Exercise",
-      /** PDF d’exercices : uniquement les fichiers EN sur le site EN. */
-      pdfEnSans: "All exercises for this theme — statements only (PDF)",
-      pdfEnAvec: "All exercises for this theme — with solutions (PDF)",
+      pdfFull: "All exercises for this theme — statements, hints and solutions (PDF)",
       pdfLabel: "PDF",
-      pdfSans: "without solutions",
-      pdfAvec: "with solutions",
+      pdfSub: "statements + solutions",
     },
   }[lang];
 
@@ -189,28 +177,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             {themes.map((theme) => {
               const title = lang === "fr" ? theme.titleFr : theme.titleEn;
               const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
-              const pdf = theme.pdfLinks;
-              const pdfEntries =
-                lang === "fr"
-                  ? [
-                      pdf.frSansSolutions
-                        ? { href: pdf.frSansSolutions, label: t.pdfSans, full: t.pdfFrSans }
-                        : null,
-                      pdf.frAvecSolutions
-                        ? { href: pdf.frAvecSolutions, label: t.pdfAvec, full: t.pdfFrAvec }
-                        : null,
-                    ]
-                  : [
-                      pdf.enSansSolutions
-                        ? { href: pdf.enSansSolutions, label: t.pdfSans, full: t.pdfEnSans }
-                        : null,
-                      pdf.enAvecSolutions
-                        ? { href: pdf.enAvecSolutions, label: t.pdfAvec, full: t.pdfEnAvec }
-                        : null,
-                    ];
-              const pdfLinks = pdfEntries.filter(
-                (e): e is { href: string; label: string; full: string } => e !== null
-              );
+              const pdfHref = lang === "fr" ? theme.pdfLinks.fr : theme.pdfLinks.en;
 
               return (
                 <div
@@ -282,45 +249,40 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     )}
                   </div>
 
-                  {pdfLinks.length > 0 ? (
+                  {pdfHref ? (
                     <div
                       style={{
                         marginTop: "1rem",
                         paddingTop: "0.85rem",
                         borderTop: "1px solid var(--border)",
-                        display: "flex",
-                        gap: "1rem",
                       }}
                     >
-                      {pdfLinks.map((entry) => (
-                        <a
-                          key={entry.href}
-                          href={entry.href}
-                          download
-                          aria-label={entry.full}
-                          className="theme-square-pdf-link"
+                      <a
+                        href={pdfHref}
+                        download
+                        aria-label={t.pdfFull}
+                        className="theme-square-pdf-link"
+                        style={{
+                          fontFamily: "var(--font-crimson)",
+                          color: "var(--accent)",
+                          textDecoration: "none",
+                          lineHeight: 1.35,
+                        }}
+                      >
+                        <span style={{ display: "block", fontSize: "0.85rem", fontWeight: 600 }}>
+                          {t.pdfLabel}
+                        </span>
+                        <span
                           style={{
-                            fontFamily: "var(--font-crimson)",
-                            color: "var(--accent)",
-                            textDecoration: "none",
-                            lineHeight: 1.35,
+                            display: "block",
+                            fontSize: "0.75rem",
+                            textDecoration: "underline",
+                            textUnderlineOffset: "2px",
                           }}
                         >
-                          <span style={{ display: "block", fontSize: "0.85rem", fontWeight: 600 }}>
-                            {t.pdfLabel}
-                          </span>
-                          <span
-                            style={{
-                              display: "block",
-                              fontSize: "0.75rem",
-                              textDecoration: "underline",
-                              textUnderlineOffset: "2px",
-                            }}
-                          >
-                            {entry.label}
-                          </span>
-                        </a>
-                      ))}
+                          {t.pdfSub}
+                        </span>
+                      </a>
                     </div>
                   ) : null}
                 </div>
@@ -362,11 +324,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             if (!cards || cards.length === 0) return null;
             const title = lang === "fr" ? theme.titleFr : theme.titleEn;
             const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
-            const pdf = theme.pdfLinks;
-            const hasPdf =
-              lang === "fr"
-                ? pdf.frAvecSolutions !== null || pdf.frSansSolutions !== null
-                : pdf.enAvecSolutions !== null || pdf.enSansSolutions !== null;
+            const pdfHref = lang === "fr" ? theme.pdfLinks.fr : theme.pdfLinks.en;
 
             const linkStyle: CSSProperties = {
               fontFamily: "var(--font-crimson)",
@@ -447,7 +405,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                       </span>
                     )}
                   </div>
-                  {hasPdf ? (
+                  {pdfHref ? (
                     <div
                       style={{
                         marginTop: "0.85rem",
@@ -455,42 +413,9 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                         borderTop: "1px solid var(--border)",
                       }}
                     >
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "0.4rem",
-                          alignItems: "flex-start",
-                        }}
-                      >
-                        {lang === "fr" ? (
-                          <>
-                            {pdf.frSansSolutions !== null ? (
-                              <a href={pdf.frSansSolutions} download style={linkStyle}>
-                                {t.pdfFrSans}
-                              </a>
-                            ) : null}
-                            {pdf.frAvecSolutions !== null ? (
-                              <a href={pdf.frAvecSolutions} download style={linkStyle}>
-                                {t.pdfFrAvec}
-                              </a>
-                            ) : null}
-                          </>
-                        ) : (
-                          <>
-                            {pdf.enSansSolutions !== null ? (
-                              <a href={pdf.enSansSolutions} download style={linkStyle}>
-                                {t.pdfEnSans}
-                              </a>
-                            ) : null}
-                            {pdf.enAvecSolutions !== null ? (
-                              <a href={pdf.enAvecSolutions} download style={linkStyle}>
-                                {t.pdfEnAvec}
-                              </a>
-                            ) : null}
-                          </>
-                        )}
-                      </div>
+                      <a href={pdfHref} download style={linkStyle}>
+                        {t.pdfFull}
+                      </a>
                     </div>
                   ) : null}
                 </div>

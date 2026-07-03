@@ -187,47 +187,41 @@ quantum-mechanics-book/
 
 ## Exercise PDFs (library + legacy `exo.tex`)
 
-The script merges, for a given book theme number `N`, all exercise sources in order: legacy `content/tex/themeN_fr/exo.tex` (or `_en`) if present, then every `exercices*.tex` in `exercises_library_fr` (or `_en`) whose `\theme{N}` matches. It runs `pdflatex`, writes first under `scripts/latex-tmp/`, then copies the PDF to `public/pdfs/`.
+The script merges, for a given book theme number `N`, all exercise sources in order: legacy `content/tex/themeN_fr/exo.tex` (or `_en`) if present, then every `exercices*.tex` in `exercises_library_fr` (or `_en`) whose `\theme{N}` matches. It runs `pdflatex` twice (a `\tableofcontents` needs two passes), writes first under `scripts/latex-tmp/`, then copies the PDF to `public/pdfs/`.
 
-**Outputs**
+Each theme now produces a **single PDF** structured in three parts, in this order, each starting with a fresh exercise numbering so the same number designates the same exercise in every part:
+
+1. **Énoncés / Statements** — the exercise statements, keywords included.
+2. **Indications / Hints** — only the `indication`/`indice`/`hint` content per exercise (a placeholder sentence is shown when an exercise has none).
+3. **Solutions** — only the `solution` content per exercise.
+
+A `\tableofcontents` at the very start links to each part.
+
+**Output**
 
 | File | Meaning |
 |------|---------|
-| `public/pdfs/exo_themeN_fr.pdf` | French, with solutions (default) |
-| `public/pdfs/exo_themeN_fr_sans_solutions.pdf` | French, statements only: strips `solution`, `indice`, `indication`, `hint` |
-| `public/pdfs/exo_themeN_en.pdf` | English, with solutions |
-| `public/pdfs/exo_themeN_en_sans_solutions.pdf` | English, statements only (same stripping as FR `_sans_solutions`) |
-
-For a single theme, build both variants with `--both`. For `--all`, both variants are produced by default (unless you pass `--sans-solutions` only).
+| `public/pdfs/exo_themeN_fr.pdf` | French, all three parts |
+| `public/pdfs/exo_themeN_en.pdf` | English, all three parts |
 
 **Requirements**
 
 - A LaTeX install (e.g. MiKTeX) with `pdflatex` on your `PATH`, **or** set `PDFLATEX` / `MIKTEX_PDFLATEX` to the full path of `pdflatex.exe` (PowerShell: `$env:PDFLATEX = "C:\...\pdflatex.exe"`).
 - Close the target PDF in viewers (Adobe, IDE preview) before rebuilding; otherwise the copy step to `public/pdfs/` can fail on Windows.
 
-**Commands** (from repo root)
+**Commands** (from repo root) — run on request, whenever exercise `.tex` sources change:
 
 ```bash
-# One theme, French (default), with solutions
+# One theme, French (default)
 npm run build:exo-pdf -- 2 fr
 
 # One theme, English
 npm run build:exo-pdf -- 2 en
 
-# French, statements only
-npm run build:exo-pdf -- 2 fr --sans-solutions
-
-# With solutions + without (two PDFs for FR)
-npm run build:exo-pdf -- 2 fr --both
-
-# All non-empty themes: FR + EN, and for each theme×language two PDFs by default
-# (with solutions, and statements-only with solutions + hints/indications stripped)
+# All non-empty themes, FR + EN
 npm run build:exo-pdf -- --all
 
-# All themes, statements-only PDFs only (no “avec corrigés” pass)
-npm run build:exo-pdf -- --all --sans-solutions
-
-# All themes, French only (or English only) — still produces avec + sans per theme
+# All themes, French only (or English only)
 npm run build:exo-pdf -- --all fr
 npm run build:exo-pdf -- --all en
 ```
