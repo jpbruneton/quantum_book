@@ -2,9 +2,11 @@
 import Link from "next/link";
 import { bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 export function Footer() {
   const { t } = useLang();
+  const lp = useLocalizedPath();
   const book = t.book;
 
   return (
@@ -63,10 +65,10 @@ export function Footer() {
             {t.footer.navigation}
           </p>
           {[
-            { href: "/", label: t.footer.home },
-            { href: "/chapters", label: t.footer.allChapters },
-            { href: "/exercises", label: t.footer.exercises },
-            { href: "/about", label: t.footer.aboutBook },
+            { href: lp("/"), label: t.footer.home },
+            { href: lp("/chapters"), label: t.footer.allChapters },
+            { href: lp("/exercises"), label: t.footer.exercises },
+            { href: lp("/about"), label: t.footer.aboutBook },
           ].map((l) => (
             <div key={l.href} style={{ marginBottom: "0.4rem" }}>
               <Link

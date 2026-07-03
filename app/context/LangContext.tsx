@@ -1,6 +1,8 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
+import { useRouter } from "next/navigation";
 import { type Lang, translations } from "@/lib/i18n";
+import { swapLocaleInPath } from "@/lib/localeRoutes";
 
 interface LangContextValue {
   lang: Lang;
@@ -14,23 +16,34 @@ const LangContext = createContext<LangContextValue>({
   t: translations.en,
 });
 
-export function LangProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
-
-  useEffect(() => {
-    const stored = localStorage.getItem("lang") as Lang | null;
-    if (stored === "en" || stored === "fr") {
-      setLangState(stored);
-    }
-  }, []);
+export function LangProvider({
+  children,
+  initialLang,
+}: {
+  children: React.ReactNode;
+  initialLang: Lang;
+}) {
+  const router = useRouter();
 
   const setLang = (newLang: Lang) => {
-    setLangState(newLang);
-    localStorage.setItem("lang", newLang);
+    if (newLang === initialLang) {
+      return;
+    }
+    const nextPath =
+      typeof window !== "undefined"
+        ? swapLocaleInPath(window.location.pathname, newLang)
+        : `/${newLang}`;
+    router.push(nextPath);
   };
 
   return (
-    <LangContext.Provider value={{ lang, setLang, t: translations[lang] as typeof translations.en }}>
+    <LangContext.Provider
+      value={{
+        lang: initialLang,
+        setLang,
+        t: translations[initialLang] as typeof translations.en,
+      }}
+    >
       {children}
     </LangContext.Provider>
   );

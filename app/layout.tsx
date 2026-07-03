@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import "./globals.css";
-import { NavBar } from "./components/NavBar";
-import { Footer } from "./components/Footer";
 import { Providers } from "./providers";
-import { VercelInstrumentation } from "./components/VercelInstrumentation";
 import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
+import { isSiteLang } from "@/lib/localeRoutes";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const SITE_URL = getSiteUrl();
@@ -64,13 +63,23 @@ export const metadata: Metadata = {
   },
 };
 
+function resolveHtmlLang(): "en" | "fr" {
+  const siteLang = headers().get("x-site-lang");
+  if (siteLang && isSiteLang(siteLang)) {
+    return siteLang;
+  }
+  return "en";
+}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const htmlLang = resolveHtmlLang();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={htmlLang} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -78,12 +87,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Providers>
-          <NavBar />
-          <main>{children}</main>
-          <Footer />
-          <VercelInstrumentation />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

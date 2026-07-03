@@ -1,4 +1,5 @@
 import type { Lesson } from "@/lib/chapters";
+import { localizedPath, type SiteLang } from "@/lib/localeRoutes";
 
 export function lessonToPathSegment(lesson: Lesson): string {
   if (lesson.kind === "fiche") {
@@ -7,8 +8,8 @@ export function lessonToPathSegment(lesson: Lesson): string {
   return `lesson-${String(lesson.number)}`;
 }
 
-export function chapterLessonPath(themeSlug: string, lesson: Lesson): string {
-  return `/chapters/${themeSlug}/${lessonToPathSegment(lesson)}`;
+export function chapterLessonPath(lang: SiteLang, themeSlug: string, lesson: Lesson): string {
+  return localizedPath(lang, `/chapters/${themeSlug}/${lessonToPathSegment(lesson)}`);
 }
 
 export function parseLessonPathSegment(

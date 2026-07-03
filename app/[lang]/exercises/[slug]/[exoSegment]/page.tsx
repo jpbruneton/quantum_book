@@ -9,6 +9,8 @@ import {
   themeHasExercisesFrOrEn,
 } from "@/lib/exercisesLibrary.server";
 import { exerciseDetailPath, exerciseSegmentToId } from "@/lib/exerciseRoutes";
+import { localeAlternates } from "@/lib/metadataAlternates";
+import { isSiteLang, SITE_LANGS } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
 import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
 import { ExerciseSingleClient } from "./ExerciseSingleClient";
@@ -16,46 +18,58 @@ import { ExerciseSingleClient } from "./ExerciseSingleClient";
 const legacySlugs = legacyExerciseSlugRedirects as Record<string, string>;
 
 interface Props {
-  params: { slug: string; exoSegment: string };
+  params: { lang: string; slug: string; exoSegment: string };
 }
 
 export function generateStaticParams() {
-  return getWebThemes()
-    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
-    .flatMap((theme) =>
-      listThemeExerciseIds(theme.number).map((exerciseId) => ({
-        slug: theme.slug,
-        exoSegment: exerciseId.replace(/:/g, "-"),
-      }))
-    );
+  return SITE_LANGS.flatMap((lang) =>
+    getWebThemes()
+      .filter((theme) => themeHasExercisesFrOrEn(theme.number))
+      .flatMap((theme) =>
+        listThemeExerciseIds(theme.number).map((exerciseId) => ({
+          lang,
+          slug: theme.slug,
+          exoSegment: exerciseId.replace(/:/g, "-"),
+        }))
+      )
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!isSiteLang(params.lang)) return {};
   const theme = getWebTheme(params.slug);
   if (!theme) return {};
   const exerciseId = exerciseSegmentToId(params.exoSegment);
   const entry = findThemeExerciseEntry(theme.number, exerciseId);
   if (!entry) return {};
-  const path = exerciseDetailPath(theme.slug, exerciseId);
+  const path = exerciseDetailPath(params.lang, theme.slug, exerciseId);
   const url = absoluteUrl(path);
   const titlePlain = exerciseTitleToPlainHtml(entry.titleTex).replace(/<[^>]+>/g, "");
+  const isFr = params.lang === "fr";
+  const themeTitle = isFr ? theme.titleFr : theme.titleEn;
   return {
-    title: `Exercise – ${titlePlain} | Theme ${theme.number} | ${bookMeta.title}`,
-    description: `Solved exercise: ${titlePlain}. Theme ${theme.number}: ${theme.titleEn}.`,
+    title: `${isFr ? "Exercice" : "Exercise"} – ${titlePlain} | ${isFr ? "Thème" : "Theme"} ${theme.number} | ${bookMeta.title}`,
+    description: `${isFr ? "Exercice corrigé" : "Solved exercise"}: ${titlePlain}. ${isFr ? "Thème" : "Theme"} ${theme.number}: ${themeTitle}.`,
     keywords: entry.keywords,
-    alternates: { canonical: url },
+    alternates: localeAlternates(
+      params.lang,
+      `/exercises/${theme.slug}/${params.exoSegment}`
+    ),
     openGraph: {
-      title: `Exercise – ${titlePlain}`,
-      description: `Theme ${theme.number}: ${theme.titleEn}`,
+      title: `${isFr ? "Exercice" : "Exercise"} – ${titlePlain}`,
+      description: `${isFr ? "Thème" : "Theme"} ${theme.number}: ${themeTitle}`,
       url,
     },
   };
 }
 
 export default function ExerciseDetailPage({ params }: Props) {
+  if (!isSiteLang(params.lang)) notFound();
   const canonicalSlug = legacySlugs[params.slug];
   if (canonicalSlug) {
-    redirect(exerciseDetailPath(canonicalSlug, exerciseSegmentToId(params.exoSegment)));
+    redirect(
+      exerciseDetailPath(params.lang, canonicalSlug, exerciseSegmentToId(params.exoSegment))
+    );
   }
 
   const theme = getWebTheme(params.slug);

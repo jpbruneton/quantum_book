@@ -7,6 +7,8 @@ import {
   buildAllExerciseIndexEntries,
   themeHasExercisesFrOrEn,
 } from "@/lib/exercisesLibrary.server";
+import { localeAlternates } from "@/lib/metadataAlternates";
+import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
 import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
 import { ExerciseThemeClient, type ThemeExerciseCard } from "./ExerciseThemeClient";
@@ -14,7 +16,7 @@ import { ExerciseThemeClient, type ThemeExerciseCard } from "./ExerciseThemeClie
 const legacySlugs = legacyExerciseSlugRedirects as Record<string, string>;
 
 interface Props {
-  params: { slug: string };
+  params: { lang: string; slug: string };
 }
 
 function buildThemeExerciseCards(themeNumber: number): {
@@ -49,31 +51,39 @@ function buildThemeExerciseCards(themeNumber: number): {
 }
 
 export function generateStaticParams() {
-  return getWebThemes()
-    .filter((theme) => themeHasExercisesFrOrEn(theme.number))
-    .map((theme) => ({ slug: theme.slug }));
+  return SITE_LANGS.flatMap((lang) =>
+    getWebThemes()
+      .filter((theme) => themeHasExercisesFrOrEn(theme.number))
+      .map((theme) => ({ lang, slug: theme.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!isSiteLang(params.lang)) return {};
   const theme = getWebTheme(params.slug);
   if (!theme) return {};
-  const url = absoluteUrl(`/exercises/${theme.slug}`);
+  const isFr = params.lang === "fr";
+  const path = localizedPath(params.lang, `/exercises/${theme.slug}`);
+  const url = absoluteUrl(path);
+  const title = isFr ? theme.titleFr : theme.titleEn;
+  const description = isFr ? theme.descriptionFr : theme.descriptionEn;
   return {
-    title: `Exercises – Theme ${theme.number}: ${theme.titleEn} | ${bookMeta.title}`,
-    description: `Solved exercises for Theme ${theme.number}: ${theme.titleEn} — ${theme.descriptionEn}`,
-    alternates: { canonical: url },
+    title: `${isFr ? "Exercices" : "Exercises"} – ${isFr ? "Thème" : "Theme"} ${theme.number}: ${title} | ${bookMeta.title}`,
+    description: `${isFr ? "Exercices corrigés pour le thème" : "Solved exercises for Theme"} ${theme.number}: ${title} — ${description}`,
+    alternates: localeAlternates(params.lang, `/exercises/${theme.slug}`),
     openGraph: {
-      title: `Exercises – Theme ${theme.number}: ${theme.titleEn}`,
-      description: theme.descriptionEn,
+      title: `${isFr ? "Exercices" : "Exercises"} – ${isFr ? "Thème" : "Theme"} ${theme.number}: ${title}`,
+      description,
       url,
     },
   };
 }
 
 export default function ExerciseThemePage({ params }: Props) {
+  if (!isSiteLang(params.lang)) notFound();
   const canonicalSlug = legacySlugs[params.slug];
   if (canonicalSlug) {
-    redirect(`/exercises/${canonicalSlug}`);
+    redirect(localizedPath(params.lang, `/exercises/${canonicalSlug}`));
   }
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();

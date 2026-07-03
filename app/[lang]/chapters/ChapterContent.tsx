@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 interface Props {
   lesson: LessonWithLocalizedContent;
@@ -91,6 +92,7 @@ export function ChapterContent({ lesson }: Props) {
   const [tocVisible, setTocVisible] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const { t, lang } = useLang();
+  const lp = useLocalizedPath();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
   const lessonContent = lang === "en" ? lesson.contentEn : lesson.contentFr;
@@ -286,7 +288,7 @@ export function ChapterContent({ lesson }: Props) {
           {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic) => (
             <Link
               key={topic}
-              href={`/glossary?q=${encodeURIComponent(topic)}`}
+              href={lp(`/glossary?q=${encodeURIComponent(topic)}`)}
               style={{
                 background: "var(--accent-bg-sm)",
                 border: "1px solid var(--accent-border-sm)",

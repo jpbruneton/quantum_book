@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { getWebThemes } from "@/lib/chapters";
 import { chapterLessonPath } from "@/lib/lessonRoutes";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 interface GlossaryOccurrence {
   themeSlug: string;
@@ -62,6 +63,7 @@ function GlossaryIntro() {
 
 function GlossaryFilterAndList() {
   const { lang } = useLang();
+  const lp = useLocalizedPath();
   const searchParams = useSearchParams();
   const selectedKeywordRaw = searchParams.get("q") || "";
   const selectedKeyword = selectedKeywordRaw.trim();
@@ -88,7 +90,7 @@ function GlossaryFilterAndList() {
             themeTitle: lang === "fr" ? theme.titleFr : theme.titleEn,
             lessonNumber: lesson.number,
             lessonSubtitle: lang === "fr" ? lesson.subtitleFr : lesson.subtitleEn,
-            lessonHref: chapterLessonPath(theme.slug, lesson),
+            lessonHref: chapterLessonPath(lang, theme.slug, lesson),
           });
         }
       }
@@ -119,7 +121,7 @@ function GlossaryFilterAndList() {
     <>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.75rem" }}>
         <Link
-          href="/glossary"
+          href={lp("/glossary")}
           style={{
             background: !selectedKeyword ? "var(--accent-bg-md)" : "var(--accent-bg-xs)",
             border: "1px solid var(--accent-border-sm)",
@@ -140,7 +142,7 @@ function GlossaryFilterAndList() {
           return (
             <Link
               key={item.keyword}
-              href={`/glossary?q=${encodeURIComponent(item.keyword)}`}
+              href={lp(`/glossary?q=${encodeURIComponent(item.keyword)}`)}
               style={{
                 background: isActive ? "var(--accent-bg-md)" : "var(--accent-bg-xs)",
                 border: "1px solid var(--accent-border-sm)",

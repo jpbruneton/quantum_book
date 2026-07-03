@@ -4,52 +4,66 @@ import { getWebTheme, getWebThemes } from "@/lib/chapters";
 import { buildThemeWithLocalizedContent } from "@/lib/chapterPage.server";
 import {
   findLessonIndexByRef,
-  getFirstLessonRef,
   lessonToPathSegment,
 } from "@/lib/lessonRoutes";
+import { localeAlternates } from "@/lib/metadataAlternates";
+import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
 import { ChapterPageClient } from "../ChapterPageClient";
 
 interface Props {
-  params: { slug: string; lessonRef: string };
+  params: { lang: string; slug: string; lessonRef: string };
 }
 
 export function generateStaticParams() {
-  return getWebThemes().flatMap((theme) =>
-    theme.lessons.map((lesson) => ({
-      slug: theme.slug,
-      lessonRef: lessonToPathSegment(lesson),
-    }))
+  return SITE_LANGS.flatMap((lang) =>
+    getWebThemes().flatMap((theme) =>
+      theme.lessons.map((lesson) => ({
+        lang,
+        slug: theme.slug,
+        lessonRef: lessonToPathSegment(lesson),
+      }))
+    )
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!isSiteLang(params.lang)) return {};
   const theme = getWebTheme(params.slug);
   if (!theme) return {};
   const lessonIndex = findLessonIndexByRef(theme.lessons, params.lessonRef);
   if (lessonIndex < 0) return {};
   const lesson = theme.lessons[lessonIndex];
-  const path = `/chapters/${theme.slug}/${params.lessonRef}`;
+  const path = localizedPath(params.lang, `/chapters/${theme.slug}/${params.lessonRef}`);
   const url = absoluteUrl(path);
-  const label =
-    lesson.kind === "fiche"
-      ? `Sheet ${lesson.number}: ${lesson.subtitleEn}`
+  const isFr = params.lang === "fr";
+  const label = lesson.kind === "fiche"
+    ? isFr
+      ? `Fiche ${lesson.number}: ${lesson.subtitleFr}`
+      : `Sheet ${lesson.number}: ${lesson.subtitleEn}`
+    : isFr
+      ? `Leçon ${lesson.number}: ${lesson.subtitleFr}`
       : `Lesson ${lesson.number}: ${lesson.subtitleEn}`;
+  const description = isFr
+    ? lesson.descriptionFr || theme.descriptionFr
+    : lesson.descriptionEn || theme.descriptionEn;
+  const keywords = isFr ? lesson.topicsFr.slice(0, 15) : lesson.topicsEn.slice(0, 15);
   return {
-    title: `Theme ${theme.number}, ${label}`,
-    description: lesson.descriptionEn || theme.descriptionEn,
-    keywords: lesson.topicsEn.slice(0, 15),
-    alternates: { canonical: url },
+    title: `${isFr ? "Thème" : "Theme"} ${theme.number}, ${label}`,
+    description,
+    keywords,
+    alternates: localeAlternates(params.lang, `/chapters/${theme.slug}/${params.lessonRef}`),
     openGraph: {
       type: "article",
-      title: `Theme ${theme.number}, ${label}`,
-      description: lesson.descriptionEn || theme.descriptionEn,
+      title: `${isFr ? "Thème" : "Theme"} ${theme.number}, ${label}`,
+      description,
       url,
     },
   };
 }
 
 export default function ChapterLessonPage({ params }: Props) {
+  if (!isSiteLang(params.lang)) notFound();
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();
 

@@ -7,9 +7,11 @@ import {
   chapterLessonPath,
   findLessonIndexByRef,
   getFirstLessonRef,
+  lessonToPathSegment,
 } from "@/lib/lessonRoutes";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 type LocalizedLesson = Theme["lessons"][number] & {
   contentFr: string;
@@ -57,6 +59,7 @@ function lessonTabStyle(active: boolean): CSSProperties {
 
 function ChapterThemeHeadingBlock({ theme }: { theme: ThemeWithLocalizedLessonContent }) {
   const { t, lang } = useLang();
+  const lp = useLocalizedPath();
   return (
     <>
       <div
@@ -70,11 +73,11 @@ function ChapterThemeHeadingBlock({ theme }: { theme: ThemeWithLocalizedLessonCo
           color: "var(--text-dim)",
         }}
       >
-        <Link href="/" style={{ color: "var(--text-dim)", textDecoration: "none" }}>
+        <Link href={lp("/")} style={{ color: "var(--text-dim)", textDecoration: "none" }}>
           {t.chapter.breadcrumbHome}
         </Link>
         <span>/</span>
-        <Link href="/chapters" style={{ color: "var(--text-dim)", textDecoration: "none" }}>
+        <Link href={lp("/chapters")} style={{ color: "var(--text-dim)", textDecoration: "none" }}>
           {t.chapter.breadcrumbThemes}
         </Link>
         <span>/</span>
@@ -136,7 +139,7 @@ function ChapterLessonTabButtons({
     >
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
         {normalLessons.map((lesson) => {
-          const href = chapterLessonPath(theme.slug, lesson);
+          const href = chapterLessonPath(lang, theme.slug, lesson);
           const active = href.endsWith(`/${activeLessonRef}`);
           return (
             <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
@@ -162,7 +165,7 @@ function ChapterLessonTabButtons({
             {lang === "fr" ? "Fiches de révision" : "Revision Sheets"}
           </span>
           {fiches.map((lesson) => {
-            const href = chapterLessonPath(theme.slug, lesson);
+            const href = chapterLessonPath(lang, theme.slug, lesson);
             const active = href.endsWith(`/${activeLessonRef}`);
             return (
               <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
@@ -193,14 +196,21 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
       ? theme.lessons[activeLessonIndex + 1]
       : null;
 
+  const prevFirstRef = prev ? getFirstLessonRef(prev.lessons) : null;
+  const prevFirstLesson =
+    prev && prevFirstRef
+      ? prev.lessons.find((lesson) => lessonToPathSegment(lesson) === prevFirstRef)
+      : null;
+  const nextFirstRef = next ? getFirstLessonRef(next.lessons) : null;
+  const nextFirstLesson =
+    next && nextFirstRef
+      ? next.lessons.find((lesson) => lessonToPathSegment(lesson) === nextFirstRef)
+      : null;
+
   const prevThemeHref =
-    prev && getFirstLessonRef(prev.lessons)
-      ? `/chapters/${prev.slug}/${getFirstLessonRef(prev.lessons)}`
-      : null;
+    prev && prevFirstLesson ? chapterLessonPath(lang, prev.slug, prevFirstLesson) : null;
   const nextThemeHref =
-    next && getFirstLessonRef(next.lessons)
-      ? `/chapters/${next.slug}/${getFirstLessonRef(next.lessons)}`
-      : null;
+    next && nextFirstLesson ? chapterLessonPath(lang, next.slug, nextFirstLesson) : null;
 
   return (
     <>
@@ -249,7 +259,7 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
       >
         {previousLesson ? (
           <Link
-            href={chapterLessonPath(theme.slug, previousLesson)}
+            href={chapterLessonPath(lang, theme.slug, previousLesson)}
             style={{ textDecoration: "none" }}
           >
             <div
@@ -329,7 +339,7 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
         )}
         {nextLesson ? (
           <Link
-            href={chapterLessonPath(theme.slug, nextLesson)}
+            href={chapterLessonPath(lang, theme.slug, nextLesson)}
             style={{ textDecoration: "none" }}
           >
             <div

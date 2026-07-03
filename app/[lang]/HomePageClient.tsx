@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getWebThemes, bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 function WaveBackground() {
   return (
@@ -30,6 +31,7 @@ function WaveBackground() {
 
 export default function HomePageClient() {
   const { t, lang } = useLang();
+  const lp = useLocalizedPath();
   const book = t.book;
   const webThemes = getWebThemes();
 
@@ -145,7 +147,7 @@ export default function HomePageClient() {
               }}
             >
               <Link
-                href="/chapters"
+                href={lp("/chapters")}
                 style={{
                   background: "var(--amber)",
                   color: "var(--bg-primary)",
@@ -163,7 +165,7 @@ export default function HomePageClient() {
                 {t.home.readOnline}
               </Link>
               <Link
-                href="/about"
+                href={lp("/about")}
                 style={{
                   border: "1px solid var(--accent-border-lg)",
                   color: "var(--amber)",
@@ -310,7 +312,7 @@ export default function HomePageClient() {
             {webThemes.map((theme) => (
               <Link
                 key={theme.slug}
-                href={`/chapters/${theme.slug}`}
+                href={lp(`/chapters/${theme.slug}`)}
                 style={{ textDecoration: "none" }}
               >
                 <div

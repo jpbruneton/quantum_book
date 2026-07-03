@@ -1,35 +1,48 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/app/context/ThemeContext";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
+import { swapLocaleInPath } from "@/lib/localeRoutes";
 import { useState } from "react";
 
 export function NavBar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const lp = useLocalizedPath();
   const { theme, toggleTheme } = useTheme();
-  const { lang, setLang, t } = useLang();
+  const { lang } = useLang();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const desktopLinks = [
-    { href: "/", label: t.nav.home },
-    { href: "/chapters", label: t.nav.chapters },
-    { href: "/exercises", label: t.nav.exercises },
-    { href: "/glossary", label: t.nav.glossary },
-    { href: "/about", label: t.nav.about },
+    { href: lp("/"), labelKey: "home" as const },
+    { href: lp("/chapters"), labelKey: "chapters" as const },
+    { href: lp("/exercises"), labelKey: "exercises" as const },
+    { href: lp("/glossary"), labelKey: "glossary" as const },
+    { href: lp("/about"), labelKey: "about" as const },
   ];
 
-  const mobileLinks = [
-    { href: "/", label: t.nav.home },
-    { href: "/chapters", label: t.nav.chapters },
-    { href: "/exercises", label: t.nav.exercises },
-    { href: "/glossary", label: t.nav.glossary },
-    { href: "/about", label: t.nav.about },
-  ];
+  const { t } = useLang();
+  const mobileLinks = desktopLinks.map((link) => ({
+    href: link.href,
+    label: t.nav[link.labelKey],
+  }));
+  const desktopLinksWithLabels = desktopLinks.map((link) => ({
+    href: link.href,
+    label: t.nav[link.labelKey],
+  }));
 
   const langLabels: Record<"en" | "fr", string> = {
     fr: "Français",
     en: "English",
+  };
+
+  const switchLang = (newLang: "en" | "fr") => {
+    if (newLang === lang) {
+      return;
+    }
+    router.push(swapLocaleInPath(pathname, newLang));
   };
 
   const LangToggle = ({ small }: { small?: boolean }) => (
@@ -51,7 +64,7 @@ export function NavBar() {
         <button
           key={l}
           type="button"
-          onClick={() => setLang(l)}
+          onClick={() => switchLang(l)}
           style={{
             background: lang === l ? "var(--amber)" : "transparent",
             color: lang === l ? (theme === "dark" ? "#0a0b0f" : "#ffffff") : "var(--text-secondary)",
@@ -103,7 +116,6 @@ export function NavBar() {
             gap: "1rem",
           }}
         >
-          {/* Desktop nav */}
           <div
             className="nav-desktop"
             style={{
@@ -113,10 +125,9 @@ export function NavBar() {
               minWidth: 0,
             }}
           >
-            {/* Language toggle: left of Home */}
             <LangToggle />
 
-            {desktopLinks.map((link) => (
+            {desktopLinksWithLabels.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -148,16 +159,13 @@ export function NavBar() {
             ))}
           </div>
 
-          {/* Mobile: hamburger + theme toggle */}
           <div
             className="nav-mobile-btn"
             style={{ alignItems: "center", gap: "0.75rem", flex: 1, justifyContent: "space-between" }}
           >
-            {/* Lang toggle visible on mobile bar */}
             <LangToggle small />
 
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              {/* Theme toggle */}
               <button
                 onClick={toggleTheme}
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
@@ -179,7 +187,6 @@ export function NavBar() {
                 {theme === "dark" ? "☀" : "☾"}
               </button>
 
-              {/* Hamburger */}
               <button
                 onClick={() => setMenuOpen((o) => !o)}
                 aria-label="Toggle menu"
@@ -206,7 +213,6 @@ export function NavBar() {
             </div>
           </div>
 
-          {/* Desktop theme toggle */}
           <div className="nav-desktop" style={{ alignItems: "center", flexShrink: 0 }}>
             <button
               onClick={toggleTheme}
@@ -240,7 +246,6 @@ export function NavBar() {
           </div>
         </div>
 
-        {/* Mobile dropdown menu */}
         {menuOpen && (
           <div
             style={{

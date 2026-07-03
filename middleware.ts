@@ -1,15 +1,79 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getWebTheme, getWebThemes } from "@/lib/chapters";
-import { lessonToPathSegment, chapterLessonPath } from "@/lib/lessonRoutes";
+import { getWebTheme } from "@/lib/chapters";
+import {
+  isSiteLang,
+  localizedPath,
+  preferSiteLangFromAcceptLanguage,
+  toInternalPathname,
+  toLogicalPath,
+  type SiteLang,
+} from "@/lib/localeRoutes";
+import { lessonToPathSegment } from "@/lib/lessonRoutes";
 import legacyExerciseSlugRedirects from "@/lib/legacyExerciseSlugRedirects.json";
 
 const legacy = legacyExerciseSlugRedirects as Record<string, string>;
 
-export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+const STATIC_PREFIXES = ["/_next", "/pdfs", "/figs", "/favicon", "/robots.txt", "/sitemap.xml"];
 
-  const chapterMatch = /^\/chapters\/([^/]+)$/.exec(pathname);
+function shouldBypass(pathname: string): boolean {
+  if (STATIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
+    return true;
+  }
+  if (/\.[a-zA-Z0-9]+$/.test(pathname)) {
+    return true;
+  }
+  return false;
+}
+
+function withSiteLangHeader(response: NextResponse, lang: SiteLang): NextResponse {
+  response.headers.set("x-site-lang", lang);
+  return response;
+}
+
+function normalizePathname(pathname: string): string {
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+}
+
+export function middleware(request: NextRequest) {
+  const pathname = normalizePathname(request.nextUrl.pathname);
+
+  if (shouldBypass(pathname)) {
+    return NextResponse.next();
+  }
+
+  if (pathname === "/" || pathname === "") {
+    const lang = preferSiteLangFromAcceptLanguage(request.headers.get("accept-language"));
+    const url = request.nextUrl.clone();
+    url.pathname = `/${lang}`;
+    return NextResponse.redirect(url, 307);
+  }
+
+  const segments = pathname.split("/").filter(Boolean);
+  const first = segments[0];
+
+  if (!isSiteLang(first)) {
+    const url = request.nextUrl.clone();
+    url.pathname = localizedPath("en", toLogicalPath(pathname));
+    return NextResponse.redirect(url, 308);
+  }
+
+  const lang = first;
+  const pathWithoutLang = segments.length > 1 ? `/${segments.slice(1).join("/")}` : "/";
+  const logicalPath = toLogicalPath(pathWithoutLang);
+  const canonicalPublicPath = localizedPath(lang, logicalPath);
+
+  if (pathname !== canonicalPublicPath) {
+    const url = request.nextUrl.clone();
+    url.pathname = canonicalPublicPath;
+    url.search = request.nextUrl.search;
+    return NextResponse.redirect(url, 308);
+  }
+
+  const chapterMatch = /^\/chapters\/([^/]+)$/.exec(logicalPath);
   if (chapterMatch) {
     const lessonQuery = request.nextUrl.searchParams.get("lesson");
     if (lessonQuery) {
@@ -23,37 +87,43 @@ export function middleware(request: NextRequest) {
       ) {
         const lesson = theme.lessons[lessonIndex];
         const url = request.nextUrl.clone();
-        url.pathname = `/chapters/${theme.slug}/${lessonToPathSegment(lesson)}`;
+        url.pathname = localizedPath(
+          lang,
+          `/chapters/${theme.slug}/${lessonToPathSegment(lesson)}`
+        );
         url.search = "";
         return NextResponse.redirect(url, 308);
       }
     }
-    return NextResponse.next();
   }
 
-  if (!pathname.startsWith("/exercises/")) {
-    return NextResponse.next();
+  if (logicalPath.startsWith("/exercises/")) {
+    const rest = logicalPath.slice("/exercises/".length).replace(/\/$/, "");
+    const slashIndex = rest.indexOf("/");
+    const themeSlug = slashIndex === -1 ? rest : rest.slice(0, slashIndex);
+    const to = legacy[themeSlug];
+    if (to) {
+      const url = request.nextUrl.clone();
+      if (slashIndex === -1) {
+        url.pathname = localizedPath(lang, `/exercises/${to}`);
+        return NextResponse.redirect(url, 308);
+      }
+      const exoSegment = rest.slice(slashIndex + 1);
+      url.pathname = localizedPath(lang, `/exercises/${to}/${exoSegment}`);
+      return NextResponse.redirect(url, 308);
+    }
   }
 
-  const rest = pathname.slice("/exercises/".length).replace(/\/$/, "");
-  const slashIndex = rest.indexOf("/");
-  const themeSlug = slashIndex === -1 ? rest : rest.slice(0, slashIndex);
-  const to = legacy[themeSlug];
-  if (!to) {
-    return NextResponse.next();
+  const internalPathname = toInternalPathname(lang, pathWithoutLang);
+  if (internalPathname !== pathname) {
+    const url = request.nextUrl.clone();
+    url.pathname = internalPathname;
+    return withSiteLangHeader(NextResponse.rewrite(url), lang);
   }
 
-  const url = request.nextUrl.clone();
-  if (slashIndex === -1) {
-    url.pathname = `/exercises/${to}`;
-    return NextResponse.redirect(url, 308);
-  }
-
-  const exoSegment = rest.slice(slashIndex + 1);
-  url.pathname = `/exercises/${to}/${exoSegment}`;
-  return NextResponse.redirect(url, 308);
+  return withSiteLangHeader(NextResponse.next(), lang);
 }
 
 export const config = {
-  matcher: ["/chapters/:path*", "/exercises/:path*"],
+  matcher: ["/((?!_next|pdfs|figs|favicon.ico|robots.txt|sitemap.xml).*)"],
 };

@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { useLang } from "@/app/context/LangContext";
 import { exerciseMatchesQuery } from "@/lib/exerciseIndexUtils";
 import { exerciseDetailPath } from "@/lib/exerciseRoutes";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 export interface ThemePdfLinks {
   frAvecSolutions: string | null;
@@ -46,6 +47,7 @@ interface Props {
 
 export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
   const { lang } = useLang();
+  const lp = useLocalizedPath();
   const [query, setQuery] = useState("");
 
   const t = {
@@ -260,7 +262,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     </div>
                     {hasContent ? (
                       <Link
-                        href={`/exercises/${theme.slug}`}
+                        href={lp(`/exercises/${theme.slug}`)}
                         style={{
                           display: "inline-block",
                           padding: "0.35rem 0.9rem",
@@ -339,7 +341,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                   {cards.map((card) => {
                     const href =
                       hasContent && theme.slug.length > 0
-                        ? exerciseDetailPath(theme.slug, card.id)
+                        ? exerciseDetailPath(lang, theme.slug, card.id)
                         : null;
                     const cardInner = (
                       <>

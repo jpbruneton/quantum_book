@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 function getThemeCategory(slug: string, lang: "fr" | "en"): string {
   const isMath = slug === "hilbert-spaces";
@@ -11,6 +12,7 @@ function getThemeCategory(slug: string, lang: "fr" | "en"): string {
 
 export function ChapterList() {
   const { t, lang } = useLang();
+  const lp = useLocalizedPath();
   const webThemes = getWebThemes();
 
   return (
@@ -51,7 +53,7 @@ export function ChapterList() {
             </div>
           ) : null}
           <Link
-            href={`/chapters/${theme.slug}`}
+            href={lp(`/chapters/${theme.slug}`)}
             style={{ textDecoration: "none", display: "block" }}
           >
             <div

@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { useLang } from "@/app/context/LangContext";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 import { processLatex } from "@/lib/latex";
 
 interface Props {
@@ -27,6 +28,7 @@ export function ExerciseSingleClient({
   contentEn,
 }: Props) {
   const { lang } = useLang();
+  const lp = useLocalizedPath();
 
   const rawContent = lang === "fr" ? contentFr : contentEn;
   const rendered = useMemo(() => (rawContent ? processLatex(rawContent) : ""), [rawContent]);
@@ -46,7 +48,7 @@ export function ExerciseSingleClient({
       <div style={{ maxWidth: "860px", margin: "0 auto" }}>
         <div style={{ marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "0.35rem" }}>
           <Link
-            href="/exercises"
+            href={lp("/exercises")}
             style={{
               fontFamily: "var(--font-crimson)",
               fontSize: "0.95rem",
@@ -57,7 +59,7 @@ export function ExerciseSingleClient({
             {libraryLabel}
           </Link>
           <Link
-            href={`/exercises/${themeSlug}`}
+            href={lp(`/exercises/${themeSlug}`)}
             style={{
               fontFamily: "var(--font-crimson)",
               fontSize: "0.95rem",

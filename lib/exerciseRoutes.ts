@@ -1,3 +1,5 @@
+import { localizedPath, type SiteLang } from "@/lib/localeRoutes";
+
 export function exerciseIdToSegment(exerciseId: string): string {
   return exerciseId.replace(/:/g, "-");
 }
@@ -9,6 +11,6 @@ export function exerciseSegmentToId(segment: string): string {
   return segment;
 }
 
-export function exerciseDetailPath(themeSlug: string, exerciseId: string): string {
-  return `/exercises/${themeSlug}/${exerciseIdToSegment(exerciseId)}`;
+export function exerciseDetailPath(lang: SiteLang, themeSlug: string, exerciseId: string): string {
+  return localizedPath(lang, `/exercises/${themeSlug}/${exerciseIdToSegment(exerciseId)}`);
 }

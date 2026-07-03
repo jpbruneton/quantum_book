@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLang } from "@/app/context/LangContext";
 import { exerciseDetailPath } from "@/lib/exerciseRoutes";
+import { useLocalizedPath } from "@/lib/useLocalizedPath";
 import type { ThemePdfLinks } from "../ExercisesClient";
 
 export interface ThemeExerciseCard {
@@ -35,10 +36,9 @@ export function ExerciseThemeClient({
 }: Props) {
   const { lang } = useLang();
   const router = useRouter();
+  const lp = useLocalizedPath();
 
-  const primary = lang === "fr" ? exercisesFr : exercisesEn;
-  const fallback = lang === "fr" ? exercisesEn : exercisesFr;
-  const exercises = primary.length > 0 ? primary : fallback;
+  const exercises = lang === "fr" ? exercisesFr : exercisesEn;
   const title = lang === "fr" ? titleFr : titleEn;
   const themePrefix = lang === "fr" ? "Thème" : "Theme";
   const backLabel = lang === "fr" ? "← Exercices" : "← Exercises";
@@ -61,8 +61,8 @@ export function ExerciseThemeClient({
     const raw = window.location.hash.replace(/^#/, "");
     if (!raw) return;
     const id = decodeURIComponent(raw);
-    router.replace(exerciseDetailPath(themeSlug, id));
-  }, [router, themeSlug]);
+    router.replace(exerciseDetailPath(lang, themeSlug, id));
+  }, [router, lang, themeSlug]);
 
   const linkStyle = {
     fontFamily: "var(--font-crimson)",
@@ -77,7 +77,7 @@ export function ExerciseThemeClient({
       <div style={{ maxWidth: "860px", margin: "0 auto" }}>
         <div style={{ marginBottom: "2rem" }}>
           <Link
-            href="/exercises"
+            href={lp("/exercises")}
             style={{
               fontFamily: "var(--font-crimson)",
               fontSize: "0.95rem",
@@ -131,7 +131,7 @@ export function ExerciseThemeClient({
             {exercises.map((card) => (
               <Link
                 key={card.id}
-                href={exerciseDetailPath(themeSlug, card.id)}
+                href={exerciseDetailPath(lang, themeSlug, card.id)}
                 style={{
                   border: "1px solid var(--border)",
                   borderRadius: "6px",
