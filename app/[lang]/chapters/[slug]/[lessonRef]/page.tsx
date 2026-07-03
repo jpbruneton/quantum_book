@@ -1,14 +1,14 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getWebTheme, getWebThemes } from "@/lib/chapters";
+import { getWebTheme, getWebThemes, bookMeta } from "@/lib/chapters";
 import { buildThemeWithLocalizedContent } from "@/lib/chapterPage.server";
 import {
   findLessonIndexByRef,
   lessonToPathSegment,
 } from "@/lib/lessonRoutes";
 import { localeAlternates } from "@/lib/metadataAlternates";
-import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
-import { absoluteUrl } from "@/lib/siteUrl";
+import { isSiteLang, localizedPath, SITE_LANGS, type SiteLang } from "@/lib/localeRoutes";
+import { absoluteUrl, getSiteUrl } from "@/lib/siteUrl";
 import { ChapterPageClient } from "../ChapterPageClient";
 
 interface Props {
@@ -62,6 +62,52 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function lessonJsonLd(
+  theme: NonNullable<ReturnType<typeof getWebTheme>>,
+  lesson: (typeof theme.lessons)[number],
+  lang: SiteLang,
+  lessonRef: string
+) {
+  const isFr = lang === "fr";
+  const label = lesson.kind === "fiche"
+    ? isFr
+      ? `Fiche ${lesson.number}: ${lesson.subtitleFr}`
+      : `Sheet ${lesson.number}: ${lesson.subtitleEn}`
+    : isFr
+      ? `Leçon ${lesson.number}: ${lesson.subtitleFr}`
+      : `Lesson ${lesson.number}: ${lesson.subtitleEn}`;
+  const description = isFr
+    ? lesson.descriptionFr || theme.descriptionFr
+    : lesson.descriptionEn || theme.descriptionEn;
+  const url = absoluteUrl(localizedPath(lang, `/chapters/${theme.slug}/${lessonRef}`));
+  const chaptersUrl = absoluteUrl(localizedPath(lang, "/chapters"));
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: isFr ? "Accueil" : "Home", item: getSiteUrl() },
+      { "@type": "ListItem", position: 2, name: isFr ? "Thèmes" : "Themes", item: chaptersUrl },
+      { "@type": "ListItem", position: 3, name: `${isFr ? "Thème" : "Theme"} ${theme.number}, ${label}`, item: url },
+    ],
+  };
+
+  const course = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: `${isFr ? "Thème" : "Theme"} ${theme.number}, ${label}`,
+    description,
+    url,
+    inLanguage: lang,
+    provider: {
+      "@type": "Organization",
+      name: bookMeta.affiliation,
+    },
+  };
+
+  return [breadcrumb, course];
+}
+
 export default function ChapterLessonPage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
   const theme = getWebTheme(params.slug);
@@ -78,11 +124,20 @@ export default function ChapterLessonPage({ params }: Props) {
     currentIndex < webThemes.length - 1 ? webThemes[currentIndex + 1] : null;
 
   return (
-    <ChapterPageClient
-      theme={themeWithDynamicContent}
-      prev={prev}
-      next={next}
-      activeLessonRef={params.lessonRef}
-    />
+    <>
+      {lessonJsonLd(theme, theme.lessons[lessonIndex], params.lang, params.lessonRef).map((block, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(block) }}
+        />
+      ))}
+      <ChapterPageClient
+        theme={themeWithDynamicContent}
+        prev={prev}
+        next={next}
+        activeLessonRef={params.lessonRef}
+      />
+    </>
   );
 }

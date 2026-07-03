@@ -1,0 +1,14 @@
+{
+  "name": "Quantum Mechanics — A Modern Introduction",
+  "short_name": "Quantum Mechanics",
+  "description": "A free, rigorous course on quantum mechanics, from Hilbert spaces to measurement theory.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0b0f",
+  "theme_color": "#f59e0b",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icon.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

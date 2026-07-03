@@ -8,7 +8,7 @@ import { getSiteUrl } from "@/lib/siteUrl";
 
 const SITE_URL = getSiteUrl();
 
-const jsonLd = {
+const bookJsonLd = {
   "@context": "https://schema.org",
   "@type": "Book",
   name: bookMetaDisplayTitle(),
@@ -27,6 +27,18 @@ const jsonLd = {
   image: `${SITE_URL}/figs/front.png`,
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: bookMetaDisplayTitle(),
+  url: SITE_URL,
+  inLanguage: ["en", "fr"],
+};
+
+// Set BING_SITE_VERIFICATION in Vercel env vars once the Bing Webmaster
+// property is created; no code change needed after that.
+const bingSiteVerification = process.env.BING_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -36,8 +48,10 @@ export const metadata: Metadata = {
   description: bookMeta.description,
   keywords: bookMeta.keywords,
   authors: [{ name: bookMeta.author }],
+  manifest: "/manifest.json",
   verification: {
     google: "aCLhKbXa-E1sdaL-9q8LrOaKugUSiEIYAy8TTXX7F4g",
+    ...(bingSiteVerification ? { other: { "msvalidate.01": bingSiteVerification } } : {}),
   },
   openGraph: {
     type: "book",
@@ -83,7 +97,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body>
