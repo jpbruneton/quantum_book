@@ -43,5 +43,7 @@ book continues to expand.
 
 ## By the same author
 
-**[Learn Thermo](https://learnthermo.org)** — a companion course on
-thermodynamics, by Jean-Philippe Bruneton (Université Paris Cité, France).
+**[Learn Thermo](https://learnthermo.org)**
+([source](https://github.com/jpbruneton/thermo_book)) — a companion course
+on thermodynamics, by Jean-Philippe Bruneton (Université Paris Cité,
+France).
