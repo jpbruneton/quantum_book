@@ -124,6 +124,10 @@ export const translations = {
         "The text develops quantum mechanics from first principles, assuming a strong background in classical mechanics, electrodynamics, and mathematics. Proofs are given in full whenever they clarify the physics, and many worked examples complement the theoretical exposition.",
       translationWarning:
         "Warning: this book is primarily written in French; the English version is automatically translated using Claude Sonnet 4.6.",
+      sameAuthorTitle: "By the Same Author",
+      sameAuthorBody:
+        "Thermodynamics — Elementary and Advanced, a companion course on thermodynamics.",
+      sameAuthorLink: "Read it at learnthermo.org",
     },
     updates: {
       label: "UPDATES",
@@ -275,6 +279,10 @@ export const translations = {
         "Le texte développe la mécanique quantique à partir des premiers principes, en supposant une solide formation en mécanique classique, en électrodynamique et en mathématiques. Les preuves sont données en entier lorsqu'elles éclairent la physique, et de nombreux exemples travaillés complètent l'exposition théorique.",
       translationWarning:
         "Note : ce livre est principalement rédigé en français ; la version anglaise est traduite automatiquement avec Claude Sonnet 4.6.",
+      sameAuthorTitle: "Du même auteur",
+      sameAuthorBody:
+        "Thermodynamique — Élémentaire et Avancée, un cours compagnon sur la thermodynamique.",
+      sameAuthorLink: "À lire sur learnthermo.org",
     },
     updates: {
       label: "ACTUALITÉS",

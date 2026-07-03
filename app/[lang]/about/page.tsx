@@ -211,6 +211,25 @@ export default function AboutPage() {
             })}
           </ul>
         </div>
+
+        {/* Same author */}
+        <div style={{ ...sectionStyle, borderBottom: "none", marginBottom: 0, paddingBottom: 0 }}>
+          <h2 style={h2Style}>{at.sameAuthorTitle}</h2>
+          <p style={{ ...bodyStyle, marginBottom: "0.65rem" }}>{at.sameAuthorBody}</p>
+          <a
+            href="https://learnthermo.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "var(--font-crimson)",
+              fontSize: "1.05rem",
+              color: "var(--amber)",
+              textDecoration: "underline",
+            }}
+          >
+            {at.sameAuthorLink} →
+          </a>
+        </div>
       </div>
     </div>
   );
