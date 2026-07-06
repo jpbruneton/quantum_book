@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:exo-pdf": "node scripts/build-exercises-pdf.mjs"
+    "build:exo-pdf": "node scripts/build-exercises-pdf.mjs",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
