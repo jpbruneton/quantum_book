@@ -35,3 +35,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# Google Search Console exports
+/google_webmaster
