@@ -1020,9 +1020,14 @@ a.exercise-index-card-link:focus-visible {
   }
 }
 
-/* ─── Mobile: hide the "01, 02, ..." lesson numbers in the leçons list ─── */
+/* ─── Mobile: hide the "01, 02, ..." lesson numbers and category badge in the leçons list ─── */
 @media (max-width: 640px) {
-  .chapter-list-number {
+  .chapter-list-row {
+    grid-template-columns: 1fr auto !important;
+  }
+
+  .chapter-list-number,
+  .chapter-list-category {
     display: none !important;
   }
 }

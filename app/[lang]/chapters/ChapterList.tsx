@@ -57,6 +57,7 @@ export function ChapterList() {
             style={{ textDecoration: "none", display: "block" }}
           >
             <div
+              className="chapter-list-row"
               style={{
                 display: "grid",
                 gridTemplateColumns: "130px 1fr auto",
@@ -89,6 +90,7 @@ export function ChapterList() {
                 }}
               >
                 <span
+                  className="chapter-list-category"
                   style={{
                     border: "1px solid var(--accent-border-sm)",
                     background: "var(--accent-bg-xs)",
