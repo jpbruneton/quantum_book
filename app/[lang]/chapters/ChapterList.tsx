@@ -104,6 +104,7 @@ export function ChapterList() {
                   {getThemeCategory(theme.slug, lang)}
                 </span>
                 <div
+                  className="chapter-list-number"
                   style={{
                     fontFamily: "var(--font-playfair)",
                     fontSize: "2.25rem",

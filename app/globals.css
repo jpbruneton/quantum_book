@@ -1004,3 +1004,25 @@ a.exercise-index-card-link:focus-visible {
     white-space: normal !important;
   }
 }
+
+/* ─── Mobile: keep the hero title clear of the sticky nav bar ─── */
+@media (max-width: 640px) {
+  .home-hero-section {
+    padding-top: 5.5rem !important;
+  }
+
+  .home-hero-text {
+    margin-top: 0 !important;
+  }
+
+  .home-main-title {
+    margin-top: 0 !important;
+  }
+}
+
+/* ─── Mobile: hide the "01, 02, ..." lesson numbers in the leçons list ─── */
+@media (max-width: 640px) {
+  .chapter-list-number {
+    display: none !important;
+  }
+}
