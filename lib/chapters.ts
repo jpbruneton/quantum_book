@@ -177,12 +177,12 @@ export const themes: Theme[] = [
     slug: "hilbert-spaces",
     number: 2,
     display_on_web: true,
-    titleFr: "Espaces de Hilbert et opérateurs linéaires",
-    titleEn: "Hilbert Spaces and Linear Operators",
+    titleFr: "Espaces de Hilbert et notations de Dirac",
+    titleEn: "Hilbert Spaces and Dirac Notation",
     descriptionFr:
-      "Algèbre & topologie, théorie des opérateurs linéaires & théorie spectrale. Notation de Dirac.",
+      "Structure des espaces de Hilbert, dual topologique, et notation de Dirac en dimension finie et infinie.",
     descriptionEn:
-      "Algebra & topology, linear operator theory & spectral theory. Dirac notation.",
+      "Hilbert space structure, topological dual, and Dirac notation in finite and infinite dimension.",
     lessons: [
       {
         slug: "espaces-de-hilbert-lecon-1",
@@ -273,11 +273,90 @@ export const themes: Theme[] = [
         `,
       },
       {
-        slug: "espaces-de-hilbert-lecon-3",
-        number: 3,
+        slug: "espaces-de-hilbert-fiche-1",
+        number: 1,
+        kind: "fiche",
         display_on_web: true,
-        titleFr: "Leçon n°3",
-        titleEn: "Lesson 3",
+        titleFr: "Fiche n°1",
+        titleEn: "Sheet 1",
+        subtitleFr: "Notation de Dirac en dimension finie",
+        subtitleEn: "Dirac Notation — Finite Dimension",
+        descriptionFr: "Récapitulatif des notations de Dirac et des formules essentielles en dimension finie.",
+        descriptionEn: "Summary of Dirac notation and essential formulas in finite dimension.",
+        topicsFr: ["Notations de Dirac", "Dimension finie", "Formulaire"],
+        topicsEn: ["Dirac notation", "Finite dimension", "Reference sheet"],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: false,
+        readingTime: "",
+        texFile: "theme2_fr/fiche1.tex",
+        references: [],
+        content: "",
+      },
+      {
+        slug: "espaces-de-hilbert-fiche-2",
+        number: 2,
+        kind: "fiche",
+        display_on_web: true,
+        titleFr: "Fiche n°2",
+        titleEn: "Sheet 2",
+        subtitleFr: "Notation de Dirac en dimension infinie",
+        subtitleEn: "Dirac Notation — Infinite Dimension",
+        descriptionFr:
+          "Représentation hilbertienne de la mécanique quantique du point, opérateurs position et impulsion, delta de Dirac.",
+        descriptionEn:
+          "Hilbert representation of point-particle quantum mechanics, position and momentum operators, and Dirac delta.",
+        topicsFr: [
+          "Notations de Dirac",
+          "Dimension infinie",
+          "Représentation position",
+          "Représentation impulsion",
+          "Delta de Dirac",
+          "Transformée de Fourier",
+          "Résolution de l'identité",
+          "Opérateur position",
+          "Opérateur impulsion",
+          "Commutation canonique",
+        ],
+        topicsEn: [
+          "Dirac notation",
+          "Infinite dimension",
+          "Position representation",
+          "Momentum representation",
+          "Dirac delta",
+          "Fourier transform",
+          "Resolution of identity",
+          "Position operator",
+          "Momentum operator",
+          "Canonical commutation",
+        ],
+        pdfFile: "ch2.pdf",
+        pdfAvailable: true,
+        readingTime: "30 min",
+        texFile: "theme2_fr/fiche2.tex",
+        references: [],
+        content: `
+<p>Notation de Dirac en dimension infinie : représentations position et impulsion, delta de Dirac et relations de commutation canoniques.</p>
+        `,
+      },
+    ],
+  },
+  {
+    slug: "linear-operator-theory",
+    number: 3,
+    display_on_web: true,
+    titleFr: "Théorie des opérateurs linéaires",
+    titleEn: "Linear Operator Theory",
+    descriptionFr:
+      "Topologie des espaces de Hilbert, opérateurs linéaires bornés et non bornés, théorie spectrale.",
+    descriptionEn:
+      "Topology of Hilbert spaces, bounded and unbounded linear operators, and spectral theory.",
+    lessons: [
+      {
+        slug: "operateurs-lineaires-lecon-1",
+        number: 1,
+        display_on_web: true,
+        titleFr: "Leçon n°1",
+        titleEn: "Lesson 1",
         subtitleFr: "Topologie des espaces de Hilbert",
         subtitleEn: "Topology of Hilbert Spaces",
         descriptionFr:
@@ -311,18 +390,18 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "40 min",
-        texFile: "theme2_fr/lecon3.tex",
+        texFile: "theme3_fr/lecon1.tex",
         references: [],
         content: `
 <p>Étude de la topologie des espaces de Hilbert : notions de convergence forte et faible, continuité, compacité et complétude.</p>
         `,
       },
       {
-        slug: "espaces-de-hilbert-lecon-4",
-        number: 4,
+        slug: "operateurs-lineaires-lecon-2",
+        number: 2,
         display_on_web: true,
-        titleFr: "Leçon n°4",
-        titleEn: "Lesson 4",
+        titleFr: "Leçon n°2",
+        titleEn: "Lesson 2",
         subtitleFr: "Théorie des opérateurs linéaires",
         subtitleEn: "Linear Operator Theory",
         descriptionFr:
@@ -350,63 +429,18 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "theme2_fr/lecon4.tex",
+        texFile: "theme3_fr/lecon2.tex",
         references: [],
         content: `
 <p>Étude structurée de la théorie des opérateurs linéaires en espace de Hilbert.</p>
         `,
       },
       {
-        slug: "espaces-de-hilbert-lecon-5",
-        number: 5,
+        slug: "operateurs-lineaires-lecon-3",
+        number: 3,
         display_on_web: true,
-        titleFr: "Leçon n°5",
-        titleEn: "Lesson 5",
-        subtitleFr: "Notations de Dirac en dimension infinie",
-        subtitleEn: "Dirac Notation — Infinite Dimension",
-        descriptionFr:
-          "Représentation hilbertienne de la mécanique quantique du point, opérateurs position et impulsion, delta de Dirac.",
-        descriptionEn:
-          "Hilbert representation of point-particle quantum mechanics, position and momentum operators, and Dirac delta.",
-        topicsFr: [
-          "Notations de Dirac",
-          "Dimension infinie",
-          "Représentation position",
-          "Représentation impulsion",
-          "Delta de Dirac",
-          "Transformée de Fourier",
-          "Résolution de l'identité",
-          "Opérateur position",
-          "Opérateur impulsion",
-          "Commutation canonique",
-        ],
-        topicsEn: [
-          "Dirac notation",
-          "Infinite dimension",
-          "Position representation",
-          "Momentum representation",
-          "Dirac delta",
-          "Fourier transform",
-          "Resolution of identity",
-          "Position operator",
-          "Momentum operator",
-          "Canonical commutation",
-        ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: true,
-        readingTime: "30 min",
-        texFile: "theme2_fr/lecon5.tex",
-        references: [],
-        content: `
-<p>Notation de Dirac en dimension infinie : représentations position et impulsion, delta de Dirac et relations de commutation canoniques.</p>
-        `,
-      },
-      {
-        slug: "espaces-de-hilbert-lecon-6",
-        number: 6,
-        display_on_web: true,
-        titleFr: "Leçon n°6",
-        titleEn: "Lesson 6",
+        titleFr: "Leçon n°3",
+        titleEn: "Lesson 3",
         subtitleFr: "Opérateurs bornés",
         subtitleEn: "Bounded Operators",
         descriptionFr:
@@ -432,16 +466,16 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
         readingTime: "",
-        texFile: "theme2_fr/lecon6.tex",
+        texFile: "theme3_fr/lecon3.tex",
         references: [],
         content: "",
       },
       {
-        slug: "espaces-de-hilbert-lecon-7",
-        number: 7,
+        slug: "operateurs-lineaires-lecon-4",
+        number: 4,
         display_on_web: true,
-        titleFr: "Leçon n°7",
-        titleEn: "Lesson 7",
+        titleFr: "Leçon n°4",
+        titleEn: "Lesson 4",
         subtitleFr: "Opérateurs non bornés",
         subtitleEn: "Unbounded Operators",
         descriptionFr:
@@ -467,16 +501,16 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
         readingTime: "",
-        texFile: "theme2_fr/lecon7.tex",
+        texFile: "theme3_fr/lecon4.tex",
         references: [],
         content: "",
       },
       {
-        slug: "espaces-de-hilbert-lecon-8",
-        number: 8,
+        slug: "operateurs-lineaires-lecon-5",
+        number: 5,
         display_on_web: true,
-        titleFr: "Leçon n°8",
-        titleEn: "Lesson 8",
+        titleFr: "Leçon n°5",
+        titleEn: "Lesson 5",
         subtitleFr: "Théorie spectrale",
         subtitleEn: "Spectral Theory",
         descriptionFr:
@@ -504,37 +538,17 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
         readingTime: "",
-        texFile: "theme2_fr/lecon8.tex",
+        texFile: "theme3_fr/lecon5.tex",
         references: [],
         content: "",
       },
       {
-        slug: "espaces-de-hilbert-fiche-1",
+        slug: "operateurs-lineaires-fiche-1",
         number: 1,
         kind: "fiche",
         display_on_web: true,
         titleFr: "Fiche n°1",
         titleEn: "Sheet 1",
-        subtitleFr: "Formulaire Dirac",
-        subtitleEn: "Dirac Reference Sheet",
-        descriptionFr: "Récapitulatif des notations de Dirac et des formules essentielles.",
-        descriptionEn: "Summary of Dirac notation and essential formulas.",
-        topicsFr: ["Notations de Dirac", "Formulaire"],
-        topicsEn: ["Dirac notation", "Reference sheet"],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: false,
-        readingTime: "",
-        texFile: "theme2_fr/fiche1.tex",
-        references: [],
-        content: "",
-      },
-      {
-        slug: "espaces-de-hilbert-fiche-2",
-        number: 2,
-        kind: "fiche",
-        display_on_web: true,
-        titleFr: "Fiche n°2",
-        titleEn: "Sheet 2",
         subtitleFr: "Atlas des opérateurs linéaires",
         subtitleEn: "Atlas of Linear Operators",
         descriptionFr: "Catalogue des principaux opérateurs linéaires et de leurs propriétés spectrales.",
@@ -544,7 +558,7 @@ export const themes: Theme[] = [
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
         readingTime: "",
-        texFile: "theme2_fr/fiche2.tex",
+        texFile: "theme3_fr/fiche1.tex",
         references: [],
         content: "",
       },
@@ -552,7 +566,7 @@ export const themes: Theme[] = [
   },
   {
     slug: "postulates",
-    number: 3,
+    number: 4,
     display_on_web: true,
     titleFr: "Postulats",
     titleEn: "Postulates",
@@ -600,7 +614,7 @@ export const themes: Theme[] = [
         pdfFile: "ch3.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "theme3_fr/lecon1.tex",
+        texFile: "theme4_fr/lecon1.tex",
         references: [],
         content: `
 <p>Ce chapitre présente les postulats de la mécanique quantique et en propose une première discussion. L'objectif est double : établir le formalisme standard, et souligner à quel point ces postulats proposent une vision du monde radicalement différente de celle de la physique classique. Nous présenterons ici la version dite \\og orthodoxe\\fg, bien connue sous le nom d'« interprétation de Copenhague\\footnote{Du nom de l'école de pensée développée à l'Université de Copenhague dans les années 1920-1930, principalement par Bohr, qui y enseignait, et par Heisenberg, qui y était de passage.} », de la mécanique quantique. Cette formulation inclut notamment le postulat de la réduction du paquet d'onde (postulat 3) ainsi que le caractère fondamentalement probabiliste des résultats de mesure (postulat 4).</p>
@@ -614,7 +628,7 @@ export const themes: Theme[] = [
   },
   {
     slug: "applications",
-    number: 4,
+    number: 5,
     display_on_web: true,
     titleFr: "Applications",
     titleEn: "Applications",
@@ -652,7 +666,7 @@ export const themes: Theme[] = [
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
         readingTime: "45 min",
-        texFile: "theme4_fr/lecon1.tex",
+        texFile: "theme5_fr/lecon1.tex",
         references: [],
         content: `
 <p>Cette leçon introduit l'étude des barrières de potentiel, avec les phénomènes de réflexion, transmission et effet tunnel.</p>
@@ -687,7 +701,7 @@ export const themes: Theme[] = [
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "theme4_fr/lecon2.tex",
+        texFile: "theme5_fr/lecon2.tex",
         references: [],
         content: `
 <p>Cette leçon traite de l'oscillateur harmonique quantique, de sa résolution algébrique et de son rôle central en physique quantique.</p>
@@ -722,7 +736,7 @@ export const themes: Theme[] = [
         pdfFile: "ch1.pdf",
         pdfAvailable: true,
         readingTime: "40 min",
-        texFile: "theme4_fr/lecon3.tex",
+        texFile: "theme5_fr/lecon3.tex",
         references: [],
         content: `
 <p>Cette leçon présente le spin quantique et ses outils de calcul, en particulier pour les systèmes à deux niveaux.</p>
@@ -757,7 +771,7 @@ export const themes: Theme[] = [
         pdfFile: "ch3.pdf",
         pdfAvailable: true,
         readingTime: "50 min",
-        texFile: "theme4_fr/lecon4.tex",
+        texFile: "theme5_fr/lecon4.tex",
         references: [],
         content: `
 <p>Cette leçon couvre la dynamique quantique et les différentes formulations de l'évolution temporelle des états.</p>
@@ -767,7 +781,7 @@ export const themes: Theme[] = [
   },
   {
     slug: "interacting-systems",
-    number: 5,
+    number: 6,
     display_on_web: false,
     titleFr: "Systèmes en interaction",
     titleEn: "Interacting Systems",
@@ -779,7 +793,7 @@ export const themes: Theme[] = [
   },
   {
     slug: "decoherence-and-quantum-measurement",
-    number: 6,
+    number: 7,
     display_on_web: false,
     titleFr: "Décohérence et mesure quantique",
     titleEn: "Decoherence and Quantum Measurement",
@@ -791,8 +805,8 @@ export const themes: Theme[] = [
   },
 ];
 
-/** Part II (themes 4–7): kept out of the public site until removed from this set. */
-const THEME_NUMBERS_EXCLUDED_FROM_WEB = new Set<number>([4, 5, 6, 7]);
+/** Part II (themes 5–7): kept out of the public site until removed from this set. */
+const THEME_NUMBERS_EXCLUDED_FROM_WEB = new Set<number>([5, 6, 7]);
 
 export function getTheme(slug: string): Theme | undefined {
   return themes.find((theme) => theme.slug === slug);
