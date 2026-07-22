@@ -490,6 +490,42 @@ body::before {
   }
 }
 
+.prose-quantum .latex-figure-row-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.prose-quantum .latex-figure-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1 1 240px;
+  max-width: min(100%, 320px);
+}
+
+.prose-quantum .latex-figure-item img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 8.5cm;
+  border-radius: 8px;
+  border: 1px solid var(--accent-border-sm);
+  cursor: zoom-in;
+}
+
+.prose-quantum .latex-figure-subcaption {
+  margin-top: 0.5rem;
+  font-family: var(--font-inter);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-align: left;
+}
+
 .prose-quantum .latex-block {
   margin: 1.25rem 0;
   padding: 0.9rem 1rem;

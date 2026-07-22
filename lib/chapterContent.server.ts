@@ -314,17 +314,20 @@ function extractFigureSourceHtml(figureBlock: string, isEnglish: boolean): strin
   return `<br /><span class="latex-figure-source"><small><em>${prefix}</em>${plain}</small></span>`;
 }
 
-function extractFigureHtml(figureBlock: string, figureNumber: number, isEnglish: boolean): string {
-  const includeGraphicsMatch = figureBlock.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
-  if (!includeGraphicsMatch) return "";
+function extractImageAndCaption(
+  block: string
+): { imagePath: string; caption: string; altText: string } | null {
+  const includeGraphicsMatch = block.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
+  if (!includeGraphicsMatch) return null;
 
   const imagePath = normalizeFigurePath(includeGraphicsMatch[1].trim());
   let captionRaw = "";
-  const captionCommandIndex = figureBlock.search(/\\caption\s*\{/);
+  // \caption*{...} (unnumbered, common inside minipages) must be matched too.
+  const captionCommandIndex = block.search(/\\caption\*?\s*\{/);
   if (captionCommandIndex !== -1) {
-    const firstBraceIndex = figureBlock.indexOf("{", captionCommandIndex);
+    const firstBraceIndex = block.indexOf("{", captionCommandIndex);
     if (firstBraceIndex !== -1) {
-      const captionBlock = readBalancedBraces(figureBlock, firstBraceIndex);
+      const captionBlock = readBalancedBraces(block, firstBraceIndex);
       if (captionBlock) {
         captionRaw = captionBlock.content.replace(/\s+/g, " ").trim();
       }
@@ -333,18 +336,51 @@ function extractFigureHtml(figureBlock: string, figureNumber: number, isEnglish:
   const caption = cleanLatexInline(captionRaw);
   const altTextRaw = latexToPlainTextForAlt(captionRaw || "Figure");
   const altText = escapeHtmlAttribute(altTextRaw);
+  return { imagePath, caption, altText };
+}
 
-  const captionWithNumber = caption
-    ? `Figure ${figureNumber}. ${caption}`
-    : `Figure ${figureNumber}`;
+function extractFigureHtml(figureBlock: string, figureNumber: number, isEnglish: boolean): string {
   const sourceHtml = extractFigureSourceHtml(figureBlock, isEnglish);
-  const figCaption = `<figcaption>${captionWithNumber}${sourceHtml}</figcaption>`;
-  const isPdfFigure = imagePath.toLowerCase().endsWith(".pdf");
-  if (isPdfFigure) {
-    return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a></object>${figCaption}</figure>`;
+
+  // Side-by-side figures built from \begin{minipage} pairs (LaTeX has no
+  // equivalent web layout primitive, so render each minipage as its own
+  // image+caption item inside a flex row, sharing a single figure number).
+  const minipageRegex = /\\begin\{minipage\}(?:\[[^\]]*\])?\{[^}]*\}([\s\S]*?)\\end\{minipage\}/g;
+  const minipageBlocks: string[] = [];
+  let minipageMatch: RegExpExecArray | null;
+  while ((minipageMatch = minipageRegex.exec(figureBlock))) {
+    minipageBlocks.push(minipageMatch[1]);
   }
 
-  return `<figure class="latex-figure"><a class="latex-figure-zoom-link" href="${imagePath}" target="_blank" rel="noreferrer"><img src="${imagePath}" alt="${altText}" loading="lazy" /></a>${figCaption}</figure>`;
+  if (minipageBlocks.length > 1) {
+    const items = minipageBlocks
+      .map((block) => extractImageAndCaption(block))
+      .filter((item): item is NonNullable<typeof item> => item !== null);
+    if (items.length === 0) return "";
+    const itemsHtml = items
+      .map((item) => {
+        const subCaption = item.caption
+          ? `<figcaption class="latex-figure-subcaption">${item.caption}</figcaption>`
+          : "";
+        return `<figure class="latex-figure-item"><a class="latex-figure-zoom-link" href="${item.imagePath}" target="_blank" rel="noreferrer"><img src="${item.imagePath}" alt="${item.altText}" loading="lazy" /></a>${subCaption}</figure>`;
+      })
+      .join("");
+    return `<figure class="latex-figure latex-figure-row"><div class="latex-figure-row-inner">${itemsHtml}</div><figcaption>Figure ${figureNumber}${sourceHtml}</figcaption></figure>`;
+  }
+
+  const single = extractImageAndCaption(figureBlock);
+  if (!single) return "";
+
+  const captionWithNumber = single.caption
+    ? `Figure ${figureNumber}. ${single.caption}`
+    : `Figure ${figureNumber}`;
+  const figCaption = `<figcaption>${captionWithNumber}${sourceHtml}</figcaption>`;
+  const isPdfFigure = single.imagePath.toLowerCase().endsWith(".pdf");
+  if (isPdfFigure) {
+    return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${single.imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${single.imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a></object>${figCaption}</figure>`;
+  }
+
+  return `<figure class="latex-figure"><a class="latex-figure-zoom-link" href="${single.imagePath}" target="_blank" rel="noreferrer"><img src="${single.imagePath}" alt="${single.altText}" loading="lazy" /></a>${figCaption}</figure>`;
 }
 
 function renderSectionHeading(
