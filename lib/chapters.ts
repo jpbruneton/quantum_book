@@ -122,6 +122,55 @@ export const themes: Theme[] = [
 <p>Un moment magnétique  $\\vec{\\mu}$, ou dipôle magnétique, est un vecteur. C'est la quantité fondamentale qui permet de quantifier l'intensité d'un aimant naturel, par exemple, ou d'un eléctro-aimant, c'est-à-dire d'une boucle de courant. Un aimant naturel possède un moment magnétique, qui par définition est dans la direction pôle Sud $\\to$ pôle Nord de l'aimant. C'est aussi la direction des lignes de champ magnétique générées par l'aimant à l'extérieur de celui-ci (elles sortent du pôle Nord et reviennent au pôle Sud ; à l'intérieur de l'aimant elles vont directement du Sud a Nord), cf figure \\ref{magnet}.</p>
         `,
       },
+      {
+        slug: "interference",
+        number: 2,
+        display_on_web: true,
+        titleFr: "Leçon n°2",
+        titleEn: "Lesson 2",
+        subtitleFr: "Interférences, chemins et gomme quantique",
+        subtitleEn: "Interference, Paths, and Quantum Eraser",
+        descriptionFr:
+          "Interféromètre de Mach-Zehnder, superposition et mélange, marquage des chemins, gomme quantique, complémentarité.",
+        descriptionEn:
+          "Mach-Zehnder interferometer, superposition vs. mixture, path marking, quantum eraser, and complementarity.",
+        topicsFr: [
+          "Mach-Zehnder",
+          "Interférence",
+          "Superposition",
+          "Amplitude de probabilité",
+          "Phase relative",
+          "Chemin",
+          "Marquage des chemins",
+          "Gomme quantique",
+          "Complémentarité",
+          "Post-sélection",
+        ],
+        topicsEn: [
+          "Mach-Zehnder",
+          "Interference",
+          "Superposition",
+          "Probability amplitude",
+          "Relative phase",
+          "Path",
+          "Path marking",
+          "Quantum eraser",
+          "Complementarity",
+          "Post-selection",
+        ],
+        pdfFile: "ch1.pdf",
+        pdfAvailable: true,
+        readingTime: "50 min",
+        texFile: "theme1_fr/lecon2.tex",
+        references: [],
+        content: `
+<p>L'interféromètre de Mach-Zehnder démontre comment les principes fondamentaux de la mécanique quantique modifient notre compréhension de la réalité. Contrairement aux expériences de Stern-Gerlach qui révèlent la quantification des résultats de mesure, le Mach-Zehnder montre la nature ondulatoire des systèmes quantiques et le rôle crucial des amplitudes de probabilité.</p>
+
+<p>Cette expérience révèle plusieurs concepts clés : la superposition et son interférence, l'importance de la phase relative, et la manière dont le marquage des chemins supprime les interférences. La gomme quantique nous permet alors de récupérer les interférences par une astuce remarquable : la post-sélection selon une mesure complémentaire.</p>
+
+<p>Nous découvrirons que les interférences n'apparaissent que lorsque les chemins restent indistinguables dans l'état physique complet. Dès que deux alternatives deviennent distinguables à travers une corrélation avec un autre degré de liberté, les termes d'interférence disparaissent, même si personne ne mesure cette corrélation.</p>
+        `,
+      },
     ],
   },
   {
