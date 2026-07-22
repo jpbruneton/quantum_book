@@ -1009,6 +1009,10 @@ function normalizeLatexBlocks(
   result = result.replace(/\\begin\{exercise\}/g, "\\begin{exo}");
   result = result.replace(/\\end\{exercise\}/g, "\\end{exo}");
 
+  // "aretenir" (à retenir) is a common alias for the "important" box style.
+  result = result.replace(/\\begin\{aretenir\}/g, "\\begin{important}");
+  result = result.replace(/\\end\{aretenir\}/g, "\\end{important}");
+
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string; collapsible?: boolean }> = [
     { env: "definition", title: "Definition" },
