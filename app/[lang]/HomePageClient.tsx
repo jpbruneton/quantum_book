@@ -123,6 +123,7 @@ export default function HomePageClient() {
                 .map((paragraph, index, arr) => (
                   <p
                     key={index}
+                    className="home-hero-description"
                     style={{
                       fontFamily: "var(--font-crimson)",
                       fontSize: "1.15rem",
