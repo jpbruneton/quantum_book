@@ -22,7 +22,6 @@ export interface Lesson {
   topicsEn: string[];
   pdfFile: string;
   pdfAvailable: boolean;
-  readingTime: string;
   content: string;
   texFile: string;
   references: LessonReference[];
@@ -111,7 +110,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch1.pdf",
         pdfAvailable: true,
-        readingTime: "45 min",
         texFile: "theme1_fr/lecon1.tex",
         references: [],
         content: `
@@ -160,7 +158,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch1.pdf",
         pdfAvailable: true,
-        readingTime: "50 min",
         texFile: "theme1_fr/lecon2.tex",
         references: [],
         content: `
@@ -220,7 +217,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
-        readingTime: "55 min",
         texFile: "theme2_fr/lecon1.tex",
         references: [],
         content: `
@@ -265,7 +261,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
-        readingTime: "35 min",
         texFile: "theme2_fr/lecon2.tex",
         references: [],
         content: `
@@ -273,31 +268,56 @@ export const themes: Theme[] = [
         `,
       },
       {
-        slug: "espaces-de-hilbert-lecon-3",
-        number: 3,
+        slug: "espaces-de-hilbert-fiche-1",
+        number: 1,
+        kind: "fiche",
         display_on_web: true,
-        titleFr: "Leçon n°3",
-        titleEn: "Lesson 3",
-        subtitleFr: "Notation de Dirac en dimension finie",
+        titleFr: "Fiche n°1",
+        titleEn: "Sheet 1",
+        subtitleFr: "Notations de Dirac en dimension finie",
         subtitleEn: "Dirac Notation — Finite Dimension",
-        descriptionFr: "Récapitulatif des notations de Dirac et des formules essentielles en dimension finie.",
-        descriptionEn: "Summary of Dirac notation and essential formulas in finite dimension.",
-        topicsFr: ["Notations de Dirac", "Dimension finie", "Formulaire"],
-        topicsEn: ["Dirac notation", "Finite dimension", "Reference sheet"],
+        descriptionFr:
+          "Règles algébriques du calcul quantique valables en toute dimension, puis formulaire matriciel en dimension finie.",
+        descriptionEn:
+          "Algebraic rules of quantum calculation valid in any dimension, then the matrix reference sheet in finite dimension.",
+        topicsFr: [
+          "Notations de Dirac",
+          "Produit scalaire hermitien",
+          "Adjoint",
+          "Opérateur ket-bra",
+          "Résolution de l'identité",
+          "Dimension finie",
+          "Éléments de matrice",
+          "Trace",
+          "Transconjugaison",
+          "Formulaire",
+        ],
+        topicsEn: [
+          "Dirac notation",
+          "Hermitian inner product",
+          "Adjoint",
+          "Ket-bra operator",
+          "Resolution of the identity",
+          "Finite dimension",
+          "Matrix elements",
+          "Trace",
+          "Conjugate transpose",
+          "Reference sheet",
+        ],
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
-        readingTime: "",
-        texFile: "theme2_fr/lecon3.tex",
+        texFile: "theme2_fr/fiche1.tex",
         references: [],
         content: "",
       },
       {
-        slug: "espaces-de-hilbert-lecon-4",
-        number: 4,
+        slug: "espaces-de-hilbert-fiche-2",
+        number: 2,
+        kind: "fiche",
         display_on_web: true,
-        titleFr: "Leçon n°4",
-        titleEn: "Lesson 4",
-        subtitleFr: "Notation de Dirac en dimension infinie",
+        titleFr: "Fiche n°2",
+        titleEn: "Sheet 2",
+        subtitleFr: "Notations de Dirac en dimension infinie",
         subtitleEn: "Dirac Notation — Infinite Dimension",
         descriptionFr:
           "Représentation hilbertienne de la mécanique quantique du point, opérateurs position et impulsion, delta de Dirac.",
@@ -328,9 +348,8 @@ export const themes: Theme[] = [
           "Canonical commutation",
         ],
         pdfFile: "ch2.pdf",
-        pdfAvailable: true,
-        readingTime: "30 min",
-        texFile: "theme2_fr/lecon4.tex",
+        pdfAvailable: false,
+        texFile: "theme2_fr/fiche2.tex",
         references: [],
         content: `
 <p>Notation de Dirac en dimension infinie : représentations position et impulsion, delta de Dirac et relations de commutation canoniques.</p>
@@ -387,7 +406,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
-        readingTime: "40 min",
         texFile: "theme3_fr/lecon1.tex",
         references: [],
         content: `
@@ -426,7 +444,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch2.pdf",
         pdfAvailable: true,
-        readingTime: "50 min",
         texFile: "theme3_fr/lecon2.tex",
         references: [],
         content: `
@@ -463,7 +480,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
-        readingTime: "",
         texFile: "theme3_fr/lecon3.tex",
         references: [],
         content: "",
@@ -498,7 +514,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
-        readingTime: "",
         texFile: "theme3_fr/lecon4.tex",
         references: [],
         content: "",
@@ -535,7 +550,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
-        readingTime: "",
         texFile: "theme3_fr/lecon5.tex",
         references: [],
         content: "",
@@ -555,7 +569,6 @@ export const themes: Theme[] = [
         topicsEn: ["Linear operators", "Atlas", "Spectral properties"],
         pdfFile: "ch2.pdf",
         pdfAvailable: false,
-        readingTime: "",
         texFile: "theme3_fr/fiche1.tex",
         references: [],
         content: "",
@@ -611,7 +624,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch3.pdf",
         pdfAvailable: true,
-        readingTime: "50 min",
         texFile: "theme4_fr/lecon1.tex",
         references: [],
         content: `
@@ -663,7 +675,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
-        readingTime: "45 min",
         texFile: "theme5_fr/lecon1.tex",
         references: [],
         content: `
@@ -698,7 +709,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch4.pdf",
         pdfAvailable: true,
-        readingTime: "50 min",
         texFile: "theme5_fr/lecon2.tex",
         references: [],
         content: `
@@ -733,7 +743,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch1.pdf",
         pdfAvailable: true,
-        readingTime: "40 min",
         texFile: "theme5_fr/lecon3.tex",
         references: [],
         content: `
@@ -768,7 +777,6 @@ export const themes: Theme[] = [
         ],
         pdfFile: "ch3.pdf",
         pdfAvailable: true,
-        readingTime: "50 min",
         texFile: "theme5_fr/lecon4.tex",
         references: [],
         content: `
