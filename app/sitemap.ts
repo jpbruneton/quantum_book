@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 import { getWebThemes } from "@/lib/chapters";
+import { hasLessonWebContent } from "@/lib/chapterPage.server";
+import { SITE_LANGS } from "@/lib/localeRoutes";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import { themeHasExercisesFrOrEn } from "@/lib/exercisesLibrary.server";
 import { lessonToPathSegment } from "@/lib/lessonRoutes";
@@ -25,10 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lessonRoutes: MetadataRoute.Sitemap = getWebThemes().flatMap((theme) =>
     theme.lessons.flatMap((lesson) => {
       const logicalPath = `/chapters/${theme.slug}/${lessonToPathSegment(lesson)}`;
-      return sitemapEntriesForLogicalPath(logicalPath, {
-        changeFrequency: "weekly",
-        priority: 0.85,
-      });
+      const availableLangs = SITE_LANGS.filter((lang) =>
+        hasLessonWebContent(lesson.texFile, lang)
+      );
+      return sitemapEntriesForLogicalPath(
+        logicalPath,
+        { changeFrequency: "weekly", priority: 0.85 },
+        availableLangs
+      );
     })
   );
 

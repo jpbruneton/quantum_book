@@ -20,8 +20,6 @@ export interface Lesson {
   descriptionEn: string;
   topicsFr: string[];
   topicsEn: string[];
-  pdfFile: string;
-  pdfAvailable: boolean;
   content: string;
   texFile: string;
   references: LessonReference[];
@@ -108,8 +106,6 @@ export const themes: Theme[] = [
           "Inhomogeneous magnetic field",
           "State projection",
         ],
-        pdfFile: "ch1.pdf",
-        pdfAvailable: true,
         texFile: "theme1_fr/lecon1.tex",
         references: [],
         content: `
@@ -156,8 +152,6 @@ export const themes: Theme[] = [
           "Complementarity",
           "Post-selection",
         ],
-        pdfFile: "ch1.pdf",
-        pdfAvailable: true,
         texFile: "theme1_fr/lecon2.tex",
         references: [],
         content: `
@@ -215,8 +209,6 @@ export const themes: Theme[] = [
           "Model spaces",
           "Isomorphisms",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: true,
         texFile: "theme2_fr/lecon1.tex",
         references: [],
         content: `
@@ -259,8 +251,6 @@ export const themes: Theme[] = [
           "Dagger",
           "Adjoint operator",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: true,
         texFile: "theme2_fr/lecon2.tex",
         references: [],
         content: `
@@ -304,8 +294,6 @@ export const themes: Theme[] = [
           "Conjugate transpose",
           "Reference sheet",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: false,
         texFile: "theme2_fr/fiche1.tex",
         references: [],
         content: "",
@@ -347,8 +335,6 @@ export const themes: Theme[] = [
           "Momentum operator",
           "Canonical commutation",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: false,
         texFile: "theme2_fr/fiche2.tex",
         references: [],
         content: `
@@ -404,8 +390,6 @@ export const themes: Theme[] = [
           "Bounded sets",
           "Compact sets",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: true,
         texFile: "theme3_fr/lecon1.tex",
         references: [],
         content: `
@@ -442,8 +426,6 @@ export const themes: Theme[] = [
           "Adjoint",
           "Dense domain",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: true,
         texFile: "theme3_fr/lecon2.tex",
         references: [],
         content: `
@@ -478,8 +460,6 @@ export const themes: Theme[] = [
           "Normal operators",
           "Spectral theorem",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: false,
         texFile: "theme3_fr/lecon3.tex",
         references: [],
         content: "",
@@ -512,8 +492,6 @@ export const themes: Theme[] = [
           "Self-adjoint extensions",
           "Deficiency indices",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: false,
         texFile: "theme3_fr/lecon4.tex",
         references: [],
         content: "",
@@ -548,8 +526,6 @@ export const themes: Theme[] = [
           "Continuous spectrum",
           "Discrete spectrum",
         ],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: false,
         texFile: "theme3_fr/lecon5.tex",
         references: [],
         content: "",
@@ -567,8 +543,6 @@ export const themes: Theme[] = [
         descriptionEn: "Catalogue of the main linear operators and their spectral properties.",
         topicsFr: ["Opérateurs linéaires", "Atlas", "Propriétés spectrales"],
         topicsEn: ["Linear operators", "Atlas", "Spectral properties"],
-        pdfFile: "ch2.pdf",
-        pdfAvailable: false,
         texFile: "theme3_fr/fiche1.tex",
         references: [],
         content: "",
@@ -622,8 +596,6 @@ export const themes: Theme[] = [
           "Quantum entanglement",
           "Bell inequalities",
         ],
-        pdfFile: "ch3.pdf",
-        pdfAvailable: true,
         texFile: "theme4_fr/lecon1.tex",
         references: [],
         content: `
@@ -673,8 +645,6 @@ export const themes: Theme[] = [
           "Scattering states",
           "Coefficients",
         ],
-        pdfFile: "ch4.pdf",
-        pdfAvailable: true,
         texFile: "theme5_fr/lecon1.tex",
         references: [],
         content: `
@@ -707,8 +677,6 @@ export const themes: Theme[] = [
           "Eigenstates",
           "Wavefunctions",
         ],
-        pdfFile: "ch4.pdf",
-        pdfAvailable: true,
         texFile: "theme5_fr/lecon2.tex",
         references: [],
         content: `
@@ -741,8 +709,6 @@ export const themes: Theme[] = [
           "Precession",
           "Two-level systems",
         ],
-        pdfFile: "ch1.pdf",
-        pdfAvailable: true,
         texFile: "theme5_fr/lecon3.tex",
         references: [],
         content: `
@@ -775,8 +741,6 @@ export const themes: Theme[] = [
           "Propagators",
           "Hamiltonian",
         ],
-        pdfFile: "ch3.pdf",
-        pdfAvailable: true,
         texFile: "theme5_fr/lecon4.tex",
         references: [],
         content: `

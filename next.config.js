@@ -22,19 +22,6 @@ const nextConfig = {
     }
     return out;
   },
-  async headers() {
-    return [
-      {
-        source: "/pdfs/:path*",
-        headers: [
-          {
-            key: "Content-Disposition",
-            value: "inline",
-          },
-        ],
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;
