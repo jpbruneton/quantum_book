@@ -79,7 +79,6 @@ export const translations = {
         "This is a preview excerpt. Download the full PDF for the complete chapter, exercises, and solutions.",
       tabOnline: "Read Online",
       tabReferences: "References",
-      tabPdf: "PDF Viewer",
       tocTitle: "Table of Contents",
       showToc: "Show TOC",
       hideToc: "Hide TOC",
@@ -90,8 +89,6 @@ export const translations = {
       contentUnavailable:
         "English lesson content is not available yet for this lesson.",
       downloadBtn: "↓ Download",
-      pdfFallback: "If the PDF doesn't display,",
-      pdfFallbackLink: "click here to download it",
       noLessonTitle: "No lesson available",
       noLessonBody:
         "This theme is listed in the structure, but lesson content has not been published yet.",
@@ -234,7 +231,6 @@ export const translations = {
         "Ceci est un extrait de prévisualisation. Téléchargez le PDF complet pour le chapitre entier, les exercices et les solutions.",
       tabOnline: "Lire en ligne",
       tabReferences: "Références",
-      tabPdf: "Visionneur PDF",
       tocTitle: "Table des matières",
       showToc: "Afficher la table des matières",
       hideToc: "Masquer la table des matières",
@@ -245,8 +241,6 @@ export const translations = {
       contentUnavailable:
         "Le contenu de cette leçon n'est pas encore disponible dans cette langue.",
       downloadBtn: "↓ Télécharger",
-      pdfFallback: "Si le PDF ne s'affiche pas,",
-      pdfFallbackLink: "cliquez ici pour le télécharger",
       noLessonTitle: "Aucune leçon disponible",
       noLessonBody:
         "Ce thème est bien présent dans la structure, mais son contenu de leçon n'est pas encore publié.",

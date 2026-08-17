@@ -14,6 +14,16 @@ import { themeSlugToCanonical } from "@/lib/themePublicSlugs";
 
 const STATIC_PREFIXES = ["/_next", "/pdfs", "/figs", "/favicon", "/robots.txt", "/sitemap.xml"];
 
+/**
+ * Lessons that were renumbered as fiches, keyed by canonical logical path.
+ * Matching after toLogicalPath covers every public spelling at once
+ * (/fr/chapitres/espaces-de-hilbert/lecon-3, /en/chapters/hilbert-spaces/lesson-3, ...).
+ */
+const RENAMED_LESSON_PATHS: Record<string, string> = {
+  "/chapters/hilbert-spaces/lesson-3": "/chapters/hilbert-spaces/fiche-1",
+  "/chapters/hilbert-spaces/lesson-4": "/chapters/hilbert-spaces/fiche-2",
+};
+
 function shouldBypass(pathname: string): boolean {
   if (STATIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
     return true;
@@ -62,6 +72,15 @@ export function middleware(request: NextRequest) {
   const lang = first;
   const pathWithoutLang = segments.length > 1 ? `/${segments.slice(1).join("/")}` : "/";
   const logicalPath = toLogicalPath(pathWithoutLang);
+
+  const renamedTarget = RENAMED_LESSON_PATHS[logicalPath];
+  if (renamedTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = localizedPath(lang, renamedTarget);
+    url.search = request.nextUrl.search;
+    return NextResponse.redirect(url, 308);
+  }
+
   const canonicalPublicPath = localizedPath(lang, logicalPath);
 
   if (pathname !== canonicalPublicPath) {

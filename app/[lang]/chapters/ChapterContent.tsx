@@ -20,22 +20,6 @@ interface TocEntry {
   level: 2 | 3 | 4;
 }
 
-function getLessonPdfRelativePath(lesson: Lesson, lang: "fr" | "en"): string {
-  const ficheMatch = lesson.texFile.match(/theme(\d+)_(?:fr|en)\/(fiche\d+)\.tex$/);
-  if (ficheMatch) {
-    const themeNumber = ficheMatch[1];
-    const ficheName = ficheMatch[2];
-    return `theme${themeNumber}_${lang}/${ficheName}.pdf`;
-  }
-  const lessonMatch = lesson.texFile.match(/theme(\d+)_(?:fr|en)\/(?:lecon|lesson)(\d+)\.tex$/);
-  if (!lessonMatch) return lesson.pdfFile;
-  const themeNumber = lessonMatch[1];
-  const lessonNumber = lesson.number;
-  const directory = `theme${themeNumber}_${lang}`;
-  const fileName = lang === "fr" ? `lecon${lessonNumber}.pdf` : `lesson${lessonNumber}.pdf`;
-  return `${directory}/${fileName}`;
-}
-
 function simplifyLatexForToc(value: string): string {
   let result = value;
   result = result.replace(/\\mathbb\{([^{}]+)\}/g, "$1");
@@ -85,7 +69,7 @@ function slugify(value: string): string {
 }
 
 export function ChapterContent({ lesson }: Props) {
-  const [tab, setTab] = useState<"web" | "refs" | "pdf">("web");
+  const [tab, setTab] = useState<"web" | "refs">("web");
   const [activeTocId, setActiveTocId] = useState("");
   const [tocVisible, setTocVisible] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -94,10 +78,6 @@ export function ChapterContent({ lesson }: Props) {
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
   const lessonContent = lesson.contentLang;
-  const pdfRelativePath = useMemo(() => getLessonPdfRelativePath(lesson, lang), [lesson, lang]);
-  const pdfFileLabel = pdfRelativePath.includes("/")
-    ? pdfRelativePath.slice(pdfRelativePath.lastIndexOf("/") + 1)
-    : pdfRelativePath;
   const hasLessonContent = lessonContent.trim().length > 0;
   const lessonHeadingFr = lesson.subtitleFr.trim() || lesson.titleFr;
   const lessonHeadingEn = lesson.subtitleEn.trim() || lesson.titleEn;
@@ -312,7 +292,7 @@ export function ChapterContent({ lesson }: Props) {
           borderBottom: "1px solid var(--border-subtle)",
         }}
       >
-        {(["web", "refs", "pdf"] as const).map((tabKey) => (
+        {(["web", "refs"] as const).map((tabKey) => (
           <button
             key={tabKey}
             onClick={() => setTab(tabKey)}
@@ -335,11 +315,7 @@ export function ChapterContent({ lesson }: Props) {
               transition: "color 0.2s",
             }}
           >
-            {tabKey === "web"
-              ? t.chapter.tabOnline
-              : tabKey === "refs"
-                ? t.chapter.tabReferences
-                : t.chapter.tabPdf}
+            {tabKey === "web" ? t.chapter.tabOnline : t.chapter.tabReferences}
           </button>
         ))}
       </div>
@@ -546,114 +522,6 @@ export function ChapterContent({ lesson }: Props) {
         </div>
       )}
 
-      {/* ─── PDF Viewer ─── */}
-      {tab === "pdf" && (
-        <div
-          style={{
-            maxWidth: "900px",
-            margin: "2rem auto",
-            padding: "0 1.5rem",
-          }}
-        >
-          <div
-            className="pdf-embed"
-            style={{
-              background: "var(--bg-card)",
-              borderRadius: "8px",
-              overflow: "hidden",
-              border: "1px solid var(--accent-border-sm)",
-            }}
-          >
-            {/* PDF toolbar */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "0.75rem 1rem",
-                background: "var(--accent-bg-xs)",
-                borderBottom: "1px solid var(--accent-border-sm)",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-jetbrains)",
-                  fontSize: "0.75rem",
-                  color: "var(--text-dim)",
-                }}
-              >
-                {pdfFileLabel}
-              </span>
-              <a
-                href={`/pdfs/${pdfRelativePath}`}
-                download
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  background: "var(--accent-bg-md)",
-                  border: "1px solid var(--accent-border-md)",
-                  color: "var(--amber)",
-                  padding: "0.35rem 0.75rem",
-                  borderRadius: "4px",
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.75rem",
-                  fontWeight: 500,
-                  textDecoration: "none",
-                }}
-              >
-                {t.chapter.downloadBtn}
-              </a>
-            </div>
-
-            {/* object + iframe fallback: some browsers render PDF poorly in iframe alone */}
-            <object
-              data={`/pdfs/${pdfRelativePath}#toolbar=0`}
-              type="application/pdf"
-              style={{
-                width: "100%",
-                height: "80vh",
-                minHeight: "600px",
-                border: "none",
-                display: "block",
-                background: "#fff",
-              }}
-              aria-label={`${lang === "fr" ? lesson.titleFr : lesson.titleEn} - PDF`}
-            >
-              <iframe
-                src={`/pdfs/${pdfRelativePath}#toolbar=0`}
-                style={{
-                  width: "100%",
-                  height: "80vh",
-                  minHeight: "600px",
-                  border: "none",
-                  background: "#fff",
-                }}
-                title={`${lang === "fr" ? lesson.titleFr : lesson.titleEn} - PDF`}
-              />
-            </object>
-          </div>
-          <p
-            style={{
-              marginTop: "1rem",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.78rem",
-              color: "var(--text-dim)",
-              textAlign: "center",
-            }}
-          >
-            {t.chapter.pdfFallback}{" "}
-            <a
-              href={`/pdfs/${pdfRelativePath}`}
-              download
-              style={{ color: "var(--amber)", textDecoration: "underline" }}
-            >
-              {t.chapter.pdfFallbackLink}
-            </a>
-            .
-          </p>
-        </div>
-      )}
       {showBackToTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
