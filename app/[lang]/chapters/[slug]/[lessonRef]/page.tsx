@@ -116,7 +116,11 @@ export default function ChapterLessonPage({ params }: Props) {
   const lessonIndex = findLessonIndexByRef(theme.lessons, params.lessonRef);
   if (lessonIndex < 0) notFound();
 
-  const themeWithDynamicContent = buildThemeWithLocalizedContent(theme);
+  const themeWithDynamicContent = buildThemeWithLocalizedContent(
+    theme,
+    params.lang,
+    lessonIndex
+  );
   const webThemes = getWebThemes();
   const currentIndex = webThemes.findIndex((item) => item.slug === theme.slug);
   const prev = currentIndex > 0 ? webThemes[currentIndex - 1] : null;

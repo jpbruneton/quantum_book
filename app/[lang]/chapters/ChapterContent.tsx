@@ -10,10 +10,8 @@ interface Props {
 }
 
 interface LessonWithLocalizedContent extends Lesson {
-  contentFr: string;
-  contentEn: string;
-  renderedFr: string;
-  renderedEn: string;
+  contentLang: string;
+  renderedLang: string;
 }
 
 interface TocEntry {
@@ -95,7 +93,7 @@ export function ChapterContent({ lesson }: Props) {
   const lp = useLocalizedPath();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
-  const lessonContent = lang === "en" ? lesson.contentEn : lesson.contentFr;
+  const lessonContent = lesson.contentLang;
   const pdfRelativePath = useMemo(() => getLessonPdfRelativePath(lesson, lang), [lesson, lang]);
   const pdfFileLabel = pdfRelativePath.includes("/")
     ? pdfRelativePath.slice(pdfRelativePath.lastIndexOf("/") + 1)
@@ -109,10 +107,7 @@ export function ChapterContent({ lesson }: Props) {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [lesson.slug]);
 
-  const renderedContent = useMemo(
-    () => (lang === "en" ? lesson.renderedEn || lesson.renderedFr : lesson.renderedFr),
-    [lang, lesson.renderedFr, lesson.renderedEn]
-  );
+  const renderedContent = lesson.renderedLang;
   const splitReferenceLabel = (label: string, fallbackUrl: string) => {
     const normalizedLabel = label.replace(/\s+/g, " ").trim();
     const inlineUrlMatch = normalizedLabel.match(/https?:\/\/[^\s]+/i);

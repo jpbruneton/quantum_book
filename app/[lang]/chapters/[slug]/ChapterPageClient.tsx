@@ -14,10 +14,8 @@ import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 type LocalizedLesson = Theme["lessons"][number] & {
-  contentFr: string;
-  contentEn: string;
-  renderedFr: string;
-  renderedEn: string;
+  contentLang: string;
+  renderedLang: string;
 };
 
 type ThemeWithLocalizedLessonContent = Omit<Theme, "lessons"> & {
