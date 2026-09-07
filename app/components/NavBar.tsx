@@ -1,52 +1,251 @@
 "use client";
-import { SUPPORTED_LANGS, type Lang } from "@/lib/i18n";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/app/context/ThemeContext";
 import { useLang } from "@/app/context/LangContext";
+import type { Lang } from "@/lib/i18n";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
 import { swapLocaleInPath } from "@/lib/localeRoutes";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const MORE_LANGUAGES: { code: Exclude<Lang, "fr" | "en">; flag: string; nativeName: string }[] = [
+  { code: "de", flag: "🇩🇪", nativeName: "Deutsch" },
+  { code: "es", flag: "🇪🇸", nativeName: "Español" },
+  { code: "pt", flag: "🇵🇹", nativeName: "Português" },
+  { code: "it", flag: "🇮🇹", nativeName: "Italiano" },
+  { code: "pl", flag: "🇵🇱", nativeName: "Polski" },
+  { code: "ru", flag: "🇷🇺", nativeName: "Русский" },
+  { code: "zh", flag: "🇨🇳", nativeName: "中文" },
+  { code: "ja", flag: "🇯🇵", nativeName: "日本語" },
+  { code: "ko", flag: "🇰🇷", nativeName: "한국어" },
+  { code: "hi", flag: "🇮🇳", nativeName: "हिन्दी" },
+  { code: "vi", flag: "🇻🇳", nativeName: "Tiếng Việt" },
+  { code: "ar", flag: "🇸🇦", nativeName: "العربية" },
+  { code: "id", flag: "🇮🇩", nativeName: "Bahasa Indonesia" },
+  { code: "tr", flag: "🇹🇷", nativeName: "Türkçe" },
+  { code: "bn", flag: "🇧🇩", nativeName: "বাংলা" },
+  { code: "ur", flag: "🇵🇰", nativeName: "اردو" },
+  { code: "sw", flag: "🇹🇿", nativeName: "Kiswahili" },
+  { code: "fa", flag: "🇮🇷", nativeName: "فارسی" },
+];
+
+const MORE_LABELS: Record<Lang, string> = {
+  fr: "Plus…",
+  en: "More…",
+  de: "Mehr…",
+  es: "Más…",
+  pt: "Mais…",
+  it: "Altro…",
+  pl: "Więcej…",
+  ru: "Ещё…",
+  zh: "更多…",
+  ja: "その他…",
+  ko: "더 보기…",
+  hi: "और…",
+  vi: "Thêm…",
+  ar: "المزيد…",
+  id: "Lainnya…",
+  tr: "Daha fazla…",
+  bn: "আরও…",
+  ur: "مزید…",
+  sw: "Zaidi…",
+  fa: "بیشتر…",
+};
+
+function MoreLanguagesMenu({
+  lang,
+  onSelect,
+  small,
+}: {
+  lang: Lang;
+  onSelect: (lang: Lang) => void;
+  small?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClickAway = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClickAway);
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        containerRef.current?.querySelector("button")?.focus();
+      }
+    };
+    document.addEventListener("keydown", onEscape);
+    return () => {
+      document.removeEventListener("mousedown", onClickAway);
+      document.removeEventListener("keydown", onEscape);
+    };
+  }, [open]);
+
+  const moreLabel = MORE_LABELS[lang] ?? "More…";
+
+  return (
+    <div ref={containerRef} style={{ position: small ? "static" : "relative", flexShrink: 0 }}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-label={small ? moreLabel : undefined}
+        style={{
+          background: "transparent",
+          color: "var(--text-secondary)",
+          border: "1px solid var(--border)",
+          borderRadius: "4px",
+          padding: small ? "0.45rem 0" : "0.35rem 0.65rem",
+          width: small ? "42px" : undefined,
+          cursor: "pointer",
+          fontFamily: "var(--font-inter)",
+          fontSize: small ? "0.8rem" : "0.75rem",
+          fontWeight: 500,
+          letterSpacing: "0.02em",
+          whiteSpace: "nowrap",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.3rem",
+          lineHeight: 1,
+        }}
+      >
+        {small ? "+" : moreLabel}
+        {!small && <span style={{ fontSize: "0.65em" }}>{open ? "▲" : "▼"}</span>}
+      </button>
+
+      {open && (
+        <div
+          style={{
+            position: "absolute",
+            top: "calc(100% + 0.4rem)",
+            insetInlineStart: 0,
+            zIndex: 60,
+            background: "var(--bg-card)",
+            border: "1px solid var(--border)",
+            borderRadius: "6px",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+            padding: "0.4rem",
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(120px, 1fr))",
+            gap: "0.15rem",
+            minWidth: "260px",
+          }}
+        >
+          {MORE_LANGUAGES.map(({ code, flag, nativeName }) => (
+            <button
+              key={code}
+              aria-pressed={lang === code}
+              lang={code}
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                onSelect(code);
+              }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                background: "transparent",
+                border: "none",
+                borderRadius: "4px",
+                padding: "0.4rem 0.5rem",
+                cursor: "pointer",
+                textAlign: "start",
+                fontFamily: "var(--font-inter)",
+                fontSize: "0.82rem",
+                color: "var(--text-secondary)",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--accent-bg-xs, rgba(200,150,60,0.08))")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "transparent")}
+            >
+              <span aria-hidden="true" style={{ fontSize: "1.1rem", lineHeight: 1 }}>{flag}</span>
+              <span dir="auto">{nativeName}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function NavBar() {
   const pathname = usePathname();
   const router = useRouter();
-  const lp = useLocalizedPath();
   const { theme, toggleTheme } = useTheme();
-  const { lang } = useLang();
+  const { lang, t } = useLang();
+  const lp = useLocalizedPath();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const desktopLinks = [
-    { href: lp("/"), labelKey: "home" as const },
-    { href: lp("/chapters"), labelKey: "chapters" as const },
-    { href: lp("/exercises"), labelKey: "exercises" as const },
-    { href: lp("/quiz"), labelKey: "quiz" as const },
-    { href: lp("/glossary"), labelKey: "glossary" as const },
-    { href: lp("/about"), labelKey: "about" as const },
+    { href: lp("/"), label: t.nav.home },
+    { href: lp("/chapters"), label: t.nav.chapters },
+    { href: lp("/exercises"), label: t.nav.exercises },
+    { href: lp("/quiz"), label: t.nav.quiz },
+    { href: lp("/glossary"), label: t.nav.glossary },
+    { href: lp("/about"), label: t.nav.about },
   ];
 
-  const { t } = useLang();
-  const mobileLinks = desktopLinks.map((link) => ({
-    href: link.href,
-    label: t.nav[link.labelKey],
-  }));
-  const desktopLinksWithLabels = desktopLinks.map((link) => ({
-    href: link.href,
-    label: t.nav[link.labelKey],
-  }));
+  const mobileLinks = desktopLinks;
 
-  const switchLang = (newLang: Lang) => {
-    if (newLang === lang) {
-      return;
-    }
-    router.push(swapLocaleInPath(pathname, newLang));
+  const langLabels: Record<"en" | "fr", string> = {
+    fr: "Français",
+    en: "English",
+  };
+
+  const langLabelsShort: Record<"en" | "fr", string> = {
+    fr: "FR",
+    en: "EN",
+  };
+
+  const switchLang = (nextLang: Lang) => {
+    setMenuOpen(false);
+    if (nextLang === lang) return;
+    router.push(swapLocaleInPath(pathname, nextLang) + window.location.search + window.location.hash);
   };
 
   const LangToggle = ({ small }: { small?: boolean }) => (
-    <select aria-label={t.common.language} value={lang} onChange={event => switchLang(event.target.value as Lang)}
-      style={{ maxWidth: small ? 130 : 150, background: "var(--bg-card)", color: "var(--text-primary)", padding: "0.4rem", border: "1px solid var(--border)", borderRadius: 4 }}>
-      {SUPPORTED_LANGS.map(code => <option key={code} value={code}>{new Intl.DisplayNames([code], {type: "language"}).of(code)}</option>)}
-    </select>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0",
+        border: "1px solid var(--border)",
+        borderRadius: "4px",
+        overflow: "hidden",
+        fontFamily: "var(--font-inter)",
+        fontSize: small ? "0.8rem" : "0.75rem",
+        fontWeight: 500,
+        flexShrink: 0,
+      }}
+    >
+      {(["fr", "en"] as const).map((l) => (
+        <button
+          key={l}
+          aria-pressed={lang === l}
+          type="button"
+          onClick={() => switchLang(l)}
+          style={{
+            background: lang === l ? "var(--amber)" : "transparent",
+            color: lang === l ? (theme === "dark" ? "#0a0b0f" : "#ffffff") : "var(--text-secondary)",
+            border: "none",
+            width: small ? "42px" : undefined,
+            padding: small ? "0.45rem 0.75rem" : "0.35rem 0.65rem",
+            cursor: "pointer",
+            letterSpacing: "0.02em",
+            transition: "background 0.2s, color 0.2s",
+            lineHeight: 1,
+            whiteSpace: "nowrap",
+          }}
+        >
+          {small ? langLabelsShort[l] : langLabels[l]}
+        </button>
+      ))}
+    </div>
   );
 
   return (
@@ -57,6 +256,25 @@ export function NavBar() {
         @media (max-width: 700px) {
           .nav-desktop { display: none !important; }
           .nav-mobile-btn { display: flex !important; }
+        }
+        .nav-link {
+          position: relative;
+        }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -4px;
+          width: 100%;
+          height: 1.5px;
+          background: var(--amber);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link-active::after {
+          transform: scaleX(1);
         }
       `}</style>
       <nav
@@ -82,6 +300,7 @@ export function NavBar() {
             gap: "1rem",
           }}
         >
+          {/* Desktop nav */}
           <div
             className="nav-desktop"
             style={{
@@ -91,17 +310,22 @@ export function NavBar() {
               minWidth: 0,
             }}
           >
-            <LangToggle />
+            {/* Language toggle + more-languages menu, stacked and flush */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+              <LangToggle />
+              <MoreLanguagesMenu lang={lang} onSelect={switchLang} />
+            </div>
 
-            {desktopLinksWithLabels.map((link) => (
+            {desktopLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                className={`nav-link${pathname === link.href ? " nav-link-active" : ""}`}
                 style={{
                   fontFamily: "var(--font-inter)",
-                  fontSize: "0.875rem",
-                  fontWeight: 400,
-                  letterSpacing: "0.05em",
+                  fontSize: "0.8rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.09em",
                   textTransform: "uppercase",
                   color:
                     pathname === link.href
@@ -125,13 +349,20 @@ export function NavBar() {
             ))}
           </div>
 
+          {/* Mobile: hamburger + theme toggle */}
           <div
             className="nav-mobile-btn"
             style={{ alignItems: "center", gap: "0.75rem", flex: 1, justifyContent: "space-between" }}
           >
-            <LangToggle small />
+            {/* Lang toggle visible on mobile bar */}
+            <div style={{ position: "relative", display: "flex", alignItems: "center", gap: "0.5rem", minWidth: 0 }}>
+              <LangToggle small />
+              <MoreLanguagesMenu lang={lang} onSelect={switchLang} small />
+            </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+
+              {/* Theme toggle */}
               <button
                 onClick={toggleTheme}
                 aria-label={theme === "dark" ? t.common.lightMode : t.common.darkMode}
@@ -153,9 +384,11 @@ export function NavBar() {
                 {theme === "dark" ? "☀" : "☾"}
               </button>
 
+              {/* Hamburger */}
               <button
                 onClick={() => setMenuOpen((o) => !o)}
                 aria-label={t.common.toggleMenu}
+                aria-expanded={menuOpen}
                 style={{
                   background: "transparent",
                   border: "1px solid var(--border)",
@@ -179,7 +412,8 @@ export function NavBar() {
             </div>
           </div>
 
-          <div className="nav-desktop" style={{ alignItems: "center", flexShrink: 0 }}>
+          {/* Desktop theme toggle */}
+          <div className="nav-desktop" style={{ alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
             <button
               onClick={toggleTheme}
               aria-label={theme === "dark" ? t.common.lightMode : t.common.darkMode}
@@ -212,6 +446,7 @@ export function NavBar() {
           </div>
         </div>
 
+        {/* Mobile dropdown menu */}
         {menuOpen && (
           <div
             style={{
