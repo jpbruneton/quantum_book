@@ -16,6 +16,7 @@ import { useLocalizedPath } from "@/lib/useLocalizedPath";
 type LocalizedLesson = Theme["lessons"][number] & {
   contentLang: string;
   renderedLang: string;
+  toc: import("@/lib/lessonPresentation").TocEntry[];
 };
 
 type ThemeWithLocalizedLessonContent = Omit<Theme, "lessons"> & {

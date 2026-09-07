@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getWebTheme, getWebThemes, bookMeta } from "@/lib/chapters";
-import { buildThemeWithLocalizedContent } from "@/lib/chapterPage.server";
+import { buildThemeWithLocalizedContent, hasLessonWebContent } from "@/lib/chapterPage.server";
 import {
   findLessonIndexByRef,
   lessonToPathSegment,
@@ -52,6 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${isFr ? "Thème" : "Theme"} ${theme.number}, ${label}`,
     description,
     keywords,
+    robots: {index: hasLessonWebContent(lesson.texFile, params.lang), follow: true},
     alternates: localeAlternates(params.lang, `/chapters/${theme.slug}/${params.lessonRef}`),
     openGraph: {
       type: "article",
@@ -129,7 +130,7 @@ export default function ChapterLessonPage({ params }: Props) {
 
   return (
     <>
-      {lessonJsonLd(theme, theme.lessons[lessonIndex], params.lang, params.lessonRef).map((block, index) => (
+      {(hasLessonWebContent(theme.lessons[lessonIndex].texFile, params.lang) ? lessonJsonLd(theme, theme.lessons[lessonIndex], params.lang, params.lessonRef) : []).map((block, index) => (
         <script
           key={index}
           type="application/ld+json"

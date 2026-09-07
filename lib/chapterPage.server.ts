@@ -1,3 +1,4 @@
+import { buildLessonPresentation } from "@/lib/lessonPresentation";
 import "server-only";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -24,7 +25,7 @@ export function hasLessonWebContent(frTexFile: string, lang: SiteLang): boolean 
   const texPath = getTexPathByFileName(getTexFilePathForLang(frTexFile, lang));
   if (!texPath || !existsSync(texPath)) return false;
   try {
-    return readFileSync(texPath, "utf-8").trim().length > 0;
+    return readFileSync(texPath, "utf-8").replace(/(?<!\\)%[^\n]*/g, "").trim().length > 0;
   } catch {
     return false;
   }
@@ -47,7 +48,7 @@ export function buildThemeWithLocalizedContent(
     ...theme,
     lessons: theme.lessons.map((lesson, index) => {
       if (index !== activeLessonIndex) {
-        return { ...lesson, content: "", contentLang: "", renderedLang: "", references: [] };
+        return { ...lesson, content: "", contentLang: "", renderedLang: "", toc: [], references: [] };
       }
       const resolvedReferences = getLessonReferences(
         theme.number,
@@ -59,11 +60,13 @@ export function buildThemeWithLocalizedContent(
         getLessonWebContent(langTexFile, -1, resolvedReferences) ||
         (lang === "fr" ? lesson.content : "");
       const renderedLang = langContent ? processLatex(langContent) : "";
+      const presentation = buildLessonPresentation(langContent, renderedLang, lang);
       return {
         ...lesson,
         content: "",
-        contentLang: langContent,
-        renderedLang,
+        contentLang: "",
+        renderedLang: presentation.content,
+        toc: presentation.toc,
         references: resolvedReferences,
       };
     }),

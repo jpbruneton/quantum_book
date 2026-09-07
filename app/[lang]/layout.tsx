@@ -1,3 +1,6 @@
+import SiteDocument, { metadata } from "@/app/components/SiteDocument";
+export function generateMetadata({params}: {params: {lang: string}}) { return {...metadata, robots: {index: params.lang === "fr" || params.lang === "en", follow: true}}; }
+export const dynamic = "error";
 import { notFound } from "next/navigation";
 import { LangProvider } from "@/app/context/LangContext";
 import { NavBar } from "@/app/components/NavBar";
@@ -20,11 +23,11 @@ export default function LangLayout({ children, params }: Props) {
   }
 
   return (
-    <LangProvider initialLang={params.lang}>
+    <SiteDocument lang={params.lang}><LangProvider initialLang={params.lang}>
       <NavBar />
       <main>{children}</main>
       <Footer />
       <VercelInstrumentation />
-    </LangProvider>
+    </LangProvider></SiteDocument>
   );
 }

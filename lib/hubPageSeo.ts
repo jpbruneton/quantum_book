@@ -7,7 +7,7 @@ interface HubPageSeoCopy {
   description: string;
 }
 
-const HUB_PAGE_SEO: Record<HubPageKey, Record<SiteLang, HubPageSeoCopy>> = {
+const HUB_PAGE_SEO: Record<HubPageKey, Record<"fr" | "en", HubPageSeoCopy>> = {
   home: {
     en: {
       title: "Quantum Mechanics — Free textbook with lessons, exercises and PDFs",
@@ -71,5 +71,5 @@ const HUB_PAGE_SEO: Record<HubPageKey, Record<SiteLang, HubPageSeoCopy>> = {
 };
 
 export function hubPageSeo(page: HubPageKey, lang: SiteLang): HubPageSeoCopy {
-  return HUB_PAGE_SEO[page][lang];
+  return HUB_PAGE_SEO[page][lang === "fr" ? "fr" : "en"];
 }

@@ -78,7 +78,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
       pdfLabel: "PDF",
       pdfSub: "statements + solutions",
     },
-  }[lang];
+  }[lang === "fr" ? "fr" : "en"];
 
   const index = lang === "fr" ? indexFr : indexEn;
   const hasQuery = query.trim().length > 0;
@@ -108,6 +108,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
       <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+        {index.length === 0 && <p>{lang === "fr" ? "Aucun exercice disponible dans cette langue." : "No exercises available in this language yet."}</p>}
         <h1
           style={{
             fontFamily: "var(--font-playfair)",
@@ -177,7 +178,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             {themes.map((theme) => {
               const title = lang === "fr" ? theme.titleFr : theme.titleEn;
               const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
-              const pdfHref = lang === "fr" ? theme.pdfLinks.fr : theme.pdfLinks.en;
+              const pdfHref = lang === "fr" ? theme.pdfLinks.fr : lang === "en" ? theme.pdfLinks.en : null;
 
               return (
                 <div
@@ -339,7 +340,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             if (!cards || cards.length === 0) return null;
             const title = lang === "fr" ? theme.titleFr : theme.titleEn;
             const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
-            const pdfHref = lang === "fr" ? theme.pdfLinks.fr : theme.pdfLinks.en;
+            const pdfHref = lang === "fr" ? theme.pdfLinks.fr : lang === "en" ? theme.pdfLinks.en : null;
 
             const linkStyle: CSSProperties = {
               fontFamily: "var(--font-crimson)",

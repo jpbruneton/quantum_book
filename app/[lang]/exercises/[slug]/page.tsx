@@ -6,6 +6,7 @@ import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import {
   buildAllExerciseIndexEntries,
   themeHasExercisesFrOrEn,
+  themeHasAnyExercises,
 } from "@/lib/exercisesLibrary.server";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
@@ -16,7 +17,7 @@ interface Props {
   params: { lang: string; slug: string };
 }
 
-function buildThemeExerciseCards(themeNumber: number): {
+function buildThemeExerciseCards(themeNumber: number, lang: import("@/lib/i18n").Lang): {
   exercisesFr: ThemeExerciseCard[];
   exercisesEn: ThemeExerciseCard[];
 } {
@@ -24,7 +25,7 @@ function buildThemeExerciseCards(themeNumber: number): {
   const exercisesEn: ThemeExerciseCard[] = [];
   let frIndex = 0;
   let enIndex = 0;
-  for (const entry of buildAllExerciseIndexEntries("fr")) {
+  for (const entry of (lang === "fr" ? buildAllExerciseIndexEntries(lang) : [])) {
     if (entry.themeNumber !== themeNumber) continue;
     frIndex += 1;
     exercisesFr.push({
@@ -34,7 +35,7 @@ function buildThemeExerciseCards(themeNumber: number): {
       keywords: entry.keywords,
     });
   }
-  for (const entry of buildAllExerciseIndexEntries("en")) {
+  for (const entry of (lang !== "fr" ? buildAllExerciseIndexEntries(lang) : [])) {
     if (entry.themeNumber !== themeNumber) continue;
     enIndex += 1;
     exercisesEn.push({
@@ -67,6 +68,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${isFr ? "Exercices" : "Exercises"} – ${isFr ? "Thème" : "Theme"} ${theme.number}: ${title} | ${bookMeta.title}`,
     description: `${isFr ? "Exercices corrigés pour le thème" : "Solved exercises for Theme"} ${theme.number}: ${title} — ${description}`,
+    robots: {index: themeHasAnyExercises(theme.number, params.lang), follow: true},
     alternates: localeAlternates(params.lang, `/exercises/${theme.slug}`),
     openGraph: {
       title: `${isFr ? "Exercices" : "Exercises"} – ${isFr ? "Thème" : "Theme"} ${theme.number}: ${title}`,
@@ -81,8 +83,8 @@ export default function ExerciseThemePage({ params }: Props) {
   const theme = getWebTheme(params.slug);
   if (!theme) notFound();
 
-  const { exercisesFr, exercisesEn } = buildThemeExerciseCards(theme.number);
-  if (exercisesFr.length === 0 && exercisesEn.length === 0) notFound();
+  const { exercisesFr, exercisesEn } = buildThemeExerciseCards(theme.number, params.lang);
+
 
   return (
     <ExerciseThemeClient

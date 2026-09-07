@@ -1,3 +1,5 @@
+import { processLatex } from "@/lib/latex";
+import type { Lang } from "@/lib/i18n";
 import "server-only";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -266,7 +268,9 @@ function extractFootnotesFromParagraph(input: string): { text: string; footnotes
 
 function normalizeFigurePath(path: string): string {
   const withoutPrefix = path.replace(/^\.?\/*/, "").replace(/^figs\//, "");
-  return `/figs/${withoutPrefix}`;
+  if (/^[a-z]{2}\//.test(withoutPrefix)) return `/figs/${withoutPrefix}`;
+  if (/^lecon\d+_fig\d+\.png$/.test(withoutPrefix)) return `/figs/fr/theme1/${withoutPrefix}`;
+  return `/figs/fr/${withoutPrefix}`;
 }
 
 function escapeHtmlAttribute(value: string): string {
@@ -767,7 +771,7 @@ interface CitationNumberMaps {
   fr: Record<string, number>;
 }
 
-type ContentLanguage = "en" | "fr";
+type ContentLanguage = Lang;
 
 function buildCitationNumberMaps(references: LessonReference[]): CitationNumberMaps {
   const maps: CitationNumberMaps = { en: {}, fr: {} };
@@ -954,7 +958,7 @@ function normalizeLatexBlocks(
   let figureRenderIndex = 0;
   let equationRenderIndex = 0;
   const references = collectReferenceMap(result);
-  const isEnglish = contentLanguage === "en";
+  const isEnglish = contentLanguage !== "fr";
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
   result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
@@ -977,6 +981,8 @@ function normalizeLatexBlocks(
 
   // Exercise library metadata (web only; not rendered as prose).
   result = stripLatexCommandsWithSimpleArg(result, "keywords");
+  result = stripLatexCommandsWithSimpleArg(result, "seoready");
+  result = stripLatexCommandsWithSimpleArg(result, "lecon");
   result = stripLatexCommandsWithSimpleArg(result, "theme");
 
   // Support command-style theorem blocks such as \proposition{...}.
@@ -1458,7 +1464,7 @@ export function getLessonWebContent(
   try {
     const source = readFileSync(texPath, "utf-8");
     const citationMaps = buildCitationNumberMaps(references);
-    const contentLanguage: ContentLanguage = /_en\//.test(texFile) ? "en" : "fr";
+    const contentLanguage: ContentLanguage = /_fr\//.test(texFile) ? "fr" : "en";
     const paragraphs = parseTexParagraphs(source, citationMaps, contentLanguage);
     const limitedParagraphs = paragraphCount > 0 ? paragraphs.slice(0, paragraphCount) : paragraphs;
     if (limitedParagraphs.length === 0) return "";
@@ -1470,15 +1476,15 @@ export function getLessonWebContent(
 
 /** Plain HTML for exercise titles in search cards (no block-level TeX). */
 export function exerciseTitleToPlainHtml(texTitle: string): string {
-  return cleanLatexInline(texTitle);
+  return processLatex(cleanLatexInline(texTitle));
 }
 
 export function getTexWebHtmlFromSource(
   source: string,
-  contentLanguage: "en" | "fr",
+  contentLanguage: Lang,
   references: LessonReference[]
 ): string {
-  const lang: ContentLanguage = contentLanguage === "en" ? "en" : "fr";
+  const lang: ContentLanguage = contentLanguage !== "fr" ? "en" : "fr";
   const citationMaps = buildCitationNumberMaps(references);
   const paragraphs = parseTexParagraphs(source, citationMaps, lang);
   if (paragraphs.length === 0) return "";

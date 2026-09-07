@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
-import "./globals.css";
-import { Providers } from "./providers";
+import { isRtlLang, type Lang } from "@/lib/i18n";
+import { fontVariables } from "@/app/fonts";
+import "katex/dist/katex.min.css";
+import "../globals.css";
+import { Providers } from "../providers";
 import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 import { isSiteLang } from "@/lib/localeRoutes";
 import { getSiteUrl } from "@/lib/siteUrl";
@@ -77,23 +79,9 @@ export const metadata: Metadata = {
   },
 };
 
-function resolveHtmlLang(): "en" | "fr" {
-  const siteLang = headers().get("x-site-lang");
-  if (siteLang && isSiteLang(siteLang)) {
-    return siteLang;
-  }
-  return "en";
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const htmlLang = resolveHtmlLang();
-
+export default function SiteDocument({ children, lang }: { children: React.ReactNode; lang: Lang }) {
   return (
-    <html lang={htmlLang} suppressHydrationWarning>
+    <html lang={lang} dir={isRtlLang(lang) ? "rtl" : "ltr"} className={fontVariables} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

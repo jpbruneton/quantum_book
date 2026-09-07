@@ -57,40 +57,9 @@ function texRoot() {
   return join(repoRoot, "content", "tex");
 }
 
-function libraryDir(lang) {
-  return join(texRoot(), lang === "fr" ? "exercises_library_fr" : "exercises_library_en");
-}
-
-function listExerciseLibraryFiles(lang) {
-  const dir = libraryDir(lang);
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir)
-    .filter((name) => /^exercices.*\.tex$/i.test(name))
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
-}
-
-function parseThemeNumberFromSource(source) {
-  const m = source.match(/\\theme\s*\{([^}]*)\}/);
-  if (!m) return null;
-  const n = Number.parseInt(m[1].replace(/\s+/g, ""), 10);
-  if (!Number.isFinite(n) || n < 1) return null;
-  return n;
-}
-
 function combineThemeExerciseSources(themeNumber, lang) {
-  const parts = [];
-  const legacyPath = join(texRoot(), `theme${themeNumber}_${lang}`, "exo.tex");
-  if (existsSync(legacyPath)) {
-    parts.push(readFileSync(legacyPath, "utf8"));
-  }
-  for (const name of listExerciseLibraryFiles(lang)) {
-    const full = join(libraryDir(lang), name);
-    const source = readFileSync(full, "utf8");
-    if (parseThemeNumberFromSource(source) === themeNumber) {
-      parts.push(source);
-    }
-  }
-  return parts.join("\n\n");
+  const file = join(texRoot(), `exos_${lang}`, `exo_theme${themeNumber}.tex`);
+  return existsSync(file) ? readFileSync(file, "utf8").replace(/\\(?:seoready|lecon)\s*\{[^}]*\}/g, "") : "";
 }
 
 function stripEnvironmentBlocks(source, envName) {

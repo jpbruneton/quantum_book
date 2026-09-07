@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { localizedPath, type SiteLang } from "@/lib/localeRoutes";
+import { localizedPath, stripLocalePrefix, type SiteLang } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
-
+import { availablePageLanguages } from "@/lib/contentAvailability.server";
 export function localeAlternates(lang: SiteLang, path: string): NonNullable<Metadata["alternates"]> {
-  const pathWithoutLang = path.startsWith("/en/") || path.startsWith("/fr/")
-    ? path.replace(/^\/(en|fr)/, "") || "/"
-    : path.startsWith("/") ? path : `/${path}`;
-
-  return {
-    canonical: absoluteUrl(localizedPath(lang, pathWithoutLang)),
-    languages: {
-      en: absoluteUrl(localizedPath("en", pathWithoutLang)),
-      fr: absoluteUrl(localizedPath("fr", pathWithoutLang)),
-      "x-default": absoluteUrl(localizedPath("en", pathWithoutLang)),
-    },
-  };
+  const logicalPath = stripLocalePrefix(path).pathWithoutLang;
+  const available = availablePageLanguages(logicalPath);
+  const languages: Record<string, string> = Object.fromEntries(available.map(code => [code, absoluteUrl(localizedPath(code, logicalPath))]));
+  const fallback = available.includes("en") ? "en" : available[0];
+  if (fallback) languages["x-default"] = absoluteUrl(localizedPath(fallback, logicalPath));
+  return {canonical: absoluteUrl(localizedPath(lang, logicalPath)), languages};
 }

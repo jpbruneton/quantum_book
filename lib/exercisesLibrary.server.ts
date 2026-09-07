@@ -1,28 +1,21 @@
 import "server-only";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import { cache } from "react";
+import { SUPPORTED_LANGS, type Lang } from "@/lib/i18n";
 export type ExerciseIndexSource = "library" | "legacy";
-
 export interface ExerciseIndexEntry {
   source: ExerciseIndexSource;
-  /** Stable id: optional brace after \\begin{exo} (ou exercice), ou clé legacy. */
   id: string;
-  /** Titre entre crochets après \\begin{exo}[...] (TeX brut). */
   titleTex: string;
   keywords: string[];
   themeNumber: number;
-  /** Relative path under content/tex for library files (undefined for legacy). */
+  lessonNumber: number | null;
+  seoReady: boolean;
   libraryRelPath: string | undefined;
 }
-
-function texRoot(): string {
-  return join(process.cwd(), "content", "tex");
-}
-
-function libraryDir(lang: "fr" | "en"): string {
-  return join(texRoot(), lang === "fr" ? "exercises_library_fr" : "exercises_library_en");
-}
-
+function texRoot() { return join(process.cwd(), "content", "tex"); }
+function libraryDir(lang: Lang) { return join(texRoot(), `exos_${lang}`); }
 function readBalancedArg(input: string, openBraceIndex: number): { content: string; endIndex: number } | null {
   if (input[openBraceIndex] !== "{") return null;
   let depth = 1;
@@ -72,159 +65,6 @@ function parseKeywordsList(raw: string): string[] {
     .filter((k) => k.length > 0);
 }
 
-export function parseThemeNumberFromSource(source: string): number | null {
-  const arg = extractCommandArg(source, "theme");
-  if (!arg) return null;
-  const n = Number.parseInt(arg.replace(/\s+/g, ""), 10);
-  if (!Number.isFinite(n) || n < 1) return null;
-  return n;
-}
-
-export function listExerciseLibraryFiles(lang: "fr" | "en"): string[] {
-  const dir = libraryDir(lang);
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir)
-    .filter((name) => /^exercices.*\.tex$/i.test(name))
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
-}
-
-export function parseFirstExerciceHeader(source: string): { titleTex: string; id: string | null } {
-  const re =
-    /\\begin\s*\{\s*(?:exo|exercice|exercise)\s*\}\s*(?:\[([^\]]*)\])?\s*(?:\{([^}]*)\})?/i;
-  const m = re.exec(source);
-  if (!m) return { titleTex: "", id: null };
-  const titleTex = (m[1] ?? "").trim();
-  const id = (m[2] ?? "").trim();
-  return { titleTex, id: id.length > 0 ? id : null };
-}
-
-export function buildLibraryIndexEntries(lang: "fr" | "en"): ExerciseIndexEntry[] {
-  const dir = libraryDir(lang);
-  const names = listExerciseLibraryFiles(lang);
-  const entries: ExerciseIndexEntry[] = [];
-  for (const name of names) {
-    const full = join(dir, name);
-    let source: string;
-    try {
-      source = readFileSync(full, "utf-8");
-    } catch {
-      continue;
-    }
-    const themeNumber = parseThemeNumberFromSource(source);
-    if (themeNumber === null) continue;
-    const kwRaw = extractCommandArg(source, "keywords");
-    const keywords = kwRaw ? parseKeywordsList(kwRaw) : [];
-    const header = parseFirstExerciceHeader(source);
-    const baseId = header.id ?? name.replace(/\.tex$/i, "");
-    entries.push({
-      source: "library",
-      id: baseId,
-      titleTex: header.titleTex,
-      keywords,
-      themeNumber,
-      libraryRelPath: `${lang === "fr" ? "exercises_library_fr" : "exercises_library_en"}/${name}`,
-    });
-  }
-  return entries;
-}
-
-export function buildLegacyExoIndexEntries(themeNumber: number, lang: "fr" | "en"): ExerciseIndexEntry[] {
-  const folder = `theme${themeNumber}_${lang}`;
-  const full = join(texRoot(), folder, "exo.tex");
-  if (!existsSync(full)) return [];
-  const source = readFileSync(full, "utf-8");
-  const re =
-    /\\begin\s*\{\s*(?:exo|exercice|exercise)\s*\}\s*(?:\[([^\]]*)\])?\s*(?:\{([^}]*)\})?/gi;
-  const entries: ExerciseIndexEntry[] = [];
-  let match: RegExpExecArray | null;
-  let serial = 0;
-  while ((match = re.exec(source)) !== null) {
-    serial += 1;
-    const titleTex = (match[1] ?? "").trim();
-    const idRaw = (match[2] ?? "").trim();
-    entries.push({
-      source: "legacy",
-      id: idRaw.length > 0 ? idRaw : `legacy-${themeNumber}-${serial}`,
-      titleTex,
-      keywords: [],
-      themeNumber,
-      libraryRelPath: undefined,
-    });
-  }
-  return entries;
-}
-
-function compareLibraryEntriesByPath(a: ExerciseIndexEntry, b: ExerciseIndexEntry): number {
-  const pa = a.libraryRelPath ?? "";
-  const pb = b.libraryRelPath ?? "";
-  return pa.localeCompare(pb, undefined, { numeric: true, sensitivity: "base" });
-}
-
-/**
- * Ordre d'affichage et de numérotation globale : pour chaque thème (1…20),
- * d'abord les exercices du fichier legacy exo.tex s'il existe, puis les fiches
- * bibliothèque de ce thème (tri par nom de fichier).
- */
-export function buildAllExerciseIndexEntries(lang: "fr" | "en"): ExerciseIndexEntry[] {
-  const libraryAll = buildLibraryIndexEntries(lang);
-  const libraryByTheme = new Map<number, ExerciseIndexEntry[]>();
-  for (const e of libraryAll) {
-    const list = libraryByTheme.get(e.themeNumber);
-    if (list) list.push(e);
-    else libraryByTheme.set(e.themeNumber, [e]);
-  }
-  for (const list of Array.from(libraryByTheme.values())) {
-    list.sort(compareLibraryEntriesByPath);
-  }
-  const out: ExerciseIndexEntry[] = [];
-  for (let theme = 1; theme <= 20; theme += 1) {
-    for (const e of buildLegacyExoIndexEntries(theme, lang)) {
-      out.push(e);
-    }
-    const libs = libraryByTheme.get(theme);
-    if (libs) {
-      for (const e of libs) {
-        out.push(e);
-      }
-    }
-  }
-  return out;
-}
-
-export function combineThemeExerciseSources(themeNumber: number, lang: "fr" | "en"): string {
-  const parts: string[] = [];
-  const legacyPath = join(texRoot(), `theme${themeNumber}_${lang}`, "exo.tex");
-  if (existsSync(legacyPath)) {
-    parts.push(readFileSync(legacyPath, "utf-8"));
-  }
-  const libNames = listExerciseLibraryFiles(lang);
-  for (const name of libNames) {
-    const full = join(libraryDir(lang), name);
-    const source = readFileSync(full, "utf-8");
-    const t = parseThemeNumberFromSource(source);
-    if (t === themeNumber) {
-      parts.push(source);
-    }
-  }
-  return parts.join("\n\n");
-}
-
-export function themeHasAnyExercises(themeNumber: number, lang: "fr" | "en"): boolean {
-  const legacyPath = join(texRoot(), `theme${themeNumber}_${lang}`, "exo.tex");
-  if (existsSync(legacyPath)) return true;
-  const libNames = listExerciseLibraryFiles(lang);
-  for (const name of libNames) {
-    const full = join(libraryDir(lang), name);
-    const source = readFileSync(full, "utf-8");
-    if (parseThemeNumberFromSource(source) === themeNumber) return true;
-  }
-  return false;
-}
-
-export function themeHasExercisesFrOrEn(themeNumber: number): boolean {
-  return themeHasAnyExercises(themeNumber, "fr") || themeHasAnyExercises(themeNumber, "en");
-}
-
 interface ParsedExoBlock {
   id: string;
   titleTex: string;
@@ -257,41 +97,48 @@ function parseExoBlocksFromSource(source: string): ParsedExoBlock[] {
   return blocks;
 }
 
-export function listThemeExerciseIds(themeNumber: number): string[] {
-  const ids = new Set<string>();
-  for (const lang of ["fr", "en"] as const) {
-    const combined = combineThemeExerciseSources(themeNumber, lang);
-    for (const block of parseExoBlocksFromSource(combined)) {
+
+export function listExerciseLibraryFiles(lang: Lang): string[] {
+  const dir = libraryDir(lang);
+  return existsSync(dir) ? readdirSync(dir).filter(name => /^exo_theme\d+\.tex$/.test(name)).sort((a,b) => a.localeCompare(b, undefined, {numeric:true})) : [];
+}
+export const combineThemeExerciseSources = cache((themeNumber: number, lang: Lang): string => {
+  const file = join(libraryDir(lang), `exo_theme${themeNumber}.tex`);
+  return existsSync(file) ? readFileSync(file, "utf8").replace(/(?<!\\)%[^\n]*/g, "") : "";
+});
+export const buildAllExerciseIndexEntries = cache((lang: Lang): ExerciseIndexEntry[] => {
+  return listExerciseLibraryFiles(lang).flatMap(name => {
+    const themeNumber = Number(name.match(/\d+/)![0]);
+    const blocks = parseExoBlocksFromSource(combineThemeExerciseSources(themeNumber, lang));
+    const ids = new Set<string>();
+    return blocks.map(block => {
+      if (ids.has(block.id)) throw new Error(`Duplicate exercise ID ${block.id} in ${name}`);
       ids.add(block.id);
-    }
-  }
-  return Array.from(ids);
+      const lesson = extractCommandArg(block.source, "lecon");
+      return {source: "library" as const, id: block.id, titleTex: block.titleTex,
+        keywords: parseKeywordsList(extractCommandArg(block.source, "keywords") ?? ""),
+        themeNumber, lessonNumber: lesson ? Number(lesson) : null,
+        seoReady: extractCommandArg(block.source, "seoready") === "true",
+        libraryRelPath: `exos_${lang}/${name}`};
+    });
+  });
+});
+export function themeHasAnyExercises(themeNumber: number, lang: Lang) {
+  return buildAllExerciseIndexEntries(lang).some(entry => entry.themeNumber === themeNumber);
 }
-
-export function extractThemeExerciseSourceById(
-  themeNumber: number,
-  lang: "fr" | "en",
-  exerciseId: string
-): string | null {
-  const combined = combineThemeExerciseSources(themeNumber, lang);
-  for (const block of parseExoBlocksFromSource(combined)) {
-    if (block.id === exerciseId) {
-      return block.source;
-    }
-  }
-  return null;
+export function themeHasExercisesFrOrEn(themeNumber: number) {
+  return SUPPORTED_LANGS.some(lang => themeHasAnyExercises(themeNumber, lang));
 }
-
-export function findThemeExerciseEntry(
-  themeNumber: number,
-  exerciseId: string
-): ExerciseIndexEntry | null {
-  for (const lang of ["fr", "en"] as const) {
-    for (const entry of buildAllExerciseIndexEntries(lang)) {
-      if (entry.themeNumber === themeNumber && entry.id === exerciseId) {
-        return entry;
-      }
-    }
+export function listThemeExerciseIds(themeNumber: number, lang?: Lang): string[] {
+  return Array.from(new Set((lang ? [lang] : SUPPORTED_LANGS).flatMap(code => buildAllExerciseIndexEntries(code).filter(entry => entry.themeNumber === themeNumber).map(entry => entry.id))));
+}
+export function extractThemeExerciseSourceById(themeNumber: number, lang: Lang, exerciseId: string) {
+  return parseExoBlocksFromSource(combineThemeExerciseSources(themeNumber, lang)).find(block => block.id === exerciseId)?.source ?? null;
+}
+export function findThemeExerciseEntry(themeNumber: number, exerciseId: string, lang?: Lang) {
+  for (const code of lang ? [lang] : SUPPORTED_LANGS) {
+    const entry = buildAllExerciseIndexEntries(code).find(entry => entry.themeNumber === themeNumber && entry.id === exerciseId);
+    if (entry) return entry;
   }
   return null;
 }

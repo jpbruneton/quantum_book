@@ -189,7 +189,7 @@ export function ExerciseThemeClient({
           </p>
         )}
 
-        {(lang === "fr" ? pdfLinks.fr : pdfLinks.en) && (
+        {(lang === "fr" ? pdfLinks.fr : lang === "en" ? pdfLinks.en : null) && (
           <div
             style={{
               marginTop: "2rem",
@@ -201,7 +201,7 @@ export function ExerciseThemeClient({
               alignItems: "flex-start",
             }}
           >
-            <a href={(lang === "fr" ? pdfLinks.fr : pdfLinks.en) ?? undefined} download style={linkStyle}>
+            <a href={(lang === "fr" ? pdfLinks.fr : lang === "en" ? pdfLinks.en : null) ?? undefined} download style={linkStyle}>
               {pdfLabel}
             </a>
           </div>

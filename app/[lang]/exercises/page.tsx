@@ -1,14 +1,16 @@
+import { notFound } from "next/navigation";
+import { isSiteLang, type SiteLang } from "@/lib/localeRoutes";
 import { getWebThemes } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import { buildAllExerciseIndexEntries, themeHasAnyExercises } from "@/lib/exercisesLibrary.server";
 import { ExercisesClient } from "./ExercisesClient";
 
-function exoTexExists(themeNumber: number, lang: "fr" | "en"): boolean {
+function exoTexExists(themeNumber: number, lang: SiteLang): boolean {
   return themeHasAnyExercises(themeNumber, lang);
 }
 
-function buildIndexCards(lang: "fr" | "en") {
+function buildIndexCards(lang: SiteLang) {
   const slugByNumber = new Map(getWebThemes().map((t) => [t.number, t.slug]));
   return buildAllExerciseIndexEntries(lang).map((e, index) => ({
     id: e.id,
@@ -22,7 +24,9 @@ function buildIndexCards(lang: "fr" | "en") {
   }));
 }
 
-export default function ExercisesPage() {
+export default function ExercisesPage({params}: {params: {lang: string}}) {
+  if (!isSiteLang(params.lang)) notFound();
+  const lang = params.lang;
   const themes = getWebThemes().map((theme) => ({
     slug: theme.slug,
     number: theme.number,
@@ -30,13 +34,13 @@ export default function ExercisesPage() {
     titleEn: theme.titleEn,
     descriptionFr: theme.descriptionFr,
     descriptionEn: theme.descriptionEn,
-    hasContentFr: exoTexExists(theme.number, "fr"),
-    hasContentEn: exoTexExists(theme.number, "en"),
+    hasContentFr: lang === "fr" && exoTexExists(theme.number, lang),
+    hasContentEn: lang !== "fr" && exoTexExists(theme.number, lang),
     pdfLinks: getExerciseThemePdfLinks(theme.number),
   }));
 
-  const indexFr = buildIndexCards("fr");
-  const indexEn = buildIndexCards("en");
+  const indexFr = lang === "fr" ? buildIndexCards(lang) : [];
+  const indexEn = lang !== "fr" ? buildIndexCards(lang) : [];
 
   return <ExercisesClient themes={themes} indexFr={indexFr} indexEn={indexEn} />;
 }

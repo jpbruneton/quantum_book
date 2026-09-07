@@ -1,6 +1,7 @@
 "use client";
+import type { TocEntry } from "@/lib/lessonPresentation";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
@@ -12,60 +13,7 @@ interface Props {
 interface LessonWithLocalizedContent extends Lesson {
   contentLang: string;
   renderedLang: string;
-}
-
-interface TocEntry {
-  id: string;
-  text: string;
-  level: 2 | 3 | 4;
-}
-
-function simplifyLatexForToc(value: string): string {
-  let result = value;
-  result = result.replace(/\\mathbb\{([^{}]+)\}/g, "$1");
-  result = result.replace(/\\mathcal\{([^{}]+)\}/g, "$1");
-  result = result.replace(/\\ell/g, "ℓ");
-  result = result.replace(/\\C/g, "C");
-  result = result.replace(/\\N/g, "N");
-  result = result.replace(/\\R/g, "R");
-  result = result.replace(/\\to/g, "→");
-  result = result.replace(/\\rightarrow/g, "→");
-  result = result.replace(/[_^]\{([^{}]+)\}/g, "$1");
-  result = result.replace(/[_^]([A-Za-z0-9]+)/g, "$1");
-  result = result.replace(/\\[a-zA-Z]+/g, "");
-  result = result.replace(/[{}]/g, "");
-  result = result.replace(/\s*([()])/g, "$1").replace(/([()])\s*/g, "$1");
-  result = result.replace(/([A-Za-zℓ])\s+(\d)/g, "$1$2");
-  result = result.replace(/(\d)\s+([A-Za-z])/g, "$1$2");
-  return result.replace(/\s+/g, " ").trim();
-}
-
-function stripHtmlForToc(value: string): string {
-  const withoutKatexMathMl = value.replace(
-    /<span class="katex-mathml">[\s\S]*?<\/span>/g,
-    ""
-  );
-  const htmlStripped = withoutKatexMathMl.replace(/<[^>]+>/g, " ");
-  const withoutInlineMathDelimiters = htmlStripped.replace(/\$+([\s\S]*?)\$+/g, (_m, math: string) =>
-    simplifyLatexForToc(math)
-  );
-  const compact = withoutInlineMathDelimiters
-    .replace(/\s*([()])/g, "$1")
-    .replace(/([()])\s*/g, "$1")
-    .replace(/([A-Za-zℓ])\s+(\d)/g, "$1$2")
-    .replace(/(\d)\s+([A-Za-z])/g, "$1$2");
-  return compact.replace(/\s+/g, " ").trim();
-}
-
-function slugify(value: string): string {
-  const normalized = value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-  return normalized || "section";
+  toc: TocEntry[];
 }
 
 export function ChapterContent({ lesson }: Props) {
@@ -77,8 +25,7 @@ export function ChapterContent({ lesson }: Props) {
   const lp = useLocalizedPath();
   const englishReferences = lesson.references.filter((reference) => reference.language === "en");
   const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
-  const lessonContent = lesson.contentLang;
-  const hasLessonContent = lessonContent.trim().length > 0;
+  const hasLessonContent = lesson.renderedLang.trim().length > 0;
   const lessonHeadingFr = lesson.subtitleFr.trim() || lesson.titleFr;
   const lessonHeadingEn = lesson.subtitleEn.trim() || lesson.titleEn;
   const lessonHeading = lang === "fr" ? lessonHeadingFr : lessonHeadingEn;
@@ -87,7 +34,6 @@ export function ChapterContent({ lesson }: Props) {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [lesson.slug]);
 
-  const renderedContent = lesson.renderedLang;
   const splitReferenceLabel = (label: string, fallbackUrl: string) => {
     const normalizedLabel = label.replace(/\s+/g, " ").trim();
     const inlineUrlMatch = normalizedLabel.match(/https?:\/\/[^\s]+/i);
@@ -139,54 +85,7 @@ export function ChapterContent({ lesson }: Props) {
       description,
     };
   };
-  const localizedRenderedContent = useMemo(() => {
-    return renderedContent.replace(
-      /<sup class="lesson-cite" data-cite-en="([^"]*)" data-cite-fr="([^"]*)">\[[^\]]*\]<\/sup>/g,
-      (_match, enRaw: string, frRaw: string) => {
-        const preferred = lang === "fr" ? frRaw : enRaw;
-        const fallback = lang === "fr" ? enRaw : frRaw;
-        const value = preferred && preferred !== "?" ? preferred : fallback && fallback !== "?" ? fallback : "?";
-        return `<sup class="lesson-cite">[${value}]</sup>`;
-      }
-    );
-  }, [renderedContent, lang]);
-  const sourceHeadingTexts = useMemo(() => {
-    const sourceHeadingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
-    const headings: string[] = [];
-    lessonContent.replace(sourceHeadingRegex, (_fullMatch, _tag: string, headingInner: string) => {
-      const withoutInlineMathDelimiters = headingInner.replace(/\$+([\s\S]*?)\$+/g, (_m, math: string) =>
-        simplifyLatexForToc(math)
-      );
-      const text = stripHtmlForToc(withoutInlineMathDelimiters);
-      headings.push(text);
-      return "";
-    });
-    return headings;
-  }, [lessonContent]);
-  const webContentWithToc = useMemo(() => {
-    const toc: TocEntry[] = [];
-    const usedIds: Record<string, number> = {};
-    const headingRegex = /<(h[2-4])>([\s\S]*?)<\/\1>/g;
-    let headingIndex = 0;
-
-    const content = localizedRenderedContent.replace(
-      headingRegex,
-      (_fullMatch, tag: string, headingInner: string) => {
-        const level = Number(tag.slice(1)) as 2 | 3 | 4;
-        const text = sourceHeadingTexts[headingIndex] || stripHtmlForToc(headingInner);
-        headingIndex += 1;
-        const baseId = slugify(text);
-        const current = usedIds[baseId] ?? 0;
-        usedIds[baseId] = current + 1;
-        const id = current > 0 ? `${baseId}-${current + 1}` : baseId;
-
-        toc.push({ id, text, level });
-        return `<${tag} id="${id}">${headingInner}</${tag}>`;
-      }
-    );
-
-    return { content, toc };
-  }, [localizedRenderedContent, sourceHeadingTexts]);
+  const webContentWithToc = {content: lesson.renderedLang, toc: lesson.toc};
 
   useEffect(() => {
     if (tab !== "web" || webContentWithToc.toc.length === 0) return;

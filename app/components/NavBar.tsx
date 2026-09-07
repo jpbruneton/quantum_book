@@ -1,4 +1,5 @@
 "use client";
+import { SUPPORTED_LANGS, type Lang } from "@/lib/i18n";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/app/context/ThemeContext";
@@ -19,6 +20,7 @@ export function NavBar() {
     { href: lp("/"), labelKey: "home" as const },
     { href: lp("/chapters"), labelKey: "chapters" as const },
     { href: lp("/exercises"), labelKey: "exercises" as const },
+    { href: lp("/quiz"), labelKey: "quiz" as const },
     { href: lp("/glossary"), labelKey: "glossary" as const },
     { href: lp("/about"), labelKey: "about" as const },
   ];
@@ -33,12 +35,7 @@ export function NavBar() {
     label: t.nav[link.labelKey],
   }));
 
-  const langLabels: Record<"en" | "fr", string> = {
-    fr: "Français",
-    en: "English",
-  };
-
-  const switchLang = (newLang: "en" | "fr") => {
+  const switchLang = (newLang: Lang) => {
     if (newLang === lang) {
       return;
     }
@@ -46,41 +43,10 @@ export function NavBar() {
   };
 
   const LangToggle = ({ small }: { small?: boolean }) => (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0",
-        border: "1px solid var(--border)",
-        borderRadius: "4px",
-        overflow: "hidden",
-        fontFamily: "var(--font-inter)",
-        fontSize: small ? "0.8rem" : "0.75rem",
-        fontWeight: 500,
-        flexShrink: 0,
-      }}
-    >
-      {(["fr", "en"] as const).map((l) => (
-        <button
-          key={l}
-          type="button"
-          onClick={() => switchLang(l)}
-          style={{
-            background: lang === l ? "var(--amber)" : "transparent",
-            color: lang === l ? (theme === "dark" ? "#0a0b0f" : "#ffffff") : "var(--text-secondary)",
-            border: "none",
-            padding: small ? "0.45rem 0.75rem" : "0.35rem 0.65rem",
-            cursor: "pointer",
-            letterSpacing: "0.02em",
-            transition: "background 0.2s, color 0.2s",
-            lineHeight: 1,
-            whiteSpace: "nowrap",
-          }}
-        >
-          {langLabels[l]}
-        </button>
-      ))}
-    </div>
+    <select aria-label="Language" value={lang} onChange={event => switchLang(event.target.value as Lang)}
+      style={{ maxWidth: small ? 130 : 150, background: "var(--bg-card)", color: "var(--text-primary)", padding: "0.4rem", border: "1px solid var(--border)", borderRadius: 4 }}>
+      {SUPPORTED_LANGS.map(code => <option key={code} value={code}>{new Intl.DisplayNames([code], {type: "language"}).of(code)}</option>)}
+    </select>
   );
 
   return (

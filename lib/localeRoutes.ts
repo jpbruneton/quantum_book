@@ -1,4 +1,4 @@
-import type { Lang } from "@/lib/i18n";
+import { SUPPORTED_LANGS, isLang, sectionSlugs, type Lang } from "@/lib/i18n";
 import {
   canonicalizeChapterExercisePath,
   localizeChapterExercisePath,
@@ -6,15 +6,12 @@ import {
 
 export type SiteLang = Lang;
 
-export const SITE_LANGS: SiteLang[] = ["en", "fr"];
+export const SITE_LANGS: SiteLang[] = [...SUPPORTED_LANGS];
 export const DEFAULT_SITE_LANG: SiteLang = "en";
 
-const ROUTE_SECTIONS = {
-  chapters: { en: "chapters", fr: "chapitres" },
-  exercises: { en: "exercises", fr: "exercices" },
-  glossary: { en: "glossary", fr: "glossaire" },
-  about: { en: "about", fr: "a-propos" },
-} as const;
+const ROUTE_SECTIONS = Object.fromEntries(Object.keys(sectionSlugs.en).map(section => [section,
+  Object.fromEntries(SUPPORTED_LANGS.map(lang => [lang, sectionSlugs[lang][section as keyof typeof sectionSlugs.en]]))
+])) as Record<keyof typeof sectionSlugs.en, Record<Lang, string>>;
 
 type RouteSection = keyof typeof ROUTE_SECTIONS;
 
@@ -32,7 +29,7 @@ function publicSectionSlug(lang: SiteLang, section: RouteSection): string {
 
 function resolveSectionFromPublicSlug(slug: string): RouteSection | null {
   for (const section of Object.keys(ROUTE_SECTIONS) as RouteSection[]) {
-    if (ROUTE_SECTIONS[section].en === slug || ROUTE_SECTIONS[section].fr === slug) {
+    if (Object.values(ROUTE_SECTIONS[section]).includes(slug)) {
       return section;
     }
   }
@@ -68,7 +65,7 @@ function toPublicPath(lang: SiteLang, logicalPath: string): string {
 }
 
 export function isSiteLang(value: string): value is SiteLang {
-  return value === "en" || value === "fr";
+  return isLang(value);
 }
 
 /** Public URL for a logical app path, with locale-prefixed section slugs. */
@@ -106,11 +103,11 @@ export function preferSiteLangFromAcceptLanguage(header: string | null): SiteLan
   if (!header) {
     return DEFAULT_SITE_LANG;
   }
-  const first = header.split(",")[0]?.trim().toLowerCase() ?? "";
-  if (first.startsWith("fr")) {
-    return "fr";
-  }
-  return DEFAULT_SITE_LANG;
+  const preferences = header.split(",").map((part) => {
+    const [tag, quality] = part.trim().toLowerCase().split(";q=");
+    return { lang: tag.split("-")[0], q: quality === undefined ? 1 : Number(quality) };
+  }).filter(item => item.q > 0).sort((a, b) => b.q - a.q);
+  return preferences.find(item => isSiteLang(item.lang))?.lang as SiteLang ?? DEFAULT_SITE_LANG;
 }
 
 /** Internal pathname for Next.js routing: /{lang}/chapters/... */

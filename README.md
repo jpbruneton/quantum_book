@@ -47,3 +47,14 @@ book continues to expand.
 ([source](https://github.com/jpbruneton/thermo_book)) — a companion course
 on thermodynamics, by Jean-Philippe Bruneton (Université Paris Cité,
 France).
+
+## Architecture et contribution
+
+Voir [architecture](docs/architecture.md), [langues](docs/languages.md),
+[instructions de traduction](docs/translation-prompt.md) et
+[suivi des traductions](docs/translation-status.md).
+
+Initialiser `content/tex` avec `git submodule update --init --recursive`, d?finir
+`NEXT_PUBLIC_SITE_URL=https://quantumlectures.org`, puis `npm ci` et `npm run build`.
+Le build synchronise les figures priv?es et pr?compile les pages dans les 20 routes
+de langue ; seuls FR et partiellement EN poss?dent actuellement du contenu.

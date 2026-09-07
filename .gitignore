@@ -38,3 +38,6 @@ next-env.d.ts
 
 # Google Search Console exports
 /google_webmaster
+
+# Generated from the private content submodule at prebuild
+/public/figs/

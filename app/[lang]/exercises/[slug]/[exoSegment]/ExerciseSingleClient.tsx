@@ -1,10 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
 import Link from "next/link";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
-import { processLatex } from "@/lib/latex";
 
 interface Props {
   themeSlug: string;
@@ -13,8 +11,7 @@ interface Props {
   themeTitleEn: string;
   titleHtml: string;
   keywords: string[];
-  contentFr: string;
-  contentEn: string;
+  rendered: string;
 }
 
 export function ExerciseSingleClient({
@@ -24,14 +21,11 @@ export function ExerciseSingleClient({
   themeTitleEn,
   titleHtml,
   keywords,
-  contentFr,
-  contentEn,
+  rendered,
 }: Props) {
   const { lang } = useLang();
   const lp = useLocalizedPath();
 
-  const rawContent = lang === "fr" ? contentFr : contentEn;
-  const rendered = useMemo(() => (rawContent ? processLatex(rawContent) : ""), [rawContent]);
 
   const themeTitle = lang === "fr" ? themeTitleFr : themeTitleEn;
   const themePrefix = lang === "fr" ? "Thème" : "Theme";

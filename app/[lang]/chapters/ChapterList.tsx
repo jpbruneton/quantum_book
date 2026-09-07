@@ -103,7 +103,7 @@ export function ChapterList() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {getThemeCategory(theme.slug, lang)}
+                  {getThemeCategory(theme.slug, lang === "fr" ? "fr" : "en")}
                 </span>
                 <div
                   className="chapter-list-number"

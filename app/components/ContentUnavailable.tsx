@@ -1,0 +1,1 @@
+export function ContentUnavailable() { return <div style={{maxWidth: 860, margin: "4rem auto", padding: "1.5rem"}}><h1>Translation in preparation</h1><p>This content is not yet available in this language.</p></div>; }

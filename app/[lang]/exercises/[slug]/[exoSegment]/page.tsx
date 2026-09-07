@@ -1,3 +1,5 @@
+import { processLatex } from "@/lib/latex";
+import { ContentUnavailable } from "@/app/components/ContentUnavailable";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
@@ -37,8 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const theme = getWebTheme(params.slug);
   if (!theme) return {};
   const exerciseId = exerciseSegmentToId(params.exoSegment);
-  const entry = findThemeExerciseEntry(theme.number, exerciseId);
-  if (!entry) return {};
+  const entry = findThemeExerciseEntry(theme.number, exerciseId, params.lang);
+  if (!entry) return {robots: {index: false, follow: true}, alternates: localeAlternates(params.lang, `/exercises/${theme.slug}/${params.exoSegment}`)};
   const path = exerciseDetailPath(params.lang, theme.slug, exerciseId);
   const url = absoluteUrl(path);
   const titlePlain = exerciseTitleToPlainHtml(entry.titleTex).replace(/<[^>]+>/g, "");
@@ -48,6 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${isFr ? "Exercice" : "Exercise"} – ${titlePlain} | ${isFr ? "Thème" : "Theme"} ${theme.number} | ${bookMeta.title}`,
     description: `${isFr ? "Exercice corrigé" : "Solved exercise"}: ${titlePlain}. ${isFr ? "Thème" : "Theme"} ${theme.number}: ${themeTitle}.`,
     keywords: entry.keywords,
+    robots: {index: entry.seoReady, follow: true},
     alternates: localeAlternates(
       params.lang,
       `/exercises/${theme.slug}/${params.exoSegment}`
@@ -70,14 +73,12 @@ export default function ExerciseDetailPage({ params }: Props) {
   const entry = findThemeExerciseEntry(theme.number, exerciseId);
   if (!entry) notFound();
 
-  const sourceFr = extractThemeExerciseSourceById(theme.number, "fr", exerciseId);
-  const sourceEn = extractThemeExerciseSourceById(theme.number, "en", exerciseId);
-  const contentFr = sourceFr ? getTexWebHtmlFromSource(sourceFr, "fr", []) : "";
-  const contentEn = sourceEn ? getTexWebHtmlFromSource(sourceEn, "en", []) : "";
+  const localizedEntry = findThemeExerciseEntry(theme.number, exerciseId, params.lang);
+  const source = extractThemeExerciseSourceById(theme.number, params.lang, exerciseId);
+  if (!source || !localizedEntry) return <ContentUnavailable />;
+  const rendered = processLatex(getTexWebHtmlFromSource(source, params.lang, []));
 
-  if (!contentFr && !contentEn) notFound();
-
-  const titleHtml = exerciseTitleToPlainHtml(entry.titleTex);
+  const titleHtml = exerciseTitleToPlainHtml(localizedEntry.titleTex);
 
   return (
     <ExerciseSingleClient
@@ -86,9 +87,8 @@ export default function ExerciseDetailPage({ params }: Props) {
       themeTitleFr={theme.titleFr}
       themeTitleEn={theme.titleEn}
       titleHtml={titleHtml}
-      keywords={entry.keywords}
-      contentFr={contentFr}
-      contentEn={contentEn}
+      keywords={localizedEntry.keywords}
+      rendered={rendered}
     />
   );
 }
