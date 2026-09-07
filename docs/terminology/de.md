@@ -28,6 +28,7 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 | Sujet | Choix et raison | Exemple / source | Statut |
 |---|---|---|---|
+| Figure de Riesz | Riesz : `Riesz` ; action : `Wirkung` ; composition : `Komposition` ; identité fondamentale : `Fundamentale Identität` | `figs-src/de/theme2/rieszfig.tex`, cohérent avec `theme2_de/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
 ## Suivi des décisions et harmonisation
 

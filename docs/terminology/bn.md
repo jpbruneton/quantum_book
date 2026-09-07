@@ -51,6 +51,7 @@ Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `
 
 | Sujet | Choix et raison | Exemple / source | Statut |
 |---|---|---|---|
+| Figure de Riesz | Riesz : `রিস` ; action : `ক্রিয়া` ; composition : `সংযোজন` ; identité fondamentale : `মৌলিক অভেদ` | `figs-src/bn/theme2/rieszfig.tex`, cohérent avec `theme2_bn/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
 ## Suivi des décisions et harmonisation
 

@@ -71,6 +71,11 @@ produit les PNG. Les quatre figures de la première leçon disposent aussi d'ali
 compatibles avec les anciens noms cités dans le cours. La figure symbolique de la
 seconde leçon est préparée sans republier sa page française.
 
+`scripts/build-riesz-figure.mjs` applique le même principe à la carte de Riesz du
+thème 2. Les 20 versions utilisent les libellés de leur leçon, avec formules
+explicitement isolées en LTR pour les trois langues RTL, puis sont servies depuis
+`figs/<lang>/theme2/rieszfig.png`.
+
 ## Vérification
 
 ```powershell

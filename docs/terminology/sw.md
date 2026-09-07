@@ -51,6 +51,7 @@ Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `
 
 | Sujet | Choix et raison | Exemple / source | Statut |
 |---|---|---|---|
+| Figure de Riesz | Riesz : `Riesz` ; action : `kitendo` ; composition : `utungaji` ; identité fondamentale : `Utambulisho wa msingi` | `figs-src/sw/theme2/rieszfig.tex`, cohérent avec `theme2_sw/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
 ## Suivi des décisions et harmonisation
 

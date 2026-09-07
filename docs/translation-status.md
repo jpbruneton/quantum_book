@@ -1,5 +1,21 @@
 # Notes et suivi des traductions Quantum
 
+## Carte de Riesz localisée — 7 septembre 2026
+
+La source TikZ de la carte de Riesz du thème 2, leçon 2, est maintenant conservée
+dans `figs-src/fr/theme2/rieszfig.tex` et générée dans les 19 langues cibles depuis
+`theme2-riesz-translations.json`. Les libellés « Riesz », « action »,
+« composition » et « identité fondamentale » suivent les choix déjà employés dans
+chaque leçon et sont consignés dans les glossaires.
+
+Deux erreurs du fichier transmis ont été corrigées avant compilation : les
+artefacts de collage et clés TikZ invalides, puis le vecteur `v` remplacé par `w`
+dans l'identité fondamentale pour retrouver exactement
+`<w|A|u>_G^* = <u|A^\dagger|w>_H`. Les 20 sources ont été compilées à 300 dpi sans
+glyphe manquant ni débordement. Tous les rendus ont été inspectés ; les formules
+des versions arabe, ourdoue et persane sont isolées en LTR. Les 20 leçons pointent
+désormais vers leur ressource localisée.
+
 ## Reprise de la leçon 1 finalisée — 7 septembre 2026
 
 Les 19 traductions de la leçon 1 du thème 1 ont été réalignées sur la source
@@ -59,7 +75,7 @@ Les commits du sous-module et du site donnent les révisions de livraison.
 | Thème 2, fiches 1 et 2 | 19 langues cibles | Traduction intégrale, fiches distinctes des leçons |
 | Interface, thèmes et métadonnées | 20 langues avec FR | Catalogues de même structure, un seul envoyé au navigateur |
 | TikZ thème 1 | 19 langues cibles | 95 sources compilées ; lexique localisé, polices adaptées, inspection visuelle |
-| Figures raster thème 2 | Toutes | Repli français autorisé en attendant les versions localisées |
+| Figures raster thème 2 | Toutes | Repli français conservé, sauf la carte de Riesz de la leçon 2, localisée dans les 20 langues |
 | Thème 1, leçon 2 française | fr | Temporairement masquée, source conservée |
 | Autres cours | Selon les fichiers existants | Disponibilité antérieure conservée ; pas de traduction du corps implicite |
 | Exercices | fr/en existants | Banques conservées, aucune nouvelle validation SEO |

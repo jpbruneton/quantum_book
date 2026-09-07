@@ -28,6 +28,7 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 
 | Sujet | Choix et raison | Exemple / source | Statut |
 |---|---|---|---|
+| Figure de Riesz | Riesz : `里斯` ; action : `作用` ; composition : `复合` ; identité fondamentale : `基本恒等式` | `figs-src/zh/theme2/rieszfig.tex`, cohérent avec `theme2_zh/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
 ## Suivi des décisions et harmonisation
 

@@ -52,6 +52,7 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 | Sujet | Choix et raison | Exemple / source | Statut |
 |---|---|---|---|
+| Figure de Riesz | Riesz : `Riesz` ; action : `działanie` ; composition : `złożenie` ; identité fondamentale : `Tożsamość podstawowa` | `figs-src/pl/theme2/rieszfig.tex`, cohérent avec `theme2_pl/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 | Références | Titre Źródła comme dans le catalogue de l'interface | Fin de leçon | Harmonisé |
 | Figures | dwa ślady dans la figure pour « deux traces », dwie plamki dans la prose pour « deux taches » ; sens compatibles | Lexique existant et leçon 1 | Relu |
 | Notation | Conserver les axes, étiquettes d'états et noms propres `L` (Larmor), `B` (Bohr) | Leçon 1 | Vérifié |

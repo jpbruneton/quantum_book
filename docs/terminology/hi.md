@@ -28,6 +28,7 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 
 | Sujet | Choix et raison | Exemple / source | Statut |
 |---|---|---|---|
+| Figure de Riesz | Riesz : `रीस` ; action : `क्रिया` ; composition : `संयोजन` ; identité fondamentale : `मूलभूत सर्वसमिका` | `figs-src/hi/theme2/rieszfig.tex`, cohérent avec `theme2_hi/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
 ## Suivi des décisions et harmonisation
 

@@ -52,6 +52,7 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 
 | Sujet | Choix et raison | Exemple / source | Statut |
 |---|---|---|---|
+| Figure de Riesz | Riesz : `ریس` ; action : `عمل` ; composition : `ترکیب` ; identité fondamentale : `بنیادی شناخت` | `figs-src/ur/theme2/rieszfig.tex`, cohérent avec `theme2_ur/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 | Four | Employer بھٹی, comme les TikZ, plutôt que تندور | Thème 1, leçon 1 et figures SG | Harmonisé |
 | Vocabulaire mathématique | Conserver نورم, اندرونی ضرب et سمتی فضا pour assurer la transition vers le thème 2 | Thème 2, leçon 1 consulté | Retenu |
 | Notation | Conserver axes, étiquettes d'états, `L` (Larmor), `B` (Bohr) et symboles mathématiques en caractères latins | Leçon 1 | Vérifié |
