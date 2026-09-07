@@ -1,0 +1,16 @@
+{
+  "theme1/lecon1": {
+    "vi": [
+      {
+        "source": "E_p",
+        "target": "E_t",
+        "meaning": "Énergie potentielle : thế năng ; voir vi.md."
+      },
+      {
+        "source": "\\omega_p",
+        "target": "\\omega_{td}",
+        "meaning": "Précession : tiến động ; voir vi.md."
+      }
+    ]
+  }
+}

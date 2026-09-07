@@ -7,28 +7,34 @@ const units = ["theme1/lecon1", "theme2/lecon1", "theme2/lecon2", "theme2/fiche1
 const selected = process.argv.find(arg => arg.startsWith("--unit="))?.slice(7);
 const availableOnly = process.argv.includes("--available-only");
 const report = [];
+const indexTranslations = JSON.parse(readFileSync("docs/terminology/math-indices.json", "utf8"));
 function clean(source) { return source.replace(/(?<!\\)%[^\n]*/g, "").replace(/\r/g, ""); }
 function captures(source, regex) { return [...source.matchAll(regex)].map(match => match[1]); }
 function contentHash(source) { return createHash("sha256").update(source.replace(/\r\n/g, "\n")).digest("hex"); }
-function mathExpressions(text) {
+function mathExpressions(text, indexAliases = []) {
   // Word order can change in a translation. Compare expressions as a multiset,
   // ignoring translated prose inside \text{} and decimal punctuation only.
   const expressions = [...text.matchAll(/\$\$[\s\S]*?\$\$|(?<![\\$])\$(?!\$)(?:\\.|[^$\\])*\$/g)].map(match => match[0]);
   for (const match of text.matchAll(/(?<!\\)\\\[[\s\S]*?(?<!\\)\\\]|(?<!\\)\\\([\s\S]*?(?<!\\)\\\)|\\beq\b[\s\S]*?\\eeq\b/g)) expressions.push(match[0]);
   for (const match of text.matchAll(/\\begin\{(equation\*?|align\*?|gather\*?|multline\*?|eqnarray\*?)\}([\s\S]*?)\\end\{\1\}/g)) expressions.push(match[2]);
-  return expressions.map(value => value
+  const restoreSourceIndices = value => indexAliases.reduce((result, alias) => {
+    const escaped = alias.target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return result.replace(new RegExp(`${escaped}(?![A-Za-z])`, "g"), () => alias.source);
+  }, value);
+  return expressions.map(value => restoreSourceIndices(value)
     .replace(/\\(?:text|mbox|textrm|textnormal)\{[^{}]*\}/g, "TEXT")
     .replace(/\s+/g, "").replaceAll("{,}", ".")).sort();
 }
-function structure(source) {
+function structure(source, indexAliases = []) {
   const text = clean(source);
   return {
     environments: captures(text, /\\(?:begin|end)\{([^}]+)\}/g),
     headings: captures(text, /\\(section|subsection|subsubsection|paragraph)\*?\s*\{/g),
     labels: captures(text, /\\label\{([^}]+)\}/g),
     references: captures(text, /\\(?:ref|eqref|cite)\{([^}]+)\}/g),
+    inputs: captures(text, /\\input\{([^}]+)\}/g),
     figures: captures(text, /\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/g).map(name => name.split("/").at(-1).replace(/_(?:fr|en)(?=\.)/, "")),
-    math: mathExpressions(text),
+    math: mathExpressions(text, indexAliases),
   };
 }
 let checked = 0;
@@ -52,7 +58,13 @@ for (const unit of selected ? [selected] : units) {
     for (const line of clean(translated).split("\n")) {
       assert.ok(!frenchProse.has(line.trim()), `${target}: unchanged French prose: ${line.trim()}`);
     }
-    const actual = structure(translated);
+    const aliases = indexTranslations[unit]?.[lang] ?? [];
+    for (const alias of aliases) {
+      assert.ok(alias.source && alias.target && alias.meaning, `${target}: incomplete index translation`);
+      assert.ok(source.includes(alias.source), `${target}: unknown source index ${alias.source}`);
+      assert.ok(translated.includes(alias.target), `${target}: missing translated index ${alias.target}`);
+    }
+    const actual = structure(translated, aliases);
     for (const key of Object.keys(expected)) assert.deepEqual(actual[key], expected[key], `${target}: ${key} must match the French source`);
     report.push({unit, lang, sourcePath, sourceSha256: sourceHash, target, sha256: contentHash(translated)});
     checked++;

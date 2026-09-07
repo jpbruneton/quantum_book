@@ -1,5 +1,27 @@
 # Notes et suivi des traductions Quantum
 
+## Reprise de la leçon 1 finalisée — 7 septembre 2026
+
+Les 19 traductions de la leçon 1 du thème 1 ont été réalignées sur la source
+française finalisée, qui est restée inchangée. Les passages avant la section 4
+ont été vérifiés et ajustés ; la suite a été reprise intégralement, notamment
+les séquences d'analyseurs, les probabilités, la superposition et la transition
+vers les espaces de Hilbert. Les glossaires par langue consignent ces choix.
+
+Les textes des quatre figures TikZ SG localisées ont été vérifiés. Les quatre
+images historiques restent des replis français explicites. Les indices
+descriptifs suivent les consignes linguistiques ; les correspondances
+vietnamiennes sont documentées dans `terminology/math-indices.json` et prises
+en compte par le contrôle des formules, sans assouplir les autres comparaisons.
+
+Les 95 traductions suivies passent le contrôle de structure, formules, références
+et figures ; le manifeste a été régénéré. Le rendu HTML et KaTeX de cette leçon,
+le sommaire, la section de références et les huit chemins d'images ont été
+contrôlés dans les 20 langues. Les contrôles d'interface et de contrats de contenu
+passent également. Aucun build ni nouvelle compilation TikZ n'a été lancé ;
+aucune validation visuelle dans un navigateur ou relecture humaine native
+n'est revendiquée pour cette reprise.
+
 ## Références en fin de cours — 7 septembre 2026
 
 Les 135 sources non vides ont reçu un titre de section localisé et un input vers
@@ -7,10 +29,11 @@ leur bibliographie. Les corps des cours et les sources vides ont été préserv�
 Les titres proviennent des catalogues existants ; cela ne constitue pas une
 actualisation des traductions du corps des leçons. Les tests contrôlent le
 sommaire et la présence des références dans le HTML initial pour les 20 langues.
-Les 19 catalogues d'interface passent leur contrôle. Le contrôle global des
-traductions reste en échec dès la leçon 1 anglaise du thème 1, dont la structure
-n'a pas encore suivi les révisions françaises ; le manifeste n'a donc pas été
-régénéré. Aucun build ni contrôle visuel du rendu navigateur n'a été lancé.
+Les 19 catalogues d'interface passent leur contrôle. À cette étape, le contrôle
+global échouait dès la leçon 1 anglaise du thème 1, encore en retard sur les
+révisions françaises ; le manifeste n'avait donc pas été régénéré. Ce décalage
+est résolu par la reprise décrite ci-dessus. Aucun build ni contrôle visuel du
+rendu navigateur n'a été lancé.
 
 ## Campagne initiale
 

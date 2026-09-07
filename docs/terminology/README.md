@@ -49,6 +49,13 @@ les étiquettes d'états ou les symboles conventionnels (par exemple `B` dans le
 magnéton de Bohr). Ne pas renommer les clés de références, labels ou macros.
 Le critère est le sens de l'indice, pas sa seule apparence typographique.
 
+Lorsqu'une traduction modifie effectivement l'écriture d'un indice, reporter la
+correspondance exacte dans `math-indices.json`, par unité et par langue, en plus
+du glossaire. Employer le symbole complet (`E_p`, par exemple), car un même
+indice peut avoir plusieurs sens. Le contrôle des traductions utilise uniquement
+ces correspondances documentées pour comparer les formules ; toutes les autres
+différences restent signalées.
+
 ## Textes dans les figures TikZ
 
 La relecture doit couvrir chaque texte visible : nœuds, annotations, légendes,

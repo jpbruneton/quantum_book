@@ -36,3 +36,36 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 | Date | Décision ou écart constaté | Unités concernées | Action restante |
 |---|---|---|---|
+| 2026-09-07 | Reprise complète depuis le français final ; comparaison lexicale avec thème 2 | Thème 1, leçon 1 | Relecture humaine native non effectuée |
+
+## Choix relus dans la leçon 1 du thème 1
+
+| Français / concept | Allemand retenu | Précision |
+|---|---|---|
+| moment magnétique ; moment cinétique | magnetisches Moment ; Drehimpuls | Deux grandeurs distinctes |
+| couple de forces | Drehmoment | Ne pas confondre avec Drehimpuls |
+| rapport gyromagnétique ; précession | gyromagnetisches Verhältnis ; Präzession | pulsation : Kreisfrequenz |
+| champs de bord | Randfelder | effets de bord : Randeffekte |
+| faisceau ; voie | Strahl ; Kanal | SG-Apparat, Analysator |
+| préparation ; filtrage ; tri | Präparation ; Filterung ; Sortierung | Physique de la préparation, pas connaissance de l'observateur |
+| quantifié ; hasard | quantisiert ; Zufall | Zufallscharakter pour le caractère aléatoire |
+| reproductibilité | Reproduzierbarkeit | Mesure idéale sans évolution intermédiaire |
+| incompatibilité | Unverträglichkeit | unverträgliche Observablen ; cohérent avec l'introduction |
+| superposition ; mélange statistique | Superposition ; statistisches Gemisch | Quantensuperposition dans les titres |
+| amplitude ; module au carré ; phase | Amplitude ; Betragsquadrat ; Phase | Modul n'est pas retenu pour la valeur absolue complexe |
+| produit scalaire ; norme | Skalarprodukt ; Norm | Identiques au thème 2, leçon 1 |
+| espace vectoriel complexe abstrait | abstrakter komplexer Vektorraum | Adjectifs fléchis dans le texte |
+| espace de Hilbert complexe | komplexer Hilbertraum | Identique au thème 2 |
+| électron non apparié | ungepaartes Elektron | Spin ; Bahndrehimpuls |
+| tache ; trace | Fleck ; Spur | Deux taches : zwei Flecken ; figure existante zwei Spuren décrit les traces |
+
+Indices : `E_p` conserve `p` pour potenziell ; `omega_p` conserve `p` pour
+Präzession. Les indices conventionnels `s` (Spin), `L` (Larmor), `B` (Bohr), `e`
+(Elektron), les axes et les nombres sont conservés. Aucun indice français
+descriptif ne nécessite ici une abréviation différente.
+
+Titre bibliographique : Literatur (catalogue). Les quatre TikZ SG et leurs six
+libellés sont traduits ; « zwei Spuren » désigne les traces et reste compatible
+avec les Flecken du texte. Aucun changement de géométrie ou compilation.
+Les quatre rasters historiques restent explicitement en `figs/fr/` (replis
+non traduits) ; les quatre schémas SG utilisent `figs/de/`.

@@ -36,3 +36,35 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 | Date | Décision ou écart constaté | Unités concernées | Action restante |
 |---|---|---|---|
+| 2026-09-07 | Reprise complète depuis le français final ; comparaison avec thème 2 | Thème 1, leçon 1 | Relecture humaine native non effectuée |
+
+## Choix relus dans la leçon 1 du thème 1
+
+| Français / concept | Italien retenu | Précision |
+|---|---|---|
+| moment magnétique ; moment cinétique | momento magnetico ; momento angolare | Grandeurs distinctes |
+| couple de forces | momento torcente | Ne pas confondre avec momento angolare |
+| rapport gyromagnétique | rapporto giromagnetico | Cohérent avec le rappel |
+| pulsation ; précession | pulsazione ; precessione | compiere un moto di precessione ; éviter precedere, ambigu |
+| champ inhomogène ; champs de bord | campo disomogeneo ; campi di bordo | Cohérence avant/après section 4 |
+| faisceau ; voie | fascio ; canale | analizzatore pour analyseur |
+| préparation ; filtrage ; tri | preparazione ; filtraggio ; selezione | semplice selezione dans le modèle classique |
+| quantifié ; hasard | quantizzato ; caso | casualità pour le caractère aléatoire |
+| reproductibilité ; incompatibilité | riproducibilità ; incompatibilità | osservabili incompatibili |
+| superposition ; mélange statistique | sovrapposizione ; miscela statistica | Distinction conservée |
+| amplitude ; module ; phase | ampiezza ; modulo ; fase | quadrato del modulo |
+| produit scalaire ; norme | prodotto scalare ; norma | Identiques au thème 2, leçon 1 |
+| espace vectoriel complexe abstrait | spazio vettoriale complesso astratto | Distinct des vecteurs spatiaux |
+| espace de Hilbert complexe | spazio di Hilbert complesso | Continuité avec thème 2 |
+| électron non apparié | elettrone spaiato | spin ; momento angolare orbitale |
+| tache ; trace | macchia ; traccia | Figure due tracce compatible avec les macchie du texte |
+
+Indices : `p` reste inchangé dans `E_p` (potenziale) et `omega_p` (precessione).
+Les indices conventionnels `s` (spin), `L` (Larmor), `B` (Bohr), `e` (elettrone),
+les axes, nombres et étiquettes d'états sont conservés.
+
+Titre bibliographique : Riferimenti. Les quatre TikZ SG ont leurs six libellés
+traduits, cohérents avec la leçon ; due tracce désigne les traces observées et
+n'impose pas de renommer macchie. Sources inspectées sans compilation.
+Quatre rasters historiques restent des replis non traduits en `figs/fr/` ; les
+quatre schémas SG sont explicitement localisés en `figs/it/`.

@@ -36,3 +36,52 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 
 | Date | Décision ou écart constaté | Unités concernées | Action restante |
 |---|---|---|---|
+
+## Reprise de la leçon 1 du thème 1 — 2026-09-07
+
+Traduction directe relue depuis `content/tex/theme1_fr/lecon1.tex` finalisée ; source cible `content/tex/theme1_ko/lesson1.tex`. Choix retenus pour cette unité, sans prétendre à une validation humaine native.
+
+| Français / concept | Forme retenue | Statut |
+|---|---|---|
+| moment magnétique | 자기 모멘트 | Retenu dans cette reprise |
+| moment cinétique | 각운동량 | Retenu dans cette reprise |
+| rapport gyromagnétique | 자기회전비 | Retenu dans cette reprise |
+| précession | 세차 운동 | Retenu dans cette reprise |
+| pulsation | 각진동수 | Retenu dans cette reprise |
+| dissipation | 소산 | Retenu dans cette reprise |
+| champs de bord | 가장자리 자기장 | Retenu dans cette reprise |
+| préparation | 준비 | Retenu dans cette reprise |
+| voie | 경로 | Retenu dans cette reprise |
+| filtrage | 필터링 | Retenu dans cette reprise |
+| superposition | 중첩 | Retenu dans cette reprise |
+| amplitude de probabilité | 확률 진폭 | Retenu dans cette reprise |
+| phase | 위상 | Retenu dans cette reprise |
+| produit scalaire | 내적 | Retenu dans cette reprise |
+| norme | 노름 | Retenu dans cette reprise |
+| espace de Hilbert complexe | 복소 힐베르트 공간 | Retenu dans cette reprise |
+| mélange statistique | 통계적 혼합 | Retenu dans cette reprise |
+| observables incompatibles | 양립하지 않는 관측가능량 | Retenu dans cette reprise |
+| spin | 스핀 | Retenu dans cette reprise |
+| électron non apparié | 홀전자 | Retenu dans cette reprise |
+
+### Indices effectivement employés
+
+| Sens français | Indice FR | Repli anglais retenu | Exemple |
+|---|---|---|---|
+| énergie potentielle | p | p, potential | $E_p$ |
+| précession | p | p, precession | $\omega_p$ |
+| spin | s | s, spin | $\mu_s$, $\gamma_s$, $\mu_{s,z}$ |
+
+E_p의 p는 퍼텐셜 에너지(potential), omega_p의 p는 세차 운동(precession), s는 스핀(spin)을 뜻한다.
+
+Les indices `x`, `y`, `z` (axes), `L` (Larmor), `B` (Bohr), `e` (électron) et les étiquettes de kets restent inchangés. Les indices descriptifs ne changent pas les clés des labels et références.
+
+### Choix éditoriaux et figures
+
+Style académique déclaratif en 다 ; 슈테른–게를라흐. 내적 et 노름 suivent thème2. Titre final « 참고문헌 ».
+
+Le TikZ abrège deux taches en 두 점, la prose précise 두 점무늬 ; 원자 오븐 et 가열로 désignent le même four. 차단 conservé.
+
+Les quatre sources TikZ `figs-src/ko/theme1/lecon1_fig1.tex` à `lecon1_fig4.tex` ont été inspectées : textes visibles traduits, symboles physiques conservés ; aucun changement géométrique. Les quatre rendus SG localisés existants sont utilisés. Les quatre images historiques `magnetsmall.png`, `magnetorque.jpg`, `precessionmag.png` et `SGimage.jpg` restent explicitement en repli `figs/fr/`, sans les déclarer traduites. Pas de nouvelle compilation ni validation visuelle du rendu dans cette reprise.
+
+Continuité vérifiée avec `theme2_ko/lesson1.tex` pour produit scalaire, norme et espace de Hilbert ; thème 2 non modifié. La relecture de toutes les autres unités reste à poursuivre au fil des reprises. Les renvois provisoires « XXX » sont conservés comme dans la source française.

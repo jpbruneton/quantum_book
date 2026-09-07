@@ -8,12 +8,28 @@ Inventaire initial issu de `content/tex/figs-src/theme1-translations.json` ; ces
 
 | Français / concept | Forme cible retenue | Contexte et source | Statut |
 |---|---|---|---|
-| prédiction classique | ধ্রুপদি পূর্বাভাস | Figure SG, lexique thème 1, entrée 1 | Usage existant, à relire |
-| bande continue | অবিচ্ছিন্ন পটি | Figure SG, lexique thème 1, entrée 2 | Usage existant, à relire |
-| résultat expérimental | পরীক্ষালব্ধ ফল | Figure SG, lexique thème 1, entrée 3 | Usage existant, à relire |
-| deux traces | দুটি দাগ | Figure SG, lexique thème 1, entrée 4 | Usage existant, à relire |
-| four | চুল্লি | Figure SG, lexique thème 1, entrée 5 | Usage existant, à relire |
-| bloqué | অবরুদ্ধ | Figure SG, lexique thème 1, entrée 6 | Usage existant, à relire |
+| prédiction classique | ধ্রুপদি পূর্বাভাস | Figure SG, lexique thème 1, entrée 1 | Relu avec la leçon 1, 2026-09-07 |
+| bande continue | অবিচ্ছিন্ন পটি | Figure SG, lexique thème 1, entrée 2 | Relu avec la leçon 1, 2026-09-07 |
+| résultat expérimental | পরীক্ষালব্ধ ফল | Figure SG, lexique thème 1, entrée 3 | Relu avec la leçon 1, 2026-09-07 |
+| deux traces | দুটি দাগ | Figure SG, lexique thème 1, entrée 4 | Relu avec la leçon 1, 2026-09-07 |
+| four | চুল্লি | Figure SG, lexique thème 1, entrée 5 | Relu avec la leçon 1, 2026-09-07 |
+| bloqué | অবরুদ্ধ | Figure SG, lexique thème 1, entrée 6 | Relu avec la leçon 1, 2026-09-07 |
+| moment magnétique | চৌম্বক ভ্রামক | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| moment cinétique | কৌণিক ভরবেগ | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| rapport gyromagnétique | জাইরোম্যাগনেটিক অনুপাত | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| précession | অয়নচলন | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| pulsation | কৌণিক কম্পাঙ্ক | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| énergie potentielle | স্থিতিশক্তি | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| état | অবস্থা | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| préparation | প্রস্তুতি | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| incompatibilité | অসামঞ্জস্য | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| superposition | উপরিপাতন | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| amplitude de probabilité | সম্ভাবনা বিস্তার | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| phase | দশা | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| produit scalaire | অন্তর্গুণন | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| norme | নর্ম | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| espace de Hilbert complexe | জটিল হিলবার্ট স্থান | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
+| mélange statistique | পরিসংখ্যানগত মিশ্রণ | Thème 1, leçon 1 ; reprise du français final | Retenu le 2026-09-07 |
 
 ## Indices descriptifs
 
@@ -21,6 +37,13 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 
 | Sens français développé | Indice français | Indice cible | Exemple LaTeX | Source / statut |
 |---|---|---|---|---|
+| potentiel | `p` | `p` | `E_p` | Thème 1, leçon 1 ; vérifié |
+| précession | `p` | `p` | `\omega_p` | Thème 1, leçon 1 ; vérifié |
+| spin | `s` | `s` | `\mu_s`, `\gamma_s`, `\mu_{s,z}` | Thème 1, leçon 1 ; vérifié |
+
+Repli anglais conformément à `en.md` : `p` de potential pour স্থিতিশক্তি, `p` de precession pour অয়নচলন, `s` de spin. Explications dans la prose cible ; aucune abréviation française résiduelle dans cette leçon.
+
+Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `e` (électron), `0` et les étiquettes des états sont conservés.
 
 ## Choix éditoriaux
 
@@ -36,3 +59,11 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 
 | Date | Décision ou écart constaté | Unités concernées | Action restante |
 |---|---|---|---|
+
+## Reprise de la leçon 1 — 2026-09-07
+
+Employer `ধ্রুপদি` pour classique conformément aux TikZ ; harmonisation de la variante préexistante `চিরায়ত` dans cette leçon. `অবিচ্ছিন্ন পটি`, `দুটি দাগ`, `চুল্লি` et `অবরুদ্ধ` restent ceux des figures. `অন্তর্গুণন`, `নর্ম` et `হিলবার্ট স্থান` concordent avec le thème 2. Employer `সম্ভাবনা বিস্তার` pour amplitude de probabilité et `উপরিপাতন` pour superposition.
+
+Les six termes visibles des quatre TikZ `figs-src/bn/theme1/lecon1_fig{1,2,3,4}.tex` et leur lexique `theme1-translations.json` ont été relus : déjà traduits, sans modification nécessaire. Géométrie et symboles SG/axes inchangés. Les quatre PNG SG localisés existants sont utilisés. `magnetsmall.png`, `magnetorque.jpg`, `precessionmag.png` et `SGimage.jpg` restent des originaux français sous `figs/fr/` : leur contenu visible n’est pas déclaré traduit. Aucun TikZ recompilé ; glyphes, débordements et rendu visuel restent à vérifier lors de la prochaine compilation autorisée.
+
+Contrôle ciblé de structure, formules, références et images passé ; rendu serveur KaTeX, sommaire et section bibliographique vérifiés sans build. Les trois notions produit scalaire/norme/Hilbert ont été comparées au thème 2 existant ; pas de modification du thème 2. Les occurrences `section XXX` de la source sont conservées sous leur traduction, sans inventer de référence.

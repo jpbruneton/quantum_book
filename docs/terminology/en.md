@@ -37,3 +37,40 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 | Date | Décision ou écart constaté | Unités concernées | Action restante |
 |---|---|---|---|
+| 2026-09-07 | Reprise complète depuis le français final ; terminologie rapprochée du thème 2 | Thème 1, leçon 1 ; comparaison thème 2, leçon 1 | Relecture humaine native non effectuée |
+
+## Choix relus dans la leçon 1 du thème 1
+
+| Français / concept | Anglais retenu | Précision |
+|---|---|---|
+| moment magnétique | magnetic moment | À distinguer de angular momentum |
+| moment cinétique | angular momentum | orbital angular momentum ; intrinsic angular momentum |
+| couple de forces | torque | Éviter le calque couple of forces pour la grandeur vectorielle |
+| rapport gyromagnétique | gyromagnetic ratio | Relation entre moment magnétique et moment cinétique |
+| pulsation | angular frequency | Larmor angular frequency ; pas frequency seule |
+| champ inhomogène | inhomogeneous field | Champ spatialement variable |
+| champs de bord | fringe fields | Même sens que edge effects dans le rappel initial |
+| faisceau ; voie | beam ; channel | Préparation et filtrage SG |
+| préparation ; filtrage | preparation ; filtering | Simple tri : simple sorting |
+| quantifié ; hasard | quantized ; randomness | Fundamental randomness distinct de l'ignorance thermique |
+| observables incompatibles | incompatible observables | Aucune construction matricielle ajoutée |
+| superposition ; mélange statistique | superposition ; statistical mixture | Deux notions distinctes |
+| amplitude de probabilité ; module ; phase | probability amplitude ; modulus ; phase | Squared modulus, pas amplitude squared sans module |
+| produit scalaire ; norme | inner product ; norm | Termes identiques au thème 2, leçon 1 |
+| espace vectoriel complexe abstrait | abstract complex vector space | État distinct du vecteur spatial du dipôle |
+| espace de Hilbert complexe | complex Hilbert space | Continuité avec thème 2 |
+| électron non apparié | unpaired electron | Spin conservé comme terme technique |
+
+Indices relus : `E_p` reste `E_p` (potential energy), `omega_p` reste `omega_p`
+(precession), `mu_s` et `gamma_s` gardent `s` (spin, symbole conventionnel).
+Ces indices anglais sont les replis pour les autres écritures. `L` (Larmor),
+`B` (Bohr), `e` (electron), `x,y,z`, les indices numériques et les étiquettes
+d'états sont conservés. Aucun indice abrégé propre au français ne subsiste.
+
+Registre : anglais académique britannique (analyser, centre, behaviour), avec
+les termes mathématiques usuels du thème 2. Titre bibliographique : References.
+Les six expressions visibles dans les quatre TikZ SG sont déjà traduites et
+cohérentes avec le cours ; sources inspectées, aucune recompilation.
+Les quatre images historiques `magnetsmall.png`, `magnetorque.jpg`,
+`precessionmag.png`, `SGimage.jpg` restent explicitement en `figs/fr/` : ce sont
+des replis non traduits, distincts des quatre schémas SG localisés.
