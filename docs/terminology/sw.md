@@ -53,6 +53,8 @@ Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `
 |---|---|---|---|
 | Figure de Riesz | Riesz : `Riesz` ; action : `kitendo` ; composition : `utungaji` ; identité fondamentale : `Utambulisho wa msingi` | `figs-src/sw/theme2/rieszfig.tex`, cohérent avec `theme2_sw/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | miundo ya kialjebra; nafasi ya kitopolojia; manifoldu laini; kundi na aljebra ya Lie; nafasi za Hilbert zenye vipimo vya ukomo, tenganifu na zisizotenganika | figs-src/sw/theme2/structures.tex, cohérent avec theme2_sw/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

@@ -30,6 +30,8 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 |---|---|---|---|
 | Figure de Riesz | Riesz : `रीस` ; action : `क्रिया` ; composition : `संयोजन` ; identité fondamentale : `मूलभूत सर्वसमिका` | `figs-src/hi/theme2/rieszfig.tex`, cohérent avec `theme2_hi/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | बीजीय संरचनाएँ; सांस्थितिक समष्टि; चिकनी मैनिफोल्ड; ली समूह और ली बीजगणित; परिमित-विमीय, वियोज्य और अवियोज्य हिल्बर्ट समष्टियाँ | figs-src/hi/theme2/structures.tex, cohérent avec theme2_hi/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

@@ -30,6 +30,8 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 |---|---|---|---|
 | Figure de Riesz | Riesz : `Рисс` ; action : `действие` ; composition : `композиция` ; identité fondamentale : `Основное тождество` | `figs-src/ru/theme2/rieszfig.tex`, cohérent avec `theme2_ru/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | алгебраические структуры; топологическое пространство; гладкое многообразие; группа и алгебра Ли; конечномерное, сепарабельное и несепарабельное гильбертовы пространства | figs-src/ru/theme2/structures.tex, cohérent avec theme2_ru/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

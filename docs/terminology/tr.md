@@ -53,6 +53,8 @@ Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `
 |---|---|---|---|
 | Figure de Riesz | Riesz : `Riesz` ; action : `etki` ; composition : `bileşke` ; identité fondamentale : `Temel özdeşlik` | `figs-src/tr/theme2/rieszfig.tex`, cohérent avec `theme2_tr/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | cebirsel yapılar; topolojik uzay; düzgün manifold; Lie grubu ve Lie cebiri; sonlu boyutlu, ayrılabilir ve ayrılabilir olmayan Hilbert uzayları | figs-src/tr/theme2/structures.tex, cohérent avec theme2_tr/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

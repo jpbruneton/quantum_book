@@ -57,6 +57,8 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 | Figures | dwa ślady dans la figure pour « deux traces », dwie plamki dans la prose pour « deux taches » ; sens compatibles | Lexique existant et leçon 1 | Relu |
 | Notation | Conserver les axes, étiquettes d'états et noms propres `L` (Larmor), `B` (Bohr) | Leçon 1 | Vérifié |
 
+| Carte des structures | struktury algebraiczne; przestrzeń topologiczna; rozmaitość gładka; grupa i algebra Liego; przestrzenie Hilberta skończeniewymiarowa, ośrodkowa i nieośrodkowa | figs-src/pl/theme2/structures.tex, cohérent avec theme2_pl/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

@@ -50,9 +50,9 @@ traduits ne constituent pas une traduction du corps.
 
 Les figures TikZ du thème 1 ont un lexique par langue et des rendus localisés.
 Lorsqu'une illustration localisée n'existe pas, le site sert la figure française.
-Les figures raster historiques du thème 2 restent françaises, à l'exception de la
-carte de Riesz de la leçon 2, reconstruite depuis sa source TikZ et localisée dans
-les 20 langues.
+Les figures raster historiques du thème 2 restent françaises, à l'exception des
+cartes des structures de la leçon 1 et de Riesz de la leçon 2, reconstruites depuis
+leurs sources TikZ et localisées dans les 20 langues.
 
 Les exercices et quiz ont une disponibilité indépendante. Une traduction de cours
 n'active aucun marqueur `\seoready{true}`. Les contenus absents sont en noindex et

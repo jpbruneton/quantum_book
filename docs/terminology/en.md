@@ -31,6 +31,8 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 |---|---|---|---|
 | Figure de Riesz | Riesz : `Riesz` ; action : `action` ; composition : `composition` ; identité fondamentale : `Fundamental identity` | `figs-src/en/theme2/rieszfig.tex`, cohérent avec `theme2_en/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | algebraic structures; topological space; smooth manifold; Lie group and Lie algebra; finite-dimensional, separable and non-separable Hilbert spaces | figs-src/en/theme2/structures.tex, cohérent avec theme2_en/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

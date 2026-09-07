@@ -30,6 +30,8 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 |---|---|---|---|
 | Figure de Riesz | Riesz : `リース` ; action : `作用` ; composition : `合成` ; identité fondamentale : `基本恒等式` | `figs-src/ja/theme2/rieszfig.tex`, cohérent avec `theme2_ja/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | 代数的構造；位相空間；滑らかな多様体；リー群とリー代数；有限次元・可分・非可分ヒルベルト空間 | figs-src/ja/theme2/structures.tex, cohérent avec theme2_ja/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

@@ -53,6 +53,8 @@ Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `
 |---|---|---|---|
 | Figure de Riesz | Riesz : `ریس` ; action : `اثر` ; composition : `ترکیب` ; identité fondamentale : `همانی بنیادی` | `figs-src/fa/theme2/rieszfig.tex`, cohérent avec `theme2_fa/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | ساختارهای جبری؛ فضای توپولوژیک؛ خمینه هموار؛ گروه لی و جبر لی؛ فضاهای هیلبرت متناهی‌بعد، جدایی‌پذیر و جدایی‌ناپذیر | figs-src/fa/theme2/structures.tex, cohérent avec theme2_fa/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

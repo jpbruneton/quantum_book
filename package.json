@@ -9,6 +9,7 @@
     "lint": "next lint",
     "build:exo-pdf": "node scripts/build-exercises-pdf.mjs",
     "build:riesz-figure": "node scripts/build-riesz-figure.mjs",
+    "build:structures-figure": "node scripts/build-structures-figure.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "prebuild": "node scripts/sync-private-assets.mjs",
     "check:static": "node scripts/check-static-pages.mjs",

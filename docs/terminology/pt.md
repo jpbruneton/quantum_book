@@ -30,6 +30,8 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 |---|---|---|---|
 | Figure de Riesz | Riesz : `Riesz` ; action : `ação` ; composition : `composição` ; identité fondamentale : `Identidade fundamental` | `figs-src/pt/theme2/rieszfig.tex`, cohérent avec `theme2_pt/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | estruturas algébricas; espaço topológico; variedade diferenciável; grupo e álgebra de Lie; espaços de Hilbert de dimensão finita, separável e não separável | figs-src/pt/theme2/structures.tex, cohérent avec theme2_pt/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

@@ -1,5 +1,23 @@
 # Notes et suivi des traductions Quantum
 
+## Carte des structures localisée — 7 septembre 2026
+
+La source transmise pour la carte du thème 2, leçon 1, a été extraite dans
+`figs-src/fr/theme2/structures.tex`, corrigée puis localisée dans les 19 langues
+cibles depuis `theme2-structures-translations.json`. Les 20 leçons utilisent
+maintenant `figs/<lang>/theme2/structures.png`.
+
+La correction scientifique principale retire l'affirmation trop générale qui
+associait la théorie quantique des champs en volume infini aux espaces de Hilbert
+non séparables. Cette branche mentionne désormais seulement certaines théories à
+secteurs non dénombrables. Les matrices sont précisées comme carrées, la topologie
+comme une famille d'ouverts, et la chaîne vers le modèle standard distingue les
+théories classique et quantique des champs.
+
+Les 20 sources ont été compilées à 300 dpi sans glyphe manquant ni débordement.
+Tous les rendus ont été inspectés ; les formules des versions arabe, ourdoue et
+persane sont isolées en LTR.
+
 ## Carte de Riesz localisée — 7 septembre 2026
 
 La source TikZ de la carte de Riesz du thème 2, leçon 2, est maintenant conservée
@@ -75,7 +93,7 @@ Les commits du sous-module et du site donnent les révisions de livraison.
 | Thème 2, fiches 1 et 2 | 19 langues cibles | Traduction intégrale, fiches distinctes des leçons |
 | Interface, thèmes et métadonnées | 20 langues avec FR | Catalogues de même structure, un seul envoyé au navigateur |
 | TikZ thème 1 | 19 langues cibles | 95 sources compilées ; lexique localisé, polices adaptées, inspection visuelle |
-| Figures raster thème 2 | Toutes | Repli français conservé, sauf la carte de Riesz de la leçon 2, localisée dans les 20 langues |
+| Figures raster thème 2 | Toutes | Repli français conservé, sauf les cartes des structures (leçon 1) et de Riesz (leçon 2), localisées dans les 20 langues |
 | Thème 1, leçon 2 française | fr | Temporairement masquée, source conservée |
 | Autres cours | Selon les fichiers existants | Disponibilité antérieure conservée ; pas de traduction du corps implicite |
 | Exercices | fr/en existants | Banques conservées, aucune nouvelle validation SEO |

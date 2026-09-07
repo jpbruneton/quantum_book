@@ -53,6 +53,8 @@ Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `
 |---|---|---|---|
 | Figure de Riesz | Riesz : `রিস` ; action : `ক্রিয়া` ; composition : `সংযোজন` ; identité fondamentale : `মৌলিক অভেদ` | `figs-src/bn/theme2/rieszfig.tex`, cohérent avec `theme2_bn/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | বীজগাণিতিক কাঠামো; টোপোলজিক্যাল স্থান; মসৃণ ম্যানিফোল্ড; লি গ্রুপ ও লি বীজগণিত; সসীম-মাত্রিক, পৃথকযোগ্য ও অপৃথকযোগ্য হিলবার্ট স্থান | figs-src/bn/theme2/structures.tex, cohérent avec theme2_bn/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

@@ -53,6 +53,8 @@ Les indices des axes `x`, `y`, `z`, les noms propres `L` (Larmor), `B` (Bohr), `
 |---|---|---|---|
 | Figure de Riesz | Riesz : `Riesz` ; action : `aksi` ; composition : `komposisi` ; identité fondamentale : `Identitas fundamental` | `figs-src/id/theme2/rieszfig.tex`, cohérent avec `theme2_id/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | struktur aljabar; ruang topologi; lipatan mulus; grup Lie dan aljabar Lie; ruang Hilbert berdimensi hingga, separabel, dan nonseparabel | figs-src/id/theme2/structures.tex, cohérent avec theme2_id/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

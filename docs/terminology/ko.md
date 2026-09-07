@@ -30,6 +30,8 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 |---|---|---|---|
 | Figure de Riesz | Riesz : `리스` ; action : `작용` ; composition : `합성` ; identité fondamentale : `기본 항등식` | `figs-src/ko/theme2/rieszfig.tex`, cohérent avec `theme2_ko/lesson2.tex` | Retenu le 2026-09-07 ; compilation et rendu inspectés |
 
+| Carte des structures | 대수적 구조; 위상 공간; 매끄러운 다양체; 리 군과 리 대수; 유한 차원·가분·비가분 힐베르트 공간 | figs-src/ko/theme2/structures.tex, cohérent avec theme2_ko/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.

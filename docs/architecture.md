@@ -76,6 +76,11 @@ thème 2. Les 20 versions utilisent les libellés de leur leçon, avec formules
 explicitement isolées en LTR pour les trois langues RTL, puis sont servies depuis
 `figs/<lang>/theme2/rieszfig.png`.
 
+`scripts/build-structures-figure.mjs` reconstruit et localise dans les 20 langues
+la carte des structures du thème 2, leçon 1. Les sources utilisent le catalogue
+`figs-src/theme2-structures-translations.json`; les rendus sont servis depuis
+`figs/<lang>/theme2/structures.png`.
+
 ## Vérification
 
 ```powershell

@@ -57,6 +57,8 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 | Vocabulaire mathématique | Conserver نورم, اندرونی ضرب et سمتی فضا pour assurer la transition vers le thème 2 | Thème 2, leçon 1 consulté | Retenu |
 | Notation | Conserver axes, étiquettes d'états, `L` (Larmor), `B` (Bohr) et symboles mathématiques en caractères latins | Leçon 1 | Vérifié |
 
+| Carte des structures | الجبری ساختیں؛ ٹوپولوجیکل فضا؛ ہموار منی فولڈ؛ گروپ لی اور الجبرا لی؛ محدود البعاد، قابل علیحدگی اور ناقابل علیحدگی ہلبرٹ فضائیں | figs-src/ur/theme2/structures.tex, cohérent avec theme2_ur/lesson1.tex | Retenu le 2026-09-07 ; compilation et rendu inspectés |
+
 ## Suivi des décisions et harmonisation
 
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.
