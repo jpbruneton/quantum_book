@@ -16,6 +16,11 @@ demandées, leçon par leçon, avec des groupes de langues lorsqu'ils sont deman
 
 ## Prompt
 
+Lire d'abord [les règles terminologiques](terminology/README.md), puis
+`terminology/<lang>.md` et `terminology/en.md` pour les indices anglais de repli.
+Enrichir ces fichiers pendant chaque reprise de traduction : ils constituent la
+mémoire des choix de vocabulaire pour tout l'ouvrage.
+
 > Translate the supplied current French LaTeX into fluent, natural academic
 > [language], using standard terminology in quantum mechanics and mathematical
 > physics. Translate directly; do not call an external translation API.
@@ -29,6 +34,15 @@ demandées, leçon par leçon, avec des groupes de langues lorsqu'ils sont deman
 > kets, normalization and physical units unchanged. Translate descriptive words
 > inside equations consistently across text, figures, exercises and solutions.
 > Never apply thermodynamics-specific notation changes to quantum mechanics.
+>
+> Descriptive subscripts derived from French words or abbreviations must be
+> translated. For languages written in the Latin alphabet, use the target-language
+> abbreviation recorded in the glossary. For other scripts, use the English
+> subscript recorded in the English glossary, and explain it in the target language.
+> This does not apply to mathematical indices, axis names or conventional symbols.
+> Translate all reader-visible text in TikZ figures too, including nodes, legends,
+> annotations, axis titles and descriptive text inside formulas. Consult and update
+> the target-language terminology and editorial choices throughout the work.
 >
 > Preserve editorial seoready markers exactly. Use localized figure paths only
 > when the corresponding assets exist. Respect the target language's punctuation
@@ -49,6 +63,14 @@ demandées, leçon par leçon, avec des groupes de langues lorsqu'ils sont deman
 - Pour les TikZ : conserver géométrie et formules, compiler chaque source, vérifier
   les glyphes, les débordements et le texte RTL. Le repli vers la figure française
   est autorisé tant que son remplacement localisé n'existe pas.
+- Vérifier explicitement les textes visibles de chaque TikZ, y compris ceux définis
+  dans des macros ou un lexique de génération. Une légende traduite dans le cours
+  ne suffit pas si la figure contient encore du français. Consigner toute figure
+  restant en repli français comme non traduite.
+- Vérifier les indices descriptifs dans le texte, les équations, les exercices,
+  les solutions et les figures selon `terminology/README.md`. Les changements
+  autorisés doivent être recensés dans les glossaires ; un contrôle automatique
+  d'égalité des formules ne remplace pas cette vérification sémantique.
 - Écrire en UTF-8. Éviter les scripts Unicode transmis par un pipe PowerShell dont
   l'encodage remplace silencieusement les caractères par `?`.
 - Consigner les empreintes source/cible dans `translation-manifest.json`, la méthode,

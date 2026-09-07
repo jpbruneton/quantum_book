@@ -1,6 +1,7 @@
 # Travail sur Quantum
 
 - Lire `docs/architecture.md`, `docs/languages.md` et `docs/translation-prompt.md` avant une évolution du contenu ou des langues.
+- Avant toute traduction, lire `docs/terminology/README.md` et le glossaire de la langue cible ; les enrichir au fil du travail avec les termes techniques, indices descriptifs et choix éditoriaux retenus. Vérifier aussi les textes des figures TikZ.
 - Conserver la hiérarchie thème → leçons/fiches. Les clés incluent le thème et la référence : `lesson-1` et `fiche-1` sont distincts.
 - `content/tex` est un sous-module privé. Préserver les modifications préexistantes ; committer les ressources dans ce dépôt, puis la référence du sous-module dans le site. Ne pousser que sur demande.
 - Précompiler les pages, les formules et le sommaire ; ne pas importer KaTeX dans un composant client ni lire `headers()` dans les layouts.
