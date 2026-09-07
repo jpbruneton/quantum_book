@@ -121,7 +121,7 @@ function ChapterLessonTabButtons({
   theme: ThemeWithLocalizedLessonContent;
   activeLessonRef: string;
 }) {
-  const { lang, t } = useLang();
+  const { lang } = useLang();
 
   if (theme.lessons.length === 0) return null;
 
@@ -149,19 +149,7 @@ function ChapterLessonTabButtons({
         })}
       </div>
       {fiches.length > 0 ? (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
-          <span
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.7rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: "var(--text-dim)",
-              marginRight: "0.15rem",
-            }}
-          >
-            {t.common.revisionSheets}
-          </span>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
           {fiches.map((lesson) => {
             const href = chapterLessonPath(lang, theme.slug, lesson);
             const active = href.endsWith(`/${activeLessonRef}`);

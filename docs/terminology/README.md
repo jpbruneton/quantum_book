@@ -56,6 +56,14 @@ indice peut avoir plusieurs sens. Le contrôle des traductions utilise uniquemen
 ces correspondances documentées pour comparer les formules ; toutes les autres
 différences restent signalées.
 
+## Abréviation internationale SI
+
+Conserver `SI` pour le Système international d'unités dans toutes les langues ;
+traduire le nom développé lorsqu'il apparaît dans la prose. Cette abréviation
+internationale n'est pas un indice descriptif français à adapter.
+Source : [BIPM, Le SI](https://www.bipm.org/en/measurement-units).
+Vérifié le 2026-09-07 dans les 19 traductions de la leçon 1.
+
 ## Textes dans les figures TikZ
 
 La relecture doit couvrir chaque texte visible : nœuds, annotations, légendes,
