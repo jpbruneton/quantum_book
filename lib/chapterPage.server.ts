@@ -52,12 +52,13 @@ export function buildThemeWithLocalizedContent(
       if (index !== activeLessonIndex) {
         return { ...lesson, content: "", contentLang: "", renderedLang: "", toc: [], references: [] };
       }
+      const langTexFile = getTexFilePathForLang(lesson.texFile, lang);
       const resolvedReferences = getLessonReferences(
         theme.number,
         lesson.number,
-        lesson.references
+        lesson.references,
+        langTexFile
       );
-      const langTexFile = getTexFilePathForLang(lesson.texFile, lang);
       const langContent =
         getLessonWebContent(langTexFile, -1, resolvedReferences) ||
         (lang === "fr" ? lesson.content : "");

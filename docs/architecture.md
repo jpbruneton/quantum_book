@@ -22,6 +22,14 @@ Quantum conserve plusieurs leçons et fiches par thème. Les URL françaises uti
 ou `fiche-M` ; les deux sortes d'unités ne partagent pas une numérotation ambiguë.
 Les anciens liens et redirections des fiches restent pris en charge.
 
+Les références figurent en fin de cours, sans onglet séparé. Chaque source non
+vide termine par une `\section{Références}` (titre traduit dans sa langue) et un
+`\input{ref_N_M}`. Les fiches utilisent `\input{ref_N_fiche_M}` pour préserver leur
+identité distincte. Les fichiers bibliographiques sont à la racine de `content/tex`.
+Le serveur lit le fichier désigné par cet input ; le titre appartient au sommaire
+préparé au serveur et la liste est visible dès le HTML initial. Un fichier de
+références vide affiche le message localisé prévu. Les sources vides restent vides.
+
 La leçon 2 du thème 1 en français est temporairement retirée par `lib/publication.ts` :
 aucune page de cours générée, aucun lien de navigation ni entrée de sitemap.
 Son URL renvoie 404. La source privée est conservée. Cette règle ne retire pas

@@ -1,7 +1,7 @@
 "use client";
 import type { TocEntry } from "@/lib/lessonPresentation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
@@ -17,7 +17,6 @@ interface LessonWithLocalizedContent extends Lesson {
 }
 
 export function ChapterContent({ lesson }: Props) {
-  const [tab, setTab] = useState<"web" | "refs">("web");
   const [activeTocId, setActiveTocId] = useState("");
   const [tocVisible, setTocVisible] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -86,9 +85,10 @@ export function ChapterContent({ lesson }: Props) {
     };
   };
   const webContentWithToc = {content: lesson.renderedLang, toc: lesson.toc};
+  const lessonHtml = useMemo(() => ({ __html: lesson.renderedLang }), [lesson.renderedLang]);
 
   useEffect(() => {
-    if (tab !== "web" || webContentWithToc.toc.length === 0) return;
+    if (webContentWithToc.toc.length === 0) return;
 
     const orderedIds = webContentWithToc.toc.map((entry) => entry.id);
     const activateFromViewport = () => {
@@ -114,7 +114,7 @@ export function ChapterContent({ lesson }: Props) {
       window.removeEventListener("scroll", activateFromViewport);
       window.removeEventListener("resize", activateFromViewport);
     };
-  }, [tab, webContentWithToc.toc]);
+  }, [webContentWithToc.toc]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -180,246 +180,186 @@ export function ChapterContent({ lesson }: Props) {
         </div>
       </div>
 
-      {/* Tab switcher */}
+      {/* ─── Web Content ─── */}
       <div
         style={{
-          maxWidth: "800px",
+          maxWidth: "1320px",
           margin: "0 auto",
-          padding: "1.5rem 1.5rem 0",
-          display: "flex",
-          gap: "0",
-          borderBottom: "1px solid var(--border-subtle)",
+          padding: "3rem 1.5rem",
         }}
       >
-        {(["web", "refs"] as const).map((tabKey) => (
-          <button
-            key={tabKey}
-            onClick={() => setTab(tabKey)}
-            style={{
-              background: "none",
-              border: "none",
-              padding: "0.75rem 1.25rem",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.82rem",
-              fontWeight: 500,
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-              color: tab === tabKey ? "var(--amber)" : "var(--text-dim)",
-              cursor: "pointer",
-              borderBottom:
-                tab === tabKey
-                  ? "2px solid var(--amber)"
-                  : "2px solid transparent",
-              marginBottom: "-1px",
-              transition: "color 0.2s",
-            }}
-          >
-            {tabKey === "web" ? t.chapter.tabOnline : t.chapter.tabReferences}
-          </button>
-        ))}
-      </div>
-
-      {/* ─── Web Content ─── */}
-      {tab === "web" && (
-        <div
-          style={{
-            maxWidth: "1320px",
-            margin: "0 auto",
-            padding: "3rem 1.5rem",
-          }}
-        >
-          {hasLessonContent ? (
-            <div className="lesson-web-layout">
-              <div className="lesson-web-main">
-                <div
-                  className="prose-quantum"
-                  dangerouslySetInnerHTML={{ __html: webContentWithToc.content }}
-                />
-              </div>
-              {webContentWithToc.toc.length > 0 && (
-                <aside className="lesson-toc lesson-toc-sticky">
-                  <div className="lesson-toc-header">
-                    {tocVisible && <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>}
-                    <button
-                      className="lesson-toc-toggle"
-                      onClick={() => setTocVisible((current) => !current)}
-                    >
-                      {tocVisible ? t.chapter.hideToc : t.chapter.showToc}
-                    </button>
-                  </div>
-                  {tocVisible && (
-                    <ul className="lesson-toc-list">
-                      {webContentWithToc.toc.map((entry) => (
-                        <li
-                          key={entry.id}
-                          className="lesson-toc-item"
-                          style={{
-                            marginInlineStart:
-                              entry.level === 2
-                                ? "0"
-                                : entry.level === 3
-                                  ? "0.7rem"
-                                  : "1.4rem",
-                          }}
-                        >
-                          <a
-                            href={`#${entry.id}`}
-                            className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
-                            onClick={() => setActiveTocId(entry.id)}
-                          >
-                            {entry.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </aside>
-              )}
-            </div>
-          ) : (
-            <p
-              style={{
-                fontFamily: "var(--font-crimson)",
-                fontSize: "1.05rem",
-                color: "var(--text-secondary)",
-                lineHeight: 1.75,
-                maxWidth: "760px",
-              }}
-            >
-              {t.chapter.contentUnavailable}
-            </p>
-          )}
-        </div>
-      )}
-
-      {/* ─── References ─── */}
-      {tab === "refs" && (
-        <div
-          style={{
-            maxWidth: "800px",
-            margin: "0 auto",
-            padding: "2rem 1.5rem 3rem",
-          }}
-        >
-          {lesson.references.length === 0 ? (
-            <p
-              style={{
-                fontFamily: "var(--font-crimson)",
-                fontSize: "1rem",
-                color: "var(--text-secondary)",
-              }}
-            >
-              {t.chapter.refsEmpty}
-            </p>
-          ) : (
-            <div style={{ display: "grid", gap: "1.75rem" }}>
-              {([
-                {
-                  index: 1,
-                  title: t.chapter.refsEnglishTitle,
-                  references: englishReferences,
-                },
-                {
-                  index: 2,
-                  title: t.chapter.refsFrenchTitle,
-                  references: frenchReferences,
-                },
-              ] as const).map((section) => (
-                <div key={section.index}>
-                  <h3
+        {hasLessonContent ? (
+          <div className="lesson-web-layout">
+            <div className="lesson-web-main">
+              <div
+                className="prose-quantum"
+                dangerouslySetInnerHTML={lessonHtml}
+              />
+              <div
+                style={{
+                  padding: "0 0 2rem",
+                }}
+              >
+                {lesson.references.length === 0 ? (
+                  <p
                     style={{
-                      fontFamily: "var(--font-playfair)",
-                      fontSize: "1.05rem",
-                      color: "var(--text-heading)",
-                      marginBottom: "0.65rem",
+                      fontFamily: "var(--font-crimson)",
+                      fontSize: "1rem",
+                      color: "var(--text-secondary)",
                     }}
                   >
-                    {section.index}. {section.title}
-                  </h3>
-                  {section.references.length === 0 ? (
-                    <p
-                      style={{
-                        fontFamily: "var(--font-crimson)",
-                        fontSize: "0.98rem",
-                        color: "var(--text-secondary)",
-                        margin: 0,
-                      }}
-                    >
-                      {t.chapter.refsSectionEmpty}
-                    </p>
-                  ) : (
-                    <ul
-                      style={{
-                        margin: 0,
-                        paddingInlineStart: "1.2rem",
-                        display: "grid",
-                        gap: "0.8rem",
-                      }}
-                    >
-                      {section.references.map((reference, index) => (
-                        <li
-                          key={`${reference.language}:${reference.key}`}
+                    {t.chapter.refsEmpty}
+                  </p>
+                ) : (
+                  <div style={{ display: "grid", gap: "1.75rem" }}>
+                    {([
+                      {
+                        index: 1,
+                        title: t.chapter.refsEnglishTitle,
+                        references: englishReferences,
+                      },
+                      {
+                        index: 2,
+                        title: t.chapter.refsFrenchTitle,
+                        references: frenchReferences,
+                      },
+                    ] as const).filter((section) => section.references.length > 0).map((section) => (
+                      <div key={section.index}>
+                        <h3
                           style={{
-                            display: "grid",
-                            gridTemplateColumns: "2.2rem 1fr",
-                            alignItems: "start",
-                            columnGap: "0.25rem",
+                            fontFamily: "var(--font-playfair)",
+                            fontSize: "1.05rem",
+                            color: "var(--text-heading)",
+                            marginBottom: "0.65rem",
                           }}
                         >
-                          <span
-                            style={{
-                              fontFamily: "var(--font-jetbrains)",
-                              fontSize: "0.8rem",
-                              color: "var(--text-dim)",
-                              lineHeight: 1.6,
-                            }}
-                          >
-                            [{index + 1}]
-                          </span>
-                          {(() => {
-                            const parts = formatReferenceLines(reference.label, reference.url);
-                            return (
+                          {section.title}
+                        </h3>
+                        <ul
+                          style={{
+                            margin: 0,
+                            paddingInlineStart: "1.2rem",
+                            display: "grid",
+                            gap: "0.8rem",
+                          }}
+                        >
+                          {section.references.map((reference, index) => (
+                            <li
+                              key={`${reference.language}:${reference.key}`}
+                              style={{
+                                display: "grid",
+                                gridTemplateColumns: "2.2rem 1fr",
+                                alignItems: "start",
+                                columnGap: "0.25rem",
+                              }}
+                            >
                               <span
                                 style={{
-                                  display: "inline-grid",
-                                  gap: "0.15rem",
-                                  verticalAlign: "top",
-                                  fontFamily: "var(--font-crimson)",
-                                  fontSize: "1rem",
-                                  color: "var(--text-heading)",
+                                  fontFamily: "var(--font-jetbrains)",
+                                  fontSize: "0.8rem",
+                                  color: "var(--text-dim)",
                                   lineHeight: 1.6,
                                 }}
                               >
-                                <span>{parts.author}</span>
-                                {parts.url ? (
-                                  <a
-                                    href={reference.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                [{index + 1}]
+                              </span>
+                              {(() => {
+                                const parts = formatReferenceLines(reference.label, reference.url);
+                                return (
+                                  <span
                                     style={{
-                                      color: "#2563eb",
-                                      textDecoration: "none",
-                                      fontFamily: "inherit",
-                                      fontSize: "inherit",
+                                      display: "inline-grid",
+                                      gap: "0.15rem",
+                                      verticalAlign: "top",
+                                      fontFamily: "var(--font-crimson)",
+                                      fontSize: "1rem",
+                                      color: "var(--text-heading)",
+                                      lineHeight: 1.6,
                                     }}
                                   >
-                                    {parts.url}
-                                  </a>
-                                ) : null}
-                                {parts.description ? <span>{parts.description}</span> : null}
-                              </span>
-                            );
-                          })()}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
+                                    <span>{parts.author}</span>
+                                    {parts.url ? (
+                                      <a
+                                        href={reference.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                          color: "#2563eb",
+                                          textDecoration: "none",
+                                          fontFamily: "inherit",
+                                          fontSize: "inherit",
+                                        }}
+                                      >
+                                        {parts.url}
+                                      </a>
+                                    ) : null}
+                                    {parts.description ? <span>{parts.description}</span> : null}
+                                  </span>
+                                );
+                              })()}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
-      )}
+            {webContentWithToc.toc.length > 0 && (
+              <aside className="lesson-toc lesson-toc-sticky">
+                <div className="lesson-toc-header">
+                  {tocVisible && <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>}
+                  <button
+                    className="lesson-toc-toggle"
+                    onClick={() => setTocVisible((current) => !current)}
+                  >
+                    {tocVisible ? t.chapter.hideToc : t.chapter.showToc}
+                  </button>
+                </div>
+                {tocVisible && (
+                  <ul className="lesson-toc-list">
+                    {webContentWithToc.toc.map((entry) => (
+                      <li
+                        key={entry.id}
+                        className="lesson-toc-item"
+                        style={{
+                          marginInlineStart:
+                            entry.level === 2
+                              ? "0"
+                              : entry.level === 3
+                                ? "0.7rem"
+                                : "1.4rem",
+                        }}
+                      >
+                        <a
+                          href={`#${entry.id}`}
+                          className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
+                          onClick={() => setActiveTocId(entry.id)}
+                        >
+                          {entry.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </aside>
+            )}
+          </div>
+        ) : (
+          <p
+            style={{
+              fontFamily: "var(--font-crimson)",
+              fontSize: "1.05rem",
+              color: "var(--text-secondary)",
+              lineHeight: 1.75,
+              maxWidth: "760px",
+            }}
+          >
+            {t.chapter.contentUnavailable}
+          </p>
+        )}
+      </div>
 
       {showBackToTop && (
         <button

@@ -9,11 +9,18 @@ function load(file) {
   if (modules.has(file)) return modules.get(file).exports;
   const module = {exports: {}};
   modules.set(file, module);
-  const js = ts.transpileModule(fs.readFileSync(file, "utf8"), {compilerOptions:{esModuleInterop: true, module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020}}).outputText;
+  const js = ts.transpileModule(fs.readFileSync(file, "utf8"), {compilerOptions:{esModuleInterop: true, module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX}}).outputText;
   const localRequire = name => {
     if (name === "server-only") return {};
-    if (name === "react") return {cache: fn => fn};
-    if (name.startsWith("@/")) return name.endsWith(".json") ? require(path.resolve(name.slice(2))) : load(`${name.slice(2)}.ts`);
+    if (name === "react") return {...require("react"), cache: fn => fn};
+    if (name === "next/navigation") return {useRouter: () => ({push() {}})};
+    if (name.startsWith("@/") || name.startsWith(".")) {
+      const source = name.startsWith("@/") ? path.resolve(name.slice(2)) : path.resolve(path.dirname(file), name);
+      if (source.endsWith(".json")) return require(source);
+      const resolved = [`${source}.ts`, `${source}.tsx`, path.join(source, 'index.ts')].find(fs.existsSync);
+      if (!resolved) throw new Error(`Cannot resolve ${name} from ${file}`);
+      return load(resolved);
+    }
     return require(name);
   };
   vm.runInThisContext(`(function(require,module,exports){${js}\n})`, {filename:file})(localRequire,module,module.exports);
@@ -61,3 +68,33 @@ const input = '<h2>Repeated</h2><h2>Repeated</h2><sup class="lesson-cite" data-c
 const presented = presentation.buildLessonPresentation(input,input,'fr');
 assert.equal(presented.toc[1].id,'repeated-2');
 assert.ok(presented.content.includes('<sup class="lesson-cite">[1]</sup>'));
+
+// Bibliographies are selected by the source input, including distinct fiche files.
+const chapterContent = load('lib/chapterContent.server.ts');
+const refs = chapterContent.getLessonReferences(99, 99, [], 'theme1_fr/lecon1.tex');
+assert.ok(refs.some(ref => ref.key === 'sahoo2022classicality'));
+assert.deepEqual(chapterContent.getLessonReferences(2, 1, [], 'theme2_fr/fiche1.tex'), []);
+assert.ok(chapterContent.getLessonReferences(2, 1, [], 'theme2_fr/lecon1.tex').length > 0);
+
+const React = require('react');
+const {renderToStaticMarkup} = require('react-dom/server');
+const {LangProvider} = load('app/context/LangContext.tsx');
+const {ChapterContent} = load('app/[lang]/chapters/ChapterContent.tsx');
+for (const lang of SUPPORTED_LANGS) {
+  const ui = require(path.resolve(`lib/locales/${lang}.json`)).ui;
+  const texFile = `theme1_${lang}/${lang === 'fr' ? 'lecon' : 'lesson'}1.tex`;
+  const references = chapterContent.getLessonReferences(1, 1, [], texFile);
+  const raw = chapterContent.getLessonWebContent(texFile, -1, references);
+  const result = presentation.buildLessonPresentation(raw, raw, lang);
+  assert.equal(result.toc.at(-1).text.replace(/^\d+\.\s*/, ''), ui.chapter.tabReferences);
+  const lesson = {slug:'lesson-1', titleFr:'Test', titleEn:'Test', subtitleFr:'', subtitleEn:'',
+    topicsFr:[], topicsEn:[], descriptionFr:'', descriptionEn:'', renderedLang:result.content,
+    toc:result.toc, references};
+  const html = renderToStaticMarkup(React.createElement(LangProvider,
+    {initialLang:lang, initialUi:ui, initialThemes:[]}, React.createElement(ChapterContent, {lesson})));
+  assert.ok(html.includes('https://doi.org/10.48550/arXiv.2211.08363'), `${lang}: bibliography visible without interaction`);
+  assert.ok(!html.includes(`>${ui.chapter.tabOnline}</button>`), `${lang}: no lesson tab`);
+  const heading = `id="${result.toc.at(-1).id}"`;
+  assert.ok(html.indexOf(heading) < html.indexOf('https://doi.org/10.48550/arXiv.2211.08363'));
+}
+console.log('Inline bibliographies, localized TOC headings and initial HTML checked in all 20 languages.');

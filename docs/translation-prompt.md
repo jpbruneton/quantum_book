@@ -14,6 +14,12 @@ demandées, leçon par leçon, avec des groupes de langues lorsqu'ils sont deman
 - Interface : `lib/locales/fr.json` → `lib/locales/<code>.json`.
 - Quiz : `lib/quizzes.ts`, `quizQuestionTranslations[code][questionId]`.
 
+Chaque cours non vide se termine par une section de références et un
+`\input{ref_N_M}` (ou `ref_N_fiche_M` pour une fiche). Traduire le titre de section
+avec le libellé du catalogue de la langue cible ; conserver le nom du fichier
+bibliographique partagé, sauf si une bibliographie localisée est explicitement
+fournie. Les références s'affichent à la suite du cours, sans onglet séparé.
+
 ## Prompt
 
 Lire d'abord [les règles terminologiques](terminology/README.md), puis

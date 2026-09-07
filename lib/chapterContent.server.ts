@@ -1498,16 +1498,34 @@ export function getTexWebHtmlFromSource(
 export function getLessonReferences(
   themeNumber: number,
   lessonNumber: number,
-  fallbackReferences: LessonReference[]
+  fallbackReferences: LessonReference[],
+  texFile?: string
 ): LessonReference[] {
-  const fileName = `ref_${themeNumber}_${lessonNumber}.tex`;
+  let fileName = `ref_${themeNumber}_${lessonNumber}.tex`;
+  let explicitInput = false;
+  if (texFile) {
+    try {
+      const lessonSource = readFileSync(getTexPathByFileName(texFile), "utf-8")
+        .split(/\r?\n/).map(stripComment).join("\n");
+      // Bibliographies live at the TeX root. Do not expand arbitrary TeX inputs.
+      const input = lessonSource.match(/\\input\s*\{(ref_[A-Za-z0-9_-]+)(?:\.tex)?\}/);
+      if (input) {
+        fileName = `${input[1]}.tex`;
+        explicitInput = true;
+      } else if (/(?:^|\/)fiche\d+\.tex$/.test(texFile)) {
+        return fallbackReferences;
+      }
+    } catch {
+      return fallbackReferences;
+    }
+  }
   const refPath = getTexPathByFileName(fileName);
   if (!refPath) return fallbackReferences;
 
   try {
     const source = readFileSync(refPath, "utf-8");
     const parsed = parseReferencesTex(source);
-    if (parsed.length > 0) return parsed;
+    if (explicitInput || parsed.length > 0) return parsed;
     return fallbackReferences;
   } catch {
     return fallbackReferences;
