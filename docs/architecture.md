@@ -89,3 +89,6 @@ Initialiser le sous-module avant le build. Les contrôles portent sur la structu
 des traductions, les formules, la précompilation, les langues/RTL, les ancres,
 l'indexation, les figures et les polices locales. Ils ne remplacent pas une
 relecture scientifique humaine.
+
+Les bibliographies partagées regroupent toutes les références sans distinction de
+langue, avec une numérotation continue identique aux appels `\cite`.

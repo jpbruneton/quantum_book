@@ -769,25 +769,12 @@ function replaceCommandBlock(
   return output;
 }
 
-interface CitationNumberMaps {
-  en: Record<string, number>;
-  fr: Record<string, number>;
-}
+type CitationNumberMaps = Record<string, number>;
 
 type ContentLanguage = Lang;
 
 function buildCitationNumberMaps(references: LessonReference[]): CitationNumberMaps {
-  const maps: CitationNumberMaps = { en: {}, fr: {} };
-  const counters: Record<"en" | "fr", number> = { en: 0, fr: 0 };
-
-  for (const reference of references) {
-    const language = reference.language;
-    if (maps[language][reference.key] !== undefined) continue;
-    counters[language] += 1;
-    maps[language][reference.key] = counters[language];
-  }
-
-  return maps;
+  return Object.fromEntries(references.map((reference, index) => [reference.key, index + 1]));
 }
 
 function replaceCitations(input: string, citationMaps: CitationNumberMaps): string {
@@ -799,17 +786,8 @@ function replaceCitations(input: string, citationMaps: CitationNumberMaps): stri
 
     if (keys.length === 0) return "[?]";
 
-    const enNumbers = keys
-      .map((key) => citationMaps.en[key])
-      .filter((value): value is number => typeof value === "number");
-    const frNumbers = keys
-      .map((key) => citationMaps.fr[key])
-      .filter((value): value is number => typeof value === "number");
-
-    const enValue = enNumbers.length > 0 ? enNumbers.join(",") : "?";
-    const frValue = frNumbers.length > 0 ? frNumbers.join(",") : "?";
-    const fallback = enValue !== "?" ? enValue : frValue;
-    return `<sup class="lesson-cite" data-cite-en="${enValue}" data-cite-fr="${frValue}">[${fallback}]</sup>`;
+    const numbers = keys.map((key) => citationMaps[key] ?? "?");
+    return `<sup class="lesson-cite">[${numbers.join(",")}]</sup>`;
   });
 }
 
@@ -1332,8 +1310,7 @@ function normalizeReferenceUrl(url: string): string {
 function parseReferencesTex(source: string): LessonReference[] {
   const refs: LessonReference[] = [];
   const lines = source.replace(/\r\n/g, "\n").split("\n");
-  let currentLanguage: "en" | "fr" = "en";
-  const autoCounters: Record<"en" | "fr", number> = { en: 0, fr: 0 };
+  let autoCounter = 0;
   let pendingStructuredRef: { name: string; url: string; description: string } | null = null;
   let pendingStructuredKey = "";
 
@@ -1346,14 +1323,13 @@ function parseReferencesTex(source: string): LessonReference[] {
     ) {
       return;
     }
-    autoCounters[currentLanguage] += 1;
+    autoCounter += 1;
     const explicitKey = pendingStructuredKey.trim();
     refs.push({
-      key: explicitKey.length > 0 ? explicitKey : `structured_${currentLanguage}_${autoCounters[currentLanguage]}`,
+      key: explicitKey.length > 0 ? explicitKey : `structured_${autoCounter}`,
       url: normalizeReferenceUrl(pendingStructuredRef.url),
       // Use a structured separator consumed by the chapter references renderer.
       label: `${cleanReferenceLabel(pendingStructuredRef.name)}|||${cleanReferenceLabel(pendingStructuredRef.description)}`,
-      language: currentLanguage,
     });
     pendingStructuredRef = null;
     pendingStructuredKey = "";
@@ -1363,22 +1339,6 @@ function parseReferencesTex(source: string): LessonReference[] {
     const rawTrimmedLine = rawLine.trim();
     const line = stripComment(rawLine).trim();
     if (!line) continue;
-
-    if (
-      /(?:^1\..*anglais|\\(?:sub)?section\*?\{[^{}]*(?:anglais|english)[^{}]*\})/i.test(line)
-    ) {
-      pushStructuredRefIfComplete();
-      currentLanguage = "en";
-      continue;
-    }
-
-    if (
-      /(?:^2\..*fran|\\(?:sub)?section\*?\{[^{}]*(?:fran|french)[^{}]*\})/i.test(line)
-    ) {
-      pushStructuredRefIfComplete();
-      currentLanguage = "fr";
-      continue;
-    }
 
     const nameRegex = /\\name\{([^{}]+)\}/g;
     let nameMatch: RegExpExecArray | null;
@@ -1416,19 +1376,17 @@ function parseReferencesTex(source: string): LessonReference[] {
         key: refEntryMatch[1].trim(),
         url: normalizeReferenceUrl(refEntryMatch[2]),
         label: cleanReferenceLabel(refEntryMatch[3]) || normalizeReferenceUrl(refEntryMatch[2]),
-        language: currentLanguage,
       });
     }
 
     const hrefRegex = /\\href\{([^{}]+)\}\{([^{}]+)\}/g;
     let hrefMatch: RegExpExecArray | null;
     while ((hrefMatch = hrefRegex.exec(line)) !== null) {
-      autoCounters[currentLanguage] += 1;
+      autoCounter += 1;
       refs.push({
-        key: `auto_${currentLanguage}_${autoCounters[currentLanguage]}`,
+        key: `auto_${autoCounter}`,
         url: normalizeReferenceUrl(hrefMatch[1]),
         label: cleanReferenceLabel(hrefMatch[2]) || normalizeReferenceUrl(hrefMatch[1]),
-        language: currentLanguage,
       });
     }
 
@@ -1441,12 +1399,11 @@ function parseReferencesTex(source: string): LessonReference[] {
         pendingStructuredRef.url = normalizedUrl;
         pushStructuredRefIfComplete();
       } else {
-        autoCounters[currentLanguage] += 1;
+        autoCounter += 1;
         refs.push({
-          key: `auto_${currentLanguage}_${autoCounters[currentLanguage]}`,
+          key: `auto_${autoCounter}`,
           url: normalizedUrl,
           label: normalizedUrl,
-          language: currentLanguage,
         });
       }
     }

@@ -56,14 +56,9 @@ function slugify(value: string): string {
 
 export function buildLessonPresentation(source: string, rendered: string, lang: Lang) {
   const headings = Array.from(source.matchAll(/<(h[2-4])>([\s\S]*?)<\/\1>/g), match => stripHtmlForToc(match[2].replace(/\$+([\s\S]*?)\$+/g, (_m, math: string) => simplifyLatexForToc(math))));
-  const localized = rendered.replace(/<sup class="lesson-cite" data-cite-en="([^"]*)" data-cite-fr="([^"]*)">[\s\S]*?<\/sup>/g, (_m, en: string, fr: string) => {
-    const preferred = lang === "fr" ? fr : en;
-    const fallback = lang === "fr" ? en : fr;
-    return `<sup class="lesson-cite">[${preferred && preferred !== "?" ? preferred : fallback || "?"}]</sup>`;
-  });
   const toc: TocEntry[] = [];
   const used: Record<string, number> = {};
-  const content = localized.replace(/<(h[2-4])>([\s\S]*?)<\/\1>/g, (_m, tag: string, inner: string) => {
+  const content = rendered.replace(/<(h[2-4])>([\s\S]*?)<\/\1>/g, (_m, tag: string, inner: string) => {
     const text = headings[toc.length] || stripHtmlForToc(inner);
     const base = slugify(text);
     const count = used[base] ?? 0;

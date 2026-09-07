@@ -22,8 +22,6 @@ export function ChapterContent({ lesson }: Props) {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const { t, lang } = useLang();
   const lp = useLocalizedPath();
-  const englishReferences = lesson.references.filter((reference) => reference.language === "en");
-  const frenchReferences = lesson.references.filter((reference) => reference.language === "fr");
   const hasLessonContent = lesson.renderedLang.trim().length > 0;
   const lessonHeadingFr = lesson.subtitleFr.trim() || lesson.titleFr;
   const lessonHeadingEn = lesson.subtitleEn.trim() || lesson.titleEn;
@@ -212,29 +210,6 @@ export function ChapterContent({ lesson }: Props) {
                   </p>
                 ) : (
                   <div style={{ display: "grid", gap: "1.75rem" }}>
-                    {([
-                      {
-                        index: 1,
-                        title: t.chapter.refsEnglishTitle,
-                        references: englishReferences,
-                      },
-                      {
-                        index: 2,
-                        title: t.chapter.refsFrenchTitle,
-                        references: frenchReferences,
-                      },
-                    ] as const).filter((section) => section.references.length > 0).map((section) => (
-                      <div key={section.index}>
-                        <h3
-                          style={{
-                            fontFamily: "var(--font-playfair)",
-                            fontSize: "1.05rem",
-                            color: "var(--text-heading)",
-                            marginBottom: "0.65rem",
-                          }}
-                        >
-                          {section.title}
-                        </h3>
                         <ul
                           style={{
                             margin: 0,
@@ -243,9 +218,9 @@ export function ChapterContent({ lesson }: Props) {
                             gap: "0.8rem",
                           }}
                         >
-                          {section.references.map((reference, index) => (
+                          {lesson.references.map((reference, index) => (
                             <li
-                              key={`${reference.language}:${reference.key}`}
+                              key={reference.key}
                               style={{
                                 display: "grid",
                                 gridTemplateColumns: "2.2rem 1fr",
@@ -300,8 +275,6 @@ export function ChapterContent({ lesson }: Props) {
                             </li>
                           ))}
                         </ul>
-                      </div>
-                    ))}
                   </div>
                 )}
               </div>

@@ -64,15 +64,20 @@ assert.equal(quiz.getLocalizedQuizQuestions(1,'lesson-1','en').length,1);
 console.log('Locale round trips, grouped exercise IDs and all-or-nothing quiz translations checked.');
 
 const presentation = load('lib/lessonPresentation.ts');
-const input = '<h2>Repeated</h2><h2>Repeated</h2><sup class="lesson-cite" data-cite-en="2" data-cite-fr="1">[2]</sup>';
+const input = '<h2>Repeated</h2><h2>Repeated</h2><sup class="lesson-cite">[2]</sup>';
 const presented = presentation.buildLessonPresentation(input,input,'fr');
 assert.equal(presented.toc[1].id,'repeated-2');
-assert.ok(presented.content.includes('<sup class="lesson-cite">[1]</sup>'));
+assert.ok(presented.content.includes('<sup class="lesson-cite">[2]</sup>'));
 
 // Bibliographies are selected by the source input, including distinct fiche files.
 const chapterContent = load('lib/chapterContent.server.ts');
 const refs = chapterContent.getLessonReferences(99, 99, [], 'theme1_fr/lecon1.tex');
 assert.ok(refs.some(ref => ref.key === 'sahoo2022classicality'));
+assert.ok(refs.some(ref => ref.key === 'jackson1999classical'));
+for (const lang of ['fr', 'en']) {
+  const cited = chapterContent.getTexWebHtmlFromSource('\\cite{jackson1999classical,sahoo2022classicality}', lang, refs);
+  assert.ok(cited.includes('<sup class="lesson-cite">[1,2]</sup>'));
+}
 assert.deepEqual(chapterContent.getLessonReferences(2, 1, [], 'theme2_fr/fiche1.tex'), []);
 assert.ok(chapterContent.getLessonReferences(2, 1, [], 'theme2_fr/lecon1.tex').length > 0);
 
@@ -93,6 +98,9 @@ for (const lang of SUPPORTED_LANGS) {
   const html = renderToStaticMarkup(React.createElement(LangProvider,
     {initialLang:lang, initialUi:ui, initialThemes:[]}, React.createElement(ChapterContent, {lesson})));
   assert.ok(html.includes('https://doi.org/10.48550/arXiv.2211.08363'), `${lang}: bibliography visible without interaction`);
+  assert.ok(html.includes('John David Jackson'), `${lang}: Jackson visible in bibliography`);
+  assert.ok(!html.includes(ui.chapter.refsEnglishTitle), `${lang}: no English reference group`);
+  assert.ok(!html.includes(ui.chapter.refsFrenchTitle), `${lang}: no French reference group`);
   assert.ok(!html.includes(`>${ui.chapter.tabOnline}</button>`), `${lang}: no lesson tab`);
   const heading = `id="${result.toc.at(-1).id}"`;
   assert.ok(html.indexOf(heading) < html.indexOf('https://doi.org/10.48550/arXiv.2211.08363'));
