@@ -2,9 +2,14 @@
 import Link from "next/link";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
+import type { Theme } from "@/lib/chapters";
 
-export function ChapterList() {
-  const { t, lang, webThemes } = useLang();
+interface Props {
+  webThemes: Theme[];
+}
+
+export function ChapterList({ webThemes }: Props) {
+  const { t, lang } = useLang();
   const lp = useLocalizedPath();
 
   return (

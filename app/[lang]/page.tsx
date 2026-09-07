@@ -4,6 +4,7 @@ import { hubPageSeo } from "@/lib/hubPageSeo";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
+import { getWebThemes } from "@/lib/localizedChapters.server";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -28,5 +29,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function HomePage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
-  return <HomePageClient />;
+  return <HomePageClient webThemes={getWebThemes(params.lang)} />;
 }

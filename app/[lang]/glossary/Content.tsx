@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { chapterLessonPath } from "@/lib/lessonRoutes";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
+import type { Theme } from "@/lib/chapters";
 
 interface GlossaryOccurrence {
   themeSlug: string;
@@ -26,7 +27,7 @@ function normalizeKeyword(value: string): string {
 }
 
 function GlossaryIntro() {
-  const { lang, t, webThemes } = useLang();
+  const { t } = useLang();
   const title = t.glossary.title;
   const subtitle = t.glossary.subtitle;
 
@@ -57,8 +58,8 @@ function GlossaryIntro() {
   );
 }
 
-function GlossaryFilterAndList() {
-  const { lang, t, webThemes } = useLang();
+function GlossaryFilterAndList({ webThemes }: { webThemes: Theme[] }) {
+  const { lang, t } = useLang();
   const lp = useLocalizedPath();
   const searchParams = useSearchParams();
   const selectedKeywordRaw = searchParams.get("q") || "";
@@ -222,7 +223,7 @@ function GlossaryFilterAndList() {
   );
 }
 
-export default function GlossaryPage() {
+export default function GlossaryPage({ webThemes }: { webThemes: Theme[] }) {
   return (
     <main
       style={{
@@ -233,7 +234,7 @@ export default function GlossaryPage() {
     >
       <GlossaryIntro />
       <Suspense fallback={null}>
-        <GlossaryFilterAndList />
+        <GlossaryFilterAndList webThemes={webThemes} />
       </Suspense>
     </main>
   );

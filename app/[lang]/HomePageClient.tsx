@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { bookMeta } from "@/lib/chapters";
+import { bookMeta, type Theme } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
@@ -29,8 +29,12 @@ function WaveBackground() {
   );
 }
 
-export default function HomePageClient() {
-  const { t, lang, webThemes } = useLang();
+interface Props {
+  webThemes: Theme[];
+}
+
+export default function HomePageClient({ webThemes }: Props) {
+  const { t, lang } = useLang();
   const lp = useLocalizedPath();
   const book = t.book;
 

@@ -107,7 +107,9 @@
       "translationWarning": "Książka została napisana głównie po francusku. Tłumaczenia przygotowano z pomocą AI i mogą zawierać błędy; tekst francuski jest wersją odniesienia.",
       "sameAuthorTitle": "Tego samego autora",
       "sameAuthorBody": "Termodynamika — Podstawowa i Zaawansowana, uzupełniający kurs termodynamiki.",
-      "sameAuthorLink": "Czytaj na learnthermo.org"
+      "sameAuthorLink": "Czytaj na learnthermo.org",
+      "openProblemsBody": "Lista otwartych problemów w mechanice kwantowej.",
+      "openProblemsLink": "Czytaj na openquantumproblems.com"
     },
     "footer": {
       "navigation": "Nawigacja",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postulaty",
-      "description": "Podstawowe aksjomaty teorii, interpretacje i fizyczne konsekwencje pomiaru.",
+      "title": "Postulaty i zastosowania",
+      "description": "Podstawowe aksjomaty teorii, interpretacje i fizyczne konsekwencje pomiaru. Metody obliczeniowe i narzędzia operatorowe łączące postulaty z konkretnymi przewidywaniami.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Splątanie kwantowe",
             "Nierówności Bella"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Zastosowania",
-      "description": "Metody obliczeniowe i narzędzia operatorowe łączące postulaty z konkretnymi przewidywaniami.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Lekcja 1",
+          "title": "Lekcja 2",
           "subtitle": "Bariery potencjału",
           "description": "Transmisja, odbicie, tunelowanie i zależność energetyczna stanów przy barierach potencjału.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Lekcja 2",
+          "title": "Lekcja 3",
           "subtitle": "Oscylator harmoniczny",
           "description": "Kwantowanie poziomów energii, operatory kreacji i anihilacji oraz stany własne oscylatora harmonicznego.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Lekcja 3",
+          "title": "Lekcja 4",
           "subtitle": "Spin",
           "description": "Macierze Pauliego, pomiar spinu, dynamika w polu magnetycznym i zastosowania do układów dwupoziomowych.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Lekcja 4",
+          "title": "Lekcja 5",
           "subtitle": "Dynamika kwantowa",
           "description": "Ewolucja unitarna, równanie Schrödingera, obrazy Schrödingera i Heisenberga oraz propagatory.",
           "topics": [

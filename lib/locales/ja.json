@@ -107,7 +107,9 @@
       "translationWarning": "本書は主にフランス語で執筆されています。翻訳は AI の支援を受けて作成されており、誤りを含む可能性があります。フランス語の原文を基準としてください。",
       "sameAuthorTitle": "同じ著者の著作",
       "sameAuthorBody": "『熱力学 — 基礎と発展』：関連する熱力学の講義書。",
-      "sameAuthorLink": "learnthermo.org で読む"
+      "sameAuthorLink": "learnthermo.org で読む",
+      "openProblemsBody": "量子力学における未解決問題の一覧。",
+      "openProblemsLink": "openquantumproblems.com で読む"
     },
     "footer": {
       "navigation": "ナビゲーション",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "公理",
-      "description": "理論の基本公理、解釈、測定の物理的帰結。",
+      "title": "公理と応用",
+      "description": "理論の基本公理、解釈、測定の物理的帰結。 公理から具体的な予測を導くための計算手法と作用素の道具。",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "量子もつれ",
             "ベルの不等式"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "応用",
-      "description": "公理から具体的な予測を導くための計算手法と作用素の道具。",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "第1レッスン",
+          "title": "第2レッスン",
           "subtitle": "ポテンシャル障壁",
           "description": "ポテンシャル障壁に対する状態の透過、反射、トンネル効果、エネルギー依存性。",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "第2レッスン",
+          "title": "第3レッスン",
           "subtitle": "調和振動子",
           "description": "エネルギー準位の量子化、生成・消滅作用素、調和振動子の固有状態。",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "第3レッスン",
+          "title": "第4レッスン",
           "subtitle": "スピン",
           "description": "パウリ行列、スピン測定、磁場中の力学、二準位系への応用。",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "第4レッスン",
+          "title": "第5レッスン",
           "subtitle": "量子力学の時間発展",
           "description": "ユニタリ発展、シュレーディンガー方程式、シュレーディンガー描像とハイゼンベルク描像、伝播関数。",
           "topics": [

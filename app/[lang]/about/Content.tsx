@@ -229,6 +229,20 @@ export default function AboutPage() {
           >
             {at.sameAuthorLink} →
           </a>
+          <p style={{ ...bodyStyle, margin: "0.85rem 0 0.65rem" }}>{at.openProblemsBody}</p>
+          <a
+            href="https://openquantumproblems.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "var(--font-crimson)",
+              fontSize: "1.05rem",
+              color: "var(--amber)",
+              textDecoration: "underline",
+            }}
+          >
+            {at.openProblemsLink} →
+          </a>
         </div>
       </div>
     </div>

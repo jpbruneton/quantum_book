@@ -107,7 +107,9 @@
       "translationWarning": "Este libro está escrito principalmente en francés. Las traducciones se han elaborado con ayuda de IA y pueden contener errores; el texto francés es la referencia.",
       "sameAuthorTitle": "Del mismo autor",
       "sameAuthorBody": "Termodinámica — Elemental y Avanzada, un curso complementario de termodinámica.",
-      "sameAuthorLink": "Leer en learnthermo.org"
+      "sameAuthorLink": "Leer en learnthermo.org",
+      "openProblemsBody": "Una lista de problemas abiertos en mecánica cuántica.",
+      "openProblemsLink": "Leer en openquantumproblems.com"
     },
     "footer": {
       "navigation": "Navegación",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postulados",
-      "description": "Axiomas básicos de la teoría, interpretaciones y consecuencias físicas de la medida.",
+      "title": "Postulados y aplicaciones",
+      "description": "Axiomas básicos de la teoría, interpretaciones y consecuencias físicas de la medida. Métodos de cálculo y herramientas operatoriales para vincular los postulados con predicciones concretas.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Entrelazamiento cuántico",
             "Desigualdades de Bell"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Aplicaciones",
-      "description": "Métodos de cálculo y herramientas operatoriales para vincular los postulados con predicciones concretas.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Lección n.º 1",
+          "title": "Lección n.º 2",
           "subtitle": "Barreras de potencial",
           "description": "Transmisión, reflexión, efecto túnel y dependencia energética de los estados ante barreras de potencial.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Lección n.º 2",
+          "title": "Lección n.º 3",
           "subtitle": "Oscilador armónico",
           "description": "Cuantización de los niveles de energía, operadores de creación y aniquilación, y estados propios del oscilador armónico.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Lección n.º 3",
+          "title": "Lección n.º 4",
           "subtitle": "Espín",
           "description": "Matrices de Pauli, medida del espín, dinámica en un campo magnético y aplicaciones a dos niveles.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Lección n.º 4",
+          "title": "Lección n.º 5",
           "subtitle": "Dinámica cuántica",
           "description": "Evolución unitaria, ecuación de Schrödinger, imágenes de Schrödinger y Heisenberg, y propagadores.",
           "topics": [

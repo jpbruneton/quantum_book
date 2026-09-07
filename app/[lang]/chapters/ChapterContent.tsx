@@ -1,6 +1,7 @@
 "use client";
 import type { TocEntry } from "@/lib/lessonPresentation";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
@@ -8,6 +9,8 @@ import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
 interface Props {
   lesson: LessonWithLocalizedContent;
+  /** Rendered as the first element of the text column, above the lesson content. */
+  topNav?: ReactNode;
 }
 
 interface LessonWithLocalizedContent extends Lesson {
@@ -16,7 +19,7 @@ interface LessonWithLocalizedContent extends Lesson {
   toc: TocEntry[];
 }
 
-export function ChapterContent({ lesson }: Props) {
+export function ChapterContent({ lesson, topNav }: Props) {
   const [activeTocId, setActiveTocId] = useState("");
   const [tocVisible, setTocVisible] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -189,6 +192,7 @@ export function ChapterContent({ lesson }: Props) {
         {hasLessonContent ? (
           <div className="lesson-web-layout">
             <div className="lesson-web-main">
+              {topNav && <div style={{ marginBottom: "1.5rem" }}>{topNav}</div>}
               <div
                 className="prose-quantum"
                 dangerouslySetInnerHTML={lessonHtml}

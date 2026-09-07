@@ -107,7 +107,9 @@
       "translationWarning": "This book is primarily written in French. Translations are produced with AI assistance and may contain errors; the French text is the reference version.",
       "sameAuthorTitle": "By the Same Author",
       "sameAuthorBody": "Thermodynamics — Elementary and Advanced, a companion course on thermodynamics.",
-      "sameAuthorLink": "Read it at learnthermo.org"
+      "sameAuthorLink": "Read it at learnthermo.org",
+      "openProblemsBody": "A list of open problems in quantum mechanics.",
+      "openProblemsLink": "Read it at openquantumproblems.com"
     },
     "footer": {
       "navigation": "Navigation",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postulates",
-      "description": "Core axioms of the theory, interpretations, and physical consequences of measurement.",
+      "title": "Postulates and Applications",
+      "description": "Core axioms of the theory, interpretations, and physical consequences of measurement. Computational methods and operator tools to connect postulates with concrete predictions.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Quantum entanglement",
             "Bell inequalities"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Applications",
-      "description": "Computational methods and operator tools to connect postulates with concrete predictions.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Lesson 1",
+          "title": "Lesson 2",
           "subtitle": "Potential Barriers",
           "description": "Transmission, reflection, tunneling, and energy dependence of states across potential barriers.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Lesson 2",
+          "title": "Lesson 3",
           "subtitle": "Harmonic Oscillator",
           "description": "Energy level quantization, creation/annihilation operators, and eigenstates of the harmonic oscillator.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Lesson 3",
+          "title": "Lesson 4",
           "subtitle": "Spin",
           "description": "Pauli matrices, spin measurement, dynamics in magnetic fields, and two-level applications.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Lesson 4",
+          "title": "Lesson 5",
           "subtitle": "Quantum Dynamics",
           "description": "Unitary evolution, Schrodinger equation, Schrodinger/Heisenberg pictures, and propagators.",
           "topics": [

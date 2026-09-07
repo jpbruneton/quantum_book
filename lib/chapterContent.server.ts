@@ -7,6 +7,32 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { LessonReference } from "@/lib/chapters";
 
+interface FigureImageVariant {
+  src: string;
+  width: number;
+}
+
+interface FigureImageMetadata {
+  width: number;
+  height: number;
+  variants: FigureImageVariant[];
+}
+
+function loadFigureImageManifest(): Record<string, FigureImageMetadata> {
+  try {
+    const manifestPath = join(process.cwd(), "public", "figs", "image-manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      images?: Record<string, FigureImageMetadata>;
+    };
+    return manifest.images ?? {};
+  } catch {
+    // Development and isolated content tests may run before the prebuild asset sync.
+    return {};
+  }
+}
+
+const figureImageManifest = loadFigureImageManifest();
+
 function stripComment(line: string): string {
   const protectedPercent = "__ESCAPED_PERCENT__";
   const escaped = line.replace(/\\%/g, protectedPercent);
@@ -345,6 +371,24 @@ function extractImageAndCaption(
   return { imagePath, caption, altText };
 }
 
+function renderFigureImage(
+  image: { imagePath: string; altText: string },
+  sizes: string
+): string {
+  const safePath = escapeHtmlAttribute(image.imagePath);
+  const metadata = figureImageManifest[image.imagePath];
+  const dimensions = metadata
+    ? ` width="${metadata.width}" height="${metadata.height}"`
+    : "";
+  const source = metadata?.variants.length
+    ? `<source type="image/webp" srcset="${metadata.variants
+        .map(variant => `${escapeHtmlAttribute(variant.src)} ${variant.width}w`)
+        .join(", ")}" sizes="${sizes}" />`
+    : "";
+  const img = `<img src="${safePath}" alt="${image.altText}"${dimensions} sizes="${sizes}" loading="lazy" decoding="async" />`;
+  return source ? `<picture>${source}${img}</picture>` : img;
+}
+
 function extractFigureHtml(figureBlock: string, figureNumber: number, contentLanguage: Lang): string {
   const labels = getTranslations(contentLanguage).blocks;
   const sourceHtml = extractFigureSourceHtml(figureBlock, contentLanguage);
@@ -369,7 +413,11 @@ function extractFigureHtml(figureBlock: string, figureNumber: number, contentLan
         const subCaption = item.caption
           ? `<figcaption class="latex-figure-subcaption">${item.caption}</figcaption>`
           : "";
-        return `<figure class="latex-figure-item"><a class="latex-figure-zoom-link" href="${item.imagePath}" target="_blank" rel="noreferrer"><img src="${item.imagePath}" alt="${item.altText}" loading="lazy" /></a>${subCaption}</figure>`;
+        const imageHtml = renderFigureImage(
+          item,
+          "(max-width: 700px) calc(100vw - 2rem), 5.2cm"
+        );
+        return `<figure class="latex-figure-item"><a class="latex-figure-zoom-link" href="${escapeHtmlAttribute(item.imagePath)}" target="_blank" rel="noreferrer">${imageHtml}</a>${subCaption}</figure>`;
       })
       .join("");
     return `<figure class="latex-figure latex-figure-row"><div class="latex-figure-row-inner">${itemsHtml}</div><figcaption>${labels.figure} ${figureNumber}${sourceHtml}</figcaption></figure>`;
@@ -387,7 +435,11 @@ function extractFigureHtml(figureBlock: string, figureNumber: number, contentLan
     return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${single.imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${single.imagePath}" target="_blank" rel="noreferrer">${labels.openPdf}</a></object>${figCaption}</figure>`;
   }
 
-  return `<figure class="latex-figure"><a class="latex-figure-zoom-link" href="${single.imagePath}" target="_blank" rel="noreferrer"><img src="${single.imagePath}" alt="${single.altText}" loading="lazy" /></a>${figCaption}</figure>`;
+  const imageHtml = renderFigureImage(
+    single,
+    "(max-width: 700px) calc(100vw - 2rem), 10.4cm"
+  );
+  return `<figure class="latex-figure"><a class="latex-figure-zoom-link" href="${escapeHtmlAttribute(single.imagePath)}" target="_blank" rel="noreferrer">${imageHtml}</a>${figCaption}</figure>`;
 }
 
 function renderSectionHeading(

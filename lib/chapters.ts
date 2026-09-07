@@ -345,8 +345,195 @@ export const themes: Theme[] = [
     ],
   },
   {
-    slug: "linear-operator-theory",
+    slug: "postulates",
     number: 3,
+    display_on_web: true,
+    titleFr: "Postulats et applications",
+    titleEn: "Postulates and Applications",
+    descriptionFr:
+      "Axiomes de base de la théorie, interprétations et conséquences physiques de la mesure. Méthodes de calcul et outils opératoriels pour relier les postulats à des prédictions concrètes.",
+    descriptionEn:
+      "Core axioms of the theory, interpretations, and physical consequences of measurement. Computational methods and operator tools to connect postulates with concrete predictions.",
+    lessons: [
+      {
+        slug: "postulats-lecon-1",
+        number: 1,
+        display_on_web: true,
+        titleFr: "Leçon n°1",
+        titleEn: "Lesson 1",
+        subtitleFr: "Mesure, dynamique et interprétation",
+        subtitleEn: "Measurement, Dynamics, and Interpretation",
+        descriptionFr:
+          "Présentation des postulats quantiques, de la règle de Born, de la réduction du paquet d'onde et de l'équation de Schrödinger.",
+        descriptionEn:
+          "Presentation of quantum postulates, Born rule, wavefunction collapse, and the Schrodinger equation.",
+        topicsFr: [
+          "Postulats",
+          "Mesure quantique",
+          "Règle de Born",
+          "Évolution unitaire",
+          "Réduction du paquet d'onde",
+          "Équation de Schrödinger",
+          "Théorème d'Ehrenfest",
+          "Superposition",
+          "Intrication quantique",
+          "Inégalités de Bell",
+        ],
+        topicsEn: [
+          "Postulates",
+          "Quantum measurement",
+          "Born rule",
+          "Unitary evolution",
+          "Wavefunction collapse",
+          "Schrodinger equation",
+          "Ehrenfest theorem",
+          "Superposition",
+          "Quantum entanglement",
+          "Bell inequalities",
+        ],
+        texFile: "theme3_fr/lecon1.tex",
+        references: [],
+        content: `
+<p>Ce chapitre présente les postulats de la mécanique quantique et en propose une première discussion. L'objectif est double : établir le formalisme standard, et souligner à quel point ces postulats proposent une vision du monde radicalement différente de celle de la physique classique. Nous présenterons ici la version dite \\og orthodoxe\\fg, bien connue sous le nom d'« interprétation de Copenhague\\footnote{Du nom de l'école de pensée développée à l'Université de Copenhague dans les années 1920-1930, principalement par Bohr, qui y enseignait, et par Heisenberg, qui y était de passage.} », de la mécanique quantique. Cette formulation inclut notamment le postulat de la réduction du paquet d'onde (postulat 3) ainsi que le caractère fondamentalement probabiliste des résultats de mesure (postulat 4).</p>
+
+<p>Cette précision prend tout son sens lorsque l'on sait qu'il existe d'autres interprétations de la mécanique quantique qui remettent en question certains des postulats énoncés ci-dessous. Une des plus connue, l'interprétation des mondes multiples d'Everett, par exemple, abandonne le postulat de réduction : dans ce cadre, toutes les issues possibles d'une mesure se réalisent dans des branches différentes de la fonction d'onde universelle. Le caractère aléatoire de la mesure devient alors relatif à l'observateur : depuis sa branche, il perçoit un résultat unique et \\emph{apparemment} aléatoire, bien que tous les résultats se produisent effectivement. C'est pourquoi, dans cette interprétation, la règle de Born (postulat 4) devrait pouvoir se dériver des autres postulats pour que la théorie soit pleinement satisfaisante\\footnote{Une telle dérivation n'a pas encore été trouvée ; c'est sujet à de vifs débats en fondements de la mécanique quantique.}. Nous couvrirons ces sujets dans la partie II [[[ref???]]].</p>
+
+<p>Par ailleurs, l'émergence de l'informatique quantique et de la cryptographie quantique a renouvelé l'intérêt théorique pour les fondements, conduisant à des reformulations des axiomes sous une forme \\emph{complètement différente} de celle que l'on expose ci-dessous. Dans ces approches la structure de Hilbert n'est même pas postulée mais dérivée à partir d'une axiomatique informationnelle. Ces approches seront discutées en partie III ou IV [[[check later]]].</p>
+        `,
+      },
+      {
+        slug: "applications-lecon-1",
+        number: 2,
+        display_on_web: true,
+        titleFr: "Leçon n°2",
+        titleEn: "Lesson 2",
+        subtitleFr: "Barrières de potentiel",
+        subtitleEn: "Potential Barriers",
+        descriptionFr:
+          "Transmission, réflexion, effet tunnel et dépendance énergétique des états face aux barrières de potentiel.",
+        descriptionEn:
+          "Transmission, reflection, tunneling, and energy dependence of states across potential barriers.",
+        topicsFr: [
+          "Effet tunnel",
+          "Transmission",
+          "Réflexion",
+          "États diffusés",
+          "Coefficients",
+        ],
+        topicsEn: [
+          "Tunneling effect",
+          "Transmission",
+          "Reflection",
+          "Scattering states",
+          "Coefficients",
+        ],
+        texFile: "theme3_fr/lecon2.tex",
+        references: [],
+        content: `
+<p>Cette leçon introduit l'étude des barrières de potentiel, avec les phénomènes de réflexion, transmission et effet tunnel.</p>
+        `,
+      },
+      {
+        slug: "applications-lecon-2",
+        number: 3,
+        display_on_web: true,
+        titleFr: "Leçon n°3",
+        titleEn: "Lesson 3",
+        subtitleFr: "Oscillateur harmonique",
+        subtitleEn: "Harmonic Oscillator",
+        descriptionFr:
+          "Quantification des niveaux d'énergie, opérateurs de création/annihilation et états propres de l'oscillateur harmonique.",
+        descriptionEn:
+          "Energy level quantization, creation/annihilation operators, and eigenstates of the harmonic oscillator.",
+        topicsFr: [
+          "Niveaux d'énergie",
+          "Échelles quantiques",
+          "Opérateurs a et a†",
+          "États propres",
+          "Fonctions d'onde",
+        ],
+        topicsEn: [
+          "Energy levels",
+          "Quantum ladders",
+          "a and a† operators",
+          "Eigenstates",
+          "Wavefunctions",
+        ],
+        texFile: "theme3_fr/lecon3.tex",
+        references: [],
+        content: `
+<p>Cette leçon traite de l'oscillateur harmonique quantique, de sa résolution algébrique et de son rôle central en physique quantique.</p>
+        `,
+      },
+      {
+        slug: "applications-lecon-3",
+        number: 4,
+        display_on_web: true,
+        titleFr: "Leçon n°4",
+        titleEn: "Lesson 4",
+        subtitleFr: "Spin",
+        subtitleEn: "Spin",
+        descriptionFr:
+          "Matrices de Pauli, mesure de spin, dynamique dans un champ magnétique et applications à deux niveaux.",
+        descriptionEn:
+          "Pauli matrices, spin measurement, dynamics in magnetic fields, and two-level applications.",
+        topicsFr: [
+          "Matrices de Pauli",
+          "Spin 1/2",
+          "Mesure",
+          "Précession",
+          "Systèmes à deux niveaux",
+        ],
+        topicsEn: [
+          "Pauli matrices",
+          "Spin 1/2",
+          "Measurement",
+          "Precession",
+          "Two-level systems",
+        ],
+        texFile: "theme3_fr/lecon4.tex",
+        references: [],
+        content: `
+<p>Cette leçon présente le spin quantique et ses outils de calcul, en particulier pour les systèmes à deux niveaux.</p>
+        `,
+      },
+      {
+        slug: "applications-lecon-4",
+        number: 5,
+        display_on_web: true,
+        titleFr: "Leçon n°5",
+        titleEn: "Lesson 5",
+        subtitleFr: "Dynamique quantique",
+        subtitleEn: "Quantum Dynamics",
+        descriptionFr:
+          "Évolution unitaire, équation de Schrödinger, images de Schrödinger/Heisenberg et propagateurs.",
+        descriptionEn:
+          "Unitary evolution, Schrodinger equation, Schrodinger/Heisenberg pictures, and propagators.",
+        topicsFr: [
+          "Évolution unitaire",
+          "Équation de Schrödinger",
+          "Image de Heisenberg",
+          "Propagateurs",
+          "Hamiltonien",
+        ],
+        topicsEn: [
+          "Unitary evolution",
+          "Schrodinger equation",
+          "Heisenberg picture",
+          "Propagators",
+          "Hamiltonian",
+        ],
+        texFile: "theme3_fr/lecon5.tex",
+        references: [],
+        content: `
+<p>Cette leçon couvre la dynamique quantique et les différentes formulations de l'évolution temporelle des états.</p>
+        `,
+      },
+    ],
+  },
+  {
+    slug: "linear-operator-theory",
+    number: 4,
     display_on_web: true,
     titleFr: "Théorie des opérateurs linéaires",
     titleEn: "Linear Operator Theory",
@@ -391,7 +578,7 @@ export const themes: Theme[] = [
           "Bounded sets",
           "Compact sets",
         ],
-        texFile: "theme3_fr/lecon1.tex",
+        texFile: "theme4_fr/lecon1.tex",
         references: [],
         content: `
 <p>Étude de la topologie des espaces de Hilbert : notions de convergence forte et faible, continuité, compacité et complétude.</p>
@@ -427,7 +614,7 @@ export const themes: Theme[] = [
           "Adjoint",
           "Dense domain",
         ],
-        texFile: "theme3_fr/lecon2.tex",
+        texFile: "theme4_fr/lecon2.tex",
         references: [],
         content: `
 <p>Étude structurée de la théorie des opérateurs linéaires en espace de Hilbert.</p>
@@ -461,7 +648,7 @@ export const themes: Theme[] = [
           "Normal operators",
           "Spectral theorem",
         ],
-        texFile: "theme3_fr/lecon3.tex",
+        texFile: "theme4_fr/lecon3.tex",
         references: [],
         content: "",
       },
@@ -493,7 +680,7 @@ export const themes: Theme[] = [
           "Self-adjoint extensions",
           "Deficiency indices",
         ],
-        texFile: "theme3_fr/lecon4.tex",
+        texFile: "theme4_fr/lecon4.tex",
         references: [],
         content: "",
       },
@@ -527,7 +714,7 @@ export const themes: Theme[] = [
           "Continuous spectrum",
           "Discrete spectrum",
         ],
-        texFile: "theme3_fr/lecon5.tex",
+        texFile: "theme4_fr/lecon5.tex",
         references: [],
         content: "",
       },
@@ -544,215 +731,15 @@ export const themes: Theme[] = [
         descriptionEn: "Catalogue of the main linear operators and their spectral properties.",
         topicsFr: ["Opérateurs linéaires", "Atlas", "Propriétés spectrales"],
         topicsEn: ["Linear operators", "Atlas", "Spectral properties"],
-        texFile: "theme3_fr/fiche1.tex",
+        texFile: "theme4_fr/fiche1.tex",
         references: [],
         content: "",
       },
     ],
   },
   {
-    slug: "postulates",
-    number: 4,
-    display_on_web: true,
-    titleFr: "Postulats",
-    titleEn: "Postulates",
-    descriptionFr:
-      "Axiomes de base de la théorie, interprétations et conséquences physiques de la mesure.",
-    descriptionEn:
-      "Core axioms of the theory, interpretations, and physical consequences of measurement.",
-    lessons: [
-      {
-        slug: "postulats-lecon-1",
-        number: 1,
-        display_on_web: true,
-        titleFr: "Leçon n°1",
-        titleEn: "Lesson 1",
-        subtitleFr: "Mesure, dynamique et interprétation",
-        subtitleEn: "Measurement, Dynamics, and Interpretation",
-        descriptionFr:
-          "Présentation des postulats quantiques, de la règle de Born, de la réduction du paquet d'onde et de l'équation de Schrödinger.",
-        descriptionEn:
-          "Presentation of quantum postulates, Born rule, wavefunction collapse, and the Schrodinger equation.",
-        topicsFr: [
-          "Postulats",
-          "Mesure quantique",
-          "Règle de Born",
-          "Évolution unitaire",
-          "Réduction du paquet d'onde",
-          "Équation de Schrödinger",
-          "Théorème d'Ehrenfest",
-          "Superposition",
-          "Intrication quantique",
-          "Inégalités de Bell",
-        ],
-        topicsEn: [
-          "Postulates",
-          "Quantum measurement",
-          "Born rule",
-          "Unitary evolution",
-          "Wavefunction collapse",
-          "Schrodinger equation",
-          "Ehrenfest theorem",
-          "Superposition",
-          "Quantum entanglement",
-          "Bell inequalities",
-        ],
-        texFile: "theme4_fr/lecon1.tex",
-        references: [],
-        content: `
-<p>Ce chapitre présente les postulats de la mécanique quantique et en propose une première discussion. L'objectif est double : établir le formalisme standard, et souligner à quel point ces postulats proposent une vision du monde radicalement différente de celle de la physique classique. Nous présenterons ici la version dite \\og orthodoxe\\fg, bien connue sous le nom d'« interprétation de Copenhague\\footnote{Du nom de l'école de pensée développée à l'Université de Copenhague dans les années 1920-1930, principalement par Bohr, qui y enseignait, et par Heisenberg, qui y était de passage.} », de la mécanique quantique. Cette formulation inclut notamment le postulat de la réduction du paquet d'onde (postulat 3) ainsi que le caractère fondamentalement probabiliste des résultats de mesure (postulat 4).</p>
-
-<p>Cette précision prend tout son sens lorsque l'on sait qu'il existe d'autres interprétations de la mécanique quantique qui remettent en question certains des postulats énoncés ci-dessous. Une des plus connue, l'interprétation des mondes multiples d'Everett, par exemple, abandonne le postulat de réduction : dans ce cadre, toutes les issues possibles d'une mesure se réalisent dans des branches différentes de la fonction d'onde universelle. Le caractère aléatoire de la mesure devient alors relatif à l'observateur : depuis sa branche, il perçoit un résultat unique et \\emph{apparemment} aléatoire, bien que tous les résultats se produisent effectivement. C'est pourquoi, dans cette interprétation, la règle de Born (postulat 4) devrait pouvoir se dériver des autres postulats pour que la théorie soit pleinement satisfaisante\\footnote{Une telle dérivation n'a pas encore été trouvée ; c'est sujet à de vifs débats en fondements de la mécanique quantique.}. Nous couvrirons ces sujets dans la partie II [[[ref???]]].</p>
-
-<p>Par ailleurs, l'émergence de l'informatique quantique et de la cryptographie quantique a renouvelé l'intérêt théorique pour les fondements, conduisant à des reformulations des axiomes sous une forme \\emph{complètement différente} de celle que l'on expose ci-dessous. Dans ces approches la structure de Hilbert n'est même pas postulée mais dérivée à partir d'une axiomatique informationnelle. Ces approches seront discutées en partie III ou IV [[[check later]]].</p>
-        `,
-      },
-    ],
-  },
-  {
-    slug: "applications",
-    number: 5,
-    display_on_web: true,
-    titleFr: "Applications",
-    titleEn: "Applications",
-    descriptionFr:
-      "Méthodes de calcul et outils opératoriels pour relier les postulats à des prédictions concrètes.",
-    descriptionEn:
-      "Computational methods and operator tools to connect postulates with concrete predictions.",
-    lessons: [
-      {
-        slug: "applications-lecon-1",
-        number: 1,
-        display_on_web: true,
-        titleFr: "Leçon n°1",
-        titleEn: "Lesson 1",
-        subtitleFr: "Barrières de potentiel",
-        subtitleEn: "Potential Barriers",
-        descriptionFr:
-          "Transmission, réflexion, effet tunnel et dépendance énergétique des états face aux barrières de potentiel.",
-        descriptionEn:
-          "Transmission, reflection, tunneling, and energy dependence of states across potential barriers.",
-        topicsFr: [
-          "Effet tunnel",
-          "Transmission",
-          "Réflexion",
-          "États diffusés",
-          "Coefficients",
-        ],
-        topicsEn: [
-          "Tunneling effect",
-          "Transmission",
-          "Reflection",
-          "Scattering states",
-          "Coefficients",
-        ],
-        texFile: "theme5_fr/lecon1.tex",
-        references: [],
-        content: `
-<p>Cette leçon introduit l'étude des barrières de potentiel, avec les phénomènes de réflexion, transmission et effet tunnel.</p>
-        `,
-      },
-      {
-        slug: "applications-lecon-2",
-        number: 2,
-        display_on_web: true,
-        titleFr: "Leçon n°2",
-        titleEn: "Lesson 2",
-        subtitleFr: "Oscillateur harmonique",
-        subtitleEn: "Harmonic Oscillator",
-        descriptionFr:
-          "Quantification des niveaux d'énergie, opérateurs de création/annihilation et états propres de l'oscillateur harmonique.",
-        descriptionEn:
-          "Energy level quantization, creation/annihilation operators, and eigenstates of the harmonic oscillator.",
-        topicsFr: [
-          "Niveaux d'énergie",
-          "Échelles quantiques",
-          "Opérateurs a et a†",
-          "États propres",
-          "Fonctions d'onde",
-        ],
-        topicsEn: [
-          "Energy levels",
-          "Quantum ladders",
-          "a and a† operators",
-          "Eigenstates",
-          "Wavefunctions",
-        ],
-        texFile: "theme5_fr/lecon2.tex",
-        references: [],
-        content: `
-<p>Cette leçon traite de l'oscillateur harmonique quantique, de sa résolution algébrique et de son rôle central en physique quantique.</p>
-        `,
-      },
-      {
-        slug: "applications-lecon-3",
-        number: 3,
-        display_on_web: true,
-        titleFr: "Leçon n°3",
-        titleEn: "Lesson 3",
-        subtitleFr: "Spin",
-        subtitleEn: "Spin",
-        descriptionFr:
-          "Matrices de Pauli, mesure de spin, dynamique dans un champ magnétique et applications à deux niveaux.",
-        descriptionEn:
-          "Pauli matrices, spin measurement, dynamics in magnetic fields, and two-level applications.",
-        topicsFr: [
-          "Matrices de Pauli",
-          "Spin 1/2",
-          "Mesure",
-          "Précession",
-          "Systèmes à deux niveaux",
-        ],
-        topicsEn: [
-          "Pauli matrices",
-          "Spin 1/2",
-          "Measurement",
-          "Precession",
-          "Two-level systems",
-        ],
-        texFile: "theme5_fr/lecon3.tex",
-        references: [],
-        content: `
-<p>Cette leçon présente le spin quantique et ses outils de calcul, en particulier pour les systèmes à deux niveaux.</p>
-        `,
-      },
-      {
-        slug: "applications-lecon-4",
-        number: 4,
-        display_on_web: true,
-        titleFr: "Leçon n°4",
-        titleEn: "Lesson 4",
-        subtitleFr: "Dynamique quantique",
-        subtitleEn: "Quantum Dynamics",
-        descriptionFr:
-          "Évolution unitaire, équation de Schrödinger, images de Schrödinger/Heisenberg et propagateurs.",
-        descriptionEn:
-          "Unitary evolution, Schrodinger equation, Schrodinger/Heisenberg pictures, and propagators.",
-        topicsFr: [
-          "Évolution unitaire",
-          "Équation de Schrödinger",
-          "Image de Heisenberg",
-          "Propagateurs",
-          "Hamiltonien",
-        ],
-        topicsEn: [
-          "Unitary evolution",
-          "Schrodinger equation",
-          "Heisenberg picture",
-          "Propagators",
-          "Hamiltonian",
-        ],
-        texFile: "theme5_fr/lecon4.tex",
-        references: [],
-        content: `
-<p>Cette leçon couvre la dynamique quantique et les différentes formulations de l'évolution temporelle des états.</p>
-        `,
-      },
-    ],
-  },
-  {
     slug: "interacting-systems",
-    number: 6,
+    number: 5,
     display_on_web: false,
     titleFr: "Systèmes en interaction",
     titleEn: "Interacting Systems",
@@ -764,7 +751,7 @@ export const themes: Theme[] = [
   },
   {
     slug: "decoherence-and-quantum-measurement",
-    number: 7,
+    number: 6,
     display_on_web: false,
     titleFr: "Décohérence et mesure quantique",
     titleEn: "Decoherence and Quantum Measurement",
@@ -776,8 +763,8 @@ export const themes: Theme[] = [
   },
 ];
 
-/** Part II (themes 5–7): kept out of the public site until removed from this set. */
-const THEME_NUMBERS_EXCLUDED_FROM_WEB = new Set<number>([5, 6, 7]);
+/** Part II (themes 5–6): kept out of the public site until removed from this set. */
+const THEME_NUMBERS_EXCLUDED_FROM_WEB = new Set<number>([5, 6]);
 
 export function getTheme(slug: string): Theme | undefined {
   return themes.find((theme) => theme.slug === slug);

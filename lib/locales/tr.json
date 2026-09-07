@@ -107,7 +107,9 @@
       "translationWarning": "Bu kitap esas olarak Fransızca yazılmıştır. Çeviriler yapay zekâ yardımıyla hazırlanmıştır ve hata içerebilir; Fransızca metin esas alınmalıdır.",
       "sameAuthorTitle": "Aynı yazardan",
       "sameAuthorBody": "Termodinamik — Temel ve İleri, termodinamik üzerine tamamlayıcı bir ders kitabı.",
-      "sameAuthorLink": "learnthermo.org üzerinde okuyun"
+      "sameAuthorLink": "learnthermo.org üzerinde okuyun",
+      "openProblemsBody": "Kuantum mekaniğindeki açık problemlerin bir listesi.",
+      "openProblemsLink": "openquantumproblems.com üzerinde okuyun"
     },
     "footer": {
       "navigation": "Gezinme",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postülalar",
-      "description": "Teorinin temel aksiyomları, yorumlar ve ölçümün fiziksel sonuçları.",
+      "title": "Postülalar ve uygulamalar",
+      "description": "Teorinin temel aksiyomları, yorumlar ve ölçümün fiziksel sonuçları. Postülaları somut öngörülere bağlayan hesap yöntemleri ve operatör araçları.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Kuantum dolanıklığı",
             "Bell eşitsizlikleri"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Uygulamalar",
-      "description": "Postülaları somut öngörülere bağlayan hesap yöntemleri ve operatör araçları.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Ders 1",
+          "title": "Ders 2",
           "subtitle": "Potansiyel engelleri",
           "description": "Potansiyel engelleri karşısında durumların iletimi, yansıması, tünellemesi ve enerjiye bağımlılığı.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Ders 2",
+          "title": "Ders 3",
           "subtitle": "Harmonik osilatör",
           "description": "Enerji düzeylerinin kuantalanması, yaratma/yok etme operatörleri ve harmonik osilatörün özdurumları.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Ders 3",
+          "title": "Ders 4",
           "subtitle": "Spin",
           "description": "Pauli matrisleri, spin ölçümü, manyetik alandaki dinamik ve iki düzeyli sistemlere uygulamalar.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Ders 4",
+          "title": "Ders 5",
           "subtitle": "Kuantum dinamiği",
           "description": "Üniter evrim, Schrödinger denklemi, Schrödinger/Heisenberg resimleri ve propagatörler.",
           "topics": [

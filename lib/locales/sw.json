@@ -107,7 +107,9 @@
       "translationWarning": "Kitabu hiki kimeandikwa hasa kwa Kifaransa. Tafsiri zimeandaliwa kwa msaada wa akili bandia na zinaweza kuwa na makosa; maandishi ya Kifaransa ndiyo rejea.",
       "sameAuthorTitle": "Kutoka kwa mwandishi huyu",
       "sameAuthorBody": "Termodinamika — Msingi na ya Juu, kozi inayokamilisha kitabu hiki kuhusu termodinamika.",
-      "sameAuthorLink": "Soma kwenye learnthermo.org"
+      "sameAuthorLink": "Soma kwenye learnthermo.org",
+      "openProblemsBody": "Orodha ya matatizo yasiyotatuliwa katika mekanika ya kwantamu.",
+      "openProblemsLink": "Soma kwenye openquantumproblems.com"
     },
     "footer": {
       "navigation": "Urambazaji",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postuleti",
-      "description": "Aksioma za msingi za nadharia, tafsiri na matokeo ya kifizikia ya upimaji.",
+      "title": "Postuleti na matumizi",
+      "description": "Aksioma za msingi za nadharia, tafsiri na matokeo ya kifizikia ya upimaji. Mbinu za hesabu na zana za opereta zinazounganisha postuleti na utabiri halisi.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Mfungamano wa kwanta",
             "Kutokuwa sawa kwa Bell"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Matumizi",
-      "description": "Mbinu za hesabu na zana za opereta zinazounganisha postuleti na utabiri halisi.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Somo 1",
+          "title": "Somo 2",
           "subtitle": "Vizuizi vya potenshali",
           "description": "Upitishaji, uakisi, upenyezaji wa kituneli na utegemezi wa nishati wa hali zinazokutana na vizuizi vya potenshali.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Somo 2",
+          "title": "Somo 3",
           "subtitle": "Osileta ya harmoniki",
           "description": "Ukwantishaji wa viwango vya nishati, opereta za uundaji/uangamizaji na hali eigen za osileta ya harmoniki.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Somo 3",
+          "title": "Somo 4",
           "subtitle": "Spini",
           "description": "Matriki za Pauli, upimaji wa spini, dinamika katika uga wa sumaku na matumizi kwa mifumo ya viwango viwili.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Somo 4",
+          "title": "Somo 5",
           "subtitle": "Dinamika ya kwanta",
           "description": "Mageuko ya unitari, mlinganyo wa Schrödinger, picha za Schrödinger/Heisenberg na propageta.",
           "topics": [

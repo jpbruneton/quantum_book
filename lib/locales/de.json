@@ -107,7 +107,9 @@
       "translationWarning": "Dieses Buch wurde hauptsächlich auf Französisch verfasst. Die Übersetzungen wurden mit KI-Unterstützung erstellt und können Fehler enthalten; maßgeblich ist der französische Text.",
       "sameAuthorTitle": "Vom selben Autor",
       "sameAuthorBody": "Thermodynamik — Elementar und Fortgeschritten, ein begleitender Kurs zur Thermodynamik.",
-      "sameAuthorLink": "Auf learnthermo.org lesen"
+      "sameAuthorLink": "Auf learnthermo.org lesen",
+      "openProblemsBody": "Eine Liste offener Probleme in der Quantenmechanik.",
+      "openProblemsLink": "Auf openquantumproblems.com lesen"
     },
     "footer": {
       "navigation": "Navigation",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postulate",
-      "description": "Grundaxiome der Theorie, Interpretationen und physikalische Folgen der Messung.",
+      "title": "Postulate und Anwendungen",
+      "description": "Grundaxiome der Theorie, Interpretationen und physikalische Folgen der Messung. Rechenmethoden und Operatorwerkzeuge, die Postulate mit konkreten Vorhersagen verbinden.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Quantenverschränkung",
             "Bellsche Ungleichungen"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Anwendungen",
-      "description": "Rechenmethoden und Operatorwerkzeuge, die Postulate mit konkreten Vorhersagen verbinden.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Lektion 1",
+          "title": "Lektion 2",
           "subtitle": "Potentialbarrieren",
           "description": "Transmission, Reflexion, Tunneleffekt und Energieabhängigkeit von Zuständen an Potentialbarrieren.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Lektion 2",
+          "title": "Lektion 3",
           "subtitle": "Harmonischer Oszillator",
           "description": "Quantisierung der Energieniveaus, Erzeugungs- und Vernichtungsoperatoren und Eigenzustände des harmonischen Oszillators.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Lektion 3",
+          "title": "Lektion 4",
           "subtitle": "Spin",
           "description": "Pauli-Matrizen, Spinmessung, Dynamik im Magnetfeld und Anwendungen auf Zweiniveausysteme.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Lektion 4",
+          "title": "Lektion 5",
           "subtitle": "Quantendynamik",
           "description": "Unitäre Zeitentwicklung, Schrödingergleichung, Schrödinger- und Heisenbergbild sowie Propagatoren.",
           "topics": [

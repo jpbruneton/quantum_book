@@ -165,6 +165,124 @@ function ChapterLessonTabButtons({
   );
 }
 
+interface NavCardProps {
+  label: string;
+  title: string;
+  href: string;
+  align: "left" | "right";
+  compact?: boolean;
+}
+
+function NavCard({ label, title, href, align, compact }: NavCardProps) {
+  return (
+    <Link href={href} style={{ textDecoration: "none" }}>
+      <div
+        className="chapter-card"
+        style={{
+          background: "var(--bg-card)",
+          border: "1px solid var(--accent-border-sm)",
+          borderRadius: compact ? "6px" : "8px",
+          padding: compact ? "0.5rem 0.9rem" : "1.25rem 1.5rem",
+          textAlign: align,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-inter)",
+            fontSize: compact ? "0.62rem" : "0.7rem",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            color: "var(--text-dim)",
+            marginBottom: compact ? "0.15rem" : "0.4rem",
+          }}
+        >
+          {label}
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: compact ? "0.8rem" : "0.95rem",
+            color: "var(--text-heading)",
+            overflow: compact ? "hidden" : undefined,
+            textOverflow: compact ? "ellipsis" : undefined,
+            whiteSpace: compact ? "nowrap" : undefined,
+          }}
+        >
+          {title}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+interface LessonNavRowProps {
+  previousLabel: string;
+  previousTitle: string | null;
+  previousHref: string | null;
+  nextLabel: string;
+  nextTitle: string | null;
+  nextHref: string | null;
+  compact?: boolean;
+  /** Skip the outer maxWidth/.lesson-web-layout wrapper — used when the
+   * caller already places this inside the .lesson-web-main column itself
+   * (e.g. the compact top-of-lesson nav, aligned with the TOC's top edge). */
+  bare?: boolean;
+}
+
+function LessonNavRow({
+  previousLabel,
+  previousTitle,
+  previousHref,
+  nextLabel,
+  nextTitle,
+  nextHref,
+  compact,
+  bare,
+}: LessonNavRowProps) {
+  if (!previousTitle && !nextTitle) return null;
+
+  const grid = (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: compact ? "0.6rem" : "1rem",
+      }}
+    >
+      {previousTitle && previousHref ? (
+        <NavCard label={previousLabel} title={previousTitle} href={previousHref} align="left" compact={compact} />
+      ) : (
+        <div />
+      )}
+      {nextTitle && nextHref ? (
+        <NavCard label={nextLabel} title={nextTitle} href={nextHref} align="right" compact={compact} />
+      ) : (
+        <div />
+      )}
+    </div>
+  );
+
+  if (bare) return grid;
+
+  return (
+    <div
+      style={{
+        maxWidth: "1320px",
+        margin: "0 auto",
+        padding: compact ? "1.25rem 1.5rem 0" : "3rem 1.5rem 5rem",
+      }}
+    >
+      {/* Reuses the .lesson-web-layout grid (text column + TOC column) so
+          this row's left edge aligns with the lesson text above/below it,
+          instead of being centered against the full width incl. the TOC. */}
+      <div className="lesson-web-layout">
+        <div className="lesson-web-main">{grid}</div>
+        <div />
+      </div>
+    </div>
+  );
+}
+
 function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props) {
   const { t, lang } = useLang();
   const activeLessonIndex = findLessonIndexByRef(theme.lessons, activeLessonRef);
@@ -196,10 +314,48 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
   const nextThemeHref =
     next && nextFirstLesson ? chapterLessonPath(lang, next.slug, nextFirstLesson) : null;
 
+  const previousLabel = t.chapter.prev;
+  const nextLabel = t.chapter.next;
+
+  const previousTitle = previousLesson
+    ? lessonDisplayLabel(previousLesson, lang)
+    : prev
+      ? lang === "fr"
+        ? prev.titleFr
+        : prev.titleEn
+      : null;
+  const nextTitle = nextLesson
+    ? lessonDisplayLabel(nextLesson, lang)
+    : next
+      ? lang === "fr"
+        ? next.titleFr
+        : next.titleEn
+      : null;
+
+  const previousHref = previousLesson
+    ? chapterLessonPath(lang, theme.slug, previousLesson)
+    : prevThemeHref;
+  const nextHref = nextLesson
+    ? chapterLessonPath(lang, theme.slug, nextLesson)
+    : nextThemeHref;
+
+  const compactNavRow = (
+    <LessonNavRow
+      previousLabel={previousLabel}
+      previousTitle={previousTitle}
+      previousHref={previousHref}
+      nextLabel={nextLabel}
+      nextTitle={nextTitle}
+      nextHref={nextHref}
+      compact
+      bare
+    />
+  );
+
   return (
     <>
       {activeLesson ? (
-        <ChapterContent lesson={activeLesson} />
+        <ChapterContent lesson={activeLesson} topNav={compactNavRow} />
       ) : (
         <div
           style={{
@@ -231,167 +387,14 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
         </div>
       )}
 
-      <div
-        style={{
-          maxWidth: "800px",
-          margin: "0 auto",
-          padding: "3rem 1.5rem 5rem",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "1rem",
-        }}
-      >
-        {previousLesson ? (
-          <Link
-            href={chapterLessonPath(lang, theme.slug, previousLesson)}
-            style={{ textDecoration: "none" }}
-          >
-            <div
-              className="chapter-card"
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--accent-border-sm)",
-                borderRadius: "8px",
-                padding: "1.25rem 1.5rem",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.7rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: "var(--text-dim)",
-                  marginBottom: "0.4rem",
-                }}
-              >
-                {t.chapter.prev}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "0.95rem",
-                  color: "var(--text-heading)",
-                }}
-              >
-                {lessonDisplayLabel(previousLesson, lang)}
-              </div>
-            </div>
-          </Link>
-        ) : prevThemeHref ? (
-          <Link href={prevThemeHref} style={{ textDecoration: "none" }}>
-            <div
-              className="chapter-card"
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--accent-border-sm)",
-                borderRadius: "8px",
-                padding: "1.25rem 1.5rem",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.7rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: "var(--text-dim)",
-                  marginBottom: "0.4rem",
-                }}
-              >
-                {t.chapter.prev}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "0.95rem",
-                  color: "var(--text-heading)",
-                }}
-              >
-                {lang === "fr" ? prev!.titleFr : prev!.titleEn}
-              </div>
-            </div>
-          </Link>
-        ) : (
-          <div />
-        )}
-        {nextLesson ? (
-          <Link
-            href={chapterLessonPath(lang, theme.slug, nextLesson)}
-            style={{ textDecoration: "none" }}
-          >
-            <div
-              className="chapter-card"
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--accent-border-sm)",
-                borderRadius: "8px",
-                padding: "1.25rem 1.5rem",
-                textAlign: "right",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.7rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: "var(--text-dim)",
-                  marginBottom: "0.4rem",
-                }}
-              >
-                {t.chapter.next}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "0.95rem",
-                  color: "var(--text-heading)",
-                }}
-              >
-                {lessonDisplayLabel(nextLesson, lang)}
-              </div>
-            </div>
-          </Link>
-        ) : nextThemeHref ? (
-          <Link href={nextThemeHref} style={{ textDecoration: "none" }}>
-            <div
-              className="chapter-card"
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--accent-border-sm)",
-                borderRadius: "8px",
-                padding: "1.25rem 1.5rem",
-                textAlign: "right",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "0.7rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: "var(--text-dim)",
-                  marginBottom: "0.4rem",
-                }}
-              >
-                {t.chapter.next}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "0.95rem",
-                  color: "var(--text-heading)",
-                }}
-              >
-                {lang === "fr" ? next!.titleFr : next!.titleEn}
-              </div>
-            </div>
-          </Link>
-        ) : (
-          <div />
-        )}
-      </div>
+      <LessonNavRow
+        previousLabel={previousLabel}
+        previousTitle={previousTitle}
+        previousHref={previousHref}
+        nextLabel={nextLabel}
+        nextTitle={nextTitle}
+        nextHref={nextHref}
+      />
     </>
   );
 }

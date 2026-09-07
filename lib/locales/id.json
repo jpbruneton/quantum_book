@@ -107,7 +107,9 @@
       "translationWarning": "Buku ini terutama ditulis dalam bahasa Prancis. Terjemahannya dibuat dengan bantuan AI dan mungkin mengandung kesalahan; teks Prancis menjadi acuan.",
       "sameAuthorTitle": "Karya lain penulis",
       "sameAuthorBody": "Termodinamika — Dasar dan Lanjut, buku pendamping tentang termodinamika.",
-      "sameAuthorLink": "Baca di learnthermo.org"
+      "sameAuthorLink": "Baca di learnthermo.org",
+      "openProblemsBody": "Daftar masalah terbuka dalam mekanika kuantum.",
+      "openProblemsLink": "Baca di openquantumproblems.com"
     },
     "footer": {
       "navigation": "Navigasi",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postulat",
-      "description": "Aksioma dasar teori, interpretasi, dan konsekuensi fisik pengukuran.",
+      "title": "Postulat dan penerapan",
+      "description": "Aksioma dasar teori, interpretasi, dan konsekuensi fisik pengukuran. Metode perhitungan dan perangkat operator untuk menghubungkan postulat dengan prediksi konkret.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Keterikatan kuantum",
             "Ketaksamaan Bell"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Penerapan",
-      "description": "Metode perhitungan dan perangkat operator untuk menghubungkan postulat dengan prediksi konkret.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Pelajaran 1",
+          "title": "Pelajaran 2",
           "subtitle": "Penghalang potensial",
           "description": "Transmisi, refleksi, penerowongan, dan ketergantungan energi keadaan saat menghadapi penghalang potensial.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Pelajaran 2",
+          "title": "Pelajaran 3",
           "subtitle": "Osilator harmonik",
           "description": "Kuantisasi tingkat energi, operator penciptaan/pemusnahan, dan keadaan eigen osilator harmonik.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Pelajaran 3",
+          "title": "Pelajaran 4",
           "subtitle": "Spin",
           "description": "Matriks Pauli, pengukuran spin, dinamika dalam medan magnet, dan penerapan pada sistem dua tingkat.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Pelajaran 4",
+          "title": "Pelajaran 5",
           "subtitle": "Dinamika kuantum",
           "description": "Evolusi uniter, persamaan Schrödinger, gambaran Schrödinger/Heisenberg, dan propagator.",
           "topics": [

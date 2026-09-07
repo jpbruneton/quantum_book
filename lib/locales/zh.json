@@ -107,7 +107,9 @@
       "translationWarning": "本书主要以法语撰写。译文借助人工智能完成，可能存在错误；应以法文原文为准。",
       "sameAuthorTitle": "同一作者的其他作品",
       "sameAuthorBody": "《热力学——基础与进阶》，一部配套的热力学教程。",
-      "sameAuthorLink": "在 learnthermo.org 阅读"
+      "sameAuthorLink": "在 learnthermo.org 阅读",
+      "openProblemsBody": "量子力学中未解决问题的清单。",
+      "openProblemsLink": "在 openquantumproblems.com 阅读"
     },
     "footer": {
       "navigation": "导航",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "公设",
-      "description": "理论的基本公理、测量的诠释及其物理后果。",
+      "title": "公设与应用",
+      "description": "理论的基本公理、测量的诠释及其物理后果。 将公设与具体预测联系起来的计算方法和算符工具。",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "量子纠缠",
             "贝尔不等式"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "应用",
-      "description": "将公设与具体预测联系起来的计算方法和算符工具。",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "第 1 课",
+          "title": "第 2 课",
           "subtitle": "势垒",
           "description": "态在势垒处的透射、反射、隧穿及其能量依赖性。",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "第 2 课",
+          "title": "第 3 课",
           "subtitle": "谐振子",
           "description": "能级量子化、产生与湮灭算符，以及谐振子的本征态。",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "第 3 课",
+          "title": "第 4 课",
           "subtitle": "自旋",
           "description": "泡利矩阵、自旋测量、磁场中的动力学及两能级应用。",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "第 4 课",
+          "title": "第 5 课",
           "subtitle": "量子动力学",
           "description": "酉演化、薛定谔方程、薛定谔与海森堡绘景，以及传播子。",
           "topics": [

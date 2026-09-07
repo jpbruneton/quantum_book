@@ -107,7 +107,9 @@
       "translationWarning": "Ce livre est rédigé principalement en français. Les traductions sont produites avec l'aide d'une IA et peuvent comporter des erreurs ; le texte français fait référence.",
       "sameAuthorTitle": "Du même auteur",
       "sameAuthorBody": "Thermodynamique — Élémentaire et Avancée, un cours compagnon sur la thermodynamique.",
-      "sameAuthorLink": "À lire sur learnthermo.org"
+      "sameAuthorLink": "À lire sur learnthermo.org",
+      "openProblemsBody": "Une liste de problèmes ouverts en mécanique quantique.",
+      "openProblemsLink": "À lire sur openquantumproblems.com"
     },
     "footer": {
       "navigation": "Navigation",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Postulats",
-      "description": "Axiomes de base de la théorie, interprétations et conséquences physiques de la mesure.",
+      "title": "Postulats et applications",
+      "description": "Axiomes de base de la théorie, interprétations et conséquences physiques de la mesure. Méthodes de calcul et outils opératoriels pour relier les postulats à des prédictions concrètes.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Intrication quantique",
             "Inégalités de Bell"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Applications",
-      "description": "Méthodes de calcul et outils opératoriels pour relier les postulats à des prédictions concrètes.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Leçon n°1",
+          "title": "Leçon n°2",
           "subtitle": "Barrières de potentiel",
           "description": "Transmission, réflexion, effet tunnel et dépendance énergétique des états face aux barrières de potentiel.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Leçon n°2",
+          "title": "Leçon n°3",
           "subtitle": "Oscillateur harmonique",
           "description": "Quantification des niveaux d'énergie, opérateurs de création/annihilation et états propres de l'oscillateur harmonique.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Leçon n°3",
+          "title": "Leçon n°4",
           "subtitle": "Spin",
           "description": "Matrices de Pauli, mesure de spin, dynamique dans un champ magnétique et applications à deux niveaux.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Leçon n°4",
+          "title": "Leçon n°5",
           "subtitle": "Dynamique quantique",
           "description": "Évolution unitaire, équation de Schrödinger, images de Schrödinger/Heisenberg et propagateurs.",
           "topics": [

@@ -3,7 +3,6 @@ const legacyExerciseSlugRedirects = require("./lib/legacyExerciseSlugRedirects.j
 
 const nextConfig = {
   output: "standalone",
-  experimental: { outputFileTracingIncludes: { "*": ["./content/tex/exos_*/**/*.tex", "./content/tex/theme*_*/**/*.tex"] } },
   async redirects() {
     const out = [
       { source: "/blog", destination: "/", permanent: true },

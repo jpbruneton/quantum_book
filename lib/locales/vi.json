@@ -107,7 +107,9 @@
       "translationWarning": "Cuốn sách được viết chủ yếu bằng tiếng Pháp. Các bản dịch được thực hiện với sự hỗ trợ của AI và có thể có sai sót; bản tiếng Pháp là bản tham chiếu.",
       "sameAuthorTitle": "Cùng tác giả",
       "sameAuthorBody": "Nhiệt động lực học — Cơ bản và Nâng cao, một khóa học bổ trợ về nhiệt động lực học.",
-      "sameAuthorLink": "Đọc tại learnthermo.org"
+      "sameAuthorLink": "Đọc tại learnthermo.org",
+      "openProblemsBody": "Một danh sách các bài toán mở trong cơ học lượng tử.",
+      "openProblemsLink": "Đọc tại openquantumproblems.com"
     },
     "footer": {
       "navigation": "Điều hướng",
@@ -391,8 +393,8 @@
       }
     },
     "postulates": {
-      "title": "Các tiên đề",
-      "description": "Các tiên đề cơ bản của lý thuyết, các cách diễn giải và hệ quả vật lý của phép đo.",
+      "title": "Các tiên đề và ứng dụng",
+      "description": "Các tiên đề cơ bản của lý thuyết, các cách diễn giải và hệ quả vật lý của phép đo. Các phương pháp tính toán và công cụ toán tử để liên hệ tiên đề với dự đoán cụ thể.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
@@ -411,16 +413,9 @@
             "Rối lượng tử",
             "Bất đẳng thức Bell"
           ]
-        }
-      }
-    },
-    "applications": {
-      "title": "Ứng dụng",
-      "description": "Các phương pháp tính toán và công cụ toán tử để liên hệ tiên đề với dự đoán cụ thể.",
-      "partHeading": "",
-      "lessons": {
+        },
         "applications-lecon-1": {
-          "title": "Bài học 1",
+          "title": "Bài học 2",
           "subtitle": "Rào thế",
           "description": "Truyền qua, phản xạ, xuyên hầm và sự phụ thuộc năng lượng của trạng thái khi gặp rào thế.",
           "topics": [
@@ -432,7 +427,7 @@
           ]
         },
         "applications-lecon-2": {
-          "title": "Bài học 2",
+          "title": "Bài học 3",
           "subtitle": "Dao động tử điều hòa",
           "description": "Lượng tử hóa các mức năng lượng, toán tử sinh và hủy, và trạng thái riêng của dao động tử điều hòa.",
           "topics": [
@@ -444,7 +439,7 @@
           ]
         },
         "applications-lecon-3": {
-          "title": "Bài học 3",
+          "title": "Bài học 4",
           "subtitle": "Spin",
           "description": "Ma trận Pauli, phép đo spin, động lực học trong từ trường và ứng dụng cho hệ hai mức.",
           "topics": [
@@ -456,7 +451,7 @@
           ]
         },
         "applications-lecon-4": {
-          "title": "Bài học 4",
+          "title": "Bài học 5",
           "subtitle": "Động lực học lượng tử",
           "description": "Tiến hóa unita, phương trình Schrödinger, bức tranh Schrödinger/Heisenberg và toán tử truyền.",
           "topics": [
