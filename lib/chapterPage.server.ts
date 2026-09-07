@@ -1,4 +1,5 @@
 import { buildLessonPresentation } from "@/lib/lessonPresentation";
+import { isLessonPublished } from "@/lib/publication";
 import "server-only";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -22,6 +23,7 @@ export function getTexFilePathForLang(frTexFile: string, lang: SiteLang): string
 
 /** True only when `lang` has an authored, non-empty lesson body on disk. */
 export function hasLessonWebContent(frTexFile: string, lang: SiteLang): boolean {
+  if (!isLessonPublished(frTexFile, lang)) return false;
   const texPath = getTexPathByFileName(getTexFilePathForLang(frTexFile, lang));
   if (!texPath || !existsSync(texPath)) return false;
   try {

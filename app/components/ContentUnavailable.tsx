@@ -1,1 +1,8 @@
-export function ContentUnavailable() { return <div style={{maxWidth: 860, margin: "4rem auto", padding: "1.5rem"}}><h1>Translation in preparation</h1><p>This content is not yet available in this language.</p></div>; }
+"use client";
+import { useLang } from "@/app/context/LangContext";
+export function ContentUnavailable() {
+  const {t} = useLang();
+  return <div style={{maxWidth: 860, margin: "4rem auto", padding: "1.5rem"}}>
+    <h1>{t.common.translationPending}</h1><p>{t.common.contentUnavailable}</p>
+  </div>;
+}

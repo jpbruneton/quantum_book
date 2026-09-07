@@ -1,4 +1,3 @@
-import { ContentUnavailable } from "@/app/components/ContentUnavailable";
 import type { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
 import { hubPageSeo } from "@/lib/hubPageSeo";
@@ -29,5 +28,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function HomePage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
-  return params.lang === "fr" || params.lang === "en" ? <HomePageClient /> : <ContentUnavailable />;
+  return <HomePageClient />;
 }

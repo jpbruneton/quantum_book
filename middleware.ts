@@ -94,7 +94,7 @@ export function middleware(request: NextRequest) {
   if (chapterMatch) {
     const lessonQuery = request.nextUrl.searchParams.get("lesson");
     if (lessonQuery) {
-      const theme = getWebTheme(themeSlugToCanonical(chapterMatch[1]));
+      const theme = getWebTheme(themeSlugToCanonical(chapterMatch[1]), lang);
       const lessonIndex = Number.parseInt(lessonQuery, 10) - 1;
       if (
         theme &&

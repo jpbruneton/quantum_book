@@ -1,54 +1,24 @@
 "use client";
-import { createContext, useContext } from "react";
-import { useRouter } from "next/navigation";
-import { type Lang, translations } from "@/lib/i18n";
-import { swapLocaleInPath } from "@/lib/localeRoutes";
-
-interface LangContextValue {
-  lang: Lang;
-  setLang: (lang: Lang) => void;
-  t: typeof translations.en;
-}
-
-const LangContext = createContext<LangContextValue>({
-  lang: "en",
-  setLang: () => {},
-  t: translations.en,
-});
-
-export function LangProvider({
-  children,
-  initialLang,
-}: {
-  children: React.ReactNode;
-  initialLang: Lang;
+import {createContext, useContext, useMemo} from "react";
+import {useRouter} from "next/navigation";
+import {translationsFromUi, type Lang, type Translations} from "@/lib/i18n";
+import type {Catalog} from "@/lib/catalog";
+import type {Theme} from "@/lib/chapters";
+import {swapLocaleInPath} from "@/lib/localeRoutes";
+interface LangContextValue {lang: Lang; setLang: (lang: Lang) => void; t: Translations; webThemes: Theme[]}
+const LangContext = createContext<LangContextValue | null>(null);
+export function LangProvider({children, initialLang, initialUi, initialThemes}: {
+  children: React.ReactNode; initialLang: Lang; initialUi: Catalog["ui"]; initialThemes: Theme[];
 }) {
   const router = useRouter();
-
-  const setLang = (newLang: Lang) => {
-    if (newLang === initialLang) {
-      return;
-    }
-    const nextPath =
-      typeof window !== "undefined"
-        ? swapLocaleInPath(window.location.pathname, newLang)
-        : `/${newLang}`;
-    router.push(nextPath);
+  const t = useMemo(() => translationsFromUi(initialUi), [initialUi]);
+  const setLang = (lang: Lang) => {
+    if (lang !== initialLang) router.push(swapLocaleInPath(window.location.pathname, lang));
   };
-
-  return (
-    <LangContext.Provider
-      value={{
-        lang: initialLang,
-        setLang,
-        t: translations[initialLang] as typeof translations.en,
-      }}
-    >
-      {children}
-    </LangContext.Provider>
-  );
+  return <LangContext.Provider value={{lang: initialLang, setLang, t, webThemes: initialThemes}}>{children}</LangContext.Provider>;
 }
-
 export function useLang() {
-  return useContext(LangContext);
+  const context = useContext(LangContext);
+  if (!context) throw new Error("Language context must be rendered inside LangProvider");
+  return context;
 }

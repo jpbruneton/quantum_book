@@ -378,7 +378,7 @@ body::before {
 }
 
 .prose-quantum .latex-footnote-item {
-  text-align: left;
+  text-align: start;
 }
 
 .prose-quantum .latex-footnote-label {
@@ -389,7 +389,8 @@ body::before {
 }
 
 .prose-quantum ul {
-  margin: 1rem 0 1.5rem 1.5rem;
+  margin: 1rem 0 1.5rem;
+  margin-inline-start: 1.5rem;
   list-style: disc;
 }
 
@@ -453,7 +454,7 @@ body::before {
   font-family: var(--font-inter);
   font-size: 0.82rem;
   color: var(--text-secondary);
-  text-align: left;
+  text-align: start;
   width: min(75%, 900px);
   max-width: 100%;
 }
@@ -517,7 +518,7 @@ body::before {
   font-family: var(--font-inter);
   font-size: 0.78rem;
   color: var(--text-secondary);
-  text-align: left;
+  text-align: start;
 }
 
 .prose-quantum .latex-block {
@@ -1050,7 +1051,7 @@ a.exercise-index-card-link:focus-visible {
   }
 
   .home-hero-description {
-    text-align: left !important;
+    text-align: start !important;
   }
 }
 

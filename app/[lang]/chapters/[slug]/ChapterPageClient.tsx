@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import type { Theme } from "@/lib/chapters";
 import {
   chapterLessonPath,
+  lessonDisplayLabel,
   findLessonIndexByRef,
   getFirstLessonRef,
   lessonToPathSegment,
@@ -120,7 +121,7 @@ function ChapterLessonTabButtons({
   theme: ThemeWithLocalizedLessonContent;
   activeLessonRef: string;
 }) {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
 
   if (theme.lessons.length === 0) return null;
 
@@ -142,9 +143,7 @@ function ChapterLessonTabButtons({
           const active = href.endsWith(`/${activeLessonRef}`);
           return (
             <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
-              {lang === "fr"
-                ? `Leçon n°${lesson.number} : ${lesson.subtitleFr}`
-                : `Lesson ${lesson.number}: ${lesson.subtitleEn}`}
+              {lessonDisplayLabel(lesson, lang)}
             </Link>
           );
         })}
@@ -161,16 +160,14 @@ function ChapterLessonTabButtons({
               marginRight: "0.15rem",
             }}
           >
-            {lang === "fr" ? "Fiches de révision" : "Revision Sheets"}
+            {t.common.revisionSheets}
           </span>
           {fiches.map((lesson) => {
             const href = chapterLessonPath(lang, theme.slug, lesson);
             const active = href.endsWith(`/${activeLessonRef}`);
             return (
               <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
-                {lang === "fr"
-                  ? `Fiche n°${lesson.number} : ${lesson.subtitleFr}`
-                  : `Sheet ${lesson.number}: ${lesson.subtitleEn}`}
+                {lessonDisplayLabel(lesson, lang)}
               </Link>
             );
           })}
@@ -289,13 +286,7 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
                   color: "var(--text-heading)",
                 }}
               >
-                {previousLesson.kind === "fiche"
-                  ? lang === "fr"
-                    ? `Fiche n°${previousLesson.number} : ${previousLesson.subtitleFr}`
-                    : `Sheet ${previousLesson.number}: ${previousLesson.subtitleEn}`
-                  : lang === "fr"
-                    ? `Leçon n°${previousLesson.number} : ${previousLesson.subtitleFr}`
-                    : `Lesson ${previousLesson.number}: ${previousLesson.subtitleEn}`}
+                {lessonDisplayLabel(previousLesson, lang)}
               </div>
             </div>
           </Link>
@@ -370,13 +361,7 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
                   color: "var(--text-heading)",
                 }}
               >
-                {nextLesson.kind === "fiche"
-                  ? lang === "fr"
-                    ? `Fiche n°${nextLesson.number} : ${nextLesson.subtitleFr}`
-                    : `Sheet ${nextLesson.number}: ${nextLesson.subtitleEn}`
-                  : lang === "fr"
-                    ? `Leçon n°${nextLesson.number} : ${nextLesson.subtitleFr}`
-                    : `Lesson ${nextLesson.number}: ${nextLesson.subtitleEn}`}
+                {lessonDisplayLabel(nextLesson, lang)}
               </div>
             </div>
           </Link>

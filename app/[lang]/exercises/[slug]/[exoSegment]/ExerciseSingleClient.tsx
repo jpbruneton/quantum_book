@@ -23,19 +23,16 @@ export function ExerciseSingleClient({
   keywords,
   rendered,
 }: Props) {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
   const lp = useLocalizedPath();
 
 
   const themeTitle = lang === "fr" ? themeTitleFr : themeTitleEn;
-  const themePrefix = lang === "fr" ? "Thème" : "Theme";
-  const backLabel = lang === "fr" ? "← Tous les exercices du thème" : "← All exercises for this theme";
-  const libraryLabel = lang === "fr" ? "← Bibliothèque d'exercices" : "← Exercise library";
-  const keywordsLabel = lang === "fr" ? "Mots-clés" : "Keywords";
-  const unavailable =
-    lang === "fr"
-      ? "Cet exercice n'est pas encore disponible dans cette langue."
-      : "This exercise is not yet available in this language.";
+  const themePrefix = t.common.theme;
+  const backLabel = t.exercises.backTheme;
+  const libraryLabel = t.exercises.backLibrary;
+  const keywordsLabel = t.exercises.keywordsLabel;
+  const unavailable = t.exercises.exerciseUnavailable;
 
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>

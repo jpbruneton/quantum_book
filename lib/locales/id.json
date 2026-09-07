@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Mekanika Kuantum",
+      "subtitle": "",
+      "description": "Buku ini menyajikan perumusan mekanika kuantum modern secara rigor. Melampaui cakupan buku pengantar biasa, buku ini mengupas perangkat penting fisika matematis, dari ruang Hilbert hingga teori spektral lanjut, termasuk topologi dan geometri.\n\nBuku ini ditujukan kepada pembaca yang ingin memahami keharusan logis dan dasar struktur yang digunakan, lebih dari sekadar menguasai perhitungan. Persoalan interpretasi dibahas secara langsung melalui analisis terperinci tentang masalah pengukuran dan dekoherensi, disertai teori alternatif serta batasan eksperimentalnya.\n\nDitujukan kepada mahasiswa tingkat lanjut, mahasiswa doktoral, dan peneliti, buku ini bertujuan memberikan penguasaan teori yang menyeluruh, dengan memadukan ketelitian teknis dan kedalaman konseptual.",
+      "edition": "Edisi Pertama"
+    },
+    "nav": {
+      "home": "Beranda",
+      "chapters": "Tema",
+      "exercises": "Latihan",
+      "quiz": "Kuis",
+      "glossary": "Glosarium",
+      "about": "Tentang"
+    },
+    "home": {
+      "badge": "Edisi daring gratis",
+      "readOnline": "Baca daring →",
+      "aboutBook": "Tentang buku",
+      "chapterPrefix": "Bab",
+      "themePrefix": "Tema",
+      "stats": {
+        "chapters": "Tema",
+        "edition": "Edisi",
+        "format": "Format",
+        "formatValue": "Web + PDF"
+      },
+      "contentsLabel": "Daftar isi",
+      "exploreTitle": "Jelajahi tema",
+      "readTheme": "Buka tema →",
+      "readLesson": "Baca pelajaran →",
+      "readChapter": "Baca bab →",
+      "fullBookDownload": "Unduh edisi lengkap (segera tersedia)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Tampilan matematika lengkap",
+          "body": "Semua persamaan ditampilkan dengan KaTeX — matematika berkualitas LaTeX di peramban Anda."
+        },
+        {
+          "icon": "⬇",
+          "title": "Unduhan PDF",
+          "body": "Setiap bab tersedia untuk diunduh sebagai PDF agar dapat dipelajari secara luring."
+        },
+        {
+          "icon": "◎",
+          "title": "Akses terbuka dan gratis",
+          "body": "Seluruh teks tersedia gratis secara daring. Tanpa langganan atau pendaftaran."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "TEMA",
+      "title": "Semua tema",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "PELAJARAN",
+      "themeLabel": "TEMA",
+      "lessonLabel": "PELAJARAN",
+      "downloadPdf": "↓ Unduh PDF",
+      "breadcrumbHome": "Beranda",
+      "breadcrumbChapters": "Tema",
+      "breadcrumbThemes": "Tema",
+      "prev": "← Sebelumnya",
+      "next": "Berikutnya →",
+      "noteTitle": "Catatan:",
+      "noteBody": "Ini adalah cuplikan pratinjau. Unduh PDF lengkap untuk mendapatkan seluruh bab, latihan, dan penyelesaiannya.",
+      "tabOnline": "Baca daring",
+      "tabReferences": "Referensi",
+      "tocTitle": "Daftar isi",
+      "showToc": "Tampilkan daftar isi",
+      "hideToc": "Sembunyikan daftar isi",
+      "refsEmpty": "Belum ada referensi untuk pelajaran ini.",
+      "refsEnglishTitle": "Referensi berbahasa Inggris",
+      "refsFrenchTitle": "Referensi berbahasa Prancis",
+      "refsSectionEmpty": "Belum ada tautan di bagian ini.",
+      "contentUnavailable": "Isi pelajaran ini belum tersedia dalam bahasa ini.",
+      "downloadBtn": "↓ Unduh",
+      "noLessonTitle": "Belum ada pelajaran",
+      "noLessonBody": "Tema ini sudah tercantum dalam struktur buku, tetapi isi pelajarannya belum diterbitkan.",
+      "readTime": "Waktu baca {time}"
+    },
+    "about": {
+      "label": "TENTANG BUKU",
+      "aboutBookTitle": "Tentang buku ini",
+      "bookDetails": "Rincian buku",
+      "detailLabels": {
+        "author": "Penulis",
+        "affiliation": "Institusi",
+        "edition": "Edisi",
+        "year": "Tahun"
+      },
+      "authorTitle": "Tentang penulis",
+      "authorBioSuffix": "adalah fisikawan di",
+      "authorBioRest": "Minat penelitiannya mencakup hukum gravitasi, mekanika kuantum beserta landasannya, serta regresi simbolik sebagai tugas pembelajaran mesin. Buku ini berasal dari catatan kuliah yang dikembangkan selama bertahun-tahun mengajar di tingkat pascasarjana.",
+      "authorLinksHeading": "Tautan",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "Tentang proyek",
+      "aboutProjectLead": "Situs dan buku ini masih dalam pengembangan. Pelajaran dan latihan akan diterbitkan secara bertahap.",
+      "aboutProjectOutlineLabel": "Rencana isi:",
+      "aboutProjectOutlineBody": "Bagian I, sistem terisolasi: formalisme matematis (fisika matematis), postulat, penerapan dasar. Bagian II, sistem yang berinteraksi: keterikatan kuantum, dekoherensi, teori pengukuran. Bagian III: interpretasi mekanika kuantum dan teori alternatif. Bagian IV: informasi kuantum, algoritma kuantum. Bagian V: gravitasi kuantum.",
+      "aboutBookBody2": "Buku ini mengembangkan mekanika kuantum dari prinsip pertama, dengan mengasumsikan dasar yang kuat dalam mekanika klasik, elektrodinamika, dan matematika. Pembuktian diberikan secara lengkap apabila membantu menjelaskan fisikanya, dan banyak contoh terselesaikan melengkapi uraian teori.",
+      "translationWarning": "Buku ini terutama ditulis dalam bahasa Prancis. Terjemahannya dibuat dengan bantuan AI dan mungkin mengandung kesalahan; teks Prancis menjadi acuan.",
+      "sameAuthorTitle": "Karya lain penulis",
+      "sameAuthorBody": "Termodinamika — Dasar dan Lanjut, buku pendamping tentang termodinamika.",
+      "sameAuthorLink": "Baca di learnthermo.org"
+    },
+    "footer": {
+      "navigation": "Navigasi",
+      "home": "Beranda",
+      "allChapters": "Semua tema",
+      "exercises": "Latihan",
+      "aboutBook": "Tentang buku",
+      "author": "Penulis",
+      "copyright": "© {year} {author}. Hak cipta dilindungi."
+    },
+    "common": {
+      "language": "Bahasa",
+      "lightMode": "Beralih ke mode terang",
+      "darkMode": "Beralih ke mode gelap",
+      "toggleMenu": "Buka atau tutup menu",
+      "backToTop": "Kembali ke atas",
+      "translationPending": "Terjemahan sedang disiapkan",
+      "contentUnavailable": "Konten ini belum tersedia dalam bahasa ini.",
+      "mathTheme": "Tema matematika",
+      "physicsTheme": "Tema fisika",
+      "revisionSheets": "Lembar rangkuman",
+      "lesson": "Pelajaran",
+      "sheet": "Lembar",
+      "theme": "Tema",
+      "quizPending": "Kuis mekanika kuantum sedang disiapkan.",
+      "notFoundTitle": "Halaman tidak ditemukan",
+      "notFoundBody": "Halaman ini tidak ada atau belum tersedia saat ini.",
+      "backHome": "Kembali ke beranda"
+    },
+    "glossary": {
+      "title": "Glosarium kata kunci",
+      "subtitle": "Klik kata kunci untuk melihat semua pelajaran yang menggunakannya.",
+      "allKeywords": "Semua kata kunci",
+      "relatedLessons": "Pelajaran terkait",
+      "noResult": "Tidak ada kata kunci yang cocok dengan filter ini."
+    },
+    "exercises": {
+      "title": "Latihan dengan penyelesaian",
+      "subtitle": "Pustaka latihan: cari menurut judul atau kata kunci, atau telusuri berdasarkan tema buku.",
+      "themePrefix": "Tema",
+      "open": "Buka kumpulan →",
+      "comingSoon": "Segera tersedia",
+      "searchPlaceholder": "Cari (judul, kata kunci)…",
+      "searchLabel": "Cari dalam pustaka",
+      "byTheme": "Menurut tema",
+      "noMatch": "Tidak ada latihan yang cocok dengan pencarian ini.",
+      "keywordsLabel": "Kata kunci",
+      "exercisePrefix": "Latihan",
+      "pdfFull": "Semua latihan dalam tema — soal, petunjuk, dan penyelesaian (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "soal + penyelesaian",
+      "unavailable": "Belum ada latihan dalam bahasa ini.",
+      "themeUnavailable": "Latihan untuk tema ini belum tersedia dalam bahasa ini.",
+      "exerciseUnavailable": "Latihan ini belum tersedia dalam bahasa ini.",
+      "back": "← Latihan",
+      "backTheme": "← Semua latihan dalam tema",
+      "backLibrary": "← Pustaka latihan",
+      "listIntro": "Pilih latihan untuk membuka soal dan penyelesaiannya."
+    },
+    "blocks": {
+      "theorem": "Teorema",
+      "definition": "Definisi",
+      "lemma": "Lema",
+      "proposition": "Proposisi",
+      "corollary": "Akibat",
+      "remark": "Catatan",
+      "example": "Contoh",
+      "proof": "Bukti",
+      "summary": "Ringkasan",
+      "exercise": "Latihan",
+      "hint": "Petunjuk",
+      "solution": "Penyelesaian",
+      "further": "Pembahasan lebih lanjut",
+      "figure": "Gambar",
+      "figureSource": "Gambar diambil dari",
+      "openPdf": "Buka gambar PDF",
+      "question": "Pertanyaan",
+      "note": "Catatan",
+      "important": "Penting"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "Pengantar umum dan eksperimen mendasar",
+      "description": "Beberapa eksperimen bersejarah yang menunjukkan keterbatasan mekanika klasik.",
+      "partHeading": "Bagian I: Sistem terisolasi",
+      "lessons": {
+        "introduction": {
+          "title": "Pelajaran 1",
+          "subtitle": "Eksperimen Stern–Gerlach",
+          "description": "Pengantar eksperimental tentang spin, momen magnetik, dan kuantisasi yang diamati dalam eksperimen Stern–Gerlach.",
+          "topics": [
+            "Spin",
+            "Momen magnetik",
+            "Stern–Gerlach",
+            "Presesi Larmor",
+            "Kuantisasi",
+            "Pengukuran kuantum",
+            "Komponen spin",
+            "Berkas atom",
+            "Medan magnet tak homogen",
+            "Proyeksi keadaan"
+          ]
+        },
+        "interference": {
+          "title": "Pelajaran 2",
+          "subtitle": "Interferensi, lintasan, dan penghapus kuantum",
+          "description": "Interferometer Mach–Zehnder, superposisi dan campuran, penandaan lintasan, penghapus kuantum, komplementaritas.",
+          "topics": [
+            "Mach–Zehnder",
+            "Interferensi",
+            "Superposisi",
+            "Amplitudo probabilitas",
+            "Fase relatif",
+            "Lintasan",
+            "Penandaan lintasan",
+            "Penghapus kuantum",
+            "Komplementaritas",
+            "Pascaseleksi"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Ruang Hilbert dan notasi Dirac",
+      "description": "Struktur ruang Hilbert, dual topologis, dan notasi Dirac dalam dimensi berhingga dan tak berhingga.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Pelajaran 1",
+          "subtitle": "Ruang Hilbert",
+          "description": "Struktur matematis: ruang vektor, ruang metrik, norma, ruang vektor bernorma, hasil kali dalam, ruang pra-Hilbert, ruang Hilbert, basis aljabar, basis Hilbert, dimensi, klasifikasi, ruang model, isomorfisme",
+          "topics": [
+            "Ruang Hilbert",
+            "Ruang bernorma",
+            "Hasil kali dalam Hermitian",
+            "Dimensi aljabar",
+            "Dimensi Hilbert",
+            "Basis Hilbert",
+            "Kelengkapan",
+            "Klasifikasi ruang Hilbert"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Pelajaran 2",
+          "subtitle": "Ruang dual, ket, bra, dan adjoin",
+          "description": "Konstruksi dual topologis, teorema representasi Riesz, pengantar ket, bra, dan adjoin",
+          "topics": [
+            "Dual aljabar",
+            "Dual topologis",
+            "Isomorfisme Riesz",
+            "Ket dan bra",
+            "Elemen matriks",
+            "Dekomposisi identitas",
+            "Dagger",
+            "Operator adjoin"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Lembar 1",
+          "subtitle": "Notasi Dirac dalam dimensi berhingga",
+          "description": "Aturan aljabar perhitungan kuantum yang berlaku dalam dimensi berapa pun, diikuti kumpulan rumus matriks dalam dimensi berhingga.",
+          "topics": [
+            "Notasi Dirac",
+            "Hasil kali dalam Hermitian",
+            "Adjoin",
+            "Operator ket-bra",
+            "Resolusi identitas",
+            "Dimensi berhingga",
+            "Elemen matriks",
+            "Jejak",
+            "Transpos konjugat",
+            "Kumpulan rumus"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Lembar 2",
+          "subtitle": "Notasi Dirac dalam dimensi tak berhingga",
+          "description": "Representasi ruang Hilbert untuk mekanika kuantum partikel titik, operator posisi dan momentum, delta Dirac.",
+          "topics": [
+            "Notasi Dirac",
+            "Dimensi tak berhingga",
+            "Representasi posisi",
+            "Representasi momentum",
+            "Delta Dirac",
+            "Transformasi Fourier",
+            "Resolusi identitas",
+            "Operator posisi",
+            "Operator momentum",
+            "Relasi komutasi kanonik"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Teori operator linear",
+      "description": "Topologi ruang Hilbert, operator linear terbatas dan tak terbatas, teori spektral.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Pelajaran 1",
+          "subtitle": "Topologi ruang Hilbert",
+          "description": "Topologi umum: himpunan terbuka dan tertutup, konvergensi kuat dan lemah, barisan Cauchy, penjumlahan vektor tak berhingga, kelengkapan, kerapatan, himpunan terbatas dan kompak.",
+          "topics": [
+            "Topologi kuat",
+            "Topologi lemah",
+            "Konvergensi kuat",
+            "Konvergensi lemah",
+            "Kelengkapan",
+            "Barisan Cauchy",
+            "Kerapatan",
+            "Subruang vektor",
+            "Himpunan terbatas",
+            "Himpunan kompak"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Pelajaran 2",
+          "subtitle": "Teori operator linear",
+          "description": "Definisi, domain, komposisi, kontinuitas, dan norma operator linear pada ruang Hilbert.",
+          "topics": [
+            "Operator linear",
+            "Domain operator",
+            "Komposisi operator",
+            "Kontinuitas",
+            "Norma operator",
+            "Adjoin",
+            "Domain rapat"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Pelajaran 3",
+          "subtitle": "Operator terbatas",
+          "description": "Aljabar operator terbatas, operator adjoin-diri dan uniter, teorema spektral dalam dimensi berhingga.",
+          "topics": [
+            "Operator terbatas",
+            "Aljabar B(H)",
+            "Sifat adjoin-diri",
+            "Operator uniter",
+            "Operator normal",
+            "Teorema spektral"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Pelajaran 4",
+          "subtitle": "Operator tak terbatas",
+          "description": "Operator berdomain rapat, penutupan, adjoin, perluasan adjoin-diri, dan kriteria sifat adjoin-diri esensial.",
+          "topics": [
+            "Operator tak terbatas",
+            "Domain rapat",
+            "Penutupan",
+            "Operator simetris",
+            "Perluasan adjoin-diri",
+            "Defisiensi adjoin"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Pelajaran 5",
+          "subtitle": "Teori spektral",
+          "description": "Spektrum dan resolven operator adjoin-diri, ukuran spektral, teorema spektral umum, dan kalkulus fungsional.",
+          "topics": [
+            "Spektrum",
+            "Resolven",
+            "Ukuran spektral",
+            "Teorema spektral",
+            "Kalkulus fungsional",
+            "Spektrum kontinu",
+            "Spektrum diskret"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Lembar 1",
+          "subtitle": "Atlas operator linear",
+          "description": "Katalog operator linear utama dan sifat spektralnya.",
+          "topics": [
+            "Operator linear",
+            "Atlas",
+            "Sifat spektral"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Postulat",
+      "description": "Aksioma dasar teori, interpretasi, dan konsekuensi fisik pengukuran.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Pelajaran 1",
+          "subtitle": "Pengukuran, dinamika, dan interpretasi",
+          "description": "Penyajian postulat kuantum, aturan Born, kolaps paket gelombang, dan persamaan Schrödinger.",
+          "topics": [
+            "Postulat",
+            "Pengukuran kuantum",
+            "Aturan Born",
+            "Evolusi uniter",
+            "Kolaps paket gelombang",
+            "Persamaan Schrödinger",
+            "Teorema Ehrenfest",
+            "Superposisi",
+            "Keterikatan kuantum",
+            "Ketaksamaan Bell"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Penerapan",
+      "description": "Metode perhitungan dan perangkat operator untuk menghubungkan postulat dengan prediksi konkret.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Pelajaran 1",
+          "subtitle": "Penghalang potensial",
+          "description": "Transmisi, refleksi, penerowongan, dan ketergantungan energi keadaan saat menghadapi penghalang potensial.",
+          "topics": [
+            "Efek terowongan",
+            "Transmisi",
+            "Refleksi",
+            "Keadaan hamburan",
+            "Koefisien"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Pelajaran 2",
+          "subtitle": "Osilator harmonik",
+          "description": "Kuantisasi tingkat energi, operator penciptaan/pemusnahan, dan keadaan eigen osilator harmonik.",
+          "topics": [
+            "Tingkat energi",
+            "Tangga kuantum",
+            "Operator a dan a†",
+            "Keadaan eigen",
+            "Fungsi gelombang"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Pelajaran 3",
+          "subtitle": "Spin",
+          "description": "Matriks Pauli, pengukuran spin, dinamika dalam medan magnet, dan penerapan pada sistem dua tingkat.",
+          "topics": [
+            "Matriks Pauli",
+            "Spin 1/2",
+            "Pengukuran",
+            "Presesi",
+            "Sistem dua tingkat"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Pelajaran 4",
+          "subtitle": "Dinamika kuantum",
+          "description": "Evolusi uniter, persamaan Schrödinger, gambaran Schrödinger/Heisenberg, dan propagator.",
+          "topics": [
+            "Evolusi uniter",
+            "Persamaan Schrödinger",
+            "Gambaran Heisenberg",
+            "Propagator",
+            "Hamiltonian"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Sistem yang berinteraksi",
+      "description": "Keadaan gabungan, keterikatan, kopling, dan dinamika sistem kuantum yang tidak terisolasi.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Dekoherensi dan pengukuran kuantum",
+      "description": "Transisi menuju perilaku klasik, masalah pengukuran, dan peran lingkungan.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

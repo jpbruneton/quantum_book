@@ -1,6 +1,8 @@
+import { getTranslations } from "@/lib/translations.server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
+import { getWebTheme, getWebThemes } from "@/lib/localizedChapters.server";
+import { bookMeta } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import {
@@ -58,20 +60,21 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isSiteLang(params.lang)) return {};
-  const theme = getWebTheme(params.slug);
+  const theme = getWebTheme(params.slug, isSiteLang(params.lang) ? params.lang : undefined);
   if (!theme) return {};
   const isFr = params.lang === "fr";
+  const t = getTranslations(params.lang);
   const path = localizedPath(params.lang, `/exercises/${theme.slug}`);
   const url = absoluteUrl(path);
   const title = isFr ? theme.titleFr : theme.titleEn;
   const description = isFr ? theme.descriptionFr : theme.descriptionEn;
   return {
-    title: `${isFr ? "Exercices" : "Exercises"} – ${isFr ? "Thème" : "Theme"} ${theme.number}: ${title} | ${bookMeta.title}`,
-    description: `${isFr ? "Exercices corrigés pour le thème" : "Solved exercises for Theme"} ${theme.number}: ${title} — ${description}`,
+    title: `${t.nav.exercises} | ${t.common.theme} ${theme.number}: ${title}`,
+    description: `${t.exercises.title}: ${title}. ${description}`,
     robots: {index: themeHasAnyExercises(theme.number, params.lang), follow: true},
     alternates: localeAlternates(params.lang, `/exercises/${theme.slug}`),
     openGraph: {
-      title: `${isFr ? "Exercices" : "Exercises"} – ${isFr ? "Thème" : "Theme"} ${theme.number}: ${title}`,
+      title: `${t.nav.exercises} | ${t.common.theme} ${theme.number}: ${title}`,
       description,
       url,
     },
@@ -80,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function ExerciseThemePage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
-  const theme = getWebTheme(params.slug);
+  const theme = getWebTheme(params.slug, isSiteLang(params.lang) ? params.lang : undefined);
   if (!theme) notFound();
 
   const { exercisesFr, exercisesEn } = buildThemeExerciseCards(theme.number, params.lang);

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { isSiteLang, type SiteLang } from "@/lib/localeRoutes";
-import { getWebThemes } from "@/lib/chapters";
+import { getWebThemes } from "@/lib/localizedChapters.server";
+
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import { buildAllExerciseIndexEntries, themeHasAnyExercises } from "@/lib/exercisesLibrary.server";
@@ -11,7 +12,7 @@ function exoTexExists(themeNumber: number, lang: SiteLang): boolean {
 }
 
 function buildIndexCards(lang: SiteLang) {
-  const slugByNumber = new Map(getWebThemes().map((t) => [t.number, t.slug]));
+  const slugByNumber = new Map(getWebThemes(lang).map((t) => [t.number, t.slug]));
   return buildAllExerciseIndexEntries(lang).map((e, index) => ({
     id: e.id,
     displayNumber: index + 1,
@@ -27,7 +28,7 @@ function buildIndexCards(lang: SiteLang) {
 export default function ExercisesPage({params}: {params: {lang: string}}) {
   if (!isSiteLang(params.lang)) notFound();
   const lang = params.lang;
-  const themes = getWebThemes().map((theme) => ({
+  const themes = getWebThemes(lang).map((theme) => ({
     slug: theme.slug,
     number: theme.number,
     titleFr: theme.titleFr,

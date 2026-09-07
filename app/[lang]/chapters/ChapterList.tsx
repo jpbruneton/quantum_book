@@ -1,19 +1,11 @@
 "use client";
 import Link from "next/link";
-import { getWebThemes } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
-function getThemeCategory(slug: string, lang: "fr" | "en"): string {
-  const isMath = slug === "hilbert-spaces";
-  if (lang === "fr") return isMath ? "Thème mathématique" : "Thème physique";
-  return isMath ? "Mathematics" : "Physics";
-}
-
 export function ChapterList() {
-  const { t, lang } = useLang();
+  const { t, lang, webThemes } = useLang();
   const lp = useLocalizedPath();
-  const webThemes = getWebThemes();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
@@ -103,7 +95,7 @@ export function ChapterList() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {getThemeCategory(theme.slug, lang === "fr" ? "fr" : "en")}
+                  {theme.slug === "hilbert-spaces" || theme.slug === "linear-operator-theory" ? t.common.mathTheme : t.common.physicsTheme}
                 </span>
                 <div
                   className="chapter-list-number"

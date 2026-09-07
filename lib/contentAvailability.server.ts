@@ -1,4 +1,5 @@
 import "server-only";
+import { isInterfaceTranslated } from "@/lib/catalog";
 import { getWebTheme } from "@/lib/chapters";
 import { findLessonIndexByRef } from "@/lib/lessonRoutes";
 import { hasLessonWebContent } from "@/lib/chapterPage.server";
@@ -20,5 +21,5 @@ export function availablePageLanguages(path: string): SiteLang[] {
       ? !!findThemeExerciseEntry(theme.number, exerciseSegmentToId(ref), lang)?.seoReady
       : theme ? themeHasAnyExercises(theme.number, lang) : buildAllExerciseIndexEntries(lang).length > 0);
   }
-  return ["fr", "en"];
+  return SITE_LANGS.filter(isInterfaceTranslated);
 }

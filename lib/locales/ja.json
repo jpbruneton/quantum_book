@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "量子力学",
+      "subtitle": "",
+      "description": "本書は、現代量子力学の厳密な定式化を提示します。通常の入門書の範囲を超え、ヒルベルト空間から高度なスペクトル理論まで、位相や幾何を含む数理物理学の重要な道具を掘り下げます。\n\n本書は、単に計算をこなすだけでなく、用いられる構造の論理的必然性と基礎を理解したい読者に向けたものです。解釈の問題を正面から取り上げ、測定問題とデコヒーレンスを詳しく分析するとともに、代替理論とそれらに課される実験的制約を紹介します。\n\n大学院生、博士課程の学生、研究者を主な対象とし、技術的な厳密さと概念的な深さを結び付けることで、理論の包括的な習得を目指します。",
+      "edition": "初版"
+    },
+    "nav": {
+      "home": "ホーム",
+      "chapters": "テーマ",
+      "exercises": "演習",
+      "quiz": "クイズ",
+      "glossary": "用語集",
+      "about": "本書について"
+    },
+    "home": {
+      "badge": "無料オンライン版",
+      "readOnline": "オンラインで読む →",
+      "aboutBook": "本書について",
+      "chapterPrefix": "章",
+      "themePrefix": "テーマ",
+      "stats": {
+        "chapters": "テーマ",
+        "edition": "版",
+        "format": "形式",
+        "formatValue": "ウェブ + PDF"
+      },
+      "contentsLabel": "目次",
+      "exploreTitle": "テーマを探す",
+      "readTheme": "テーマを開く →",
+      "readLesson": "レッスンを読む →",
+      "readChapter": "章を読む →",
+      "fullBookDownload": "完全版をダウンロード（近日公開）",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "完全な数式表示",
+          "body": "すべての数式を KaTeX で表示し、ブラウザー上で LaTeX 品質の組版を実現します。"
+        },
+        {
+          "icon": "⬇",
+          "title": "PDF ダウンロード",
+          "body": "各章は PDF としてダウンロードでき、オフラインで学習できます。"
+        },
+        {
+          "icon": "◎",
+          "title": "自由で無料のアクセス",
+          "body": "全文を無料でオンライン公開しています。購読や登録は不要です。"
+        }
+      ]
+    },
+    "chapters": {
+      "label": "テーマ",
+      "title": "すべてのテーマ",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "レッスン",
+      "themeLabel": "テーマ",
+      "lessonLabel": "レッスン",
+      "downloadPdf": "↓ PDF をダウンロード",
+      "breadcrumbHome": "ホーム",
+      "breadcrumbChapters": "テーマ",
+      "breadcrumbThemes": "テーマ",
+      "prev": "← 前へ",
+      "next": "次へ →",
+      "noteTitle": "注：",
+      "noteBody": "これはプレビュー用の抜粋です。章全体と演習・解答は完全版 PDF をダウンロードしてご覧ください。",
+      "tabOnline": "オンラインで読む",
+      "tabReferences": "参考文献",
+      "tocTitle": "目次",
+      "showToc": "目次を表示",
+      "hideToc": "目次を非表示",
+      "refsEmpty": "このレッスンにはまだ参考文献が追加されていません。",
+      "refsEnglishTitle": "英語の参考文献",
+      "refsFrenchTitle": "フランス語の参考文献",
+      "refsSectionEmpty": "この節にはまだリンクが追加されていません。",
+      "contentUnavailable": "このレッスンの内容は、まだこの言語では利用できません。",
+      "downloadBtn": "↓ ダウンロード",
+      "noLessonTitle": "利用できるレッスンがありません",
+      "noLessonBody": "このテーマは構成に含まれていますが、レッスンの内容はまだ公開されていません。",
+      "readTime": "読了目安：{time}"
+    },
+    "about": {
+      "label": "本書について",
+      "aboutBookTitle": "この本について",
+      "bookDetails": "書籍情報",
+      "detailLabels": {
+        "author": "著者",
+        "affiliation": "所属機関",
+        "edition": "版",
+        "year": "年"
+      },
+      "authorTitle": "著者について",
+      "authorBioSuffix": "は物理学者です。所属：",
+      "authorBioRest": "研究分野は重力法則、量子力学とその基礎、そして機械学習の課題としての記号回帰です。本書は、長年の大学院教育で発展させてきた講義ノートをもとにしています。",
+      "authorLinksHeading": "リンク",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "プロジェクトについて",
+      "aboutProjectLead": "このサイトと書籍は現在制作中です。レッスンと演習は順次公開します。",
+      "aboutProjectOutlineLabel": "予定内容：",
+      "aboutProjectOutlineBody": "第 I 部、孤立系：数学的定式化（数理物理学）、公理、基本的応用。第 II 部、相互作用する系：量子もつれ、デコヒーレンス、測定理論。第 III 部：量子力学の解釈と代替理論。第 IV 部：量子情報、量子アルゴリズム。第 V 部：量子重力。",
+      "aboutBookBody2": "本書は、古典力学、電磁力学、数学の確かな基礎を前提に、第一原理から量子力学を展開します。物理の理解に役立つ証明は省略せずに示し、多数の詳しい解例で理論的な説明を補います。",
+      "translationWarning": "本書は主にフランス語で執筆されています。翻訳は AI の支援を受けて作成されており、誤りを含む可能性があります。フランス語の原文を基準としてください。",
+      "sameAuthorTitle": "同じ著者の著作",
+      "sameAuthorBody": "『熱力学 — 基礎と発展』：関連する熱力学の講義書。",
+      "sameAuthorLink": "learnthermo.org で読む"
+    },
+    "footer": {
+      "navigation": "ナビゲーション",
+      "home": "ホーム",
+      "allChapters": "すべてのテーマ",
+      "exercises": "演習",
+      "aboutBook": "本書について",
+      "author": "著者",
+      "copyright": "© {year} {author}. 無断転載を禁じます。"
+    },
+    "common": {
+      "language": "言語",
+      "lightMode": "ライトモードに切り替え",
+      "darkMode": "ダークモードに切り替え",
+      "toggleMenu": "メニューを開く・閉じる",
+      "backToTop": "ページ上部へ戻る",
+      "translationPending": "翻訳準備中",
+      "contentUnavailable": "この内容は、まだこの言語では利用できません。",
+      "mathTheme": "数学のテーマ",
+      "physicsTheme": "物理のテーマ",
+      "revisionSheets": "復習シート",
+      "lesson": "レッスン",
+      "sheet": "シート",
+      "theme": "テーマ",
+      "quizPending": "量子力学のクイズは準備中です。",
+      "notFoundTitle": "ページが見つかりません",
+      "notFoundBody": "このページは存在しないか、現在利用できません。",
+      "backHome": "ホームへ戻る"
+    },
+    "glossary": {
+      "title": "キーワード用語集",
+      "subtitle": "キーワードをクリックすると、その語を使うすべてのレッスンが表示されます。",
+      "allKeywords": "すべてのキーワード",
+      "relatedLessons": "関連するレッスン",
+      "noResult": "この絞り込み条件に合うキーワードはありません。"
+    },
+    "exercises": {
+      "title": "解答付き演習",
+      "subtitle": "演習ライブラリー：題名やキーワードで検索するか、本のテーマ別に探せます。",
+      "themePrefix": "テーマ",
+      "open": "演習集を開く →",
+      "comingSoon": "近日公開",
+      "searchPlaceholder": "検索（題名、キーワード）…",
+      "searchLabel": "ライブラリー内を検索",
+      "byTheme": "テーマ別",
+      "noMatch": "この検索に一致する演習はありません。",
+      "keywordsLabel": "キーワード",
+      "exercisePrefix": "演習",
+      "pdfFull": "テーマ内の全演習 — 問題・ヒント・解答（PDF）",
+      "pdfLabel": "PDF",
+      "pdfSub": "問題 + 解答",
+      "unavailable": "この言語の演習はまだありません。",
+      "themeUnavailable": "このテーマの演習は、まだこの言語では利用できません。",
+      "exerciseUnavailable": "この演習は、まだこの言語では利用できません。",
+      "back": "← 演習",
+      "backTheme": "← テーマ内の全演習",
+      "backLibrary": "← 演習ライブラリー",
+      "listIntro": "演習を選ぶと問題と解答が開きます。"
+    },
+    "blocks": {
+      "theorem": "定理",
+      "definition": "定義",
+      "lemma": "補題",
+      "proposition": "命題",
+      "corollary": "系",
+      "remark": "注意",
+      "example": "例",
+      "proof": "証明",
+      "summary": "まとめ",
+      "exercise": "演習",
+      "hint": "ヒント",
+      "solution": "解答",
+      "further": "さらに学ぶために",
+      "figure": "図",
+      "figureSource": "図の出典：",
+      "openPdf": "PDF の図を開く",
+      "question": "問",
+      "note": "注",
+      "important": "重要"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "全体の導入と基礎を築いた実験",
+      "description": "古典力学の限界を示した歴史的な実験。",
+      "partHeading": "第 I 部：孤立系",
+      "lessons": {
+        "introduction": {
+          "title": "第1レッスン",
+          "subtitle": "シュテルン–ゲルラッハの実験",
+          "description": "シュテルン–ゲルラッハの実験で観測されるスピン、磁気モーメント、量子化への実験的な導入。",
+          "topics": [
+            "スピン",
+            "磁気モーメント",
+            "シュテルン–ゲルラッハ",
+            "ラーモア歳差運動",
+            "量子化",
+            "量子測定",
+            "スピン成分",
+            "原子ビーム",
+            "不均一磁場",
+            "状態の射影"
+          ]
+        },
+        "interference": {
+          "title": "第2レッスン",
+          "subtitle": "干渉、経路、量子消しゴム",
+          "description": "マッハ–ツェンダー干渉計、重ね合わせと混合、経路の標識、量子消しゴム、相補性。",
+          "topics": [
+            "マッハ–ツェンダー",
+            "干渉",
+            "重ね合わせ",
+            "確率振幅",
+            "相対位相",
+            "経路",
+            "経路の標識",
+            "量子消しゴム",
+            "相補性",
+            "事後選択"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "ヒルベルト空間とディラック記法",
+      "description": "ヒルベルト空間の構造、位相的双対、有限次元と無限次元でのディラック記法。",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "第1レッスン",
+          "subtitle": "ヒルベルト空間",
+          "description": "数学的構造：ベクトル空間、距離空間、ノルム、ノルム線形空間、内積、前ヒルベルト空間、ヒルベルト空間、代数的基底、ヒルベルト基底、次元、分類、モデル空間、同型",
+          "topics": [
+            "ヒルベルト空間",
+            "ノルム空間",
+            "エルミート内積",
+            "代数的次元",
+            "ヒルベルト次元",
+            "ヒルベルト基底",
+            "完備性",
+            "ヒルベルト空間の分類"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "第2レッスン",
+          "subtitle": "双対空間、ケット、ブラ、随伴",
+          "description": "位相的双対の構成、リースの表現定理、ケット・ブラ・随伴の導入",
+          "topics": [
+            "代数的双対",
+            "位相的双対",
+            "リース同型",
+            "ケットとブラ",
+            "行列要素",
+            "恒等作用素の分解",
+            "ダガー",
+            "随伴作用素"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "復習シート1",
+          "subtitle": "有限次元でのディラック記法",
+          "description": "任意の次元で成り立つ量子計算の代数的規則と、有限次元での行列公式集。",
+          "topics": [
+            "ディラック記法",
+            "エルミート内積",
+            "随伴",
+            "ケット・ブラ作用素",
+            "恒等作用素の分解",
+            "有限次元",
+            "行列要素",
+            "トレース",
+            "共役転置",
+            "公式集"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "復習シート2",
+          "subtitle": "無限次元でのディラック記法",
+          "description": "点粒子の量子力学のヒルベルト空間表現、位置・運動量作用素、ディラックのデルタ。",
+          "topics": [
+            "ディラック記法",
+            "無限次元",
+            "位置表示",
+            "運動量表示",
+            "ディラックのデルタ",
+            "フーリエ変換",
+            "恒等作用素の分解",
+            "位置作用素",
+            "運動量作用素",
+            "正準交換関係"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "線形作用素論",
+      "description": "ヒルベルト空間の位相、有界・非有界線形作用素、スペクトル理論。",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "第1レッスン",
+          "subtitle": "ヒルベルト空間の位相",
+          "description": "一般位相：開集合と閉集合、強収束と弱収束、コーシー列、ベクトルの無限和、完備性、稠密性、有界集合とコンパクト集合。",
+          "topics": [
+            "強位相",
+            "弱位相",
+            "強収束",
+            "弱収束",
+            "完備性",
+            "コーシー列",
+            "稠密性",
+            "ベクトル部分空間",
+            "有界集合",
+            "コンパクト集合"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "第2レッスン",
+          "subtitle": "線形作用素論",
+          "description": "ヒルベルト空間上の線形作用素の定義、定義域、合成、連続性、ノルム。",
+          "topics": [
+            "線形作用素",
+            "作用素の定義域",
+            "作用素の合成",
+            "連続性",
+            "作用素ノルム",
+            "随伴",
+            "稠密な定義域"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "第3レッスン",
+          "subtitle": "有界作用素",
+          "description": "有界作用素の代数、自己共役作用素とユニタリ作用素、有限次元のスペクトル定理。",
+          "topics": [
+            "有界作用素",
+            "代数 B(H)",
+            "自己共役性",
+            "ユニタリ作用素",
+            "正規作用素",
+            "スペクトル定理"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "第4レッスン",
+          "subtitle": "非有界作用素",
+          "description": "稠密に定義された作用素、閉包、随伴、自己共役拡張、本質的自己共役性の判定条件。",
+          "topics": [
+            "非有界作用素",
+            "稠密な定義域",
+            "閉包",
+            "対称作用素",
+            "自己共役拡張",
+            "随伴性の不足"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "第5レッスン",
+          "subtitle": "スペクトル理論",
+          "description": "自己共役作用素のスペクトルとレゾルベント、スペクトル測度、一般スペクトル定理、関数計算。",
+          "topics": [
+            "スペクトル",
+            "レゾルベント",
+            "スペクトル測度",
+            "スペクトル定理",
+            "関数計算",
+            "連続スペクトル",
+            "離散スペクトル"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "復習シート1",
+          "subtitle": "線形作用素アトラス",
+          "description": "主要な線形作用素とそのスペクトル特性の一覧。",
+          "topics": [
+            "線形作用素",
+            "アトラス",
+            "スペクトル特性"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "公理",
+      "description": "理論の基本公理、解釈、測定の物理的帰結。",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "第1レッスン",
+          "subtitle": "測定、力学、解釈",
+          "description": "量子論の公理、ボルン則、波束の収縮、シュレーディンガー方程式の紹介。",
+          "topics": [
+            "公理",
+            "量子測定",
+            "ボルン則",
+            "ユニタリ発展",
+            "波束の収縮",
+            "シュレーディンガー方程式",
+            "エーレンフェストの定理",
+            "重ね合わせ",
+            "量子もつれ",
+            "ベルの不等式"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "応用",
+      "description": "公理から具体的な予測を導くための計算手法と作用素の道具。",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "第1レッスン",
+          "subtitle": "ポテンシャル障壁",
+          "description": "ポテンシャル障壁に対する状態の透過、反射、トンネル効果、エネルギー依存性。",
+          "topics": [
+            "トンネル効果",
+            "透過",
+            "反射",
+            "散乱状態",
+            "係数"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "第2レッスン",
+          "subtitle": "調和振動子",
+          "description": "エネルギー準位の量子化、生成・消滅作用素、調和振動子の固有状態。",
+          "topics": [
+            "エネルギー準位",
+            "量子のはしご",
+            "作用素 a と a†",
+            "固有状態",
+            "波動関数"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "第3レッスン",
+          "subtitle": "スピン",
+          "description": "パウリ行列、スピン測定、磁場中の力学、二準位系への応用。",
+          "topics": [
+            "パウリ行列",
+            "スピン 1/2",
+            "測定",
+            "歳差運動",
+            "二準位系"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "第4レッスン",
+          "subtitle": "量子力学の時間発展",
+          "description": "ユニタリ発展、シュレーディンガー方程式、シュレーディンガー描像とハイゼンベルク描像、伝播関数。",
+          "topics": [
+            "ユニタリ発展",
+            "シュレーディンガー方程式",
+            "ハイゼンベルク描像",
+            "伝播関数",
+            "ハミルトニアン"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "相互作用する系",
+      "description": "複合状態、量子もつれ、結合、孤立していない量子系の力学。",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "デコヒーレンスと量子測定",
+      "description": "古典的振る舞いへの移行、測定問題、環境の役割。",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

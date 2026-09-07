@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
-import { getWebTheme } from "@/lib/chapters";
+import { getWebTheme } from "@/lib/localizedChapters.server";
+
 import { getFirstLessonRef } from "@/lib/lessonRoutes";
 import { isSiteLang, localizedPath } from "@/lib/localeRoutes";
 
@@ -9,7 +10,7 @@ interface Props {
 
 export default function ChapterThemeRedirectPage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
-  const theme = getWebTheme(params.slug);
+  const theme = getWebTheme(params.slug, isSiteLang(params.lang) ? params.lang : undefined);
   if (!theme) notFound();
   const firstLessonRef = getFirstLessonRef(theme.lessons);
   if (!firstLessonRef) notFound();

@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Quantum Mechanics",
+      "subtitle": "",
+      "description": "This book proposes a rigorous formalization of modern quantum mechanics. Going beyond the scope of conventional introductory textbooks, it develops the essential tools of mathematical physics, from Hilbert spaces to advanced spectral theory, including topology and geometry.\n\nThis treatise is intended for readers who seek, beyond computational practice, to understand the logical necessity and foundation of the structures in use. The text addresses interpretational issues directly, with a detailed analysis of the measurement problem and decoherence, while also presenting alternative theories and their experimental constraints.\n\nIntended for master's students, doctoral students, and researchers, it aims at a comprehensive command of the theory, uniting technical rigor with conceptual depth.",
+      "edition": "First Edition"
+    },
+    "nav": {
+      "home": "Home",
+      "chapters": "Themes",
+      "exercises": "Exercises",
+      "quiz": "Quiz",
+      "glossary": "Glossary",
+      "about": "About"
+    },
+    "home": {
+      "badge": "Free Online Edition",
+      "readOnline": "Read Online →",
+      "aboutBook": "About the Book",
+      "chapterPrefix": "Ch",
+      "themePrefix": "Theme",
+      "stats": {
+        "chapters": "Themes",
+        "edition": "Edition",
+        "format": "Format",
+        "formatValue": "Web + PDF"
+      },
+      "contentsLabel": "Contents",
+      "exploreTitle": "Explore the Themes",
+      "readTheme": "Open theme →",
+      "readLesson": "Read lesson →",
+      "readChapter": "Read chapter →",
+      "fullBookDownload": "Download the full edition (coming soon)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Full Math Rendering",
+          "body": "All equations rendered with KaTeX — crisp LaTeX-quality math in your browser."
+        },
+        {
+          "icon": "⬇",
+          "title": "PDF Downloads",
+          "body": "Every chapter available as a downloadable PDF for offline study."
+        },
+        {
+          "icon": "◎",
+          "title": "Free & Open Access",
+          "body": "Complete text freely available online. No paywalls, no sign-up required."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "THEMES",
+      "title": "All Themes",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "LESSON",
+      "themeLabel": "THEME",
+      "lessonLabel": "LESSON",
+      "downloadPdf": "↓ Download PDF",
+      "breadcrumbHome": "Home",
+      "breadcrumbChapters": "Themes",
+      "breadcrumbThemes": "Themes",
+      "prev": "← Previous",
+      "next": "Next →",
+      "noteTitle": "Note:",
+      "noteBody": "This is a preview excerpt. Download the full PDF for the complete chapter, exercises, and solutions.",
+      "tabOnline": "Read Online",
+      "tabReferences": "References",
+      "tocTitle": "Table of Contents",
+      "showToc": "Show TOC",
+      "hideToc": "Hide TOC",
+      "refsEmpty": "No references added yet for this lesson.",
+      "refsEnglishTitle": "English references",
+      "refsFrenchTitle": "French references",
+      "refsSectionEmpty": "No link added in this section yet.",
+      "contentUnavailable": "The content of this lesson is not yet available in this language.",
+      "downloadBtn": "↓ Download",
+      "noLessonTitle": "No lesson available",
+      "noLessonBody": "This theme is listed in the structure, but lesson content has not been published yet.",
+      "readTime": "{time} read"
+    },
+    "about": {
+      "label": "ABOUT THE BOOK",
+      "aboutBookTitle": "About This Book",
+      "bookDetails": "Book Details",
+      "detailLabels": {
+        "author": "Author",
+        "affiliation": "Affiliation",
+        "edition": "Edition",
+        "year": "Year"
+      },
+      "authorTitle": "About the Author",
+      "authorBioSuffix": "is a physicist at ",
+      "authorBioRest": "His research interests include the laws of gravitation, quantum mechanics and its foundations, and symbolic regression as a machine learning task. This book grew from lecture notes developed over many years of teaching at graduate and advanced undergraduate level.",
+      "authorLinksHeading": "Profiles",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "About the Project",
+      "aboutProjectLead": "This site and the book are under development. Lessons and exercises will be added gradually.",
+      "aboutProjectOutlineLabel": "Planned content:",
+      "aboutProjectOutlineBody": "Part I, isolated systems: mathematical formalism (mathematical physics), postulates, basic applications. Part II, interacting systems: entanglement, decoherence, measurement theory. Part III: interpretations of quantum mechanics and alternative theories. Part IV: quantum information, quantum algorithms. Part V: quantum gravity.",
+      "aboutBookBody2": "The text develops quantum mechanics from first principles, assuming a strong background in classical mechanics, electrodynamics, and mathematics. Proofs are given in full whenever they clarify the physics, and many worked examples complement the theoretical exposition.",
+      "translationWarning": "This book is primarily written in French. Translations are produced with AI assistance and may contain errors; the French text is the reference version.",
+      "sameAuthorTitle": "By the Same Author",
+      "sameAuthorBody": "Thermodynamics — Elementary and Advanced, a companion course on thermodynamics.",
+      "sameAuthorLink": "Read it at learnthermo.org"
+    },
+    "footer": {
+      "navigation": "Navigation",
+      "home": "Home",
+      "allChapters": "All Themes",
+      "exercises": "Exercises",
+      "aboutBook": "About the Book",
+      "author": "Author",
+      "copyright": "© {year} {author}. All rights reserved."
+    },
+    "common": {
+      "language": "Language",
+      "lightMode": "Switch to light mode",
+      "darkMode": "Switch to dark mode",
+      "toggleMenu": "Open or close the menu",
+      "backToTop": "Back to top",
+      "translationPending": "Translation in preparation",
+      "contentUnavailable": "This content is not yet available in this language.",
+      "mathTheme": "Mathematics theme",
+      "physicsTheme": "Physics theme",
+      "revisionSheets": "Revision sheets",
+      "lesson": "Lesson",
+      "sheet": "Sheet",
+      "theme": "Theme",
+      "quizPending": "Quantum mechanics quizzes are in preparation.",
+      "notFoundTitle": "Page not found",
+      "notFoundBody": "This page does not exist or is currently unavailable.",
+      "backHome": "Back to home"
+    },
+    "glossary": {
+      "title": "Keyword glossary",
+      "subtitle": "Click a keyword to see every lesson that uses it.",
+      "allKeywords": "All keywords",
+      "relatedLessons": "Related lessons",
+      "noResult": "No keyword found for this filter."
+    },
+    "exercises": {
+      "title": "Solved exercises",
+      "subtitle": "Exercise library: search by title or keywords, or browse by book theme.",
+      "themePrefix": "Theme",
+      "open": "Open set →",
+      "comingSoon": "Coming soon",
+      "searchPlaceholder": "Search (title, keywords)…",
+      "searchLabel": "Search the library",
+      "byTheme": "By theme",
+      "noMatch": "No exercises match this query.",
+      "keywordsLabel": "Keywords",
+      "exercisePrefix": "Exercise",
+      "pdfFull": "All exercises for this theme — statements, hints and solutions (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "statements + solutions",
+      "unavailable": "No exercises are available in this language yet.",
+      "themeUnavailable": "Exercises for this theme are not yet available in this language.",
+      "exerciseUnavailable": "This exercise is not yet available in this language.",
+      "back": "← Exercises",
+      "backTheme": "← All exercises for this theme",
+      "backLibrary": "← Exercise library",
+      "listIntro": "Choose an exercise to open its statement and solution."
+    },
+    "blocks": {
+      "theorem": "Theorem",
+      "definition": "Definition",
+      "lemma": "Lemma",
+      "proposition": "Proposition",
+      "corollary": "Corollary",
+      "remark": "Remark",
+      "example": "Example",
+      "proof": "Proof",
+      "summary": "Summary",
+      "exercise": "Exercise",
+      "hint": "Hint",
+      "solution": "Solution",
+      "further": "To go further",
+      "figure": "Figure",
+      "figureSource": "Figure taken from",
+      "openPdf": "Open PDF figure",
+      "question": "Question",
+      "note": "Note",
+      "important": "Important"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "General Introduction and Foundational Experiments",
+      "description": "Historical experiments that invalidate classical mechanics.",
+      "partHeading": "Part I: Isolated Systems",
+      "lessons": {
+        "introduction": {
+          "title": "Lesson 1",
+          "subtitle": "Stern-Gerlach Experiment",
+          "description": "Experimental introduction to spin, magnetic moment, and quantization observed in the Stern-Gerlach experiment.",
+          "topics": [
+            "Spin",
+            "Magnetic moment",
+            "Stern-Gerlach",
+            "Larmor precession",
+            "Quantization",
+            "Quantum measurement",
+            "Spin components",
+            "Atomic beam",
+            "Inhomogeneous magnetic field",
+            "State projection"
+          ]
+        },
+        "interference": {
+          "title": "Lesson 2",
+          "subtitle": "Interference, Paths, and Quantum Eraser",
+          "description": "Mach-Zehnder interferometer, superposition vs. mixture, path marking, quantum eraser, and complementarity.",
+          "topics": [
+            "Mach-Zehnder",
+            "Interference",
+            "Superposition",
+            "Probability amplitude",
+            "Relative phase",
+            "Path",
+            "Path marking",
+            "Quantum eraser",
+            "Complementarity",
+            "Post-selection"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Hilbert Spaces and Dirac Notation",
+      "description": "Hilbert space structure, topological dual, and Dirac notation in finite and infinite dimension.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Lesson 1",
+          "subtitle": "Hilbert Spaces",
+          "description": "Vector spaces, norms, inner products, strong topology, completeness, and Hilbert bases to establish quantum mechanics' formal framework.",
+          "topics": [
+            "Hilbert space",
+            "Normed space",
+            "Hermitian inner product",
+            "Algebraic dimension",
+            "Hilbert dimension",
+            "Hilbert basis",
+            "Completeness",
+            "Classification of Hilbert spaces"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Lesson 2",
+          "subtitle": "Dual Space, Kets, Bras, Adjoint",
+          "description": "Construction of the topological dual, identification via the Riesz representation theorem, and physical interpretation.",
+          "topics": [
+            "Algebraic dual",
+            "Topological dual",
+            "Riesz isomorphism",
+            "Kets and bras",
+            "Matrix elements",
+            "Resolution of the identity",
+            "Dagger",
+            "Adjoint operator"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Sheet 1",
+          "subtitle": "Dirac Notation — Finite Dimension",
+          "description": "Algebraic rules of quantum calculation valid in any dimension, then the matrix reference sheet in finite dimension.",
+          "topics": [
+            "Dirac notation",
+            "Hermitian inner product",
+            "Adjoint",
+            "Ket-bra operator",
+            "Resolution of the identity",
+            "Finite dimension",
+            "Matrix elements",
+            "Trace",
+            "Conjugate transpose",
+            "Reference sheet"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Sheet 2",
+          "subtitle": "Dirac Notation — Infinite Dimension",
+          "description": "Hilbert representation of point-particle quantum mechanics, position and momentum operators, and Dirac delta.",
+          "topics": [
+            "Dirac notation",
+            "Infinite dimension",
+            "Position representation",
+            "Momentum representation",
+            "Dirac delta",
+            "Fourier transform",
+            "Resolution of identity",
+            "Position operator",
+            "Momentum operator",
+            "Canonical commutation"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Linear Operator Theory",
+      "description": "Topology of Hilbert spaces, bounded and unbounded linear operators, and spectral theory.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Lesson 1",
+          "subtitle": "Topology of Hilbert Spaces",
+          "description": "Strong/weak convergences, Cauchy sequences, completeness, and topological structures of Hilbert spaces.",
+          "topics": [
+            "Strong topology",
+            "Weak topology",
+            "Strong convergence",
+            "Weak convergence",
+            "Completeness",
+            "Cauchy sequences",
+            "Density",
+            "Vector subspaces",
+            "Bounded sets",
+            "Compact sets"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Lesson 2",
+          "subtitle": "Linear Operator Theory",
+          "description": "Definition, domain, composition, continuity, and norm of linear operators in Hilbert space.",
+          "topics": [
+            "Linear operators",
+            "Operator domain",
+            "Operator composition",
+            "Continuity",
+            "Operator norm",
+            "Adjoint",
+            "Dense domain"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Lesson 3",
+          "subtitle": "Bounded Operators",
+          "description": "Algebra of bounded operators, self-adjoint and unitary operators, spectral theorem in finite dimension.",
+          "topics": [
+            "Bounded operators",
+            "Algebra B(H)",
+            "Self-adjointness",
+            "Unitary operators",
+            "Normal operators",
+            "Spectral theorem"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Lesson 4",
+          "subtitle": "Unbounded Operators",
+          "description": "Densely defined operators, closure, adjoint, self-adjoint extensions, and essential self-adjointness criteria.",
+          "topics": [
+            "Unbounded operators",
+            "Dense domain",
+            "Closure",
+            "Symmetric operators",
+            "Self-adjoint extensions",
+            "Deficiency indices"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Lesson 5",
+          "subtitle": "Spectral Theory",
+          "description": "Spectrum and resolvent of self-adjoint operators, spectral measure, general spectral theorem, and functional calculus.",
+          "topics": [
+            "Spectrum",
+            "Resolvent",
+            "Spectral measure",
+            "Spectral theorem",
+            "Functional calculus",
+            "Continuous spectrum",
+            "Discrete spectrum"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Sheet 1",
+          "subtitle": "Atlas of Linear Operators",
+          "description": "Catalogue of the main linear operators and their spectral properties.",
+          "topics": [
+            "Linear operators",
+            "Atlas",
+            "Spectral properties"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Postulates",
+      "description": "Core axioms of the theory, interpretations, and physical consequences of measurement.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Lesson 1",
+          "subtitle": "Measurement, Dynamics, and Interpretation",
+          "description": "Presentation of quantum postulates, Born rule, wavefunction collapse, and the Schrodinger equation.",
+          "topics": [
+            "Postulates",
+            "Quantum measurement",
+            "Born rule",
+            "Unitary evolution",
+            "Wavefunction collapse",
+            "Schrodinger equation",
+            "Ehrenfest theorem",
+            "Superposition",
+            "Quantum entanglement",
+            "Bell inequalities"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Applications",
+      "description": "Computational methods and operator tools to connect postulates with concrete predictions.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Lesson 1",
+          "subtitle": "Potential Barriers",
+          "description": "Transmission, reflection, tunneling, and energy dependence of states across potential barriers.",
+          "topics": [
+            "Tunneling effect",
+            "Transmission",
+            "Reflection",
+            "Scattering states",
+            "Coefficients"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Lesson 2",
+          "subtitle": "Harmonic Oscillator",
+          "description": "Energy level quantization, creation/annihilation operators, and eigenstates of the harmonic oscillator.",
+          "topics": [
+            "Energy levels",
+            "Quantum ladders",
+            "a and a† operators",
+            "Eigenstates",
+            "Wavefunctions"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Lesson 3",
+          "subtitle": "Spin",
+          "description": "Pauli matrices, spin measurement, dynamics in magnetic fields, and two-level applications.",
+          "topics": [
+            "Pauli matrices",
+            "Spin 1/2",
+            "Measurement",
+            "Precession",
+            "Two-level systems"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Lesson 4",
+          "subtitle": "Quantum Dynamics",
+          "description": "Unitary evolution, Schrodinger equation, Schrodinger/Heisenberg pictures, and propagators.",
+          "topics": [
+            "Unitary evolution",
+            "Schrodinger equation",
+            "Heisenberg picture",
+            "Propagators",
+            "Hamiltonian"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Interacting Systems",
+      "description": "Composite states, entanglement, couplings, and dynamics of non-isolated quantum systems.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Decoherence and Quantum Measurement",
+      "description": "Classical emergence, the measurement problem, and the role of the environment.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { getWebThemes, bookMeta } from "@/lib/chapters";
+import { bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
 
@@ -30,10 +30,9 @@ function WaveBackground() {
 }
 
 export default function HomePageClient() {
-  const { t, lang } = useLang();
+  const { t, lang, webThemes } = useLang();
   const lp = useLocalizedPath();
   const book = t.book;
-  const webThemes = getWebThemes();
 
   return (
     <div style={{ position: "relative", zIndex: 1 }}>

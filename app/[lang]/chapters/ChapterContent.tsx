@@ -254,7 +254,7 @@ export function ChapterContent({ lesson }: Props) {
                           key={entry.id}
                           className="lesson-toc-item"
                           style={{
-                            marginLeft:
+                            marginInlineStart:
                               entry.level === 2
                                 ? "0"
                                 : entry.level === 3
@@ -351,7 +351,7 @@ export function ChapterContent({ lesson }: Props) {
                     <ul
                       style={{
                         margin: 0,
-                        paddingLeft: "1.2rem",
+                        paddingInlineStart: "1.2rem",
                         display: "grid",
                         gap: "0.8rem",
                       }}
@@ -424,8 +424,8 @@ export function ChapterContent({ lesson }: Props) {
       {showBackToTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          aria-label={lang === "fr" ? "Revenir en haut" : "Back to top"}
-          title={lang === "fr" ? "Revenir en haut" : "Back to top"}
+          aria-label={t.common.backToTop}
+          title={t.common.backToTop}
           style={{
             position: "fixed",
             right: "1.2rem",

@@ -40,45 +40,11 @@ interface Props {
 }
 
 export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
-  const { lang } = useLang();
+  const { lang, t: site } = useLang();
   const lp = useLocalizedPath();
   const [query, setQuery] = useState("");
 
-  const t = {
-    fr: {
-      title: "Exercices corrigés",
-      subtitle:
-        "Bibliothèque d'exercices : recherche par titre ou mots-clés, ou accès par thème du livre.",
-      themePrefix: "Thème",
-      open: "Ouvrir la série →",
-      comingSoon: "À venir",
-      searchPlaceholder: "Rechercher (titre, mots-clés)…",
-      searchLabel: "Recherche dans la bibliothèque",
-      byTheme: "Par thème",
-      noMatch: "Aucun exercice ne correspond à cette requête.",
-      keywordsLabel: "Mots-clés",
-      exercisePrefix: "Exercice",
-      pdfFull: "Tous les exercices du thème — énoncés, indications et solutions (PDF)",
-      pdfLabel: "PDF",
-      pdfSub: "énoncés + solutions",
-    },
-    en: {
-      title: "Solved Exercises",
-      subtitle: "Exercise library: search by title or keywords, or browse by book theme.",
-      themePrefix: "Theme",
-      open: "Open set →",
-      comingSoon: "Coming soon",
-      searchPlaceholder: "Search (title, keywords)…",
-      searchLabel: "Search the library",
-      byTheme: "By theme",
-      noMatch: "No exercises match this query.",
-      keywordsLabel: "Keywords",
-      exercisePrefix: "Exercise",
-      pdfFull: "All exercises for this theme — statements, hints and solutions (PDF)",
-      pdfLabel: "PDF",
-      pdfSub: "statements + solutions",
-    },
-  }[lang === "fr" ? "fr" : "en"];
+  const t = site.exercises;
 
   const index = lang === "fr" ? indexFr : indexEn;
   const hasQuery = query.trim().length > 0;
@@ -108,7 +74,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
       <div style={{ maxWidth: "860px", margin: "0 auto" }}>
-        {index.length === 0 && <p>{lang === "fr" ? "Aucun exercice disponible dans cette langue." : "No exercises available in this language yet."}</p>}
+        {index.length === 0 && <p>{t.unavailable}</p>}
         <h1
           style={{
             fontFamily: "var(--font-playfair)",

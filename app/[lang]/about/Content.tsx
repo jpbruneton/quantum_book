@@ -40,8 +40,8 @@ export default function AboutPage() {
     fontWeight: 600,
     color: "var(--text-heading)",
     marginBottom: "0.75rem",
-    borderLeft: "3px solid var(--amber)",
-    paddingLeft: "1rem",
+    borderInlineStart: "3px solid var(--amber)",
+    paddingInlineStart: "1rem",
   };
 
   const bodyStyle = {
@@ -84,7 +84,7 @@ export default function AboutPage() {
         {/* Description */}
         <div style={sectionStyle}>
           <h2 style={h2Style}>{at.aboutBookTitle}</h2>
-          {lang === "en" ? (
+          {lang !== "fr" ? (
             <p style={{ ...bodyStyle, fontWeight: 700, color: "var(--text-heading)" }}>
               {at.translationWarning}
             </p>
@@ -182,7 +182,7 @@ export default function AboutPage() {
           <ul
             style={{
               margin: 0,
-              paddingLeft: "1.25rem",
+              paddingInlineStart: "1.25rem",
               fontFamily: "var(--font-crimson)",
               fontSize: "1.05rem",
               color: "var(--text-secondary)",

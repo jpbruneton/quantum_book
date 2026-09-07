@@ -1,5 +1,7 @@
 import { processLatex } from "@/lib/latex";
-import type { Lang } from "@/lib/i18n";
+import { isLang, type Lang } from "@/lib/i18n";
+import { getTranslations } from "@/lib/translations.server";
+import { localizeFigureAssets } from "@/lib/figureAssets.server";
 import "server-only";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -297,7 +299,7 @@ function latexToPlainTextForAlt(value: string): string {
     .trim();
 }
 
-function extractFigureSourceHtml(figureBlock: string, isEnglish: boolean): string {
+function extractFigureSourceHtml(figureBlock: string, contentLanguage: Lang): string {
   const beginTag = "\\begin{figuresource}";
   const endTag = "\\end{figuresource}";
   const start = figureBlock.indexOf(beginTag);
@@ -306,7 +308,7 @@ function extractFigureSourceHtml(figureBlock: string, isEnglish: boolean): strin
   if (end === -1) return "";
   const inner = figureBlock.slice(start + beginTag.length, end).trim();
   const urlMatch = inner.match(/\\url\{([^}]*)\}/);
-  const prefix = isEnglish ? "Figure taken from " : "Figure tirée de ";
+  const prefix = `${getTranslations(contentLanguage).blocks.figureSource} `;
   if (urlMatch) {
     const rawUrl = urlMatch[1];
     const safeHref = escapeHtmlAttribute(rawUrl);
@@ -343,8 +345,9 @@ function extractImageAndCaption(
   return { imagePath, caption, altText };
 }
 
-function extractFigureHtml(figureBlock: string, figureNumber: number, isEnglish: boolean): string {
-  const sourceHtml = extractFigureSourceHtml(figureBlock, isEnglish);
+function extractFigureHtml(figureBlock: string, figureNumber: number, contentLanguage: Lang): string {
+  const labels = getTranslations(contentLanguage).blocks;
+  const sourceHtml = extractFigureSourceHtml(figureBlock, contentLanguage);
 
   // Side-by-side figures built from \begin{minipage} pairs (LaTeX has no
   // equivalent web layout primitive, so render each minipage as its own
@@ -369,19 +372,19 @@ function extractFigureHtml(figureBlock: string, figureNumber: number, isEnglish:
         return `<figure class="latex-figure-item"><a class="latex-figure-zoom-link" href="${item.imagePath}" target="_blank" rel="noreferrer"><img src="${item.imagePath}" alt="${item.altText}" loading="lazy" /></a>${subCaption}</figure>`;
       })
       .join("");
-    return `<figure class="latex-figure latex-figure-row"><div class="latex-figure-row-inner">${itemsHtml}</div><figcaption>Figure ${figureNumber}${sourceHtml}</figcaption></figure>`;
+    return `<figure class="latex-figure latex-figure-row"><div class="latex-figure-row-inner">${itemsHtml}</div><figcaption>${labels.figure} ${figureNumber}${sourceHtml}</figcaption></figure>`;
   }
 
   const single = extractImageAndCaption(figureBlock);
   if (!single) return "";
 
   const captionWithNumber = single.caption
-    ? `Figure ${figureNumber}. ${single.caption}`
-    : `Figure ${figureNumber}`;
+    ? `${labels.figure} ${figureNumber}. ${single.caption}`
+    : `${labels.figure} ${figureNumber}`;
   const figCaption = `<figcaption>${captionWithNumber}${sourceHtml}</figcaption>`;
   const isPdfFigure = single.imagePath.toLowerCase().endsWith(".pdf");
   if (isPdfFigure) {
-    return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${single.imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${single.imagePath}" target="_blank" rel="noreferrer">Ouvrir la figure PDF</a></object>${figCaption}</figure>`;
+    return `<figure class="latex-figure"><object class="latex-figure-pdf" data="${single.imagePath}" type="application/pdf"><a class="latex-figure-pdf-link" href="${single.imagePath}" target="_blank" rel="noreferrer">${labels.openPdf}</a></object>${figCaption}</figure>`;
   }
 
   return `<figure class="latex-figure"><a class="latex-figure-zoom-link" href="${single.imagePath}" target="_blank" rel="noreferrer"><img src="${single.imagePath}" alt="${single.altText}" loading="lazy" /></a>${figCaption}</figure>`;
@@ -856,7 +859,7 @@ function peelTrailingEnvironmentBlock(
   return { rest, inner };
 }
 
-function transformQuestionsInner(body: string, isEnglish: boolean): string {
+function transformQuestionsInner(body: string, contentLanguage: Lang): string {
   const trimmed = body.trim();
   if (!/\\question\b/.test(trimmed)) {
     return `\n\n${trimmed}\n\n`;
@@ -866,7 +869,7 @@ function transformQuestionsInner(body: string, isEnglish: boolean): string {
     .slice(1)
     .map((c) => c.trim())
     .filter((c) => c.length > 0);
-  const qWord = isEnglish ? "Question" : "Question";
+  const qWord = getTranslations(contentLanguage).blocks.question;
   let out = `\n\n<div class="latex-exercise-questions">`;
   for (let i = 0; i < chunks.length; i += 1) {
     let chunk = chunks[i];
@@ -904,7 +907,7 @@ function transformQuestionsInner(body: string, isEnglish: boolean): string {
   return out;
 }
 
-function transformQuestionsEnvironments(input: string, isEnglish: boolean): string {
+function transformQuestionsEnvironments(input: string, contentLanguage: Lang): string {
   const beginTag = "\\begin{questions}";
   const endTag = "\\end{questions}";
   let result = "";
@@ -943,7 +946,7 @@ function transformQuestionsEnvironments(input: string, isEnglish: boolean): stri
       break;
     }
     const inner = input.slice(start + beginTag.length, closedAt);
-    result += transformQuestionsInner(inner, isEnglish);
+    result += transformQuestionsInner(inner, contentLanguage);
     cursor = closedAt + endTag.length;
   }
   return result;
@@ -958,7 +961,7 @@ function normalizeLatexBlocks(
   let figureRenderIndex = 0;
   let equationRenderIndex = 0;
   const references = collectReferenceMap(result);
-  const isEnglish = contentLanguage !== "fr";
+  const labels = getTranslations(contentLanguage).blocks;
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
   result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
@@ -972,7 +975,7 @@ function normalizeLatexBlocks(
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
     figureRenderIndex += 1;
-    return `\n\n${extractFigureHtml(block, figureRenderIndex, isEnglish)}\n\n`;
+    return `\n\n${extractFigureHtml(block, figureRenderIndex, contentLanguage)}\n\n`;
   });
 
   // Ignore mdframed wrappers while preserving their inner content.
@@ -986,12 +989,12 @@ function normalizeLatexBlocks(
   result = stripLatexCommandsWithSimpleArg(result, "theme");
 
   // Support command-style theorem blocks such as \proposition{...}.
-  result = replaceCommandBlock(result, "proposition", "latex-block-proposition", "Proposition");
+  result = replaceCommandBlock(result, "proposition", "latex-block-proposition", labels.proposition);
   result = replaceCommandBlock(
     result,
     "coro",
     "latex-block-corollary",
-    isEnglish ? "Corollary" : "Corollaire"
+    labels.corollary
   );
 
   // Render section-like commands as headings in document order.
@@ -1000,14 +1003,14 @@ function normalizeLatexBlocks(
   // Render proof environments as collapsible details blocks.
   result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
     const suffix = label ? ` (${cleanLatexInline(label)})` : "";
-    return `\n\n<details class="latex-proof"><summary class="latex-proof-summary"><em>${isEnglish ? "Proof" : "Démonstration"}${suffix}.</em></summary><div class="latex-proof-body">`;
+    return `\n\n<details class="latex-proof"><summary class="latex-proof-summary"><em>${labels.proof}${suffix}.</em></summary><div class="latex-proof-body">`;
   });
   result = result.replace(
     /\\end\{proof\}/g,
     ` <span class="latex-proof-qed" aria-hidden="true">□</span></div></details>\n\n`
   );
 
-  result = transformQuestionsEnvironments(result, isEnglish);
+  result = transformQuestionsEnvironments(result, contentLanguage);
 
   // Un seul compteur / style « léger » pour exercice, exercise et exo.
   result = result.replace(/\\begin\{exercice\}/g, "\\begin{exo}");
@@ -1021,23 +1024,23 @@ function normalizeLatexBlocks(
 
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string; collapsible?: boolean }> = [
-    { env: "definition", title: "Definition" },
-    { env: "theorem", title: isEnglish ? "Theorem" : "Théorème" },
-    { env: "proposition", title: "Proposition" },
-    { env: "lemma", title: "Lemma" },
-    { env: "corollaire", title: isEnglish ? "Corollary" : "Corollaire" },
-    { env: "corollary", title: isEnglish ? "Corollary" : "Corollaire" },
-    { env: "remark", title: isEnglish ? "Remark" : "Remarque" },
-    { env: "plusloin", title: isEnglish ? "To go further" : "Pour aller plus loin" },
-    { env: "exemple", title: isEnglish ? "Example" : "Exemple" },
-    { env: "example", title: "Example" },
-    { env: "resume", title: isEnglish ? "Summary" : "Résumé" },
-    { env: "important", title: "Important" },
-    { env: "exo", title: isEnglish ? "Exercise" : "Exercice" },
-    { env: "indice", title: isEnglish ? "Hint" : "Indice", collapsible: true },
-    { env: "indication", title: isEnglish ? "Hint" : "Indication", collapsible: true },
-    { env: "hint", title: isEnglish ? "Hint" : "Indice", collapsible: true },
-    { env: "solution", title: isEnglish ? "Solution" : "Solution", collapsible: true },
+    { env: "definition", title: labels.definition },
+    { env: "theorem", title: labels.theorem },
+    { env: "proposition", title: labels.proposition },
+    { env: "lemma", title: labels.lemma },
+    { env: "corollaire", title: labels.corollary },
+    { env: "corollary", title: labels.corollary },
+    { env: "remark", title: labels.remark },
+    { env: "plusloin", title: labels.further },
+    { env: "exemple", title: labels.example },
+    { env: "example", title: labels.example },
+    { env: "resume", title: labels.summary },
+    { env: "important", title: labels.important },
+    { env: "exo", title: labels.exercise },
+    { env: "indice", title: labels.hint, collapsible: true },
+    { env: "indication", title: labels.hint, collapsible: true },
+    { env: "hint", title: labels.hint, collapsible: true },
+    { env: "solution", title: labels.solution, collapsible: true },
   ];
   const blockCounters: Record<string, number> = {
     definition: 0,
@@ -1075,7 +1078,7 @@ function normalizeLatexBlocks(
         numberedTitle = `${blockKind.title} ${blockCounters[blockKind.env]}`;
       }
       if (blockKind.env === "plusloin") {
-        const label = isEnglish ? "To go further" : "Pour aller plus loin";
+        const label = labels.further;
         const topicHtml = displayLabel
           ? `<strong class="latex-plusloin-topic"> (${cleanLatexInline(displayLabel)})</strong>`
           : "";
@@ -1165,7 +1168,7 @@ function normalizeLatexBlocks(
   return result;
 }
 
-function renderParagraph(paragraph: string, footnoteCounter: { value: number }): string {
+function renderParagraph(paragraph: string, footnoteCounter: { value: number }, lang: Lang): string {
   const extracted = extractFootnotesFromParagraph(paragraph);
   let cleaned = cleanLatexInline(extracted.text);
   const assignedFootnotes = extracted.footnotes.map((rawFootnote) => {
@@ -1192,7 +1195,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }):
     const footnotesHtml = assignedFootnotes
       .map(
         (fn) =>
-          `<div class="latex-footnote-item"><span class="latex-footnote-label">Note ${fn.number} :</span> ${fn.text}</div>`
+          `<div class="latex-footnote-item"><span class="latex-footnote-label">${getTranslations(lang).blocks.note} ${fn.number}:</span> ${fn.text}</div>`
       )
       .join("");
     const footnotesBlock = `\n<div class="latex-footnotes">${footnotesHtml}</div>`;
@@ -1273,11 +1276,11 @@ function sanitizeUnbalancedDollarMath(paragraph: string): string {
   return paragraph.replace(/(?<!\\)\$(?!\$)/g, "&#36;");
 }
 
-function paragraphsToHtml(paragraphs: string[]): string {
+function paragraphsToHtml(paragraphs: string[], lang: Lang): string {
   const footnoteCounter = { value: 1 };
   return paragraphs
     .map((paragraph) => sanitizeUnbalancedDollarMath(paragraph))
-    .map((paragraph) => renderParagraph(paragraph, footnoteCounter))
+    .map((paragraph) => renderParagraph(paragraph, footnoteCounter, lang))
     .filter((chunk) => chunk.length > 0)
     .join("\n\n");
 }
@@ -1464,11 +1467,12 @@ export function getLessonWebContent(
   try {
     const source = readFileSync(texPath, "utf-8");
     const citationMaps = buildCitationNumberMaps(references);
-    const contentLanguage: ContentLanguage = /_fr\//.test(texFile) ? "fr" : "en";
+    const code = texFile.match(/_([a-z]{2})\//)?.[1] ?? "fr";
+    const contentLanguage: ContentLanguage = isLang(code) ? code : "fr";
     const paragraphs = parseTexParagraphs(source, citationMaps, contentLanguage);
     const limitedParagraphs = paragraphCount > 0 ? paragraphs.slice(0, paragraphCount) : paragraphs;
     if (limitedParagraphs.length === 0) return "";
-    return paragraphsToHtml(limitedParagraphs);
+    return localizeFigureAssets(paragraphsToHtml(limitedParagraphs, contentLanguage), contentLanguage);
   } catch {
     return "";
   }
@@ -1484,11 +1488,11 @@ export function getTexWebHtmlFromSource(
   contentLanguage: Lang,
   references: LessonReference[]
 ): string {
-  const lang: ContentLanguage = contentLanguage !== "fr" ? "en" : "fr";
+  const lang: ContentLanguage = contentLanguage;
   const citationMaps = buildCitationNumberMaps(references);
   const paragraphs = parseTexParagraphs(source, citationMaps, lang);
   if (paragraphs.length === 0) return "";
-  return paragraphsToHtml(paragraphs);
+  return localizeFigureAssets(paragraphsToHtml(paragraphs, lang), lang);
 }
 
 export function getLessonReferences(

@@ -1,60 +1,83 @@
-# Alignement Quantum / Thermo
+# Architecture Quantum / Thermo
 
-Comparaison et adaptation du 7 septembre 2026.
+Alignement du 7 septembre 2026, puis publication multilingue du contenu Quantum.
 
-| Sujet | Quantum avant | Thermo / adaptation retenue |
-|---|---|---|
-| Document HTML | Langue issue de `headers()` dans le layout racine : rendu dynamique | Document par `[lang]`, params statiques, `dynamic = "error"` pour d?tecter une r?gression |
-| Formules | Le?ons rendues au serveur, exercices recalcul?s au navigateur | KaTeX uniquement au serveur, titres compris |
-| Sommaire | Calcul dans le composant client | Titres, ancres et sommaire pr?par?s au serveur |
-| Ressources | CSS Google Fonts et KaTeX via imports distants | `next/font` et CSS KaTeX empaquet?s, polices servies localement |
-| Charge utile | Exercices FR et EN envoy?s ensemble | Uniquement les exercices de la langue demand?e ; une seule le?on porte le corps rendu |
-| Langues | FR / EN | M?me registre de 20 langues que Thermo ; contenu r?el FR et partiellement EN, autres langues r?serv?es |
-| Indexation | Alternates FR/EN m?me en cas d'absence ; exercices sans validation | Disponibilit? commune aux m?tadonn?es et sitemap, exercices sous validation ?ditoriale, quiz et coquilles en noindex |
-| Exercices | Fichiers isol?s `exercises_library_*` | Banque `exos_<lang>/exo_themeN.tex`, identifiants conserv?s, toutes les entr?es analys?es |
-| Figures | `public/figs` et sources dispers?es | Sources priv?es `figs-src/<lang>/`, rendus priv?s `site-assets/figs/<lang>/`, synchronisation prebuild |
-| Quiz | Absents | Infrastructure, interface Thermo traduite et pages par th?me + le?on ; aucune question Thermo import?e |
+| Sujet | Architecture retenue |
+|---|---|
+| HTML | Document par `[lang]`, paramètres statiques, `dynamic = "error"` pour détecter une régression vers le rendu dynamique |
+| Formules | KaTeX au serveur, titres et exercices compris ; HTML mathématique disponible sans JavaScript |
+| Sommaire | Titres, ancres et références préparés au serveur |
+| Ressources | Polices `next/font` et CSS KaTeX empaquetés et servis localement |
+| Charge utile | Corps de la leçon active, exercices de la langue demandée et un seul catalogue d'interface |
+| Langues | Même registre de 20 langues que Thermo ; catalogues JSON chargés uniquement au serveur |
+| Indexation | Disponibilité commune aux métadonnées et au sitemap ; exercices sous validation éditoriale, quiz et contenus manquants en noindex |
+| Exercices | Une banque `exos_<lang>/exo_themeN.tex`, identifiants stables, rattachement facultatif à une leçon |
+| Figures | Sources privées `figs-src/<lang>/`, rendus privés `site-assets/figs/<lang>/`, copie vers `public/figs` au prebuild |
+| Quiz | Infrastructure et interface multilingue, clés par thème et leçon ; aucune question Thermo importée |
 
-## Diff?rence conserv?e
+## Plusieurs leçons par thème
 
-Thermo utilise principalement une le?on par chapitre. Quantum garde plusieurs le?ons
-et fiches par th?me. Les URL restent `/fr/chapitres/<th?me>/lecon-M` ou `fiche-M`.
-Les quiz utilisent `/fr/quiz/<th?me>/lesson-M` et conservent aussi les fiches.
-Une question a une cl? stable, un `theme` et un `lessonRef` ; aucun num?ro de le?on
-global ambigu. Les anciens liens, slugs et redirections de fiches restent pris en charge.
+Quantum conserve plusieurs leçons et fiches par thème. Les URL françaises utilisent
+`/fr/chapitres/<thème>/lecon-M` et `fiche-M`. Une clé associe le thème à `lesson-M`
+ou `fiche-M` ; les deux sortes d'unités ne partagent pas une numérotation ambiguë.
+Les anciens liens et redirections des fiches restent pris en charge.
 
-## Exercices et publication
+La leçon 2 du thème 1 en français est temporairement retirée par `lib/publication.ts` :
+aucune page de cours générée, aucun lien de navigation ni entrée de sitemap.
+Son URL renvoie 404. La source privée est conservée. Cette règle ne retire pas
+automatiquement une version existante dans une autre langue.
 
-Une banque par th?me contient plusieurs environnements `exo`, avec leurs titres,
-mots-cl?s, indications et solutions. `\theme{N}` historique est conserv? mais le
-classement vient du nom du fichier. `\lecon{M}` permet un rattachement plus fin.
-Les exercices existants n'ont pas ?t? r??crits ni valid?s artificiellement : sans
-`\seoready{true}`, la page reste accessible, mais en noindex et hors sitemap.
-Le g?n?rateur PDF lit la m?me banque ; la compilation PDF reste une commande s?par?e
-n?cessitant une installation LaTeX (FR/EN actuellement).
+## Interface et disponibilité
+
+`lib/locales/fr.json` définit le schéma de référence. Chaque catalogue contient
+l'interface (`ui`) et les titres, descriptions et mots-clés des thèmes et leçons
+(`themes`). `lib/localizedChapters.server.ts` prépare les métadonnées localisées.
+Le contexte client reçoit seulement la langue active ; les autres catalogues
+ne sont pas importés dans le navigateur ni dans le middleware.
+
+La disponibilité d'une leçon dépend de sa source TeX et de la règle de publication.
+Un corps absent n'est jamais remplacé par le français ou l'anglais. Les catalogues
+peuvent décrire les futurs thèmes sans prétendre que leurs leçons sont publiées.
+
+## Exercices et quiz
+
+Une banque par thème contient plusieurs environnements `exo`, titres, mots-clés,
+indications et solutions. Le classement vient du nom du fichier ; `\theme{N}`
+historique est conservé et `\lecon{M}` permet une association plus fine.
+Sans `\seoready{true}`, un exercice reste accessible mais en noindex et hors sitemap.
+La traduction des cours ne valide pas les banques d'exercices. Le générateur PDF
+lit ces mêmes banques ; sa compilation est séparée et actuellement limitée à FR/EN.
+Les quiz restent en préparation et en noindex tant que la banque est vide.
 
 ## Figures
 
-Les anciennes images partag?es r?sident dans `site-assets/figs/fr/`. Le parseur r?sout
-les anciens chemins sans locale vers ce dossier ; les anciens fichiers publics restent
-accessibles pour les liens d?j? diffus?s. Les figures TikZ du th?me 1 sont rang?es sous
-`figs-src/fr/theme1/`, avec leurs PNG dans `site-assets/figs/fr/theme1/`.
-Les nouveaux chemins doivent ?tre explicites : `figs/<lang>/...`. Une illustration
-avec texte doit ?tre traduite avant de revendiquer une version localis?e.
+Le résolveur utilise l'image de la langue demandée si elle existe, sinon l'original
+français, conformément à la consigne de publication. Ce repli concerne uniquement
+les figures. Les images françaises ne sont pas dupliquées sous un autre code langue
+pour simuler une traduction.
 
-## V?rification
+`scripts/build-theme1-figures.mjs` génère les sources TikZ localisées à partir des
+sources françaises et du lexique `figs-src/theme1-translations.json`. Il compile
+avec LuaLaTeX ou XeLaTeX selon l'écriture, vérifie les glyphes et débordements, puis
+produit les PNG. Les quatre figures de la première leçon disposent aussi d'alias
+compatibles avec les anciens noms cités dans le cours. La figure symbolique de la
+seconde leçon est préparée sans republier sa page française.
+
+## Vérification
 
 ```powershell
+node scripts/check-translations.mjs --write-manifest
+node scripts/check-interface-translations.mjs --write-index
 $env:NEXT_PUBLIC_SITE_URL = 'https://quantumlectures.org'
 npm run build
 npm run check:static
 npm run check:assets
 node scripts/check-content-contracts.cjs
-# Facultatif, apr?s next start -p 3100 :
+# Avec un serveur local démarré sur le port 3100 :
 node scripts/check-static-pages.mjs http://localhost:3100
 ```
 
-Le build synchronise les ressources priv?es et produit les pages HTML/RSC.
-Les contr?les v?rifient la pr?compilation, la langue/RTL, les ancres, le noindex,
-les images et polices locales. Initialiser le sous-module avant toute construction.
-Le site trace les banques et sources de le?ons pour la sortie standalone.
+Initialiser le sous-module avant le build. Les contrôles portent sur la structure
+des traductions, les formules, la précompilation, les langues/RTL, les ancres,
+l'indexation, les figures et les polices locales. Ils ne remplacent pas une
+relecture scientifique humaine.

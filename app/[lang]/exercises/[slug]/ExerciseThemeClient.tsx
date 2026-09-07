@@ -34,28 +34,19 @@ export function ExerciseThemeClient({
   exercisesEn,
   pdfLinks,
 }: Props) {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
   const router = useRouter();
   const lp = useLocalizedPath();
 
   const exercises = lang === "fr" ? exercisesFr : exercisesEn;
   const title = lang === "fr" ? titleFr : titleEn;
-  const themePrefix = lang === "fr" ? "Thème" : "Theme";
-  const backLabel = lang === "fr" ? "← Exercices" : "← Exercises";
-  const listIntro =
-    lang === "fr"
-      ? "Choisissez un exercice pour ouvrir son énoncé et sa correction."
-      : "Choose an exercise to open its statement and solution.";
-  const keywordsLabel = lang === "fr" ? "Mots-clés" : "Keywords";
-  const exercisePrefix = lang === "fr" ? "Exercice" : "Exercise";
-  const unavailable =
-    lang === "fr"
-      ? "Les exercices de ce thème ne sont pas encore disponibles dans cette langue."
-      : "Exercises for this theme are not yet available in this language.";
-  const pdfLabel =
-    lang === "fr"
-      ? "Tous les exercices du thème — énoncés, indications et solutions (PDF)"
-      : "All exercises for this theme — statements, hints and solutions (PDF)";
+  const themePrefix = t.common.theme;
+  const backLabel = t.exercises.back;
+  const listIntro = t.exercises.listIntro;
+  const keywordsLabel = t.exercises.keywordsLabel;
+  const exercisePrefix = t.exercises.exercisePrefix;
+  const unavailable = t.exercises.themeUnavailable;
+  const pdfLabel = t.exercises.pdfFull;
 
   useEffect(() => {
     const raw = window.location.hash.replace(/^#/, "");

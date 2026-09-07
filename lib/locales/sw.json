@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Mekanika ya Kwanta",
+      "subtitle": "",
+      "description": "Kitabu hiki kinawasilisha uundaji madhubuti wa kikanuni wa mekanika ya kwanta ya kisasa. Kikivuka mipaka ya vitabu vya kawaida vya utangulizi, kinachunguza kwa kina zana muhimu za fizikia ya kihisabati, kutoka nafasi za Hilbert hadi nadharia ya juu ya spektra, pamoja na topolojia na jiometria.\n\nKitabu hiki kinawalenga wanaotaka kuelewa ulazima wa kimantiki na misingi ya miundo inayotumiwa, zaidi ya kufanya hesabu tu. Kinashughulikia moja kwa moja masuala ya ufasiri, kikichambua kwa undani tatizo la upimaji na upotevu wa mshikamano wa kwanta, huku kikiwasilisha nadharia mbadala na vizuizi vyake vya kimajaribio.\n\nKimekusudiwa kwa wanafunzi wa ngazi za juu, wanafunzi wa uzamivu na watafiti. Lengo lake ni kutoa uelewa mpana wa nadharia kwa kuunganisha usahihi wa kiufundi na kina cha dhana.",
+      "edition": "Toleo la Kwanza"
+    },
+    "nav": {
+      "home": "Mwanzo",
+      "chapters": "Mada",
+      "exercises": "Mazoezi",
+      "quiz": "Majaribio",
+      "glossary": "Faharasa",
+      "about": "Kuhusu"
+    },
+    "home": {
+      "badge": "Toleo la bure mtandaoni",
+      "readOnline": "Soma mtandaoni →",
+      "aboutBook": "Kuhusu kitabu",
+      "chapterPrefix": "Sura",
+      "themePrefix": "Mada",
+      "stats": {
+        "chapters": "Mada",
+        "edition": "Toleo",
+        "format": "Muundo",
+        "formatValue": "Wavuti + PDF"
+      },
+      "contentsLabel": "Yaliyomo",
+      "exploreTitle": "Chunguza mada",
+      "readTheme": "Fungua mada →",
+      "readLesson": "Soma somo →",
+      "readChapter": "Soma sura →",
+      "fullBookDownload": "Pakua toleo kamili (linakuja)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Uonyeshaji kamili wa hisabati",
+          "body": "Milinganyo yote inaonyeshwa kwa KaTeX — hisabati yenye ubora wa LaTeX katika kivinjari chako."
+        },
+        {
+          "icon": "⬇",
+          "title": "Vipakuliwa vya PDF",
+          "body": "Kila sura inapatikana kupakuliwa kama PDF kwa kujifunza bila mtandao."
+        },
+        {
+          "icon": "◎",
+          "title": "Ufikiaji wazi na wa bure",
+          "body": "Maandishi yote yanapatikana bure mtandaoni. Hakuna usajili wala ada ya uanachama."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "MADA",
+      "title": "Mada zote",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "SOMO",
+      "themeLabel": "MADA",
+      "lessonLabel": "SOMO",
+      "downloadPdf": "↓ Pakua PDF",
+      "breadcrumbHome": "Mwanzo",
+      "breadcrumbChapters": "Mada",
+      "breadcrumbThemes": "Mada",
+      "prev": "← Iliyotangulia",
+      "next": "Inayofuata →",
+      "noteTitle": "Tanbihi:",
+      "noteBody": "Hiki ni kipande cha hakikisho. Pakua PDF kamili kupata sura nzima, mazoezi na suluhisho.",
+      "tabOnline": "Soma mtandaoni",
+      "tabReferences": "Marejeo",
+      "tocTitle": "Yaliyomo",
+      "showToc": "Onyesha yaliyomo",
+      "hideToc": "Ficha yaliyomo",
+      "refsEmpty": "Bado hakuna marejeo yaliyoongezwa kwa somo hili.",
+      "refsEnglishTitle": "Marejeo ya Kiingereza",
+      "refsFrenchTitle": "Marejeo ya Kifaransa",
+      "refsSectionEmpty": "Bado hakuna kiungo kilichoongezwa katika sehemu hii.",
+      "contentUnavailable": "Maudhui ya somo hili bado hayapatikani katika lugha hii.",
+      "downloadBtn": "↓ Pakua",
+      "noLessonTitle": "Hakuna somo linalopatikana",
+      "noLessonBody": "Mada hii ipo katika muundo wa kitabu, lakini maudhui ya somo lake bado hayajachapishwa.",
+      "readTime": "Muda wa kusoma: {time}"
+    },
+    "about": {
+      "label": "KUHUSU KITABU",
+      "aboutBookTitle": "Kuhusu kitabu hiki",
+      "bookDetails": "Maelezo ya kitabu",
+      "detailLabels": {
+        "author": "Mwandishi",
+        "affiliation": "Taasisi",
+        "edition": "Toleo",
+        "year": "Mwaka"
+      },
+      "authorTitle": "Kuhusu mwandishi",
+      "authorBioSuffix": "ni mwanafizikia katika",
+      "authorBioRest": "Utafiti wake unahusu sheria za uvutano, mekanika ya kwanta na misingi yake, pamoja na urejeshi wa kialama kama kazi ya ujifunzaji wa mashine. Kitabu hiki kimetokana na noti za mihadhara zilizoendelezwa katika miaka mingi ya ufundishaji wa ngazi za juu.",
+      "authorLinksHeading": "Viungo",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "Kuhusu mradi",
+      "aboutProjectLead": "Tovuti hii na kitabu hiki bado vinaendelezwa. Masomo na mazoezi yatachapishwa hatua kwa hatua.",
+      "aboutProjectOutlineLabel": "Maudhui yaliyopangwa:",
+      "aboutProjectOutlineBody": "Sehemu I, mifumo iliyotengwa: mfumo wa kihisabati (fizikia ya kihisabati), postuleti, matumizi ya msingi. Sehemu II, mifumo inayoingiliana: mfungamano wa kwanta, upotevu wa mshikamano wa kwanta, nadharia ya upimaji. Sehemu III: tafsiri za mekanika ya kwanta na nadharia mbadala. Sehemu IV: taarifa za kwanta, algoriti za kwanta. Sehemu V: uvutano wa kwanta.",
+      "aboutBookBody2": "Maandishi yanajenga mekanika ya kwanta kutoka kanuni za kwanza, yakidhani msingi imara wa mekanika ya kawaida, elektrodinamika na hisabati. Uthibitisho unatolewa kikamilifu pale unapofafanua fizikia, na mifano mingi iliyotatuliwa inakamilisha maelezo ya kinadharia.",
+      "translationWarning": "Kitabu hiki kimeandikwa hasa kwa Kifaransa. Tafsiri zimeandaliwa kwa msaada wa akili bandia na zinaweza kuwa na makosa; maandishi ya Kifaransa ndiyo rejea.",
+      "sameAuthorTitle": "Kutoka kwa mwandishi huyu",
+      "sameAuthorBody": "Termodinamika — Msingi na ya Juu, kozi inayokamilisha kitabu hiki kuhusu termodinamika.",
+      "sameAuthorLink": "Soma kwenye learnthermo.org"
+    },
+    "footer": {
+      "navigation": "Urambazaji",
+      "home": "Mwanzo",
+      "allChapters": "Mada zote",
+      "exercises": "Mazoezi",
+      "aboutBook": "Kuhusu kitabu",
+      "author": "Mwandishi",
+      "copyright": "© {year} {author}. Haki zote zimehifadhiwa."
+    },
+    "common": {
+      "language": "Lugha",
+      "lightMode": "Tumia hali angavu",
+      "darkMode": "Tumia hali ya giza",
+      "toggleMenu": "Fungua au funga menyu",
+      "backToTop": "Rudi juu",
+      "translationPending": "Tafsiri inaandaliwa",
+      "contentUnavailable": "Maudhui haya bado hayapatikani katika lugha hii.",
+      "mathTheme": "Mada ya hisabati",
+      "physicsTheme": "Mada ya fizikia",
+      "revisionSheets": "Karatasi za marudio",
+      "lesson": "Somo",
+      "sheet": "Karatasi",
+      "theme": "Mada",
+      "quizPending": "Majaribio ya mekanika ya kwanta yanaandaliwa.",
+      "notFoundTitle": "Ukurasa haujapatikana",
+      "notFoundBody": "Ukurasa huu haupo au haupatikani kwa sasa.",
+      "backHome": "Rudi mwanzo"
+    },
+    "glossary": {
+      "title": "Faharasa ya maneno muhimu",
+      "subtitle": "Bofya neno muhimu kuona masomo yote yanayolitumia.",
+      "allKeywords": "Maneno muhimu yote",
+      "relatedLessons": "Masomo yanayohusiana",
+      "noResult": "Hakuna neno muhimu lililopatikana kwa kichujio hiki."
+    },
+    "exercises": {
+      "title": "Mazoezi yenye suluhisho",
+      "subtitle": "Maktaba ya mazoezi: tafuta kwa kichwa au maneno muhimu, au vinjari kwa mada ya kitabu.",
+      "themePrefix": "Mada",
+      "open": "Fungua mfululizo →",
+      "comingSoon": "Yanakuja",
+      "searchPlaceholder": "Tafuta (kichwa, maneno muhimu)…",
+      "searchLabel": "Tafuta katika maktaba",
+      "byTheme": "Kwa mada",
+      "noMatch": "Hakuna zoezi linalolingana na utafutaji huu.",
+      "keywordsLabel": "Maneno muhimu",
+      "exercisePrefix": "Zoezi",
+      "pdfFull": "Mazoezi yote ya mada — maswali, vidokezo na suluhisho (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "maswali + suluhisho",
+      "unavailable": "Bado hakuna mazoezi katika lugha hii.",
+      "themeUnavailable": "Mazoezi ya mada hii bado hayapatikani katika lugha hii.",
+      "exerciseUnavailable": "Zoezi hili bado halipatikani katika lugha hii.",
+      "back": "← Mazoezi",
+      "backTheme": "← Mazoezi yote ya mada",
+      "backLibrary": "← Maktaba ya mazoezi",
+      "listIntro": "Chagua zoezi kufungua swali na suluhisho lake."
+    },
+    "blocks": {
+      "theorem": "Nadharia",
+      "definition": "Ufafanuzi",
+      "lemma": "Lema",
+      "proposition": "Pendekezo",
+      "corollary": "Tokeo",
+      "remark": "Angalizo",
+      "example": "Mfano",
+      "proof": "Uthibitisho",
+      "summary": "Muhtasari",
+      "exercise": "Zoezi",
+      "hint": "Kidokezo",
+      "solution": "Suluhisho",
+      "further": "Kwa undani zaidi",
+      "figure": "Kielelezo",
+      "figureSource": "Kielelezo kutoka",
+      "openPdf": "Fungua kielelezo cha PDF",
+      "question": "Swali",
+      "note": "Tanbihi",
+      "important": "Muhimu"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "Utangulizi wa jumla na majaribio ya msingi",
+      "description": "Baadhi ya majaribio ya kihistoria yaliyoonyesha kutotosha kwa mekanika ya kawaida.",
+      "partHeading": "Sehemu I: Mifumo iliyotengwa",
+      "lessons": {
+        "introduction": {
+          "title": "Somo 1",
+          "subtitle": "Jaribio la Stern–Gerlach",
+          "description": "Utangulizi wa kimajaribio kuhusu spini, momenti ya sumaku na ukwantishaji unaoonekana katika jaribio la Stern–Gerlach.",
+          "topics": [
+            "Spini",
+            "Momenti ya sumaku",
+            "Stern–Gerlach",
+            "Precesheni ya Larmor",
+            "Ukwantishaji",
+            "Upimaji wa kwanta",
+            "Vijenzi vya spini",
+            "Boriti ya atomi",
+            "Uga wa sumaku usio sare",
+            "Projeksheni ya hali"
+          ]
+        },
+        "interference": {
+          "title": "Somo 2",
+          "subtitle": "Mwingiliano, njia na kifutio cha kwanta",
+          "description": "Interferomita ya Mach–Zehnder, superposisheni na mchanganyiko, uwekaji alama wa njia, kifutio cha kwanta, ukamilishanaji.",
+          "topics": [
+            "Mach–Zehnder",
+            "Mwingiliano",
+            "Superposisheni",
+            "Amplitudo ya uwezekano",
+            "Awamu linganishi",
+            "Njia",
+            "Uwekaji alama wa njia",
+            "Kifutio cha kwanta",
+            "Ukamilishanaji",
+            "Uchaguzi wa baadae"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Nafasi za Hilbert na uandishi wa Dirac",
+      "description": "Muundo wa nafasi za Hilbert, duali ya kitopolojia na uandishi wa Dirac katika vipimo vyenye kikomo na visivyo na kikomo.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Somo 1",
+          "subtitle": "Nafasi za Hilbert",
+          "description": "Miundo ya kihisabati: nafasi za vekta, nafasi za metriki, noma, nafasi za vekta zenye noma, zao la ndani, nafasi ya kabla ya Hilbert, nafasi ya Hilbert, msingi wa kialjebra, msingi wa Hilbert, kipimo, uainishaji, nafasi za mfano, isomofizimu",
+          "topics": [
+            "Nafasi ya Hilbert",
+            "Nafasi yenye noma",
+            "Zao la ndani la Hermiti",
+            "Kipimo cha kialjebra",
+            "Kipimo cha Hilbert",
+            "Msingi wa Hilbert",
+            "Ukamilifu",
+            "Uainishaji wa nafasi za Hilbert"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Somo 2",
+          "subtitle": "Nafasi duali, ket, bra na adjointi",
+          "description": "Ujenzi wa duali ya kitopolojia, nadharia ya uwakilishi ya Riesz, utangulizi wa ket, bra na adjointi",
+          "topics": [
+            "Duali ya kialjebra",
+            "Duali ya kitopolojia",
+            "Isomofizimu ya Riesz",
+            "Ket na bra",
+            "Vipengele vya matriki",
+            "Mtengano wa identiti",
+            "Dagger",
+            "Opereta adjointi"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Karatasi 1",
+          "subtitle": "Uandishi wa Dirac katika kipimo chenye kikomo",
+          "description": "Kanuni za kialjebra za hesabu za kwanta zinazotumika katika kipimo chochote, kisha mkusanyiko wa fomula za matriki katika kipimo chenye kikomo.",
+          "topics": [
+            "Uandishi wa Dirac",
+            "Zao la ndani la Hermiti",
+            "Adjointi",
+            "Opereta ket-bra",
+            "Utatuzi wa identiti",
+            "Kipimo chenye kikomo",
+            "Vipengele vya matriki",
+            "Trace",
+            "Transpozi konjugati",
+            "Mkusanyiko wa fomula"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Karatasi 2",
+          "subtitle": "Uandishi wa Dirac katika kipimo kisicho na kikomo",
+          "description": "Uwakilishi wa Hilbert wa mekanika ya kwanta ya chembe ya nukta, opereta za nafasi na momentamu, delta ya Dirac.",
+          "topics": [
+            "Uandishi wa Dirac",
+            "Kipimo kisicho na kikomo",
+            "Uwakilishi wa nafasi",
+            "Uwakilishi wa momentamu",
+            "Delta ya Dirac",
+            "Badiliko la Fourier",
+            "Utatuzi wa identiti",
+            "Opereta ya nafasi",
+            "Opereta ya momentamu",
+            "Ubadilishanaji wa kikanoni"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Nadharia ya opereta za mstari",
+      "description": "Topolojia ya nafasi za Hilbert, opereta za mstari zilizowekewa na zisizowekewa mipaka, nadharia ya spektra.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Somo 1",
+          "subtitle": "Topolojia ya nafasi za Hilbert",
+          "description": "Topolojia ya jumla: seti wazi na funge, muunganiko imara na dhaifu, mifuatano ya Cauchy, jumla isiyo na kikomo ya vekta, ukamilifu, msongamano, seti zilizowekewa mipaka na seti kompakt.",
+          "topics": [
+            "Topolojia imara",
+            "Topolojia dhaifu",
+            "Muunganiko imara",
+            "Muunganiko dhaifu",
+            "Ukamilifu",
+            "Mifuatano ya Cauchy",
+            "Msongamano",
+            "Nafasi ndogo za vekta",
+            "Seti zilizowekewa mipaka",
+            "Seti kompakt"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Somo 2",
+          "subtitle": "Nadharia ya opereta za mstari",
+          "description": "Ufafanuzi, kikoa, utungaji, mwendelezo na noma ya opereta za mstari katika nafasi ya Hilbert.",
+          "topics": [
+            "Opereta za mstari",
+            "Kikoa cha opereta",
+            "Utungaji wa opereta",
+            "Mwendelezo",
+            "Noma ya opereta",
+            "Adjointi",
+            "Kikoa kizito"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Somo 3",
+          "subtitle": "Opereta zilizowekewa mipaka",
+          "description": "Aljebra ya opereta zilizowekewa mipaka, opereta zilizo adjointi zenyewe na za unitari, nadharia ya spektra katika kipimo chenye kikomo.",
+          "topics": [
+            "Opereta zilizowekewa mipaka",
+            "Aljebra B(H)",
+            "Kuwa adjointi yenyewe",
+            "Opereta za unitari",
+            "Opereta za kawaida",
+            "Nadharia ya spektra"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Somo 4",
+          "subtitle": "Opereta zisizowekewa mipaka",
+          "description": "Opereta zenye kikoa kizito, ufungaji, adjointi, viendelezi vilivyo adjointi vyenyewe na vigezo vya kuwa kimsingi adjointi yenyewe.",
+          "topics": [
+            "Opereta zisizowekewa mipaka",
+            "Kikoa kizito",
+            "Ufungaji",
+            "Opereta za ulinganifu",
+            "Viendelezi vilivyo adjointi vyenyewe",
+            "Upungufu wa uadjointi"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Somo 5",
+          "subtitle": "Nadharia ya spektra",
+          "description": "Spektra na resolventi ya opereta zilizo adjointi zenyewe, kipimo cha spektra, nadharia ya jumla ya spektra na hesabu ya kifunksioni.",
+          "topics": [
+            "Spektra",
+            "Resolventi",
+            "Kipimo cha spektra",
+            "Nadharia ya spektra",
+            "Hesabu ya kifunksioni",
+            "Spektra endelevu",
+            "Spektra ya pekee"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Karatasi 1",
+          "subtitle": "Atlasi ya opereta za mstari",
+          "description": "Katalogi ya opereta kuu za mstari na sifa zake za spektra.",
+          "topics": [
+            "Opereta za mstari",
+            "Atlasi",
+            "Sifa za spektra"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Postuleti",
+      "description": "Aksioma za msingi za nadharia, tafsiri na matokeo ya kifizikia ya upimaji.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Somo 1",
+          "subtitle": "Upimaji, dinamika na ufasiri",
+          "description": "Uwasilishaji wa postuleti za kwanta, kanuni ya Born, kuporomoka kwa pakiti ya mawimbi na mlinganyo wa Schrödinger.",
+          "topics": [
+            "Postuleti",
+            "Upimaji wa kwanta",
+            "Kanuni ya Born",
+            "Mageuko ya unitari",
+            "Kuporomoka kwa pakiti ya mawimbi",
+            "Mlinganyo wa Schrödinger",
+            "Nadharia ya Ehrenfest",
+            "Superposisheni",
+            "Mfungamano wa kwanta",
+            "Kutokuwa sawa kwa Bell"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Matumizi",
+      "description": "Mbinu za hesabu na zana za opereta zinazounganisha postuleti na utabiri halisi.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Somo 1",
+          "subtitle": "Vizuizi vya potenshali",
+          "description": "Upitishaji, uakisi, upenyezaji wa kituneli na utegemezi wa nishati wa hali zinazokutana na vizuizi vya potenshali.",
+          "topics": [
+            "Athari ya kituneli",
+            "Upitishaji",
+            "Uakisi",
+            "Hali zilizotawanywa",
+            "Vigawo"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Somo 2",
+          "subtitle": "Osileta ya harmoniki",
+          "description": "Ukwantishaji wa viwango vya nishati, opereta za uundaji/uangamizaji na hali eigen za osileta ya harmoniki.",
+          "topics": [
+            "Viwango vya nishati",
+            "Ngazi za kwanta",
+            "Opereta a na a†",
+            "Hali eigen",
+            "Funksioni za mawimbi"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Somo 3",
+          "subtitle": "Spini",
+          "description": "Matriki za Pauli, upimaji wa spini, dinamika katika uga wa sumaku na matumizi kwa mifumo ya viwango viwili.",
+          "topics": [
+            "Matriki za Pauli",
+            "Spini 1/2",
+            "Upimaji",
+            "Precesheni",
+            "Mifumo ya viwango viwili"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Somo 4",
+          "subtitle": "Dinamika ya kwanta",
+          "description": "Mageuko ya unitari, mlinganyo wa Schrödinger, picha za Schrödinger/Heisenberg na propageta.",
+          "topics": [
+            "Mageuko ya unitari",
+            "Mlinganyo wa Schrödinger",
+            "Picha ya Heisenberg",
+            "Propageta",
+            "Hamiltoniani"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Mifumo inayoingiliana",
+      "description": "Hali changamani, mfungamano, miunganisho na dinamika ya mifumo ya kwanta isiyotengwa.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Upotevu wa mshikamano na upimaji wa kwanta",
+      "description": "Mpito kuelekea tabia ya kawaida, tatizo la upimaji na nafasi ya mazingira.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

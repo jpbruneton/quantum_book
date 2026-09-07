@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Mecánica Cuántica",
+      "subtitle": "",
+      "description": "Esta obra propone una formalización rigurosa de la mecánica cuántica moderna. Superando el marco de los manuales introductorios convencionales, profundiza en las herramientas esenciales de la física matemática, desde los espacios de Hilbert hasta la teoría espectral avanzada, pasando por la topología y la geometría.\n\nEste tratado se dirige a quienes buscan, más allá de la mera práctica del cálculo, comprender la necesidad lógica y el fundamento de las estructuras empleadas. El texto aborda directamente las cuestiones de interpretación, analiza en detalle el problema de la medida y de la decoherencia, y presenta las teorías alternativas y sus restricciones experimentales.\n\nDestinado a estudiantes avanzados, doctorandos e investigadores, aspira a un dominio exhaustivo de la teoría, uniendo rigor técnico y profundidad conceptual.",
+      "edition": "Primera Edición"
+    },
+    "nav": {
+      "home": "Inicio",
+      "chapters": "Temas",
+      "exercises": "Ejercicios",
+      "quiz": "Cuestionarios",
+      "glossary": "Glosario",
+      "about": "Acerca de"
+    },
+    "home": {
+      "badge": "Edición gratuita en línea",
+      "readOnline": "Leer en línea →",
+      "aboutBook": "Acerca del libro",
+      "chapterPrefix": "Cap.",
+      "themePrefix": "Tema",
+      "stats": {
+        "chapters": "Temas",
+        "edition": "Edición",
+        "format": "Formato",
+        "formatValue": "Web + PDF"
+      },
+      "contentsLabel": "Índice",
+      "exploreTitle": "Explorar los temas",
+      "readTheme": "Abrir el tema →",
+      "readLesson": "Leer la lección →",
+      "readChapter": "Leer el capítulo →",
+      "fullBookDownload": "Descargar la edición completa (próximamente)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Representación matemática completa",
+          "body": "Todas las ecuaciones se representan con KaTeX: matemáticas de calidad LaTeX en el navegador."
+        },
+        {
+          "icon": "⬇",
+          "title": "Descargas en PDF",
+          "body": "Cada capítulo está disponible para descargar en PDF y estudiar sin conexión."
+        },
+        {
+          "icon": "◎",
+          "title": "Acceso libre y gratuito",
+          "body": "Texto completo disponible gratuitamente en línea. Sin suscripción ni registro."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "TEMAS",
+      "title": "Todos los temas",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "LECCIÓN",
+      "themeLabel": "TEMA",
+      "lessonLabel": "LECCIÓN",
+      "downloadPdf": "↓ Descargar PDF",
+      "breadcrumbHome": "Inicio",
+      "breadcrumbChapters": "Temas",
+      "breadcrumbThemes": "Temas",
+      "prev": "← Anterior",
+      "next": "Siguiente →",
+      "noteTitle": "Nota:",
+      "noteBody": "Este es un extracto de vista previa. Descarga el PDF completo para acceder al capítulo íntegro, los ejercicios y las soluciones.",
+      "tabOnline": "Leer en línea",
+      "tabReferences": "Referencias",
+      "tocTitle": "Índice de contenidos",
+      "showToc": "Mostrar el índice",
+      "hideToc": "Ocultar el índice",
+      "refsEmpty": "Todavía no se han añadido referencias para esta lección.",
+      "refsEnglishTitle": "Referencias en inglés",
+      "refsFrenchTitle": "Referencias en francés",
+      "refsSectionEmpty": "Todavía no se han añadido enlaces en esta sección.",
+      "contentUnavailable": "El contenido de esta lección aún no está disponible en este idioma.",
+      "downloadBtn": "↓ Descargar",
+      "noLessonTitle": "No hay lecciones disponibles",
+      "noLessonBody": "Este tema figura en la estructura, pero el contenido de sus lecciones aún no se ha publicado.",
+      "readTime": "{time} de lectura"
+    },
+    "about": {
+      "label": "ACERCA DEL LIBRO",
+      "aboutBookTitle": "Acerca de este libro",
+      "bookDetails": "Datos del libro",
+      "detailLabels": {
+        "author": "Autor",
+        "affiliation": "Institución",
+        "edition": "Edición",
+        "year": "Año"
+      },
+      "authorTitle": "Acerca del autor",
+      "authorBioSuffix": "es físico en la",
+      "authorBioRest": "Sus intereses de investigación abarcan las leyes de la gravitación, la mecánica cuántica y sus fundamentos, así como la regresión simbólica como tarea de aprendizaje automático. Este libro nace de apuntes de cursos elaborados a lo largo de muchos años de docencia de posgrado.",
+      "authorLinksHeading": "Enlaces",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "Acerca del proyecto",
+      "aboutProjectLead": "Este sitio y esta obra están en desarrollo. Las lecciones y los ejercicios se publicarán progresivamente.",
+      "aboutProjectOutlineLabel": "Contenido previsto:",
+      "aboutProjectOutlineBody": "Parte I, sistemas aislados: formalismo matemático (física matemática), postulados, aplicaciones básicas. Parte II, sistemas en interacción: entrelazamiento, decoherencia, teoría de la medida. Parte III: interpretaciones de la mecánica cuántica y teorías alternativas. Parte IV: información cuántica, algoritmos cuánticos. Parte V: gravitación cuántica.",
+      "aboutBookBody2": "El texto desarrolla la mecánica cuántica desde los primeros principios, suponiendo una sólida formación en mecánica clásica, electrodinámica y matemáticas. Las demostraciones se presentan íntegramente cuando aclaran la física, y numerosos ejemplos resueltos complementan la exposición teórica.",
+      "translationWarning": "Este libro está escrito principalmente en francés. Las traducciones se han elaborado con ayuda de IA y pueden contener errores; el texto francés es la referencia.",
+      "sameAuthorTitle": "Del mismo autor",
+      "sameAuthorBody": "Termodinámica — Elemental y Avanzada, un curso complementario de termodinámica.",
+      "sameAuthorLink": "Leer en learnthermo.org"
+    },
+    "footer": {
+      "navigation": "Navegación",
+      "home": "Inicio",
+      "allChapters": "Todos los temas",
+      "exercises": "Ejercicios",
+      "aboutBook": "Acerca del libro",
+      "author": "Autor",
+      "copyright": "© {year} {author}. Todos los derechos reservados."
+    },
+    "common": {
+      "language": "Idioma",
+      "lightMode": "Cambiar al modo claro",
+      "darkMode": "Cambiar al modo oscuro",
+      "toggleMenu": "Abrir o cerrar el menú",
+      "backToTop": "Volver arriba",
+      "translationPending": "Traducción en preparación",
+      "contentUnavailable": "Este contenido aún no está disponible en este idioma.",
+      "mathTheme": "Tema matemático",
+      "physicsTheme": "Tema físico",
+      "revisionSheets": "Fichas de repaso",
+      "lesson": "Lección",
+      "sheet": "Ficha",
+      "theme": "Tema",
+      "quizPending": "Los cuestionarios de mecánica cuántica están en preparación.",
+      "notFoundTitle": "Página no encontrada",
+      "notFoundBody": "Esta página no existe o no está disponible actualmente.",
+      "backHome": "Volver al inicio"
+    },
+    "glossary": {
+      "title": "Glosario de palabras clave",
+      "subtitle": "Haz clic en una palabra clave para ver todas las lecciones que la utilizan.",
+      "allKeywords": "Todas las palabras clave",
+      "relatedLessons": "Lecciones relacionadas",
+      "noResult": "No se han encontrado palabras clave para este filtro."
+    },
+    "exercises": {
+      "title": "Ejercicios resueltos",
+      "subtitle": "Biblioteca de ejercicios: busca por título o palabras clave, o accede por tema del libro.",
+      "themePrefix": "Tema",
+      "open": "Abrir la serie →",
+      "comingSoon": "Próximamente",
+      "searchPlaceholder": "Buscar (título, palabras clave)…",
+      "searchLabel": "Buscar en la biblioteca",
+      "byTheme": "Por tema",
+      "noMatch": "Ningún ejercicio coincide con esta búsqueda.",
+      "keywordsLabel": "Palabras clave",
+      "exercisePrefix": "Ejercicio",
+      "pdfFull": "Todos los ejercicios del tema: enunciados, indicaciones y soluciones (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "enunciados + soluciones",
+      "unavailable": "Todavía no hay ejercicios disponibles en este idioma.",
+      "themeUnavailable": "Los ejercicios de este tema aún no están disponibles en este idioma.",
+      "exerciseUnavailable": "Este ejercicio aún no está disponible en este idioma.",
+      "back": "← Ejercicios",
+      "backTheme": "← Todos los ejercicios del tema",
+      "backLibrary": "← Biblioteca de ejercicios",
+      "listIntro": "Elige un ejercicio para abrir su enunciado y su solución."
+    },
+    "blocks": {
+      "theorem": "Teorema",
+      "definition": "Definición",
+      "lemma": "Lema",
+      "proposition": "Proposición",
+      "corollary": "Corolario",
+      "remark": "Observación",
+      "example": "Ejemplo",
+      "proof": "Demostración",
+      "summary": "Resumen",
+      "exercise": "Ejercicio",
+      "hint": "Indicación",
+      "solution": "Solución",
+      "further": "Para profundizar",
+      "figure": "Figura",
+      "figureSource": "Figura tomada de",
+      "openPdf": "Abrir la figura PDF",
+      "question": "Pregunta",
+      "note": "Nota",
+      "important": "Importante"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "Introducción general y experimentos fundamentales",
+      "description": "Algunos experimentos históricos que invalidan la mecánica clásica.",
+      "partHeading": "Parte I: Sistemas aislados",
+      "lessons": {
+        "introduction": {
+          "title": "Lección n.º 1",
+          "subtitle": "Experimento de Stern y Gerlach",
+          "description": "Introducción experimental al espín, al momento magnético y a la cuantización observada en el experimento de Stern y Gerlach.",
+          "topics": [
+            "Espín",
+            "Momento magnético",
+            "Stern-Gerlach",
+            "Precesión de Larmor",
+            "Cuantización",
+            "Medida cuántica",
+            "Componentes del espín",
+            "Haz atómico",
+            "Campo magnético inhomogéneo",
+            "Proyección de estado"
+          ]
+        },
+        "interference": {
+          "title": "Lección n.º 2",
+          "subtitle": "Interferencias, caminos y borrador cuántico",
+          "description": "Interferómetro de Mach-Zehnder, superposición y mezcla, marcado de caminos, borrador cuántico, complementariedad.",
+          "topics": [
+            "Mach-Zehnder",
+            "Interferencia",
+            "Superposición",
+            "Amplitud de probabilidad",
+            "Fase relativa",
+            "Camino",
+            "Marcado de caminos",
+            "Borrador cuántico",
+            "Complementariedad",
+            "Postselección"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Espacios de Hilbert y notación de Dirac",
+      "description": "Estructura de los espacios de Hilbert, dual topológico y notación de Dirac en dimensión finita e infinita.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Lección n.º 1",
+          "subtitle": "Espacios de Hilbert",
+          "description": "Estructuras matemáticas: espacios vectoriales, espacios métricos, norma, espacios vectoriales normados, producto escalar, espacio prehilbertiano, espacio de Hilbert, base algebraica, base hilbertiana, dimensionalidad, clasificación, espacios modelo, isomorfismos",
+          "topics": [
+            "Espacio de Hilbert",
+            "Espacio normado",
+            "Producto escalar hermítico",
+            "Dimensión algebraica",
+            "Dimensión hilbertiana",
+            "Base hilbertiana",
+            "Completitud",
+            "Clasificación de los espacios de Hilbert"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Lección n.º 2",
+          "subtitle": "Espacio dual, kets, bras y adjunto",
+          "description": "Construcción del dual topológico, teorema de representación de Riesz, introducción de los kets, los bras y el adjunto",
+          "topics": [
+            "Dual algebraico",
+            "Dual topológico",
+            "Isomorfismo de Riesz",
+            "Kets y bras",
+            "Elementos de matriz",
+            "Descomposición de la identidad",
+            "Daga",
+            "Operador adjunto"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Ficha n.º 1",
+          "subtitle": "Notación de Dirac en dimensión finita",
+          "description": "Reglas algebraicas del cálculo cuántico válidas en cualquier dimensión, seguidas de un formulario matricial en dimensión finita.",
+          "topics": [
+            "Notación de Dirac",
+            "Producto escalar hermítico",
+            "Adjunto",
+            "Operador ket-bra",
+            "Resolución de la identidad",
+            "Dimensión finita",
+            "Elementos de matriz",
+            "Traza",
+            "Transposición conjugada",
+            "Formulario"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Ficha n.º 2",
+          "subtitle": "Notación de Dirac en dimensión infinita",
+          "description": "Representación hilbertiana de la mecánica cuántica de una partícula puntual, operadores posición y momento, delta de Dirac.",
+          "topics": [
+            "Notación de Dirac",
+            "Dimensión infinita",
+            "Representación de posición",
+            "Representación de momento",
+            "Delta de Dirac",
+            "Transformada de Fourier",
+            "Resolución de la identidad",
+            "Operador posición",
+            "Operador momento",
+            "Conmutación canónica"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Teoría de operadores lineales",
+      "description": "Topología de los espacios de Hilbert, operadores lineales acotados y no acotados, teoría espectral.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Lección n.º 1",
+          "subtitle": "Topología de los espacios de Hilbert",
+          "description": "Topología general: abiertos y cerrados, convergencias fuerte y débil, sucesiones de Cauchy, suma infinita de vectores, completitud, densidad, conjuntos acotados y compactos.",
+          "topics": [
+            "Topología fuerte",
+            "Topología débil",
+            "Convergencia fuerte",
+            "Convergencia débil",
+            "Completitud",
+            "Sucesiones de Cauchy",
+            "Densidad",
+            "Subespacios vectoriales",
+            "Conjuntos acotados",
+            "Conjuntos compactos"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Lección n.º 2",
+          "subtitle": "Teoría de operadores lineales",
+          "description": "Definición, dominio, composición, continuidad y norma de los operadores lineales en un espacio de Hilbert.",
+          "topics": [
+            "Operadores lineales",
+            "Dominio de un operador",
+            "Composición de operadores",
+            "Continuidad",
+            "Norma de operador",
+            "Adjunto",
+            "Dominio denso"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Lección n.º 3",
+          "subtitle": "Operadores acotados",
+          "description": "Álgebra de operadores acotados, operadores autoadjuntos y unitarios, teorema espectral en dimensión finita.",
+          "topics": [
+            "Operadores acotados",
+            "Álgebra B(H)",
+            "Autoadjunción",
+            "Operadores unitarios",
+            "Operadores normales",
+            "Teorema espectral"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Lección n.º 4",
+          "subtitle": "Operadores no acotados",
+          "description": "Operadores de dominio denso, clausura, adjunto, extensiones autoadjuntas y criterios de autoadjunción esencial.",
+          "topics": [
+            "Operadores no acotados",
+            "Dominio denso",
+            "Clausura",
+            "Operadores simétricos",
+            "Extensiones autoadjuntas",
+            "Deficiencia de adjunción"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Lección n.º 5",
+          "subtitle": "Teoría espectral",
+          "description": "Espectro y resolvente de los operadores autoadjuntos, medida espectral, teorema espectral general y cálculo funcional.",
+          "topics": [
+            "Espectro",
+            "Resolvente",
+            "Medida espectral",
+            "Teorema espectral",
+            "Cálculo funcional",
+            "Espectro continuo",
+            "Espectro discreto"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Ficha n.º 1",
+          "subtitle": "Atlas de operadores lineales",
+          "description": "Catálogo de los principales operadores lineales y de sus propiedades espectrales.",
+          "topics": [
+            "Operadores lineales",
+            "Atlas",
+            "Propiedades espectrales"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Postulados",
+      "description": "Axiomas básicos de la teoría, interpretaciones y consecuencias físicas de la medida.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Lección n.º 1",
+          "subtitle": "Medida, dinámica e interpretación",
+          "description": "Presentación de los postulados cuánticos, la regla de Born, la reducción del paquete de ondas y la ecuación de Schrödinger.",
+          "topics": [
+            "Postulados",
+            "Medida cuántica",
+            "Regla de Born",
+            "Evolución unitaria",
+            "Reducción del paquete de ondas",
+            "Ecuación de Schrödinger",
+            "Teorema de Ehrenfest",
+            "Superposición",
+            "Entrelazamiento cuántico",
+            "Desigualdades de Bell"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Aplicaciones",
+      "description": "Métodos de cálculo y herramientas operatoriales para vincular los postulados con predicciones concretas.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Lección n.º 1",
+          "subtitle": "Barreras de potencial",
+          "description": "Transmisión, reflexión, efecto túnel y dependencia energética de los estados ante barreras de potencial.",
+          "topics": [
+            "Efecto túnel",
+            "Transmisión",
+            "Reflexión",
+            "Estados dispersados",
+            "Coeficientes"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Lección n.º 2",
+          "subtitle": "Oscilador armónico",
+          "description": "Cuantización de los niveles de energía, operadores de creación y aniquilación, y estados propios del oscilador armónico.",
+          "topics": [
+            "Niveles de energía",
+            "Escaleras cuánticas",
+            "Operadores a y a†",
+            "Estados propios",
+            "Funciones de onda"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Lección n.º 3",
+          "subtitle": "Espín",
+          "description": "Matrices de Pauli, medida del espín, dinámica en un campo magnético y aplicaciones a dos niveles.",
+          "topics": [
+            "Matrices de Pauli",
+            "Espín 1/2",
+            "Medida",
+            "Precesión",
+            "Sistemas de dos niveles"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Lección n.º 4",
+          "subtitle": "Dinámica cuántica",
+          "description": "Evolución unitaria, ecuación de Schrödinger, imágenes de Schrödinger y Heisenberg, y propagadores.",
+          "topics": [
+            "Evolución unitaria",
+            "Ecuación de Schrödinger",
+            "Imagen de Heisenberg",
+            "Propagadores",
+            "Hamiltoniano"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Sistemas en interacción",
+      "description": "Estados compuestos, entrelazamiento, acoplamientos y dinámicas de sistemas cuánticos no aislados.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Decoherencia y medida cuántica",
+      "description": "Transición al comportamiento clásico, problema de la medida y papel del entorno.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

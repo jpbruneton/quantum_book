@@ -1,3 +1,4 @@
+import { buildAllExerciseIndexEntries } from "@/lib/exercisesLibrary.server";
 import type { Metadata } from "next";
 import { hubPageSeo } from "@/lib/hubPageSeo";
 import { localeAlternates } from "@/lib/metadataAlternates";
@@ -16,6 +17,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   return {
     title: { absolute: seo.title },
     description: seo.description,
+    robots: {index: buildAllExerciseIndexEntries(params.lang).length > 0, follow: true},
     alternates: localeAlternates(params.lang, "/exercises"),
     openGraph: {
       title: seo.title,

@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useLang } from "@/app/context/LangContext";
 
 export default function NotFound() {
+  const { lang, t } = useLang();
   return (
     <div
       style={{
@@ -34,7 +38,7 @@ export default function NotFound() {
           marginBottom: "1rem",
         }}
       >
-        Page Not Found
+        {t.common.notFoundTitle}
       </h1>
       <p
         style={{
@@ -44,10 +48,10 @@ export default function NotFound() {
           maxWidth: "400px",
         }}
       >
-        The wavefunction collapsed. This page does not exist in the observable universe.
+        {t.common.notFoundBody}
       </p>
       <Link
-        href="/en"
+        href={`/${lang}`}
         style={{
           background: "var(--amber)",
           color: "#0a0b0f",
@@ -59,7 +63,7 @@ export default function NotFound() {
           textDecoration: "none",
         }}
       >
-        Return Home
+        {t.common.backHome}
       </Link>
     </div>
   );

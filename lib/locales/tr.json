@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Kuantum Mekaniği",
+      "subtitle": "",
+      "description": "Bu kitap, modern kuantum mekaniğinin titiz bir biçimsel kuruluşunu sunar. Geleneksel giriş kitaplarının kapsamını aşarak Hilbert uzaylarından ileri spektral teoriye, topoloji ve geometriye kadar matematiksel fiziğin temel araçlarını derinlemesine inceler.\n\nBu eser, yalnızca hesap yapabilmenin ötesine geçerek kullanılan yapıların mantıksal zorunluluğunu ve temellerini kavramak isteyenlere yöneliktir. Yorumlama sorunlarını doğrudan ele alır; ölçüm ve eşevresizlik problemlerini ayrıntılı olarak incelerken alternatif teorileri ve bunların deneysel kısıtlarını da sunar.\n\nİleri düzey öğrencilere, doktora öğrencilerine ve araştırmacılara yönelik bu kitap, teknik titizliği kavramsal derinlikle birleştirerek teoriye kapsamlı bir hâkimiyet kazandırmayı amaçlar.",
+      "edition": "Birinci Baskı"
+    },
+    "nav": {
+      "home": "Ana sayfa",
+      "chapters": "Konular",
+      "exercises": "Alıştırmalar",
+      "quiz": "Testler",
+      "glossary": "Sözlük",
+      "about": "Hakkında"
+    },
+    "home": {
+      "badge": "Ücretsiz çevrimiçi baskı",
+      "readOnline": "Çevrimiçi oku →",
+      "aboutBook": "Kitap hakkında",
+      "chapterPrefix": "Böl.",
+      "themePrefix": "Konu",
+      "stats": {
+        "chapters": "Konular",
+        "edition": "Baskı",
+        "format": "Biçim",
+        "formatValue": "Web + PDF"
+      },
+      "contentsLabel": "İçindekiler",
+      "exploreTitle": "Konuları keşfedin",
+      "readTheme": "Konuyu aç →",
+      "readLesson": "Dersi oku →",
+      "readChapter": "Bölümü oku →",
+      "fullBookDownload": "Tam baskıyı indir (yakında)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Eksiksiz matematik gösterimi",
+          "body": "Tüm denklemler KaTeX ile işlenir — tarayıcınızda LaTeX kalitesinde matematik."
+        },
+        {
+          "icon": "⬇",
+          "title": "PDF indirmeleri",
+          "body": "Çevrimdışı çalışmak için her bölüm PDF olarak indirilebilir."
+        },
+        {
+          "icon": "◎",
+          "title": "Açık ve ücretsiz erişim",
+          "body": "Tam metin çevrimiçi olarak ücretsizdir. Abonelik veya kayıt gerekmez."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "KONULAR",
+      "title": "Tüm konular",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "DERS",
+      "themeLabel": "KONU",
+      "lessonLabel": "DERS",
+      "downloadPdf": "↓ PDF indir",
+      "breadcrumbHome": "Ana sayfa",
+      "breadcrumbChapters": "Konular",
+      "breadcrumbThemes": "Konular",
+      "prev": "← Önceki",
+      "next": "Sonraki →",
+      "noteTitle": "Not:",
+      "noteBody": "Bu bir önizleme alıntısıdır. Bölümün tamamı, alıştırmalar ve çözümler için tam PDF dosyasını indirin.",
+      "tabOnline": "Çevrimiçi oku",
+      "tabReferences": "Kaynaklar",
+      "tocTitle": "İçindekiler",
+      "showToc": "İçindekileri göster",
+      "hideToc": "İçindekileri gizle",
+      "refsEmpty": "Bu ders için henüz kaynak eklenmedi.",
+      "refsEnglishTitle": "İngilizce kaynaklar",
+      "refsFrenchTitle": "Fransızca kaynaklar",
+      "refsSectionEmpty": "Bu bölüme henüz bağlantı eklenmedi.",
+      "contentUnavailable": "Bu dersin içeriği henüz bu dilde mevcut değil.",
+      "downloadBtn": "↓ İndir",
+      "noLessonTitle": "Henüz ders yok",
+      "noLessonBody": "Bu konu kitap yapısında yer alıyor, ancak ders içeriği henüz yayımlanmadı.",
+      "readTime": "{time} okuma süresi"
+    },
+    "about": {
+      "label": "KİTAP HAKKINDA",
+      "aboutBookTitle": "Bu kitap hakkında",
+      "bookDetails": "Kitap bilgileri",
+      "detailLabels": {
+        "author": "Yazar",
+        "affiliation": "Kurum",
+        "edition": "Baskı",
+        "year": "Yıl"
+      },
+      "authorTitle": "Yazar hakkında",
+      "authorBioSuffix": "şu kurumda fizikçidir:",
+      "authorBioRest": "Araştırma alanları kütleçekim yasalarını, kuantum mekaniğini ve temellerini, ayrıca bir makine öğrenmesi görevi olarak sembolik regresyonu kapsar. Bu kitap, uzun yıllar süren lisansüstü öğretim sırasında geliştirilen ders notlarından doğmuştur.",
+      "authorLinksHeading": "Bağlantılar",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "Proje hakkında",
+      "aboutProjectLead": "Bu site ve kitap geliştirme aşamasındadır. Dersler ve alıştırmalar aşamalı olarak yayımlanacaktır.",
+      "aboutProjectOutlineLabel": "Planlanan içerik:",
+      "aboutProjectOutlineBody": "Kısım I, yalıtılmış sistemler: matematiksel biçimcilik (matematiksel fizik), postülalar, temel uygulamalar. Kısım II, etkileşen sistemler: dolanıklık, eşevresizlik, ölçüm teorisi. Kısım III: kuantum mekaniğinin yorumları ve alternatif teoriler. Kısım IV: kuantum bilgisi, kuantum algoritmaları. Kısım V: kuantum kütleçekimi.",
+      "aboutBookBody2": "Metin, klasik mekanik, elektrodinamik ve matematikte sağlam bir altyapı varsayarak kuantum mekaniğini ilk ilkelerden geliştirir. Fiziği aydınlattıkları durumlarda ispatlar eksiksiz verilir; çok sayıda çözümlü örnek kuramsal anlatımı tamamlar.",
+      "translationWarning": "Bu kitap esas olarak Fransızca yazılmıştır. Çeviriler yapay zekâ yardımıyla hazırlanmıştır ve hata içerebilir; Fransızca metin esas alınmalıdır.",
+      "sameAuthorTitle": "Aynı yazardan",
+      "sameAuthorBody": "Termodinamik — Temel ve İleri, termodinamik üzerine tamamlayıcı bir ders kitabı.",
+      "sameAuthorLink": "learnthermo.org üzerinde okuyun"
+    },
+    "footer": {
+      "navigation": "Gezinme",
+      "home": "Ana sayfa",
+      "allChapters": "Tüm konular",
+      "exercises": "Alıştırmalar",
+      "aboutBook": "Kitap hakkında",
+      "author": "Yazar",
+      "copyright": "© {year} {author}. Tüm hakları saklıdır."
+    },
+    "common": {
+      "language": "Dil",
+      "lightMode": "Açık moda geç",
+      "darkMode": "Koyu moda geç",
+      "toggleMenu": "Menüyü aç veya kapat",
+      "backToTop": "Başa dön",
+      "translationPending": "Çeviri hazırlanıyor",
+      "contentUnavailable": "Bu içerik henüz bu dilde mevcut değil.",
+      "mathTheme": "Matematik konusu",
+      "physicsTheme": "Fizik konusu",
+      "revisionSheets": "Tekrar föyleri",
+      "lesson": "Ders",
+      "sheet": "Föy",
+      "theme": "Konu",
+      "quizPending": "Kuantum mekaniği testleri hazırlanıyor.",
+      "notFoundTitle": "Sayfa bulunamadı",
+      "notFoundBody": "Bu sayfa mevcut değil veya şu anda kullanılamıyor.",
+      "backHome": "Ana sayfaya dön"
+    },
+    "glossary": {
+      "title": "Anahtar kelimeler sözlüğü",
+      "subtitle": "Bir anahtar kelimeyi kullanan tüm dersleri görmek için kelimeye tıklayın.",
+      "allKeywords": "Tüm anahtar kelimeler",
+      "relatedLessons": "İlgili dersler",
+      "noResult": "Bu filtreye uygun anahtar kelime bulunamadı."
+    },
+    "exercises": {
+      "title": "Çözümlü alıştırmalar",
+      "subtitle": "Alıştırma kütüphanesi: başlık veya anahtar kelimeyle arayın ya da kitaptaki konuya göre göz atın.",
+      "themePrefix": "Konu",
+      "open": "Seriyi aç →",
+      "comingSoon": "Yakında",
+      "searchPlaceholder": "Ara (başlık, anahtar kelimeler)…",
+      "searchLabel": "Kütüphanede ara",
+      "byTheme": "Konuya göre",
+      "noMatch": "Bu aramayla eşleşen alıştırma yok.",
+      "keywordsLabel": "Anahtar kelimeler",
+      "exercisePrefix": "Alıştırma",
+      "pdfFull": "Konunun tüm alıştırmaları — sorular, ipuçları ve çözümler (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "sorular + çözümler",
+      "unavailable": "Bu dilde henüz alıştırma yok.",
+      "themeUnavailable": "Bu konunun alıştırmaları henüz bu dilde mevcut değil.",
+      "exerciseUnavailable": "Bu alıştırma henüz bu dilde mevcut değil.",
+      "back": "← Alıştırmalar",
+      "backTheme": "← Konunun tüm alıştırmaları",
+      "backLibrary": "← Alıştırma kütüphanesi",
+      "listIntro": "Sorusunu ve çözümünü açmak için bir alıştırma seçin."
+    },
+    "blocks": {
+      "theorem": "Teorem",
+      "definition": "Tanım",
+      "lemma": "Lemma",
+      "proposition": "Önerme",
+      "corollary": "Sonuç",
+      "remark": "Açıklama",
+      "example": "Örnek",
+      "proof": "İspat",
+      "summary": "Özet",
+      "exercise": "Alıştırma",
+      "hint": "İpucu",
+      "solution": "Çözüm",
+      "further": "Daha ileri okumalar",
+      "figure": "Şekil",
+      "figureSource": "Şeklin alındığı kaynak:",
+      "openPdf": "PDF şekli aç",
+      "question": "Soru",
+      "note": "Not",
+      "important": "Önemli"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "Genel giriş ve temel deneyler",
+      "description": "Klasik mekaniği geçersiz kılan bazı tarihsel deneyler.",
+      "partHeading": "Kısım I: Yalıtılmış sistemler",
+      "lessons": {
+        "introduction": {
+          "title": "Ders 1",
+          "subtitle": "Stern–Gerlach deneyi",
+          "description": "Stern–Gerlach deneyinde gözlenen spin, manyetik moment ve kuantalanmaya deneysel giriş.",
+          "topics": [
+            "Spin",
+            "Manyetik moment",
+            "Stern–Gerlach",
+            "Larmor presesyonu",
+            "Kuantalanma",
+            "Kuantum ölçümü",
+            "Spin bileşenleri",
+            "Atom demeti",
+            "Homojen olmayan manyetik alan",
+            "Durum izdüşümü"
+          ]
+        },
+        "interference": {
+          "title": "Ders 2",
+          "subtitle": "Girişim, yollar ve kuantum silgisi",
+          "description": "Mach–Zehnder girişimölçeri, süperpozisyon ve karışım, yol işaretleme, kuantum silgisi, tamamlayıcılık.",
+          "topics": [
+            "Mach–Zehnder",
+            "Girişim",
+            "Süperpozisyon",
+            "Olasılık genliği",
+            "Göreli faz",
+            "Yol",
+            "Yol işaretleme",
+            "Kuantum silgisi",
+            "Tamamlayıcılık",
+            "Sonradan seçilim"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Hilbert uzayları ve Dirac gösterimi",
+      "description": "Hilbert uzaylarının yapısı, topolojik dual ve sonlu ile sonsuz boyutta Dirac gösterimi.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Ders 1",
+          "subtitle": "Hilbert uzayları",
+          "description": "Matematiksel yapılar: vektör uzayları, metrik uzaylar, norm, normlu vektör uzayları, iç çarpım, ön-Hilbert uzayı, Hilbert uzayı, cebirsel baz, Hilbert bazı, boyut, sınıflandırma, model uzaylar, izomorfizmler",
+          "topics": [
+            "Hilbert uzayı",
+            "Normlu uzay",
+            "Hermit iç çarpımı",
+            "Cebirsel boyut",
+            "Hilbert boyutu",
+            "Hilbert bazı",
+            "Tamlık",
+            "Hilbert uzaylarının sınıflandırılması"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Ders 2",
+          "subtitle": "Dual uzay, ketler, bralar ve eşlenik",
+          "description": "Topolojik dualin kuruluşu, Riesz temsil teoremi, ketlere, bralara ve eşleniğe giriş",
+          "topics": [
+            "Cebirsel dual",
+            "Topolojik dual",
+            "Riesz izomorfizmi",
+            "Ketler ve bralar",
+            "Matris elemanları",
+            "Birim operatörün ayrışımı",
+            "Dagger",
+            "Eşlenik operatör"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Föy 1",
+          "subtitle": "Sonlu boyutta Dirac gösterimi",
+          "description": "Her boyutta geçerli kuantum hesabının cebirsel kuralları ve ardından sonlu boyutta matris formülleri.",
+          "topics": [
+            "Dirac gösterimi",
+            "Hermit iç çarpımı",
+            "Eşlenik",
+            "Ket-bra operatörü",
+            "Birim operatörün açılımı",
+            "Sonlu boyut",
+            "Matris elemanları",
+            "İz",
+            "Eşlenik transpoz",
+            "Formül özeti"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Föy 2",
+          "subtitle": "Sonsuz boyutta Dirac gösterimi",
+          "description": "Noktasal parçacığın kuantum mekaniğinin Hilbert uzayı temsili, konum ve momentum operatörleri, Dirac deltası.",
+          "topics": [
+            "Dirac gösterimi",
+            "Sonsuz boyut",
+            "Konum temsili",
+            "Momentum temsili",
+            "Dirac deltası",
+            "Fourier dönüşümü",
+            "Birim operatörün açılımı",
+            "Konum operatörü",
+            "Momentum operatörü",
+            "Kanonik komütasyon"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Lineer operatörler teorisi",
+      "description": "Hilbert uzaylarının topolojisi, sınırlı ve sınırsız lineer operatörler, spektral teori.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Ders 1",
+          "subtitle": "Hilbert uzaylarının topolojisi",
+          "description": "Genel topoloji: açık ve kapalı kümeler, güçlü ve zayıf yakınsama, Cauchy dizileri, sonsuz vektör toplamı, tamlık, yoğunluk, sınırlı ve kompakt kümeler.",
+          "topics": [
+            "Güçlü topoloji",
+            "Zayıf topoloji",
+            "Güçlü yakınsama",
+            "Zayıf yakınsama",
+            "Tamlık",
+            "Cauchy dizileri",
+            "Yoğunluk",
+            "Vektör altuzayları",
+            "Sınırlı kümeler",
+            "Kompakt kümeler"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Ders 2",
+          "subtitle": "Lineer operatörler teorisi",
+          "description": "Hilbert uzayında lineer operatörlerin tanımı, tanım kümesi, bileşkesi, sürekliliği ve normu.",
+          "topics": [
+            "Lineer operatörler",
+            "Operatörün tanım kümesi",
+            "Operatörlerin bileşkesi",
+            "Süreklilik",
+            "Operatör normu",
+            "Eşlenik",
+            "Yoğun tanım kümesi"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Ders 3",
+          "subtitle": "Sınırlı operatörler",
+          "description": "Sınırlı operatörler cebiri, kendine eşlenik ve üniter operatörler, sonlu boyutta spektral teorem.",
+          "topics": [
+            "Sınırlı operatörler",
+            "B(H) cebiri",
+            "Kendine eşleniklik",
+            "Üniter operatörler",
+            "Normal operatörler",
+            "Spektral teorem"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Ders 4",
+          "subtitle": "Sınırsız operatörler",
+          "description": "Yoğun tanımlı operatörler, kapanış, eşlenik, kendine eşlenik genişletmeler ve esasen kendine eşleniklik ölçütleri.",
+          "topics": [
+            "Sınırsız operatörler",
+            "Yoğun tanım kümesi",
+            "Kapanış",
+            "Simetrik operatörler",
+            "Kendine eşlenik genişletmeler",
+            "Eşleniklik eksikliği"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Ders 5",
+          "subtitle": "Spektral teori",
+          "description": "Kendine eşlenik operatörlerin spektrumu ve rezolventi, spektral ölçü, genel spektral teorem ve fonksiyonel hesap.",
+          "topics": [
+            "Spektrum",
+            "Rezolvent",
+            "Spektral ölçü",
+            "Spektral teorem",
+            "Fonksiyonel hesap",
+            "Sürekli spektrum",
+            "Ayrık spektrum"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Föy 1",
+          "subtitle": "Lineer operatörler atlası",
+          "description": "Başlıca lineer operatörlerin ve spektral özelliklerinin kataloğu.",
+          "topics": [
+            "Lineer operatörler",
+            "Atlas",
+            "Spektral özellikler"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Postülalar",
+      "description": "Teorinin temel aksiyomları, yorumlar ve ölçümün fiziksel sonuçları.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Ders 1",
+          "subtitle": "Ölçüm, dinamik ve yorum",
+          "description": "Kuantum postülalarının, Born kuralının, dalga paketinin çökmesinin ve Schrödinger denkleminin sunumu.",
+          "topics": [
+            "Postülalar",
+            "Kuantum ölçümü",
+            "Born kuralı",
+            "Üniter evrim",
+            "Dalga paketinin çökmesi",
+            "Schrödinger denklemi",
+            "Ehrenfest teoremi",
+            "Süperpozisyon",
+            "Kuantum dolanıklığı",
+            "Bell eşitsizlikleri"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Uygulamalar",
+      "description": "Postülaları somut öngörülere bağlayan hesap yöntemleri ve operatör araçları.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Ders 1",
+          "subtitle": "Potansiyel engelleri",
+          "description": "Potansiyel engelleri karşısında durumların iletimi, yansıması, tünellemesi ve enerjiye bağımlılığı.",
+          "topics": [
+            "Tünelleme",
+            "İletim",
+            "Yansıma",
+            "Saçılma durumları",
+            "Katsayılar"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Ders 2",
+          "subtitle": "Harmonik osilatör",
+          "description": "Enerji düzeylerinin kuantalanması, yaratma/yok etme operatörleri ve harmonik osilatörün özdurumları.",
+          "topics": [
+            "Enerji düzeyleri",
+            "Kuantum merdivenleri",
+            "a ve a† operatörleri",
+            "Özdurumlar",
+            "Dalga fonksiyonları"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Ders 3",
+          "subtitle": "Spin",
+          "description": "Pauli matrisleri, spin ölçümü, manyetik alandaki dinamik ve iki düzeyli sistemlere uygulamalar.",
+          "topics": [
+            "Pauli matrisleri",
+            "Spin 1/2",
+            "Ölçüm",
+            "Presesyon",
+            "İki düzeyli sistemler"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Ders 4",
+          "subtitle": "Kuantum dinamiği",
+          "description": "Üniter evrim, Schrödinger denklemi, Schrödinger/Heisenberg resimleri ve propagatörler.",
+          "topics": [
+            "Üniter evrim",
+            "Schrödinger denklemi",
+            "Heisenberg resmi",
+            "Propagatörler",
+            "Hamiltonyen"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Etkileşen sistemler",
+      "description": "Bileşik durumlar, dolanıklık, bağlaşımlar ve yalıtılmamış kuantum sistemlerinin dinamiği.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Eşevresizlik ve kuantum ölçümü",
+      "description": "Klasik davranışa geçiş, ölçüm problemi ve çevrenin rolü.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

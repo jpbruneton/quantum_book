@@ -1,4 +1,6 @@
 import { themeSlugToCanonical } from "@/lib/themePublicSlugs";
+import type { Lang } from "@/lib/i18n";
+import { isLessonPublished } from "@/lib/publication";
 
 export interface LessonReference {
   key: string;
@@ -782,22 +784,19 @@ export function getTheme(slug: string): Theme | undefined {
   return themes.find((theme) => theme.slug === slug);
 }
 
-export function getWebThemes(): Theme[] {
+export function getWebThemes(lang?: Lang): Theme[] {
   return themes
     .filter(
       (theme) =>
         theme.display_on_web &&
         !THEME_NUMBERS_EXCLUDED_FROM_WEB.has(theme.number)
     )
-    .map((theme) => ({
-      ...theme,
-      lessons: theme.lessons.filter((lesson) => lesson.display_on_web),
-    }));
+    .map(theme => ({...theme, lessons: theme.lessons.filter(lesson => lesson.display_on_web && (!lang || isLessonPublished(lesson.texFile, lang)))}));
 }
 
-export function getWebTheme(slug: string): Theme | undefined {
+export function getWebTheme(slug: string, lang?: Lang): Theme | undefined {
   const canonicalSlug = themeSlugToCanonical(slug);
-  return getWebThemes().find((theme) => theme.slug === canonicalSlug);
+  return getWebThemes(lang).find((theme) => theme.slug === canonicalSlug);
 }
 
 export function getTotalLessonsCount(): number {

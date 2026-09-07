@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "量子力学",
+      "subtitle": "",
+      "description": "本书对现代量子力学作出严格的形式化表述。它超越传统入门教材的范围，深入讨论数学物理的核心工具，从希尔伯特空间、拓扑与几何，一直到高等谱理论。\n\n本书面向希望超越单纯计算实践、理解所用结构的逻辑必然性及其基础的读者。正文直接讨论诠释问题，详细分析测量问题和退相干，同时介绍替代理论及其受到的实验约束。\n\n本书适合高年级学生、博士生和研究人员，旨在将技术上的严谨与概念上的深度相结合，帮助读者全面掌握理论。",
+      "edition": "第一版"
+    },
+    "nav": {
+      "home": "首页",
+      "chapters": "主题",
+      "exercises": "习题",
+      "quiz": "测验",
+      "glossary": "术语表",
+      "about": "关于"
+    },
+    "home": {
+      "badge": "免费在线版",
+      "readOnline": "在线阅读 →",
+      "aboutBook": "关于本书",
+      "chapterPrefix": "章",
+      "themePrefix": "主题",
+      "stats": {
+        "chapters": "主题",
+        "edition": "版本",
+        "format": "格式",
+        "formatValue": "网页 + PDF"
+      },
+      "contentsLabel": "目录",
+      "exploreTitle": "探索各个主题",
+      "readTheme": "打开主题 →",
+      "readLesson": "阅读本课 →",
+      "readChapter": "阅读本章 →",
+      "fullBookDownload": "下载完整版（即将推出）",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "完整的数学排版",
+          "body": "所有方程均使用 KaTeX 排版，在浏览器中呈现 LaTeX 品质的数学公式。"
+        },
+        {
+          "icon": "⬇",
+          "title": "PDF 下载",
+          "body": "每章均可下载为 PDF，便于离线学习。"
+        },
+        {
+          "icon": "◎",
+          "title": "开放且免费",
+          "body": "全文可免费在线阅读，无需订阅或注册。"
+        }
+      ]
+    },
+    "chapters": {
+      "label": "主题",
+      "title": "全部主题",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "课程",
+      "themeLabel": "主题",
+      "lessonLabel": "课程",
+      "downloadPdf": "↓ 下载 PDF",
+      "breadcrumbHome": "首页",
+      "breadcrumbChapters": "主题",
+      "breadcrumbThemes": "主题",
+      "prev": "← 上一项",
+      "next": "下一项 →",
+      "noteTitle": "说明：",
+      "noteBody": "这是预览节选。请下载完整 PDF，获取整章内容、习题及解答。",
+      "tabOnline": "在线阅读",
+      "tabReferences": "参考资料",
+      "tocTitle": "目录",
+      "showToc": "显示目录",
+      "hideToc": "隐藏目录",
+      "refsEmpty": "本课尚未添加参考资料。",
+      "refsEnglishTitle": "英文参考资料",
+      "refsFrenchTitle": "法文参考资料",
+      "refsSectionEmpty": "本节尚未添加链接。",
+      "contentUnavailable": "本课内容尚未提供此语言版本。",
+      "downloadBtn": "↓ 下载",
+      "noLessonTitle": "暂无可用课程",
+      "noLessonBody": "本主题已列入书籍结构，但课程内容尚未发布。",
+      "readTime": "阅读时间：{time}"
+    },
+    "about": {
+      "label": "关于本书",
+      "aboutBookTitle": "关于这本书",
+      "bookDetails": "书籍信息",
+      "detailLabels": {
+        "author": "作者",
+        "affiliation": "所属机构",
+        "edition": "版本",
+        "year": "年份"
+      },
+      "authorTitle": "关于作者",
+      "authorBioSuffix": "是一位物理学家，任职于",
+      "authorBioRest": "他的研究兴趣涵盖引力定律、量子力学及其基础，以及作为机器学习任务的符号回归。本书源于多年研究生教学中不断完善的课程讲义。",
+      "authorLinksHeading": "链接",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "关于项目",
+      "aboutProjectLead": "本网站和本书仍在编写与开发中。课程和习题将陆续发布。",
+      "aboutProjectOutlineLabel": "计划内容：",
+      "aboutProjectOutlineBody": "第一部分，孤立系统：数学形式体系（数学物理）、公设、基本应用。第二部分，相互作用系统：纠缠、退相干、测量理论。第三部分：量子力学诠释与替代理论。第四部分：量子信息、量子算法。第五部分：量子引力。",
+      "aboutBookBody2": "正文从第一性原理出发建立量子力学，假定读者具备扎实的经典力学、电动力学和数学基础。凡有助于阐明物理的证明均完整给出，并以大量详解例题补充理论论述。",
+      "translationWarning": "本书主要以法语撰写。译文借助人工智能完成，可能存在错误；应以法文原文为准。",
+      "sameAuthorTitle": "同一作者的其他作品",
+      "sameAuthorBody": "《热力学——基础与进阶》，一部配套的热力学教程。",
+      "sameAuthorLink": "在 learnthermo.org 阅读"
+    },
+    "footer": {
+      "navigation": "导航",
+      "home": "首页",
+      "allChapters": "全部主题",
+      "exercises": "习题",
+      "aboutBook": "关于本书",
+      "author": "作者",
+      "copyright": "© {year} {author}。保留所有权利。"
+    },
+    "common": {
+      "language": "语言",
+      "lightMode": "切换到浅色模式",
+      "darkMode": "切换到深色模式",
+      "toggleMenu": "打开或关闭菜单",
+      "backToTop": "返回顶部",
+      "translationPending": "翻译准备中",
+      "contentUnavailable": "此内容尚未提供此语言版本。",
+      "mathTheme": "数学主题",
+      "physicsTheme": "物理主题",
+      "revisionSheets": "复习资料",
+      "lesson": "课程",
+      "sheet": "资料",
+      "theme": "主题",
+      "quizPending": "量子力学测验正在准备中。",
+      "notFoundTitle": "找不到页面",
+      "notFoundBody": "此页面不存在或目前不可用。",
+      "backHome": "返回首页"
+    },
+    "glossary": {
+      "title": "关键词术语表",
+      "subtitle": "点击关键词，查看使用该词的全部课程。",
+      "allKeywords": "全部关键词",
+      "relatedLessons": "相关课程",
+      "noResult": "未找到符合此筛选条件的关键词。"
+    },
+    "exercises": {
+      "title": "习题与解答",
+      "subtitle": "习题库：按标题或关键词搜索，或按书中主题浏览。",
+      "themePrefix": "主题",
+      "open": "打开习题组 →",
+      "comingSoon": "即将推出",
+      "searchPlaceholder": "搜索（标题、关键词）…",
+      "searchLabel": "搜索习题库",
+      "byTheme": "按主题",
+      "noMatch": "没有与本次搜索匹配的习题。",
+      "keywordsLabel": "关键词",
+      "exercisePrefix": "习题",
+      "pdfFull": "本主题全部习题——题目、提示与解答（PDF）",
+      "pdfLabel": "PDF",
+      "pdfSub": "题目 + 解答",
+      "unavailable": "尚无此语言的习题。",
+      "themeUnavailable": "本主题习题尚未提供此语言版本。",
+      "exerciseUnavailable": "本题尚未提供此语言版本。",
+      "back": "← 习题",
+      "backTheme": "← 本主题全部习题",
+      "backLibrary": "← 习题库",
+      "listIntro": "选择一道习题，打开题目及其解答。"
+    },
+    "blocks": {
+      "theorem": "定理",
+      "definition": "定义",
+      "lemma": "引理",
+      "proposition": "命题",
+      "corollary": "推论",
+      "remark": "注",
+      "example": "例",
+      "proof": "证明",
+      "summary": "小结",
+      "exercise": "习题",
+      "hint": "提示",
+      "solution": "解答",
+      "further": "进一步探讨",
+      "figure": "图",
+      "figureSource": "图片来源：",
+      "openPdf": "打开 PDF 图片",
+      "question": "问题",
+      "note": "注释",
+      "important": "重要"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "总论与奠基性实验",
+      "description": "几个否定经典力学普遍适用性的历史实验。",
+      "partHeading": "第一部分：孤立系统",
+      "lessons": {
+        "introduction": {
+          "title": "第 1 课",
+          "subtitle": "斯特恩–盖拉赫实验",
+          "description": "通过斯特恩–盖拉赫实验介绍自旋、磁矩以及实验中观察到的量子化。",
+          "topics": [
+            "自旋",
+            "磁矩",
+            "斯特恩–盖拉赫",
+            "拉莫尔进动",
+            "量子化",
+            "量子测量",
+            "自旋分量",
+            "原子束",
+            "非均匀磁场",
+            "态投影"
+          ]
+        },
+        "interference": {
+          "title": "第 2 课",
+          "subtitle": "干涉、路径与量子擦除",
+          "description": "马赫–曾德尔干涉仪、叠加与混合、路径标记、量子擦除、互补性。",
+          "topics": [
+            "马赫–曾德尔",
+            "干涉",
+            "叠加",
+            "概率幅",
+            "相对相位",
+            "路径",
+            "路径标记",
+            "量子擦除",
+            "互补性",
+            "后选择"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "希尔伯特空间与狄拉克记号",
+      "description": "希尔伯特空间的结构、拓扑对偶，以及有限维和无限维中的狄拉克记号。",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "第 1 课",
+          "subtitle": "希尔伯特空间",
+          "description": "数学结构：向量空间、度量空间、范数、赋范向量空间、内积、预希尔伯特空间、希尔伯特空间、代数基、希尔伯特基、维数、分类、模型空间、同构",
+          "topics": [
+            "希尔伯特空间",
+            "赋范空间",
+            "厄米内积",
+            "代数维数",
+            "希尔伯特维数",
+            "希尔伯特基",
+            "完备性",
+            "希尔伯特空间的分类"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "第 2 课",
+          "subtitle": "对偶空间、右矢、左矢与伴随",
+          "description": "拓扑对偶的构造、里斯表示定理，以及右矢、左矢和伴随的引入",
+          "topics": [
+            "代数对偶",
+            "拓扑对偶",
+            "里斯同构",
+            "右矢与左矢",
+            "矩阵元",
+            "恒等算符分解",
+            "匕首记号",
+            "伴随算符"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "复习资料 1",
+          "subtitle": "有限维中的狄拉克记号",
+          "description": "适用于任意维数的量子计算代数规则，以及有限维矩阵公式汇总。",
+          "topics": [
+            "狄拉克记号",
+            "厄米内积",
+            "伴随",
+            "右矢–左矢算符",
+            "恒等算符展开",
+            "有限维",
+            "矩阵元",
+            "迹",
+            "共轭转置",
+            "公式汇总"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "复习资料 2",
+          "subtitle": "无限维中的狄拉克记号",
+          "description": "点粒子量子力学的希尔伯特空间表示、位置与动量算符、狄拉克 δ 函数。",
+          "topics": [
+            "狄拉克记号",
+            "无限维",
+            "位置表象",
+            "动量表象",
+            "狄拉克 δ 函数",
+            "傅里叶变换",
+            "恒等算符展开",
+            "位置算符",
+            "动量算符",
+            "正则对易关系"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "线性算符理论",
+      "description": "希尔伯特空间的拓扑、有界与无界线性算符、谱理论。",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "第 1 课",
+          "subtitle": "希尔伯特空间的拓扑",
+          "description": "一般拓扑：开集与闭集、强收敛与弱收敛、柯西序列、向量无穷和、完备性、稠密性、有界集与紧集。",
+          "topics": [
+            "强拓扑",
+            "弱拓扑",
+            "强收敛",
+            "弱收敛",
+            "完备性",
+            "柯西序列",
+            "稠密性",
+            "向量子空间",
+            "有界集",
+            "紧集"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "第 2 课",
+          "subtitle": "线性算符理论",
+          "description": "希尔伯特空间上线性算符的定义、定义域、复合、连续性与范数。",
+          "topics": [
+            "线性算符",
+            "算符定义域",
+            "算符复合",
+            "连续性",
+            "算符范数",
+            "伴随",
+            "稠密定义域"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "第 3 课",
+          "subtitle": "有界算符",
+          "description": "有界算符代数、自伴算符与酉算符、有限维谱定理。",
+          "topics": [
+            "有界算符",
+            "代数 B(H)",
+            "自伴性",
+            "酉算符",
+            "正规算符",
+            "谱定理"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "第 4 课",
+          "subtitle": "无界算符",
+          "description": "稠密定义的算符、闭包、伴随、自伴扩张以及本质自伴性的判据。",
+          "topics": [
+            "无界算符",
+            "稠密定义域",
+            "闭包",
+            "对称算符",
+            "自伴扩张",
+            "伴随亏缺"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "第 5 课",
+          "subtitle": "谱理论",
+          "description": "自伴算符的谱与预解式、谱测度、一般谱定理与函数演算。",
+          "topics": [
+            "谱",
+            "预解式",
+            "谱测度",
+            "谱定理",
+            "函数演算",
+            "连续谱",
+            "离散谱"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "复习资料 1",
+          "subtitle": "线性算符图鉴",
+          "description": "主要线性算符及其谱性质汇编。",
+          "topics": [
+            "线性算符",
+            "图鉴",
+            "谱性质"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "公设",
+      "description": "理论的基本公理、测量的诠释及其物理后果。",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "第 1 课",
+          "subtitle": "测量、动力学与诠释",
+          "description": "介绍量子公设、玻恩规则、波包坍缩以及薛定谔方程。",
+          "topics": [
+            "公设",
+            "量子测量",
+            "玻恩规则",
+            "酉演化",
+            "波包坍缩",
+            "薛定谔方程",
+            "埃伦费斯特定理",
+            "叠加",
+            "量子纠缠",
+            "贝尔不等式"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "应用",
+      "description": "将公设与具体预测联系起来的计算方法和算符工具。",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "第 1 课",
+          "subtitle": "势垒",
+          "description": "态在势垒处的透射、反射、隧穿及其能量依赖性。",
+          "topics": [
+            "隧穿效应",
+            "透射",
+            "反射",
+            "散射态",
+            "系数"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "第 2 课",
+          "subtitle": "谐振子",
+          "description": "能级量子化、产生与湮灭算符，以及谐振子的本征态。",
+          "topics": [
+            "能级",
+            "量子阶梯",
+            "算符 a 与 a†",
+            "本征态",
+            "波函数"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "第 3 课",
+          "subtitle": "自旋",
+          "description": "泡利矩阵、自旋测量、磁场中的动力学及两能级应用。",
+          "topics": [
+            "泡利矩阵",
+            "自旋 1/2",
+            "测量",
+            "进动",
+            "两能级系统"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "第 4 课",
+          "subtitle": "量子动力学",
+          "description": "酉演化、薛定谔方程、薛定谔与海森堡绘景，以及传播子。",
+          "topics": [
+            "酉演化",
+            "薛定谔方程",
+            "海森堡绘景",
+            "传播子",
+            "哈密顿量"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "相互作用系统",
+      "description": "复合态、纠缠、耦合以及非孤立量子系统的动力学。",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "退相干与量子测量",
+      "description": "向经典行为的过渡、测量问题以及环境的作用。",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

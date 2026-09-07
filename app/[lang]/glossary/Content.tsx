@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { getWebThemes } from "@/lib/chapters";
 import { chapterLessonPath } from "@/lib/lessonRoutes";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
@@ -27,12 +26,9 @@ function normalizeKeyword(value: string): string {
 }
 
 function GlossaryIntro() {
-  const { lang } = useLang();
-  const title = lang === "fr" ? "Glossaire des mots-clés" : "Keyword Glossary";
-  const subtitle =
-    lang === "fr"
-      ? "Cliquez sur un mot-clé pour voir toutes les leçons qui l'utilisent."
-      : "Click a keyword to see every lesson that uses it.";
+  const { lang, t, webThemes } = useLang();
+  const title = t.glossary.title;
+  const subtitle = t.glossary.subtitle;
 
   return (
     <div style={{ maxWidth: "850px" }}>
@@ -62,7 +58,7 @@ function GlossaryIntro() {
 }
 
 function GlossaryFilterAndList() {
-  const { lang } = useLang();
+  const { lang, t, webThemes } = useLang();
   const lp = useLocalizedPath();
   const searchParams = useSearchParams();
   const selectedKeywordRaw = searchParams.get("q") || "";
@@ -71,7 +67,7 @@ function GlossaryFilterAndList() {
 
   const glossaryItems = useMemo<GlossaryItem[]>(() => {
     const map = new Map<string, GlossaryItem>();
-    const themes = getWebThemes();
+    const themes = webThemes;
 
     for (const theme of themes) {
       for (const lesson of theme.lessons) {
@@ -97,11 +93,11 @@ function GlossaryFilterAndList() {
     }
 
     return Array.from(map.values()).sort((a, b) =>
-      a.keyword.localeCompare(b.keyword, lang === "fr" ? "fr" : "en", {
+      a.keyword.localeCompare(b.keyword, lang, {
         sensitivity: "base",
       })
     );
-  }, [lang]);
+  }, [lang, webThemes]);
 
   const filteredItems = useMemo(() => {
     if (!selectedKeywordNormalized) return glossaryItems;
@@ -110,12 +106,9 @@ function GlossaryFilterAndList() {
     );
   }, [glossaryItems, selectedKeywordNormalized]);
 
-  const allKeywordsLabel = lang === "fr" ? "Tous les mots-clés" : "All keywords";
-  const relatedLessonsLabel = lang === "fr" ? "Leçons associées" : "Related lessons";
-  const noResultLabel =
-    lang === "fr"
-      ? "Aucun mot-clé trouvé pour ce filtre."
-      : "No keyword found for this filter.";
+  const allKeywordsLabel = t.glossary.allKeywords;
+  const relatedLessonsLabel = t.glossary.relatedLessons;
+  const noResultLabel = t.glossary.noResult;
 
   return (
     <>
@@ -217,9 +210,7 @@ function GlossaryFilterAndList() {
                       fontSize: "1rem",
                     }}
                   >
-                    {lang === "fr"
-                      ? `Thème ${occurrence.themeNumber} (${occurrence.themeTitle}) - Leçon n°${occurrence.lessonNumber} : ${occurrence.lessonSubtitle}`
-                      : `Theme ${occurrence.themeNumber} (${occurrence.themeTitle}) - Lesson ${occurrence.lessonNumber}: ${occurrence.lessonSubtitle}`}
+                    {`${t.common.theme} ${occurrence.themeNumber} (${occurrence.themeTitle}) · ${t.common.lesson} ${occurrence.lessonNumber}: ${occurrence.lessonSubtitle}`}
                   </Link>
                 ))}
               </div>

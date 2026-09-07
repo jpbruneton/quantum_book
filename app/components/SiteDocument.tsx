@@ -1,3 +1,4 @@
+import { getTranslations } from "@/lib/translations.server";
 import type { Metadata } from "next";
 import { isRtlLang, type Lang } from "@/lib/i18n";
 import { fontVariables } from "@/app/fonts";
@@ -5,7 +6,6 @@ import "katex/dist/katex.min.css";
 import "../globals.css";
 import { Providers } from "../providers";
 import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
-import { isSiteLang } from "@/lib/localeRoutes";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const SITE_URL = getSiteUrl();
@@ -80,16 +80,17 @@ export const metadata: Metadata = {
 };
 
 export default function SiteDocument({ children, lang }: { children: React.ReactNode; lang: Lang }) {
+  const t = getTranslations(lang);
   return (
     <html lang={lang} dir={isRtlLang(lang) ? "rtl" : "ltr"} className={fontVariables} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({...bookJsonLd, name: t.book.title, description: t.book.description, inLanguage: lang, url: `${SITE_URL}/${lang}`}).replace(/</g, "\\u003c") }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({...websiteJsonLd, name: t.book.title, inLanguage: lang, url: `${SITE_URL}/${lang}`}).replace(/</g, "\\u003c") }}
         />
       </head>
       <body>

@@ -1,8 +1,10 @@
+import { getTranslations } from "@/lib/translations.server";
 import { processLatex } from "@/lib/latex";
 import { ContentUnavailable } from "@/app/components/ContentUnavailable";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { bookMeta, getWebTheme, getWebThemes } from "@/lib/chapters";
+import { getWebTheme, getWebThemes } from "@/lib/localizedChapters.server";
+import { bookMeta } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml, getTexWebHtmlFromSource } from "@/lib/chapterContent.server";
 import {
   extractThemeExerciseSourceById,
@@ -36,7 +38,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isSiteLang(params.lang)) return {};
-  const theme = getWebTheme(params.slug);
+  const theme = getWebTheme(params.slug, isSiteLang(params.lang) ? params.lang : undefined);
   if (!theme) return {};
   const exerciseId = exerciseSegmentToId(params.exoSegment);
   const entry = findThemeExerciseEntry(theme.number, exerciseId, params.lang);
@@ -45,10 +47,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = absoluteUrl(path);
   const titlePlain = exerciseTitleToPlainHtml(entry.titleTex).replace(/<[^>]+>/g, "");
   const isFr = params.lang === "fr";
+  const t = getTranslations(params.lang);
   const themeTitle = isFr ? theme.titleFr : theme.titleEn;
   return {
-    title: `${isFr ? "Exercice" : "Exercise"} – ${titlePlain} | ${isFr ? "Thème" : "Theme"} ${theme.number} | ${bookMeta.title}`,
-    description: `${isFr ? "Exercice corrigé" : "Solved exercise"}: ${titlePlain}. ${isFr ? "Thème" : "Theme"} ${theme.number}: ${themeTitle}.`,
+    title: `${t.exercises.exercisePrefix}: ${titlePlain} | ${t.common.theme} ${theme.number}`,
+    description: `${t.exercises.exercisePrefix}: ${titlePlain}. ${t.common.theme} ${theme.number}: ${themeTitle}.`,
     keywords: entry.keywords,
     robots: {index: entry.seoReady, follow: true},
     alternates: localeAlternates(
@@ -56,8 +59,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `/exercises/${theme.slug}/${params.exoSegment}`
     ),
     openGraph: {
-      title: `${isFr ? "Exercice" : "Exercise"} – ${titlePlain}`,
-      description: `${isFr ? "Thème" : "Theme"} ${theme.number}: ${themeTitle}`,
+      title: `${t.exercises.exercisePrefix}: ${titlePlain}`,
+      description: `${t.common.theme} ${theme.number}: ${themeTitle}`,
       url,
     },
   };
@@ -66,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function ExerciseDetailPage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
 
-  const theme = getWebTheme(params.slug);
+  const theme = getWebTheme(params.slug, isSiteLang(params.lang) ? params.lang : undefined);
   if (!theme) notFound();
 
   const exerciseId = exerciseSegmentToId(params.exoSegment);

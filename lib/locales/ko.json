@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "양자역학",
+      "subtitle": "",
+      "description": "이 책은 현대 양자역학을 엄밀하게 정식화합니다. 일반적인 입문 교재의 범위를 넘어 힐베르트 공간에서 고급 스펙트럼 이론까지, 위상과 기하를 포함한 수리물리학의 핵심 도구를 깊이 있게 다룹니다.\n\n이 책은 단순한 계산 능력을 넘어 사용되는 구조의 논리적 필연성과 기초를 이해하려는 독자를 위한 것입니다. 해석의 문제를 정면으로 다루고 측정 문제와 결어긋남을 자세히 분석하며, 대안 이론과 그에 대한 실험적 제약도 소개합니다.\n\n고급 과정 학생, 박사과정 학생, 연구자를 대상으로 하며, 기술적 엄밀성과 개념적 깊이를 결합하여 이론을 포괄적으로 익히는 것을 목표로 합니다.",
+      "edition": "초판"
+    },
+    "nav": {
+      "home": "홈",
+      "chapters": "주제",
+      "exercises": "연습문제",
+      "quiz": "퀴즈",
+      "glossary": "용어집",
+      "about": "소개"
+    },
+    "home": {
+      "badge": "무료 온라인판",
+      "readOnline": "온라인으로 읽기 →",
+      "aboutBook": "책 소개",
+      "chapterPrefix": "장",
+      "themePrefix": "주제",
+      "stats": {
+        "chapters": "주제",
+        "edition": "판",
+        "format": "형식",
+        "formatValue": "웹 + PDF"
+      },
+      "contentsLabel": "목차",
+      "exploreTitle": "주제 살펴보기",
+      "readTheme": "주제 열기 →",
+      "readLesson": "강의 읽기 →",
+      "readChapter": "장 읽기 →",
+      "fullBookDownload": "전체판 내려받기 (준비 중)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "완전한 수식 표시",
+          "body": "모든 방정식은 KaTeX로 표시됩니다. 브라우저에서 LaTeX 수준의 수식을 볼 수 있습니다."
+        },
+        {
+          "icon": "⬇",
+          "title": "PDF 내려받기",
+          "body": "각 장을 PDF로 내려받아 오프라인에서 학습할 수 있습니다."
+        },
+        {
+          "icon": "◎",
+          "title": "자유로운 무료 이용",
+          "body": "전체 본문을 온라인에서 무료로 읽을 수 있습니다. 구독이나 가입이 필요 없습니다."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "주제",
+      "title": "모든 주제",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "강의",
+      "themeLabel": "주제",
+      "lessonLabel": "강의",
+      "downloadPdf": "↓ PDF 내려받기",
+      "breadcrumbHome": "홈",
+      "breadcrumbChapters": "주제",
+      "breadcrumbThemes": "주제",
+      "prev": "← 이전",
+      "next": "다음 →",
+      "noteTitle": "참고:",
+      "noteBody": "이 내용은 미리보기 발췌문입니다. 장 전체와 연습문제 및 해설은 전체 PDF를 내려받아 확인하세요.",
+      "tabOnline": "온라인으로 읽기",
+      "tabReferences": "참고문헌",
+      "tocTitle": "목차",
+      "showToc": "목차 표시",
+      "hideToc": "목차 숨기기",
+      "refsEmpty": "이 강의에는 아직 참고문헌이 추가되지 않았습니다.",
+      "refsEnglishTitle": "영어 참고문헌",
+      "refsFrenchTitle": "프랑스어 참고문헌",
+      "refsSectionEmpty": "이 절에는 아직 링크가 추가되지 않았습니다.",
+      "contentUnavailable": "이 강의 내용은 아직 이 언어로 제공되지 않습니다.",
+      "downloadBtn": "↓ 내려받기",
+      "noLessonTitle": "제공되는 강의가 없습니다",
+      "noLessonBody": "이 주제는 책의 구성에 포함되어 있지만 강의 내용은 아직 공개되지 않았습니다.",
+      "readTime": "읽는 시간: {time}"
+    },
+    "about": {
+      "label": "책 소개",
+      "aboutBookTitle": "이 책에 관하여",
+      "bookDetails": "도서 정보",
+      "detailLabels": {
+        "author": "저자",
+        "affiliation": "소속 기관",
+        "edition": "판",
+        "year": "연도"
+      },
+      "authorTitle": "저자 소개",
+      "authorBioSuffix": "은 물리학자입니다. 소속:",
+      "authorBioRest": "그의 연구 관심사는 중력 법칙, 양자역학과 그 기초, 그리고 기계학습 과제로서의 기호 회귀를 포함합니다. 이 책은 오랜 기간 대학원에서 강의하며 발전시킨 강의 노트에서 시작되었습니다.",
+      "authorLinksHeading": "링크",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "프로젝트 소개",
+      "aboutProjectLead": "이 사이트와 책은 개발 중입니다. 강의와 연습문제는 차례로 공개됩니다.",
+      "aboutProjectOutlineLabel": "예정된 내용:",
+      "aboutProjectOutlineBody": "제 I 부, 고립계: 수학적 정식화(수리물리학), 공준, 기본 응용. 제 II 부, 상호작용하는 계: 얽힘, 결어긋남, 측정 이론. 제 III 부: 양자역학의 해석과 대안 이론. 제 IV 부: 양자 정보, 양자 알고리즘. 제 V 부: 양자 중력.",
+      "aboutBookBody2": "본문은 고전역학, 전기역학, 수학에 대한 탄탄한 배경을 전제로 첫 원리에서 양자역학을 전개합니다. 물리적 이해에 도움이 되는 증명은 빠짐없이 제시하며, 자세히 풀이한 많은 예제로 이론적 설명을 보완합니다.",
+      "translationWarning": "이 책은 주로 프랑스어로 작성되었습니다. 번역은 AI의 도움으로 작성되어 오류가 있을 수 있으며, 프랑스어 원문을 기준으로 합니다.",
+      "sameAuthorTitle": "같은 저자의 다른 책",
+      "sameAuthorBody": "열역학 — 기초와 고급, 함께 읽을 수 있는 열역학 강의서.",
+      "sameAuthorLink": "learnthermo.org에서 읽기"
+    },
+    "footer": {
+      "navigation": "탐색",
+      "home": "홈",
+      "allChapters": "모든 주제",
+      "exercises": "연습문제",
+      "aboutBook": "책 소개",
+      "author": "저자",
+      "copyright": "© {year} {author}. 모든 권리 보유."
+    },
+    "common": {
+      "language": "언어",
+      "lightMode": "밝은 모드로 전환",
+      "darkMode": "어두운 모드로 전환",
+      "toggleMenu": "메뉴 열기 또는 닫기",
+      "backToTop": "맨 위로 돌아가기",
+      "translationPending": "번역 준비 중",
+      "contentUnavailable": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+      "mathTheme": "수학 주제",
+      "physicsTheme": "물리 주제",
+      "revisionSheets": "복습 자료",
+      "lesson": "강의",
+      "sheet": "자료",
+      "theme": "주제",
+      "quizPending": "양자역학 퀴즈를 준비 중입니다.",
+      "notFoundTitle": "페이지를 찾을 수 없습니다",
+      "notFoundBody": "이 페이지는 존재하지 않거나 현재 이용할 수 없습니다.",
+      "backHome": "홈으로 돌아가기"
+    },
+    "glossary": {
+      "title": "핵심어 용어집",
+      "subtitle": "핵심어를 클릭하면 그 단어를 사용하는 모든 강의를 볼 수 있습니다.",
+      "allKeywords": "모든 핵심어",
+      "relatedLessons": "관련 강의",
+      "noResult": "이 필터에 맞는 핵심어가 없습니다."
+    },
+    "exercises": {
+      "title": "해설이 있는 연습문제",
+      "subtitle": "연습문제 모음: 제목이나 핵심어로 검색하거나 책의 주제별로 살펴보세요.",
+      "themePrefix": "주제",
+      "open": "문제집 열기 →",
+      "comingSoon": "준비 중",
+      "searchPlaceholder": "검색 (제목, 핵심어)…",
+      "searchLabel": "문제 모음 검색",
+      "byTheme": "주제별",
+      "noMatch": "이 검색에 맞는 연습문제가 없습니다.",
+      "keywordsLabel": "핵심어",
+      "exercisePrefix": "연습문제",
+      "pdfFull": "주제의 모든 연습문제 — 문제, 힌트, 해설 (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "문제 + 해설",
+      "unavailable": "이 언어로 제공되는 연습문제가 아직 없습니다.",
+      "themeUnavailable": "이 주제의 연습문제는 아직 이 언어로 제공되지 않습니다.",
+      "exerciseUnavailable": "이 연습문제는 아직 이 언어로 제공되지 않습니다.",
+      "back": "← 연습문제",
+      "backTheme": "← 주제의 모든 연습문제",
+      "backLibrary": "← 연습문제 모음",
+      "listIntro": "문제를 선택하면 문제와 해설이 열립니다."
+    },
+    "blocks": {
+      "theorem": "정리",
+      "definition": "정의",
+      "lemma": "보조정리",
+      "proposition": "명제",
+      "corollary": "따름정리",
+      "remark": "참고",
+      "example": "예제",
+      "proof": "증명",
+      "summary": "요약",
+      "exercise": "연습문제",
+      "hint": "힌트",
+      "solution": "풀이",
+      "further": "더 깊이 알아보기",
+      "figure": "그림",
+      "figureSource": "그림 출처:",
+      "openPdf": "PDF 그림 열기",
+      "question": "문항",
+      "note": "주",
+      "important": "중요"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "전체 개요와 기초를 세운 실험",
+      "description": "고전역학의 한계를 드러낸 몇 가지 역사적 실험.",
+      "partHeading": "제 I 부: 고립계",
+      "lessons": {
+        "introduction": {
+          "title": "제1강",
+          "subtitle": "슈테른–게를라흐 실험",
+          "description": "슈테른–게를라흐 실험에서 관측되는 스핀, 자기 모멘트, 양자화에 대한 실험적 입문.",
+          "topics": [
+            "스핀",
+            "자기 모멘트",
+            "슈테른–게를라흐",
+            "라머 세차 운동",
+            "양자화",
+            "양자 측정",
+            "스핀 성분",
+            "원자 빔",
+            "불균일 자기장",
+            "상태 사영"
+          ]
+        },
+        "interference": {
+          "title": "제2강",
+          "subtitle": "간섭, 경로, 양자 지우개",
+          "description": "마흐–젠더 간섭계, 중첩과 혼합, 경로 표지, 양자 지우개, 상보성.",
+          "topics": [
+            "마흐–젠더",
+            "간섭",
+            "중첩",
+            "확률 진폭",
+            "상대 위상",
+            "경로",
+            "경로 표지",
+            "양자 지우개",
+            "상보성",
+            "사후 선택"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "힐베르트 공간과 디랙 표기법",
+      "description": "힐베르트 공간의 구조, 위상적 쌍대, 유한 차원과 무한 차원의 디랙 표기법.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "제1강",
+          "subtitle": "힐베르트 공간",
+          "description": "수학적 구조: 벡터 공간, 거리 공간, 노름, 노름 벡터 공간, 내적, 전힐베르트 공간, 힐베르트 공간, 대수적 기저, 힐베르트 기저, 차원, 분류, 모형 공간, 동형사상",
+          "topics": [
+            "힐베르트 공간",
+            "노름 공간",
+            "에르미트 내적",
+            "대수적 차원",
+            "힐베르트 차원",
+            "힐베르트 기저",
+            "완비성",
+            "힐베르트 공간의 분류"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "제2강",
+          "subtitle": "쌍대 공간, 켓, 브라, 수반",
+          "description": "위상적 쌍대의 구성, 리스 표현 정리, 켓과 브라 및 수반의 도입",
+          "topics": [
+            "대수적 쌍대",
+            "위상적 쌍대",
+            "리스 동형사상",
+            "켓과 브라",
+            "행렬 원소",
+            "항등 연산자의 분해",
+            "대거",
+            "수반 연산자"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "복습 자료 1",
+          "subtitle": "유한 차원의 디랙 표기법",
+          "description": "모든 차원에서 성립하는 양자 계산의 대수적 규칙과 유한 차원 행렬 공식 모음.",
+          "topics": [
+            "디랙 표기법",
+            "에르미트 내적",
+            "수반",
+            "켓–브라 연산자",
+            "항등 연산자의 전개",
+            "유한 차원",
+            "행렬 원소",
+            "대각합",
+            "켤레 전치",
+            "공식 모음"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "복습 자료 2",
+          "subtitle": "무한 차원의 디랙 표기법",
+          "description": "점입자 양자역학의 힐베르트 공간 표현, 위치와 운동량 연산자, 디랙 델타.",
+          "topics": [
+            "디랙 표기법",
+            "무한 차원",
+            "위치 표현",
+            "운동량 표현",
+            "디랙 델타",
+            "푸리에 변환",
+            "항등 연산자의 전개",
+            "위치 연산자",
+            "운동량 연산자",
+            "정준 교환 관계"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "선형 연산자 이론",
+      "description": "힐베르트 공간의 위상, 유계 및 비유계 선형 연산자, 스펙트럼 이론.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "제1강",
+          "subtitle": "힐베르트 공간의 위상",
+          "description": "일반 위상: 열린집합과 닫힌집합, 강수렴과 약수렴, 코시 수열, 벡터의 무한합, 완비성, 조밀성, 유계집합과 콤팩트 집합.",
+          "topics": [
+            "강위상",
+            "약위상",
+            "강수렴",
+            "약수렴",
+            "완비성",
+            "코시 수열",
+            "조밀성",
+            "벡터 부분공간",
+            "유계집합",
+            "콤팩트 집합"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "제2강",
+          "subtitle": "선형 연산자 이론",
+          "description": "힐베르트 공간에서 선형 연산자의 정의, 정의역, 합성, 연속성, 노름.",
+          "topics": [
+            "선형 연산자",
+            "연산자의 정의역",
+            "연산자의 합성",
+            "연속성",
+            "연산자 노름",
+            "수반",
+            "조밀한 정의역"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "제3강",
+          "subtitle": "유계 연산자",
+          "description": "유계 연산자 대수, 자기수반 및 유니터리 연산자, 유한 차원 스펙트럼 정리.",
+          "topics": [
+            "유계 연산자",
+            "대수 B(H)",
+            "자기수반성",
+            "유니터리 연산자",
+            "정규 연산자",
+            "스펙트럼 정리"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "제4강",
+          "subtitle": "비유계 연산자",
+          "description": "조밀하게 정의된 연산자, 폐포, 수반, 자기수반 확장, 본질적 자기수반성의 판정 기준.",
+          "topics": [
+            "비유계 연산자",
+            "조밀한 정의역",
+            "폐포",
+            "대칭 연산자",
+            "자기수반 확장",
+            "수반 결손"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "제5강",
+          "subtitle": "스펙트럼 이론",
+          "description": "자기수반 연산자의 스펙트럼과 리졸벤트, 스펙트럼 측도, 일반 스펙트럼 정리, 함수적 계산.",
+          "topics": [
+            "스펙트럼",
+            "리졸벤트",
+            "스펙트럼 측도",
+            "스펙트럼 정리",
+            "함수적 계산",
+            "연속 스펙트럼",
+            "이산 스펙트럼"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "복습 자료 1",
+          "subtitle": "선형 연산자 도감",
+          "description": "주요 선형 연산자와 그 스펙트럼 성질을 정리한 목록.",
+          "topics": [
+            "선형 연산자",
+            "도감",
+            "스펙트럼 성질"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "공준",
+      "description": "이론의 기본 공리, 해석, 측정의 물리적 결과.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "제1강",
+          "subtitle": "측정, 동역학, 해석",
+          "description": "양자 공준, 보른 규칙, 파동 묶음의 붕괴, 슈뢰딩거 방정식 소개.",
+          "topics": [
+            "공준",
+            "양자 측정",
+            "보른 규칙",
+            "유니터리 시간 발전",
+            "파동 묶음의 붕괴",
+            "슈뢰딩거 방정식",
+            "에렌페스트 정리",
+            "중첩",
+            "양자 얽힘",
+            "벨 부등식"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "응용",
+      "description": "공준을 구체적인 예측과 연결하는 계산 방법과 연산자 도구.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "제1강",
+          "subtitle": "퍼텐셜 장벽",
+          "description": "퍼텐셜 장벽에서 상태의 투과, 반사, 터널링 및 에너지 의존성.",
+          "topics": [
+            "터널 효과",
+            "투과",
+            "반사",
+            "산란 상태",
+            "계수"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "제2강",
+          "subtitle": "조화 진동자",
+          "description": "에너지 준위의 양자화, 생성 및 소멸 연산자, 조화 진동자의 고유상태.",
+          "topics": [
+            "에너지 준위",
+            "양자 사다리",
+            "연산자 a와 a†",
+            "고유상태",
+            "파동함수"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "제3강",
+          "subtitle": "스핀",
+          "description": "파울리 행렬, 스핀 측정, 자기장 속 동역학, 두 준위 계에 대한 응용.",
+          "topics": [
+            "파울리 행렬",
+            "스핀 1/2",
+            "측정",
+            "세차 운동",
+            "두 준위 계"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "제4강",
+          "subtitle": "양자 동역학",
+          "description": "유니터리 시간 발전, 슈뢰딩거 방정식, 슈뢰딩거 및 하이젠베르크 묘사, 전파함수.",
+          "topics": [
+            "유니터리 시간 발전",
+            "슈뢰딩거 방정식",
+            "하이젠베르크 묘사",
+            "전파함수",
+            "해밀토니안"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "상호작용하는 계",
+      "description": "복합 상태, 얽힘, 결합, 고립되지 않은 양자계의 동역학.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "결어긋남과 양자 측정",
+      "description": "고전적 거동으로의 전이, 측정 문제, 환경의 역할.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

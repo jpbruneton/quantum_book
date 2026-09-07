@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Mechanika Kwantowa",
+      "subtitle": "",
+      "description": "Książka przedstawia ścisłe sformułowanie współczesnej mechaniki kwantowej. Wykraczając poza zakres tradycyjnych podręczników wprowadzających, szczegółowo omawia niezbędne narzędzia fizyki matematycznej: od przestrzeni Hilberta przez topologię i geometrię po zaawansowaną teorię spektralną.\n\nDzieło jest skierowane do osób, które poza samą praktyką obliczeniową chcą zrozumieć logiczną konieczność i podstawy stosowanych struktur. Tekst bezpośrednio podejmuje zagadnienia interpretacyjne, szczegółowo analizuje problem pomiaru i dekoherencję, a także przedstawia teorie alternatywne oraz ich ograniczenia doświadczalne.\n\nPrzeznaczona dla zaawansowanych studentów, doktorantów i badaczy książka ma umożliwić wszechstronne opanowanie teorii, łącząc ścisłość techniczną z głębią pojęciową.",
+      "edition": "Wydanie Pierwsze"
+    },
+    "nav": {
+      "home": "Strona główna",
+      "chapters": "Tematy",
+      "exercises": "Zadania",
+      "quiz": "Quizy",
+      "glossary": "Słownik",
+      "about": "O książce"
+    },
+    "home": {
+      "badge": "Bezpłatne wydanie online",
+      "readOnline": "Czytaj online →",
+      "aboutBook": "O książce",
+      "chapterPrefix": "Rozdz.",
+      "themePrefix": "Temat",
+      "stats": {
+        "chapters": "Tematy",
+        "edition": "Wydanie",
+        "format": "Format",
+        "formatValue": "Web + PDF"
+      },
+      "contentsLabel": "Spis treści",
+      "exploreTitle": "Poznaj tematy",
+      "readTheme": "Otwórz temat →",
+      "readLesson": "Czytaj lekcję →",
+      "readChapter": "Czytaj rozdział →",
+      "fullBookDownload": "Pobierz pełne wydanie (wkrótce)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Pełne wyświetlanie matematyki",
+          "body": "Wszystkie równania są wyświetlane za pomocą KaTeX — matematyka w jakości LaTeX w przeglądarce."
+        },
+        {
+          "icon": "⬇",
+          "title": "Pliki PDF do pobrania",
+          "body": "Każdy rozdział można pobrać jako PDF do nauki bez połączenia z internetem."
+        },
+        {
+          "icon": "◎",
+          "title": "Otwarty i bezpłatny dostęp",
+          "body": "Pełny tekst dostępny bezpłatnie online. Bez subskrypcji i rejestracji."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "TEMATY",
+      "title": "Wszystkie tematy",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "LEKCJA",
+      "themeLabel": "TEMAT",
+      "lessonLabel": "LEKCJA",
+      "downloadPdf": "↓ Pobierz PDF",
+      "breadcrumbHome": "Strona główna",
+      "breadcrumbChapters": "Tematy",
+      "breadcrumbThemes": "Tematy",
+      "prev": "← Poprzedni",
+      "next": "Następny →",
+      "noteTitle": "Uwaga:",
+      "noteBody": "To fragment poglądowy. Pobierz pełny PDF, aby uzyskać cały rozdział, zadania i rozwiązania.",
+      "tabOnline": "Czytaj online",
+      "tabReferences": "Źródła",
+      "tocTitle": "Spis treści",
+      "showToc": "Pokaż spis treści",
+      "hideToc": "Ukryj spis treści",
+      "refsEmpty": "Do tej lekcji nie dodano jeszcze źródeł.",
+      "refsEnglishTitle": "Źródła anglojęzyczne",
+      "refsFrenchTitle": "Źródła francuskojęzyczne",
+      "refsSectionEmpty": "W tej sekcji nie dodano jeszcze odnośników.",
+      "contentUnavailable": "Treść tej lekcji nie jest jeszcze dostępna w tym języku.",
+      "downloadBtn": "↓ Pobierz",
+      "noLessonTitle": "Brak dostępnych lekcji",
+      "noLessonBody": "Ten temat znajduje się w strukturze książki, ale treść jego lekcji nie została jeszcze opublikowana.",
+      "readTime": "Czas czytania: {time}"
+    },
+    "about": {
+      "label": "O KSIĄŻCE",
+      "aboutBookTitle": "O tej książce",
+      "bookDetails": "Informacje o książce",
+      "detailLabels": {
+        "author": "Autor",
+        "affiliation": "Instytucja",
+        "edition": "Wydanie",
+        "year": "Rok"
+      },
+      "authorTitle": "O autorze",
+      "authorBioSuffix": "jest fizykiem w",
+      "authorBioRest": "Jego zainteresowania badawcze obejmują prawa grawitacji, mechanikę kwantową i jej podstawy oraz regresję symboliczną jako zadanie uczenia maszynowego. Książka powstała z notatek do wykładów rozwijanych przez wiele lat nauczania na zaawansowanym poziomie akademickim.",
+      "authorLinksHeading": "Odnośniki",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "O projekcie",
+      "aboutProjectLead": "Ta witryna i książka są w trakcie opracowywania. Lekcje i zadania będą publikowane stopniowo.",
+      "aboutProjectOutlineLabel": "Planowana zawartość:",
+      "aboutProjectOutlineBody": "Część I, układy izolowane: formalizm matematyczny (fizyka matematyczna), postulaty, podstawowe zastosowania. Część II, układy oddziałujące: splątanie, dekoherencja, teoria pomiaru. Część III: interpretacje mechaniki kwantowej i teorie alternatywne. Część IV: informacja kwantowa, algorytmy kwantowe. Część V: grawitacja kwantowa.",
+      "aboutBookBody2": "Tekst rozwija mechanikę kwantową od pierwszych zasad, zakładając solidne przygotowanie z mechaniki klasycznej, elektrodynamiki i matematyki. Dowody podano w całości tam, gdzie pomagają zrozumieć fizykę, a liczne rozwiązane przykłady uzupełniają wykład teoretyczny.",
+      "translationWarning": "Książka została napisana głównie po francusku. Tłumaczenia przygotowano z pomocą AI i mogą zawierać błędy; tekst francuski jest wersją odniesienia.",
+      "sameAuthorTitle": "Tego samego autora",
+      "sameAuthorBody": "Termodynamika — Podstawowa i Zaawansowana, uzupełniający kurs termodynamiki.",
+      "sameAuthorLink": "Czytaj na learnthermo.org"
+    },
+    "footer": {
+      "navigation": "Nawigacja",
+      "home": "Strona główna",
+      "allChapters": "Wszystkie tematy",
+      "exercises": "Zadania",
+      "aboutBook": "O książce",
+      "author": "Autor",
+      "copyright": "© {year} {author}. Wszelkie prawa zastrzeżone."
+    },
+    "common": {
+      "language": "Język",
+      "lightMode": "Przełącz na tryb jasny",
+      "darkMode": "Przełącz na tryb ciemny",
+      "toggleMenu": "Otwórz lub zamknij menu",
+      "backToTop": "Wróć na górę",
+      "translationPending": "Tłumaczenie w przygotowaniu",
+      "contentUnavailable": "Ta treść nie jest jeszcze dostępna w tym języku.",
+      "mathTheme": "Temat matematyczny",
+      "physicsTheme": "Temat fizyczny",
+      "revisionSheets": "Karty powtórkowe",
+      "lesson": "Lekcja",
+      "sheet": "Karta",
+      "theme": "Temat",
+      "quizPending": "Quizy z mechaniki kwantowej są w przygotowaniu.",
+      "notFoundTitle": "Nie znaleziono strony",
+      "notFoundBody": "Ta strona nie istnieje lub jest obecnie niedostępna.",
+      "backHome": "Wróć na stronę główną"
+    },
+    "glossary": {
+      "title": "Słownik słów kluczowych",
+      "subtitle": "Kliknij słowo kluczowe, aby zobaczyć wszystkie lekcje, w których występuje.",
+      "allKeywords": "Wszystkie słowa kluczowe",
+      "relatedLessons": "Powiązane lekcje",
+      "noResult": "Nie znaleziono słów kluczowych pasujących do tego filtra."
+    },
+    "exercises": {
+      "title": "Zadania z rozwiązaniami",
+      "subtitle": "Biblioteka zadań: wyszukuj według tytułu lub słów kluczowych albo przeglądaj według tematów książki.",
+      "themePrefix": "Temat",
+      "open": "Otwórz zestaw →",
+      "comingSoon": "Wkrótce",
+      "searchPlaceholder": "Szukaj (tytuł, słowa kluczowe)…",
+      "searchLabel": "Szukaj w bibliotece",
+      "byTheme": "Według tematu",
+      "noMatch": "Żadne zadanie nie pasuje do tego zapytania.",
+      "keywordsLabel": "Słowa kluczowe",
+      "exercisePrefix": "Zadanie",
+      "pdfFull": "Wszystkie zadania z tematu — treści, wskazówki i rozwiązania (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "treści + rozwiązania",
+      "unavailable": "W tym języku nie ma jeszcze dostępnych zadań.",
+      "themeUnavailable": "Zadania z tego tematu nie są jeszcze dostępne w tym języku.",
+      "exerciseUnavailable": "To zadanie nie jest jeszcze dostępne w tym języku.",
+      "back": "← Zadania",
+      "backTheme": "← Wszystkie zadania z tematu",
+      "backLibrary": "← Biblioteka zadań",
+      "listIntro": "Wybierz zadanie, aby otworzyć jego treść i rozwiązanie."
+    },
+    "blocks": {
+      "theorem": "Twierdzenie",
+      "definition": "Definicja",
+      "lemma": "Lemat",
+      "proposition": "Stwierdzenie",
+      "corollary": "Wniosek",
+      "remark": "Uwaga",
+      "example": "Przykład",
+      "proof": "Dowód",
+      "summary": "Podsumowanie",
+      "exercise": "Zadanie",
+      "hint": "Wskazówka",
+      "solution": "Rozwiązanie",
+      "further": "Dla zainteresowanych",
+      "figure": "Rysunek",
+      "figureSource": "Rysunek pochodzi z",
+      "openPdf": "Otwórz rysunek PDF",
+      "question": "Pytanie",
+      "note": "Uwaga",
+      "important": "Ważne"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "Wprowadzenie ogólne i fundamentalne doświadczenia",
+      "description": "Wybrane historyczne doświadczenia podważające mechanikę klasyczną.",
+      "partHeading": "Część I: Układy izolowane",
+      "lessons": {
+        "introduction": {
+          "title": "Lekcja 1",
+          "subtitle": "Doświadczenie Sterna–Gerlacha",
+          "description": "Doświadczalne wprowadzenie do spinu, momentu magnetycznego i kwantowania obserwowanego w doświadczeniu Sterna–Gerlacha.",
+          "topics": [
+            "Spin",
+            "Moment magnetyczny",
+            "Stern–Gerlach",
+            "Precesja Larmora",
+            "Kwantowanie",
+            "Pomiar kwantowy",
+            "Składowe spinu",
+            "Wiązka atomowa",
+            "Niejednorodne pole magnetyczne",
+            "Rzutowanie stanu"
+          ]
+        },
+        "interference": {
+          "title": "Lekcja 2",
+          "subtitle": "Interferencja, drogi i gumka kwantowa",
+          "description": "Interferometr Macha–Zehndera, superpozycja i mieszanina, znakowanie dróg, gumka kwantowa, komplementarność.",
+          "topics": [
+            "Mach–Zehnder",
+            "Interferencja",
+            "Superpozycja",
+            "Amplituda prawdopodobieństwa",
+            "Faza względna",
+            "Droga",
+            "Znakowanie dróg",
+            "Gumka kwantowa",
+            "Komplementarność",
+            "Postselekcja"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Przestrzenie Hilberta i notacja Diraca",
+      "description": "Struktura przestrzeni Hilberta, dual topologiczny i notacja Diraca w wymiarze skończonym i nieskończonym.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Lekcja 1",
+          "subtitle": "Przestrzenie Hilberta",
+          "description": "Struktury matematyczne: przestrzenie wektorowe, przestrzenie metryczne, norma, unormowane przestrzenie wektorowe, iloczyn skalarny, przestrzeń prehilbertowska, przestrzeń Hilberta, baza algebraiczna, baza Hilberta, wymiar, klasyfikacja, przestrzenie modelowe, izomorfizmy",
+          "topics": [
+            "Przestrzeń Hilberta",
+            "Przestrzeń unormowana",
+            "Hermitowski iloczyn skalarny",
+            "Wymiar algebraiczny",
+            "Wymiar Hilberta",
+            "Baza Hilberta",
+            "Zupełność",
+            "Klasyfikacja przestrzeni Hilberta"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Lekcja 2",
+          "subtitle": "Przestrzeń dualna, kety, bra i sprzężenie",
+          "description": "Konstrukcja dualu topologicznego, twierdzenie Riesza o reprezentacji, wprowadzenie ketów, bra i sprzężenia",
+          "topics": [
+            "Dual algebraiczny",
+            "Dual topologiczny",
+            "Izomorfizm Riesza",
+            "Kety i bra",
+            "Elementy macierzowe",
+            "Rozkład operatora tożsamościowego",
+            "Dagger",
+            "Operator sprzężony"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Karta 1",
+          "subtitle": "Notacja Diraca w wymiarze skończonym",
+          "description": "Reguły algebraiczne rachunku kwantowego obowiązujące w dowolnym wymiarze, a następnie zestaw wzorów macierzowych w wymiarze skończonym.",
+          "topics": [
+            "Notacja Diraca",
+            "Hermitowski iloczyn skalarny",
+            "Sprzężenie",
+            "Operator ket-bra",
+            "Rozkład jedności",
+            "Wymiar skończony",
+            "Elementy macierzowe",
+            "Ślad",
+            "Transpozycja ze sprzężeniem",
+            "Zestaw wzorów"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Karta 2",
+          "subtitle": "Notacja Diraca w wymiarze nieskończonym",
+          "description": "Hilbertowska reprezentacja mechaniki kwantowej cząstki punktowej, operatory położenia i pędu, delta Diraca.",
+          "topics": [
+            "Notacja Diraca",
+            "Wymiar nieskończony",
+            "Reprezentacja położeniowa",
+            "Reprezentacja pędowa",
+            "Delta Diraca",
+            "Transformata Fouriera",
+            "Rozkład jedności",
+            "Operator położenia",
+            "Operator pędu",
+            "Kanoniczne relacje komutacji"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Teoria operatorów liniowych",
+      "description": "Topologia przestrzeni Hilberta, ograniczone i nieograniczone operatory liniowe, teoria spektralna.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Lekcja 1",
+          "subtitle": "Topologia przestrzeni Hilberta",
+          "description": "Topologia ogólna: zbiory otwarte i domknięte, zbieżność silna i słaba, ciągi Cauchy'ego, nieskończone sumy wektorów, zupełność, gęstość, zbiory ograniczone i zwarte.",
+          "topics": [
+            "Topologia silna",
+            "Topologia słaba",
+            "Zbieżność silna",
+            "Zbieżność słaba",
+            "Zupełność",
+            "Ciągi Cauchy'ego",
+            "Gęstość",
+            "Podprzestrzenie wektorowe",
+            "Zbiory ograniczone",
+            "Zbiory zwarte"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Lekcja 2",
+          "subtitle": "Teoria operatorów liniowych",
+          "description": "Definicja, dziedzina, składanie, ciągłość i norma operatorów liniowych w przestrzeni Hilberta.",
+          "topics": [
+            "Operatory liniowe",
+            "Dziedzina operatora",
+            "Składanie operatorów",
+            "Ciągłość",
+            "Norma operatora",
+            "Sprzężenie",
+            "Dziedzina gęsta"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Lekcja 3",
+          "subtitle": "Operatory ograniczone",
+          "description": "Algebra operatorów ograniczonych, operatory samosprzężone i unitarne, twierdzenie spektralne w wymiarze skończonym.",
+          "topics": [
+            "Operatory ograniczone",
+            "Algebra B(H)",
+            "Samosprzężoność",
+            "Operatory unitarne",
+            "Operatory normalne",
+            "Twierdzenie spektralne"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Lekcja 4",
+          "subtitle": "Operatory nieograniczone",
+          "description": "Operatory gęsto określone, domknięcie, sprzężenie, rozszerzenia samosprzężone i kryteria istotnej samosprzężoności.",
+          "topics": [
+            "Operatory nieograniczone",
+            "Dziedzina gęsta",
+            "Domknięcie",
+            "Operatory symetryczne",
+            "Rozszerzenia samosprzężone",
+            "Defekt sprzężenia"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Lekcja 5",
+          "subtitle": "Teoria spektralna",
+          "description": "Widmo i rezolwenta operatorów samosprzężonych, miara spektralna, ogólne twierdzenie spektralne i rachunek funkcyjny.",
+          "topics": [
+            "Widmo",
+            "Rezolwenta",
+            "Miara spektralna",
+            "Twierdzenie spektralne",
+            "Rachunek funkcyjny",
+            "Widmo ciągłe",
+            "Widmo dyskretne"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Karta 1",
+          "subtitle": "Atlas operatorów liniowych",
+          "description": "Katalog najważniejszych operatorów liniowych i ich własności spektralnych.",
+          "topics": [
+            "Operatory liniowe",
+            "Atlas",
+            "Własności spektralne"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Postulaty",
+      "description": "Podstawowe aksjomaty teorii, interpretacje i fizyczne konsekwencje pomiaru.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Lekcja 1",
+          "subtitle": "Pomiar, dynamika i interpretacja",
+          "description": "Przedstawienie postulatów kwantowych, reguły Borna, redukcji pakietu falowego i równania Schrödingera.",
+          "topics": [
+            "Postulaty",
+            "Pomiar kwantowy",
+            "Reguła Borna",
+            "Ewolucja unitarna",
+            "Redukcja pakietu falowego",
+            "Równanie Schrödingera",
+            "Twierdzenie Ehrenfesta",
+            "Superpozycja",
+            "Splątanie kwantowe",
+            "Nierówności Bella"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Zastosowania",
+      "description": "Metody obliczeniowe i narzędzia operatorowe łączące postulaty z konkretnymi przewidywaniami.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Lekcja 1",
+          "subtitle": "Bariery potencjału",
+          "description": "Transmisja, odbicie, tunelowanie i zależność energetyczna stanów przy barierach potencjału.",
+          "topics": [
+            "Efekt tunelowy",
+            "Transmisja",
+            "Odbicie",
+            "Stany rozproszeniowe",
+            "Współczynniki"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Lekcja 2",
+          "subtitle": "Oscylator harmoniczny",
+          "description": "Kwantowanie poziomów energii, operatory kreacji i anihilacji oraz stany własne oscylatora harmonicznego.",
+          "topics": [
+            "Poziomy energii",
+            "Drabiny kwantowe",
+            "Operatory a i a†",
+            "Stany własne",
+            "Funkcje falowe"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Lekcja 3",
+          "subtitle": "Spin",
+          "description": "Macierze Pauliego, pomiar spinu, dynamika w polu magnetycznym i zastosowania do układów dwupoziomowych.",
+          "topics": [
+            "Macierze Pauliego",
+            "Spin 1/2",
+            "Pomiar",
+            "Precesja",
+            "Układy dwupoziomowe"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Lekcja 4",
+          "subtitle": "Dynamika kwantowa",
+          "description": "Ewolucja unitarna, równanie Schrödingera, obrazy Schrödingera i Heisenberga oraz propagatory.",
+          "topics": [
+            "Ewolucja unitarna",
+            "Równanie Schrödingera",
+            "Obraz Heisenberga",
+            "Propagatory",
+            "Hamiltonian"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Układy oddziałujące",
+      "description": "Stany złożone, splątanie, sprzężenia i dynamika nieizolowanych układów kwantowych.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Dekoherencja i pomiar kwantowy",
+      "description": "Przejście do zachowania klasycznego, problem pomiaru i rola otoczenia.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

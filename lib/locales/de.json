@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Quantenmechanik",
+      "subtitle": "",
+      "description": "Dieses Buch bietet eine strenge Formulierung der modernen Quantenmechanik. Es geht über den Rahmen herkömmlicher Einführungslehrbücher hinaus und vertieft die wesentlichen Werkzeuge der mathematischen Physik: von Hilberträumen über Topologie und Geometrie bis hin zur fortgeschrittenen Spektraltheorie.\n\nDas Werk richtet sich an alle, die über die bloße Rechenpraxis hinaus die logische Notwendigkeit und die Grundlagen der verwendeten Strukturen verstehen möchten. Es behandelt Interpretationsfragen unmittelbar, analysiert das Messproblem und die Dekohärenz eingehend und stellt zugleich alternative Theorien sowie deren experimentelle Einschränkungen vor.\n\nFür fortgeschrittene Studierende, Promovierende und Forschende konzipiert, strebt es eine umfassende Beherrschung der Theorie an und verbindet technische Strenge mit begrifflicher Tiefe.",
+      "edition": "Erste Auflage"
+    },
+    "nav": {
+      "home": "Startseite",
+      "chapters": "Themen",
+      "exercises": "Übungen",
+      "quiz": "Quiz",
+      "glossary": "Glossar",
+      "about": "Über das Buch"
+    },
+    "home": {
+      "badge": "Kostenlose Onlineausgabe",
+      "readOnline": "Online lesen →",
+      "aboutBook": "Über das Buch",
+      "chapterPrefix": "Kap.",
+      "themePrefix": "Thema",
+      "stats": {
+        "chapters": "Themen",
+        "edition": "Auflage",
+        "format": "Format",
+        "formatValue": "Web + PDF"
+      },
+      "contentsLabel": "Inhalt",
+      "exploreTitle": "Themen entdecken",
+      "readTheme": "Thema öffnen →",
+      "readLesson": "Lektion lesen →",
+      "readChapter": "Kapitel lesen →",
+      "fullBookDownload": "Gesamtausgabe herunterladen (demnächst)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Vollständige mathematische Darstellung",
+          "body": "Alle Gleichungen werden mit KaTeX dargestellt — Mathematik in LaTeX-Qualität in Ihrem Browser."
+        },
+        {
+          "icon": "⬇",
+          "title": "PDF-Downloads",
+          "body": "Jedes Kapitel steht als PDF zum Herunterladen und zum Lernen ohne Internetverbindung bereit."
+        },
+        {
+          "icon": "◎",
+          "title": "Frei und kostenlos zugänglich",
+          "body": "Der vollständige Text ist kostenlos online verfügbar. Ohne Abonnement und ohne Registrierung."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "THEMEN",
+      "title": "Alle Themen",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "LEKTION",
+      "themeLabel": "THEMA",
+      "lessonLabel": "LEKTION",
+      "downloadPdf": "↓ PDF herunterladen",
+      "breadcrumbHome": "Startseite",
+      "breadcrumbChapters": "Themen",
+      "breadcrumbThemes": "Themen",
+      "prev": "← Zurück",
+      "next": "Weiter →",
+      "noteTitle": "Hinweis:",
+      "noteBody": "Dies ist ein Vorschauauszug. Laden Sie das vollständige PDF herunter, um das gesamte Kapitel mit Übungen und Lösungen zu lesen.",
+      "tabOnline": "Online lesen",
+      "tabReferences": "Literatur",
+      "tocTitle": "Inhaltsverzeichnis",
+      "showToc": "Inhaltsverzeichnis anzeigen",
+      "hideToc": "Inhaltsverzeichnis ausblenden",
+      "refsEmpty": "Für diese Lektion wurden noch keine Quellen hinzugefügt.",
+      "refsEnglishTitle": "Englischsprachige Quellen",
+      "refsFrenchTitle": "Französischsprachige Quellen",
+      "refsSectionEmpty": "In diesem Abschnitt wurden noch keine Links hinzugefügt.",
+      "contentUnavailable": "Der Inhalt dieser Lektion ist in dieser Sprache noch nicht verfügbar.",
+      "downloadBtn": "↓ Herunterladen",
+      "noLessonTitle": "Keine Lektion verfügbar",
+      "noLessonBody": "Dieses Thema ist in der Buchstruktur vorhanden, seine Lektionsinhalte wurden jedoch noch nicht veröffentlicht.",
+      "readTime": "{time} Lesezeit"
+    },
+    "about": {
+      "label": "ÜBER DAS BUCH",
+      "aboutBookTitle": "Über dieses Buch",
+      "bookDetails": "Buchangaben",
+      "detailLabels": {
+        "author": "Autor",
+        "affiliation": "Einrichtung",
+        "edition": "Auflage",
+        "year": "Jahr"
+      },
+      "authorTitle": "Über den Autor",
+      "authorBioSuffix": "ist Physiker an der",
+      "authorBioRest": "Seine Forschungsinteressen umfassen die Gravitationsgesetze, die Quantenmechanik und ihre Grundlagen sowie symbolische Regression als Aufgabe des maschinellen Lernens. Dieses Buch entstand aus Vorlesungsnotizen, die während langjähriger Lehrtätigkeit im weiterführenden Studium entwickelt wurden.",
+      "authorLinksHeading": "Links",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "Über das Projekt",
+      "aboutProjectLead": "Diese Website und dieses Buch befinden sich in Entwicklung. Lektionen und Übungen werden nach und nach veröffentlicht.",
+      "aboutProjectOutlineLabel": "Geplanter Inhalt:",
+      "aboutProjectOutlineBody": "Teil I, isolierte Systeme: mathematischer Formalismus (mathematische Physik), Postulate, grundlegende Anwendungen. Teil II, wechselwirkende Systeme: Verschränkung, Dekohärenz, Messtheorie. Teil III: Interpretationen der Quantenmechanik und alternative Theorien. Teil IV: Quanteninformation, Quantenalgorithmen. Teil V: Quantengravitation.",
+      "aboutBookBody2": "Der Text entwickelt die Quantenmechanik aus ersten Prinzipien und setzt solide Kenntnisse der klassischen Mechanik, Elektrodynamik und Mathematik voraus. Beweise werden vollständig ausgeführt, wenn sie die Physik verdeutlichen; zahlreiche durchgerechnete Beispiele ergänzen die theoretische Darstellung.",
+      "translationWarning": "Dieses Buch wurde hauptsächlich auf Französisch verfasst. Die Übersetzungen wurden mit KI-Unterstützung erstellt und können Fehler enthalten; maßgeblich ist der französische Text.",
+      "sameAuthorTitle": "Vom selben Autor",
+      "sameAuthorBody": "Thermodynamik — Elementar und Fortgeschritten, ein begleitender Kurs zur Thermodynamik.",
+      "sameAuthorLink": "Auf learnthermo.org lesen"
+    },
+    "footer": {
+      "navigation": "Navigation",
+      "home": "Startseite",
+      "allChapters": "Alle Themen",
+      "exercises": "Übungen",
+      "aboutBook": "Über das Buch",
+      "author": "Autor",
+      "copyright": "© {year} {author}. Alle Rechte vorbehalten."
+    },
+    "common": {
+      "language": "Sprache",
+      "lightMode": "Zum hellen Modus wechseln",
+      "darkMode": "Zum dunklen Modus wechseln",
+      "toggleMenu": "Menü öffnen oder schließen",
+      "backToTop": "Nach oben",
+      "translationPending": "Übersetzung in Vorbereitung",
+      "contentUnavailable": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+      "mathTheme": "Mathematisches Thema",
+      "physicsTheme": "Physikalisches Thema",
+      "revisionSheets": "Übersichtsblätter",
+      "lesson": "Lektion",
+      "sheet": "Übersichtsblatt",
+      "theme": "Thema",
+      "quizPending": "Die Quiz zur Quantenmechanik sind in Vorbereitung.",
+      "notFoundTitle": "Seite nicht gefunden",
+      "notFoundBody": "Diese Seite existiert nicht oder ist derzeit nicht verfügbar.",
+      "backHome": "Zur Startseite"
+    },
+    "glossary": {
+      "title": "Stichwortglossar",
+      "subtitle": "Klicken Sie auf ein Stichwort, um alle Lektionen anzuzeigen, in denen es vorkommt.",
+      "allKeywords": "Alle Stichwörter",
+      "relatedLessons": "Zugehörige Lektionen",
+      "noResult": "Für diesen Filter wurden keine Stichwörter gefunden."
+    },
+    "exercises": {
+      "title": "Übungen mit Lösungen",
+      "subtitle": "Übungsbibliothek: nach Titel oder Stichwörtern suchen oder nach Themen des Buches stöbern.",
+      "themePrefix": "Thema",
+      "open": "Aufgabenreihe öffnen →",
+      "comingSoon": "Demnächst",
+      "searchPlaceholder": "Suchen (Titel, Stichwörter)…",
+      "searchLabel": "Bibliothek durchsuchen",
+      "byTheme": "Nach Thema",
+      "noMatch": "Keine Übung entspricht dieser Suche.",
+      "keywordsLabel": "Stichwörter",
+      "exercisePrefix": "Übung",
+      "pdfFull": "Alle Übungen zum Thema — Aufgaben, Hinweise und Lösungen (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "Aufgaben + Lösungen",
+      "unavailable": "In dieser Sprache sind noch keine Übungen verfügbar.",
+      "themeUnavailable": "Die Übungen zu diesem Thema sind in dieser Sprache noch nicht verfügbar.",
+      "exerciseUnavailable": "Diese Übung ist in dieser Sprache noch nicht verfügbar.",
+      "back": "← Übungen",
+      "backTheme": "← Alle Übungen zum Thema",
+      "backLibrary": "← Übungsbibliothek",
+      "listIntro": "Wählen Sie eine Übung, um die Aufgabe und ihre Lösung zu öffnen."
+    },
+    "blocks": {
+      "theorem": "Satz",
+      "definition": "Definition",
+      "lemma": "Lemma",
+      "proposition": "Proposition",
+      "corollary": "Korollar",
+      "remark": "Bemerkung",
+      "example": "Beispiel",
+      "proof": "Beweis",
+      "summary": "Zusammenfassung",
+      "exercise": "Übung",
+      "hint": "Hinweis",
+      "solution": "Lösung",
+      "further": "Zur Vertiefung",
+      "figure": "Abbildung",
+      "figureSource": "Abbildung aus",
+      "openPdf": "PDF-Abbildung öffnen",
+      "question": "Frage",
+      "note": "Anmerkung",
+      "important": "Wichtig"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "Allgemeine Einführung und grundlegende Experimente",
+      "description": "Einige historische Experimente, die die klassische Mechanik widerlegen.",
+      "partHeading": "Teil I: Isolierte Systeme",
+      "lessons": {
+        "introduction": {
+          "title": "Lektion 1",
+          "subtitle": "Das Stern-Gerlach-Experiment",
+          "description": "Experimentelle Einführung in Spin, magnetisches Moment und die im Stern-Gerlach-Experiment beobachtete Quantisierung.",
+          "topics": [
+            "Spin",
+            "Magnetisches Moment",
+            "Stern-Gerlach",
+            "Larmorpräzession",
+            "Quantisierung",
+            "Quantenmessung",
+            "Spinkomponenten",
+            "Atomstrahl",
+            "Inhomogenes Magnetfeld",
+            "Zustandsprojektion"
+          ]
+        },
+        "interference": {
+          "title": "Lektion 2",
+          "subtitle": "Interferenz, Wege und Quantenradierer",
+          "description": "Mach-Zehnder-Interferometer, Superposition und Gemisch, Wegmarkierung, Quantenradierer, Komplementarität.",
+          "topics": [
+            "Mach-Zehnder",
+            "Interferenz",
+            "Superposition",
+            "Wahrscheinlichkeitsamplitude",
+            "Relative Phase",
+            "Weg",
+            "Wegmarkierung",
+            "Quantenradierer",
+            "Komplementarität",
+            "Nachselektion"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Hilberträume und Dirac-Notation",
+      "description": "Struktur der Hilberträume, topologischer Dualraum und Dirac-Notation in endlicher und unendlicher Dimension.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Lektion 1",
+          "subtitle": "Hilberträume",
+          "description": "Mathematische Strukturen: Vektorräume, metrische Räume, Norm, normierte Vektorräume, Skalarprodukt, Prä-Hilbertraum, Hilbertraum, algebraische Basis, Hilbertbasis, Dimension, Klassifikation, Modellräume, Isomorphismen",
+          "topics": [
+            "Hilbertraum",
+            "Normierter Raum",
+            "Hermitesches Skalarprodukt",
+            "Algebraische Dimension",
+            "Hilbertdimension",
+            "Hilbertbasis",
+            "Vollständigkeit",
+            "Klassifikation der Hilberträume"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Lektion 2",
+          "subtitle": "Dualraum, Kets, Bras und Adjungierte",
+          "description": "Konstruktion des topologischen Dualraums, Rieszscher Darstellungssatz, Einführung in Kets, Bras und die Adjungierte",
+          "topics": [
+            "Algebraischer Dualraum",
+            "Topologischer Dualraum",
+            "Riesz-Isomorphismus",
+            "Kets und Bras",
+            "Matrixelemente",
+            "Zerlegung der Identität",
+            "Dagger",
+            "Adjungierter Operator"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Übersichtsblatt 1",
+          "subtitle": "Dirac-Notation in endlicher Dimension",
+          "description": "Algebraische Regeln des Quantenkalküls in beliebiger Dimension, anschließend eine Matrixformelsammlung für endliche Dimension.",
+          "topics": [
+            "Dirac-Notation",
+            "Hermitesches Skalarprodukt",
+            "Adjungierte",
+            "Ket-Bra-Operator",
+            "Auflösung der Identität",
+            "Endliche Dimension",
+            "Matrixelemente",
+            "Spur",
+            "Konjugierte Transposition",
+            "Formelsammlung"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Übersichtsblatt 2",
+          "subtitle": "Dirac-Notation in unendlicher Dimension",
+          "description": "Hilbertraumdarstellung der Quantenmechanik eines Punktteilchens, Orts- und Impulsoperator, Dirac-Delta.",
+          "topics": [
+            "Dirac-Notation",
+            "Unendliche Dimension",
+            "Ortsdarstellung",
+            "Impulsdarstellung",
+            "Dirac-Delta",
+            "Fouriertransformation",
+            "Auflösung der Identität",
+            "Ortsoperator",
+            "Impulsoperator",
+            "Kanonische Vertauschungsrelation"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Theorie linearer Operatoren",
+      "description": "Topologie der Hilberträume, beschränkte und unbeschränkte lineare Operatoren, Spektraltheorie.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Lektion 1",
+          "subtitle": "Topologie der Hilberträume",
+          "description": "Allgemeine Topologie: offene und abgeschlossene Mengen, starke und schwache Konvergenz, Cauchyfolgen, unendliche Vektorsummen, Vollständigkeit, Dichtheit, beschränkte und kompakte Mengen.",
+          "topics": [
+            "Starke Topologie",
+            "Schwache Topologie",
+            "Starke Konvergenz",
+            "Schwache Konvergenz",
+            "Vollständigkeit",
+            "Cauchyfolgen",
+            "Dichtheit",
+            "Vektorunterräume",
+            "Beschränkte Mengen",
+            "Kompakte Mengen"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Lektion 2",
+          "subtitle": "Theorie linearer Operatoren",
+          "description": "Definition, Definitionsbereich, Komposition, Stetigkeit und Norm linearer Operatoren im Hilbertraum.",
+          "topics": [
+            "Lineare Operatoren",
+            "Definitionsbereich eines Operators",
+            "Komposition von Operatoren",
+            "Stetigkeit",
+            "Operatornorm",
+            "Adjungierte",
+            "Dichter Definitionsbereich"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Lektion 3",
+          "subtitle": "Beschränkte Operatoren",
+          "description": "Algebra beschränkter Operatoren, selbstadjungierte und unitäre Operatoren, Spektralsatz in endlicher Dimension.",
+          "topics": [
+            "Beschränkte Operatoren",
+            "Algebra B(H)",
+            "Selbstadjungiertheit",
+            "Unitäre Operatoren",
+            "Normale Operatoren",
+            "Spektralsatz"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Lektion 4",
+          "subtitle": "Unbeschränkte Operatoren",
+          "description": "Dicht definierte Operatoren, Abschluss, Adjungierte, selbstadjungierte Erweiterungen und Kriterien für wesentliche Selbstadjungiertheit.",
+          "topics": [
+            "Unbeschränkte Operatoren",
+            "Dichter Definitionsbereich",
+            "Abschluss",
+            "Symmetrische Operatoren",
+            "Selbstadjungierte Erweiterungen",
+            "Defizienz"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Lektion 5",
+          "subtitle": "Spektraltheorie",
+          "description": "Spektrum und Resolvente selbstadjungierter Operatoren, Spektralmaß, allgemeiner Spektralsatz und Funktionalkalkül.",
+          "topics": [
+            "Spektrum",
+            "Resolvente",
+            "Spektralmaß",
+            "Spektralsatz",
+            "Funktionalkalkül",
+            "Kontinuierliches Spektrum",
+            "Diskretes Spektrum"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Übersichtsblatt 1",
+          "subtitle": "Atlas linearer Operatoren",
+          "description": "Katalog der wichtigsten linearen Operatoren und ihrer spektralen Eigenschaften.",
+          "topics": [
+            "Lineare Operatoren",
+            "Atlas",
+            "Spektrale Eigenschaften"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Postulate",
+      "description": "Grundaxiome der Theorie, Interpretationen und physikalische Folgen der Messung.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Lektion 1",
+          "subtitle": "Messung, Dynamik und Interpretation",
+          "description": "Darstellung der Quantenpostulate, der Bornschen Regel, des Wellenpaketkollapses und der Schrödingergleichung.",
+          "topics": [
+            "Postulate",
+            "Quantenmessung",
+            "Bornsche Regel",
+            "Unitäre Zeitentwicklung",
+            "Wellenpaketkollaps",
+            "Schrödingergleichung",
+            "Ehrenfest-Theorem",
+            "Superposition",
+            "Quantenverschränkung",
+            "Bellsche Ungleichungen"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Anwendungen",
+      "description": "Rechenmethoden und Operatorwerkzeuge, die Postulate mit konkreten Vorhersagen verbinden.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Lektion 1",
+          "subtitle": "Potentialbarrieren",
+          "description": "Transmission, Reflexion, Tunneleffekt und Energieabhängigkeit von Zuständen an Potentialbarrieren.",
+          "topics": [
+            "Tunneleffekt",
+            "Transmission",
+            "Reflexion",
+            "Streuzustände",
+            "Koeffizienten"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Lektion 2",
+          "subtitle": "Harmonischer Oszillator",
+          "description": "Quantisierung der Energieniveaus, Erzeugungs- und Vernichtungsoperatoren und Eigenzustände des harmonischen Oszillators.",
+          "topics": [
+            "Energieniveaus",
+            "Quantenleitern",
+            "Operatoren a und a†",
+            "Eigenzustände",
+            "Wellenfunktionen"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Lektion 3",
+          "subtitle": "Spin",
+          "description": "Pauli-Matrizen, Spinmessung, Dynamik im Magnetfeld und Anwendungen auf Zweiniveausysteme.",
+          "topics": [
+            "Pauli-Matrizen",
+            "Spin 1/2",
+            "Messung",
+            "Präzession",
+            "Zweiniveausysteme"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Lektion 4",
+          "subtitle": "Quantendynamik",
+          "description": "Unitäre Zeitentwicklung, Schrödingergleichung, Schrödinger- und Heisenbergbild sowie Propagatoren.",
+          "topics": [
+            "Unitäre Zeitentwicklung",
+            "Schrödingergleichung",
+            "Heisenbergbild",
+            "Propagatoren",
+            "Hamiltonoperator"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Wechselwirkende Systeme",
+      "description": "Zusammengesetzte Zustände, Verschränkung, Kopplungen und Dynamik nicht isolierter Quantensysteme.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Dekohärenz und Quantenmessung",
+      "description": "Übergang zum klassischen Verhalten, Messproblem und Rolle der Umgebung.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}

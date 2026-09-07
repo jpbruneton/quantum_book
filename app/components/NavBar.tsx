@@ -43,7 +43,7 @@ export function NavBar() {
   };
 
   const LangToggle = ({ small }: { small?: boolean }) => (
-    <select aria-label="Language" value={lang} onChange={event => switchLang(event.target.value as Lang)}
+    <select aria-label={t.common.language} value={lang} onChange={event => switchLang(event.target.value as Lang)}
       style={{ maxWidth: small ? 130 : 150, background: "var(--bg-card)", color: "var(--text-primary)", padding: "0.4rem", border: "1px solid var(--border)", borderRadius: 4 }}>
       {SUPPORTED_LANGS.map(code => <option key={code} value={code}>{new Intl.DisplayNames([code], {type: "language"}).of(code)}</option>)}
     </select>
@@ -134,7 +134,7 @@ export function NavBar() {
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <button
                 onClick={toggleTheme}
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-label={theme === "dark" ? t.common.lightMode : t.common.darkMode}
                 style={{
                   background: "transparent",
                   border: "1px solid var(--border)",
@@ -155,7 +155,7 @@ export function NavBar() {
 
               <button
                 onClick={() => setMenuOpen((o) => !o)}
-                aria-label="Toggle menu"
+                aria-label={t.common.toggleMenu}
                 style={{
                   background: "transparent",
                   border: "1px solid var(--border)",
@@ -182,7 +182,7 @@ export function NavBar() {
           <div className="nav-desktop" style={{ alignItems: "center", flexShrink: 0 }}>
             <button
               onClick={toggleTheme}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              aria-label={theme === "dark" ? t.common.lightMode : t.common.darkMode}
               style={{
                 background: "transparent",
                 border: "1px solid var(--border)",

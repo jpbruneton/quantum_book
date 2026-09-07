@@ -9,6 +9,12 @@ export function lessonToPathSegment(lesson: Lesson): string {
   return `lesson-${String(lesson.number)}`;
 }
 
+export function lessonDisplayLabel(lesson: Lesson, lang: SiteLang): string {
+  const title = lang === "fr" ? lesson.titleFr : lesson.titleEn;
+  const subtitle = lang === "fr" ? lesson.subtitleFr : lesson.subtitleEn;
+  return `${title}: ${subtitle}`;
+}
+
 export function lessonToPublicPathSegment(lang: SiteLang, lesson: Lesson): string {
   return lessonRefToPublic(lang, lessonToPathSegment(lesson));
 }

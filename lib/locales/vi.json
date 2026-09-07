@@ -1,0 +1,485 @@
+{
+  "ui": {
+    "book": {
+      "title": "Cơ Học Lượng Tử",
+      "subtitle": "",
+      "description": "Cuốn sách này trình bày một cách hình thức hóa chặt chẽ cơ học lượng tử hiện đại. Vượt ra ngoài phạm vi của các giáo trình nhập môn thông thường, sách đi sâu vào những công cụ thiết yếu của vật lý toán, từ không gian Hilbert đến lý thuyết phổ nâng cao, bao gồm cả tô pô và hình học.\n\nChuyên khảo dành cho những ai muốn vượt lên trên việc tính toán đơn thuần để hiểu tính tất yếu về logic và nền tảng của các cấu trúc được sử dụng. Nội dung trực tiếp đề cập đến các vấn đề diễn giải, phân tích chi tiết bài toán phép đo và sự mất kết hợp, đồng thời giới thiệu các lý thuyết thay thế cùng những ràng buộc thực nghiệm của chúng.\n\nHướng tới học viên cao học, nghiên cứu sinh và các nhà nghiên cứu, sách giúp nắm vững toàn diện lý thuyết bằng cách kết hợp sự chặt chẽ về kỹ thuật với chiều sâu khái niệm.",
+      "edition": "Ấn bản thứ nhất"
+    },
+    "nav": {
+      "home": "Trang chủ",
+      "chapters": "Chủ đề",
+      "exercises": "Bài tập",
+      "quiz": "Trắc nghiệm",
+      "glossary": "Thuật ngữ",
+      "about": "Giới thiệu"
+    },
+    "home": {
+      "badge": "Ấn bản trực tuyến miễn phí",
+      "readOnline": "Đọc trực tuyến →",
+      "aboutBook": "Giới thiệu sách",
+      "chapterPrefix": "Ch.",
+      "themePrefix": "Chủ đề",
+      "stats": {
+        "chapters": "Chủ đề",
+        "edition": "Ấn bản",
+        "format": "Định dạng",
+        "formatValue": "Web + PDF"
+      },
+      "contentsLabel": "Mục lục",
+      "exploreTitle": "Khám phá các chủ đề",
+      "readTheme": "Mở chủ đề →",
+      "readLesson": "Đọc bài học →",
+      "readChapter": "Đọc chương →",
+      "fullBookDownload": "Tải ấn bản đầy đủ (sắp có)",
+      "features": [
+        {
+          "icon": "∫",
+          "title": "Hiển thị toán học đầy đủ",
+          "body": "Mọi phương trình đều được hiển thị bằng KaTeX — toán học chất lượng LaTeX ngay trong trình duyệt."
+        },
+        {
+          "icon": "⬇",
+          "title": "Tải PDF",
+          "body": "Mỗi chương đều có bản PDF để tải về và học ngoại tuyến."
+        },
+        {
+          "icon": "◎",
+          "title": "Truy cập mở và miễn phí",
+          "body": "Toàn văn được cung cấp miễn phí trực tuyến. Không cần đăng ký hay thuê bao."
+        }
+      ]
+    },
+    "chapters": {
+      "label": "CHỦ ĐỀ",
+      "title": "Tất cả chủ đề",
+      "description": ""
+    },
+    "chapter": {
+      "chapterLabel": "BÀI HỌC",
+      "themeLabel": "CHỦ ĐỀ",
+      "lessonLabel": "BÀI HỌC",
+      "downloadPdf": "↓ Tải PDF",
+      "breadcrumbHome": "Trang chủ",
+      "breadcrumbChapters": "Chủ đề",
+      "breadcrumbThemes": "Chủ đề",
+      "prev": "← Trước",
+      "next": "Tiếp →",
+      "noteTitle": "Lưu ý:",
+      "noteBody": "Đây là đoạn trích xem trước. Hãy tải PDF đầy đủ để xem toàn bộ chương, bài tập và lời giải.",
+      "tabOnline": "Đọc trực tuyến",
+      "tabReferences": "Tài liệu tham khảo",
+      "tocTitle": "Mục lục",
+      "showToc": "Hiện mục lục",
+      "hideToc": "Ẩn mục lục",
+      "refsEmpty": "Chưa có tài liệu tham khảo cho bài học này.",
+      "refsEnglishTitle": "Tài liệu tiếng Anh",
+      "refsFrenchTitle": "Tài liệu tiếng Pháp",
+      "refsSectionEmpty": "Chưa có liên kết nào được thêm vào phần này.",
+      "contentUnavailable": "Nội dung bài học này chưa có bằng ngôn ngữ này.",
+      "downloadBtn": "↓ Tải xuống",
+      "noLessonTitle": "Chưa có bài học",
+      "noLessonBody": "Chủ đề này đã có trong cấu trúc sách, nhưng nội dung bài học chưa được công bố.",
+      "readTime": "Thời gian đọc: {time}"
+    },
+    "about": {
+      "label": "GIỚI THIỆU SÁCH",
+      "aboutBookTitle": "Về cuốn sách này",
+      "bookDetails": "Thông tin sách",
+      "detailLabels": {
+        "author": "Tác giả",
+        "affiliation": "Cơ quan",
+        "edition": "Ấn bản",
+        "year": "Năm"
+      },
+      "authorTitle": "Về tác giả",
+      "authorBioSuffix": "là nhà vật lý tại",
+      "authorBioRest": "Các hướng nghiên cứu của ông bao gồm các định luật hấp dẫn, cơ học lượng tử và nền tảng của nó, cũng như hồi quy ký hiệu dưới góc độ một nhiệm vụ học máy. Cuốn sách bắt nguồn từ các ghi chép bài giảng được phát triển qua nhiều năm giảng dạy sau đại học.",
+      "authorLinksHeading": "Liên kết",
+      "authorLinkLinkedIn": "LinkedIn",
+      "authorLinkGoogleScholar": "Google Scholar",
+      "authorLinkGitHub": "GitHub",
+      "aboutProjectTitle": "Về dự án",
+      "aboutProjectLead": "Trang web và cuốn sách này đang được phát triển. Các bài học và bài tập sẽ được công bố dần.",
+      "aboutProjectOutlineLabel": "Nội dung dự kiến:",
+      "aboutProjectOutlineBody": "Phần I, các hệ cô lập: hình thức luận toán học (vật lý toán), tiên đề, ứng dụng cơ bản. Phần II, các hệ tương tác: rối lượng tử, mất kết hợp, lý thuyết phép đo. Phần III: các cách diễn giải cơ học lượng tử và lý thuyết thay thế. Phần IV: thông tin lượng tử, thuật toán lượng tử. Phần V: hấp dẫn lượng tử.",
+      "aboutBookBody2": "Nội dung phát triển cơ học lượng tử từ những nguyên lý đầu tiên, giả định người đọc có nền tảng vững chắc về cơ học cổ điển, điện động lực học và toán học. Các chứng minh được trình bày đầy đủ khi giúp làm rõ vật lý, và nhiều ví dụ có lời giải bổ sung cho phần lý thuyết.",
+      "translationWarning": "Cuốn sách được viết chủ yếu bằng tiếng Pháp. Các bản dịch được thực hiện với sự hỗ trợ của AI và có thể có sai sót; bản tiếng Pháp là bản tham chiếu.",
+      "sameAuthorTitle": "Cùng tác giả",
+      "sameAuthorBody": "Nhiệt động lực học — Cơ bản và Nâng cao, một khóa học bổ trợ về nhiệt động lực học.",
+      "sameAuthorLink": "Đọc tại learnthermo.org"
+    },
+    "footer": {
+      "navigation": "Điều hướng",
+      "home": "Trang chủ",
+      "allChapters": "Tất cả chủ đề",
+      "exercises": "Bài tập",
+      "aboutBook": "Giới thiệu sách",
+      "author": "Tác giả",
+      "copyright": "© {year} {author}. Bảo lưu mọi quyền."
+    },
+    "common": {
+      "language": "Ngôn ngữ",
+      "lightMode": "Chuyển sang chế độ sáng",
+      "darkMode": "Chuyển sang chế độ tối",
+      "toggleMenu": "Mở hoặc đóng trình đơn",
+      "backToTop": "Về đầu trang",
+      "translationPending": "Bản dịch đang được chuẩn bị",
+      "contentUnavailable": "Nội dung này chưa có bằng ngôn ngữ này.",
+      "mathTheme": "Chủ đề toán học",
+      "physicsTheme": "Chủ đề vật lý",
+      "revisionSheets": "Phiếu ôn tập",
+      "lesson": "Bài học",
+      "sheet": "Phiếu",
+      "theme": "Chủ đề",
+      "quizPending": "Các bài trắc nghiệm cơ học lượng tử đang được chuẩn bị.",
+      "notFoundTitle": "Không tìm thấy trang",
+      "notFoundBody": "Trang này không tồn tại hoặc hiện chưa khả dụng.",
+      "backHome": "Về trang chủ"
+    },
+    "glossary": {
+      "title": "Bảng thuật ngữ theo từ khóa",
+      "subtitle": "Nhấp vào một từ khóa để xem tất cả bài học sử dụng từ đó.",
+      "allKeywords": "Tất cả từ khóa",
+      "relatedLessons": "Bài học liên quan",
+      "noResult": "Không có từ khóa phù hợp với bộ lọc này."
+    },
+    "exercises": {
+      "title": "Bài tập có lời giải",
+      "subtitle": "Thư viện bài tập: tìm theo tiêu đề hoặc từ khóa, hoặc duyệt theo chủ đề của sách.",
+      "themePrefix": "Chủ đề",
+      "open": "Mở bộ bài tập →",
+      "comingSoon": "Sắp có",
+      "searchPlaceholder": "Tìm kiếm (tiêu đề, từ khóa)…",
+      "searchLabel": "Tìm trong thư viện",
+      "byTheme": "Theo chủ đề",
+      "noMatch": "Không có bài tập phù hợp với truy vấn này.",
+      "keywordsLabel": "Từ khóa",
+      "exercisePrefix": "Bài tập",
+      "pdfFull": "Tất cả bài tập của chủ đề — đề bài, gợi ý và lời giải (PDF)",
+      "pdfLabel": "PDF",
+      "pdfSub": "đề bài + lời giải",
+      "unavailable": "Chưa có bài tập bằng ngôn ngữ này.",
+      "themeUnavailable": "Các bài tập của chủ đề này chưa có bằng ngôn ngữ này.",
+      "exerciseUnavailable": "Bài tập này chưa có bằng ngôn ngữ này.",
+      "back": "← Bài tập",
+      "backTheme": "← Tất cả bài tập của chủ đề",
+      "backLibrary": "← Thư viện bài tập",
+      "listIntro": "Chọn một bài tập để mở đề bài và lời giải."
+    },
+    "blocks": {
+      "theorem": "Định lý",
+      "definition": "Định nghĩa",
+      "lemma": "Bổ đề",
+      "proposition": "Mệnh đề",
+      "corollary": "Hệ quả",
+      "remark": "Nhận xét",
+      "example": "Ví dụ",
+      "proof": "Chứng minh",
+      "summary": "Tóm tắt",
+      "exercise": "Bài tập",
+      "hint": "Gợi ý",
+      "solution": "Lời giải",
+      "further": "Tìm hiểu thêm",
+      "figure": "Hình",
+      "figureSource": "Hình trích từ",
+      "openPdf": "Mở hình PDF",
+      "question": "Câu hỏi",
+      "note": "Chú thích",
+      "important": "Quan trọng"
+    }
+  },
+  "themes": {
+    "foundational-experiments": {
+      "title": "Giới thiệu chung và các thí nghiệm nền tảng",
+      "description": "Một số thí nghiệm lịch sử bác bỏ tính phổ quát của cơ học cổ điển.",
+      "partHeading": "Phần I: Các hệ cô lập",
+      "lessons": {
+        "introduction": {
+          "title": "Bài học 1",
+          "subtitle": "Thí nghiệm Stern–Gerlach",
+          "description": "Giới thiệu thực nghiệm về spin, mômen từ và sự lượng tử hóa quan sát được trong thí nghiệm Stern–Gerlach.",
+          "topics": [
+            "Spin",
+            "Mômen từ",
+            "Stern–Gerlach",
+            "Tiến động Larmor",
+            "Lượng tử hóa",
+            "Phép đo lượng tử",
+            "Các thành phần spin",
+            "Chùm nguyên tử",
+            "Từ trường không đồng nhất",
+            "Phép chiếu trạng thái"
+          ]
+        },
+        "interference": {
+          "title": "Bài học 2",
+          "subtitle": "Giao thoa, đường đi và bộ xóa lượng tử",
+          "description": "Giao thoa kế Mach–Zehnder, chồng chập và hỗn hợp, đánh dấu đường đi, bộ xóa lượng tử, tính bổ sung.",
+          "topics": [
+            "Mach–Zehnder",
+            "Giao thoa",
+            "Chồng chập",
+            "Biên độ xác suất",
+            "Pha tương đối",
+            "Đường đi",
+            "Đánh dấu đường đi",
+            "Bộ xóa lượng tử",
+            "Tính bổ sung",
+            "Hậu tuyển chọn"
+          ]
+        }
+      }
+    },
+    "hilbert-spaces": {
+      "title": "Không gian Hilbert và ký hiệu Dirac",
+      "description": "Cấu trúc không gian Hilbert, đối ngẫu tô pô và ký hiệu Dirac trong số chiều hữu hạn và vô hạn.",
+      "partHeading": "",
+      "lessons": {
+        "espaces-de-hilbert-lecon-1": {
+          "title": "Bài học 1",
+          "subtitle": "Không gian Hilbert",
+          "description": "Các cấu trúc toán học: không gian vectơ, không gian mêtric, chuẩn, không gian vectơ định chuẩn, tích vô hướng, không gian tiền Hilbert, không gian Hilbert, cơ sở đại số, cơ sở Hilbert, số chiều, phân loại, không gian mô hình, đẳng cấu",
+          "topics": [
+            "Không gian Hilbert",
+            "Không gian định chuẩn",
+            "Tích vô hướng Hermite",
+            "Số chiều đại số",
+            "Số chiều Hilbert",
+            "Cơ sở Hilbert",
+            "Tính đầy đủ",
+            "Phân loại không gian Hilbert"
+          ]
+        },
+        "espaces-de-hilbert-lecon-2": {
+          "title": "Bài học 2",
+          "subtitle": "Không gian đối ngẫu, ket, bra và liên hợp",
+          "description": "Xây dựng đối ngẫu tô pô, định lý biểu diễn Riesz, giới thiệu ket, bra và liên hợp",
+          "topics": [
+            "Đối ngẫu đại số",
+            "Đối ngẫu tô pô",
+            "Đẳng cấu Riesz",
+            "Ket và bra",
+            "Phần tử ma trận",
+            "Phân rã đồng nhất",
+            "Dagger",
+            "Toán tử liên hợp"
+          ]
+        },
+        "espaces-de-hilbert-fiche-1": {
+          "title": "Phiếu 1",
+          "subtitle": "Ký hiệu Dirac trong số chiều hữu hạn",
+          "description": "Các quy tắc đại số của tính toán lượng tử đúng trong mọi số chiều, sau đó là bảng công thức ma trận trong số chiều hữu hạn.",
+          "topics": [
+            "Ký hiệu Dirac",
+            "Tích vô hướng Hermite",
+            "Liên hợp",
+            "Toán tử ket-bra",
+            "Phân giải đồng nhất",
+            "Số chiều hữu hạn",
+            "Phần tử ma trận",
+            "Vết",
+            "Chuyển vị liên hợp",
+            "Bảng công thức"
+          ]
+        },
+        "espaces-de-hilbert-fiche-2": {
+          "title": "Phiếu 2",
+          "subtitle": "Ký hiệu Dirac trong số chiều vô hạn",
+          "description": "Biểu diễn Hilbert của cơ học lượng tử hạt điểm, toán tử vị trí và động lượng, delta Dirac.",
+          "topics": [
+            "Ký hiệu Dirac",
+            "Số chiều vô hạn",
+            "Biểu diễn vị trí",
+            "Biểu diễn động lượng",
+            "Delta Dirac",
+            "Biến đổi Fourier",
+            "Phân giải đồng nhất",
+            "Toán tử vị trí",
+            "Toán tử động lượng",
+            "Hệ thức giao hoán chính tắc"
+          ]
+        }
+      }
+    },
+    "linear-operator-theory": {
+      "title": "Lý thuyết toán tử tuyến tính",
+      "description": "Tô pô của không gian Hilbert, toán tử tuyến tính bị chặn và không bị chặn, lý thuyết phổ.",
+      "partHeading": "",
+      "lessons": {
+        "operateurs-lineaires-lecon-1": {
+          "title": "Bài học 1",
+          "subtitle": "Tô pô của không gian Hilbert",
+          "description": "Tô pô tổng quát: tập mở và đóng, hội tụ mạnh và yếu, dãy Cauchy, tổng vô hạn vectơ, tính đầy đủ, tính trù mật, tập bị chặn và tập compact.",
+          "topics": [
+            "Tô pô mạnh",
+            "Tô pô yếu",
+            "Hội tụ mạnh",
+            "Hội tụ yếu",
+            "Tính đầy đủ",
+            "Dãy Cauchy",
+            "Tính trù mật",
+            "Không gian vectơ con",
+            "Tập bị chặn",
+            "Tập compact"
+          ]
+        },
+        "operateurs-lineaires-lecon-2": {
+          "title": "Bài học 2",
+          "subtitle": "Lý thuyết toán tử tuyến tính",
+          "description": "Định nghĩa, miền xác định, phép hợp thành, tính liên tục và chuẩn của toán tử tuyến tính trên không gian Hilbert.",
+          "topics": [
+            "Toán tử tuyến tính",
+            "Miền xác định của toán tử",
+            "Hợp thành toán tử",
+            "Tính liên tục",
+            "Chuẩn toán tử",
+            "Liên hợp",
+            "Miền xác định trù mật"
+          ]
+        },
+        "operateurs-lineaires-lecon-3": {
+          "title": "Bài học 3",
+          "subtitle": "Toán tử bị chặn",
+          "description": "Đại số toán tử bị chặn, toán tử tự liên hợp và unita, định lý phổ trong số chiều hữu hạn.",
+          "topics": [
+            "Toán tử bị chặn",
+            "Đại số B(H)",
+            "Tính tự liên hợp",
+            "Toán tử unita",
+            "Toán tử chuẩn tắc",
+            "Định lý phổ"
+          ]
+        },
+        "operateurs-lineaires-lecon-4": {
+          "title": "Bài học 4",
+          "subtitle": "Toán tử không bị chặn",
+          "description": "Toán tử xác định trù mật, bao đóng, liên hợp, mở rộng tự liên hợp và các tiêu chuẩn tự liên hợp thiết yếu.",
+          "topics": [
+            "Toán tử không bị chặn",
+            "Miền xác định trù mật",
+            "Bao đóng",
+            "Toán tử đối xứng",
+            "Mở rộng tự liên hợp",
+            "Độ khuyết liên hợp"
+          ]
+        },
+        "operateurs-lineaires-lecon-5": {
+          "title": "Bài học 5",
+          "subtitle": "Lý thuyết phổ",
+          "description": "Phổ và giải thức của toán tử tự liên hợp, độ đo phổ, định lý phổ tổng quát và phép tính hàm.",
+          "topics": [
+            "Phổ",
+            "Giải thức",
+            "Độ đo phổ",
+            "Định lý phổ",
+            "Phép tính hàm",
+            "Phổ liên tục",
+            "Phổ rời rạc"
+          ]
+        },
+        "operateurs-lineaires-fiche-1": {
+          "title": "Phiếu 1",
+          "subtitle": "Tập tra cứu toán tử tuyến tính",
+          "description": "Danh mục các toán tử tuyến tính chính và tính chất phổ của chúng.",
+          "topics": [
+            "Toán tử tuyến tính",
+            "Tập tra cứu",
+            "Tính chất phổ"
+          ]
+        }
+      }
+    },
+    "postulates": {
+      "title": "Các tiên đề",
+      "description": "Các tiên đề cơ bản của lý thuyết, các cách diễn giải và hệ quả vật lý của phép đo.",
+      "partHeading": "",
+      "lessons": {
+        "postulats-lecon-1": {
+          "title": "Bài học 1",
+          "subtitle": "Phép đo, động lực học và diễn giải",
+          "description": "Trình bày các tiên đề lượng tử, quy tắc Born, sự co sụp bó sóng và phương trình Schrödinger.",
+          "topics": [
+            "Tiên đề",
+            "Phép đo lượng tử",
+            "Quy tắc Born",
+            "Tiến hóa unita",
+            "Co sụp bó sóng",
+            "Phương trình Schrödinger",
+            "Định lý Ehrenfest",
+            "Chồng chập",
+            "Rối lượng tử",
+            "Bất đẳng thức Bell"
+          ]
+        }
+      }
+    },
+    "applications": {
+      "title": "Ứng dụng",
+      "description": "Các phương pháp tính toán và công cụ toán tử để liên hệ tiên đề với dự đoán cụ thể.",
+      "partHeading": "",
+      "lessons": {
+        "applications-lecon-1": {
+          "title": "Bài học 1",
+          "subtitle": "Rào thế",
+          "description": "Truyền qua, phản xạ, xuyên hầm và sự phụ thuộc năng lượng của trạng thái khi gặp rào thế.",
+          "topics": [
+            "Hiệu ứng xuyên hầm",
+            "Truyền qua",
+            "Phản xạ",
+            "Trạng thái tán xạ",
+            "Hệ số"
+          ]
+        },
+        "applications-lecon-2": {
+          "title": "Bài học 2",
+          "subtitle": "Dao động tử điều hòa",
+          "description": "Lượng tử hóa các mức năng lượng, toán tử sinh và hủy, và trạng thái riêng của dao động tử điều hòa.",
+          "topics": [
+            "Mức năng lượng",
+            "Thang lượng tử",
+            "Toán tử a và a†",
+            "Trạng thái riêng",
+            "Hàm sóng"
+          ]
+        },
+        "applications-lecon-3": {
+          "title": "Bài học 3",
+          "subtitle": "Spin",
+          "description": "Ma trận Pauli, phép đo spin, động lực học trong từ trường và ứng dụng cho hệ hai mức.",
+          "topics": [
+            "Ma trận Pauli",
+            "Spin 1/2",
+            "Phép đo",
+            "Tiến động",
+            "Hệ hai mức"
+          ]
+        },
+        "applications-lecon-4": {
+          "title": "Bài học 4",
+          "subtitle": "Động lực học lượng tử",
+          "description": "Tiến hóa unita, phương trình Schrödinger, bức tranh Schrödinger/Heisenberg và toán tử truyền.",
+          "topics": [
+            "Tiến hóa unita",
+            "Phương trình Schrödinger",
+            "Bức tranh Heisenberg",
+            "Toán tử truyền",
+            "Hamiltonian"
+          ]
+        }
+      }
+    },
+    "interacting-systems": {
+      "title": "Các hệ tương tác",
+      "description": "Trạng thái hợp thành, rối lượng tử, liên kết và động lực học của các hệ lượng tử không cô lập.",
+      "partHeading": "",
+      "lessons": {}
+    },
+    "decoherence-and-quantum-measurement": {
+      "title": "Mất kết hợp và phép đo lượng tử",
+      "description": "Chuyển tiếp sang hành vi cổ điển, bài toán phép đo và vai trò của môi trường.",
+      "partHeading": "",
+      "lessons": {}
+    }
+  }
+}
