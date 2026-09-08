@@ -1,6 +1,5 @@
 import { getTranslations } from "@/lib/translations.server";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { isRtlLang, type Lang } from "@/lib/i18n";
 import { fontVariables } from "@/app/fonts";
 import "katex/dist/katex.min.css";
@@ -85,15 +84,6 @@ export default function SiteDocument({ children, lang }: { children: React.React
   return (
     <html lang={lang} dir={isRtlLang(lang) ? "rtl" : "ltr"} className={fontVariables} suppressHydrationWarning>
       <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-18438495407" strategy="afterInteractive" />
-        <Script id="google-tag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18438495407');
-          `}
-        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({...bookJsonLd, name: t.book.title, description: t.book.description, inLanguage: lang, url: `${SITE_URL}/${lang}`}).replace(/</g, "\\u003c") }}
