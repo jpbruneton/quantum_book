@@ -8,6 +8,8 @@ import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
 import { getTranslations } from "@/lib/translations.server";
+import { breadcrumbListJsonLd } from "@/lib/structuredData";
+import { JsonLd } from "@/app/components/JsonLd";
 import { ChapterPageClient } from "../ChapterPageClient";
 interface Props { params: {lang: string; slug: string; lessonRef: string} }
 export function generateStaticParams() {
@@ -39,19 +41,19 @@ export default function ChapterLessonPage({params}: Props) {
   const webThemes = getWebThemes(lang);
   const position = webThemes.findIndex(item => item.slug === theme.slug);
   const url = absoluteUrl(localizedPath(lang, path));
-  const jsonLd = [{
-    "@context": "https://schema.org", "@type": "BreadcrumbList",
-    itemListElement: [
-      {"@type": "ListItem", position: 1, name: t.nav.home, item: absoluteUrl(localizedPath(lang, "/"))},
-      {"@type": "ListItem", position: 2, name: t.nav.chapters, item: absoluteUrl(localizedPath(lang, "/chapters"))},
-      {"@type": "ListItem", position: 3, name: title, item: url},
-    ],
-  }, {"@context": "https://schema.org", "@type": "Course", name: title,
-    description: lesson.descriptionFr || theme.descriptionFr, url, inLanguage: lang,
-    provider: {"@type": "Organization", name: bookMeta.affiliation},
-  }];
+  const jsonLd = [
+    breadcrumbListJsonLd(lang, [
+      {name: t.nav.home, logicalPath: "/"},
+      {name: t.nav.chapters, logicalPath: "/chapters"},
+      {name: title, logicalPath: path},
+    ]),
+    {"@context": "https://schema.org", "@type": "Course", name: title,
+      description: lesson.descriptionFr || theme.descriptionFr, url, inLanguage: lang,
+      provider: {"@type": "Organization", name: bookMeta.affiliation},
+    },
+  ];
   return <>
-    {hasLessonWebContent(lesson.texFile, lang) && jsonLd.map((block, key) => <script key={key} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(block).replace(/</g, "\\u003c")}} />)}
+    {hasLessonWebContent(lesson.texFile, lang) && <JsonLd data={jsonLd} />}
     <ChapterPageClient theme={buildThemeWithLocalizedContent(theme, lang, index)} prev={webThemes[position - 1] ?? null} next={webThemes[position + 1] ?? null} activeLessonRef={lessonToPathSegment(lesson)} />
   </>;
 }

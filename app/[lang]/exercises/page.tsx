@@ -5,6 +5,9 @@ import { getWebThemes } from "@/lib/localizedChapters.server";
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import { buildAllExerciseIndexEntries, themeHasAnyExercises } from "@/lib/exercisesLibrary.server";
+import { getTranslations } from "@/lib/translations.server";
+import { breadcrumbListJsonLd, itemListJsonLd } from "@/lib/structuredData";
+import { JsonLd } from "@/app/components/JsonLd";
 import { ExercisesClient } from "./ExercisesClient";
 
 function exoTexExists(themeNumber: number, lang: SiteLang): boolean {
@@ -43,5 +46,20 @@ export default function ExercisesPage({params}: {params: {lang: string}}) {
   const indexFr = lang === "fr" ? buildIndexCards(lang) : [];
   const indexEn = lang !== "fr" ? buildIndexCards(lang) : [];
 
-  return <ExercisesClient themes={themes} indexFr={indexFr} indexEn={indexEn} />;
+  const t = getTranslations(lang);
+  const jsonLd = [
+    breadcrumbListJsonLd(lang, [
+      {name: t.nav.home, logicalPath: "/"},
+      {name: t.nav.exercises, logicalPath: "/exercises"},
+    ]),
+    itemListJsonLd(lang, themes.filter(theme => theme.hasContentFr || theme.hasContentEn).map(theme => ({
+      name: lang === "fr" ? theme.titleFr : theme.titleEn,
+      logicalPath: `/exercises/${theme.slug}`,
+    }))),
+  ];
+
+  return <>
+    <JsonLd data={jsonLd} />
+    <ExercisesClient themes={themes} indexFr={indexFr} indexEn={indexEn} />
+  </>;
 }

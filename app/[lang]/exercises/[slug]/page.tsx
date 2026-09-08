@@ -13,6 +13,9 @@ import {
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
+import { exerciseIdToSegment } from "@/lib/exerciseRoutes";
+import { breadcrumbListJsonLd, itemListJsonLd } from "@/lib/structuredData";
+import { JsonLd } from "@/app/components/JsonLd";
 import { ExerciseThemeClient, type ThemeExerciseCard } from "./ExerciseThemeClient";
 
 interface Props {
@@ -88,16 +91,34 @@ export default function ExerciseThemePage({ params }: Props) {
 
   const { exercisesFr, exercisesEn } = buildThemeExerciseCards(theme.number, params.lang);
 
+  const lang = params.lang;
+  const t = getTranslations(lang);
+  const themeTitle = lang === "fr" ? theme.titleFr : theme.titleEn;
+  const exerciseCards = lang === "fr" ? exercisesFr : exercisesEn;
+  const jsonLd = [
+    breadcrumbListJsonLd(lang, [
+      {name: t.nav.home, logicalPath: "/"},
+      {name: t.nav.exercises, logicalPath: "/exercises"},
+      {name: themeTitle, logicalPath: `/exercises/${theme.slug}`},
+    ]),
+    ...(exerciseCards.length > 0 ? [itemListJsonLd(lang, exerciseCards.map(card => ({
+      name: card.titleHtml.replace(/<[^>]+>/g, ""),
+      logicalPath: `/exercises/${theme.slug}/${exerciseIdToSegment(card.id)}`,
+    })))] : []),
+  ];
 
   return (
-    <ExerciseThemeClient
-      themeSlug={theme.slug}
-      number={theme.number}
-      titleFr={theme.titleFr}
-      titleEn={theme.titleEn}
-      exercisesFr={exercisesFr}
-      exercisesEn={exercisesEn}
-      pdfLinks={getExerciseThemePdfLinks(theme.number)}
-    />
+    <>
+      <JsonLd data={jsonLd} />
+      <ExerciseThemeClient
+        themeSlug={theme.slug}
+        number={theme.number}
+        titleFr={theme.titleFr}
+        titleEn={theme.titleEn}
+        exercisesFr={exercisesFr}
+        exercisesEn={exercisesEn}
+        pdfLinks={getExerciseThemePdfLinks(theme.number)}
+      />
+    </>
   );
 }
