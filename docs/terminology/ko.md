@@ -88,3 +88,9 @@ Le TikZ abrège deux taches en 두 점, la prose précise 두 점무늬 ; 원자
 Les quatre sources TikZ `figs-src/ko/theme1/lecon1_fig1.tex` à `lecon1_fig4.tex` ont été inspectées : textes visibles traduits, symboles physiques conservés ; aucun changement géométrique. Les quatre rendus SG localisés existants sont utilisés. Les quatre images historiques `magnetsmall.png`, `magnetorque.jpg`, `precessionmag.png` et `SGimage.jpg` restent explicitement en repli `figs/fr/`, sans les déclarer traduites. Pas de nouvelle compilation ni validation visuelle du rendu dans cette reprise.
 
 Continuité vérifiée avec `theme2_ko/lesson1.tex` pour produit scalaire, norme et espace de Hilbert ; thème 2 non modifié. La relecture de toutes les autres unités reste à poursuivre au fil des reprises. Les renvois provisoires « XXX » sont conservés comme dans la source française.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « 이 페이지 공유 ». Confirmation de copie : « 링크가 복사되었습니다! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/ko.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « 링크 복사 » (copier le lien), « 이메일 » (courriel). Noms des plateformes conservés.

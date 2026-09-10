@@ -67,3 +67,9 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 | Date | Décision ou écart constaté | Unités concernées | Action restante |
 |---|---|---|---|
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Udostępnij tę stronę ». Confirmation de copie : « Link skopiowany! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/pl.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Kopiuj link » (copier le lien), « E-mail » (courriel). Noms des plateformes conservés.

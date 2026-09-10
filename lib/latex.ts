@@ -105,23 +105,40 @@ export function processLatex(html: string): string {
   });
 
   // 2. Inline math: $...$ — allow newlines inside (e.g. \begin{pmatrix} 1\n i \end{pmatrix}).
-  result = result.replace(/\$([^$]+?)\$/g, (match, math) => {
+  result = result.replace(/([([{«“（「][ \u00a0\u202f]*)?\$([^$]+?)\$((?:[ \u00a0\u202f]*[)\]},.…:;!?»”。，、；：！？؟،؛）」])+)?/g, (match, opening: string | undefined, math: string, trailing: string | undefined) => {
     if (/<\/?[a-z][^>]*>/i.test(math)) return match;
 
     let body = math.trim();
     body = normalizeMultilineMatrixEnvironmentsInMathFragment(body);
 
     try {
-      return katex.renderToString(sanitizeMathCommon(body), {
+      const renderedMath = katex.renderToString(sanitizeMathCommon(body), {
         displayMode: false,
         throwOnError: false,
         trust: false,
         macros: KATEX_MACROS,
       });
+      // Thermo's closing punctuation rule, extended to opening parentheses and
+      // punctuation separated from math by a (possibly nonbreaking) space.
+      return opening || trailing
+        ? `<span class="latex-inline-math-punctuation">${opening ?? ""}${renderedMath}${trailing ?? ""}</span>`
+        : renderedMath;
     } catch {
       return match;
     }
   });
 
   return result;
+}
+
+/** Text for metadata: discard the hidden MathML/TeX alternative, keeping visible math once. */
+export function renderedHtmlToPlainText(html: string): string {
+  return html
+    .replace(/<math\b[^>]*>[\s\S]*?<\/math>/g, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/&#x([\da-f]+);/gi, (_match, hex: string) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_match, decimal: string) => String.fromCodePoint(Number(decimal)))
+    .replace(/&(amp|lt|gt|quot|apos|nbsp);/g, (_match, entity: string) =>
+      ({amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " "})[entity]!)
+    .replace(/\s+/g, " ").trim();
 }

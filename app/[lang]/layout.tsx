@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { LangProvider } from "@/app/context/LangContext";
 import { NavBar } from "@/app/components/NavBar";
 import { Footer } from "@/app/components/Footer";
+import { FloatingShareButton } from "@/app/components/FloatingShareButton";
 import { VercelInstrumentation } from "@/app/components/VercelInstrumentation";
 import { isSiteLang, SITE_LANGS } from "@/lib/localeRoutes";
 import { getTranslations } from "@/lib/translations.server";
@@ -24,6 +25,6 @@ export function generateMetadata({params}: {params: {lang: string}}) {
 export default function LangLayout({children, params}: {children: React.ReactNode; params: {lang: string}}) {
   if (!isSiteLang(params.lang)) notFound();
   return <SiteDocument lang={params.lang}><LangProvider initialLang={params.lang} initialUi={getCatalog(params.lang).ui}>
-    <NavBar /><main>{children}</main><Footer /><VercelInstrumentation />
+    <NavBar /><main>{children}</main><Footer /><FloatingShareButton /><VercelInstrumentation />
   </LangProvider></SiteDocument>;
 }

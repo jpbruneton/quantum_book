@@ -189,6 +189,12 @@
       "question": "Pertanyaan",
       "note": "Catatan",
       "important": "Penting"
+    },
+    "share": {
+      "label": "Bagikan halaman ini",
+      "copied": "Tautan disalin!",
+      "copyLink": "Salin tautan",
+      "email": "Email"
     }
   },
   "themes": {

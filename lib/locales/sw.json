@@ -189,6 +189,12 @@
       "question": "Swali",
       "note": "Tanbihi",
       "important": "Muhimu"
+    },
+    "share": {
+      "label": "Shiriki ukurasa huu",
+      "copied": "Kiungo kimenakiliwa!",
+      "copyLink": "Nakili kiungo",
+      "email": "Barua pepe"
     }
   },
   "themes": {

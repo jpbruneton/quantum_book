@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getWebTheme, getWebThemes } from "@/lib/localizedChapters.server";
 import { bookMeta } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
+import { renderedHtmlToPlainText } from "@/lib/latex";
 import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import {
   buildAllExerciseIndexEntries,
@@ -102,7 +103,7 @@ export default function ExerciseThemePage({ params }: Props) {
       {name: themeTitle, logicalPath: `/exercises/${theme.slug}`},
     ]),
     ...(exerciseCards.length > 0 ? [itemListJsonLd(lang, exerciseCards.map(card => ({
-      name: card.titleHtml.replace(/<[^>]+>/g, ""),
+      name: renderedHtmlToPlainText(card.titleHtml),
       logicalPath: `/exercises/${theme.slug}/${exerciseIdToSegment(card.id)}`,
     })))] : []),
   ];

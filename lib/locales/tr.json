@@ -189,6 +189,12 @@
       "question": "Soru",
       "note": "Not",
       "important": "Önemli"
+    },
+    "share": {
+      "label": "Bu sayfayı paylaş",
+      "copied": "Bağlantı kopyalandı!",
+      "copyLink": "Bağlantıyı kopyala",
+      "email": "E-posta"
     }
   },
   "themes": {

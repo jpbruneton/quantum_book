@@ -189,6 +189,12 @@
       "question": "سوال",
       "note": "نوٹ",
       "important": "اہم"
+    },
+    "share": {
+      "label": "یہ صفحہ شیئر کریں",
+      "copied": "لنک کاپی ہو گیا!",
+      "copyLink": "لنک کاپی کریں",
+      "email": "ای میل"
     }
   },
   "themes": {

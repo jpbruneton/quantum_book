@@ -189,6 +189,12 @@
       "question": "Domanda",
       "note": "Nota",
       "important": "Importante"
+    },
+    "share": {
+      "label": "Condividi questa pagina",
+      "copied": "Link copiato!",
+      "copyLink": "Copia link",
+      "email": "Email"
     }
   },
   "themes": {

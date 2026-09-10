@@ -434,6 +434,7 @@ body::before {
 
 .prose-quantum .latex-figure-zoom-link {
   display: inline-flex;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
   text-decoration: none;
@@ -976,7 +977,7 @@ a.exercise-index-card-link:focus-visible {
   }
 
   .prose-quantum .latex-equation {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     row-gap: 0.25rem;
   }
 
@@ -1021,6 +1022,45 @@ a.exercise-index-card-link:focus-visible {
 ::selection { background: var(--accent-bg-md); color: var(--text-heading); }
 
 /* ─── Home responsive fixes ─── */
+/* Imported from Thermo: avoid stretched word spacing on narrow screens.
+   Logical alignment also supports Quantum's RTL languages. */
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .prose-quantum p,
+  .prose-quantum .latex-block > .latex-block-body,
+  .prose-quantum .latex-block-collapsible-body,
+  .prose-quantum .latex-list li {
+    text-align: start;
+  }
+}
+
+.prose-quantum a {
+  overflow-wrap: anywhere;
+}
+
+.prose-quantum [id^="tex-ref-"] {
+  scroll-margin-top: 120px;
+}
+
+.latex-inline-math-punctuation {
+  white-space: nowrap;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+@media (max-width: 900px) {
+  .latex-inline-math-punctuation {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align: bottom;
+  }
+}
+
 @media (max-width: 980px) {
   .home-hero-grid {
     grid-template-columns: 1fr !important;
@@ -1058,9 +1098,15 @@ a.exercise-index-card-link:focus-visible {
 /* ─── Mobile: hide the "01, 02, ..." lesson numbers and category badge in the leçons list ─── */
 @media (max-width: 640px) {
   .chapter-list-row {
-    grid-template-columns: 1fr auto !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1rem !important;
   }
 
+  .chapter-list-action {
+    align-items: flex-start !important;
+  }
+
+  .chapter-list-meta,
   .chapter-list-number,
   .chapter-list-category {
     display: none !important;
@@ -1068,3 +1114,151 @@ a.exercise-index-card-link:focus-visible {
 }
 
 .katex { direction: ltr; unicode-bidi: isolate; }
+
+.nav-desktop {
+  display: flex;
+}
+
+.nav-mobile-btn {
+  display: none;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1.5px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link-active::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 700px) {
+  .nav-desktop {
+    display: none !important;
+  }
+
+  .nav-mobile-btn {
+    display: flex;
+  }
+
+  .nav-mobile-btn button {
+    min-height: 42px;
+  }
+
+  .lesson-back-to-top {
+    right: auto !important;
+    inset-inline-end: max(1rem, env(safe-area-inset-right), env(safe-area-inset-left)) !important;
+    bottom: calc(max(1.25rem, env(safe-area-inset-bottom)) + 68px) !important;
+  }
+}
+
+.share-control { position: relative; max-width: 100%; }
+.share-inline { display: inline-block; }
+.share-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(96, 165, 250, 0.4);
+  border-radius: 999px;
+  background: rgba(186, 230, 253, 0.55);
+  backdrop-filter: blur(6px);
+  color: #075985;
+  font-family: var(--font-inter);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.share-trigger svg { flex-shrink: 0; }
+.share-trigger:hover { background: rgba(186, 230, 253, 0.8); }
+[data-theme="dark"] .share-trigger {
+  background: rgba(125, 211, 252, 0.22);
+  color: #bae6fd;
+}
+[data-theme="dark"] .share-trigger:hover { background: rgba(125, 211, 252, 0.32); }
+.share-control :focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 3px;
+}
+.floating-share-btn {
+  position: fixed;
+  inset-inline-end: max(1rem, env(safe-area-inset-right), env(safe-area-inset-left));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 40;
+}
+.floating-share-btn .share-trigger {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(7, 89, 133, 0.18);
+}
+.share-menu {
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + 0.5rem);
+  z-index: 60;
+  width: min(240px, calc(100vw - 3rem));
+  max-height: min(350px, calc(100dvh - 13rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+.floating-share-btn .share-menu {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  top: auto;
+  bottom: calc(100% + 0.6rem);
+}
+.share-menu a, .share-menu button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.4rem 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-inter);
+  font-size: 0.82rem;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+.share-menu a:hover, .share-menu button:hover { background: var(--bg-card-hover); }
+.share-badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #475569;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+@media (min-width: 701px) {
+  .floating-share-btn { bottom: calc(max(1.2rem, env(safe-area-inset-bottom)) + 54px); }
+}

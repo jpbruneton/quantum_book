@@ -175,7 +175,7 @@ interface NavCardProps {
 
 function NavCard({ label, title, href, align, compact }: NavCardProps) {
   return (
-    <Link href={href} style={{ textDecoration: "none" }}>
+    <Link href={href} style={{ textDecoration: "none", minWidth: 0, overflowWrap: "anywhere" }}>
       <div
         className="chapter-card"
         style={{
@@ -245,7 +245,7 @@ function LessonNavRow({
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
         gap: compact ? "0.6rem" : "1rem",
       }}
     >

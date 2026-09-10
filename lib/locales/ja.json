@@ -189,6 +189,12 @@
       "question": "問",
       "note": "注",
       "important": "重要"
+    },
+    "share": {
+      "label": "このページを共有",
+      "copied": "リンクをコピーしました！",
+      "copyLink": "リンクをコピー",
+      "email": "メール"
     }
   },
   "themes": {

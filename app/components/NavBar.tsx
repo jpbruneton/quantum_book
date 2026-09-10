@@ -134,6 +134,8 @@ function MoreLanguagesMenu({
             gridTemplateColumns: "repeat(2, minmax(120px, 1fr))",
             gap: "0.15rem",
             minWidth: "260px",
+            maxHeight: "calc(100dvh - 84px)",
+            overflowY: "auto",
           }}
         >
           {MORE_LANGUAGES.map(({ code, flag, nativeName }) => (
@@ -250,33 +252,6 @@ export function NavBar() {
 
   return (
     <>
-      <style>{`
-        .nav-desktop { display: flex; }
-        .nav-mobile-btn { display: none; }
-        @media (max-width: 700px) {
-          .nav-desktop { display: none !important; }
-          .nav-mobile-btn { display: flex !important; }
-        }
-        .nav-link {
-          position: relative;
-        }
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -4px;
-          width: 100%;
-          height: 1.5px;
-          background: var(--amber);
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .nav-link:hover::after,
-        .nav-link-active::after {
-          transform: scaleX(1);
-        }
-      `}</style>
       <nav
         style={{
           position: "sticky",
@@ -449,14 +424,16 @@ export function NavBar() {
         {/* Mobile dropdown menu */}
         {menuOpen && (
           <div
+            className="nav-mobile-btn"
             style={{
               borderTop: "1px solid var(--border)",
               background: "var(--nav-bg)",
               backdropFilter: "blur(12px)",
               padding: "0.75rem 1.5rem 1rem",
-              display: "flex",
               flexDirection: "column",
               gap: "0.75rem",
+              maxHeight: "calc(100dvh - 64px)",
+              overflowY: "auto",
             }}
           >
             {mobileLinks.map((link) => (

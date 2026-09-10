@@ -20,6 +20,7 @@ export function Footer() {
       }}
     >
       <div
+        className="footer-grid"
         style={{
           maxWidth: "1100px",
           margin: "0 auto",

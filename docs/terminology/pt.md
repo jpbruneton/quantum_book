@@ -73,3 +73,9 @@ variation inutile avant le thème 2. Les six libellés des quatre TikZ SG sont
 traduits et cohérents (faixa contínua, duas manchas, forno, bloqueado).
 Rendu non recompilé. Quatre rasters historiques en repli `figs/fr/` non traduit,
 quatre schémas SG localisés en `figs/pt/`.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Partilhar esta página ». Confirmation de copie : « Ligação copiada! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/pt.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Copiar link » (copier le lien), « E-mail » (courriel). Noms des plateformes conservés.

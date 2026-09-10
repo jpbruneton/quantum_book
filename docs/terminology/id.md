@@ -70,3 +70,9 @@ Préférer `oven` pour le four atomique, comme dans les TikZ, à la variante `tu
 Les six termes visibles des quatre TikZ `figs-src/id/theme1/lecon1_fig{1,2,3,4}.tex` et leur lexique `theme1-translations.json` ont été relus : déjà traduits, sans modification nécessaire. Géométrie et symboles SG/axes inchangés. Les quatre PNG SG localisés existants sont utilisés. `magnetsmall.png`, `magnetorque.jpg`, `precessionmag.png` et `SGimage.jpg` restent des originaux français sous `figs/fr/` : leur contenu visible n’est pas déclaré traduit. Aucun TikZ recompilé ; glyphes, débordements et rendu visuel restent à vérifier lors de la prochaine compilation autorisée.
 
 Contrôle ciblé de structure, formules, références et images passé ; rendu serveur KaTeX, sommaire et section bibliographique vérifiés sans build. Les trois notions produit scalaire/norme/Hilbert ont été comparées au thème 2 existant ; pas de modification du thème 2. Les occurrences `section XXX` de la source sont conservées sous leur traduction, sans inventer de référence.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Bagikan halaman ini ». Confirmation de copie : « Tautan disalin! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/id.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Salin tautan » (copier le lien), « Email » (courriel). Noms des plateformes conservés.

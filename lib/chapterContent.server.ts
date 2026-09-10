@@ -3,9 +3,11 @@ import { isLang, type Lang } from "@/lib/i18n";
 import { getTranslations } from "@/lib/translations.server";
 import { localizeFigureAssets } from "@/lib/figureAssets.server";
 import "server-only";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import type { LessonReference } from "@/lib/chapters";
+import { getWebThemes } from "@/lib/chapters";
+import { chapterLessonPath } from "@/lib/lessonRoutes";
 
 interface FigureImageVariant {
   src: string;
@@ -181,10 +183,33 @@ function shouldSkipLatexLine(line: string): boolean {
   return false;
 }
 
+// As in Thermo, text spacing commands must not be rewritten inside formulas.
+// Preserve generated links/tags as well (notably tildes in URLs).
+function replaceOutsideMath(input: string, transform: (segment: string) => string): string {
+  const protectedRegex = /\$\$[\s\S]*?\$\$|\$[^$]*\$|<a\b[^>]*>[\s\S]*?<\/a>|<[^>]*>/g;
+  let result = "";
+  let cursor = 0;
+  for (const match of Array.from(input.matchAll(protectedRegex))) {
+    result += transform(input.slice(cursor, match.index)) + match[0];
+    cursor = match.index! + match[0].length;
+  }
+  return result + transform(input.slice(cursor));
+}
+
 function cleanLatexInline(text: string): string {
   let result = text;
   const nbsp = "\u00A0";
   result = replaceTexorpdfstring(result);
+  const urls: string[] = [];
+  result = replaceInlineCommand(result, "url", (content) => {
+    const url = content.replace(/\\([%_#&{}])/g, "$1").trim();
+    const display = escapeHtmlText(url);
+    const link = /^(https?:\/\/|mailto:)/i.test(url)
+      ? `<a href="${escapeHtmlAttribute(url)}" target="_blank" rel="noreferrer">${display}</a>`
+      : display;
+    urls.push(link);
+    return `__LATEX_URL_${urls.length - 1}__`;
+  });
   const accentMap: Record<string, Record<string, string>> = {
     "'": { a: "á", e: "é", i: "í", o: "ó", u: "ú", y: "ý", A: "Á", E: "É", I: "Í", O: "Ó", U: "Ú", Y: "Ý" },
     "`": { a: "à", e: "è", i: "ì", o: "ò", u: "ù", A: "À", E: "È", I: "Ì", O: "Ò", U: "Ù" },
@@ -203,6 +228,9 @@ function cleanLatexInline(text: string): string {
   result = replaceInlineCommand(result, "textbf", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
   result = replaceInlineCommand(result, "uline", (content) => `<em>${content}</em>`);
   result = replaceInlineCommand(result, "underline", (content) => `<span class="latex-uline">${content}</span>`);
+  result = replaceOutsideMath(result, (segment) => segment
+    .replace(/(?<!\\)\\[,;: ]/g, nbsp)
+    .replace(/(?<!\\)\\([{}%_#&])/g, (_match, character: string) => escapeHtmlText(character)));
   // Convert TeX opening/closing double quotes to typographic quotes.
   result = result.replace(/``/g, "“").replace(/''/g, "”");
   result = result.replace(/\\ldots/g, "...");
@@ -220,8 +248,8 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/\s+;/g, `${nbsp};`);
   result = result.replace(/\s+\?/g, `${nbsp}?`);
   result = result.replace(/\s+!/g, `${nbsp}!`);
-  result = result.replace(/~+/g, " ");
-  return result.trim();
+  result = replaceOutsideMath(result, (segment) => segment.replace(/~+/g, nbsp));
+  return result.replace(/__LATEX_URL_(\d+)__/g, (_match, index: string) => urls[Number(index)]).trim();
 }
 
 function stripFootnotes(input: string): string {
@@ -665,7 +693,9 @@ function collectReferenceMap(input: string): Record<string, string> {
       if (env === "figure") {
         figureIndex += 1;
         refText = `Figure ${figureIndex}`;
-      } else if (["equation", "align", "gather", "multline", "eqnarray"].includes(env)) {
+      } else if (env === "equation" && !beginMatch[1].endsWith("*")) {
+        // Match the numbered equations actually emitted by normalizeLatexBlocks.
+        // Unnumbered display environments must not shift subsequent references.
         equationIndex += 1;
         refText = `${equationIndex}`;
       } else if (env === "theorem") {
@@ -982,15 +1012,58 @@ function transformQuestionsEnvironments(input: string, contentLanguage: Lang): s
   return result;
 }
 
+interface CrossReference {
+  file: string;
+  number: string;
+  theme: number;
+  lesson: number;
+  kind: "lesson" | "fiche";
+  href?: string;
+}
+
+function referenceAnchor(label: string): string {
+  return `tex-ref-${Array.from(label).map((character) => character.codePointAt(0)!.toString(16)).join("-")}`;
+}
+
+let frenchCrossReferences: Record<string, CrossReference[]> | undefined;
+function getFrenchCrossReferences(): Record<string, CrossReference[]> {
+  if (frenchCrossReferences) return frenchCrossReferences;
+  const result: Record<string, CrossReference[]> = {};
+  const published = new Map<string, string>();
+  for (const theme of getWebThemes("fr")) {
+    for (const lesson of theme.lessons) published.set(lesson.texFile, chapterLessonPath("fr", theme.slug, lesson));
+  }
+  const root = join(process.cwd(), "content", "tex");
+  // Index only French source here: translation changes are a separate editorial task.
+  for (const directory of readdirSync(root, { withFileTypes: true })) {
+    const theme = /^theme(\d+)_fr$/.exec(directory.name);
+    if (!directory.isDirectory() || !theme) continue;
+    for (const name of readdirSync(join(root, directory.name))) {
+      const lesson = /^(lecon|fiche)(\d+)\.tex$/.exec(name);
+      if (!lesson) continue;
+      const file = `${directory.name}/${name}`;
+      const source = readFileSync(join(root, file), "utf8").split(/\r?\n/)
+        .map(stripComment).filter((line) => !shouldSkipLatexLine(line)).join("\n")
+        .replace(/\\beq\b/g, "\\begin{equation}").replace(/\\eeq\b/g, "\\end{equation}");
+      for (const [label, number] of Object.entries(collectReferenceMap(source))) {
+        (result[label] ??= []).push({file, number, theme: Number(theme[1]), lesson: Number(lesson[2]),
+          kind: lesson[1] === "fiche" ? "fiche" : "lesson", href: published.get(file)});
+      }
+    }
+  }
+  frenchCrossReferences = result;
+  return result;
+}
+
 function normalizeLatexBlocks(
   input: string,
   citationMaps: CitationNumberMaps,
-  contentLanguage: ContentLanguage
+  contentLanguage: ContentLanguage,
+  texFile?: string
 ): string {
   let result = input;
   let figureRenderIndex = 0;
   let equationRenderIndex = 0;
-  const references = collectReferenceMap(result);
   const labels = getTranslations(contentLanguage).blocks;
 
   // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
@@ -998,6 +1071,10 @@ function normalizeLatexBlocks(
   result = result.replace(/\\\$/g, "$");
   // Do not strip \, \: \; — they are meaningful math spacing for KaTeX ($...$ / $$...$$).
   result = result.replace(/\\\./g, ".");
+  result = result.replace(/\\beq\b/g, "\\begin{equation}");
+  result = result.replace(/\\eeq\b/g, "\\end{equation}");
+  const references = collectReferenceMap(result);
+  const externalReferences = contentLanguage === "fr" && texFile ? getFrenchCrossReferences() : {};
 
   // Common typo tolerance.
   result = result.replace(/\\bgin\{figure\*?\}/g, "\\begin{figure}");
@@ -1005,7 +1082,10 @@ function normalizeLatexBlocks(
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
     figureRenderIndex += 1;
-    return `\n\n${extractFigureHtml(block, figureRenderIndex, contentLanguage)}\n\n`;
+    const anchors = contentLanguage === "fr" && texFile
+      ? Array.from(block.matchAll(/\\label\{([^{}]+)\}/g), (match) => `<span id="${referenceAnchor(match[1])}"></span>`).join("") : "";
+    const figure = extractFigureHtml(block, figureRenderIndex, contentLanguage).replace(/(<figure\b[^>]*>)/, `$1${anchors}`);
+    return `\n\n${figure}\n\n`;
   });
 
   // Ignore mdframed wrappers while preserving their inner content.
@@ -1051,6 +1131,8 @@ function normalizeLatexBlocks(
   // "aretenir" (à retenir) is a common alias for the "important" box style.
   result = result.replace(/\\begin\{aretenir\}/g, "\\begin{important}");
   result = result.replace(/\\end\{aretenir\}/g, "\\end{important}");
+  result = result.replace(/\\begin\{attention\}/g, "\\begin{important}");
+  result = result.replace(/\\end\{attention\}/g, "\\end{important}");
 
   // Render theorem-like environments as styled blocks.
   const blockKinds: Array<{ env: string; title: string; collapsible?: boolean }> = [
@@ -1128,7 +1210,9 @@ function normalizeLatexBlocks(
       if (blockKind.collapsible) {
         return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div></summary><div class="latex-block-collapsible-body">`;
       }
-      return `\n\n<div class="latex-block latex-block-${blockKind.env}"><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div><div class="latex-block-body">`;
+      const anchor = contentLanguage === "fr" && texFile && looksLikeTechnicalLabel && fallbackArg
+        ? ` id="${referenceAnchor(fallbackArg)}"` : "";
+      return `\n\n<div class="latex-block latex-block-${blockKind.env}"${anchor}><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div><div class="latex-block-body">`;
     });
     result = result.replace(
       endRegex,
@@ -1152,7 +1236,9 @@ function normalizeLatexBlocks(
   result = result.replace(/\\eeq\b/g, "\\end{equation}");
   result = result.replace(/\\begin\{equation\}([\s\S]*?)\\end\{equation\}/g, (_m, body: string) => {
     equationRenderIndex += 1;
-    return `\n\n<div class="latex-equation"><div class="latex-equation-math">$$\n${body.trim()}\n$$</div><span class="latex-equation-number">(${equationRenderIndex})</span></div>\n\n`;
+    const anchors = contentLanguage === "fr" && texFile
+      ? Array.from(body.matchAll(/\\label\{([^{}]+)\}/g), (match) => `<span id="${referenceAnchor(match[1])}"></span>`).join("") : "";
+    return `\n\n<div class="latex-equation"><div class="latex-equation-math">${anchors}$$\n${body.trim()}\n$$</div><span class="latex-equation-number">(${equationRenderIndex})</span></div>\n\n`;
   });
   result = result.replace(/\\begin\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n\n$$\n");
   result = result.replace(/\\end\{(equation\*|align\*?|gather\*?|multline\*?)\}/g, "\n$$\n\n");
@@ -1171,18 +1257,32 @@ function normalizeLatexBlocks(
 
   // Render bibliography citations as numbered markers.
   result = replaceCitations(result, citationMaps);
-  result = result.replace(/\\ref\{([^{}]*)\}/g, (_m, label: string) => {
+  result = result.replace(/\\(eqref|ref)\{([^{}]*)\}/g, (_m, command: string, label: string) => {
     const resolved = references[label];
-    if (!resolved) return `[${label}]`;
+    if (!resolved) {
+      const candidates = externalReferences[label]?.filter((entry) => entry.file !== texFile) ?? [];
+      if (candidates.length !== 1) return `[${label}]`;
+      const target = candidates[0];
+      const number = target.number.replace(/^[^0-9]+/, "");
+      const text = `${command === "eqref" ? `(${number})` : number} (thème ${target.theme}, ${target.kind === "fiche" ? "fiche" : "leçon"} ${target.lesson}${target.href ? "" : ", non publiée"})`;
+      return target.href
+        ? `<a class="latex-cross-reference" href="${escapeHtmlAttribute(target.href)}#${referenceAnchor(label)}">${text}</a>`
+        : text;
+    }
     // Keep \ref output numeric to avoid duplicating prefixes already present in prose
     // (e.g. "cf Figure \ref{magnet}" -> "cf Figure 1", not "cf Figure Figure 1").
-    return resolved
+    const number = resolved
       .replace(
         /^(Figure|Théorème|Theorem|Proposition|Définition|Definition|Lemme|Lemma|Corollaire|Corollary|Exemple|Example|Remarque|Remark)\s+/i,
         ""
       )
       .trim();
+    return command === "eqref" ? `(${number})` : number;
   });
+  if (contentLanguage === "fr" && texFile) {
+    result = replaceOutsideMath(result, (segment) => segment.replace(/\\label\{([^{}]+)\}/g,
+      (_match, label: string) => `<span id="${referenceAnchor(label)}" class="latex-reference-anchor"></span>`));
+  }
   result = result.replace(/\\label\{[^{}]*\}/g, "");
 
   // Remove line-level environments that are not needed for web rendering.
@@ -1318,7 +1418,8 @@ function paragraphsToHtml(paragraphs: string[], lang: Lang): string {
 function parseTexParagraphs(
   texSource: string,
   citationMaps: CitationNumberMaps,
-  contentLanguage: ContentLanguage
+  contentLanguage: ContentLanguage,
+  texFile?: string
 ): string[] {
   const normalized = texSource.replace(/\r\n/g, "\n");
   const lines = normalized.split("\n");
@@ -1331,7 +1432,7 @@ function parseTexParagraphs(
     keptLines.push(line);
   }
 
-  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage).trim();
+  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage, texFile).trim();
   if (!body) return [];
 
   const paragraphs = body
@@ -1478,7 +1579,7 @@ export function getLessonWebContent(
     const citationMaps = buildCitationNumberMaps(references);
     const code = texFile.match(/_([a-z]{2})\//)?.[1] ?? "fr";
     const contentLanguage: ContentLanguage = isLang(code) ? code : "fr";
-    const paragraphs = parseTexParagraphs(source, citationMaps, contentLanguage);
+    const paragraphs = parseTexParagraphs(source, citationMaps, contentLanguage, texFile);
     const limitedParagraphs = paragraphCount > 0 ? paragraphs.slice(0, paragraphCount) : paragraphs;
     if (limitedParagraphs.length === 0) return "";
     return localizeFigureAssets(paragraphsToHtml(limitedParagraphs, contentLanguage), contentLanguage);

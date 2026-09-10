@@ -88,3 +88,9 @@ Prose académique directe, noms Штерн и Герлах ; « приготов
 Les quatre sources TikZ `figs-src/ru/theme1/lecon1_fig1.tex` à `lecon1_fig4.tex` ont été inspectées : textes visibles traduits, symboles physiques conservés ; aucun changement géométrique. Les quatre rendus SG localisés existants sont utilisés. Les quatre images historiques `magnetsmall.png`, `magnetorque.jpg`, `precessionmag.png` et `SGimage.jpg` restent explicitement en repli `figs/fr/`, sans les déclarer traduites. Pas de nouvelle compilation ni validation visuelle du rendu dans cette reprise.
 
 Continuité vérifiée avec `theme2_ru/lesson1.tex` pour produit scalaire, norme et espace de Hilbert ; thème 2 non modifié. La relecture de toutes les autres unités reste à poursuivre au fil des reprises. Les renvois provisoires « XXX » sont conservés comme dans la source française.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Поделиться этой страницей ». Confirmation de copie : « Ссылка скопирована! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/ru.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Скопировать ссылку » (copier le lien), « Электронная почта » (courriel). Noms des plateformes conservés.

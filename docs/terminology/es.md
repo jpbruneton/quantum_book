@@ -71,3 +71,9 @@ Titre bibliographique : Referencias. Les six textes visibles des quatre TikZ
 SG sont traduits et cohérents avec le cours (notamment dos manchas, horno).
 Aucune compilation effectuée. Les quatre rasters historiques restent en
 `figs/fr/`, donc en repli non traduit ; les schémas SG sont en `figs/es/`.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Compartir esta página ». Confirmation de copie : « ¡Enlace copiado! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/es.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Copiar enlace » (copier le lien), « Correo electrónico » (courriel). Noms des plateformes conservés.

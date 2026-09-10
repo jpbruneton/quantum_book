@@ -72,3 +72,9 @@ Les six termes visibles des quatre TikZ `figs-src/sw/theme1/lecon1_fig{1,2,3,4}.
 Contrôle ciblé de structure, formules, références et images passé ; rendu serveur KaTeX, sommaire et section bibliographique vérifiés sans build. Les trois notions produit scalaire/norme/Hilbert ont été comparées au thème 2 existant ; pas de modification du thème 2. Les occurrences `section XXX` de la source sont conservées sous leur traduction, sans inventer de référence.
 
 Projection : retenir `projeksheni`, déjà utilisé au thème 2, leçon 1 ; réserver `makadirio` aux estimations/approximations. L’usage `makadirio ya kiothogonali` observé dans le thème 2, leçon 2 reste à harmoniser lors de sa reprise. Combinaison linéaire : `muunganiko wa mstari`, distincte du mélange statistique `mchanganyiko wa kitakwimu`.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Shiriki ukurasa huu ». Confirmation de copie : « Kiungo kimenakiliwa! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/sw.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Nakili kiungo » (copier le lien), « Barua pepe » (courriel). Noms des plateformes conservés.

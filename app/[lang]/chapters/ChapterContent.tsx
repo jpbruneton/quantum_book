@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
+import { ShareButton } from "@/app/components/ShareButton";
 
 interface Props {
   lesson: LessonWithLocalizedContent;
@@ -31,7 +32,9 @@ export function ChapterContent({ lesson, topNav }: Props) {
   const lessonHeading = lang === "fr" ? lessonHeadingFr : lessonHeadingEn;
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    const target = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
+    if (target) target.scrollIntoView({ block: "start", behavior: "auto" });
+    else window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [lesson.slug]);
 
   const splitReferenceLabel = (label: string, fallbackUrl: string) => {
@@ -181,6 +184,10 @@ export function ChapterContent({ lesson, topNav }: Props) {
         </div>
       </div>
 
+      <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0.75rem 1.5rem 0" }}>
+        <ShareButton variant="inline" />
+      </div>
+
       {/* ─── Web Content ─── */}
       <div
         style={{
@@ -227,7 +234,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
                               key={reference.key}
                               style={{
                                 display: "grid",
-                                gridTemplateColumns: "2.2rem 1fr",
+                                gridTemplateColumns: "2.2rem minmax(0, 1fr)",
                                 alignItems: "start",
                                 columnGap: "0.25rem",
                               }}
@@ -248,6 +255,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
                                   <span
                                     style={{
                                       display: "inline-grid",
+                                      overflowWrap: "anywhere",
                                       gap: "0.15rem",
                                       verticalAlign: "top",
                                       fontFamily: "var(--font-crimson)",
@@ -340,6 +348,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
 
       {showBackToTop && (
         <button
+          className="lesson-back-to-top"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label={t.common.backToTop}
           title={t.common.backToTop}

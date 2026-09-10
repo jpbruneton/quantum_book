@@ -18,6 +18,11 @@ for (const route of pages) {
   assert.ok(canonical, `${route}: canonical URL`);
   if (route.includes("/quiz") || (!['fr','en'].includes(lang) && route.includes('/exercises'))) assert.match(html, /name="robots" content="noindex, follow"/, `${route}: unfinished content is not indexed`);
   const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+  const withoutMathSource = visible.replace(/<math\b[^>]*>[\s\S]*?<\/math>/g, "");
+  assert.doesNotMatch(withoutMathSource, /(?:^|>)[^<]*\\(?:[,;:{} ]|(?:eqref|url|begin|end)\b)/,
+    `${route}: no unconverted TeX commands in visible text`);
+  assert.doesNotMatch(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? "", /\\/,
+    `${route}: metadata title does not expose TeX source`);
   if (visible.includes('class="katex"')) mathPages++;
   for (const [,id] of visible.matchAll(/href="#([^"]+)"/g)) assert.ok(visible.includes(`id="${id}"`), `${route}: anchor ${id}`);
 }

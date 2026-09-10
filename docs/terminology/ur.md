@@ -67,3 +67,9 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 
 | Date | Décision ou écart constaté | Unités concernées | Action restante |
 |---|---|---|---|
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « یہ صفحہ شیئر کریں ». Confirmation de copie : « لنک کاپی ہو گیا! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/ur.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « لنک کاپی کریں » (copier le lien), « ای میل » (courriel). Noms des plateformes conservés.

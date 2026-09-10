@@ -118,3 +118,10 @@ par inspection du HTML statique, et les PNG TikZ ont été inspectés visuelleme
 Après toute modification d'une source française, relancer les contrôles et mettre
 à jour les traductions concernées avant de régénérer le manifeste. Ne pas utiliser
 une ancienne traduction anglaise comme source autoritaire.
+## Renvois français repris le 10 septembre 2026
+
+Les corrections de renvois des thèmes 2 et 3 sont réalisées en français seulement,
+à la demande de l’auteur. Les traductions du thème 2 restent à synchroniser pour
+ces références et labels. Le contrôle structurel des traductions signale cet écart ;
+le manifeste conserve la dernière validation multilingue antérieure à cette reprise.
+Voir [la liste des corrections et notes restantes](french-reference-audit.md).

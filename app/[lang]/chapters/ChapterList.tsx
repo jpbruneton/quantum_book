@@ -79,6 +79,7 @@ export function ChapterList({ webThemes }: Props) {
               }}
             >
               <div
+                className="chapter-list-meta"
                 style={{
                   display: "flex",
                   flexDirection: "column",
@@ -142,6 +143,7 @@ export function ChapterList({ webThemes }: Props) {
               </div>
 
               <div
+                className="chapter-list-action"
                 style={{
                   display: "flex",
                   flexDirection: "column",

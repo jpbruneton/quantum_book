@@ -72,3 +72,9 @@ libellés sont traduits ; « zwei Spuren » désigne les traces et reste compati
 avec les Flecken du texte. Aucun changement de géométrie ou compilation.
 Les quatre rasters historiques restent explicitement en `figs/fr/` (replis
 non traduits) ; les quatre schémas SG utilisent `figs/de/`.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Diese Seite teilen ». Confirmation de copie : « Link kopiert! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/de.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Link kopieren » (copier le lien), « E-Mail » (courriel). Noms des plateformes conservés.

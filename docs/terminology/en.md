@@ -77,3 +77,9 @@ cohérentes avec le cours ; sources inspectées, aucune recompilation.
 Les quatre images historiques `magnetsmall.png`, `magnetorque.jpg`,
 `precessionmag.png`, `SGimage.jpg` restent explicitement en `figs/fr/` : ce sont
 des replis non traduits, distincts des quatre schémas SG localisés.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Share this page ». Confirmation de copie : « Link copied! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/en.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Copy link » (copier le lien), « Email » (courriel). Noms des plateformes conservés.

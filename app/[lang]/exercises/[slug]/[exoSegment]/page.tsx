@@ -1,5 +1,5 @@
 import { getTranslations } from "@/lib/translations.server";
-import { processLatex } from "@/lib/latex";
+import { processLatex, renderedHtmlToPlainText } from "@/lib/latex";
 import { ContentUnavailable } from "@/app/components/ContentUnavailable";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!entry) return {robots: {index: false, follow: true}, alternates: localeAlternates(params.lang, `/exercises/${theme.slug}/${params.exoSegment}`)};
   const path = exerciseDetailPath(params.lang, theme.slug, exerciseId);
   const url = absoluteUrl(path);
-  const titlePlain = exerciseTitleToPlainHtml(entry.titleTex).replace(/<[^>]+>/g, "");
+  const titlePlain = renderedHtmlToPlainText(exerciseTitleToPlainHtml(entry.titleTex));
   const isFr = params.lang === "fr";
   const t = getTranslations(params.lang);
   const themeTitle = isFr ? theme.titleFr : theme.titleEn;

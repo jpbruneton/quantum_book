@@ -189,6 +189,12 @@
       "question": "Câu hỏi",
       "note": "Chú thích",
       "important": "Quan trọng"
+    },
+    "share": {
+      "label": "Chia sẻ trang này",
+      "copied": "Đã sao chép liên kết!",
+      "copyLink": "Sao chép liên kết",
+      "email": "Email"
     }
   },
   "themes": {

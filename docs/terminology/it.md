@@ -71,3 +71,9 @@ traduits, cohérents avec la leçon ; due tracce désigne les traces observées 
 n'impose pas de renommer macchie. Sources inspectées sans compilation.
 Quatre rasters historiques restent des replis non traduits en `figs/fr/` ; les
 quatre schémas SG sont explicitement localisés en `figs/it/`.
+
+## Interface mobile — 2026-09-10
+
+Partager cette page : « Condividi questa pagina ». Confirmation de copie : « Link copiato! ».
+Libellés courts de commande et de retour utilisateur dans `lib/locales/it.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
+Menu de partage : « Copia link » (copier le lien), « Email » (courriel). Noms des plateformes conservés.
