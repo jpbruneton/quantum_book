@@ -38,7 +38,10 @@ Outre les nouveaux renvois, cela répare `l2n` dans la fiche 1, et `l2r`, `elemm
 
 ## Notes nécessitant une décision ou du contenu supplémentaire
 
-Aucun label ni passage de destination n’a été inventé. Les notes ci-dessous restent dans la source ; elles ne sont pas présentées comme résolues.
+Aucun label ni passage de destination n’a été inventé. À la demande de l’auteur,
+les notes ci-dessous sont conservées en commentaires TeX et masquées dans le rendu.
+Les annonces de renvois sans cible et les sections encore à l’état de brouillon
+sont également commentées. Aucun passage manquant n’a été rédigé.
 
 | Source | Note restante |
 |---|---|
@@ -56,9 +59,9 @@ Aucun label ni passage de destination n’a été inventé. Les notes ci-dessous
 
 ## Bibliographie vérifiée
 
-Autre dépendance manquante : `theme3_fr/lecon1.tex` inclut `Chp4/alea`, mais ce
-fichier n’existe pas dans le dépôt. Le renvoi à la « sous-section suivante sur
-l’aléatoire fondamental » ne peut donc pas recevoir de label valide actuellement.
+Autre dépendance manquante : l’inclusion de `Chp4/alea` dans `theme3_fr/lecon1.tex`
+est désormais commentée, car ce fichier n’existe pas dans le dépôt. L’annonce de
+la « sous-section suivante sur l’aléatoire fondamental » est masquée elle aussi.
 
 - [Pusey, Barrett et Rudolph (2012)](https://arxiv.org/abs/1111.3328) : article original sur la réalité de l’état quantique.
 - [Colbeck et Renner (2012)](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.108.150402) : article original sur la correspondance entre fonction d’onde et réalité.
