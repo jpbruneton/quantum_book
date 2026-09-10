@@ -195,6 +195,12 @@
       "copied": "링크가 복사되었습니다!",
       "copyLink": "링크 복사",
       "email": "이메일"
+    },
+    "crossReference": {
+      "theme": "주제",
+      "lesson": "과",
+      "fiche": "학습 자료",
+      "unavailable": "이 언어로 제공되지 않음"
     }
   },
   "themes": {

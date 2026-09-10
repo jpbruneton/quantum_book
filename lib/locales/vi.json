@@ -195,6 +195,12 @@
       "copied": "Đã sao chép liên kết!",
       "copyLink": "Sao chép liên kết",
       "email": "Email"
+    },
+    "crossReference": {
+      "theme": "Chủ đề",
+      "lesson": "Bài học",
+      "fiche": "Phiếu",
+      "unavailable": "chưa có bằng ngôn ngữ này"
     }
   },
   "themes": {

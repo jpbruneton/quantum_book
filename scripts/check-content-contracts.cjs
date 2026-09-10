@@ -161,3 +161,36 @@ assert.doesNotMatch(frenchPostulates, /\\ref\{\}|\[blochsphere\]|\[rabi_battemen
 const frenchDirac = [...frenchPages.values()].find(page => page.file === 'theme2_fr/lecon2.tex').html;
 assert.doesNotMatch(frenchDirac, /\[eq:ket_to_bra\]/, 'The labelled dagger identity has a displayed equation number');
 console.log(`${crossReferenceCount} French cross-references have published targets and stable anchors; unpublished targets stay unlinked.`);
+
+const lessonSource = load('lib/lessonSource.server.ts');
+let translatedLinks = 0;
+for (const lang of SUPPORTED_LANGS.filter(lang => lang !== 'fr')) {
+  const pages = new Map();
+  for (const theme of getWebThemes(lang)) {
+    for (const lesson of theme.lessons) {
+      if (!lessonSource.hasLessonWebContent(lesson.texFile, lang)) continue;
+      const file = lessonSource.getTexFilePathForLang(lesson.texFile, lang);
+      pages.set(lessonRoutes.chapterLessonPath(lang, theme.slug, lesson), {
+        file, html: chapterContent.getLessonWebContent(file, -1, chapterContent.getLessonReferences(theme.number, lesson.number, [], file)),
+      });
+    }
+  }
+  let count = 0;
+  for (const page of pages.values()) {
+    for (const match of page.html.matchAll(/class="latex-cross-reference" href="([^"#]+)#([^"]+)"/g)) {
+      assert.ok(match[1].startsWith(`/${lang}/`), `${lang}: reference stays in the requested language`);
+      assert.ok(pages.get(match[1])?.html.includes(`id="${match[2]}"`), `${page.file}: translated target anchor exists`);
+      count++;
+    }
+  }
+  assert.ok(count >= 2, `${lang}: Hilbert and Dirac links are present`);
+  translatedLinks += count;
+  const copy = require(path.resolve(`lib/locales/${lang}.json`)).ui.crossReference;
+  for (const n of [1, 2]) {
+    const html = [...pages.values()].find(page => page.file === `theme2_${lang}/lesson${n}.tex`).html;
+    assert.ok(html.includes(copy.unavailable), `${lang}: untranslated target is explicitly identified`);
+    assert.doesNotMatch(html, /\[(?:postulat_mesure|sec:t2-notations-dirac|sec:t4-operateurs-bornes|hilbertcn|sec:t4-adjoint-domaine-dense|eq:ket_to_bra|eq:bra_to_ket)\]/);
+  }
+  assert.equal(lessonSource.hasLessonWebContent('theme3_fr/lecon1.tex', lang), false);
+}
+console.log(`${translatedLinks} translated cross-references have same-language targets and stable anchors; missing translations remain unlinked.`);

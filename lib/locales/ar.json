@@ -195,6 +195,12 @@
       "copied": "تم نسخ الرابط!",
       "copyLink": "نسخ الرابط",
       "email": "البريد الإلكتروني"
+    },
+    "crossReference": {
+      "theme": "المحور",
+      "lesson": "الدرس",
+      "fiche": "البطاقة",
+      "unavailable": "غير متاح بهذه اللغة"
     }
   },
   "themes": {

@@ -195,6 +195,12 @@
       "copied": "لنک کاپی ہو گیا!",
       "copyLink": "لنک کاپی کریں",
       "email": "ای میل"
+    },
+    "crossReference": {
+      "theme": "موضوع",
+      "lesson": "سبق",
+      "fiche": "ورق",
+      "unavailable": "اس زبان میں دستیاب نہیں"
     }
   },
   "themes": {

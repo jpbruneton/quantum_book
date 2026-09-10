@@ -8,6 +8,7 @@ import { join } from "node:path";
 import type { LessonReference } from "@/lib/chapters";
 import { getWebThemes } from "@/lib/chapters";
 import { chapterLessonPath } from "@/lib/lessonRoutes";
+import { getTexFilePathForLang, hasLessonWebContent } from "@/lib/lessonSource.server";
 
 interface FigureImageVariant {
   src: string;
@@ -1025,21 +1026,26 @@ function referenceAnchor(label: string): string {
   return `tex-ref-${Array.from(label).map((character) => character.codePointAt(0)!.toString(16)).join("-")}`;
 }
 
-let frenchCrossReferences: Record<string, CrossReference[]> | undefined;
-function getFrenchCrossReferences(): Record<string, CrossReference[]> {
-  if (frenchCrossReferences) return frenchCrossReferences;
+const crossReferencesByLanguage = new Map<ContentLanguage, Record<string, CrossReference[]>>();
+function getCrossReferences(lang: ContentLanguage): Record<string, CrossReference[]> {
+  const cached = crossReferencesByLanguage.get(lang);
+  if (cached) return cached;
   const result: Record<string, CrossReference[]> = {};
   const published = new Map<string, string>();
-  for (const theme of getWebThemes("fr")) {
-    for (const lesson of theme.lessons) published.set(lesson.texFile, chapterLessonPath("fr", theme.slug, lesson));
+  for (const theme of getWebThemes(lang)) {
+    for (const lesson of theme.lessons) {
+      if (hasLessonWebContent(lesson.texFile, lang)) {
+        published.set(getTexFilePathForLang(lesson.texFile, lang), chapterLessonPath(lang, theme.slug, lesson));
+      }
+    }
   }
   const root = join(process.cwd(), "content", "tex");
-  // Index only French source here: translation changes are a separate editorial task.
+  // Links only point to authored and published targets in the requested language.
   for (const directory of readdirSync(root, { withFileTypes: true })) {
-    const theme = /^theme(\d+)_fr$/.exec(directory.name);
+    const theme = new RegExp(`^theme(\\d+)_${lang}$`).exec(directory.name);
     if (!directory.isDirectory() || !theme) continue;
     for (const name of readdirSync(join(root, directory.name))) {
-      const lesson = /^(lecon|fiche)(\d+)\.tex$/.exec(name);
+      const lesson = /^(lecon|lesson|fiche)(\d+)\.tex$/.exec(name);
       if (!lesson) continue;
       const file = `${directory.name}/${name}`;
       const source = readFileSync(join(root, file), "utf8").split(/\r?\n/)
@@ -1051,7 +1057,18 @@ function getFrenchCrossReferences(): Record<string, CrossReference[]> {
       }
     }
   }
-  frenchCrossReferences = result;
+  if (lang !== "fr") {
+    // French labels supply location metadata for untranslated targets, never body text or links.
+    for (const [label, entries] of Object.entries(getCrossReferences("fr"))) {
+      for (const entry of entries) {
+        const file = getTexFilePathForLang(entry.file, lang);
+        if (!result[label]?.some((target) => target.file === file)) {
+          (result[label] ??= []).push({ ...entry, file, href: undefined });
+        }
+      }
+    }
+  }
+  crossReferencesByLanguage.set(lang, result);
   return result;
 }
 
@@ -1074,7 +1091,7 @@ function normalizeLatexBlocks(
   result = result.replace(/\\beq\b/g, "\\begin{equation}");
   result = result.replace(/\\eeq\b/g, "\\end{equation}");
   const references = collectReferenceMap(result);
-  const externalReferences = contentLanguage === "fr" && texFile ? getFrenchCrossReferences() : {};
+  const externalReferences = texFile ? getCrossReferences(contentLanguage) : {};
 
   // Common typo tolerance.
   result = result.replace(/\\bgin\{figure\*?\}/g, "\\begin{figure}");
@@ -1082,7 +1099,7 @@ function normalizeLatexBlocks(
   // Render LaTeX figures as HTML figures, instead of showing raw environment tags.
   result = result.replace(/\\begin\{figure\*?\}[\s\S]*?\\end\{figure\*?\}/g, (block) => {
     figureRenderIndex += 1;
-    const anchors = contentLanguage === "fr" && texFile
+    const anchors = texFile
       ? Array.from(block.matchAll(/\\label\{([^{}]+)\}/g), (match) => `<span id="${referenceAnchor(match[1])}"></span>`).join("") : "";
     const figure = extractFigureHtml(block, figureRenderIndex, contentLanguage).replace(/(<figure\b[^>]*>)/, `$1${anchors}`);
     return `\n\n${figure}\n\n`;
@@ -1210,7 +1227,7 @@ function normalizeLatexBlocks(
       if (blockKind.collapsible) {
         return `\n\n<details class="latex-block latex-block-${blockKind.env}"><summary><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div></summary><div class="latex-block-collapsible-body">`;
       }
-      const anchor = contentLanguage === "fr" && texFile && looksLikeTechnicalLabel && fallbackArg
+      const anchor = texFile && looksLikeTechnicalLabel && fallbackArg
         ? ` id="${referenceAnchor(fallbackArg)}"` : "";
       return `\n\n<div class="latex-block latex-block-${blockKind.env}"${anchor}><div class="latex-block-heading"><strong>${headingStrongInner}</strong></div><div class="latex-block-body">`;
     });
@@ -1236,7 +1253,7 @@ function normalizeLatexBlocks(
   result = result.replace(/\\eeq\b/g, "\\end{equation}");
   result = result.replace(/\\begin\{equation\}([\s\S]*?)\\end\{equation\}/g, (_m, body: string) => {
     equationRenderIndex += 1;
-    const anchors = contentLanguage === "fr" && texFile
+    const anchors = texFile
       ? Array.from(body.matchAll(/\\label\{([^{}]+)\}/g), (match) => `<span id="${referenceAnchor(match[1])}"></span>`).join("") : "";
     return `\n\n<div class="latex-equation"><div class="latex-equation-math">${anchors}$$\n${body.trim()}\n$$</div><span class="latex-equation-number">(${equationRenderIndex})</span></div>\n\n`;
   });
@@ -1264,7 +1281,8 @@ function normalizeLatexBlocks(
       if (candidates.length !== 1) return `[${label}]`;
       const target = candidates[0];
       const number = target.number.replace(/^[^0-9]+/, "");
-      const text = `${command === "eqref" ? `(${number})` : number} (thème ${target.theme}, ${target.kind === "fiche" ? "fiche" : "leçon"} ${target.lesson}${target.href ? "" : ", non publiée"})`;
+      const copy = getTranslations(contentLanguage).crossReference;
+      const text = `${command === "eqref" ? `(${number})` : number} (${copy.theme} ${target.theme}, ${copy[target.kind]} ${target.lesson}${target.href ? "" : `, ${copy.unavailable}`})`;
       return target.href
         ? `<a class="latex-cross-reference" href="${escapeHtmlAttribute(target.href)}#${referenceAnchor(label)}">${text}</a>`
         : text;
@@ -1279,7 +1297,7 @@ function normalizeLatexBlocks(
       .trim();
     return command === "eqref" ? `(${number})` : number;
   });
-  if (contentLanguage === "fr" && texFile) {
+  if (texFile) {
     result = replaceOutsideMath(result, (segment) => segment.replace(/\\label\{([^{}]+)\}/g,
       (_match, label: string) => `<span id="${referenceAnchor(label)}" class="latex-reference-anchor"></span>`));
   }

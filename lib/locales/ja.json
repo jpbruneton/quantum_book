@@ -195,6 +195,12 @@
       "copied": "リンクをコピーしました！",
       "copyLink": "リンクをコピー",
       "email": "メール"
+    },
+    "crossReference": {
+      "theme": "テーマ",
+      "lesson": "課",
+      "fiche": "資料",
+      "unavailable": "この言語では未公開"
     }
   },
   "themes": {

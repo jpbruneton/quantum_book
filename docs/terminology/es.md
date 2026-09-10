@@ -77,3 +77,8 @@ Aucune compilation effectuée. Les quatre rasters historiques restent en
 Partager cette page : « Compartir esta página ». Confirmation de copie : « ¡Enlace copiado! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/es.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « Copiar enlace » (copier le lien), « Correo electrónico » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « véase la sección ». Cible indisponible : « no disponible en este idioma ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

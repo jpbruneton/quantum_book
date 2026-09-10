@@ -195,6 +195,12 @@
       "copied": "Tautan disalin!",
       "copyLink": "Salin tautan",
       "email": "Email"
+    },
+    "crossReference": {
+      "theme": "Tema",
+      "lesson": "Pelajaran",
+      "fiche": "Lembar",
+      "unavailable": "belum tersedia dalam bahasa ini"
     }
   },
   "themes": {

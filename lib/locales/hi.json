@@ -195,6 +195,12 @@
       "copied": "लिंक कॉपी हो गया!",
       "copyLink": "लिंक कॉपी करें",
       "email": "ईमेल"
+    },
+    "crossReference": {
+      "theme": "विषय",
+      "lesson": "पाठ",
+      "fiche": "सहायक पत्रक",
+      "unavailable": "इस भाषा में उपलब्ध नहीं"
     }
   },
   "themes": {

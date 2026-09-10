@@ -195,6 +195,12 @@
       "copied": "Bağlantı kopyalandı!",
       "copyLink": "Bağlantıyı kopyala",
       "email": "E-posta"
+    },
+    "crossReference": {
+      "theme": "Tema",
+      "lesson": "Ders",
+      "fiche": "Bilgi föyü",
+      "unavailable": "bu dilde mevcut değil"
     }
   },
   "themes": {

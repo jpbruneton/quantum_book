@@ -76,3 +76,8 @@ Contrôle ciblé de structure, formules, références et images passé ; rendu s
 Partager cette page : « Bagikan halaman ini ». Confirmation de copie : « Tautan disalin! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/id.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « Salin tautan » (copier le lien), « Email » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « lihat bagian ». Cible indisponible : « belum tersedia dalam bahasa ini ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

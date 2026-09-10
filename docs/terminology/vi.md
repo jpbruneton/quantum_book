@@ -94,3 +94,8 @@ Continuité vérifiée avec `theme2_vi/lesson1.tex` pour produit scalaire, norme
 Partager cette page : « Chia sẻ trang này ». Confirmation de copie : « Đã sao chép liên kết! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/vi.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « Sao chép liên kết » (copier le lien), « Email » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « xem mục ». Cible indisponible : « chưa có bằng ngôn ngữ này ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

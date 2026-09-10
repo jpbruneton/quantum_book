@@ -77,3 +77,8 @@ quatre schémas SG sont explicitement localisés en `figs/it/`.
 Partager cette page : « Condividi questa pagina ». Confirmation de copie : « Link copiato! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/it.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « Copia link » (copier le lien), « Email » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « si veda la sezione ». Cible indisponible : « non disponibile in questa lingua ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

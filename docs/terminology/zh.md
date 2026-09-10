@@ -94,3 +94,8 @@ Continuité vérifiée avec `theme2_zh/lesson1.tex` pour produit scalaire, norme
 Partager cette page : « 分享此页面 ». Confirmation de copie : « 链接已复制！ ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/zh.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « 复制链接 » (copier le lien), « 电子邮件 » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « 参见第 ». Cible indisponible : « 此语言版本尚未提供 ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

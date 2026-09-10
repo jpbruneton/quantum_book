@@ -76,3 +76,8 @@ Contrôle ciblé de structure, formules, références et images passé ; rendu s
 Partager cette page : « اشتراک‌گذاری این صفحه ». Confirmation de copie : « پیوند کپی شد! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/fa.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « کپی پیوند » (copier le lien), « ایمیل » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « نگاه کنید به بخش ». Cible indisponible : « به این زبان در دسترس نیست ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

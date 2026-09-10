@@ -195,6 +195,12 @@
       "copied": "链接已复制！",
       "copyLink": "复制链接",
       "email": "电子邮件"
+    },
+    "crossReference": {
+      "theme": "主题",
+      "lesson": "课",
+      "fiche": "资料页",
+      "unavailable": "此语言版本尚未提供"
     }
   },
   "themes": {

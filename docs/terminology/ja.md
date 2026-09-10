@@ -94,3 +94,8 @@ Continuité vérifiée avec `theme2_ja/lesson1.tex` pour produit scalaire, norme
 Partager cette page : « このページを共有 ». Confirmation de copie : « リンクをコピーしました！ ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/ja.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « リンクをコピー » (copier le lien), « メール » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « 第 ». Cible indisponible : « この言語では未公開 ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

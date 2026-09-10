@@ -73,3 +73,8 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 Partager cette page : « Udostępnij tę stronę ». Confirmation de copie : « Link skopiowany! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/pl.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « Kopiuj link » (copier le lien), « E-mail » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « zob. sekcja ». Cible indisponible : « niedostępne w tym języku ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

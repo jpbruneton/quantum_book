@@ -195,6 +195,12 @@
       "copied": "Link kopiert!",
       "copyLink": "Link kopieren",
       "email": "E-Mail"
+    },
+    "crossReference": {
+      "theme": "Thema",
+      "lesson": "Lektion",
+      "fiche": "Merkblatt",
+      "unavailable": "in dieser Sprache nicht verfügbar"
     }
   },
   "themes": {

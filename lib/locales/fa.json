@@ -195,6 +195,12 @@
       "copied": "پیوند کپی شد!",
       "copyLink": "کپی پیوند",
       "email": "ایمیل"
+    },
+    "crossReference": {
+      "theme": "موضوع",
+      "lesson": "درس",
+      "fiche": "برگه",
+      "unavailable": "به این زبان در دسترس نیست"
     }
   },
   "themes": {

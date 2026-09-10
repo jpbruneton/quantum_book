@@ -1,6 +1,6 @@
 # Renvois français — thèmes 2 et 3
 
-Audit du 10 septembre 2026. Sources françaises uniquement. Les labels ajoutés dans le thème 4 servent de cibles aux renvois du thème 2. Aucune leçon supplémentaire publiée.
+Audit du 10 septembre 2026, puis propagation aux traductions existantes à la demande de l’auteur. Les labels ajoutés dans le thème 4 servent de cibles aux renvois du thème 2. Aucune leçon supplémentaire publiée.
 
 ## Renvois et labels corrigés
 
@@ -71,12 +71,21 @@ La leçon du thème 3 charge désormais `ref_3_1.tex` ; elle chargeait auparavan
 
 ## Traductions
 
-Les sources traduites ne sont pas modifiées. `check-translations.mjs --write-manifest` signale donc un écart de références avec les nouvelles sources françaises du thème 2. Le manifeste conserve la dernière validation multilingue ; il ne prétend pas valider ces nouveaux renvois. La synchronisation des traductions est reportée à la demande de l’auteur.
+Les 19 traductions des leçons 1 et 2 du thème 2 reprennent les cinq renvois, le label des notations de Dirac et les deux équations numérotées séparément (38 fichiers). Les 95 unités du manifeste passent le contrôle de structure, formules, références et figures.
+
+Le rendu des références entre leçons et fiches est étendu aux 20 langues. Les 114 liens des traductions pointent vers une ancre existante dans la même langue. Pour un passage non traduit, seuls son numéro et sa localisation sont repris de l’index français, avec une mention d’indisponibilité traduite et sans lien. Aucun contenu français n’est substitué à une traduction manquante.
+
+Le thème 3 n’a aucune traduction rédigée : son fichier anglais est vide. Les TODO masqués restent donc uniquement dans la source française ; aucun passage manquant ni nouvelle traduction du thème 3 n’a été rédigé. Les cibles du thème 4, leçon 3, n’ont pas non plus de traduction rédigée.
 ## Validation
 
 Compilation réussie avec l’URL canonique Quantum, contrôles statiques et ressources
 réussis, contrats de contenu réussis. Les neuf liens français entre leçons ont une
 cible publiée et une ancre existante. Le navigateur vérifie aussi l’arrivée à la
 bonne section, sous la barre de navigation : le retour automatique en haut ne doit
-pas écraser le fragment d’un lien entrant. Le contrôle multilingue des sources
-signale l’écart attendu décrit ci-dessus ; les catalogues d’interface sont valides.
+pas écraser le fragment d’un lien entrant. Les contrôles multilingues des sources
+et des catalogues d’interface sont valides après synchronisation.
+
+Après propagation, les 19 langues sont également vérifiées dans Chromium à 320 px :
+navigation réelle vers les notations de Dirac, position de l’ancre sous le menu,
+absence de débordement de page et d’erreur JavaScript. L’audit du HTML compilé ne
+détecte aucun antislash parasite visible.

@@ -94,3 +94,8 @@ Continuité vérifiée avec `theme2_ko/lesson1.tex` pour produit scalaire, norme
 Partager cette page : « 이 페이지 공유 ». Confirmation de copie : « 링크가 복사되었습니다! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/ko.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « 링크 복사 » (copier le lien), « 이메일 » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « 제 ». Cible indisponible : « 이 언어로 제공되지 않음 ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

@@ -94,3 +94,8 @@ Continuité vérifiée avec `theme2_hi/lesson1.tex` pour produit scalaire, norme
 Partager cette page : « यह पृष्ठ साझा करें ». Confirmation de copie : « लिंक कॉपी हो गया! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/hi.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « लिंक कॉपी करें » (copier le lien), « ईमेल » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « अनुभाग ». Cible indisponible : « इस भाषा में उपलब्ध नहीं ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

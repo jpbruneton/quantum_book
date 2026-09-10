@@ -195,6 +195,12 @@
       "copied": "Lien copié !",
       "copyLink": "Copier le lien",
       "email": "E-mail"
+    },
+    "crossReference": {
+      "theme": "thème",
+      "lesson": "leçon",
+      "fiche": "fiche",
+      "unavailable": "non publiée"
     }
   },
   "themes": {

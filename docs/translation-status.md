@@ -120,8 +120,11 @@ Après toute modification d'une source française, relancer les contrôles et me
 une ancienne traduction anglaise comme source autoritaire.
 ## Renvois français repris le 10 septembre 2026
 
-Les corrections de renvois des thèmes 2 et 3 sont réalisées en français seulement,
-à la demande de l’auteur. Les traductions du thème 2 restent à synchroniser pour
-ces références et labels. Le contrôle structurel des traductions signale cet écart ;
-le manifeste conserve la dernière validation multilingue antérieure à cette reprise.
+Les corrections du thème 2 sont synchronisées dans les 19 langues : cinq renvois,
+label des notations de Dirac et numérotation séparée des identités adjointes.
+Les 95 unités traduites passent le contrôle structurel ; le manifeste est régénéré.
+Le rendu des renvois est multilingue, avec 114 liens vérifiés vers des ancres dans
+la même langue. Une cible non traduite est signalée sans lien ni repli de contenu.
+Le thème 3 n’a aucune traduction rédigée (fichier anglais vide) : aucun passage
+manquant n’est ajouté et les notes éditoriales demeurent masquées en français.
 Voir [la liste des corrections et notes restantes](french-reference-audit.md).

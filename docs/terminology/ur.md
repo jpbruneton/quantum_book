@@ -73,3 +73,8 @@ Utiliser les indices descriptifs anglais de [en.md](en.md), en caractères latin
 Partager cette page : « یہ صفحہ شیئر کریں ». Confirmation de copie : « لنک کاپی ہو گیا! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/ur.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « لنک کاپی کریں » (copier le lien), « ای میل » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « دیکھیے حصہ ». Cible indisponible : « اس زبان میں دستیاب نہیں ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.

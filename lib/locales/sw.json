@@ -195,6 +195,12 @@
       "copied": "Kiungo kimenakiliwa!",
       "copyLink": "Nakili kiungo",
       "email": "Barua pepe"
+    },
+    "crossReference": {
+      "theme": "Mada",
+      "lesson": "Somo",
+      "fiche": "Karatasi",
+      "unavailable": "haipatikani katika lugha hii"
     }
   },
   "themes": {

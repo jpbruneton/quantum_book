@@ -76,3 +76,8 @@ Contrôle ciblé de structure, formules, références et images passé ; rendu s
 Partager cette page : « مشاركة هذه الصفحة ». Confirmation de copie : « تم نسخ الرابط! ».
 Libellés courts de commande et de retour utilisateur dans `lib/locales/ar.json` (`ui.share`). Traduction directe du français ; relecture humaine native non effectuée.
 Menu de partage : « نسخ الرابط » (copier le lien), « البريد الإلكتروني » (courriel). Noms des plateformes conservés.
+
+### Renvois du thème 2 — 2026-09-10
+
+Renvoi de section : « انظر القسم ». Cible indisponible : « غير متاح بهذه اللغة ».
+Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.
