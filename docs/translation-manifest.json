@@ -6,153 +6,153 @@
       "unit": "theme1/lecon1",
       "lang": "en",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_en/lesson1.tex",
-      "sha256": "1232c8f5da4954e0a9a141eb24cb51aba654347cff9a3e8fe7d38b3b53822089"
+      "sha256": "006b89a9304edfb1e0448b20bd7932374cb5fb3f2de2e74de0f7c5d17293db73"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "de",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_de/lesson1.tex",
-      "sha256": "9bad85f87d8b6e38605a3934013de0cae4c0d3a2faf388983e9ecf8d308a1f6d"
+      "sha256": "a3213ab310ee755dba597b49fc2c57c2c135d1aeda6e1367c08b744a135b01b7"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "es",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_es/lesson1.tex",
-      "sha256": "16602f33171e6e44710cf3fb4746b0d80a5b9537e618b15084dff301bc3cd5bd"
+      "sha256": "7639075256ca2eec85c28a22c5fcab687eaa0ab34580aab9de05ba9f3039809e"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "pt",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_pt/lesson1.tex",
-      "sha256": "e6d9e003d38e5dd49eb2bc630009d7b29d3706cfd25ee38bf585527ca6b3b3f6"
+      "sha256": "7b3e49b278e787f5138acd8d10a0459fdc728d119ec36094cb2af6d9c826d0a0"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "it",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_it/lesson1.tex",
-      "sha256": "56a63f935b22b0859607a0bcf0fb1062023c63c7e32af37d55da1650ea87f6b8"
+      "sha256": "0318ca99a80485e9fcbf870abc5d4d6ca53e4cd409225ddaf703f496457fb414"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "pl",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_pl/lesson1.tex",
-      "sha256": "1040c787ad39d424953b66b02620b992930c505ca8c1d33c4d74cb394dc4e8c7"
+      "sha256": "aa80f7fe5c91dec5bfc70005a1101f1ef906a07adad80019f19cbcf379856fcc"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "ru",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_ru/lesson1.tex",
-      "sha256": "7ba105a67f249f084f7193a3cd7f192c798d278853790a1c0aef6a357b318ecd"
+      "sha256": "5fa1b32c9df5f897a2f93e5c13b20898746f89fb2f250bb50ab1305117f488e2"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "zh",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_zh/lesson1.tex",
-      "sha256": "7fdd45fce43b19779a9f9dad8655b9d68aea4db732ced7a2ae252a180f78a11f"
+      "sha256": "8a1e2bde7ae381ebf99243f246658b23b1d60126b82499c874e6bb4eb23809be"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "ja",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_ja/lesson1.tex",
-      "sha256": "345c39ce7c278118f180f1ea898accb7b142f59f3fa1fccbea8d02575b7f10ae"
+      "sha256": "25400343c57a154a2c38fe7e2f26c4a23611e80fa7aaf3c52abee94916617c51"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "ko",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_ko/lesson1.tex",
-      "sha256": "f68135119e25dd186f2891f18bfbe901da50bab2b4b6a0a663680542b4b6c769"
+      "sha256": "b4807b618b501458b1aa226f6b395355836b04e8fd0b61faf3578583659ee1e1"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "hi",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_hi/lesson1.tex",
-      "sha256": "55a7461ec0a2ece5a29791194e5af0262dc810e7c3057787ba4643f00f73f44f"
+      "sha256": "4b5356207f4e14bebed8a459f1e1d590ad092bd5fd8e4e16001db0e962ae346e"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "vi",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_vi/lesson1.tex",
-      "sha256": "ed886b42c6006a1ccb9f4a9cf00eeac32c3bcd9372a5a859f724b56044c2f869"
+      "sha256": "940cea35629556933b73fbfd89cfa2388791c3b8c9de1ccbb087aa2b1c29b195"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "ar",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_ar/lesson1.tex",
-      "sha256": "3f1cec9e290d8d1718cc3705a0da109a9519677ad22ce7e8f80a9596191e5f81"
+      "sha256": "6ee8360d7fe13f0a786e813fd30c7080c790d5d39c5f9b92aaebde89220bf182"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "id",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_id/lesson1.tex",
-      "sha256": "0c9b194f462c810c402b404183cee963e1eb001d5829a7b0a8d6f267010cef39"
+      "sha256": "f0b925ecc0dbe6d9216637bf5ff07775275d4872e04a07abee0c532b864ca259"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "tr",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_tr/lesson1.tex",
-      "sha256": "f353befd94ccd40631ae0d8440c2a68cebe728048027824b96cb331f881a77ba"
+      "sha256": "6b6adb30aaf376bb28db8d8617f9658c3b61e589321a6a3c8c1b733fde91cdf0"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "bn",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_bn/lesson1.tex",
-      "sha256": "fe2f4a2cff8f4195cd744bdd0088487d6d039bc8807387e896fd1caeb94df6c0"
+      "sha256": "5ad820b5eb4608cf68d9b38607593278332700d5d1f613988a4453d970350db4"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "ur",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_ur/lesson1.tex",
-      "sha256": "e2f2a56c091377aad59c63f99d6cb1c24c94a787c59f46e85aa2496f022f4da3"
+      "sha256": "0f78750d7ccdfba03b5d2bb9f46740c251d84448e147496d8d4aa80d85d26d6a"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "sw",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_sw/lesson1.tex",
-      "sha256": "5d7e173b219d0ff8d55b7c93d950365d2a4e067e498bbbf964de2308a8ba7a79"
+      "sha256": "b68407867090a2f39e1b9411178d40af198ba14c860953f199c3c4c4c080e0ff"
     },
     {
       "unit": "theme1/lecon1",
       "lang": "fa",
       "sourcePath": "content/tex/theme1_fr/lecon1.tex",
-      "sourceSha256": "165e695fb18041c484c0aa095cb5c6dab00c3f2c6344baa5e52f8b3c6bb2d1bb",
+      "sourceSha256": "bee527393716613d6405697eea0a3dbb22838c931a36392911f2eadfbae65674",
       "target": "content/tex/theme1_fa/lesson1.tex",
-      "sha256": "00f685abdc05ee2612caafc823534fbc0ab46c2f1163c8881f8cf236a0a877da"
+      "sha256": "afdf0b756d942ca3d5d472e1655694ea0d82be055ac4ad510f46690d96f43fcd"
     },
     {
       "unit": "theme2/lecon1",

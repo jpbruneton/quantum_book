@@ -187,7 +187,7 @@ const plainItalics = chapterContent.getTexWebHtmlFromSource(String.raw`\textit{T
 assert.ok(plainItalics.includes('<i>Titre du livre</i>'));
 assert.ok(!plainItalics.includes('latex-inline-blue-strong'));
 const sgLink = chapterContent.getTexWebHtmlFromSource(String.raw`\hyperref[ch:sg]{Stern et Gerlach}`, 'fr', [], 'theme3_fr/lecon2.tex');
-assert.match(sgLink, /class="latex-cross-reference"/);
+assert.doesNotMatch(sgLink, /href=/, 'Keep the original cross-theme label unresolved until its source is refactored');
 const hiddenInterferenceLink = chapterContent.getTexWebHtmlFromSource(String.raw`\hyperref[ch:interferences]{Interférences}`, 'fr', [], 'theme3_fr/lecon2.tex');
 assert.doesNotMatch(hiddenInterferenceLink, /href=/, 'The hidden theme 1 lesson stays unpublished');
 const unpublishedReference = chapterContent.getTexWebHtmlFromSource(String.raw`Voir \ref{sec:haroche}.`, 'fr', [], 'theme3_fr/lecon1.tex');
