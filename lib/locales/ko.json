@@ -170,6 +170,7 @@
       "listIntro": "문제를 선택하면 문제와 해설이 열립니다."
     },
     "blocks": {
+      "postulate": "공리",
       "theorem": "정리",
       "definition": "정의",
       "lemma": "보조정리",

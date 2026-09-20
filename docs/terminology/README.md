@@ -12,6 +12,10 @@ Les libellés du partage mobile (`ui.share.label` et `ui.share.copied`) sont
 consignés dans chaque glossaire cible depuis le 2026-09-10. Ils désignent le
 partage de la page courante et la confirmation de copie de son lien.
 
+Depuis le 2026-09-20, chaque glossaire consigne aussi le libellé numéroté
+« Postulat » (`ui.blocks.postulate`). Cet ajout d'interface ne constitue pas une
+traduction des leçons du thème 3.
+
 - Chercher le concept dans le glossaire avant de choisir sa traduction.
 - Pour un nouveau terme, consigner la forme retenue, son contexte et le fichier
   où elle est employée. Distinguer les sens si un mot français est polysémique.

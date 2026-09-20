@@ -170,6 +170,7 @@
       "listIntro": "Pilih latihan untuk membuka soal dan penyelesaiannya."
     },
     "blocks": {
+      "postulate": "Postulat",
       "theorem": "Teorema",
       "definition": "Definisi",
       "lemma": "Lema",

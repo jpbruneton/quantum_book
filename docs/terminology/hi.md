@@ -99,3 +99,7 @@ Menu de partage : « लिंक कॉपी करें » (copier le lien),
 
 Renvoi de section : « अनुभाग ». Cible indisponible : « इस भाषा में उपलब्ध नहीं ».
 Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.
+
+### Blocs de cours — 2026-09-20
+
+Postulat : « अभिधारणा » (`ui.blocks.postulate`). Libellé numéroté de l'environnement `postulat`, traduit directement du français ; relecture humaine native non effectuée.

@@ -84,3 +84,7 @@ Menu de partage : « Copiar link » (copier le lien), « E-mail » (courriel). N
 
 Renvoi de section : « ver secção ». Cible indisponible : « indisponível neste idioma ».
 Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.
+
+### Blocs de cours — 2026-09-20
+
+Postulat : « Postulado » (`ui.blocks.postulate`). Libellé numéroté de l'environnement `postulat`, traduit directement du français ; relecture humaine native non effectuée.

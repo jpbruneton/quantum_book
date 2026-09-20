@@ -83,6 +83,25 @@ la carte des structures du thème 2, leçon 1. Les sources utilisent le catalogu
 
 ## Vérification
 
+### Environnements des leçons
+
+La convention est `\begin{theorem}[Titre]{label}` (nom `theorem`, pas
+`theoreme`). Le titre et le label sont facultatifs ; la forme
+`\begin{theorem}[Titre]\label{label}` est également acceptée. Les labels
+techniques restent invisibles et servent aux renvois et aux ancres du site.
+Le préambule français fournit les environnements manquants `theorem`,
+`definition`, `remark` et `postulat`, sans remplacer ceux d'un document maître.
+Il charge `amsthm` et `mdframed` et définit le style de cadre `cours`.
+
+Le convertisseur serveur conserve le titre `frametitle` des cadres `mdframed`
+et numérote séparément les blocs `postulat`. Le libellé vient du catalogue de
+la langue active. Les variantes `\ref*` sont résolues comme `\ref` ; les
+liens `\hyperref` ne ciblent que des contenus disponibles. Un renvoi explicite
+vers un chapitre absent conserve son texte sans créer de lien cassé.
+Les notes contenant des équations sont protégées avant la découpe en paragraphes.
+
+### Commandes de contrôle
+
 ```powershell
 node scripts/check-translations.mjs --write-manifest
 node scripts/check-interface-translations.mjs --write-index

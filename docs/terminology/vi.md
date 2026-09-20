@@ -99,3 +99,7 @@ Menu de partage : « Sao chép liên kết » (copier le lien), « Email » (cou
 
 Renvoi de section : « xem mục ». Cible indisponible : « chưa có bằng ngôn ngữ này ».
 Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.
+
+### Blocs de cours — 2026-09-20
+
+Postulat : « Tiên đề » (`ui.blocks.postulate`). Libellé numéroté de l'environnement `postulat`, traduit directement du français ; relecture humaine native non effectuée.

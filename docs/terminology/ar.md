@@ -81,3 +81,7 @@ Menu de partage : « نسخ الرابط » (copier le lien), « البريد ا
 
 Renvoi de section : « انظر القسم ». Cible indisponible : « غير متاح بهذه اللغة ».
 Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.
+
+### Blocs de cours — 2026-09-20
+
+Postulat : « مسلّمة » (`ui.blocks.postulate`). Libellé numéroté de l'environnement `postulat`, traduit directement du français ; relecture humaine native non effectuée.

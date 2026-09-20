@@ -128,3 +128,14 @@ la même langue. Une cible non traduite est signalée sans lien ni repli de cont
 Le thème 3 n’a aucune traduction rédigée (fichier anglais vide) : aucun passage
 manquant n’est ajouté et les notes éditoriales demeurent masquées en français.
 Voir [la liste des corrections et notes restantes](french-reference-audit.md).
+
+## Adaptation du thème 3, leçon 1 — 20 septembre 2026
+
+La refonte française est intégrée au rendu du site, sans modification de prose
+ni d'équations lors de l'adaptation. Les dix références citées sont regroupées
+dans `ref_3_1.tex`. Aucune traduction du corps du thème 3 n'est ajoutée.
+Seul le nouveau libellé d'interface `ui.blocks.postulate` est traduit directement
+du français dans les 19 catalogues cibles et consigné dans leurs glossaires ;
+relecture humaine native non effectuée. Aucun indice ni texte de figure modifié.
+Les contrôles des 95 traductions existantes et des 19 catalogues passent après
+régénération du manifeste et de l'index d'interface.

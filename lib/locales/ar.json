@@ -170,6 +170,7 @@
       "listIntro": "اختر تمرينًا لفتح المسألة وحلّها."
     },
     "blocks": {
+      "postulate": "مسلّمة",
       "theorem": "مبرهنة",
       "definition": "تعريف",
       "lemma": "لمّة",

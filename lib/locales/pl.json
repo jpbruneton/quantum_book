@@ -170,6 +170,7 @@
       "listIntro": "Wybierz zadanie, aby otworzyć jego treść i rozwiązanie."
     },
     "blocks": {
+      "postulate": "Postulat",
       "theorem": "Twierdzenie",
       "definition": "Definicja",
       "lemma": "Lemat",

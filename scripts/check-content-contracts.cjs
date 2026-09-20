@@ -156,7 +156,41 @@ for (const page of frenchPages.values()) {
 }
 assert.ok(crossReferenceCount >= 9, 'Cross-lesson and cross-fiche references are rendered');
 const frenchPostulates = [...frenchPages.values()].find(page => page.file === 'theme3_fr/lecon1.tex').html;
-assert.ok(frenchPostulates.includes('thème 5, leçon 8, non publiée'), 'Unpublished source is identified without a broken link');
+const unpublishedReference = chapterContent.getTexWebHtmlFromSource(String.raw`Voir \ref{sec:haroche}.`, 'fr', [], 'theme3_fr/lecon1.tex');
+assert.ok(unpublishedReference.includes('thème 5, leçon 8, non publiée'), 'Unpublished source is identified without a broken link');
+assert.doesNotMatch(unpublishedReference, /href=/);
+const postulateReferences = chapterContent.getLessonReferences(3, 1, [], 'theme3_fr/lecon1.tex');
+assert.equal(postulateReferences.length, 10);
+const renderedPostulates = processLatex(frenchPostulates);
+assert.equal((renderedPostulates.match(/class="latex-block latex-block-postulat"/g) ?? []).length, 6);
+assert.equal((renderedPostulates.match(/class="latex-block latex-block-theorem"/g) ?? []).length, 3);
+for (let n = 1; n <= 6; n++) assert.ok(renderedPostulates.includes(`Postulat ${n}`));
+assert.ok(renderedPostulates.includes('Introduction au thème 3'));
+assert.equal((renderedPostulates.match(/class="latex-footnote-ref"/g) ?? []).length, 4);
+assert.doesNotMatch(renderedPostulates, /katex-error/);
+assert.doesNotMatch(renderedHtmlToPlainText(renderedPostulates), /\\[A-Za-z]+|\$|__FOOTNOTE_/);
+const postulateSource = fs.readFileSync('content/tex/theme3_fr/lecon1.tex', 'utf8');
+for (const [, key] of postulateSource.matchAll(/\\cite\{([^}]+)\}/g)) {
+  assert.ok(postulateReferences.some(ref => ref.key === key), `Postulates citation ${key} resolves`);
+}
+const postulatePresentation = presentation.buildLessonPresentation(frenchPostulates, renderedPostulates, 'fr');
+assert.equal(postulatePresentation.toc.at(-1).text, '4. Références');
+const theoremSyntax = chapterContent.getTexWebHtmlFromSource(String.raw`
+\begin{theorem}[Premier]{th:first}Énoncé.\end{theorem}
+\begin{theorem}[Second]\label{th:second}Énoncé.\end{theorem}
+\begin{theorem}Sans titre ni label.\end{theorem}
+\begin{postulat}[Test]{post:test}Énoncé.\end{postulat}
+Voir \ref{th:first}, \ref*{th:second}, \ref{post:test}.`, 'fr', [], 'theme3_fr/lecon1.tex');
+assert.ok(theoremSyntax.includes('Voir 1, 2, 1.'));
+assert.ok(theoremSyntax.includes('Théorème 3'));
+const noteWithMath = processLatex(chapterContent.getTexWebHtmlFromSource(String.raw`
+\begin{equation}\label{eq:outside}x=1\end{equation}
+Texte\footnote{Voir \eqref{eq:outside}.
+\[y=x+1\]
+Fin de la note.} Suite.`, 'fr', []));
+assert.equal((noteWithMath.match(/class="latex-footnote-ref"/g) ?? []).length, 1);
+assert.ok(noteWithMath.includes('Voir (1).'));
+assert.doesNotMatch(renderedHtmlToPlainText(noteWithMath), /\\|\$|__FOOTNOTE_/);
 assert.doesNotMatch(frenchPostulates, /\\ref\{\}|\[blochsphere\]|\[rabi_battements\]/);
 const frenchDirac = [...frenchPages.values()].find(page => page.file === 'theme2_fr/lecon2.tex').html;
 assert.doesNotMatch(frenchDirac, /\[eq:ket_to_bra\]/, 'The labelled dagger identity has a displayed equation number');

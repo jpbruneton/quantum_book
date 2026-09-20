@@ -170,6 +170,7 @@
       "listIntro": "选择一道习题，打开题目及其解答。"
     },
     "blocks": {
+      "postulate": "公设",
       "theorem": "定理",
       "definition": "定义",
       "lemma": "引理",

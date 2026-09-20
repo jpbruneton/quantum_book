@@ -170,6 +170,7 @@
       "listIntro": "Sorusunu ve çözümünü açmak için bir alıştırma seçin."
     },
     "blocks": {
+      "postulate": "Postüla",
       "theorem": "Teorem",
       "definition": "Tanım",
       "lemma": "Lemma",

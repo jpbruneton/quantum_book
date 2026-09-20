@@ -170,6 +170,7 @@
       "listIntro": "Choose an exercise to open its statement and solution."
     },
     "blocks": {
+      "postulate": "Postulate",
       "theorem": "Theorem",
       "definition": "Definition",
       "lemma": "Lemma",

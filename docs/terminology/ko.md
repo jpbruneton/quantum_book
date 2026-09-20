@@ -99,3 +99,7 @@ Menu de partage : « 링크 복사 » (copier le lien), « 이메일 » (courrie
 
 Renvoi de section : « 제 ». Cible indisponible : « 이 언어로 제공되지 않음 ».
 Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux identités adjointes sont numérotées séparément. Aucun texte de figure ni indice mathématique modifié.
+
+### Blocs de cours — 2026-09-20
+
+Postulat : « 공리 » (`ui.blocks.postulate`). Libellé numéroté de l'environnement `postulat`, traduit directement du français ; relecture humaine native non effectuée.

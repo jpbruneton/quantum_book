@@ -170,6 +170,7 @@
       "listIntro": "Chọn một bài tập để mở đề bài và lời giải."
     },
     "blocks": {
+      "postulate": "Tiên đề",
       "theorem": "Định lý",
       "definition": "Định nghĩa",
       "lemma": "Bổ đề",

@@ -229,6 +229,8 @@ function cleanLatexInline(text: string): string {
   result = replaceInlineCommand(result, "textbf", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
   result = replaceInlineCommand(result, "uline", (content) => `<em>${content}</em>`);
   result = replaceInlineCommand(result, "underline", (content) => `<span class="latex-uline">${content}</span>`);
+  result = replaceInlineCommand(result, "textup", (content) => content);
+  result = replaceOutsideMath(result, (segment) => segment.replace(/\\small\b/g, ""));
   result = replaceOutsideMath(result, (segment) => segment
     .replace(/(?<!\\)\\[,;: ]/g, nbsp)
     .replace(/(?<!\\)\\([{}%_#&])/g, (_match, character: string) => escapeHtmlText(character)));
@@ -634,6 +636,7 @@ function collectReferenceMap(input: string): Record<string, string> {
   let figureIndex = 0;
   let equationIndex = 0;
   let theoremIndex = 0;
+  let postulateIndex = 0;
   let propositionIndex = 0;
   let definitionIndex = 0;
   let lemmaIndex = 0;
@@ -702,6 +705,9 @@ function collectReferenceMap(input: string): Record<string, string> {
       } else if (env === "theorem") {
         theoremIndex += 1;
         refText = `Théorème ${theoremIndex}`;
+      } else if (env === "postulat") {
+        postulateIndex += 1;
+        refText = `Postulat ${postulateIndex}`;
       } else if (env === "proposition") {
         propositionIndex += 1;
         refText = `Proposition ${propositionIndex}`;
@@ -1020,6 +1026,7 @@ interface CrossReference {
   lesson: number;
   kind: "lesson" | "fiche";
   href?: string;
+  wholeLesson?: boolean;
 }
 
 function referenceAnchor(label: string): string {
@@ -1048,7 +1055,14 @@ function getCrossReferences(lang: ContentLanguage): Record<string, CrossReferenc
       const lesson = /^(lecon|lesson|fiche)(\d+)\.tex$/.exec(name);
       if (!lesson) continue;
       const file = `${directory.name}/${name}`;
-      const source = readFileSync(join(root, file), "utf8").split(/\r?\n/)
+      const rawSource = readFileSync(join(root, file), "utf8");
+      const chapterLabel = rawSource.match(/\\chapter\{[^\n]+?\}[^\n]*?\\label\{([^{}]+)\}/)?.[1];
+      if (chapterLabel) {
+        (result[chapterLabel] ??= []).push({ file, number: lesson[2], theme: Number(theme[1]),
+          lesson: Number(lesson[2]), kind: lesson[1] === "fiche" ? "fiche" : "lesson",
+          href: published.get(file), wholeLesson: true });
+      }
+      const source = rawSource.split(/\r?\n/)
         .map(stripComment).filter((line) => !shouldSkipLatexLine(line)).join("\n")
         .replace(/\\beq\b/g, "\\begin{equation}").replace(/\\eeq\b/g, "\\end{equation}");
       for (const [label, number] of Object.entries(collectReferenceMap(source))) {
@@ -1105,9 +1119,14 @@ function normalizeLatexBlocks(
     return `\n\n${figure}\n\n`;
   });
 
-  // Ignore mdframed wrappers while preserving their inner content.
-  result = result.replace(/\\begin\{mdframed\}(?:\[[^\]]*\])?/g, "");
-  result = result.replace(/\\end\{mdframed\}/g, "");
+  // Preserve the frame title as well as its body (no PDF styling options in HTML).
+  result = result.replace(/\\begin\{mdframed\}(?:\[([^\]]*)\])?/g, (_match, options: string = "") => {
+    const titleStart = /(?:^|,)\s*frametitle\s*=\s*/.exec(options);
+    const title = titleStart ? readBalancedBracesAt(options, titleStart.index + titleStart[0].length)?.content : "";
+    const heading = title ? `<div class="latex-block-heading"><strong>${cleanLatexInline(title)}</strong></div>` : "";
+    return `\n\n<div class="latex-block latex-block-cours">${heading}<div class="latex-block-body">`;
+  });
+  result = result.replace(/\\end\{mdframed\}/g, "</div></div>\n\n");
 
   // Exercise library metadata (web only; not rendered as prose).
   result = stripLatexCommandsWithSimpleArg(result, "keywords");
@@ -1155,6 +1174,7 @@ function normalizeLatexBlocks(
   const blockKinds: Array<{ env: string; title: string; collapsible?: boolean }> = [
     { env: "definition", title: labels.definition },
     { env: "theorem", title: labels.theorem },
+    { env: "postulat", title: labels.postulate },
     { env: "proposition", title: labels.proposition },
     { env: "lemma", title: labels.lemma },
     { env: "corollaire", title: labels.corollary },
@@ -1174,6 +1194,7 @@ function normalizeLatexBlocks(
   const blockCounters: Record<string, number> = {
     definition: 0,
     theorem: 0,
+    postulat: 0,
     proposition: 0,
     lemma: 0,
     corollaire: 0,
@@ -1274,7 +1295,21 @@ function normalizeLatexBlocks(
 
   // Render bibliography citations as numbered markers.
   result = replaceCitations(result, citationMaps);
-  result = result.replace(/\\(eqref|ref)\{([^{}]*)\}/g, (_m, command: string, label: string) => {
+  result = result.replace(/\\hyperref\[([^\]]+)\]\{([^{}]+)\}/g, (_match, label: string, text: string) => {
+    if (references[label] && texFile) return `<a class="latex-cross-reference" href="#${referenceAnchor(label)}">${text}</a>`;
+    const themeNumber = /^theme:(\d+)$/.exec(label)?.[1];
+    if (themeNumber) {
+      const theme = getWebThemes(contentLanguage).find((entry) => entry.number === Number(themeNumber));
+      const lesson = theme?.lessons.find((entry) => hasLessonWebContent(entry.texFile, contentLanguage));
+      if (theme && lesson) return `<a class="latex-cross-reference" href="${escapeHtmlAttribute(chapterLessonPath(contentLanguage, theme.slug, lesson))}">${text}</a>`;
+    }
+    const candidates = externalReferences[label]?.filter((entry) => entry.file !== texFile) ?? [];
+    const target = candidates.length === 1 ? candidates[0] : undefined;
+    return target?.href
+      ? `<a class="latex-cross-reference" href="${escapeHtmlAttribute(target.href)}${target.wholeLesson ? "" : `#${referenceAnchor(label)}`}">${text}</a>`
+      : text;
+  });
+  result = result.replace(/\\(eqref|ref)\*?\{([^{}]*)\}/g, (_m, command: string, label: string) => {
     const resolved = references[label];
     if (!resolved) {
       const candidates = externalReferences[label]?.filter((entry) => entry.file !== texFile) ?? [];
@@ -1284,14 +1319,14 @@ function normalizeLatexBlocks(
       const copy = getTranslations(contentLanguage).crossReference;
       const text = `${command === "eqref" ? `(${number})` : number} (${copy.theme} ${target.theme}, ${copy[target.kind]} ${target.lesson}${target.href ? "" : `, ${copy.unavailable}`})`;
       return target.href
-        ? `<a class="latex-cross-reference" href="${escapeHtmlAttribute(target.href)}#${referenceAnchor(label)}">${text}</a>`
+        ? `<a class="latex-cross-reference" href="${escapeHtmlAttribute(target.href)}${target.wholeLesson ? "" : `#${referenceAnchor(label)}`}">${text}</a>`
         : text;
     }
     // Keep \ref output numeric to avoid duplicating prefixes already present in prose
     // (e.g. "cf Figure \ref{magnet}" -> "cf Figure 1", not "cf Figure Figure 1").
     const number = resolved
       .replace(
-        /^(Figure|Théorème|Theorem|Proposition|Définition|Definition|Lemme|Lemma|Corollaire|Corollary|Exemple|Example|Remarque|Remark)\s+/i,
+        /^(Figure|Théorème|Theorem|Postulat|Proposition|Définition|Definition|Lemme|Lemma|Corollaire|Corollary|Exemple|Example|Remarque|Remark)\s+/i,
         ""
       )
       .trim();
@@ -1450,12 +1485,18 @@ function parseTexParagraphs(
     keptLines.push(line);
   }
 
-  const body = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage, texFile).trim();
+  // Resolve references in the whole lesson, then protect complete notes before
+  // the paragraph split (display equations introduce blank lines inside notes).
+  const normalizedBody = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage, texFile);
+  const extracted = extractFootnotesFromParagraph(normalizedBody);
+  const notes = extracted.footnotes.map((note) => note.replace(/\n+/g, " "));
+  const body = extracted.text.trim();
   if (!body) return [];
 
   const paragraphs = body
     .split(/\n\s*\n+/)
     .map((paragraph) => paragraph.replace(/\n+/g, " ").trim())
+    .map((paragraph) => paragraph.replace(/__FOOTNOTE_(\d+)__/g, (_match, index: string) => `\\footnote{${notes[Number(index)]}}`))
     .filter((paragraph) => paragraph.length > 0);
 
   return paragraphs;
@@ -1614,11 +1655,12 @@ export function exerciseTitleToPlainHtml(texTitle: string): string {
 export function getTexWebHtmlFromSource(
   source: string,
   contentLanguage: Lang,
-  references: LessonReference[]
+  references: LessonReference[],
+  texFile?: string
 ): string {
   const lang: ContentLanguage = contentLanguage;
   const citationMaps = buildCitationNumberMaps(references);
-  const paragraphs = parseTexParagraphs(source, citationMaps, lang);
+  const paragraphs = parseTexParagraphs(source, citationMaps, lang, texFile);
   if (paragraphs.length === 0) return "";
   return localizeFigureAssets(paragraphsToHtml(paragraphs, lang), lang);
 }

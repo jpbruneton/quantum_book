@@ -170,6 +170,7 @@
       "listIntro": "Wählen Sie eine Übung, um die Aufgabe und ihre Lösung zu öffnen."
     },
     "blocks": {
+      "postulate": "Postulat",
       "theorem": "Satz",
       "definition": "Definition",
       "lemma": "Lemma",

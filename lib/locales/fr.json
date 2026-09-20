@@ -170,6 +170,7 @@
       "listIntro": "Choisissez un exercice pour ouvrir son énoncé et sa correction."
     },
     "blocks": {
+      "postulate": "Postulat",
       "theorem": "Théorème",
       "definition": "Définition",
       "lemma": "Lemme",

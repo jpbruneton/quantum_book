@@ -170,6 +170,7 @@
       "listIntro": "Elige un ejercicio para abrir su enunciado y su solución."
     },
     "blocks": {
+      "postulate": "Postulado",
       "theorem": "Teorema",
       "definition": "Definición",
       "lemma": "Lema",

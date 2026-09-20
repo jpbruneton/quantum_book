@@ -170,6 +170,7 @@
       "listIntro": "演習を選ぶと問題と解答が開きます。"
     },
     "blocks": {
+      "postulate": "公理",
       "theorem": "定理",
       "definition": "定義",
       "lemma": "補題",

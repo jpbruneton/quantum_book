@@ -170,6 +170,7 @@
       "listIntro": "Scegli un esercizio per aprirne il testo e la soluzione."
     },
     "blocks": {
+      "postulate": "Postulato",
       "theorem": "Teorema",
       "definition": "Definizione",
       "lemma": "Lemma",
