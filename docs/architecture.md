@@ -89,9 +89,21 @@ La convention est `\begin{theorem}[Titre]{label}` (nom `theorem`, pas
 `theoreme`). Le titre et le label sont facultatifs ; la forme
 `\begin{theorem}[Titre]\label{label}` est également acceptée. Les labels
 techniques restent invisibles et servent aux renvois et aux ancres du site.
+La forme `{label}` est une extension de notre préambule et du convertisseur,
+pas un argument des environnements `amsthm`/`newmdtheoremenv` standards. La leçon 1
+du thème 3 emploie donc `\label{label}` pour rester portable vers le préambule
+du livre. L'environnement `exemple` accepte aussi un label facultatif sans
+consommer le début de son texte lorsqu'il est absent.
 Le préambule français fournit les environnements manquants `theorem`,
 `definition`, `remark` et `postulat`, sans remplacer ceux d'un document maître.
 Il charge `amsthm` et `mdframed` et définit le style de cadre `cours`.
+Les réglages de ce cadre et les commandes usuelles des ensembles, de Dirac,
+de norme, de trace et d'équations proviennent du préambule autonome fourni.
+Les conventions existantes `\Dom` (D calligraphique), `\grad` (nabla vectoriel)
+et `\transpose` (exposant top) sont conservées. Le préambule du livre utilise
+respectivement D droit, grad et T : ces variantes ne sont pas imposées aux cours
+déjà publiés. La classe, la pagination, les compteurs du livre et son input TikZ
+restent propres au document maître ; `header_fr.tex` demeure un fragment.
 
 Le convertisseur serveur conserve le titre `frametitle` des cadres `mdframed`
 et numérote séparément les blocs `postulat`. Le libellé vient du catalogue de

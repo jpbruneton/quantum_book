@@ -43,6 +43,7 @@ export const KATEX_MACROS: Record<string, string> = {
   "\\bignorm": "\\left\\lVert#1\\right\\rVert",
   "\\norm": "\\left\\lVert#1\\right\\rVert",
   "\\grad": "\\vec{\\nabla}",
+  "\\tr": "\\operatorname{tr}",
 
   // Misc textual helpers
   "\\rev": "\\textrm{rev}",
