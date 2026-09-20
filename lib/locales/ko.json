@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "제2강",
-          "subtitle": "퍼텐셜 장벽",
-          "description": "퍼텐셜 장벽에서 상태의 투과, 반사, 터널링 및 에너지 의존성.",
-          "topics": [
-            "터널 효과",
-            "투과",
-            "반사",
-            "산란 상태",
-            "계수"
-          ]
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "제3강",
-          "subtitle": "조화 진동자",
-          "description": "에너지 준위의 양자화, 생성 및 소멸 연산자, 조화 진동자의 고유상태.",
-          "topics": [
-            "에너지 준위",
-            "양자 사다리",
-            "연산자 a와 a†",
-            "고유상태",
-            "파동함수"
-          ]
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "제4강",
-          "subtitle": "스핀",
-          "description": "파울리 행렬, 스핀 측정, 자기장 속 동역학, 두 준위 계에 대한 응용.",
-          "topics": [
-            "파울리 행렬",
-            "스핀 1/2",
-            "측정",
-            "세차 운동",
-            "두 준위 계"
-          ]
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "제5강",
-          "subtitle": "양자 동역학",
-          "description": "유니터리 시간 발전, 슈뢰딩거 방정식, 슈뢰딩거 및 하이젠베르크 묘사, 전파함수.",
-          "topics": [
-            "유니터리 시간 발전",
-            "슈뢰딩거 방정식",
-            "하이젠베르크 묘사",
-            "전파함수",
-            "해밀토니안"
-          ]
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "제6강",
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "제7강",
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "제8강",
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "제9강",
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "제10강",
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "제11강",
+          "subtitle": "번역 준비 중",
+          "description": "이 내용은 아직 이 언어로 제공되지 않습니다.",
+          "topics": []
         }
       }
     },

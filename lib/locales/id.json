@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Pelajaran 2",
-          "subtitle": "Penghalang potensial",
-          "description": "Transmisi, refleksi, penerowongan, dan ketergantungan energi keadaan saat menghadapi penghalang potensial.",
-          "topics": [
-            "Efek terowongan",
-            "Transmisi",
-            "Refleksi",
-            "Keadaan hamburan",
-            "Koefisien"
-          ]
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Pelajaran 3",
-          "subtitle": "Osilator harmonik",
-          "description": "Kuantisasi tingkat energi, operator penciptaan/pemusnahan, dan keadaan eigen osilator harmonik.",
-          "topics": [
-            "Tingkat energi",
-            "Tangga kuantum",
-            "Operator a dan a†",
-            "Keadaan eigen",
-            "Fungsi gelombang"
-          ]
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Pelajaran 4",
-          "subtitle": "Spin",
-          "description": "Matriks Pauli, pengukuran spin, dinamika dalam medan magnet, dan penerapan pada sistem dua tingkat.",
-          "topics": [
-            "Matriks Pauli",
-            "Spin 1/2",
-            "Pengukuran",
-            "Presesi",
-            "Sistem dua tingkat"
-          ]
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Pelajaran 5",
-          "subtitle": "Dinamika kuantum",
-          "description": "Evolusi uniter, persamaan Schrödinger, gambaran Schrödinger/Heisenberg, dan propagator.",
-          "topics": [
-            "Evolusi uniter",
-            "Persamaan Schrödinger",
-            "Gambaran Heisenberg",
-            "Propagator",
-            "Hamiltonian"
-          ]
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Pelajaran 6",
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Pelajaran 7",
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Pelajaran 8",
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Pelajaran 9",
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Pelajaran 10",
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Pelajaran 11",
+          "subtitle": "Terjemahan sedang disiapkan",
+          "description": "Konten ini belum tersedia dalam bahasa ini.",
+          "topics": []
         }
       }
     },

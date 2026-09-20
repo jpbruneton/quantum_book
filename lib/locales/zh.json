@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "第 2 课",
-          "subtitle": "势垒",
-          "description": "态在势垒处的透射、反射、隧穿及其能量依赖性。",
-          "topics": [
-            "隧穿效应",
-            "透射",
-            "反射",
-            "散射态",
-            "系数"
-          ]
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "第 3 课",
-          "subtitle": "谐振子",
-          "description": "能级量子化、产生与湮灭算符，以及谐振子的本征态。",
-          "topics": [
-            "能级",
-            "量子阶梯",
-            "算符 a 与 a†",
-            "本征态",
-            "波函数"
-          ]
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "第 4 课",
-          "subtitle": "自旋",
-          "description": "泡利矩阵、自旋测量、磁场中的动力学及两能级应用。",
-          "topics": [
-            "泡利矩阵",
-            "自旋 1/2",
-            "测量",
-            "进动",
-            "两能级系统"
-          ]
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "第 5 课",
-          "subtitle": "量子动力学",
-          "description": "酉演化、薛定谔方程、薛定谔与海森堡绘景，以及传播子。",
-          "topics": [
-            "酉演化",
-            "薛定谔方程",
-            "海森堡绘景",
-            "传播子",
-            "哈密顿量"
-          ]
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "第 6 课",
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "第 7 课",
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "第 8 课",
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "第 9 课",
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "第 10 课",
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "第 11 课",
+          "subtitle": "翻译准备中",
+          "description": "此内容尚未提供此语言版本。",
+          "topics": []
         }
       }
     },

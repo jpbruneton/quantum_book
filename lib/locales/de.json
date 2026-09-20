@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Lektion 2",
-          "subtitle": "Potentialbarrieren",
-          "description": "Transmission, Reflexion, Tunneleffekt und Energieabhängigkeit von Zuständen an Potentialbarrieren.",
-          "topics": [
-            "Tunneleffekt",
-            "Transmission",
-            "Reflexion",
-            "Streuzustände",
-            "Koeffizienten"
-          ]
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Lektion 3",
-          "subtitle": "Harmonischer Oszillator",
-          "description": "Quantisierung der Energieniveaus, Erzeugungs- und Vernichtungsoperatoren und Eigenzustände des harmonischen Oszillators.",
-          "topics": [
-            "Energieniveaus",
-            "Quantenleitern",
-            "Operatoren a und a†",
-            "Eigenzustände",
-            "Wellenfunktionen"
-          ]
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Lektion 4",
-          "subtitle": "Spin",
-          "description": "Pauli-Matrizen, Spinmessung, Dynamik im Magnetfeld und Anwendungen auf Zweiniveausysteme.",
-          "topics": [
-            "Pauli-Matrizen",
-            "Spin 1/2",
-            "Messung",
-            "Präzession",
-            "Zweiniveausysteme"
-          ]
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Lektion 5",
-          "subtitle": "Quantendynamik",
-          "description": "Unitäre Zeitentwicklung, Schrödingergleichung, Schrödinger- und Heisenbergbild sowie Propagatoren.",
-          "topics": [
-            "Unitäre Zeitentwicklung",
-            "Schrödingergleichung",
-            "Heisenbergbild",
-            "Propagatoren",
-            "Hamiltonoperator"
-          ]
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Lektion 6",
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Lektion 7",
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Lektion 8",
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Lektion 9",
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Lektion 10",
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Lektion 11",
+          "subtitle": "Übersetzung in Vorbereitung",
+          "description": "Dieser Inhalt ist in dieser Sprache noch nicht verfügbar.",
+          "topics": []
         }
       }
     },

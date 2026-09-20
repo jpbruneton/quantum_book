@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Lezione n. 2",
-          "subtitle": "Barriere di potenziale",
-          "description": "Trasmissione, riflessione, effetto tunnel e dipendenza energetica degli stati in presenza di barriere di potenziale.",
-          "topics": [
-            "Effetto tunnel",
-            "Trasmissione",
-            "Riflessione",
-            "Stati diffusi",
-            "Coefficienti"
-          ]
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Lezione n. 3",
-          "subtitle": "Oscillatore armonico",
-          "description": "Quantizzazione dei livelli energetici, operatori di creazione e annichilazione, e autostati dell'oscillatore armonico.",
-          "topics": [
-            "Livelli energetici",
-            "Scale quantistiche",
-            "Operatori a e a†",
-            "Autostati",
-            "Funzioni d'onda"
-          ]
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Lezione n. 4",
-          "subtitle": "Spin",
-          "description": "Matrici di Pauli, misura dello spin, dinamica in un campo magnetico e applicazioni a due livelli.",
-          "topics": [
-            "Matrici di Pauli",
-            "Spin 1/2",
-            "Misura",
-            "Precessione",
-            "Sistemi a due livelli"
-          ]
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Lezione n. 5",
-          "subtitle": "Dinamica quantistica",
-          "description": "Evoluzione unitaria, equazione di Schrödinger, rappresentazioni di Schrödinger e Heisenberg, e propagatori.",
-          "topics": [
-            "Evoluzione unitaria",
-            "Equazione di Schrödinger",
-            "Rappresentazione di Heisenberg",
-            "Propagatori",
-            "Hamiltoniana"
-          ]
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Lezione n. 6",
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Lezione n. 7",
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Lezione n. 8",
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Lezione n. 9",
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Lezione n. 10",
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Lezione n. 11",
+          "subtitle": "Traduzione in preparazione",
+          "description": "Questo contenuto non è ancora disponibile in questa lingua.",
+          "topics": []
         }
       }
     },

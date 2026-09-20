@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Lección n.º 2",
-          "subtitle": "Barreras de potencial",
-          "description": "Transmisión, reflexión, efecto túnel y dependencia energética de los estados ante barreras de potencial.",
-          "topics": [
-            "Efecto túnel",
-            "Transmisión",
-            "Reflexión",
-            "Estados dispersados",
-            "Coeficientes"
-          ]
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Lección n.º 3",
-          "subtitle": "Oscilador armónico",
-          "description": "Cuantización de los niveles de energía, operadores de creación y aniquilación, y estados propios del oscilador armónico.",
-          "topics": [
-            "Niveles de energía",
-            "Escaleras cuánticas",
-            "Operadores a y a†",
-            "Estados propios",
-            "Funciones de onda"
-          ]
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Lección n.º 4",
-          "subtitle": "Espín",
-          "description": "Matrices de Pauli, medida del espín, dinámica en un campo magnético y aplicaciones a dos niveles.",
-          "topics": [
-            "Matrices de Pauli",
-            "Espín 1/2",
-            "Medida",
-            "Precesión",
-            "Sistemas de dos niveles"
-          ]
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Lección n.º 5",
-          "subtitle": "Dinámica cuántica",
-          "description": "Evolución unitaria, ecuación de Schrödinger, imágenes de Schrödinger y Heisenberg, y propagadores.",
-          "topics": [
-            "Evolución unitaria",
-            "Ecuación de Schrödinger",
-            "Imagen de Heisenberg",
-            "Propagadores",
-            "Hamiltoniano"
-          ]
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Lección n.º 6",
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Lección n.º 7",
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Lección n.º 8",
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Lección n.º 9",
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Lección n.º 10",
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Lección n.º 11",
+          "subtitle": "Traducción en preparación",
+          "description": "Este contenido aún no está disponible en este idioma.",
+          "topics": []
         }
       }
     },

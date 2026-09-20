@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Ders 2",
-          "subtitle": "Potansiyel engelleri",
-          "description": "Potansiyel engelleri karşısında durumların iletimi, yansıması, tünellemesi ve enerjiye bağımlılığı.",
-          "topics": [
-            "Tünelleme",
-            "İletim",
-            "Yansıma",
-            "Saçılma durumları",
-            "Katsayılar"
-          ]
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Ders 3",
-          "subtitle": "Harmonik osilatör",
-          "description": "Enerji düzeylerinin kuantalanması, yaratma/yok etme operatörleri ve harmonik osilatörün özdurumları.",
-          "topics": [
-            "Enerji düzeyleri",
-            "Kuantum merdivenleri",
-            "a ve a† operatörleri",
-            "Özdurumlar",
-            "Dalga fonksiyonları"
-          ]
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Ders 4",
-          "subtitle": "Spin",
-          "description": "Pauli matrisleri, spin ölçümü, manyetik alandaki dinamik ve iki düzeyli sistemlere uygulamalar.",
-          "topics": [
-            "Pauli matrisleri",
-            "Spin 1/2",
-            "Ölçüm",
-            "Presesyon",
-            "İki düzeyli sistemler"
-          ]
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Ders 5",
-          "subtitle": "Kuantum dinamiği",
-          "description": "Üniter evrim, Schrödinger denklemi, Schrödinger/Heisenberg resimleri ve propagatörler.",
-          "topics": [
-            "Üniter evrim",
-            "Schrödinger denklemi",
-            "Heisenberg resmi",
-            "Propagatörler",
-            "Hamiltonyen"
-          ]
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Ders 6",
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Ders 7",
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Ders 8",
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Ders 9",
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Ders 10",
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Ders 11",
+          "subtitle": "Çeviri hazırlanıyor",
+          "description": "Bu içerik henüz bu dilde mevcut değil.",
+          "topics": []
         }
       }
     },

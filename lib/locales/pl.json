@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Lekcja 2",
-          "subtitle": "Bariery potencjału",
-          "description": "Transmisja, odbicie, tunelowanie i zależność energetyczna stanów przy barierach potencjału.",
-          "topics": [
-            "Efekt tunelowy",
-            "Transmisja",
-            "Odbicie",
-            "Stany rozproszeniowe",
-            "Współczynniki"
-          ]
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Lekcja 3",
-          "subtitle": "Oscylator harmoniczny",
-          "description": "Kwantowanie poziomów energii, operatory kreacji i anihilacji oraz stany własne oscylatora harmonicznego.",
-          "topics": [
-            "Poziomy energii",
-            "Drabiny kwantowe",
-            "Operatory a i a†",
-            "Stany własne",
-            "Funkcje falowe"
-          ]
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Lekcja 4",
-          "subtitle": "Spin",
-          "description": "Macierze Pauliego, pomiar spinu, dynamika w polu magnetycznym i zastosowania do układów dwupoziomowych.",
-          "topics": [
-            "Macierze Pauliego",
-            "Spin 1/2",
-            "Pomiar",
-            "Precesja",
-            "Układy dwupoziomowe"
-          ]
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Lekcja 5",
-          "subtitle": "Dynamika kwantowa",
-          "description": "Ewolucja unitarna, równanie Schrödingera, obrazy Schrödingera i Heisenberga oraz propagatory.",
-          "topics": [
-            "Ewolucja unitarna",
-            "Równanie Schrödingera",
-            "Obraz Heisenberga",
-            "Propagatory",
-            "Hamiltonian"
-          ]
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Lekcja 6",
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Lekcja 7",
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Lekcja 8",
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Lekcja 9",
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Lekcja 10",
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Lekcja 11",
+          "subtitle": "Tłumaczenie w przygotowaniu",
+          "description": "Ta treść nie jest jeszcze dostępna w tym języku.",
+          "topics": []
         }
       }
     },

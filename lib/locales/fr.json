@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Leçon n°2",
-          "subtitle": "Barrières de potentiel",
-          "description": "Transmission, réflexion, effet tunnel et dépendance énergétique des états face aux barrières de potentiel.",
-          "topics": [
-            "Effet tunnel",
-            "Transmission",
-            "Réflexion",
-            "États diffusés",
-            "Coefficients"
-          ]
+          "subtitle": "Premières applications : Stern–Gerlach et Mach–Zehnder",
+          "description": "Premières applications : Stern–Gerlach et Mach–Zehnder",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Leçon n°3",
-          "subtitle": "Oscillateur harmonique",
-          "description": "Quantification des niveaux d'énergie, opérateurs de création/annihilation et états propres de l'oscillateur harmonique.",
-          "topics": [
-            "Niveaux d'énergie",
-            "Échelles quantiques",
-            "Opérateurs a et a†",
-            "États propres",
-            "Fonctions d'onde"
-          ]
+          "subtitle": "Discussion des postulats",
+          "description": "Discussion des postulats",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Leçon n°4",
-          "subtitle": "Spin",
-          "description": "Matrices de Pauli, mesure de spin, dynamique dans un champ magnétique et applications à deux niveaux.",
-          "topics": [
-            "Matrices de Pauli",
-            "Spin 1/2",
-            "Mesure",
-            "Précession",
-            "Systèmes à deux niveaux"
-          ]
+          "subtitle": "Position, impulsion et représentations d'une particule",
+          "description": "Position, impulsion et représentations d'une particule",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Leçon n°5",
-          "subtitle": "Dynamique quantique",
-          "description": "Évolution unitaire, équation de Schrödinger, images de Schrödinger/Heisenberg et propagateurs.",
-          "topics": [
-            "Évolution unitaire",
-            "Équation de Schrödinger",
-            "Image de Heisenberg",
-            "Propagateurs",
-            "Hamiltonien"
-          ]
+          "subtitle": "Dynamique d'une particule",
+          "description": "Dynamique d'une particule",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Leçon n°6",
+          "subtitle": "Puits de potentiel et effet tunnel",
+          "description": "Puits de potentiel et effet tunnel",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Leçon n°7",
+          "subtitle": "L'oscillateur harmonique",
+          "description": "L'oscillateur harmonique",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Leçon n°8",
+          "subtitle": "L'atome d'hydrogène",
+          "description": "L'atome d'hydrogène",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Leçon n°9",
+          "subtitle": "Le benzène : électrons délocalisés et spectre moléculaire",
+          "description": "Le benzène : électrons délocalisés et spectre moléculaire",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Leçon n°10",
+          "subtitle": "Moment cinétique et spin",
+          "description": "Moment cinétique et spin",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Leçon n°11",
+          "subtitle": "Oscillations, interférences et battements",
+          "description": "Oscillations, interférences et battements",
+          "topics": []
         }
       }
     },

@@ -225,7 +225,7 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/\\c\{([cC])\}/g, (_m, letter: string) => (letter === "c" ? "ç" : "Ç"));
 
   result = replaceInlineCommand(result, "emph", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
-  result = replaceInlineCommand(result, "textit", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
+  result = replaceInlineCommand(result, "textit", (content) => `<i>${content}</i>`);
   result = replaceInlineCommand(result, "textbf", (content) => `<span class="latex-inline-blue-strong">${content}</span>`);
   result = replaceInlineCommand(result, "uline", (content) => `<em>${content}</em>`);
   result = replaceInlineCommand(result, "underline", (content) => `<span class="latex-uline">${content}</span>`);
@@ -381,9 +381,12 @@ function extractImageAndCaption(
   block: string
 ): { imagePath: string; caption: string; altText: string } | null {
   const includeGraphicsMatch = block.match(/\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/);
-  if (!includeGraphicsMatch) return null;
+  const tikzSource = block.match(/\\input\{figs-src\/fr\/theme3\/(t3_l\d+_[a-z0-9_]+)(?:\.tex)?\}/);
+  if (!includeGraphicsMatch && !tikzSource) return null;
 
-  const imagePath = normalizeFigurePath(includeGraphicsMatch[1].trim());
+  const imagePath = includeGraphicsMatch
+    ? normalizeFigurePath(includeGraphicsMatch[1].trim())
+    : `/figs/fr/theme3/${tikzSource![1]}.png`;
   let captionRaw = "";
   // \caption*{...} (unnumbered, common inside minipages) must be matched too.
   const captionCommandIndex = block.search(/\\caption\*?\s*\{/);
@@ -1056,8 +1059,9 @@ function getCrossReferences(lang: ContentLanguage): Record<string, CrossReferenc
       if (!lesson) continue;
       const file = `${directory.name}/${name}`;
       const rawSource = readFileSync(join(root, file), "utf8");
-      const chapterLabel = rawSource.match(/\\chapter\{[^\n]+?\}[^\n]*?\\label\{([^{}]+)\}/)?.[1];
-      if (chapterLabel) {
+      const chapterLabels = rawSource.match(/\\chapter\{[^\n]+?\}((?:\s*\\label\{[^{}]+\})+)/)?.[1] ?? "";
+      for (const match of Array.from(chapterLabels.matchAll(/\\label\{([^{}]+)\}/g))) {
+        const chapterLabel = match[1];
         (result[chapterLabel] ??= []).push({ file, number: lesson[2], theme: Number(theme[1]),
           lesson: Number(lesson[2]), kind: lesson[1] === "fiche" ? "fiche" : "lesson",
           href: published.get(file), wholeLesson: true });
@@ -1097,8 +1101,8 @@ function normalizeLatexBlocks(
   let equationRenderIndex = 0;
   const labels = getTranslations(contentLanguage).blocks;
 
-  // Be tolerant to over-escaped LaTeX sequences from copy/paste paths.
-  result = result.replace(/\\\\([A-Za-z]+)/g, "\\$1");
+  // A double backslash before a letter is a valid matrix row boundary (e.g. \\J).
+  // Never collapse it into an unrelated command.
   result = result.replace(/\\\$/g, "$");
   // Do not strip \, \: \; — they are meaningful math spacing for KaTeX ($...$ / $$...$$).
   result = result.replace(/\\\./g, ".");
@@ -1145,6 +1149,20 @@ function normalizeLatexBlocks(
 
   // Render section-like commands as headings in document order.
   result = replaceSectionCommands(result);
+
+  // Text tables retain their cells and inline mathematics in a scrollable table.
+  result = result.replace(/\\begin\{tabular\}([\s\S]*?)\\end\{tabular\}/g, (_match, body: string) => {
+    const spec = readBalancedBracesAt(body.trimStart(), 0);
+    if (!spec) return _match;
+    const rows = body.trimStart().slice(spec.endIndex).replace(/\\hline\b/g, "")
+      .split(/\\\\(?:\[[^\]]*\])?/).map((row) => row.trim()).filter(Boolean);
+    const html = rows.map((row, index) => {
+      const tag = index === 0 ? "th" : "td";
+      const cells = row.split(/(?<!\\)&/).map((cell) => `<${tag}${index === 0 ? ' scope="col"' : ""}>${cell.trim()}</${tag}>`).join("");
+      return `<tr>${cells}</tr>`;
+    });
+    return `\n\n<div class="latex-table-scroll"><table class="latex-table"><thead>${html[0] ?? ""}</thead><tbody>${html.slice(1).join("")}</tbody></table></div>\n\n`;
+  });
 
   // Render proof environments as collapsible details blocks.
   result = result.replace(/\\begin\{proof\}(?:\[([^\]]+)\])?/g, (_m, label: string) => {
@@ -1396,6 +1414,7 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }, 
   };
 
   if (cleaned.startsWith("<figure")) return withFootnotes(cleaned);
+  if (cleaned.startsWith('<div class="latex-table-scroll"')) return withFootnotes(cleaned);
   if (cleaned.startsWith("<h2") || cleaned.startsWith("<h3") || cleaned.startsWith("<h4") || cleaned.startsWith("<h5")) return withFootnotes(cleaned);
   if (cleaned.startsWith("<div class=\"latex-vspace\"")) return withFootnotes(cleaned);
   if (
@@ -1512,7 +1531,7 @@ function cleanReferenceLabel(text: string): string {
 }
 
 function normalizeReferenceUrl(url: string): string {
-  const trimmed = url.trim();
+  const trimmed = url.trim().replace(/\\([%&])/g, "$1");
   if (/^https?:\/\//i.test(trimmed)) return trimmed;
   if (/^www\./i.test(trimmed)) return `https://${trimmed}`;
   if (/^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:\/.*)?$/.test(trimmed)) return `https://${trimmed}`;

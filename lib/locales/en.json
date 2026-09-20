@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Lesson 2",
-          "subtitle": "Potential Barriers",
-          "description": "Transmission, reflection, tunneling, and energy dependence of states across potential barriers.",
-          "topics": [
-            "Tunneling effect",
-            "Transmission",
-            "Reflection",
-            "Scattering states",
-            "Coefficients"
-          ]
+          "subtitle": "First applications: Stern–Gerlach and Mach–Zehnder",
+          "description": "First applications: Stern–Gerlach and Mach–Zehnder",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Lesson 3",
-          "subtitle": "Harmonic Oscillator",
-          "description": "Energy level quantization, creation/annihilation operators, and eigenstates of the harmonic oscillator.",
-          "topics": [
-            "Energy levels",
-            "Quantum ladders",
-            "a and a† operators",
-            "Eigenstates",
-            "Wavefunctions"
-          ]
+          "subtitle": "Discussion of the postulates",
+          "description": "Discussion of the postulates",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Lesson 4",
-          "subtitle": "Spin",
-          "description": "Pauli matrices, spin measurement, dynamics in magnetic fields, and two-level applications.",
-          "topics": [
-            "Pauli matrices",
-            "Spin 1/2",
-            "Measurement",
-            "Precession",
-            "Two-level systems"
-          ]
+          "subtitle": "Position, momentum, and particle representations",
+          "description": "Position, momentum, and particle representations",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Lesson 5",
-          "subtitle": "Quantum Dynamics",
-          "description": "Unitary evolution, Schrodinger equation, Schrodinger/Heisenberg pictures, and propagators.",
-          "topics": [
-            "Unitary evolution",
-            "Schrodinger equation",
-            "Heisenberg picture",
-            "Propagators",
-            "Hamiltonian"
-          ]
+          "subtitle": "Dynamics of a particle",
+          "description": "Dynamics of a particle",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Lesson 6",
+          "subtitle": "Potential wells and tunneling",
+          "description": "Potential wells and tunneling",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Lesson 7",
+          "subtitle": "The harmonic oscillator",
+          "description": "The harmonic oscillator",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Lesson 8",
+          "subtitle": "The hydrogen atom",
+          "description": "The hydrogen atom",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Lesson 9",
+          "subtitle": "Benzene: delocalized electrons and molecular spectrum",
+          "description": "Benzene: delocalized electrons and molecular spectrum",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Lesson 10",
+          "subtitle": "Angular momentum and spin",
+          "description": "Angular momentum and spin",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Lesson 11",
+          "subtitle": "Oscillations, interference, and beats",
+          "description": "Oscillations, interference, and beats",
+          "topics": []
         }
       }
     },

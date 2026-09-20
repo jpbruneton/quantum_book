@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Lição n.º 2",
-          "subtitle": "Barreiras de potencial",
-          "description": "Transmissão, reflexão, efeito de túnel e dependência energética dos estados perante barreiras de potencial.",
-          "topics": [
-            "Efeito de túnel",
-            "Transmissão",
-            "Reflexão",
-            "Estados dispersos",
-            "Coeficientes"
-          ]
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Lição n.º 3",
-          "subtitle": "Oscilador harmónico",
-          "description": "Quantização dos níveis de energia, operadores de criação e aniquilação, e estados próprios do oscilador harmónico.",
-          "topics": [
-            "Níveis de energia",
-            "Escadas quânticas",
-            "Operadores a e a†",
-            "Estados próprios",
-            "Funções de onda"
-          ]
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Lição n.º 4",
-          "subtitle": "Spin",
-          "description": "Matrizes de Pauli, medição do spin, dinâmica num campo magnético e aplicações a dois níveis.",
-          "topics": [
-            "Matrizes de Pauli",
-            "Spin 1/2",
-            "Medição",
-            "Precessão",
-            "Sistemas de dois níveis"
-          ]
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Lição n.º 5",
-          "subtitle": "Dinâmica quântica",
-          "description": "Evolução unitária, equação de Schrödinger, representações de Schrödinger e Heisenberg, e propagadores.",
-          "topics": [
-            "Evolução unitária",
-            "Equação de Schrödinger",
-            "Representação de Heisenberg",
-            "Propagadores",
-            "Hamiltoniano"
-          ]
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Lição n.º 6",
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Lição n.º 7",
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Lição n.º 8",
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Lição n.º 9",
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Lição n.º 10",
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Lição n.º 11",
+          "subtitle": "Tradução em preparação",
+          "description": "Este conteúdo ainda não está disponível nesta língua.",
+          "topics": []
         }
       }
     },

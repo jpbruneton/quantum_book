@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "第2レッスン",
-          "subtitle": "ポテンシャル障壁",
-          "description": "ポテンシャル障壁に対する状態の透過、反射、トンネル効果、エネルギー依存性。",
-          "topics": [
-            "トンネル効果",
-            "透過",
-            "反射",
-            "散乱状態",
-            "係数"
-          ]
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "第3レッスン",
-          "subtitle": "調和振動子",
-          "description": "エネルギー準位の量子化、生成・消滅作用素、調和振動子の固有状態。",
-          "topics": [
-            "エネルギー準位",
-            "量子のはしご",
-            "作用素 a と a†",
-            "固有状態",
-            "波動関数"
-          ]
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "第4レッスン",
-          "subtitle": "スピン",
-          "description": "パウリ行列、スピン測定、磁場中の力学、二準位系への応用。",
-          "topics": [
-            "パウリ行列",
-            "スピン 1/2",
-            "測定",
-            "歳差運動",
-            "二準位系"
-          ]
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "第5レッスン",
-          "subtitle": "量子力学の時間発展",
-          "description": "ユニタリ発展、シュレーディンガー方程式、シュレーディンガー描像とハイゼンベルク描像、伝播関数。",
-          "topics": [
-            "ユニタリ発展",
-            "シュレーディンガー方程式",
-            "ハイゼンベルク描像",
-            "伝播関数",
-            "ハミルトニアン"
-          ]
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "第6レッスン",
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "第7レッスン",
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "第8レッスン",
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "第9レッスン",
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "第10レッスン",
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "第11レッスン",
+          "subtitle": "翻訳準備中",
+          "description": "この内容は、まだこの言語では利用できません。",
+          "topics": []
         }
       }
     },

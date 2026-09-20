@@ -35,6 +35,12 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 ## Suivi des décisions et harmonisation
 
+- 2026-09-21 : titres du nouveau plan du thème 3 dans le catalogue uniquement :
+  « impulsion » → momentum ; « puits de potentiel » → potential wells ;
+  « effet tunnel » → tunneling ; « électrons délocalisés » → delocalized electrons ;
+  « moment cinétique » → angular momentum ; « battements » → beats.
+  Ces métadonnées ne constituent pas une traduction des cours.
+
 - 2026-09-07 : inventaire initial des six expressions des figures SG ; relecture lors de la prochaine reprise.
 - Les autres termes techniques et les choix propres à cette langue restent à recenser.
 

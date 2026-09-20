@@ -59,6 +59,16 @@ Les quiz restent en préparation et en noindex tant que la banque est vide.
 
 ## Figures
 
+Les onze leçons françaises du thème 3 sont enregistrées dans le site. Leurs fragments
+TikZ restent dans `content/tex/figs-src/fr/theme3/`, avec `parametres.tex`.
+`node scripts/build-theme3-figures.cjs` compile les 33 figures utilisées vers
+`content/tex/site-assets/figs/fr/theme3/` (MiKTeX/TeX et `pdftoppm` nécessaires).
+Le convertisseur associe ces inputs aux PNG ; le prebuild prépare les variantes
+responsives. La compilation des figures est séparée du build du site.
+Les métadonnées du nouveau plan sont renseignées en français et en anglais ; les
+autres catalogues réutilisent le libellé localisé de traduction en préparation.
+Cela ne rend disponible aucune traduction du corps des leçons du thème 3.
+
 Le résolveur utilise l'image de la langue demandée si elle existe, sinon l'original
 français, conformément à la consigne de publication. Ce repli concerne uniquement
 les figures. Les images françaises ne sont pas dupliquées sous un autre code langue

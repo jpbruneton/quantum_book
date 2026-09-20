@@ -156,6 +156,40 @@ for (const page of frenchPages.values()) {
 }
 assert.ok(crossReferenceCount >= 9, 'Cross-lesson and cross-fiche references are rendered');
 const frenchPostulates = [...frenchPages.values()].find(page => page.file === 'theme3_fr/lecon1.tex').html;
+const theme3Lessons = getWebThemes('fr').find(theme => theme.number === 3).lessons;
+assert.equal(theme3Lessons.length, 11, 'All authored theme 3 lessons are registered');
+for (const lesson of theme3Lessons) {
+  const source = fs.readFileSync(path.join('content/tex', lesson.texFile), 'utf8');
+  const refs = chapterContent.getLessonReferences(3, lesson.number, [], lesson.texFile);
+  const raw = chapterContent.getLessonWebContent(lesson.texFile, -1, refs);
+  const html = processLatex(raw);
+  assert.match(source.trimEnd(), new RegExp(`\\\\section\\{Références\\}\\s*\\\\input\\{ref_3_${lesson.number}\\}$`));
+  assert.doesNotMatch(html, /katex-error/);
+  assert.doesNotMatch(renderedHtmlToPlainText(html), /\\[A-Za-z]+|\$|__FOOTNOTE_|\[(?:eq|th|sec|fig|ch):[^\]]+\]/);
+  for (const [, key] of source.matchAll(/\\cite\{([^}]+)\}/g)) {
+    assert.ok(refs.some(ref => ref.key === key), `${lesson.texFile}: citation ${key} resolves`);
+  }
+  for (const ref of refs) assert.ok(!ref.url.includes('\\'), 'Bibliography URLs contain no TeX escapes');
+  assert.equal((html.match(/<figure class="latex-figure"/g) ?? []).length,
+    (source.match(/\\begin\{figure\}/g) ?? []).length, `${lesson.texFile}: every figure survives conversion`);
+  assert.equal((html.match(/<table class="latex-table"/g) ?? []).length,
+    (source.match(/\\begin\{tabular\}/g) ?? []).length, `${lesson.texFile}: every text table survives conversion`);
+}
+const matrixRows = processLatex(chapterContent.getTexWebHtmlFromSource(String.raw`\[
+\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+\begin{pmatrix}c\\s\end{pmatrix},\quad
+\begin{pmatrix}0&J\\J&0\end{pmatrix}\]`, 'fr', []));
+assert.doesNotMatch(renderedHtmlToPlainText(matrixRows), /\\/);
+assert.doesNotMatch(matrixRows, /katex-error/);
+const chapterAliases = chapterContent.getTexWebHtmlFromSource(String.raw`Voir \hyperref[ch:discussion]{discussion} et \hyperref[Disc]{alias}.`, 'fr', [], 'theme3_fr/lecon1.tex');
+assert.equal((chapterAliases.match(/class="latex-cross-reference"/g) ?? []).length, 2, 'Chapter labels on separate lines and aliases resolve');
+const plainItalics = chapterContent.getTexWebHtmlFromSource(String.raw`\textit{Titre du livre}`, 'fr', []);
+assert.ok(plainItalics.includes('<i>Titre du livre</i>'));
+assert.ok(!plainItalics.includes('latex-inline-blue-strong'));
+const sgLink = chapterContent.getTexWebHtmlFromSource(String.raw`\hyperref[ch:sg]{Stern et Gerlach}`, 'fr', [], 'theme3_fr/lecon2.tex');
+assert.match(sgLink, /class="latex-cross-reference"/);
+const hiddenInterferenceLink = chapterContent.getTexWebHtmlFromSource(String.raw`\hyperref[ch:interferences]{Interférences}`, 'fr', [], 'theme3_fr/lecon2.tex');
+assert.doesNotMatch(hiddenInterferenceLink, /href=/, 'The hidden theme 1 lesson stays unpublished');
 const unpublishedReference = chapterContent.getTexWebHtmlFromSource(String.raw`Voir \ref{sec:haroche}.`, 'fr', [], 'theme3_fr/lecon1.tex');
 assert.ok(unpublishedReference.includes('thème 5, leçon 8, non publiée'), 'Unpublished source is identified without a broken link');
 assert.doesNotMatch(unpublishedReference, /href=/);

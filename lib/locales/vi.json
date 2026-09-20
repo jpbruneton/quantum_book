@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Bài học 2",
-          "subtitle": "Rào thế",
-          "description": "Truyền qua, phản xạ, xuyên hầm và sự phụ thuộc năng lượng của trạng thái khi gặp rào thế.",
-          "topics": [
-            "Hiệu ứng xuyên hầm",
-            "Truyền qua",
-            "Phản xạ",
-            "Trạng thái tán xạ",
-            "Hệ số"
-          ]
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Bài học 3",
-          "subtitle": "Dao động tử điều hòa",
-          "description": "Lượng tử hóa các mức năng lượng, toán tử sinh và hủy, và trạng thái riêng của dao động tử điều hòa.",
-          "topics": [
-            "Mức năng lượng",
-            "Thang lượng tử",
-            "Toán tử a và a†",
-            "Trạng thái riêng",
-            "Hàm sóng"
-          ]
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Bài học 4",
-          "subtitle": "Spin",
-          "description": "Ma trận Pauli, phép đo spin, động lực học trong từ trường và ứng dụng cho hệ hai mức.",
-          "topics": [
-            "Ma trận Pauli",
-            "Spin 1/2",
-            "Phép đo",
-            "Tiến động",
-            "Hệ hai mức"
-          ]
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Bài học 5",
-          "subtitle": "Động lực học lượng tử",
-          "description": "Tiến hóa unita, phương trình Schrödinger, bức tranh Schrödinger/Heisenberg và toán tử truyền.",
-          "topics": [
-            "Tiến hóa unita",
-            "Phương trình Schrödinger",
-            "Bức tranh Heisenberg",
-            "Toán tử truyền",
-            "Hamiltonian"
-          ]
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Bài học 6",
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Bài học 7",
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Bài học 8",
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Bài học 9",
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Bài học 10",
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Bài học 11",
+          "subtitle": "Bản dịch đang được chuẩn bị",
+          "description": "Nội dung này chưa có bằng ngôn ngữ này.",
+          "topics": []
         }
       }
     },

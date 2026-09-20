@@ -930,6 +930,23 @@ a.exercise-index-card-link:focus-visible {
   font-weight: 700;
 }
 
+.prose-quantum .latex-table-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose-quantum .latex-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prose-quantum .latex-table th,
+.prose-quantum .latex-table td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border, #d1d5db);
+  text-align: left;
+}
+
 .prose-quantum .latex-list {
   margin: 1rem 0 1.25rem 1.5rem;
   padding-left: 0.5rem;

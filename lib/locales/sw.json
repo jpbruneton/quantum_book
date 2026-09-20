@@ -429,51 +429,63 @@
         },
         "applications-lecon-1": {
           "title": "Somo 2",
-          "subtitle": "Vizuizi vya potenshali",
-          "description": "Upitishaji, uakisi, upenyezaji wa kituneli na utegemezi wa nishati wa hali zinazokutana na vizuizi vya potenshali.",
-          "topics": [
-            "Athari ya kituneli",
-            "Upitishaji",
-            "Uakisi",
-            "Hali zilizotawanywa",
-            "Vigawo"
-          ]
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
         },
         "applications-lecon-2": {
           "title": "Somo 3",
-          "subtitle": "Osileta ya harmoniki",
-          "description": "Ukwantishaji wa viwango vya nishati, opereta za uundaji/uangamizaji na hali eigen za osileta ya harmoniki.",
-          "topics": [
-            "Viwango vya nishati",
-            "Ngazi za kwanta",
-            "Opereta a na a†",
-            "Hali eigen",
-            "Funksioni za mawimbi"
-          ]
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
         },
         "applications-lecon-3": {
           "title": "Somo 4",
-          "subtitle": "Spini",
-          "description": "Matriki za Pauli, upimaji wa spini, dinamika katika uga wa sumaku na matumizi kwa mifumo ya viwango viwili.",
-          "topics": [
-            "Matriki za Pauli",
-            "Spini 1/2",
-            "Upimaji",
-            "Precesheni",
-            "Mifumo ya viwango viwili"
-          ]
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
         },
         "applications-lecon-4": {
           "title": "Somo 5",
-          "subtitle": "Dinamika ya kwanta",
-          "description": "Mageuko ya unitari, mlinganyo wa Schrödinger, picha za Schrödinger/Heisenberg na propageta.",
-          "topics": [
-            "Mageuko ya unitari",
-            "Mlinganyo wa Schrödinger",
-            "Picha ya Heisenberg",
-            "Propageta",
-            "Hamiltoniani"
-          ]
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
+        },
+        "applications-lecon-5": {
+          "title": "Somo 6",
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
+        },
+        "applications-lecon-6": {
+          "title": "Somo 7",
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
+        },
+        "applications-lecon-7": {
+          "title": "Somo 8",
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
+        },
+        "applications-lecon-8": {
+          "title": "Somo 9",
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
+        },
+        "applications-lecon-9": {
+          "title": "Somo 10",
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
+        },
+        "applications-lecon-10": {
+          "title": "Somo 11",
+          "subtitle": "Tafsiri inaandaliwa",
+          "description": "Maudhui haya bado hayapatikani katika lugha hii.",
+          "topics": []
         }
       }
     },
