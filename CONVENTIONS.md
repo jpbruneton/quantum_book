@@ -1,5 +1,6 @@
 # Conventions LaTeX du projet
 
+- Progression pédagogique : jusqu'au thème 3 inclus, rester dans le cadre des états purs et des mesures projectives. Ne pas introduire ni utiliser les états mixtes, les matrices densité ou les POVM ; leur étude vient ultérieurement. S'appuyer sur les notions déjà introduites dans les leçons précédentes sans répéter leur présentation.
 - Renvoi à une section de la même leçon : employer « plus bas », « ci-dessous », « ci-dessus », « plus haut », etc., selon la position de la cible. On peut préciser le numéro, par exemple « plus bas, en section~\ref*{sec:exemple} ». Le renvoi reste non cliquable.
 - Renvoi à une autre leçon du même thème : écrire simplement « nous avons vu à la leçon 3 », « nous verrons à la leçon 4 », « la leçon suivante », etc., sans répéter le thème et sans hyperlien. Utiliser le numéro de la leçon seul (3, et non 2.3).
 - Renvoi à un autre thème : utiliser `\hyperref[cible]{...}` et préciser le thème, ainsi que la leçon si elle est connue, par exemple `\hyperref[ch:spectral]{thème 2, leçon 6}`. Pour un renvoi à un thème entier, utiliser sa cible `theme:1`, `theme:2` ou `theme:3`. Ne pas inventer de cible pour un thème futur qui n'existe pas encore dans le projet ; conserver alors l'annonce en texte simple.
