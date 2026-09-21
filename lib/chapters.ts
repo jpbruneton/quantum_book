@@ -361,7 +361,7 @@ export const themes: Theme[] = [
         display_on_web: true,
         titleFr: "Leçon n°1",
         titleEn: "Lesson 1",
-        subtitleFr: "Mesure, dynamique et interprétation",
+        subtitleFr: "Les postulats",
         subtitleEn: "Measurement, Dynamics, and Interpretation",
         descriptionFr:
           "Présentation des postulats quantiques, de la règle de Born, de la réduction du paquet d'onde et de l'équation de Schrödinger.",

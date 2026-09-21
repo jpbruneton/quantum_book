@@ -1,5 +1,7 @@
 # Conventions LaTeX du projet
 
+- Titres et sous-titres : privilégier des formulations nominales courtes et précises (« Conditions de raccordement »). Éviter les consignes à l'infinitif et les titres construits autour d'un verbe, sauf nécessité pédagogique.
+
 - Opérateur identité : utiliser `\mathbb{1}`, comme au thème 2, sans chapeau. Préciser au besoin l'espace par un indice, par exemple `\mathbb{1}_{\H}`. Ne pas alterner avec `I`, `\mathrm{Id}` ou `\mathbf{1}` pour désigner cet opérateur ; conserver les lettres servant d'indices ou de noms d'intervalles.
 - Ton scientifique : conserver les explications pédagogiques, mais éviter les jugements esthétiques, les superlatifs et les appréciations subjectives (« jolie formule », « résultat surprenant », etc.). Décrire précisément les propriétés, les hypothèses et les limites des résultats ; ne pas présenter une question ouverte comme résolue.
 - Progression pédagogique : jusqu'au thème 3 inclus, rester dans le cadre des états purs et des mesures projectives. Ne pas introduire ni utiliser les états mixtes, les matrices densité ou les POVM ; leur étude vient ultérieurement. S'appuyer sur les notions déjà introduites dans les leçons précédentes sans répéter leur présentation.
