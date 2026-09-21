@@ -59,8 +59,11 @@ Les quiz restent en préparation et en noindex tant que la banque est vide.
 
 ## Figures
 
-Les onze leçons françaises du thème 3 sont enregistrées dans le site. Leurs fragments
-TikZ restent dans `content/tex/figs-src/fr/theme3/`, avec `parametres.tex`.
+Les onze leçons françaises du thème 3 sont enregistrées dans le site.
+Les leçons 1 à 8 sont publiées ; les suivantes restent dans le dépôt privé et sont
+exclues des pages, de la navigation et du sitemap par `lib/publication.ts`.
+Les leçons françaises du thème 3, sauf la première, portent l'encart « Leçon en cours de réécriture ».
+Leurs fragments TikZ restent dans `content/tex/figs-src/fr/theme3/`, avec `parametres.tex`.
 `node scripts/build-theme3-figures.cjs` compile les 33 figures utilisées vers
 `content/tex/site-assets/figs/fr/theme3/` (MiKTeX/TeX et `pdftoppm` nécessaires).
 Le convertisseur associe ces inputs aux PNG ; le prebuild prépare les variantes

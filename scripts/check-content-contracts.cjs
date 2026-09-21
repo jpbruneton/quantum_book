@@ -121,7 +121,7 @@ for (const lang of SUPPORTED_LANGS) {
   assert.equal(result.toc.at(-1).text.replace(/^\d+\.\s*/, ''), ui.chapter.tabReferences);
   const lesson = {slug:'lesson-1', titleFr:'Test', titleEn:'Test', subtitleFr:'', subtitleEn:'',
     topicsFr:[], topicsEn:[], descriptionFr:'', descriptionEn:'', renderedLang:result.content,
-    toc:result.toc, references};
+    toc:result.toc, references, texFile, number:1};
   const html = renderToStaticMarkup(React.createElement(LangProvider,
     {initialLang:lang, initialUi:ui, initialThemes:[]}, React.createElement(ChapterContent, {lesson})));
   assert.ok(html.includes('https://doi.org/10.48550/arXiv.2211.08363'), `${lang}: bibliography visible without interaction`);
@@ -157,7 +157,8 @@ for (const page of frenchPages.values()) {
 assert.ok(crossReferenceCount >= 9, 'Cross-lesson and cross-fiche references are rendered');
 const frenchPostulates = [...frenchPages.values()].find(page => page.file === 'theme3_fr/lecon1.tex').html;
 const theme3Lessons = getWebThemes('fr').find(theme => theme.number === 3).lessons;
-assert.equal(theme3Lessons.length, 11, 'All authored theme 3 lessons are registered');
+assert.equal(getWebThemes().find(theme => theme.number === 3).lessons.length, 11, 'All authored theme 3 lessons remain registered');
+assert.deepEqual(theme3Lessons.map(lesson => lesson.number), [1, 2, 3, 4, 5, 6, 7, 8], 'Only theme 3 lessons 1–8 are published in French');
 for (const lesson of theme3Lessons) {
   const source = fs.readFileSync(path.join('content/tex', lesson.texFile), 'utf8');
   const refs = chapterContent.getLessonReferences(3, lesson.number, [], lesson.texFile);

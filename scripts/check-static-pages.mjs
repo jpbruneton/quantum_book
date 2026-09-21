@@ -47,6 +47,17 @@ if (!process.argv.includes('--available-only')) {
   }
 }
 const sitemap = readFileSync('.next/server/app/sitemap.xml.body', 'utf8');
+for (let lesson = 1; lesson <= 11; lesson++) {
+  const route = `/fr/chapters/postulates/lesson-${lesson}`;
+  const published = lesson <= 8;
+  assert.equal(!!routes[route], published, `${route}: publication limit`);
+  assert.equal(sitemap.includes(`/fr/chapitres/postulats/lecon-${lesson}<`), published, `${route}: sitemap publication limit`);
+  if (published) {
+    const html = readFileSync(`.next/server/app${route}.html`, 'utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
+    assert.equal(html.includes('Leçon en cours de réécriture'), lesson > 1, `${route}: rewriting notice`);
+    assert.ok(!html.includes('class="katex-error"'), `${route}: equations render correctly`);
+  }
+}
 assert.ok(!sitemap.includes('/quiz'), 'Unpublished quizzes absent from sitemap');
 assert.ok(!sitemap.includes('/fr/chapitres/experiences-fondatrices/lecon-2'), 'Withdrawn French lesson absent from sitemap');
 console.log(`${pages.length} static localized pages checked; ${mathPages} pages with precompiled equations.`);

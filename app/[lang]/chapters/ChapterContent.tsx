@@ -151,6 +151,22 @@ export function ChapterContent({ lesson, topNav }: Props) {
         >
           {lessonHeading}
         </h2>
+        {lang === "fr" && lesson.texFile.startsWith("theme3_fr/") && lesson.number > 1 && (
+          <p
+            style={{
+              marginTop: "1rem",
+              marginBottom: "1rem",
+              padding: "0.65rem 1rem",
+              borderLeft: "3px solid var(--amber)",
+              background: "var(--accent-bg-xs)",
+              color: "var(--text-heading)",
+              fontFamily: "var(--font-inter)",
+              fontSize: "0.9rem",
+            }}
+          >
+            Leçon en cours de réécriture
+          </p>
+        )}
         <p
           style={{
             fontFamily: "var(--font-crimson)",

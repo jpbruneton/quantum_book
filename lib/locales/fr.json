@@ -429,63 +429,127 @@
         },
         "applications-lecon-1": {
           "title": "Leçon n°2",
-          "subtitle": "Premières applications : Stern–Gerlach et Mach–Zehnder",
-          "description": "Premières applications : Stern–Gerlach et Mach–Zehnder",
-          "topics": []
+          "subtitle": "Stern–Gerlach et Mach–Zehnder",
+          "description": "Probabilités de mesure et interférences : séquences de Stern–Gerlach et interféromètre de Mach–Zehnder.",
+          "topics": [
+            "Stern–Gerlach",
+            "Mach–Zehnder",
+            "Amplitudes de probabilité",
+            "Mesures successives",
+            "Interférences"
+          ]
         },
         "applications-lecon-2": {
           "title": "Leçon n°3",
           "subtitle": "Discussion des postulats",
-          "description": "Discussion des postulats",
-          "topics": []
+          "description": "Superposition, spectres, incertitudes et problème de la mesure : interpréter les postulats et leur rapport à la physique classique.",
+          "topics": [
+            "Superposition",
+            "Spectre des observables",
+            "Relations d’incertitude",
+            "Problème de la mesure",
+            "Principe de correspondance",
+            "Quantification canonique"
+          ]
         },
         "applications-lecon-3": {
           "title": "Leçon n°4",
-          "subtitle": "Position, impulsion et représentations d'une particule",
-          "description": "Position, impulsion et représentations d'une particule",
-          "topics": []
+          "subtitle": "Position et impulsion",
+          "description": "Représentations en position et en impulsion, delta de Dirac, translations et transformation de Fourier.",
+          "topics": [
+            "Position",
+            "Impulsion",
+            "Delta de Dirac",
+            "Translations",
+            "Transformation de Fourier",
+            "Commutateur canonique"
+          ]
         },
         "applications-lecon-4": {
           "title": "Leçon n°5",
-          "subtitle": "Dynamique d'une particule",
-          "description": "Dynamique d'une particule",
-          "topics": []
+          "subtitle": "Dynamique d’une particule",
+          "description": "Équation de Schrödinger en position, courant de probabilité, particule libre et théorème d’Ehrenfest.",
+          "topics": [
+            "Équation de Schrödinger",
+            "Courant de probabilité",
+            "États stationnaires",
+            "Particule libre",
+            "Théorème d’Ehrenfest"
+          ]
         },
         "applications-lecon-5": {
           "title": "Leçon n°6",
           "subtitle": "Puits de potentiel et effet tunnel",
-          "description": "Puits de potentiel et effet tunnel",
-          "topics": []
+          "description": "États liés et diffusion dans les puits, marches et barrières de potentiel : raccordements, réflexion, transmission et effet tunnel.",
+          "topics": [
+            "Puits de potentiel",
+            "Conditions aux limites",
+            "États liés",
+            "Réflexion et transmission",
+            "Effet tunnel"
+          ]
         },
         "applications-lecon-6": {
           "title": "Leçon n°7",
-          "subtitle": "L'oscillateur harmonique",
-          "description": "L'oscillateur harmonique",
-          "topics": []
+          "subtitle": "L’oscillateur harmonique",
+          "description": "Spectre et états propres de l’oscillateur harmonique par les opérateurs d’échelle ; fonctions de Hermite et fluctuations.",
+          "topics": [
+            "Oscillateur harmonique",
+            "Opérateurs d’échelle",
+            "Opérateur nombre",
+            "Énergie du fondamental",
+            "Fonctions de Hermite"
+          ]
         },
         "applications-lecon-7": {
           "title": "Leçon n°8",
-          "subtitle": "L'atome d'hydrogène",
-          "description": "L'atome d'hydrogène",
-          "topics": []
+          "subtitle": "L’atome d’hydrogène",
+          "description": "Spectre et orbitales de l’hydrogène, nombres quantiques et raies spectrales ; introduction aux atomes à plusieurs électrons.",
+          "topics": [
+            "Atome d’hydrogène",
+            "Orbitales atomiques",
+            "Nombres quantiques",
+            "Raies spectrales",
+            "Règles de remplissage",
+            "Règles de Slater"
+          ]
         },
         "applications-lecon-8": {
           "title": "Leçon n°9",
-          "subtitle": "Le benzène : électrons délocalisés et spectre moléculaire",
-          "description": "Le benzène : électrons délocalisés et spectre moléculaire",
-          "topics": []
+          "subtitle": "Le benzène",
+          "description": "Électrons délocalisés du benzène : symétries, orbitales moléculaires, transitions optiques et comparaison aux mesures.",
+          "topics": [
+            "Benzène",
+            "Délocalisation électronique",
+            "Orbitales moléculaires",
+            "Symétries",
+            "Spectre d’absorption"
+          ]
         },
         "applications-lecon-9": {
           "title": "Leçon n°10",
           "subtitle": "Moment cinétique et spin",
-          "description": "Moment cinétique et spin",
-          "topics": []
+          "description": "Algèbre du moment cinétique, spin, sphère de Bloch, rotations et couplage au champ magnétique.",
+          "topics": [
+            "Moment cinétique",
+            "Spin",
+            "Sphère de Bloch",
+            "Matrices de Pauli",
+            "Rotations",
+            "Champ magnétique"
+          ]
         },
         "applications-lecon-10": {
           "title": "Leçon n°11",
-          "subtitle": "Oscillations, interférences et battements",
-          "description": "Oscillations, interférences et battements",
-          "topics": []
+          "subtitle": "Oscillations et interférences",
+          "description": "Phases relatives et dynamique à deux niveaux : battements quantiques, oscillations de Rabi et interférences de Ramsey.",
+          "topics": [
+            "Battements quantiques",
+            "Systèmes à deux niveaux",
+            "Oscillations de Rabi",
+            "Interférences de Ramsey",
+            "Cohérence"
+          ]
         }
       }
     },
