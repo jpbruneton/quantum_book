@@ -148,7 +148,21 @@ const {buildThemeWithLocalizedContent} = load('lib/chapterPage.server.ts');
 const activeTheme = buildThemeWithLocalizedContent(getWebThemes('fr').find(theme => theme.number === 3), 'fr', 0);
 assert.equal(activeTheme.lessons.filter(lesson => lesson.renderedLang).length, 1, 'Only the active lesson body crosses the client boundary');
 assert.ok(activeTheme.lessons.every(lesson => !lesson.content && !lesson.contentLang), 'Intermediate lesson sources remain on the server');
+const eighthLessonTheme = buildThemeWithLocalizedContent(getWebThemes('fr').find(theme => theme.number === 3), 'fr', 7);
+assert.equal(eighthLessonTheme.lessons[7].number, 8);
+assert.ok(eighthLessonTheme.lessons[7].renderedLang.length > 0, 'Opening lesson 8 loads its own content');
+assert.ok(eighthLessonTheme.lessons.every((lesson, index) => index === 7 ||
+  (!lesson.renderedLang && !lesson.content && !lesson.contentLang && !lesson.toc.length && !lesson.references.length)),
+  'Opening lesson 8 does not load the content, TOC or references of other lessons');
 const lessonRoutes = load('lib/lessonRoutes.ts');
+for (const lang of SUPPORTED_LANGS) {
+  for (const theme of getWebThemes(lang)) {
+    if (!theme.lessons.length) continue;
+    assert.equal(lessonRoutes.chapterThemePath(lang, theme),
+      lessonRoutes.chapterLessonPath(lang, theme.slug, theme.lessons[0]),
+      'Theme links open the first published lesson directly, without a redirect');
+  }
+}
 const frenchPages = new Map();
 for (const theme of getWebThemes('fr')) {
   for (const lesson of theme.lessons) {

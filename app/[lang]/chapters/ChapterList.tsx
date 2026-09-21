@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useLang } from "@/app/context/LangContext";
-import { useLocalizedPath } from "@/lib/useLocalizedPath";
+import { chapterThemePath } from "@/lib/lessonRoutes";
 import type { Theme } from "@/lib/chapters";
 
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
 
 export function ChapterList({ webThemes }: Props) {
   const { t, lang } = useLang();
-  const lp = useLocalizedPath();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
@@ -51,7 +50,7 @@ export function ChapterList({ webThemes }: Props) {
           ) : null}
           <Link
             prefetch={false}
-            href={lp(`/chapters/${theme.slug}`)}
+            href={chapterThemePath(lang, theme)}
             style={{ textDecoration: "none", display: "block" }}
           >
             <div

@@ -133,17 +133,6 @@ export function ChapterContent({ lesson, topNav }: Props) {
             Leçon en cours de réécriture
           </p>
         )}
-        <p
-          style={{
-            fontFamily: "var(--font-crimson)",
-            fontSize: "1rem",
-            color: "var(--text-secondary)",
-            lineHeight: 1.7,
-            marginBottom: "1rem",
-          }}
-        >
-          {lang === "fr" ? lesson.descriptionFr : lesson.descriptionEn}
-        </p>
       </div>
 
       <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0.75rem 1.5rem 0" }}>

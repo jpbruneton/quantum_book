@@ -4,6 +4,7 @@ import Image from "next/image";
 import { type Theme } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
+import { chapterThemePath } from "@/lib/lessonRoutes";
 
 export default function HomePageClient({ webThemes }: { webThemes: Theme[] }) {
   const { t, lang } = useLang();
@@ -44,7 +45,7 @@ export default function HomePageClient({ webThemes }: { webThemes: Theme[] }) {
           <div className="home-theme-grid">
             {webThemes.map(theme => (
               <Link key={theme.slug} className="home-theme-card chapter-card" prefetch={false}
-                href={lp(`/chapters/${theme.slug}`)}>
+                href={chapterThemePath(lang, theme)}>
                 <span className="home-theme-number">{t.home.themePrefix} {String(theme.number).padStart(2, "0")}</span>
                 <h3>{lang === "fr" ? theme.titleFr : theme.titleEn}</h3>
                 <p>{lang === "fr" ? theme.descriptionFr : theme.descriptionEn}</p>

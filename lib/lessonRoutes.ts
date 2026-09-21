@@ -1,4 +1,4 @@
-import type { Lesson } from "@/lib/chapters";
+import type { Lesson, Theme } from "@/lib/chapters";
 import { localizedPath, type SiteLang } from "@/lib/localeRoutes";
 import { lessonRefToCanonical, lessonRefToPublic } from "@/lib/themePublicSlugs";
 
@@ -21,6 +21,13 @@ export function lessonToPublicPathSegment(lang: SiteLang, lesson: Lesson): strin
 
 export function chapterLessonPath(lang: SiteLang, themeSlug: string, lesson: Lesson): string {
   return localizedPath(lang, `/chapters/${themeSlug}/${lessonToPathSegment(lesson)}`);
+}
+
+export function chapterThemePath(lang: SiteLang, theme: Pick<Theme, "slug" | "lessons">): string {
+  const first = theme.lessons[0];
+  return first
+    ? chapterLessonPath(lang, theme.slug, first)
+    : localizedPath(lang, `/chapters/${theme.slug}`);
 }
 
 export function parseLessonPathSegment(
