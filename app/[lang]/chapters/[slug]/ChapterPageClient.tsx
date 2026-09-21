@@ -33,7 +33,7 @@ interface Props {
 
 const headerBoxStyle: CSSProperties = {
   borderBottom: "1px solid var(--border)",
-  padding: "4rem 1.5rem 3rem",
+  padding: "0.85rem 1.5rem",
   background: "var(--bg-secondary)",
   transition: "background 0.25s ease",
 };
@@ -61,56 +61,21 @@ function ChapterThemeHeadingBlock({ theme }: { theme: ThemeWithLocalizedLessonCo
   const { t, lang } = useLang();
   const lp = useLocalizedPath();
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          marginBottom: "2rem",
-          fontFamily: "var(--font-inter)",
-          fontSize: "0.8rem",
-          color: "var(--text-dim)",
-        }}
-      >
-        <Link href={lp("/")} style={{ color: "var(--text-dim)", textDecoration: "none" }}>
-          {t.chapter.breadcrumbHome}
-        </Link>
-        <span>/</span>
-        <Link href={lp("/chapters")} style={{ color: "var(--text-dim)", textDecoration: "none" }}>
-          {t.chapter.breadcrumbThemes}
-        </Link>
-        <span>/</span>
-        <span style={{ color: "var(--amber)" }}>
-          {t.chapter.themeLabel.charAt(0) + t.chapter.themeLabel.slice(1).toLowerCase()}{" "}
-          {theme.number}
-        </span>
-      </div>
-
-      <h1
-        style={{
-          fontFamily: "var(--font-playfair)",
-          fontSize: "clamp(2rem, 5vw, 3rem)",
-          fontWeight: 700,
-          color: "var(--text-heading)",
-          marginBottom: "0.5rem",
-          lineHeight: 1.2,
-        }}
-      >
+    <nav className="chapter-location" aria-label={t.chapter.breadcrumbThemes} tabIndex={0}>
+      <Link href={lp("/")}>
+        {t.chapter.breadcrumbHome}
+      </Link>
+      <span aria-hidden="true">/</span>
+      <Link href={lp("/chapters")}>
+        {t.chapter.breadcrumbThemes}
+      </Link>
+      <span aria-hidden="true">/</span>
+      <h1>
+        {t.chapter.themeLabel.charAt(0) + t.chapter.themeLabel.slice(1).toLowerCase()}{" "}
+        {theme.number}{" — "}
         {lang === "fr" ? theme.titleFr : theme.titleEn}
       </h1>
-      <p
-        style={{
-          fontFamily: "var(--font-playfair)",
-          fontStyle: "italic",
-          fontSize: "1.2rem",
-          color: "var(--amber-soft)",
-          marginBottom: "1.5rem",
-        }}
-      >
-        {lang === "fr" ? theme.descriptionFr : theme.descriptionEn}
-      </p>
-    </>
+    </nav>
   );
 }
 
@@ -131,7 +96,7 @@ function ChapterLessonTabButtons({
   return (
     <div
       style={{
-        marginTop: "1.75rem",
+        marginTop: "0.75rem",
         display: "flex",
         flexDirection: "column",
         gap: "0.6rem",
