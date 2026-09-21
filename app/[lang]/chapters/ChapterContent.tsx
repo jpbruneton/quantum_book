@@ -110,6 +110,15 @@ export function ChapterContent({ lesson, topNav }: Props) {
         >
           {lessonHeading}
         </h2>
+        <p className="lesson-keywords">
+          <span>{lang === "fr" ? "Mots clés" : t.exercises.keywordsLabel} : </span>
+          {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic, index) => (
+            <span key={topic}>
+              {index > 0 && ", "}
+              <Link prefetch={false} href={lp(`/glossary?q=${encodeURIComponent(topic)}`)}>{topic}</Link>
+            </span>
+          ))}
+        </p>
         {lang === "fr" && lesson.texFile.startsWith("theme3_fr/") && lesson.number > 1 && (
           <p
             className="lesson-rewriting-notice"
@@ -135,27 +144,6 @@ export function ChapterContent({ lesson, topNav }: Props) {
         >
           {lang === "fr" ? lesson.descriptionFr : lesson.descriptionEn}
         </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.5rem" }}>
-          {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic) => (
-            <Link
-              prefetch={false}
-              key={topic}
-              href={lp(`/glossary?q=${encodeURIComponent(topic)}`)}
-              style={{
-                background: "var(--accent-bg-sm)",
-                border: "1px solid var(--accent-border-sm)",
-                borderRadius: "100px",
-                padding: "0.2rem 0.75rem",
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.74rem",
-                color: "var(--amber)",
-                textDecoration: "none",
-              }}
-            >
-              {topic}
-            </Link>
-          ))}
-        </div>
       </div>
 
       <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0.75rem 1.5rem 0" }}>

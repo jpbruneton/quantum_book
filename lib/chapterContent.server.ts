@@ -1128,7 +1128,8 @@ function normalizeLatexBlocks(
     const titleStart = /(?:^|,)\s*frametitle\s*=\s*/.exec(options);
     const title = titleStart ? readBalancedBracesAt(options, titleStart.index + titleStart[0].length)?.content : "";
     const heading = title ? `<div class="latex-block-heading"><strong>${cleanLatexInline(title)}</strong></div>` : "";
-    return `\n\n<div class="latex-block latex-block-cours">${heading}<div class="latex-block-body">`;
+    const neutral = /(?:^|,)\s*backgroundcolor\s*=\s*gray(?:!\d+)?\s*(?:,|$)/.test(options);
+    return `\n\n<div class="latex-block latex-block-cours${neutral ? " latex-block-neutral" : ""}">${heading}<div class="latex-block-body">`;
   });
   result = result.replace(/\\end\{mdframed\}/g, "</div></div>\n\n");
 
@@ -1393,7 +1394,30 @@ function renderParagraph(paragraph: string, footnoteCounter: { value: number }, 
   // For proofs, keep footnotes inside the collapsible body (before □), not below </details>.
   const withFootnotes = (html: string): string => {
     if (assignedFootnotes.length === 0) return html;
-    const footnotesHtml = assignedFootnotes
+    // Attach list notes to the item containing their reference, including nested lists.
+    const itemStack: number[] = [];
+    const noteItems = new Map<number, number>();
+    const itemNotes = new Map<number, typeof assignedFootnotes>();
+    let itemId = 0;
+    html = html.replace(/<li\b[^>]*>|<\/li>|<sup class="latex-footnote-ref">(\d+)<\/sup>/g, (tag, number: string) => {
+      if (tag.startsWith("<li")) itemStack.push(itemId++);
+      else if (tag === "</li>") {
+        const id = itemStack.pop();
+        const notes = id === undefined ? undefined : itemNotes.get(id);
+        if (notes?.length) return `<div class="latex-footnotes">${notes.map(fn => `<div class="latex-footnote-item"><span class="latex-footnote-label">${getTranslations(lang).blocks.note} ${fn.number}:</span> ${fn.text}</div>`).join("")}</div></li>`;
+      } else if (itemStack.length) {
+        const note = assignedFootnotes.find(fn => fn.number === Number(number));
+        if (note) {
+          const id = itemStack[itemStack.length - 1];
+          noteItems.set(note.number, id);
+          itemNotes.set(id, [...(itemNotes.get(id) ?? []), note]);
+        }
+      }
+      return tag;
+    });
+    const remainingNotes = assignedFootnotes.filter(fn => !noteItems.has(fn.number));
+    if (!remainingNotes.length) return html;
+    const footnotesHtml = remainingNotes
       .map(
         (fn) =>
           `<div class="latex-footnote-item"><span class="latex-footnote-label">${getTranslations(lang).blocks.note} ${fn.number}:</span> ${fn.text}</div>`
@@ -1509,7 +1533,14 @@ function parseTexParagraphs(
   const normalizedBody = normalizeLatexBlocks(keptLines.join("\n"), citationMaps, contentLanguage, texFile);
   const extracted = extractFootnotesFromParagraph(normalizedBody);
   const notes = extracted.footnotes.map((note) => note.replace(/\n+/g, " "));
-  const body = extracted.text.trim();
+  // Keep complete lists together: blank lines and display math must not separate
+  // an item's footnote reference from its closing tag.
+  let listDepth = 0;
+  const body = extracted.text.trim().replace(/<\/?(?:ul|ol)\b[^>]*>|\n/g, (token) => {
+    if (token === "\n") return listDepth > 0 ? " " : token;
+    listDepth += token.startsWith("</") ? -1 : 1;
+    return token;
+  });
   if (!body) return [];
 
   const paragraphs = body

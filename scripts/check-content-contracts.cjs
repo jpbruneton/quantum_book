@@ -213,7 +213,9 @@ assert.equal((renderedPostulates.match(/class="latex-block latex-block-postulat"
 assert.equal((renderedPostulates.match(/class="latex-block latex-block-theorem"/g) ?? []).length, 3);
 for (let n = 1; n <= 6; n++) assert.ok(renderedPostulates.includes(`Postulat ${n}`));
 assert.ok(renderedPostulates.includes('Introduction au thème 3'));
-assert.equal((renderedPostulates.match(/class="latex-footnote-ref"/g) ?? []).length, 4);
+assert.equal((renderedPostulates.match(/class="latex-footnote-ref"/g) ?? []).length,
+  (fs.readFileSync('content/tex/theme3_fr/lecon1.tex', 'utf8').match(/\\footnote\s*\{/g) ?? []).length);
+assert.ok(renderedPostulates.includes('latex-block-neutral'), 'The theme introduction uses the neutral frame');
 assert.doesNotMatch(renderedPostulates, /katex-error/);
 assert.doesNotMatch(renderedHtmlToPlainText(renderedPostulates), /\\[A-Za-z]+|\$|__FOOTNOTE_/);
 const postulateSource = fs.readFileSync('content/tex/theme3_fr/lecon1.tex', 'utf8');
@@ -237,6 +239,18 @@ Texte\footnote{Voir \eqref{eq:outside}.
 Fin de la note.} Suite.`, 'fr', []));
 assert.equal((noteWithMath.match(/class="latex-footnote-ref"/g) ?? []).length, 1);
 assert.ok(noteWithMath.includes('Voir (1).'));
+const listNote = chapterContent.getTexWebHtmlFromSource(String.raw`
+\begin{itemize}
+\item Premier item\footnote{Note du premier item.}. Suite.
+
+\item Deuxieme item avant une formule
+\[x=1\]
+Fin du deuxieme item.
+\end{itemize}`, 'fr', []);
+assert.match(listNote, /Premier item[\s\S]*Note du premier item\.[\s\S]*<\/li>\s*<li>Deuxieme item/);
+assert.equal((listNote.match(/Note du premier item\./g) ?? []).length, 1);
+assert.ok(listNote.indexOf('Note du premier item.') < listNote.indexOf('Deuxieme item'));
+assert.doesNotMatch(processLatex(listNote), /katex-error/);
 assert.doesNotMatch(renderedHtmlToPlainText(noteWithMath), /\\|\$|__FOOTNOTE_/);
 assert.doesNotMatch(frenchPostulates, /\\ref\{\}|\[blochsphere\]|\[rabi_battements\]/);
 const frenchDirac = [...frenchPages.values()].find(page => page.file === 'theme2_fr/lecon2.tex').html;

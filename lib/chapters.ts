@@ -376,8 +376,6 @@ export const themes: Theme[] = [
           "Équation de Schrödinger",
           "Théorème d'Ehrenfest",
           "Superposition",
-          "Intrication quantique",
-          "Inégalités de Bell",
         ],
         topicsEn: [
           "Postulates",
@@ -407,7 +405,7 @@ export const themes: Theme[] = [
         display_on_web: true,
         titleFr: "Leçon n°2",
         titleEn: "Lesson 2",
-        subtitleFr: "Premières applications : Stern–Gerlach et Mach–Zehnder",
+        subtitleFr: "Retour sur le Stern et Gerlach",
         subtitleEn: "First applications: Stern–Gerlach and Mach–Zehnder",
         descriptionFr: "Premières applications : Stern–Gerlach et Mach–Zehnder",
         descriptionEn: "First applications: Stern–Gerlach and Mach–Zehnder",

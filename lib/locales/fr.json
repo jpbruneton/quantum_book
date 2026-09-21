@@ -422,14 +422,12 @@
             "Réduction du paquet d'onde",
             "Équation de Schrödinger",
             "Théorème d'Ehrenfest",
-            "Superposition",
-            "Intrication quantique",
-            "Inégalités de Bell"
+            "Superposition"
           ]
         },
         "applications-lecon-1": {
           "title": "Leçon n°2",
-          "subtitle": "Stern–Gerlach et Mach–Zehnder",
+          "subtitle": "Retour sur le Stern et Gerlach",
           "description": "Probabilités de mesure et interférences : séquences de Stern–Gerlach et interféromètre de Mach–Zehnder.",
           "topics": [
             "Stern–Gerlach",
