@@ -257,8 +257,7 @@ export function NavBar() {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          background: "var(--nav-bg)",
-          backdropFilter: "blur(12px)",
+          background: "var(--bg-primary)",
           borderBottom: "1px solid var(--border)",
           transition: "background 0.25s ease, border-color 0.25s ease",
         }}

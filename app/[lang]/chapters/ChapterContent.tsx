@@ -7,6 +7,7 @@ import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
 import { ShareButton } from "@/app/components/ShareButton";
+import { observeLessonScroll } from "@/lib/lessonScroll";
 
 interface Props {
   lesson: LessonWithLocalizedContent;
@@ -92,44 +93,11 @@ export function ChapterContent({ lesson, topNav }: Props) {
   const lessonHtml = useMemo(() => ({ __html: lesson.renderedLang }), [lesson.renderedLang]);
 
   useEffect(() => {
-    if (webContentWithToc.toc.length === 0) return;
-
-    const orderedIds = webContentWithToc.toc.map((entry) => entry.id);
-    const activateFromViewport = () => {
-      const offset = 120;
-      let current = orderedIds[0];
-
-      for (const id of orderedIds) {
-        const element = document.getElementById(id);
-        if (!element) continue;
-        const top = element.getBoundingClientRect().top;
-        if (top - offset <= 0) current = id;
-        else break;
-      }
-
-      setActiveTocId(current);
-    };
-
-    activateFromViewport();
-    window.addEventListener("scroll", activateFromViewport, { passive: true });
-    window.addEventListener("resize", activateFromViewport);
-
-    return () => {
-      window.removeEventListener("scroll", activateFromViewport);
-      window.removeEventListener("resize", activateFromViewport);
-    };
-  }, [webContentWithToc.toc]);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setShowBackToTop(window.scrollY > 280);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+    return observeLessonScroll(lesson.toc.map(entry => entry.id), (id, showTop) => {
+      setActiveTocId(id);
+      setShowBackToTop(showTop);
+    });
+  }, [lesson.toc]);
 
   return (
     <>
@@ -153,13 +121,11 @@ export function ChapterContent({ lesson, topNav }: Props) {
         </h2>
         {lang === "fr" && lesson.texFile.startsWith("theme3_fr/") && lesson.number > 1 && (
           <p
+            className="lesson-rewriting-notice"
             style={{
               marginTop: "1rem",
               marginBottom: "1rem",
               padding: "0.65rem 1rem",
-              borderLeft: "3px solid var(--amber)",
-              background: "var(--accent-bg-xs)",
-              color: "var(--text-heading)",
               fontFamily: "var(--font-inter)",
               fontSize: "0.9rem",
             }}

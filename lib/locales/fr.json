@@ -407,7 +407,7 @@
     },
     "postulates": {
       "title": "Postulats et applications",
-      "description": "Axiomes de base de la théorie, interprétations et conséquences physiques de la mesure. Méthodes de calcul et outils opératoriels pour relier les postulats à des prédictions concrètes.",
+      "description": "Postulats, interprétations et premières applications.",
       "partHeading": "",
       "lessons": {
         "postulats-lecon-1": {
