@@ -26,9 +26,11 @@ export function ChapterContent({ lesson, topNav }: Props) {
   const { t, lang } = useLang();
   const lp = useLocalizedPath();
   const hasLessonContent = lesson.renderedLang.trim().length > 0;
-  const lessonHeadingFr = lesson.subtitleFr.trim() || lesson.titleFr;
-  const lessonHeadingEn = lesson.subtitleEn.trim() || lesson.titleEn;
-  const lessonHeading = lang === "fr" ? lessonHeadingFr : lessonHeadingEn;
+  const lessonTitle = lang === "fr" ? lesson.titleFr : lesson.titleEn;
+  const lessonSubtitle = (lang === "fr" ? lesson.subtitleFr : lesson.subtitleEn).trim();
+  const lessonHeading = lessonSubtitle
+    ? `${lessonTitle}${lang === "fr" ? " : " : ": "}${lessonSubtitle}`
+    : lessonTitle;
 
   useEffect(() => {
     const target = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
@@ -93,50 +95,52 @@ export function ChapterContent({ lesson, topNav }: Props) {
   return (
     <>
       <div
+        className="lesson-web-layout"
         style={{
-          maxWidth: "800px",
+          maxWidth: "1320px",
           margin: "0 auto",
           padding: "2rem 1.5rem 0",
         }}
       >
-        <h2
-          style={{
-            fontFamily: "var(--font-playfair)",
-            fontSize: "1.45rem",
-            color: "var(--text-heading)",
-            marginBottom: "0.65rem",
-            lineHeight: 1.3,
-          }}
-        >
-          {lessonHeading}
-        </h2>
-        <p className="lesson-keywords">
-          <span>{lang === "fr" ? "Mots clés" : t.exercises.keywordsLabel} : </span>
-          {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic, index) => (
-            <span key={topic}>
-              {index > 0 && ", "}
-              <Link prefetch={false} href={lp(`/glossary?q=${encodeURIComponent(topic)}`)}>{topic}</Link>
-            </span>
-          ))}
-        </p>
-        {lang === "fr" && lesson.texFile.startsWith("theme3_fr/") && lesson.number > 1 && (
-          <p
-            className="lesson-rewriting-notice"
+        <header className="lesson-web-main" style={{ textAlign: "start" }}>
+          <h2
             style={{
-              marginTop: "1rem",
-              marginBottom: "1rem",
-              padding: "0.65rem 1rem",
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.9rem",
+              fontFamily: "var(--font-playfair)",
+              fontSize: "1.45rem",
+              color: "var(--text-heading)",
+              marginBottom: "0.65rem",
+              lineHeight: 1.3,
             }}
           >
-            Leçon en cours de réécriture
+            {lessonHeading}
+          </h2>
+          <p className="lesson-keywords">
+            <span>{lang === "fr" ? "Mots clés" : t.exercises.keywordsLabel} : </span>
+            {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic, index) => (
+              <span key={topic}>
+                {index > 0 && ", "}
+                <Link prefetch={false} href={lp(`/glossary?q=${encodeURIComponent(topic)}`)}>{topic}</Link>
+              </span>
+            ))}
           </p>
-        )}
-      </div>
-
-      <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0.75rem 1.5rem 0" }}>
-        <ShareButton variant="inline" />
+          {lang === "fr" && lesson.texFile.startsWith("theme3_fr/") && lesson.number > 1 && (
+            <p
+              className="lesson-rewriting-notice"
+              style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                padding: "0.65rem 1rem",
+                fontFamily: "var(--font-inter)",
+                fontSize: "0.9rem",
+              }}
+            >
+              Leçon en cours de réécriture
+            </p>
+          )}
+          <div style={{ paddingTop: "0.75rem" }}>
+            <ShareButton variant="inline" />
+          </div>
+        </header>
       </div>
 
       {/* ─── Web Content ─── */}

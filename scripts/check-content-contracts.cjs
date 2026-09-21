@@ -127,11 +127,17 @@ for (const lang of SUPPORTED_LANGS) {
   const raw = chapterContent.getLessonWebContent(texFile, -1, references);
   const result = presentation.buildLessonPresentation(raw, raw, lang);
   assert.equal(result.toc.at(-1).text.replace(/^\d+\.\s*/, ''), ui.chapter.tabReferences);
-  const lesson = {slug:'lesson-1', titleFr:'Test', titleEn:'Test', subtitleFr:'', subtitleEn:'',
-    topicsFr:[], topicsEn:[], descriptionFr:'', descriptionEn:'', renderedLang:result.content,
+  const lesson = {slug:'lesson-1', titleFr:'Leçon n°1', titleEn:'Lesson 1', subtitleFr:'Les postulats', subtitleEn:'Postulates',
+    topicsFr:['Postulats'], topicsEn:['Postulates'], descriptionFr:'DESCRIPTION_MUST_NOT_BE_VISIBLE', descriptionEn:'DESCRIPTION_MUST_NOT_BE_VISIBLE', renderedLang:result.content,
     toc:result.toc, references, texFile, number:1};
   const html = renderToStaticMarkup(React.createElement(LangProvider,
     {initialLang:lang, initialUi:ui, initialThemes:[]}, React.createElement(ChapterContent, {lesson})));
+  assert.ok(!html.includes('DESCRIPTION_MUST_NOT_BE_VISIBLE'), `${lang}: lesson descriptions are not displayed`);
+  assert.match(html, lang === 'fr' ? />Leçon n°1 : Les postulats<\/h2>/ : />Lesson 1: Postulates<\/h2>/,
+    `${lang}: lesson heading includes its numbered label and title`);
+  assert.ok(html.includes('class="lesson-keywords"'), `${lang}: keywords remain visible`);
+  assert.match(html, /class="lesson-web-layout"[^>]*><header class="lesson-web-main" style="text-align:start"/,
+    `${lang}: heading uses the same responsive column as lesson text`);
   assert.ok(html.includes('https://doi.org/10.48550/arXiv.2211.08363'), `${lang}: bibliography visible without interaction`);
   assert.ok(html.includes('John David Jackson'), `${lang}: Jackson visible in bibliography`);
   assert.ok(!html.includes(ui.chapter.refsEnglishTitle), `${lang}: no English reference group`);
