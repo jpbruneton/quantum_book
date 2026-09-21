@@ -177,6 +177,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     {hasContent ? (
                       <Link
                         href={lp(`/exercises/${theme.slug}`)}
+                        prefetch={false}
                         className="theme-square-link"
                         style={{
                           display: "flex",
@@ -361,6 +362,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     {hasContent ? (
                       <Link
                         href={lp(`/exercises/${theme.slug}`)}
+                        prefetch={false}
                         style={{
                           display: "inline-block",
                           padding: "0.35rem 0.9rem",
@@ -452,6 +454,7 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     return href ? (
                       <Link
                         key={`${card.themeSlug}-${card.id}-${card.titleTex}`}
+                        prefetch={false}
                         href={href}
                         scroll={true}
                         className="exercise-index-card-link"

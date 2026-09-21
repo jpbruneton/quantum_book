@@ -317,6 +317,7 @@ export default function HomePageClient({ webThemes }: Props) {
             {webThemes.map((theme) => (
               <Link
                 key={theme.slug}
+                prefetch={false}
                 href={lp(`/chapters/${theme.slug}`)}
                 style={{ textDecoration: "none" }}
               >

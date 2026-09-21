@@ -136,6 +136,7 @@ function GlossaryFilterAndList({ webThemes }: { webThemes: Theme[] }) {
           return (
             <Link
               key={item.keyword}
+              prefetch={false}
               href={lp(`/glossary?q=${encodeURIComponent(item.keyword)}`)}
               style={{
                 background: isActive ? "var(--accent-bg-md)" : "var(--accent-bg-xs)",
@@ -202,6 +203,7 @@ function GlossaryFilterAndList({ webThemes }: { webThemes: Theme[] }) {
                 {item.occurrences.map((occurrence, index) => (
                   <Link
                     key={`${occurrence.themeSlug}-${occurrence.lessonNumber}-${index}`}
+                    prefetch={false}
                     href={occurrence.lessonHref}
                     style={{
                       display: "block",

@@ -1,3 +1,4 @@
+import "server-only";
 import type { Lang } from "@/lib/i18n";
 
 /**
@@ -557,4 +558,23 @@ export const quizTranslations: Record<Lang, QuizTranslations> = {
 
 export function getQuizTranslations(lang: Lang): QuizTranslations {
   return quizTranslations[lang] ?? quizTranslations.en;
+}
+
+export interface QuizRunnerCopy {
+  progress: string[];
+  scores: string[];
+  next: string;
+  seeScore: string;
+  scoreTitle: string;
+  restart: string;
+}
+
+/** Serialize only the active language, including its exact number-dependent labels. */
+export function getQuizRunnerCopy(lang: Lang, questionCount: number): QuizRunnerCopy {
+  const t = getQuizTranslations(lang);
+  return {
+    progress: Array.from({length: questionCount}, (_, i) => t.questionOf(i + 1, questionCount)),
+    scores: Array.from({length: questionCount + 1}, (_, score) => t.scoreLine(score, questionCount)),
+    next: t.next, seeScore: t.seeScore, scoreTitle: t.scoreTitle, restart: t.restart,
+  };
 }

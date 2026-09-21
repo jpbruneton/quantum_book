@@ -258,11 +258,8 @@ body::before {
   cursor: pointer;
 }
 
-.lesson-toc-sticky {
-  position: sticky;
-  top: 86px;
-  max-height: calc(100vh - 110px);
-  overflow: auto;
+.lesson-toc-sidebar {
+  align-self: start;
 }
 
 .lesson-toc-title {
@@ -306,22 +303,14 @@ body::before {
   opacity: 1;
 }
 
-.lesson-toc-link-active {
-  opacity: 1;
-  color: var(--text-heading);
-  font-weight: 600;
-}
-
 @media (max-width: 980px) {
   .lesson-web-layout {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .lesson-toc-sticky {
-    position: static;
-    max-height: none;
-    overflow: visible;
+  .lesson-toc-sidebar {
+    grid-row: 1;
     margin-bottom: 1.2rem;
   }
 }

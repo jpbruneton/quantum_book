@@ -37,11 +37,19 @@ automatiquement une version existante dans une autre langue.
 
 ## Interface et disponibilité
 
+Le sommaire reste dans le flux de la page ; il ne suit plus le défilement.
+Les boutons flottants portent leur propre état, indépendamment du corps du cours.
+Les liens des listes de leçons et d'exercices ne préchargent pas automatiquement
+les autres pages. Voir l'[audit Quantum / Thermo](performance-audit-2026-09-21.md).
+
 `lib/locales/fr.json` définit le schéma de référence. Chaque catalogue contient
 l'interface (`ui`) et les titres, descriptions et mots-clés des thèmes et leçons
 (`themes`). `lib/localizedChapters.server.ts` prépare les métadonnées localisées.
 Le contexte client reçoit seulement la langue active ; les autres catalogues
 ne sont pas importés dans le navigateur ni dans le middleware.
+L'interface du quiz suit la même règle : les libellés et leurs variantes numériques
+sont préparés côté serveur dans la langue active. Le moteur KaTeX est protégé par
+une frontière `server-only`.
 
 La disponibilité d'une leçon dépend de sa source TeX et de la règle de publication.
 Un corps absent n'est jamais remplacé par le français ou l'anglais. Les catalogues

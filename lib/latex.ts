@@ -1,3 +1,4 @@
+import "server-only";
 import katex from "katex";
 import { KATEX_MACROS } from "@/lib/latexMacros";
 

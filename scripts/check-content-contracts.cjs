@@ -27,6 +27,14 @@ function load(file) {
   return module.exports;
 }
 const {SUPPORTED_LANGS} = load('lib/i18n.ts');
+const {getQuizRunnerCopy, getQuizTranslations} = load('lib/quizTranslations.ts');
+for (const lang of SUPPORTED_LANGS) {
+  const t = getQuizTranslations(lang);
+  const copy = JSON.parse(JSON.stringify(getQuizRunnerCopy(lang, 3)));
+  assert.deepEqual(copy.progress, [1, 2, 3].map(i => t.questionOf(i, 3)));
+  assert.deepEqual(copy.scores, [0, 1, 2, 3].map(score => t.scoreLine(score, 3)));
+  assert.equal(copy.restart, t.restart);
+}
 const {processLatex, renderedHtmlToPlainText} = load('lib/latex.ts');
 const inlineWithPunctuation = processLatex('<p>($x$), puis $y$.</p>');
 assert.equal((inlineWithPunctuation.match(/class="latex-inline-math-punctuation"/g) ?? []).length, 2);
@@ -136,6 +144,10 @@ console.log('Inline bibliographies, localized TOC headings and initial HTML chec
 
 // French references can cross lesson/fiche boundaries, without publishing a target.
 const {getWebThemes} = load('lib/chapters.ts');
+const {buildThemeWithLocalizedContent} = load('lib/chapterPage.server.ts');
+const activeTheme = buildThemeWithLocalizedContent(getWebThemes('fr').find(theme => theme.number === 3), 'fr', 0);
+assert.equal(activeTheme.lessons.filter(lesson => lesson.renderedLang).length, 1, 'Only the active lesson body crosses the client boundary');
+assert.ok(activeTheme.lessons.every(lesson => !lesson.content && !lesson.contentLang), 'Intermediate lesson sources remain on the server');
 const lessonRoutes = load('lib/lessonRoutes.ts');
 const frenchPages = new Map();
 for (const theme of getWebThemes('fr')) {

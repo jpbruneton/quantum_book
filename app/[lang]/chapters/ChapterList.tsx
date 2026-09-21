@@ -50,6 +50,7 @@ export function ChapterList({ webThemes }: Props) {
             </div>
           ) : null}
           <Link
+            prefetch={false}
             href={lp(`/chapters/${theme.slug}`)}
             style={{ textDecoration: "none", display: "block" }}
           >

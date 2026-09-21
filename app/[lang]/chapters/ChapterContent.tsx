@@ -7,7 +7,7 @@ import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
 import { ShareButton } from "@/app/components/ShareButton";
-import { observeLessonScroll } from "@/lib/lessonScroll";
+import { BackToTopButton } from "@/app/components/BackToTopButton";
 
 interface Props {
   lesson: LessonWithLocalizedContent;
@@ -22,9 +22,7 @@ interface LessonWithLocalizedContent extends Lesson {
 }
 
 export function ChapterContent({ lesson, topNav }: Props) {
-  const [activeTocId, setActiveTocId] = useState("");
   const [tocVisible, setTocVisible] = useState(true);
-  const [showBackToTop, setShowBackToTop] = useState(false);
   const { t, lang } = useLang();
   const lp = useLocalizedPath();
   const hasLessonContent = lesson.renderedLang.trim().length > 0;
@@ -92,13 +90,6 @@ export function ChapterContent({ lesson, topNav }: Props) {
   const webContentWithToc = {content: lesson.renderedLang, toc: lesson.toc};
   const lessonHtml = useMemo(() => ({ __html: lesson.renderedLang }), [lesson.renderedLang]);
 
-  useEffect(() => {
-    return observeLessonScroll(lesson.toc.map(entry => entry.id), (id, showTop) => {
-      setActiveTocId(id);
-      setShowBackToTop(showTop);
-    });
-  }, [lesson.toc]);
-
   return (
     <>
       <div
@@ -147,6 +138,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.5rem" }}>
           {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic) => (
             <Link
+              prefetch={false}
               key={topic}
               href={lp(`/glossary?q=${encodeURIComponent(topic)}`)}
               style={{
@@ -274,7 +266,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
               </div>
             </div>
             {webContentWithToc.toc.length > 0 && (
-              <aside className="lesson-toc lesson-toc-sticky">
+              <aside className="lesson-toc lesson-toc-sidebar">
                 <div className="lesson-toc-header">
                   {tocVisible && <h3 className="lesson-toc-title">{t.chapter.tocTitle}</h3>}
                   <button
@@ -301,8 +293,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
                       >
                         <a
                           href={`#${entry.id}`}
-                          className={`lesson-toc-link ${activeTocId === entry.id ? "lesson-toc-link-active" : ""}`}
-                          onClick={() => setActiveTocId(entry.id)}
+                          className="lesson-toc-link"
                         >
                           {entry.text}
                         </a>
@@ -328,32 +319,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
         )}
       </div>
 
-      {showBackToTop && (
-        <button
-          className="lesson-back-to-top"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          aria-label={t.common.backToTop}
-          title={t.common.backToTop}
-          style={{
-            position: "fixed",
-            right: "1.2rem",
-            bottom: "1.2rem",
-            width: "42px",
-            height: "42px",
-            borderRadius: "999px",
-            border: "1px solid var(--accent-border-md)",
-            background: "var(--bg-card)",
-            color: "var(--amber)",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.18)",
-            cursor: "pointer",
-            zIndex: 40,
-            fontSize: "1.1rem",
-            lineHeight: 1,
-          }}
-        >
-          ↑
-        </button>
-      )}
+      <BackToTopButton lessonKey={lesson.slug} />
     </>
   );
 }

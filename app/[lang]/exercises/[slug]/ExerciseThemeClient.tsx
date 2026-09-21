@@ -122,6 +122,7 @@ export function ExerciseThemeClient({
             {exercises.map((card) => (
               <Link
                 key={card.id}
+                prefetch={false}
                 href={exerciseDetailPath(lang, themeSlug, card.id)}
                 style={{
                   border: "1px solid var(--border)",

@@ -4,7 +4,7 @@ import { getWebTheme, getWebThemes } from "@/lib/localizedChapters.server";
 import { isSiteLang } from "@/lib/localeRoutes";
 import { findLessonIndexByRef, lessonToPathSegment } from "@/lib/lessonRoutes";
 import { getLocalizedQuizQuestions } from "@/lib/quizzes";
-import { getQuizTranslations } from "@/lib/quizTranslations";
+import { getQuizTranslations, getQuizRunnerCopy } from "@/lib/quizTranslations";
 import { localeAlternates } from "@/lib/metadataAlternates";
 import { processLatex } from "@/lib/latex";
 import { QuizRunner } from "./QuizRunner";
@@ -25,5 +25,5 @@ export default function QuizPage({params}: Props) {
   const questions = getLocalizedQuizQuestions(theme.number, params.lessonRef, params.lang);
   const t = getQuizTranslations(params.lang);
   if (!questions) return <div style={{maxWidth: 860, margin: "4rem auto", padding: "1.5rem"}}><h1>{t.hubTitle}</h1><p>{t.unavailableLesson(theme.lessons[index].number)}</p></div>;
-  return <QuizRunner questions={questions.map(q => ({...q, question: processLatex(q.question), choices: q.choices.map(processLatex), explanations: q.explanations.map(processLatex)}))} />;
+  return <QuizRunner copy={getQuizRunnerCopy(params.lang, questions.length)} questions={questions.map(q => ({...q, question: processLatex(q.question), choices: q.choices.map(processLatex), explanations: q.explanations.map(processLatex)}))} />;
 }
