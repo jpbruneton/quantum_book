@@ -25,16 +25,16 @@ export default function HomePageClient({ webThemes }: { webThemes: Theme[] }) {
               priority sizes="(max-width: 640px) 80px, (max-width: 900px) 180px, 260px" />
           </div>
           <nav className="home-entry-links" aria-label={t.home.contentsLabel}>
-            <Link className="home-entry-link home-entry-primary" prefetch={false} href={lp("/chapters")}>
+            <Link className="home-entry-link home-entry-primary" href={lp("/chapters")}>
               <span>{t.nav.chapters}</span><span className="home-entry-arrow" aria-hidden="true">→</span>
             </Link>
-            <Link className="home-entry-link" prefetch={false} href={lp("/exercises")}>
+            <Link className="home-entry-link" href={lp("/exercises")}>
               <span>{t.nav.exercises}</span><span className="home-entry-arrow" aria-hidden="true">→</span>
             </Link>
           </nav>
           <div className="home-welcome-summary">
             {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-            <Link className="home-about-link" prefetch={false} href={lp("/about")}>{t.home.aboutBook}</Link>
+            <Link className="home-about-link" href={lp("/about")}>{t.home.aboutBook}</Link>
           </div>
         </div>
       </section>
@@ -44,7 +44,7 @@ export default function HomePageClient({ webThemes }: { webThemes: Theme[] }) {
           <h2 id="home-themes-title">{t.home.exploreTitle}</h2>
           <div className="home-theme-grid">
             {webThemes.map(theme => (
-              <Link key={theme.slug} className="home-theme-card chapter-card" prefetch={false}
+              <Link key={theme.slug} className="home-theme-card chapter-card"
                 href={chapterThemePath(lang, theme)}>
                 <span className="home-theme-number">{t.home.themePrefix} {String(theme.number).padStart(2, "0")}</span>
                 <h3>{lang === "fr" ? theme.titleFr : theme.titleEn}</h3>

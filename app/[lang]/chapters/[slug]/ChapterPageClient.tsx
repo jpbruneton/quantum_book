@@ -107,7 +107,7 @@ function ChapterLessonTabButtons({
           const href = chapterLessonPath(lang, theme.slug, lesson);
           const active = href.endsWith(`/${activeLessonRef}`);
           return (
-            <Link key={lesson.slug} href={href} prefetch={false} style={lessonTabStyle(active)}>
+            <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
               {lessonDisplayLabel(lesson, lang)}
             </Link>
           );
@@ -119,7 +119,7 @@ function ChapterLessonTabButtons({
             const href = chapterLessonPath(lang, theme.slug, lesson);
             const active = href.endsWith(`/${activeLessonRef}`);
             return (
-              <Link key={lesson.slug} href={href} prefetch={false} style={lessonTabStyle(active)}>
+              <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
                 {lessonDisplayLabel(lesson, lang)}
               </Link>
             );
@@ -140,7 +140,7 @@ interface NavCardProps {
 
 function NavCard({ label, title, href, align, compact }: NavCardProps) {
   return (
-    <Link href={href} prefetch={false} style={{ textDecoration: "none", minWidth: 0, overflowWrap: "anywhere" }}>
+    <Link href={href} style={{ textDecoration: "none", minWidth: 0, overflowWrap: "anywhere" }}>
       <div
         className="chapter-card"
         style={{

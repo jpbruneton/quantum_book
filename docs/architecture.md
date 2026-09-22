@@ -39,8 +39,13 @@ automatiquement une version existante dans une autre langue.
 
 Le sommaire reste dans le flux de la page ; il ne suit plus le défilement.
 Les boutons flottants portent leur propre état, indépendamment du corps du cours.
-Les liens des listes de leçons et d'exercices ne préchargent pas automatiquement
-les autres pages. Voir l'[audit Quantum / Thermo](performance-audit-2026-09-21.md).
+Depuis le 22 septembre 2026, les liens de l'accueil, des thèmes et des leçons
+utilisent à nouveau le préchargement automatique de Next.js, comme Thermo :
+les destinations visibles peuvent être mises en cache avant le clic. Chaque
+page conserve uniquement le corps de sa leçon active ; le préchargement demande
+des pages distinctes, sans regrouper les cours dans une même réponse. Les listes
+d'exercices gardent leur chargement à la demande. Ce réglage remplace, pour les
+cours, celui de l'[audit Quantum / Thermo](performance-audit-2026-09-21.md).
 
 Le glossaire public et son index par mots-clés ont été retirés. Les mots-clés
 restent affichés en texte simple dans les leçons ; ils servent toujours aux
