@@ -13,10 +13,10 @@ function truncateForMeta(text: string, maxLength = META_DESCRIPTION_MAX_LENGTH):
   return `${cut.slice(0, lastSpace > 0 ? lastSpace : maxLength).trimEnd()}…`;
 }
 
-export type HubPageKey = "home" | "chapters" | "exercises" | "glossary" | "about";
+export type HubPageKey = "home" | "chapters" | "exercises" | "about";
 export function hubPageSeo(page: HubPageKey, lang: SiteLang) {
   const t = getTranslations(lang);
   const title = page === "home" ? t.book.title : `${t.nav[page]} | ${t.book.title}`;
-  const description = page === "exercises" ? t.exercises.subtitle : page === "glossary" ? t.glossary.subtitle : truncateForMeta(t.book.description.split("\n")[0]);
+  const description = page === "exercises" ? t.exercises.subtitle : truncateForMeta(t.book.description.split("\n")[0]);
   return {title, description};
 }

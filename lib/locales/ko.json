@@ -11,7 +11,6 @@
       "chapters": "주제",
       "exercises": "연습문제",
       "quiz": "퀴즈",
-      "glossary": "용어집",
       "about": "소개"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "페이지를 찾을 수 없습니다",
       "notFoundBody": "이 페이지는 존재하지 않거나 현재 이용할 수 없습니다.",
       "backHome": "홈으로 돌아가기"
-    },
-    "glossary": {
-      "title": "핵심어 용어집",
-      "subtitle": "핵심어를 클릭하면 그 단어를 사용하는 모든 강의를 볼 수 있습니다.",
-      "allKeywords": "모든 핵심어",
-      "relatedLessons": "관련 강의",
-      "noResult": "이 필터에 맞는 핵심어가 없습니다."
     },
     "exercises": {
       "title": "해설이 있는 연습문제",

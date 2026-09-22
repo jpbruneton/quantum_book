@@ -11,7 +11,6 @@
       "chapters": "Tema",
       "exercises": "Latihan",
       "quiz": "Kuis",
-      "glossary": "Glosarium",
       "about": "Tentang"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Halaman tidak ditemukan",
       "notFoundBody": "Halaman ini tidak ada atau belum tersedia saat ini.",
       "backHome": "Kembali ke beranda"
-    },
-    "glossary": {
-      "title": "Glosarium kata kunci",
-      "subtitle": "Klik kata kunci untuk melihat semua pelajaran yang menggunakannya.",
-      "allKeywords": "Semua kata kunci",
-      "relatedLessons": "Pelajaran terkait",
-      "noResult": "Tidak ada kata kunci yang cocok dengan filter ini."
     },
     "exercises": {
       "title": "Latihan dengan penyelesaian",

@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {path: "/", priority: 1},
     {path: "/chapters", priority: 0.8},
     {path: "/exercises", priority: 0.8},
-    {path: "/glossary", priority: 0.8},
     {path: "/about", priority: 0.6},
   ];
   for (const theme of getWebThemes()) {

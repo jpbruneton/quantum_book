@@ -11,7 +11,6 @@
       "chapters": "主题",
       "exercises": "习题",
       "quiz": "测验",
-      "glossary": "术语表",
       "about": "关于"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "找不到页面",
       "notFoundBody": "此页面不存在或目前不可用。",
       "backHome": "返回首页"
-    },
-    "glossary": {
-      "title": "关键词术语表",
-      "subtitle": "点击关键词，查看使用该词的全部课程。",
-      "allKeywords": "全部关键词",
-      "relatedLessons": "相关课程",
-      "noResult": "未找到符合此筛选条件的关键词。"
     },
     "exercises": {
       "title": "习题与解答",

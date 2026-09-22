@@ -11,7 +11,6 @@
       "chapters": "Mada",
       "exercises": "Mazoezi",
       "quiz": "Majaribio",
-      "glossary": "Faharasa",
       "about": "Kuhusu"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Ukurasa haujapatikana",
       "notFoundBody": "Ukurasa huu haupo au haupatikani kwa sasa.",
       "backHome": "Rudi mwanzo"
-    },
-    "glossary": {
-      "title": "Faharasa ya maneno muhimu",
-      "subtitle": "Bofya neno muhimu kuona masomo yote yanayolitumia.",
-      "allKeywords": "Maneno muhimu yote",
-      "relatedLessons": "Masomo yanayohusiana",
-      "noResult": "Hakuna neno muhimu lililopatikana kwa kichujio hiki."
     },
     "exercises": {
       "title": "Mazoezi yenye suluhisho",

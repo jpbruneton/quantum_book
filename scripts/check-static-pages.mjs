@@ -8,6 +8,7 @@ for (const lang of languages) assert.ok(routes[`/${lang}`], `${lang}: static hom
 assert.ok(!routes['/fr/chapters/foundational-experiments/lesson-2'], 'Withdrawn French lesson is not generated');
 let mathPages = 0;
 for (const route of pages) {
+  assert.ok(!route.includes('/glossary'), `${route}: removed glossary is not generated`);
   assert.equal(routes[route].initialRevalidateSeconds, false, `${route}: precompiled`);
   const html = readFileSync(join(".next/server/app", `${route.slice(1)}.html`), "utf8");
   const lang = route.split("/")[1];
@@ -47,6 +48,8 @@ if (!process.argv.includes('--available-only')) {
   }
 }
 const sitemap = readFileSync('.next/server/app/sitemap.xml.body', 'utf8');
+assert.doesNotMatch(sitemap, /\/(?:glossary|glossaire|glossar|glosario|glossario|slowniczek|bang-thuat-ngu|glosarium|sozluk|kamusi)(?:[<"/?]|$)/,
+  'Removed glossary URLs are absent from the sitemap');
 for (let lesson = 1; lesson <= 11; lesson++) {
   const route = `/fr/chapters/postulates/lesson-${lesson}`;
   const published = lesson <= 8;

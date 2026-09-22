@@ -11,7 +11,6 @@
       "chapters": "Thèmes",
       "exercises": "Exercices",
       "quiz": "Quiz",
-      "glossary": "Glossaire",
       "about": "À propos"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Page introuvable",
       "notFoundBody": "Cette page n'existe pas ou n'est pas disponible actuellement.",
       "backHome": "Retour à l'accueil"
-    },
-    "glossary": {
-      "title": "Glossaire des mots-clés",
-      "subtitle": "Cliquez sur un mot-clé pour voir toutes les leçons qui l'utilisent.",
-      "allKeywords": "Tous les mots-clés",
-      "relatedLessons": "Leçons associées",
-      "noResult": "Aucun mot-clé trouvé pour ce filtre."
     },
     "exercises": {
       "title": "Exercices corrigés",

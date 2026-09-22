@@ -42,6 +42,11 @@ Les boutons flottants portent leur propre état, indépendamment du corps du cou
 Les liens des listes de leçons et d'exercices ne préchargent pas automatiquement
 les autres pages. Voir l'[audit Quantum / Thermo](performance-audit-2026-09-21.md).
 
+Le glossaire public et son index par mots-clés ont été retirés. Les mots-clés
+restent affichés en texte simple dans les leçons ; ils servent toujours aux
+métadonnées et à la recherche d'exercices. Les lexiques de `docs/terminology`
+restent des documents éditoriaux internes, indépendants du site public.
+
 `lib/locales/fr.json` définit le schéma de référence. Chaque catalogue contient
 l'interface (`ui`) et les titres, descriptions et mots-clés des thèmes et leçons
 (`themes`). `lib/localizedChapters.server.ts` prépare les métadonnées localisées.

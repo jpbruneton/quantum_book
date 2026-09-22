@@ -11,7 +11,6 @@
       "chapters": "Konular",
       "exercises": "Alıştırmalar",
       "quiz": "Testler",
-      "glossary": "Sözlük",
       "about": "Hakkında"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Sayfa bulunamadı",
       "notFoundBody": "Bu sayfa mevcut değil veya şu anda kullanılamıyor.",
       "backHome": "Ana sayfaya dön"
-    },
-    "glossary": {
-      "title": "Anahtar kelimeler sözlüğü",
-      "subtitle": "Bir anahtar kelimeyi kullanan tüm dersleri görmek için kelimeye tıklayın.",
-      "allKeywords": "Tüm anahtar kelimeler",
-      "relatedLessons": "İlgili dersler",
-      "noResult": "Bu filtreye uygun anahtar kelime bulunamadı."
     },
     "exercises": {
       "title": "Çözümlü alıştırmalar",

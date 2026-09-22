@@ -122,6 +122,8 @@ const {LangProvider} = load('app/context/LangContext.tsx');
 const {ChapterContent} = load('app/[lang]/chapters/ChapterContent.tsx');
 for (const lang of SUPPORTED_LANGS) {
   const ui = require(path.resolve(`lib/locales/${lang}.json`)).ui;
+  assert.ok(!Object.hasOwn(ui, 'glossary') && !Object.hasOwn(ui.nav, 'glossary'),
+    `${lang}: removed glossary is not shipped in the interface catalogue`);
   const texFile = `theme1_${lang}/${lang === 'fr' ? 'lecon' : 'lesson'}1.tex`;
   const references = chapterContent.getLessonReferences(1, 1, [], texFile);
   const raw = chapterContent.getLessonWebContent(texFile, -1, references);
@@ -136,6 +138,9 @@ for (const lang of SUPPORTED_LANGS) {
   assert.match(html, lang === 'fr' ? />Leçon n°1 : Les postulats<\/h2>/ : />Lesson 1: Postulates<\/h2>/,
     `${lang}: lesson heading includes its numbered label and title`);
   assert.ok(html.includes('class="lesson-keywords"'), `${lang}: keywords remain visible`);
+  const keywordsHtml = html.match(/<p class="lesson-keywords">([\s\S]*?)<\/p>/)?.[1] ?? '';
+  assert.ok(keywordsHtml.includes(lang === 'fr' ? 'Postulats' : 'Postulates'), `${lang}: keyword text is preserved`);
+  assert.doesNotMatch(keywordsHtml, /<a\b/, `${lang}: keywords no longer link to a glossary`);
   assert.match(html, /class="lesson-web-layout"[^>]*><header class="lesson-web-main" style="text-align:start"/,
     `${lang}: heading uses the same responsive column as lesson text`);
   assert.ok(html.includes('https://doi.org/10.48550/arXiv.2211.08363'), `${lang}: bibliography visible without interaction`);

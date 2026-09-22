@@ -11,7 +11,6 @@
       "chapters": "Temas",
       "exercises": "Exercícios",
       "quiz": "Questionários",
-      "glossary": "Glossário",
       "about": "Sobre"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Página não encontrada",
       "notFoundBody": "Esta página não existe ou não está disponível de momento.",
       "backHome": "Voltar ao início"
-    },
-    "glossary": {
-      "title": "Glossário de palavras-chave",
-      "subtitle": "Clique numa palavra-chave para ver todas as lições que a utilizam.",
-      "allKeywords": "Todas as palavras-chave",
-      "relatedLessons": "Lições relacionadas",
-      "noResult": "Não foram encontradas palavras-chave para este filtro."
     },
     "exercises": {
       "title": "Exercícios resolvidos",

@@ -38,7 +38,7 @@ export function isRtlLang(lang: Lang): boolean {
   return (RTL_LANGS as readonly string[]).includes(lang);
 }
 
-export const SECTIONS = ["chapters", "exercises", "quiz", "glossary", "about"] as const;
+export const SECTIONS = ["chapters", "exercises", "quiz", "about"] as const;
 export type Section = (typeof SECTIONS)[number];
 
 /** English section words, reused as-is for every language that has no translated public URL word. */
@@ -46,7 +46,6 @@ const IDENTITY_SECTION_SLUGS: Record<Section, string> = {
   chapters: "chapters",
   exercises: "exercises",
   quiz: "quiz",
-  glossary: "glossary",
   about: "about",
 };
 
@@ -66,42 +65,36 @@ export const sectionSlugs: Record<Lang, Record<Section, string>> = {
     chapters: "chapitres",
     exercises: "exercices",
     quiz: "quiz",
-    glossary: "glossaire",
     about: "a-propos",
   },
   de: {
     chapters: "lektionen",
     exercises: "uebungen",
     quiz: "quiz",
-    glossary: "glossar",
     about: "ueber-das-buch",
   },
   es: {
     chapters: "lecciones",
     exercises: "ejercicios",
     quiz: "quiz",
-    glossary: "glosario",
     about: "sobre-el-libro",
   },
   pt: {
     chapters: "licoes",
     exercises: "exercicios",
     quiz: "quiz",
-    glossary: "glossario",
     about: "sobre-o-livro",
   },
   it: {
     chapters: "lezioni",
     exercises: "esercizi",
     quiz: "quiz",
-    glossary: "glossario",
     about: "il-libro",
   },
   pl: {
     chapters: "lekcje",
     exercises: "cwiczenia",
     quiz: "quiz",
-    glossary: "slowniczek",
     about: "o-ksiazce",
   },
   ru: IDENTITY_SECTION_SLUGS,
@@ -113,7 +106,6 @@ export const sectionSlugs: Record<Lang, Record<Section, string>> = {
     chapters: "bai-hoc",
     exercises: "bai-tap",
     quiz: "quiz",
-    glossary: "bang-thuat-ngu",
     about: "gioi-thieu",
   },
   ar: IDENTITY_SECTION_SLUGS,
@@ -121,14 +113,12 @@ export const sectionSlugs: Record<Lang, Record<Section, string>> = {
     chapters: "pelajaran",
     exercises: "latihan",
     quiz: "kuis",
-    glossary: "glosarium",
     about: "tentang-buku",
   },
   tr: {
     chapters: "dersler",
     exercises: "alistirmalar",
     quiz: "quiz",
-    glossary: "sozluk",
     about: "kitap-hakkinda",
   },
   bn: IDENTITY_SECTION_SLUGS,
@@ -137,7 +127,6 @@ export const sectionSlugs: Record<Lang, Record<Section, string>> = {
     chapters: "masomo",
     exercises: "mazoezi",
     quiz: "jaribio",
-    glossary: "kamusi",
     about: "kuhusu-kitabu",
   },
   fa: IDENTITY_SECTION_SLUGS,

@@ -33,7 +33,7 @@ gardent leurs slugs publics français/anglais ; les autres langues utilisent les
 slugs anglais pour préserver les liens existants.
 
 Les catalogues `lib/locales/<code>.json` couvrent l'accueil, la navigation, les
-thèmes, le glossaire, les exercices, les messages de disponibilité et les blocs
+thèmes, les exercices, les messages de disponibilité et les blocs
 du cours. `lib/quizTranslations.ts` fournit l'interface des quiz dans les 20 langues.
 La banque de questions Quantum reste vide.
 

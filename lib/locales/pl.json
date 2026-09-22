@@ -11,7 +11,6 @@
       "chapters": "Tematy",
       "exercises": "Zadania",
       "quiz": "Quizy",
-      "glossary": "Słownik",
       "about": "O książce"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Nie znaleziono strony",
       "notFoundBody": "Ta strona nie istnieje lub jest obecnie niedostępna.",
       "backHome": "Wróć na stronę główną"
-    },
-    "glossary": {
-      "title": "Słownik słów kluczowych",
-      "subtitle": "Kliknij słowo kluczowe, aby zobaczyć wszystkie lekcje, w których występuje.",
-      "allKeywords": "Wszystkie słowa kluczowe",
-      "relatedLessons": "Powiązane lekcje",
-      "noResult": "Nie znaleziono słów kluczowych pasujących do tego filtra."
     },
     "exercises": {
       "title": "Zadania z rozwiązaniami",

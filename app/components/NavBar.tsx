@@ -188,7 +188,6 @@ export function NavBar() {
     { href: lp("/chapters"), label: t.nav.chapters },
     { href: lp("/exercises"), label: t.nav.exercises },
     { href: lp("/quiz"), label: t.nav.quiz },
-    { href: lp("/glossary"), label: t.nav.glossary },
     { href: lp("/about"), label: t.nav.about },
   ];
 

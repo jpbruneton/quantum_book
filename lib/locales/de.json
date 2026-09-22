@@ -11,7 +11,6 @@
       "chapters": "Themen",
       "exercises": "Übungen",
       "quiz": "Quiz",
-      "glossary": "Glossar",
       "about": "Über das Buch"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Seite nicht gefunden",
       "notFoundBody": "Diese Seite existiert nicht oder ist derzeit nicht verfügbar.",
       "backHome": "Zur Startseite"
-    },
-    "glossary": {
-      "title": "Stichwortglossar",
-      "subtitle": "Klicken Sie auf ein Stichwort, um alle Lektionen anzuzeigen, in denen es vorkommt.",
-      "allKeywords": "Alle Stichwörter",
-      "relatedLessons": "Zugehörige Lektionen",
-      "noResult": "Für diesen Filter wurden keine Stichwörter gefunden."
     },
     "exercises": {
       "title": "Übungen mit Lösungen",

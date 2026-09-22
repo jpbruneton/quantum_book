@@ -11,7 +11,6 @@
       "chapters": "Themes",
       "exercises": "Exercises",
       "quiz": "Quiz",
-      "glossary": "Glossary",
       "about": "About"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Page not found",
       "notFoundBody": "This page does not exist or is currently unavailable.",
       "backHome": "Back to home"
-    },
-    "glossary": {
-      "title": "Keyword glossary",
-      "subtitle": "Click a keyword to see every lesson that uses it.",
-      "allKeywords": "All keywords",
-      "relatedLessons": "Related lessons",
-      "noResult": "No keyword found for this filter."
     },
     "exercises": {
       "title": "Solved exercises",

@@ -11,7 +11,6 @@
       "chapters": "Chủ đề",
       "exercises": "Bài tập",
       "quiz": "Trắc nghiệm",
-      "glossary": "Thuật ngữ",
       "about": "Giới thiệu"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "Không tìm thấy trang",
       "notFoundBody": "Trang này không tồn tại hoặc hiện chưa khả dụng.",
       "backHome": "Về trang chủ"
-    },
-    "glossary": {
-      "title": "Bảng thuật ngữ theo từ khóa",
-      "subtitle": "Nhấp vào một từ khóa để xem tất cả bài học sử dụng từ đó.",
-      "allKeywords": "Tất cả từ khóa",
-      "relatedLessons": "Bài học liên quan",
-      "noResult": "Không có từ khóa phù hợp với bộ lọc này."
     },
     "exercises": {
       "title": "Bài tập có lời giải",

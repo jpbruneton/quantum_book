@@ -11,7 +11,6 @@
       "chapters": "テーマ",
       "exercises": "演習",
       "quiz": "クイズ",
-      "glossary": "用語集",
       "about": "本書について"
     },
     "home": {
@@ -138,13 +137,6 @@
       "notFoundTitle": "ページが見つかりません",
       "notFoundBody": "このページは存在しないか、現在利用できません。",
       "backHome": "ホームへ戻る"
-    },
-    "glossary": {
-      "title": "キーワード用語集",
-      "subtitle": "キーワードをクリックすると、その語を使うすべてのレッスンが表示されます。",
-      "allKeywords": "すべてのキーワード",
-      "relatedLessons": "関連するレッスン",
-      "noResult": "この絞り込み条件に合うキーワードはありません。"
     },
     "exercises": {
       "title": "解答付き演習",

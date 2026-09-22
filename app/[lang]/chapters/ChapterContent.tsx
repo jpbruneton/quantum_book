@@ -1,11 +1,9 @@
 "use client";
 import type { TocEntry } from "@/lib/lessonPresentation";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
-import { useLocalizedPath } from "@/lib/useLocalizedPath";
 import { ShareButton } from "@/app/components/ShareButton";
 import { BackToTopButton } from "@/app/components/BackToTopButton";
 
@@ -24,7 +22,6 @@ interface LessonWithLocalizedContent extends Lesson {
 export function ChapterContent({ lesson, topNav }: Props) {
   const [tocVisible, setTocVisible] = useState(true);
   const { t, lang } = useLang();
-  const lp = useLocalizedPath();
   const hasLessonContent = lesson.renderedLang.trim().length > 0;
   const lessonTitle = lang === "fr" ? lesson.titleFr : lesson.titleEn;
   const lessonSubtitle = (lang === "fr" ? lesson.subtitleFr : lesson.subtitleEn).trim();
@@ -116,12 +113,7 @@ export function ChapterContent({ lesson, topNav }: Props) {
           </h2>
           <p className="lesson-keywords">
             <span>{lang === "fr" ? "Mots clés" : t.exercises.keywordsLabel} : </span>
-            {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).map((topic, index) => (
-              <span key={topic}>
-                {index > 0 && ", "}
-                <Link prefetch={false} href={lp(`/glossary?q=${encodeURIComponent(topic)}`)}>{topic}</Link>
-              </span>
-            ))}
+            {(lang === "fr" ? lesson.topicsFr : lesson.topicsEn).join(", ")}
           </p>
           {lang === "fr" && lesson.texFile.startsWith("theme3_fr/") && lesson.number > 1 && (
             <p

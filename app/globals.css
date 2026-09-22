@@ -694,9 +694,6 @@ body::before {
   color: var(--text-secondary);
 }
 
-.lesson-keywords a { color: inherit; text-decoration: none; }
-.lesson-keywords a:hover, .lesson-keywords a:focus-visible { text-decoration: underline; }
-
 .prose-quantum .latex-block-postulat {
   border-color: #3b82f666;
   background: #3b82f61a;
