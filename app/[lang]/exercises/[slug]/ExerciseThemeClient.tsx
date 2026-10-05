@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useLang } from "@/app/context/LangContext";
 import { exerciseDetailPath } from "@/lib/exerciseRoutes";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
-import type { ExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 
 export interface ThemeExerciseCard {
   id: string;
@@ -22,7 +21,6 @@ interface Props {
   titleEn: string;
   exercisesFr: ThemeExerciseCard[];
   exercisesEn: ThemeExerciseCard[];
-  pdfLinks: ExerciseThemePdfLinks;
 }
 
 export function ExerciseThemeClient({
@@ -32,7 +30,6 @@ export function ExerciseThemeClient({
   titleEn,
   exercisesFr,
   exercisesEn,
-  pdfLinks,
 }: Props) {
   const { lang, t } = useLang();
   const router = useRouter();
@@ -46,7 +43,6 @@ export function ExerciseThemeClient({
   const keywordsLabel = t.exercises.keywordsLabel;
   const exercisePrefix = t.exercises.exercisePrefix;
   const unavailable = t.exercises.themeUnavailable;
-  const pdfLabel = t.exercises.pdfFull;
 
   useEffect(() => {
     const raw = window.location.hash.replace(/^#/, "");
@@ -54,14 +50,6 @@ export function ExerciseThemeClient({
     const id = decodeURIComponent(raw);
     router.replace(exerciseDetailPath(lang, themeSlug, id));
   }, [router, lang, themeSlug]);
-
-  const linkStyle = {
-    fontFamily: "var(--font-crimson)",
-    fontSize: "0.88rem",
-    color: "var(--accent)",
-    textDecoration: "underline",
-    textUnderlineOffset: "2px",
-  } as const;
 
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
@@ -179,24 +167,6 @@ export function ExerciseThemeClient({
           >
             {unavailable}
           </p>
-        )}
-
-        {(lang === "fr" ? pdfLinks.fr : lang === "en" ? pdfLinks.en : null) && (
-          <div
-            style={{
-              marginTop: "2rem",
-              paddingTop: "1.5rem",
-              borderTop: "1px solid var(--border)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.4rem",
-              alignItems: "flex-start",
-            }}
-          >
-            <a href={(lang === "fr" ? pdfLinks.fr : lang === "en" ? pdfLinks.en : null) ?? undefined} download style={linkStyle}>
-              {pdfLabel}
-            </a>
-          </div>
         )}
       </div>
     </div>

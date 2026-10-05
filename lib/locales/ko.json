@@ -19,35 +19,11 @@
       "aboutBook": "책 소개",
       "chapterPrefix": "장",
       "themePrefix": "주제",
-      "stats": {
-        "chapters": "주제",
-        "edition": "판",
-        "format": "형식",
-        "formatValue": "웹 + PDF"
-      },
       "contentsLabel": "목차",
       "exploreTitle": "주제 살펴보기",
       "readTheme": "주제 열기 →",
       "readLesson": "강의 읽기 →",
-      "readChapter": "장 읽기 →",
-      "fullBookDownload": "전체판 내려받기 (준비 중)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "완전한 수식 표시",
-          "body": "모든 방정식은 KaTeX로 표시됩니다. 브라우저에서 LaTeX 수준의 수식을 볼 수 있습니다."
-        },
-        {
-          "icon": "⬇",
-          "title": "PDF 내려받기",
-          "body": "각 장을 PDF로 내려받아 오프라인에서 학습할 수 있습니다."
-        },
-        {
-          "icon": "◎",
-          "title": "자유로운 무료 이용",
-          "body": "전체 본문을 온라인에서 무료로 읽을 수 있습니다. 구독이나 가입이 필요 없습니다."
-        }
-      ]
+      "readChapter": "장 읽기 →"
     },
     "chapters": {
       "label": "주제",
@@ -58,14 +34,11 @@
       "chapterLabel": "강의",
       "themeLabel": "주제",
       "lessonLabel": "강의",
-      "downloadPdf": "↓ PDF 내려받기",
       "breadcrumbHome": "홈",
       "breadcrumbChapters": "주제",
       "breadcrumbThemes": "주제",
       "prev": "← 이전",
       "next": "다음 →",
-      "noteTitle": "참고:",
-      "noteBody": "이 내용은 미리보기 발췌문입니다. 장 전체와 연습문제 및 해설은 전체 PDF를 내려받아 확인하세요.",
       "tabOnline": "온라인으로 읽기",
       "tabReferences": "참고문헌",
       "tocTitle": "목차",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "프랑스어 참고문헌",
       "refsSectionEmpty": "이 절에는 아직 링크가 추가되지 않았습니다.",
       "contentUnavailable": "이 강의 내용은 아직 이 언어로 제공되지 않습니다.",
-      "downloadBtn": "↓ 내려받기",
       "noLessonTitle": "제공되는 강의가 없습니다",
       "noLessonBody": "이 주제는 책의 구성에 포함되어 있지만 강의 내용은 아직 공개되지 않았습니다.",
       "readTime": "읽는 시간: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "이 검색에 맞는 연습문제가 없습니다.",
       "keywordsLabel": "핵심어",
       "exercisePrefix": "연습문제",
-      "pdfFull": "주제의 모든 연습문제 — 문제, 힌트, 해설 (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "문제 + 해설",
       "unavailable": "이 언어로 제공되는 연습문제가 아직 없습니다.",
       "themeUnavailable": "이 주제의 연습문제는 아직 이 언어로 제공되지 않습니다.",
       "exerciseUnavailable": "이 연습문제는 아직 이 언어로 제공되지 않습니다.",

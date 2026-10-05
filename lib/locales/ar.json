@@ -19,35 +19,11 @@
       "aboutBook": "حول الكتاب",
       "chapterPrefix": "فصل",
       "themePrefix": "المحور",
-      "stats": {
-        "chapters": "المحاور",
-        "edition": "الطبعة",
-        "format": "الصيغة",
-        "formatValue": "ويب + PDF"
-      },
       "contentsLabel": "المحتويات",
       "exploreTitle": "استكشف المحاور",
       "readTheme": "افتح المحور ←",
       "readLesson": "اقرأ الدرس ←",
-      "readChapter": "اقرأ الفصل ←",
-      "fullBookDownload": "تنزيل الطبعة الكاملة (قريبًا)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "عرض رياضي متكامل",
-          "body": "تُعرض جميع المعادلات باستخدام KaTeX — رياضيات بجودة LaTeX في متصفحك."
-        },
-        {
-          "icon": "⬇",
-          "title": "تنزيل ملفات PDF",
-          "body": "يتاح كل فصل للتنزيل بصيغة PDF للدراسة دون اتصال بالإنترنت."
-        },
-        {
-          "icon": "◎",
-          "title": "وصول مفتوح ومجاني",
-          "body": "النص الكامل متاح مجانًا على الإنترنت، دون اشتراك أو تسجيل."
-        }
-      ]
+      "readChapter": "اقرأ الفصل ←"
     },
     "chapters": {
       "label": "المحاور",
@@ -58,14 +34,11 @@
       "chapterLabel": "الدرس",
       "themeLabel": "المحور",
       "lessonLabel": "الدرس",
-      "downloadPdf": "↓ تنزيل PDF",
       "breadcrumbHome": "الرئيسية",
       "breadcrumbChapters": "المحاور",
       "breadcrumbThemes": "المحاور",
       "prev": "→ السابق",
       "next": "التالي ←",
-      "noteTitle": "ملاحظة:",
-      "noteBody": "هذا مقتطف للمعاينة. نزّل ملف PDF الكامل للاطلاع على الفصل بأكمله والتمارين والحلول.",
       "tabOnline": "القراءة على الإنترنت",
       "tabReferences": "المراجع",
       "tocTitle": "جدول المحتويات",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "مراجع باللغة الفرنسية",
       "refsSectionEmpty": "لم تُضف روابط في هذا القسم حتى الآن.",
       "contentUnavailable": "محتوى هذا الدرس غير متاح بهذه اللغة حتى الآن.",
-      "downloadBtn": "↓ تنزيل",
       "noLessonTitle": "لا توجد دروس متاحة",
       "noLessonBody": "هذا المحور مدرج في بنية الكتاب، لكن محتوى دروسه لم يُنشر بعد.",
       "readTime": "مدة القراءة: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "لا يوجد تمرين يطابق هذا البحث.",
       "keywordsLabel": "الكلمات المفتاحية",
       "exercisePrefix": "التمرين",
-      "pdfFull": "جميع تمارين المحور — المسائل والتلميحات والحلول (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "المسائل + الحلول",
       "unavailable": "لا توجد تمارين متاحة بهذه اللغة حتى الآن.",
       "themeUnavailable": "تمارين هذا المحور غير متاحة بهذه اللغة حتى الآن.",
       "exerciseUnavailable": "هذا التمرين غير متاح بهذه اللغة حتى الآن.",

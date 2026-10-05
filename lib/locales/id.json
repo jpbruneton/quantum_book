@@ -19,35 +19,11 @@
       "aboutBook": "Tentang buku",
       "chapterPrefix": "Bab",
       "themePrefix": "Tema",
-      "stats": {
-        "chapters": "Tema",
-        "edition": "Edisi",
-        "format": "Format",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "Daftar isi",
       "exploreTitle": "Jelajahi tema",
       "readTheme": "Buka tema →",
       "readLesson": "Baca pelajaran →",
-      "readChapter": "Baca bab →",
-      "fullBookDownload": "Unduh edisi lengkap (segera tersedia)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Tampilan matematika lengkap",
-          "body": "Semua persamaan ditampilkan dengan KaTeX — matematika berkualitas LaTeX di peramban Anda."
-        },
-        {
-          "icon": "⬇",
-          "title": "Unduhan PDF",
-          "body": "Setiap bab tersedia untuk diunduh sebagai PDF agar dapat dipelajari secara luring."
-        },
-        {
-          "icon": "◎",
-          "title": "Akses terbuka dan gratis",
-          "body": "Seluruh teks tersedia gratis secara daring. Tanpa langganan atau pendaftaran."
-        }
-      ]
+      "readChapter": "Baca bab →"
     },
     "chapters": {
       "label": "TEMA",
@@ -58,14 +34,11 @@
       "chapterLabel": "PELAJARAN",
       "themeLabel": "TEMA",
       "lessonLabel": "PELAJARAN",
-      "downloadPdf": "↓ Unduh PDF",
       "breadcrumbHome": "Beranda",
       "breadcrumbChapters": "Tema",
       "breadcrumbThemes": "Tema",
       "prev": "← Sebelumnya",
       "next": "Berikutnya →",
-      "noteTitle": "Catatan:",
-      "noteBody": "Ini adalah cuplikan pratinjau. Unduh PDF lengkap untuk mendapatkan seluruh bab, latihan, dan penyelesaiannya.",
       "tabOnline": "Baca daring",
       "tabReferences": "Referensi",
       "tocTitle": "Daftar isi",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Referensi berbahasa Prancis",
       "refsSectionEmpty": "Belum ada tautan di bagian ini.",
       "contentUnavailable": "Isi pelajaran ini belum tersedia dalam bahasa ini.",
-      "downloadBtn": "↓ Unduh",
       "noLessonTitle": "Belum ada pelajaran",
       "noLessonBody": "Tema ini sudah tercantum dalam struktur buku, tetapi isi pelajarannya belum diterbitkan.",
       "readTime": "Waktu baca {time}"
@@ -150,9 +122,6 @@
       "noMatch": "Tidak ada latihan yang cocok dengan pencarian ini.",
       "keywordsLabel": "Kata kunci",
       "exercisePrefix": "Latihan",
-      "pdfFull": "Semua latihan dalam tema — soal, petunjuk, dan penyelesaian (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "soal + penyelesaian",
       "unavailable": "Belum ada latihan dalam bahasa ini.",
       "themeUnavailable": "Latihan untuk tema ini belum tersedia dalam bahasa ini.",
       "exerciseUnavailable": "Latihan ini belum tersedia dalam bahasa ini.",

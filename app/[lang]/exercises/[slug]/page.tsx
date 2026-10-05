@@ -5,7 +5,6 @@ import { getWebTheme, getWebThemes } from "@/lib/localizedChapters.server";
 import { bookMeta } from "@/lib/chapters";
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
 import { renderedHtmlToPlainText } from "@/lib/latex";
-import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import {
   buildAllExerciseIndexEntries,
   themeHasExercisesFrOrEn,
@@ -118,7 +117,6 @@ export default function ExerciseThemePage({ params }: Props) {
         titleEn={theme.titleEn}
         exercisesFr={exercisesFr}
         exercisesEn={exercisesEn}
-        pdfLinks={getExerciseThemePdfLinks(theme.number)}
       />
     </>
   );

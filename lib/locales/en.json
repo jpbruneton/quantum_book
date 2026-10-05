@@ -19,35 +19,11 @@
       "aboutBook": "About the Book",
       "chapterPrefix": "Ch",
       "themePrefix": "Theme",
-      "stats": {
-        "chapters": "Themes",
-        "edition": "Edition",
-        "format": "Format",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "Contents",
       "exploreTitle": "Explore the Themes",
       "readTheme": "Open theme →",
       "readLesson": "Read lesson →",
-      "readChapter": "Read chapter →",
-      "fullBookDownload": "Download the full edition (coming soon)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Full Math Rendering",
-          "body": "All equations rendered with KaTeX — crisp LaTeX-quality math in your browser."
-        },
-        {
-          "icon": "⬇",
-          "title": "PDF Downloads",
-          "body": "Every chapter available as a downloadable PDF for offline study."
-        },
-        {
-          "icon": "◎",
-          "title": "Free & Open Access",
-          "body": "Complete text freely available online. No paywalls, no sign-up required."
-        }
-      ]
+      "readChapter": "Read chapter →"
     },
     "chapters": {
       "label": "THEMES",
@@ -58,14 +34,11 @@
       "chapterLabel": "LESSON",
       "themeLabel": "THEME",
       "lessonLabel": "LESSON",
-      "downloadPdf": "↓ Download PDF",
       "breadcrumbHome": "Home",
       "breadcrumbChapters": "Themes",
       "breadcrumbThemes": "Themes",
       "prev": "← Previous",
       "next": "Next →",
-      "noteTitle": "Note:",
-      "noteBody": "This is a preview excerpt. Download the full PDF for the complete chapter, exercises, and solutions.",
       "tabOnline": "Read Online",
       "tabReferences": "References",
       "tocTitle": "Table of Contents",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "French references",
       "refsSectionEmpty": "No link added in this section yet.",
       "contentUnavailable": "The content of this lesson is not yet available in this language.",
-      "downloadBtn": "↓ Download",
       "noLessonTitle": "No lesson available",
       "noLessonBody": "This theme is listed in the structure, but lesson content has not been published yet.",
       "readTime": "{time} read"
@@ -150,9 +122,6 @@
       "noMatch": "No exercises match this query.",
       "keywordsLabel": "Keywords",
       "exercisePrefix": "Exercise",
-      "pdfFull": "All exercises for this theme — statements, hints and solutions (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "statements + solutions",
       "unavailable": "No exercises are available in this language yet.",
       "themeUnavailable": "Exercises for this theme are not yet available in this language.",
       "exerciseUnavailable": "This exercise is not yet available in this language.",

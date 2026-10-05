@@ -19,35 +19,11 @@
       "aboutBook": "دربارهٔ کتاب",
       "chapterPrefix": "فصل",
       "themePrefix": "موضوع",
-      "stats": {
-        "chapters": "موضوع‌ها",
-        "edition": "ویرایش",
-        "format": "قالب",
-        "formatValue": "وب + PDF"
-      },
       "contentsLabel": "فهرست مطالب",
       "exploreTitle": "موضوع‌ها را کاوش کنید",
       "readTheme": "باز کردن موضوع ←",
       "readLesson": "خواندن درس ←",
-      "readChapter": "خواندن فصل ←",
-      "fullBookDownload": "دریافت نسخهٔ کامل (به‌زودی)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "نمایش کامل ریاضیات",
-          "body": "همهٔ معادله‌ها با KaTeX نمایش داده می‌شوند؛ ریاضیات با کیفیت LaTeX در مرورگر شما."
-        },
-        {
-          "icon": "⬇",
-          "title": "دریافت PDF",
-          "body": "هر فصل برای مطالعهٔ آفلاین به‌صورت PDF قابل دریافت است."
-        },
-        {
-          "icon": "◎",
-          "title": "دسترسی آزاد و رایگان",
-          "body": "متن کامل به‌رایگان آنلاین در دسترس است. بدون اشتراک و ثبت‌نام."
-        }
-      ]
+      "readChapter": "خواندن فصل ←"
     },
     "chapters": {
       "label": "موضوع‌ها",
@@ -58,14 +34,11 @@
       "chapterLabel": "درس",
       "themeLabel": "موضوع",
       "lessonLabel": "درس",
-      "downloadPdf": "↓ دریافت PDF",
       "breadcrumbHome": "خانه",
       "breadcrumbChapters": "موضوع‌ها",
       "breadcrumbThemes": "موضوع‌ها",
       "prev": "→ قبلی",
       "next": "بعدی ←",
-      "noteTitle": "یادداشت:",
-      "noteBody": "این بخشی برای پیش‌نمایش است. برای فصل کامل، تمرین‌ها و پاسخ‌ها، PDF کامل را دریافت کنید.",
       "tabOnline": "مطالعهٔ آنلاین",
       "tabReferences": "منابع",
       "tocTitle": "فهرست مطالب",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "منابع فرانسوی",
       "refsSectionEmpty": "هنوز پیوندی به این بخش افزوده نشده است.",
       "contentUnavailable": "محتوای این درس هنوز به این زبان در دسترس نیست.",
-      "downloadBtn": "↓ دریافت",
       "noLessonTitle": "درسی در دسترس نیست",
       "noLessonBody": "این موضوع در ساختار کتاب وجود دارد، اما محتوای درس آن هنوز منتشر نشده است.",
       "readTime": "زمان مطالعه: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "تمرینی مطابق این جست‌وجو وجود ندارد.",
       "keywordsLabel": "کلیدواژه‌ها",
       "exercisePrefix": "تمرین",
-      "pdfFull": "همهٔ تمرین‌های موضوع — صورت مسئله‌ها، راهنمایی‌ها و پاسخ‌ها (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "صورت مسئله‌ها + پاسخ‌ها",
       "unavailable": "هنوز تمرینی به این زبان در دسترس نیست.",
       "themeUnavailable": "تمرین‌های این موضوع هنوز به این زبان در دسترس نیستند.",
       "exerciseUnavailable": "این تمرین هنوز به این زبان در دسترس نیست.",

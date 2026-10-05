@@ -71,8 +71,8 @@ Une banque par thème contient plusieurs environnements `exo`, titres, mots-clé
 indications et solutions. Le classement vient du nom du fichier ; `\theme{N}`
 historique est conservé et `\lecon{M}` permet une association plus fine.
 Sans `\seoready{true}`, un exercice reste accessible mais en noindex et hors sitemap.
-La traduction des cours ne valide pas les banques d'exercices. Le générateur PDF
-lit ces mêmes banques ; sa compilation est séparée et actuellement limitée à FR/EN.
+La traduction des cours ne valide pas les banques d'exercices. Le site ne propose
+pas de téléchargement PDF des exercices.
 Les quiz restent en préparation et en noindex tant que la banque est vide.
 
 ## Figures

@@ -19,35 +19,11 @@
       "aboutBook": "Kitap hakkında",
       "chapterPrefix": "Böl.",
       "themePrefix": "Konu",
-      "stats": {
-        "chapters": "Konular",
-        "edition": "Baskı",
-        "format": "Biçim",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "İçindekiler",
       "exploreTitle": "Konuları keşfedin",
       "readTheme": "Konuyu aç →",
       "readLesson": "Dersi oku →",
-      "readChapter": "Bölümü oku →",
-      "fullBookDownload": "Tam baskıyı indir (yakında)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Eksiksiz matematik gösterimi",
-          "body": "Tüm denklemler KaTeX ile işlenir — tarayıcınızda LaTeX kalitesinde matematik."
-        },
-        {
-          "icon": "⬇",
-          "title": "PDF indirmeleri",
-          "body": "Çevrimdışı çalışmak için her bölüm PDF olarak indirilebilir."
-        },
-        {
-          "icon": "◎",
-          "title": "Açık ve ücretsiz erişim",
-          "body": "Tam metin çevrimiçi olarak ücretsizdir. Abonelik veya kayıt gerekmez."
-        }
-      ]
+      "readChapter": "Bölümü oku →"
     },
     "chapters": {
       "label": "KONULAR",
@@ -58,14 +34,11 @@
       "chapterLabel": "DERS",
       "themeLabel": "KONU",
       "lessonLabel": "DERS",
-      "downloadPdf": "↓ PDF indir",
       "breadcrumbHome": "Ana sayfa",
       "breadcrumbChapters": "Konular",
       "breadcrumbThemes": "Konular",
       "prev": "← Önceki",
       "next": "Sonraki →",
-      "noteTitle": "Not:",
-      "noteBody": "Bu bir önizleme alıntısıdır. Bölümün tamamı, alıştırmalar ve çözümler için tam PDF dosyasını indirin.",
       "tabOnline": "Çevrimiçi oku",
       "tabReferences": "Kaynaklar",
       "tocTitle": "İçindekiler",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Fransızca kaynaklar",
       "refsSectionEmpty": "Bu bölüme henüz bağlantı eklenmedi.",
       "contentUnavailable": "Bu dersin içeriği henüz bu dilde mevcut değil.",
-      "downloadBtn": "↓ İndir",
       "noLessonTitle": "Henüz ders yok",
       "noLessonBody": "Bu konu kitap yapısında yer alıyor, ancak ders içeriği henüz yayımlanmadı.",
       "readTime": "{time} okuma süresi"
@@ -150,9 +122,6 @@
       "noMatch": "Bu aramayla eşleşen alıştırma yok.",
       "keywordsLabel": "Anahtar kelimeler",
       "exercisePrefix": "Alıştırma",
-      "pdfFull": "Konunun tüm alıştırmaları — sorular, ipuçları ve çözümler (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "sorular + çözümler",
       "unavailable": "Bu dilde henüz alıştırma yok.",
       "themeUnavailable": "Bu konunun alıştırmaları henüz bu dilde mevcut değil.",
       "exerciseUnavailable": "Bu alıştırma henüz bu dilde mevcut değil.",
