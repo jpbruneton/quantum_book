@@ -1,5 +1,29 @@
 # Notes et suivi des traductions Quantum
 
+## Thème 3, exercices en anglais — 5 octobre 2026
+
+Les 16 exercices de `exos_fr/exo_theme3.tex` ont été traduits directement en
+anglais académique britannique, sans API de traduction externe, par quatre passes
+parallèles puis assemblés dans `exos_en/exo_theme3.tex`. Les 16 identifiants,
+les rattachements aux leçons, les 73 questions et solutions, les indications,
+les macros, l'ordre et les marqueurs éditoriaux ont été conservés. Aucun marqueur
+`\seoready{true}` n'a été ajouté.
+
+Le contrôle structurel compare désormais aussi les banques d'exercices. Les
+1 142 expressions mathématiques de cette banque correspondent à la source après
+normalisation des seuls textes descriptifs traduits. Le manifeste contient son
+empreinte source/cible et couvre maintenant 103 traductions : les 102 leçons et
+fiches déjà suivies, plus cette banque anglaise. Le glossaire anglais consigne
+les nouveaux choix terminologiques ; `math-indices.json` enregistre la contrainte
+de sommation `n\,\mathrm{impair}` vers `n\,\mathrm{odd}`.
+
+Le build de production, les contrôles statiques, les ressources et les contrats
+de contenu passent ; les 16 pages d'exercice anglaises ont été précompilées. Le
+contrôle global des catalogues d'interface reste bloqué par un écart préexistant
+du catalogue allemand (10 mots-clés contre 8 pour la leçon 1 du thème 1), hors
+du périmètre de cette traduction. Aucune relecture humaine native ni validation
+scientifique indépendante n'est revendiquée.
+
 ## Thème 3, leçons 1 à 7 en anglais — 5 octobre 2026
 
 Les sept premières leçons françaises du thème 3 ont été traduites directement en

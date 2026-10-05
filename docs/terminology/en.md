@@ -138,6 +138,35 @@ restent inchangés : leurs abréviations conviennent également à `classical`,
 `incident`, `reflected`, `transmitted` et `external`. Les indices d'axes, d'états
 et de sommation ainsi que les autres symboles conventionnels restent inchangés.
 
+## Theme 3 exercises — 2026-10-05
+
+| Français / concept | Anglais retenu | Précision |
+|---|---|---|
+| inversion de la molécule d'ammoniac | ammonia inversion | Modèle à deux niveaux et couplage tunnel |
+| battement quantique | quantum beat | Interférence entre deux fréquences de Bohr |
+| puits infini | infinite square well | `infinite well` admis dans les titres courts |
+| précession de Larmor | Larmor precession | `pi pulse` pour une impulsion qui retourne le spin |
+| densité radiale de probabilité | radial probability density | À distinguer de la densité volumique $|\psi|^2$ |
+| région classiquement interdite | classically forbidden region | Pénétration de la fonction d'onde |
+| représentation en impulsion | momentum-space representation | Cohérent avec `position-space representation` |
+| fonction lorentzienne au carré | squared Lorentzian function | Distribution en impulsion de l'exercice 10 |
+| étalement du paquet d'ondes | wave-packet spreading | `wave packet` dans la prose, trait d'union dans le composé adjectival |
+| respiration d'un paquet | wave-packet breathing | Oscillation périodique de sa largeur |
+| modèle de Hückel ; radical allyle | Hückel model; allyl radical | Chimie quantique, orthographe britannique conservée ailleurs |
+| énergie de délocalisation | delocalisation energy | Avec `electron population` et `bond order` |
+| puits delta | delta well | `matching condition` et `discontinuity condition` aux raccordements |
+| polarisabilité | polarisability | Orthographe britannique |
+| approximation soudaine | sudden approximation | Avec `wave-function overlap` |
+
+Choix éditoriaux : `spin retourné` devient `spin flipped`; `théorème de
+Plancherel` devient `Plancherel's theorem`; `méthode variationnelle` devient
+`variational method`; `temps de retour` devient `revival period`. Les libellés
+visibles dans les formules sont traduits (`pour` → `for`, `soit` → `that is`,
+et les en-têtes du tableau de Hückel). La contrainte de sommation
+`n\,\mathrm{impair}` devient `n\,\mathrm{odd}` et sa correspondance est
+consignée dans `math-indices.json`. Les étiquettes d'états $G$, $D$, $S$ et
+$AS$ restent inchangées, conformément à la règle sur les labels d'état.
+
 ## Interface mobile — 2026-09-10
 
 Partager cette page : « Share this page ». Confirmation de copie : « Link copied! ».

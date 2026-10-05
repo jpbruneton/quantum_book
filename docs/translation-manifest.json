@@ -817,6 +817,14 @@
       "sourceSha256": "c97506f5a59e22f905b880cd11b3c2f2d88b6cf5327ae231e2b105fa98668fde",
       "target": "content/tex/theme3_en/lesson7.tex",
       "sha256": "41c38fb2eacf9a96677075f18cb973975c4c6ccd94255f75288225800530c4f6"
+    },
+    {
+      "unit": "exos/theme3",
+      "lang": "en",
+      "sourcePath": "content/tex/exos_fr/exo_theme3.tex",
+      "sourceSha256": "02090cdd940953f1d37a56b20a7f14fc8c52531973ea496f89c8def894edb69c",
+      "target": "content/tex/exos_en/exo_theme3.tex",
+      "sha256": "44d053fdae9b75bd7f18e7d584802d8e1ed7b6aa6f4fd830fff9b935a9793516"
     }
   ]
 }

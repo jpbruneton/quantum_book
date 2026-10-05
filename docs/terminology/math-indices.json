@@ -45,5 +45,14 @@
         "meaning": "Constante de normalisation de l'état impair : odd state; voir en.md."
       }
     ]
+  },
+  "exos/theme3": {
+    "en": [
+      {
+        "source": "n\\,\\mathrm{impair}",
+        "target": "n\\,\\mathrm{odd}",
+        "meaning": "Contrainte de sommation sur les entiers impairs : odd integers; voir en.md."
+      }
+    ]
   }
 }

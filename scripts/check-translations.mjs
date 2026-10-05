@@ -16,6 +16,7 @@ const unitLanguages = new Map([
   ["theme3/lecon5", ["en"]],
   ["theme3/lecon6", ["en"]],
   ["theme3/lecon7", ["en"]],
+  ["exos/theme3", ["en"]],
 ]);
 const units = [...unitLanguages.keys()];
 const selected = process.argv.find(arg => arg.startsWith("--unit="))?.slice(7);
@@ -48,6 +49,11 @@ function structure(source, indexAliases = []) {
     references: captures(text, /\\(?:ref|eqref|cite)\{([^}]+)\}/g),
     inputs: captures(text, /\\input\{([^}]+)\}/g),
     figures: captures(text, /\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}/g).map(name => name.split("/").at(-1).replace(/_(?:fr|en)(?=\.)/, "")),
+    exercises: captures(text, /\\begin\{exo\}(?:\[[^\]]*\])?\{([^}]+)\}/g),
+    exerciseLessons: captures(text, /\\lecon\{([^}]+)\}/g),
+    exerciseThemes: captures(text, /\\theme\{([^}]+)\}/g),
+    seoMarkers: captures(text, /\\seoready\{([^}]+)\}/g),
+    questions: captures(text, /(\\question)\b/g),
     math: mathExpressions(text, indexAliases),
   };
 }
@@ -55,14 +61,19 @@ let checked = 0;
 for (const unit of selected ? [selected] : units) {
   assert.ok(units.includes(unit), `Unknown unit ${unit}`);
   const [theme, lesson] = unit.split("/");
-  const sourcePath = `content/tex/${theme}_fr/${lesson}.tex`;
+  const isExerciseBank = theme === "exos";
+  const sourcePath = isExerciseBank
+    ? `content/tex/exos_fr/exo_${lesson}.tex`
+    : `content/tex/${theme}_fr/${lesson}.tex`;
   const source = readFileSync(sourcePath, "utf8");
   const expected = structure(source);
   const frenchProse = new Set(clean(source).split("\n").map(line => line.trim()).filter(line =>
     line.length > 55 && /[a-zA-Z\u00c0-\u024f]{4,} [a-zA-Z\u00c0-\u024f]{3,} /.test(line)));
   const sourceHash = contentHash(source);
   for (const lang of unitLanguages.get(unit)) {
-    const target = `content/tex/${theme}_${lang}/${lesson.replace("lecon", "lesson")}.tex`;
+    const target = isExerciseBank
+      ? `content/tex/exos_${lang}/exo_${lesson}.tex`
+      : `content/tex/${theme}_${lang}/${lesson.replace("lecon", "lesson")}.tex`;
     if (availableOnly && !existsSync(target)) continue;
     assert.ok(existsSync(target), `Missing translation: ${target}`);
     const translated = readFileSync(target, "utf8");
@@ -84,7 +95,7 @@ for (const unit of selected ? [selected] : units) {
     checked++;
   }
 }
-console.log(`${checked} lesson translations checked for complete structure, references and figures.`);
+console.log(`${checked} translations checked for complete structure, references, figures and exercises.`);
 if (process.argv.includes("--write-manifest")) {
   assert.equal(checked, [...unitLanguages.values()].reduce((total, langs) => total + langs.length, 0));
   writeFileSync("docs/translation-manifest.json", JSON.stringify({method: "Direct AI translation by language-group workers; no external translation API", newlineNormalization: "LF", files: report}, null, 2) + "\n");
