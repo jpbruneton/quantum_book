@@ -39,7 +39,7 @@ export default function ExercisesPage({params}: {params: {lang: string}}) {
     descriptionEn: theme.descriptionEn,
     hasContentFr: lang === "fr" && exoTexExists(theme.number, lang),
     hasContentEn: lang !== "fr" && exoTexExists(theme.number, lang),
-  }));
+  })).filter((theme) => theme.hasContentFr || theme.hasContentEn);
 
   const indexFr = lang === "fr" ? buildIndexCards(lang) : [];
   const indexEn = lang !== "fr" ? buildIndexCards(lang) : [];
