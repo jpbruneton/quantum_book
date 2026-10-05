@@ -849,38 +849,37 @@ a.exercise-index-card-link:focus-visible {
   transition: border-color 0.15s ease;
 }
 
-.theme-square-link {
+.theme-square-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 1.25rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid #b91c1c;
+  border-radius: 8px;
+  background: #b91c1c;
+  color: #fff;
+  font-family: var(--font-inter);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
   text-decoration: none;
+  transition: filter 0.15s ease, box-shadow 0.15s ease;
 }
 
-.theme-square-link::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+.theme-square-cta:hover {
+  filter: brightness(0.94);
+  box-shadow: 0 4px 16px rgba(185, 28, 28, 0.2);
 }
 
-.theme-square-arrow {
-  flex: none;
-  color: var(--accent);
-  font-size: 0.95rem;
-  line-height: 1;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-  opacity: 0.55;
-}
-
-.theme-square-link:hover .theme-square-arrow,
-.theme-square-link:focus-visible .theme-square-arrow {
-  opacity: 1;
-  transform: translate(2px, -2px);
-}
-
-.theme-square-card:has(.theme-square-link:hover),
-.theme-square-card:has(.theme-square-link:focus-visible) {
+.theme-square-card:has(.theme-square-cta:hover),
+.theme-square-card:has(.theme-square-cta:focus-visible) {
   border-color: var(--accent-border-hover, var(--accent));
 }
 
-.theme-square-link:focus-visible {
-  outline: 2px solid var(--accent);
+.theme-square-cta:focus-visible {
+  outline: 3px solid #dc2626;
   outline-offset: 2px;
 }
 

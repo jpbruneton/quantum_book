@@ -171,55 +171,28 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     >
                       {t.themePrefix} {theme.number}
                     </div>
-                    {hasContent ? (
-                      <Link
-                        href={lp(`/exercises/${theme.slug}`)}
-                        prefetch={false}
-                        className="theme-square-link"
-                        style={{
-                          display: "flex",
-                          alignItems: "baseline",
-                          justifyContent: "space-between",
-                          gap: "0.6rem",
-                          fontFamily: "var(--font-playfair)",
-                          fontSize: "1.1rem",
-                          fontWeight: 600,
-                          color: "var(--text-heading)",
-                          lineHeight: 1.35,
-                        }}
-                      >
-                        <span>{title}</span>
-                        <span className="theme-square-arrow" aria-hidden="true">
-                          ↗
-                        </span>
-                      </Link>
-                    ) : (
-                      <>
-                        <div
-                          style={{
-                            fontFamily: "var(--font-playfair)",
-                            fontSize: "1.1rem",
-                            fontWeight: 600,
-                            color: "var(--text-heading)",
-                            lineHeight: 1.35,
-                          }}
-                        >
-                          {title}
-                        </div>
-                        <div
-                          style={{
-                            fontFamily: "var(--font-crimson)",
-                            fontSize: "0.85rem",
-                            color: "var(--text-secondary)",
-                            marginTop: "0.5rem",
-                          }}
-                        >
-                          {t.comingSoon}
-                        </div>
-                      </>
-                    )}
+                    <div
+                      style={{
+                        fontFamily: "var(--font-playfair)",
+                        fontSize: "1.1rem",
+                        fontWeight: 600,
+                        color: "var(--text-heading)",
+                        lineHeight: 1.35,
+                      }}
+                    >
+                      {title}
+                    </div>
                   </div>
 
+                  {hasContent ? (
+                    <Link
+                      href={lp(`/exercises/${theme.slug}`)}
+                      prefetch={false}
+                      className="theme-square-cta"
+                    >
+                      {t.open}
+                    </Link>
+                  ) : null}
                 </div>
               );
             })}

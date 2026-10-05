@@ -208,3 +208,8 @@ Les cinq renvois des leçons 1 et 2 reprennent les labels français ; les deux i
 ### Blocs de cours — 2026-09-20
 
 Postulat : « Postulate » (`ui.blocks.postulate`). Libellé numéroté de l'environnement `postulat`, traduit directement du français ; relecture humaine native non effectuée.
+
+### Appel à l'action des exercices — 2026-10-05
+
+« Aller aux exercices » devient « Go to exercises » (`ui.exercises.open`).
+Libellé explicite du bouton placé au bas des cartes de thèmes disponibles.
