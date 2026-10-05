@@ -390,9 +390,15 @@
         },
         "applications-lecon-1": {
           "title": "Lesson 2",
-          "subtitle": "First applications: Stern–Gerlach and Mach–Zehnder",
-          "description": "First applications: Stern–Gerlach and Mach–Zehnder",
-          "topics": []
+          "subtitle": "Back to the Stern–Gerlach experiment",
+          "description": "Building the spin-1/2 model from the Stern–Gerlach results and the postulates: Pauli matrices, sequential experiments, arbitrary axis.",
+          "topics": [
+            "Stern–Gerlach",
+            "Spin 1/2",
+            "Pauli matrices",
+            "Successive measurements",
+            "Complex amplitudes"
+          ]
         },
         "applications-lecon-2": {
           "title": "Lesson 3",

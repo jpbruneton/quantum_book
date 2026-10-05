@@ -388,14 +388,14 @@
         },
         "applications-lecon-1": {
           "title": "Leçon n°2",
-          "subtitle": "Retour sur le Stern et Gerlach",
-          "description": "Probabilités de mesure et interférences : séquences de Stern–Gerlach et interféromètre de Mach–Zehnder.",
+          "subtitle": "Retour sur l'expérience de Stern et Gerlach",
+          "description": "Construction du modèle du spin 1/2 à partir des résultats de Stern–Gerlach et des postulats : matrices de Pauli, expériences en série, axe quelconque.",
           "topics": [
             "Stern–Gerlach",
-            "Mach–Zehnder",
-            "Amplitudes de probabilité",
+            "Spin 1/2",
+            "Matrices de Pauli",
             "Mesures successives",
-            "Interférences"
+            "Amplitudes complexes"
           ]
         },
         "applications-lecon-2": {
