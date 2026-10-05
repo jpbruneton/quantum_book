@@ -84,7 +84,7 @@ Les leçons françaises du thème 3, sauf la première, portent l'encart « Leç
 Leurs fragments TikZ restent dans `content/tex/figs-src/fr/theme3/`, avec `parametres.tex`.
 `node scripts/build-theme3-figures.cjs` compile les 33 figures utilisées vers
 `content/tex/site-assets/figs/fr/theme3/` (MiKTeX/TeX et `pdftoppm` nécessaires).
-Les leçons 1 à 6 disposent aussi d'une traduction anglaise. Leurs 13 figures
+Les leçons 1 à 7 disposent aussi d'une traduction anglaise. Leurs 16 figures
 utilisées ont des sources localisées dans `figs-src/en/theme3/` et des rendus dans
 `site-assets/figs/en/theme3/`. La commande
 `node scripts/build-theme3-figures.cjs --lang=en` les reconstruit ; `--jobs=N`

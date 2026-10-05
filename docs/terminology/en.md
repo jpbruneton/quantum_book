@@ -37,7 +37,7 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 - 2026-10-05 : métadonnées anglaises du thème 3 réalignées sur les onze entrées
   françaises (titres, descriptions et mots-clés). Cela ne rend disponibles que
-  les corps réellement présents : les leçons 1 à 6 en anglais à cette date.
+  les corps réellement présents : les leçons 1 à 7 en anglais à cette date.
 
 - 2026-09-21 : titres du nouveau plan du thème 3 dans le catalogue uniquement :
   « impulsion » → momentum ; « puits de potentiel » → potential wells ;
@@ -88,7 +88,7 @@ Les quatre images historiques `magnetsmall.png`, `magnetorque.jpg`,
 `precessionmag.png`, `SGimage.jpg` restent explicitement en `figs/fr/` : ce sont
 des replis non traduits, distincts des quatre schémas SG localisés.
 
-## Theme 3, Lessons 1--6 — 2026-10-05
+## Theme 3, Lessons 1--7 — 2026-10-05
 
 | Français / concept | Anglais retenu | Précision |
 |---|---|---|
@@ -112,6 +112,15 @@ des replis non traduits, distincts des quatre schémas SG localisés.
 | queue évanescente | evanescent tail | Région classiquement interdite |
 | effet tunnel | tunnelling | Orthographe britannique à deux `l` |
 | coefficient de réflexion / transmission | reflection / transmission coefficient | Probabilités sans dimension |
+| oscillateur harmonique | harmonic oscillator | Modèle quadratique classique et quantique |
+| opérateurs d'échelle | ladder operators | Terme générique pour les opérateurs de montée et de descente |
+| opérateur d'annihilation / de création | annihilation / creation operator | Respectivement $a$ et $a^\dagger$ |
+| opérateur nombre | number operator | $N=a^\dagger a$ |
+| état fondamental ; état excité | ground state; excited state | `ground-state energy` dans un composé adjectival |
+| énergie de point zéro | zero-point energy | Énergie $\hbar\omega/2$ du fondamental |
+| fonctions / polynômes de Hermite | Hermite functions / polynomials | Capitalisation du nom propre conservée |
+| état cohérent | coherent state | Paquet gaussien oscillant sans se déformer |
+| phonon | phonon | Quantum d'un mode de vibration du cristal |
 
 Registre retenu : anglais académique britannique (`normalised`, `localised`,
 `tunnelling`) et traduction directe proche de la syntaxe française lorsqu'elle

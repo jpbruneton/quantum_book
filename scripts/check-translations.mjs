@@ -15,6 +15,7 @@ const unitLanguages = new Map([
   ["theme3/lecon4", ["en"]],
   ["theme3/lecon5", ["en"]],
   ["theme3/lecon6", ["en"]],
+  ["theme3/lecon7", ["en"]],
 ]);
 const units = [...unitLanguages.keys()];
 const selected = process.argv.find(arg => arg.startsWith("--unit="))?.slice(7);
