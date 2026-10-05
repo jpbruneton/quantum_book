@@ -373,19 +373,17 @@
       "lessons": {
         "postulats-lecon-1": {
           "title": "Lesson 1",
-          "subtitle": "Measurement, Dynamics, and Interpretation",
-          "description": "Presentation of quantum postulates, Born rule, wavefunction collapse, and the Schrodinger equation.",
+          "subtitle": "The postulates",
+          "description": "Presentation of the quantum postulates, Born rule, wave-function collapse and the Schrödinger equation.",
           "topics": [
             "Postulates",
             "Quantum measurement",
             "Born rule",
             "Unitary evolution",
-            "Wavefunction collapse",
-            "Schrodinger equation",
+            "Wave-function collapse",
+            "Schrödinger equation",
             "Ehrenfest theorem",
-            "Superposition",
-            "Quantum entanglement",
-            "Bell inequalities"
+            "Superposition"
           ]
         },
         "applications-lecon-1": {
@@ -403,56 +401,114 @@
         "applications-lecon-2": {
           "title": "Lesson 3",
           "subtitle": "Discussion of the postulates",
-          "description": "Discussion of the postulates",
-          "topics": []
+          "description": "Superposition, spectra, uncertainty and the measurement problem: interpreting the postulates and their relationship to classical physics.",
+          "topics": [
+            "Superposition",
+            "Spectrum of observables",
+            "Uncertainty relations",
+            "Measurement problem",
+            "Correspondence principle",
+            "Canonical quantisation"
+          ]
         },
         "applications-lecon-3": {
           "title": "Lesson 4",
-          "subtitle": "Position, momentum, and particle representations",
-          "description": "Position, momentum, and particle representations",
-          "topics": []
+          "subtitle": "Position and momentum",
+          "description": "Position-space and momentum-space representations, the Dirac delta, translations and the Fourier transform.",
+          "topics": [
+            "Position",
+            "Momentum",
+            "Dirac delta",
+            "Translations",
+            "Fourier transform",
+            "Canonical commutator"
+          ]
         },
         "applications-lecon-4": {
           "title": "Lesson 5",
           "subtitle": "Dynamics of a particle",
-          "description": "Dynamics of a particle",
-          "topics": []
+          "description": "The Schrödinger equation in position space, probability current, the free particle and Ehrenfest's theorem.",
+          "topics": [
+            "Schrödinger equation",
+            "Probability current",
+            "Stationary states",
+            "Free particle",
+            "Ehrenfest's theorem"
+          ]
         },
         "applications-lecon-5": {
           "title": "Lesson 6",
-          "subtitle": "Potential wells and tunneling",
-          "description": "Potential wells and tunneling",
-          "topics": []
+          "subtitle": "Potential wells and tunnelling",
+          "description": "Bound states and scattering in potential wells, steps and barriers: matching conditions, reflection, transmission and tunnelling.",
+          "topics": [
+            "Potential wells",
+            "Boundary conditions",
+            "Bound states",
+            "Reflection and transmission",
+            "Tunnelling"
+          ]
         },
         "applications-lecon-6": {
           "title": "Lesson 7",
           "subtitle": "The harmonic oscillator",
-          "description": "The harmonic oscillator",
-          "topics": []
+          "description": "Spectrum and eigenstates of the harmonic oscillator using ladder operators; Hermite functions and fluctuations.",
+          "topics": [
+            "Harmonic oscillator",
+            "Ladder operators",
+            "Number operator",
+            "Ground-state energy",
+            "Hermite functions"
+          ]
         },
         "applications-lecon-7": {
           "title": "Lesson 8",
           "subtitle": "The hydrogen atom",
-          "description": "The hydrogen atom",
-          "topics": []
+          "description": "The spectrum and orbitals of hydrogen, quantum numbers and spectral lines; introduction to many-electron atoms.",
+          "topics": [
+            "Hydrogen atom",
+            "Atomic orbitals",
+            "Quantum numbers",
+            "Spectral lines",
+            "Electron-filling rules",
+            "Slater's rules"
+          ]
         },
         "applications-lecon-8": {
           "title": "Lesson 9",
-          "subtitle": "Benzene: delocalized electrons and molecular spectrum",
-          "description": "Benzene: delocalized electrons and molecular spectrum",
-          "topics": []
+          "subtitle": "Benzene",
+          "description": "Delocalised electrons in benzene: symmetries, molecular orbitals, optical transitions and comparison with measurements.",
+          "topics": [
+            "Benzene",
+            "Electron delocalisation",
+            "Molecular orbitals",
+            "Symmetries",
+            "Absorption spectrum"
+          ]
         },
         "applications-lecon-9": {
           "title": "Lesson 10",
           "subtitle": "Angular momentum and spin",
-          "description": "Angular momentum and spin",
-          "topics": []
+          "description": "Angular-momentum algebra, spin, the Bloch sphere, rotations and coupling to a magnetic field.",
+          "topics": [
+            "Angular momentum",
+            "Spin",
+            "Bloch sphere",
+            "Pauli matrices",
+            "Rotations",
+            "Magnetic field"
+          ]
         },
         "applications-lecon-10": {
           "title": "Lesson 11",
-          "subtitle": "Oscillations, interference, and beats",
-          "description": "Oscillations, interference, and beats",
-          "topics": []
+          "subtitle": "Oscillations and interference",
+          "description": "Relative phases and two-level dynamics: quantum beats, Rabi oscillations and Ramsey interference.",
+          "topics": [
+            "Quantum beats",
+            "Two-level systems",
+            "Rabi oscillations",
+            "Ramsey interference",
+            "Coherence"
+          ]
         }
       }
     },

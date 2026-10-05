@@ -313,9 +313,18 @@ for (const lang of SUPPORTED_LANGS.filter(lang => lang !== 'fr')) {
   const copy = require(path.resolve(`lib/locales/${lang}.json`)).ui.crossReference;
   for (const n of [1, 2]) {
     const html = [...pages.values()].find(page => page.file === `theme2_${lang}/lesson${n}.tex`).html;
-    assert.ok(html.includes(copy.unavailable), `${lang}: untranslated target is explicitly identified`);
+    if (lang === 'en' && n === 1) {
+      const translatedTargetPath = [...pages.entries()]
+        .find(([, page]) => page.file === 'theme3_en/lesson1.tex')?.[0];
+      assert.ok(translatedTargetPath, 'en: newly translated measurement-postulate target exists');
+      assert.ok(html.includes(`href="${translatedTargetPath}#`),
+        'en: newly translated measurement-postulate target is linked');
+      assert.ok(!html.includes(copy.unavailable), 'en: all targets from theme 2 lesson 1 are translated');
+    } else {
+      assert.ok(html.includes(copy.unavailable), `${lang}: untranslated target is explicitly identified`);
+    }
     assert.doesNotMatch(html, /\[(?:postulat_mesure|sec:t2-notations-dirac|sec:t4-operateurs-bornes|hilbertcn|sec:t4-adjoint-domaine-dense|eq:ket_to_bra|eq:bra_to_ket)\]/);
   }
-  assert.equal(lessonSource.hasLessonWebContent('theme3_fr/lecon1.tex', lang), false);
+  assert.equal(lessonSource.hasLessonWebContent('theme3_fr/lecon1.tex', lang), lang === 'en');
 }
 console.log(`${translatedLinks} translated cross-references have same-language targets and stable anchors; missing translations remain unlinked.`);

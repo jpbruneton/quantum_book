@@ -35,6 +35,10 @@ Traduire les indices descriptifs avec une abréviation de cette langue ; consign
 
 ## Suivi des décisions et harmonisation
 
+- 2026-10-05 : métadonnées anglaises du thème 3 réalignées sur les onze entrées
+  françaises (titres, descriptions et mots-clés). Cela ne rend disponibles que
+  les corps réellement présents : les leçons 1 à 6 en anglais à cette date.
+
 - 2026-09-21 : titres du nouveau plan du thème 3 dans le catalogue uniquement :
   « impulsion » → momentum ; « puits de potentiel » → potential wells ;
   « effet tunnel » → tunneling ; « électrons délocalisés » → delocalized electrons ;
@@ -83,6 +87,47 @@ cohérentes avec le cours ; sources inspectées, aucune recompilation.
 Les quatre images historiques `magnetsmall.png`, `magnetorque.jpg`,
 `precessionmag.png`, `SGimage.jpg` restent explicitement en `figs/fr/` : ce sont
 des replis non traduits, distincts des quatre schémas SG localisés.
+
+## Theme 3, Lessons 1--6 — 2026-10-05
+
+| Français / concept | Anglais retenu | Précision |
+|---|---|---|
+| opérateur auto-adjoint | self-adjoint operator | Employer `self-adjoint`, non `Hermitian`, lorsque le domaine d'un opérateur non borné intervient |
+| sous-espace propre | eigenspace | `eigenstate` pour un état propre normalisé ; `eigenvector` pour le vecteur mathématique |
+| réduction du paquet d'onde | wave-function collapse | Trait d'union conservé dans `wave-function` employé comme nom composé |
+| règle de Born | Born rule | Capitalisation standard |
+| valeur moyenne d'une observable | expectation value of an observable | Éviter `average value` dans les énoncés formels |
+| écart-type | standard deviation | À distinguer de la variance (`variance`) |
+| rayon ; espace projectif | ray; projective space | Identification des états à une phase globale près |
+| groupe unitaire fortement continu | strongly continuous unitary group | Terminologie de Stone |
+| état stationnaire | stationary state | État propre d'énergie à phase globale dépendant du temps |
+| matrices de Pauli | Pauli matrices | `Pauli operator` lorsque l'accent porte sur l'observable |
+| représentation position | position-space representation | Même convention pour `momentum-space representation` |
+| fonction d'onde en position | position-space wave function | `wave function` dans la prose ; `wave-function` dans un composé adjectival |
+| densité / courant de probabilité | probability density / probability current | Continuité avec l'équation de conservation locale |
+| paquet d'ondes gaussien | Gaussian wave packet | `wave packet`, en deux mots |
+| puits de potentiel | potential well | `infinite square well`, `finite square well` selon le cas |
+| potentiel delta | delta potential | Distribution de Dirac conservée comme `Dirac delta distribution` |
+| état lié ; état de diffusion | bound state; scattering state | Distinction spectrale et asymptotique |
+| queue évanescente | evanescent tail | Région classiquement interdite |
+| effet tunnel | tunnelling | Orthographe britannique à deux `l` |
+| coefficient de réflexion / transmission | reflection / transmission coefficient | Probabilités sans dimension |
+
+Registre retenu : anglais académique britannique (`normalised`, `localised`,
+`tunnelling`) et traduction directe proche de la syntaxe française lorsqu'elle
+reste naturelle. Les titres de sections et les légendes sont traduits sans
+résumé ni ajout explicatif. Les labels, citations et noms de fichiers
+bibliographiques restent inchangés.
+
+Indice descriptif traduit : `M_{\text{prêt}}` devient `M_{\text{ready}}` dans la
+leçon 3 pour l'état initial prêt de l'appareil de mesure. La correspondance est
+enregistrée dans `math-indices.json`. Dans la leçon 6, les indices de parité sont
+également traduits : `\phi_{\rm pair}` / `C_{\rm p}` deviennent
+`\phi_{\rm even}` / `C_{\rm e}`, et `\phi_{\rm impair}` / `C_{\rm i}` deviennent
+`\phi_{\rm odd}` / `C_{\rm o}`. Les indices `cl`, `inc`, `refl`, `trans` et `ext`
+restent inchangés : leurs abréviations conviennent également à `classical`,
+`incident`, `reflected`, `transmitted` et `external`. Les indices d'axes, d'états
+et de sommation ainsi que les autres symboles conventionnels restent inchangés.
 
 ## Interface mobile — 2026-09-10
 

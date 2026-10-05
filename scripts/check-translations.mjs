@@ -3,7 +3,20 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 
 const languages = ["en", "de", "es", "pt", "it", "pl", "ru", "zh", "ja", "ko", "hi", "vi", "ar", "id", "tr", "bn", "ur", "sw", "fa"];
-const units = ["theme1/lecon1", "theme2/lecon1", "theme2/lecon2", "theme2/fiche1", "theme2/fiche2"];
+const unitLanguages = new Map([
+  ["theme1/lecon1", languages],
+  ["theme2/lecon1", languages],
+  ["theme2/lecon2", languages],
+  ["theme2/fiche1", languages],
+  ["theme2/fiche2", languages],
+  ["theme3/lecon1", ["en"]],
+  ["theme3/lecon2", ["en"]],
+  ["theme3/lecon3", ["en"]],
+  ["theme3/lecon4", ["en"]],
+  ["theme3/lecon5", ["en"]],
+  ["theme3/lecon6", ["en"]],
+]);
+const units = [...unitLanguages.keys()];
 const selected = process.argv.find(arg => arg.startsWith("--unit="))?.slice(7);
 const availableOnly = process.argv.includes("--available-only");
 const report = [];
@@ -47,7 +60,7 @@ for (const unit of selected ? [selected] : units) {
   const frenchProse = new Set(clean(source).split("\n").map(line => line.trim()).filter(line =>
     line.length > 55 && /[a-zA-Z\u00c0-\u024f]{4,} [a-zA-Z\u00c0-\u024f]{3,} /.test(line)));
   const sourceHash = contentHash(source);
-  for (const lang of languages) {
+  for (const lang of unitLanguages.get(unit)) {
     const target = `content/tex/${theme}_${lang}/${lesson.replace("lecon", "lesson")}.tex`;
     if (availableOnly && !existsSync(target)) continue;
     assert.ok(existsSync(target), `Missing translation: ${target}`);
@@ -72,6 +85,6 @@ for (const unit of selected ? [selected] : units) {
 }
 console.log(`${checked} lesson translations checked for complete structure, references and figures.`);
 if (process.argv.includes("--write-manifest")) {
-  assert.equal(checked, units.length * languages.length);
+  assert.equal(checked, [...unitLanguages.values()].reduce((total, langs) => total + langs.length, 0));
   writeFileSync("docs/translation-manifest.json", JSON.stringify({method: "Direct AI translation by language-group workers; no external translation API", newlineNormalization: "LF", files: report}, null, 2) + "\n");
 }

@@ -12,5 +12,38 @@
         "meaning": "Précession : tiến động ; voir vi.md."
       }
     ]
+  },
+  "theme3/lecon3": {
+    "en": [
+      {
+        "source": "M_{\\text{prêt}}",
+        "target": "M_{\\text{ready}}",
+        "meaning": "État initial prêt de l'appareil de mesure : ready state; voir en.md."
+      }
+    ]
+  },
+  "theme3/lecon6": {
+    "en": [
+      {
+        "source": "\\phi_{\\rm pair}",
+        "target": "\\phi_{\\rm even}",
+        "meaning": "Fonction propre paire : even eigenfunction; voir en.md."
+      },
+      {
+        "source": "C_{\\rm p}",
+        "target": "C_{\\rm e}",
+        "meaning": "Constante de normalisation de l'état pair : even state; voir en.md."
+      },
+      {
+        "source": "\\phi_{\\rm impair}",
+        "target": "\\phi_{\\rm odd}",
+        "meaning": "Fonction propre impaire : odd eigenfunction; voir en.md."
+      },
+      {
+        "source": "C_{\\rm i}",
+        "target": "C_{\\rm o}",
+        "meaning": "Constante de normalisation de l'état impair : odd state; voir en.md."
+      }
+    ]
   }
 }

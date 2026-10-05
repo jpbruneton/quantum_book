@@ -1,5 +1,28 @@
 # Notes et suivi des traductions Quantum
 
+## Thème 3, leçons 1 à 6 en anglais — 5 octobre 2026
+
+Les six premières leçons françaises du thème 3 ont été traduites directement en
+anglais académique britannique, sans API de traduction externe. La structure
+LaTeX, les équations, labels, références, citations et renvois ont été conservés.
+Une seconde passe croisée a relu les leçons 1 à 3 ; les leçons 4 à 6 ont fait
+l'objet d'une relecture ciblée après les contrôles structurels.
+
+Les 13 figures TikZ utilisées par ces leçons ont des sources anglaises et ont été
+compilées à 200 dpi dans `site-assets/figs/en/theme3/`. Les libellés visibles,
+légendes internes et ponctuations décimales ont été vérifiés ; les 13 rendus ont
+été inspectés sans glyphe manquant, texte français résiduel ni débordement visible.
+Le compilateur du thème 3 accepte désormais `--lang=en` et `--jobs=<N>`.
+
+Le glossaire anglais consigne les choix de mécanique quantique et les indices
+descriptifs traduits. `math-indices.json` enregistre `M_{\text{prêt}}` vers
+`M_{\text{ready}}` ainsi que les indices de parité `pair` / `impair` vers
+`even` / `odd`. Le validateur et le manifeste couvrent maintenant 101 unités
+traduites : les 95 historiques et ces six nouvelles leçons anglaises.
+
+Aucune relecture humaine native ni validation scientifique indépendante n'est
+revendiquée pour cette livraison.
+
 ## Carte des structures localisée — 7 septembre 2026
 
 La source transmise pour la carte du thème 2, leçon 1, a été extraite dans

@@ -761,6 +761,54 @@
       "sourceSha256": "2e0709acda8e2fd3981e18fe3d60d00a981889de384ab22d6376205c40958205",
       "target": "content/tex/theme2_fa/fiche2.tex",
       "sha256": "f58edc8c4a671a109f5c5bbf5554933f34e5130f2c28bc456c114a6bed4d729e"
+    },
+    {
+      "unit": "theme3/lecon1",
+      "lang": "en",
+      "sourcePath": "content/tex/theme3_fr/lecon1.tex",
+      "sourceSha256": "05a1869337f3332a94656756d10b28043095c7b6cab45d3ab27e673940b62235",
+      "target": "content/tex/theme3_en/lesson1.tex",
+      "sha256": "609c41b998705c8080c7dafd7d741f84e21158d8fbf41f280734663185a1dfa4"
+    },
+    {
+      "unit": "theme3/lecon2",
+      "lang": "en",
+      "sourcePath": "content/tex/theme3_fr/lecon2.tex",
+      "sourceSha256": "fcc3d39dcc3ff2d7f4675e7607fd60b26e577a867b8293f421b7821aec9638dd",
+      "target": "content/tex/theme3_en/lesson2.tex",
+      "sha256": "894b51918cadfe1e3e2118940714bc6b19183ae6e9ee2971bf3484e50130e333"
+    },
+    {
+      "unit": "theme3/lecon3",
+      "lang": "en",
+      "sourcePath": "content/tex/theme3_fr/lecon3.tex",
+      "sourceSha256": "9bf9ba76468c31780429895a7a6dc37564f23bb580fd2f7deceeb15425248d5a",
+      "target": "content/tex/theme3_en/lesson3.tex",
+      "sha256": "5427cb7750e2f9eed7127b1f5e1ac5319a192b57fe13450837591618445c76ba"
+    },
+    {
+      "unit": "theme3/lecon4",
+      "lang": "en",
+      "sourcePath": "content/tex/theme3_fr/lecon4.tex",
+      "sourceSha256": "abdbb33648c055ca692de35fb8ca298148644538bed4d785173297eb929b29ff",
+      "target": "content/tex/theme3_en/lesson4.tex",
+      "sha256": "4d1cf60b131a2daf6a04254b5b69819e786f759f642c826370256a1cb6f95df9"
+    },
+    {
+      "unit": "theme3/lecon5",
+      "lang": "en",
+      "sourcePath": "content/tex/theme3_fr/lecon5.tex",
+      "sourceSha256": "550b14e849b6a344063d86661bcf6de0576f158aa17755da7a24b37059ce548e",
+      "target": "content/tex/theme3_en/lesson5.tex",
+      "sha256": "ffb840fc1453563273d4253f48e81b29879b0ab788fb9b45a3a52e622315b099"
+    },
+    {
+      "unit": "theme3/lecon6",
+      "lang": "en",
+      "sourcePath": "content/tex/theme3_fr/lecon6.tex",
+      "sourceSha256": "cf2387c8bc31c6f9c0c9a987ebcf08e6c1e9b4ed9e7e781766a003574a602bc3",
+      "target": "content/tex/theme3_en/lesson6.tex",
+      "sha256": "913f7d2f16f8f5da55d44a9dace6a35013e17bcd768c3acfa4ca22f9bf585a07"
     }
   ]
 }
