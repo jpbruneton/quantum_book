@@ -19,35 +19,11 @@
       "aboutBook": "O książce",
       "chapterPrefix": "Rozdz.",
       "themePrefix": "Temat",
-      "stats": {
-        "chapters": "Tematy",
-        "edition": "Wydanie",
-        "format": "Format",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "Spis treści",
       "exploreTitle": "Poznaj tematy",
       "readTheme": "Otwórz temat →",
       "readLesson": "Czytaj lekcję →",
-      "readChapter": "Czytaj rozdział →",
-      "fullBookDownload": "Pobierz pełne wydanie (wkrótce)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Pełne wyświetlanie matematyki",
-          "body": "Wszystkie równania są wyświetlane za pomocą KaTeX — matematyka w jakości LaTeX w przeglądarce."
-        },
-        {
-          "icon": "⬇",
-          "title": "Pliki PDF do pobrania",
-          "body": "Każdy rozdział można pobrać jako PDF do nauki bez połączenia z internetem."
-        },
-        {
-          "icon": "◎",
-          "title": "Otwarty i bezpłatny dostęp",
-          "body": "Pełny tekst dostępny bezpłatnie online. Bez subskrypcji i rejestracji."
-        }
-      ]
+      "readChapter": "Czytaj rozdział →"
     },
     "chapters": {
       "label": "TEMATY",
@@ -58,14 +34,11 @@
       "chapterLabel": "LEKCJA",
       "themeLabel": "TEMAT",
       "lessonLabel": "LEKCJA",
-      "downloadPdf": "↓ Pobierz PDF",
       "breadcrumbHome": "Strona główna",
       "breadcrumbChapters": "Tematy",
       "breadcrumbThemes": "Tematy",
       "prev": "← Poprzedni",
       "next": "Następny →",
-      "noteTitle": "Uwaga:",
-      "noteBody": "To fragment poglądowy. Pobierz pełny PDF, aby uzyskać cały rozdział, zadania i rozwiązania.",
       "tabOnline": "Czytaj online",
       "tabReferences": "Źródła",
       "tocTitle": "Spis treści",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Źródła francuskojęzyczne",
       "refsSectionEmpty": "W tej sekcji nie dodano jeszcze odnośników.",
       "contentUnavailable": "Treść tej lekcji nie jest jeszcze dostępna w tym języku.",
-      "downloadBtn": "↓ Pobierz",
       "noLessonTitle": "Brak dostępnych lekcji",
       "noLessonBody": "Ten temat znajduje się w strukturze książki, ale treść jego lekcji nie została jeszcze opublikowana.",
       "readTime": "Czas czytania: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "Żadne zadanie nie pasuje do tego zapytania.",
       "keywordsLabel": "Słowa kluczowe",
       "exercisePrefix": "Zadanie",
-      "pdfFull": "Wszystkie zadania z tematu — treści, wskazówki i rozwiązania (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "treści + rozwiązania",
       "unavailable": "W tym języku nie ma jeszcze dostępnych zadań.",
       "themeUnavailable": "Zadania z tego tematu nie są jeszcze dostępne w tym języku.",
       "exerciseUnavailable": "To zadanie nie jest jeszcze dostępne w tym języku.",

@@ -19,35 +19,11 @@
       "aboutBook": "کتاب کے بارے میں",
       "chapterPrefix": "باب",
       "themePrefix": "موضوع",
-      "stats": {
-        "chapters": "موضوعات",
-        "edition": "ایڈیشن",
-        "format": "شکل",
-        "formatValue": "ویب + PDF"
-      },
       "contentsLabel": "فہرستِ مضامین",
       "exploreTitle": "موضوعات دریافت کریں",
       "readTheme": "موضوع کھولیں ←",
       "readLesson": "سبق پڑھیں ←",
-      "readChapter": "باب پڑھیں ←",
-      "fullBookDownload": "مکمل ایڈیشن ڈاؤن لوڈ کریں (جلد)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "مکمل ریاضیاتی نمائش",
-          "body": "تمام مساوات KaTeX کے ذریعے دکھائی جاتی ہیں — آپ کے براؤزر میں LaTeX معیار کی ریاضی۔"
-        },
-        {
-          "icon": "⬇",
-          "title": "PDF ڈاؤن لوڈ",
-          "body": "آف لائن مطالعے کے لیے ہر باب PDF کی صورت میں ڈاؤن لوڈ کیا جا سکتا ہے۔"
-        },
-        {
-          "icon": "◎",
-          "title": "کھلی اور مفت رسائی",
-          "body": "مکمل متن آن لائن مفت دستیاب ہے۔ نہ رکنیت درکار ہے، نہ اندراج۔"
-        }
-      ]
+      "readChapter": "باب پڑھیں ←"
     },
     "chapters": {
       "label": "موضوعات",
@@ -58,14 +34,11 @@
       "chapterLabel": "سبق",
       "themeLabel": "موضوع",
       "lessonLabel": "سبق",
-      "downloadPdf": "↓ PDF ڈاؤن لوڈ کریں",
       "breadcrumbHome": "صفحۂ اوّل",
       "breadcrumbChapters": "موضوعات",
       "breadcrumbThemes": "موضوعات",
       "prev": "→ پچھلا",
       "next": "اگلا ←",
-      "noteTitle": "نوٹ:",
-      "noteBody": "یہ پیش نظارے کا ایک اقتباس ہے۔ پورا باب، مشقیں اور حل حاصل کرنے کے لیے مکمل PDF ڈاؤن لوڈ کریں۔",
       "tabOnline": "آن لائن مطالعہ",
       "tabReferences": "حوالہ جات",
       "tocTitle": "فہرستِ مضامین",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "فرانسیسی حوالہ جات",
       "refsSectionEmpty": "اس حصے میں ابھی کوئی ربط شامل نہیں کیا گیا۔",
       "contentUnavailable": "اس سبق کا متن ابھی اس زبان میں دستیاب نہیں۔",
-      "downloadBtn": "↓ ڈاؤن لوڈ کریں",
       "noLessonTitle": "کوئی سبق دستیاب نہیں",
       "noLessonBody": "یہ موضوع کتاب کی ساخت میں شامل ہے، لیکن اس کے سبق کا متن ابھی شائع نہیں ہوا۔",
       "readTime": "مطالعے کا وقت: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "اس تلاش سے مطابقت رکھنے والی کوئی مشق نہیں۔",
       "keywordsLabel": "کلیدی الفاظ",
       "exercisePrefix": "مشق",
-      "pdfFull": "موضوع کی تمام مشقیں — سوالات، اشارے اور حل (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "سوالات + حل",
       "unavailable": "ابھی اس زبان میں کوئی مشق دستیاب نہیں۔",
       "themeUnavailable": "اس موضوع کی مشقیں ابھی اس زبان میں دستیاب نہیں۔",
       "exerciseUnavailable": "یہ مشق ابھی اس زبان میں دستیاب نہیں۔",

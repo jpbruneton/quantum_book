@@ -19,35 +19,11 @@
       "aboutBook": "Giới thiệu sách",
       "chapterPrefix": "Ch.",
       "themePrefix": "Chủ đề",
-      "stats": {
-        "chapters": "Chủ đề",
-        "edition": "Ấn bản",
-        "format": "Định dạng",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "Mục lục",
       "exploreTitle": "Khám phá các chủ đề",
       "readTheme": "Mở chủ đề →",
       "readLesson": "Đọc bài học →",
-      "readChapter": "Đọc chương →",
-      "fullBookDownload": "Tải ấn bản đầy đủ (sắp có)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Hiển thị toán học đầy đủ",
-          "body": "Mọi phương trình đều được hiển thị bằng KaTeX — toán học chất lượng LaTeX ngay trong trình duyệt."
-        },
-        {
-          "icon": "⬇",
-          "title": "Tải PDF",
-          "body": "Mỗi chương đều có bản PDF để tải về và học ngoại tuyến."
-        },
-        {
-          "icon": "◎",
-          "title": "Truy cập mở và miễn phí",
-          "body": "Toàn văn được cung cấp miễn phí trực tuyến. Không cần đăng ký hay thuê bao."
-        }
-      ]
+      "readChapter": "Đọc chương →"
     },
     "chapters": {
       "label": "CHỦ ĐỀ",
@@ -58,14 +34,11 @@
       "chapterLabel": "BÀI HỌC",
       "themeLabel": "CHỦ ĐỀ",
       "lessonLabel": "BÀI HỌC",
-      "downloadPdf": "↓ Tải PDF",
       "breadcrumbHome": "Trang chủ",
       "breadcrumbChapters": "Chủ đề",
       "breadcrumbThemes": "Chủ đề",
       "prev": "← Trước",
       "next": "Tiếp →",
-      "noteTitle": "Lưu ý:",
-      "noteBody": "Đây là đoạn trích xem trước. Hãy tải PDF đầy đủ để xem toàn bộ chương, bài tập và lời giải.",
       "tabOnline": "Đọc trực tuyến",
       "tabReferences": "Tài liệu tham khảo",
       "tocTitle": "Mục lục",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Tài liệu tiếng Pháp",
       "refsSectionEmpty": "Chưa có liên kết nào được thêm vào phần này.",
       "contentUnavailable": "Nội dung bài học này chưa có bằng ngôn ngữ này.",
-      "downloadBtn": "↓ Tải xuống",
       "noLessonTitle": "Chưa có bài học",
       "noLessonBody": "Chủ đề này đã có trong cấu trúc sách, nhưng nội dung bài học chưa được công bố.",
       "readTime": "Thời gian đọc: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "Không có bài tập phù hợp với truy vấn này.",
       "keywordsLabel": "Từ khóa",
       "exercisePrefix": "Bài tập",
-      "pdfFull": "Tất cả bài tập của chủ đề — đề bài, gợi ý và lời giải (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "đề bài + lời giải",
       "unavailable": "Chưa có bài tập bằng ngôn ngữ này.",
       "themeUnavailable": "Các bài tập của chủ đề này chưa có bằng ngôn ngữ này.",
       "exerciseUnavailable": "Bài tập này chưa có bằng ngôn ngữ này.",

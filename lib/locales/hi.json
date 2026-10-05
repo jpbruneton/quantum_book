@@ -19,35 +19,11 @@
       "aboutBook": "पुस्तक के बारे में",
       "chapterPrefix": "अध्याय",
       "themePrefix": "विषय",
-      "stats": {
-        "chapters": "विषय",
-        "edition": "संस्करण",
-        "format": "प्रारूप",
-        "formatValue": "वेब + PDF"
-      },
       "contentsLabel": "विषयसूची",
       "exploreTitle": "विषय देखें",
       "readTheme": "विषय खोलें →",
       "readLesson": "पाठ पढ़ें →",
-      "readChapter": "अध्याय पढ़ें →",
-      "fullBookDownload": "पूरा संस्करण डाउनलोड करें (शीघ्र)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "पूर्ण गणितीय प्रदर्शन",
-          "body": "सभी समीकरण KaTeX से प्रदर्शित होते हैं—आपके ब्राउज़र में LaTeX गुणवत्ता का गणित।"
-        },
-        {
-          "icon": "⬇",
-          "title": "PDF डाउनलोड",
-          "body": "ऑफलाइन अध्ययन के लिए प्रत्येक अध्याय PDF के रूप में डाउनलोड किया जा सकता है।"
-        },
-        {
-          "icon": "◎",
-          "title": "खुली और निःशुल्क पहुँच",
-          "body": "पूरा पाठ ऑनलाइन निःशुल्क उपलब्ध है। न सदस्यता की आवश्यकता, न पंजीकरण की।"
-        }
-      ]
+      "readChapter": "अध्याय पढ़ें →"
     },
     "chapters": {
       "label": "विषय",
@@ -58,14 +34,11 @@
       "chapterLabel": "पाठ",
       "themeLabel": "विषय",
       "lessonLabel": "पाठ",
-      "downloadPdf": "↓ PDF डाउनलोड करें",
       "breadcrumbHome": "मुखपृष्ठ",
       "breadcrumbChapters": "विषय",
       "breadcrumbThemes": "विषय",
       "prev": "← पिछला",
       "next": "अगला →",
-      "noteTitle": "टिप्पणी:",
-      "noteBody": "यह पूर्वावलोकन का एक अंश है। पूरा अध्याय, अभ्यास और हल पाने के लिए पूर्ण PDF डाउनलोड करें।",
       "tabOnline": "ऑनलाइन पढ़ें",
       "tabReferences": "संदर्भ",
       "tocTitle": "विषयसूची",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "फ़्रेंच संदर्भ",
       "refsSectionEmpty": "इस खंड में अभी कोई लिंक नहीं जोड़ा गया है।",
       "contentUnavailable": "इस पाठ की सामग्री अभी इस भाषा में उपलब्ध नहीं है।",
-      "downloadBtn": "↓ डाउनलोड करें",
       "noLessonTitle": "कोई पाठ उपलब्ध नहीं",
       "noLessonBody": "यह विषय पुस्तक की संरचना में है, लेकिन इसके पाठ की सामग्री अभी प्रकाशित नहीं हुई है।",
       "readTime": "पढ़ने का समय: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "इस खोज से मेल खाने वाला कोई अभ्यास नहीं है।",
       "keywordsLabel": "मुख्य शब्द",
       "exercisePrefix": "अभ्यास",
-      "pdfFull": "विषय के सभी अभ्यास — प्रश्न, संकेत और हल (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "प्रश्न + हल",
       "unavailable": "अभी इस भाषा में कोई अभ्यास उपलब्ध नहीं है।",
       "themeUnavailable": "इस विषय के अभ्यास अभी इस भाषा में उपलब्ध नहीं हैं।",
       "exerciseUnavailable": "यह अभ्यास अभी इस भाषा में उपलब्ध नहीं है।",

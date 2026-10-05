@@ -7,7 +7,6 @@ import { useLang } from "@/app/context/LangContext";
 import { exerciseMatchesQuery } from "@/lib/exerciseIndexUtils";
 import { exerciseDetailPath } from "@/lib/exerciseRoutes";
 import { useLocalizedPath } from "@/lib/useLocalizedPath";
-import type { ExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 
 export interface ThemeCard {
   slug: string;
@@ -18,7 +17,6 @@ export interface ThemeCard {
   descriptionEn: string;
   hasContentFr: boolean;
   hasContentEn: boolean;
-  pdfLinks: ExerciseThemePdfLinks;
 }
 
 export interface ExerciseIndexCard {
@@ -144,7 +142,6 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             {themes.map((theme) => {
               const title = lang === "fr" ? theme.titleFr : theme.titleEn;
               const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
-              const pdfHref = lang === "fr" ? theme.pdfLinks.fr : lang === "en" ? theme.pdfLinks.en : null;
 
               return (
                 <div
@@ -223,51 +220,6 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                     )}
                   </div>
 
-                  {pdfHref ? (
-                    <div
-                      style={{
-                        marginTop: "1rem",
-                        paddingTop: "0.85rem",
-                        borderTop: "1px solid var(--border)",
-                      }}
-                    >
-                      <a
-                        href={pdfHref}
-                        download
-                        aria-label={t.pdfFull}
-                        className="theme-square-pdf-link"
-                        style={{
-                          display: "flex",
-                          alignItems: "baseline",
-                          justifyContent: "space-between",
-                          gap: "0.6rem",
-                          fontFamily: "var(--font-crimson)",
-                          color: "var(--accent)",
-                          textDecoration: "none",
-                          lineHeight: 1.35,
-                        }}
-                      >
-                        <span>
-                          <span style={{ display: "block", fontSize: "0.85rem", fontWeight: 600 }}>
-                            {t.pdfLabel}
-                          </span>
-                          <span
-                            style={{
-                              display: "block",
-                              fontSize: "0.75rem",
-                              textDecoration: "underline",
-                              textUnderlineOffset: "2px",
-                            }}
-                          >
-                            {t.pdfSub}
-                          </span>
-                        </span>
-                        <span className="theme-square-arrow" aria-hidden="true">
-                          ↓
-                        </span>
-                      </a>
-                    </div>
-                  ) : null}
                 </div>
               );
             })}
@@ -307,15 +259,6 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
             if (!cards || cards.length === 0) return null;
             const title = lang === "fr" ? theme.titleFr : theme.titleEn;
             const hasContent = lang === "fr" ? theme.hasContentFr : theme.hasContentEn;
-            const pdfHref = lang === "fr" ? theme.pdfLinks.fr : lang === "en" ? theme.pdfLinks.en : null;
-
-            const linkStyle: CSSProperties = {
-              fontFamily: "var(--font-crimson)",
-              fontSize: "0.88rem",
-              color: "var(--accent)",
-              textDecoration: "underline",
-              textUnderlineOffset: "2px",
-            };
 
             return (
               <section key={themeNumber}>
@@ -389,19 +332,6 @@ export function ExercisesClient({ themes, indexFr, indexEn }: Props) {
                       </span>
                     )}
                   </div>
-                  {pdfHref ? (
-                    <div
-                      style={{
-                        marginTop: "0.85rem",
-                        paddingTop: "0.85rem",
-                        borderTop: "1px solid var(--border)",
-                      }}
-                    >
-                      <a href={pdfHref} download style={linkStyle}>
-                        {t.pdfFull}
-                      </a>
-                    </div>
-                  ) : null}
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>

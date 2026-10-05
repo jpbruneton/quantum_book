@@ -3,7 +3,6 @@ import { isSiteLang, type SiteLang } from "@/lib/localeRoutes";
 import { getWebThemes } from "@/lib/localizedChapters.server";
 
 import { exerciseTitleToPlainHtml } from "@/lib/chapterContent.server";
-import { getExerciseThemePdfLinks } from "@/lib/exercisePdfDownloads.server";
 import { buildAllExerciseIndexEntries, themeHasAnyExercises } from "@/lib/exercisesLibrary.server";
 import { getTranslations } from "@/lib/translations.server";
 import { breadcrumbListJsonLd, itemListJsonLd } from "@/lib/structuredData";
@@ -40,7 +39,6 @@ export default function ExercisesPage({params}: {params: {lang: string}}) {
     descriptionEn: theme.descriptionEn,
     hasContentFr: lang === "fr" && exoTexExists(theme.number, lang),
     hasContentEn: lang !== "fr" && exoTexExists(theme.number, lang),
-    pdfLinks: getExerciseThemePdfLinks(theme.number),
   }));
 
   const indexFr = lang === "fr" ? buildIndexCards(lang) : [];

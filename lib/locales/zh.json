@@ -19,35 +19,11 @@
       "aboutBook": "关于本书",
       "chapterPrefix": "章",
       "themePrefix": "主题",
-      "stats": {
-        "chapters": "主题",
-        "edition": "版本",
-        "format": "格式",
-        "formatValue": "网页 + PDF"
-      },
       "contentsLabel": "目录",
       "exploreTitle": "探索各个主题",
       "readTheme": "打开主题 →",
       "readLesson": "阅读本课 →",
-      "readChapter": "阅读本章 →",
-      "fullBookDownload": "下载完整版（即将推出）",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "完整的数学排版",
-          "body": "所有方程均使用 KaTeX 排版，在浏览器中呈现 LaTeX 品质的数学公式。"
-        },
-        {
-          "icon": "⬇",
-          "title": "PDF 下载",
-          "body": "每章均可下载为 PDF，便于离线学习。"
-        },
-        {
-          "icon": "◎",
-          "title": "开放且免费",
-          "body": "全文可免费在线阅读，无需订阅或注册。"
-        }
-      ]
+      "readChapter": "阅读本章 →"
     },
     "chapters": {
       "label": "主题",
@@ -58,14 +34,11 @@
       "chapterLabel": "课程",
       "themeLabel": "主题",
       "lessonLabel": "课程",
-      "downloadPdf": "↓ 下载 PDF",
       "breadcrumbHome": "首页",
       "breadcrumbChapters": "主题",
       "breadcrumbThemes": "主题",
       "prev": "← 上一项",
       "next": "下一项 →",
-      "noteTitle": "说明：",
-      "noteBody": "这是预览节选。请下载完整 PDF，获取整章内容、习题及解答。",
       "tabOnline": "在线阅读",
       "tabReferences": "参考资料",
       "tocTitle": "目录",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "法文参考资料",
       "refsSectionEmpty": "本节尚未添加链接。",
       "contentUnavailable": "本课内容尚未提供此语言版本。",
-      "downloadBtn": "↓ 下载",
       "noLessonTitle": "暂无可用课程",
       "noLessonBody": "本主题已列入书籍结构，但课程内容尚未发布。",
       "readTime": "阅读时间：{time}"
@@ -150,9 +122,6 @@
       "noMatch": "没有与本次搜索匹配的习题。",
       "keywordsLabel": "关键词",
       "exercisePrefix": "习题",
-      "pdfFull": "本主题全部习题——题目、提示与解答（PDF）",
-      "pdfLabel": "PDF",
-      "pdfSub": "题目 + 解答",
       "unavailable": "尚无此语言的习题。",
       "themeUnavailable": "本主题习题尚未提供此语言版本。",
       "exerciseUnavailable": "本题尚未提供此语言版本。",

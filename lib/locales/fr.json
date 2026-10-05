@@ -19,35 +19,11 @@
       "aboutBook": "À propos du livre",
       "chapterPrefix": "Ch",
       "themePrefix": "Thème",
-      "stats": {
-        "chapters": "Thèmes",
-        "edition": "Édition",
-        "format": "Format",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "Sommaire",
       "exploreTitle": "Explorer les thèmes",
       "readTheme": "Ouvrir le thème →",
       "readLesson": "Lire la leçon →",
-      "readChapter": "Lire le chapitre →",
-      "fullBookDownload": "Télécharger l'édition complète (bientôt)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Rendu mathématique complet",
-          "body": "Toutes les équations sont rendues avec KaTeX — des maths de qualité LaTeX dans votre navigateur."
-        },
-        {
-          "icon": "⬇",
-          "title": "Téléchargements PDF",
-          "body": "Chaque chapitre est disponible en téléchargement PDF pour une étude hors ligne."
-        },
-        {
-          "icon": "◎",
-          "title": "Accès libre et gratuit",
-          "body": "Texte intégral disponible gratuitement en ligne. Sans abonnement, sans inscription."
-        }
-      ]
+      "readChapter": "Lire le chapitre →"
     },
     "chapters": {
       "label": "THÈMES",
@@ -58,14 +34,11 @@
       "chapterLabel": "LEÇON",
       "themeLabel": "THÈME",
       "lessonLabel": "LEÇON",
-      "downloadPdf": "↓ Télécharger le PDF",
       "breadcrumbHome": "Accueil",
       "breadcrumbChapters": "Thèmes",
       "breadcrumbThemes": "Thèmes",
       "prev": "← Précédent",
       "next": "Suivant →",
-      "noteTitle": "Note :",
-      "noteBody": "Ceci est un extrait de prévisualisation. Téléchargez le PDF complet pour le chapitre entier, les exercices et les solutions.",
       "tabOnline": "Lire en ligne",
       "tabReferences": "Références",
       "tocTitle": "Table des matières",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Références françaises",
       "refsSectionEmpty": "Aucun lien ajouté dans cette section pour le moment.",
       "contentUnavailable": "Le contenu de cette leçon n'est pas encore disponible dans cette langue.",
-      "downloadBtn": "↓ Télécharger",
       "noLessonTitle": "Aucune leçon disponible",
       "noLessonBody": "Ce thème est bien présent dans la structure, mais son contenu de leçon n'est pas encore publié.",
       "readTime": "{time} de lecture"
@@ -150,9 +122,6 @@
       "noMatch": "Aucun exercice ne correspond à cette requête.",
       "keywordsLabel": "Mots-clés",
       "exercisePrefix": "Exercice",
-      "pdfFull": "Tous les exercices du thème — énoncés, indications et solutions (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "énoncés + solutions",
       "unavailable": "Aucun exercice n'est encore disponible dans cette langue.",
       "themeUnavailable": "Les exercices de ce thème ne sont pas encore disponibles dans cette langue.",
       "exerciseUnavailable": "Cet exercice n'est pas encore disponible dans cette langue.",
@@ -419,14 +388,14 @@
         },
         "applications-lecon-1": {
           "title": "Leçon n°2",
-          "subtitle": "Retour sur le Stern et Gerlach",
-          "description": "Probabilités de mesure et interférences : séquences de Stern–Gerlach et interféromètre de Mach–Zehnder.",
+          "subtitle": "Retour sur l'expérience de Stern et Gerlach",
+          "description": "Construction du modèle du spin 1/2 à partir des résultats de Stern–Gerlach et des postulats : matrices de Pauli, expériences en série, axe quelconque.",
           "topics": [
             "Stern–Gerlach",
-            "Mach–Zehnder",
-            "Amplitudes de probabilité",
+            "Spin 1/2",
+            "Matrices de Pauli",
             "Mesures successives",
-            "Interférences"
+            "Amplitudes complexes"
           ]
         },
         "applications-lecon-2": {

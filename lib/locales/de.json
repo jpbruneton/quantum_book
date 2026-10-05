@@ -19,35 +19,11 @@
       "aboutBook": "Über das Buch",
       "chapterPrefix": "Kap.",
       "themePrefix": "Thema",
-      "stats": {
-        "chapters": "Themen",
-        "edition": "Auflage",
-        "format": "Format",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "Inhalt",
       "exploreTitle": "Themen entdecken",
       "readTheme": "Thema öffnen →",
       "readLesson": "Lektion lesen →",
-      "readChapter": "Kapitel lesen →",
-      "fullBookDownload": "Gesamtausgabe herunterladen (demnächst)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Vollständige mathematische Darstellung",
-          "body": "Alle Gleichungen werden mit KaTeX dargestellt — Mathematik in LaTeX-Qualität in Ihrem Browser."
-        },
-        {
-          "icon": "⬇",
-          "title": "PDF-Downloads",
-          "body": "Jedes Kapitel steht als PDF zum Herunterladen und zum Lernen ohne Internetverbindung bereit."
-        },
-        {
-          "icon": "◎",
-          "title": "Frei und kostenlos zugänglich",
-          "body": "Der vollständige Text ist kostenlos online verfügbar. Ohne Abonnement und ohne Registrierung."
-        }
-      ]
+      "readChapter": "Kapitel lesen →"
     },
     "chapters": {
       "label": "THEMEN",
@@ -58,14 +34,11 @@
       "chapterLabel": "LEKTION",
       "themeLabel": "THEMA",
       "lessonLabel": "LEKTION",
-      "downloadPdf": "↓ PDF herunterladen",
       "breadcrumbHome": "Startseite",
       "breadcrumbChapters": "Themen",
       "breadcrumbThemes": "Themen",
       "prev": "← Zurück",
       "next": "Weiter →",
-      "noteTitle": "Hinweis:",
-      "noteBody": "Dies ist ein Vorschauauszug. Laden Sie das vollständige PDF herunter, um das gesamte Kapitel mit Übungen und Lösungen zu lesen.",
       "tabOnline": "Online lesen",
       "tabReferences": "Literatur",
       "tocTitle": "Inhaltsverzeichnis",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Französischsprachige Quellen",
       "refsSectionEmpty": "In diesem Abschnitt wurden noch keine Links hinzugefügt.",
       "contentUnavailable": "Der Inhalt dieser Lektion ist in dieser Sprache noch nicht verfügbar.",
-      "downloadBtn": "↓ Herunterladen",
       "noLessonTitle": "Keine Lektion verfügbar",
       "noLessonBody": "Dieses Thema ist in der Buchstruktur vorhanden, seine Lektionsinhalte wurden jedoch noch nicht veröffentlicht.",
       "readTime": "{time} Lesezeit"
@@ -150,9 +122,6 @@
       "noMatch": "Keine Übung entspricht dieser Suche.",
       "keywordsLabel": "Stichwörter",
       "exercisePrefix": "Übung",
-      "pdfFull": "Alle Übungen zum Thema — Aufgaben, Hinweise und Lösungen (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "Aufgaben + Lösungen",
       "unavailable": "In dieser Sprache sind noch keine Übungen verfügbar.",
       "themeUnavailable": "Die Übungen zu diesem Thema sind in dieser Sprache noch nicht verfügbar.",
       "exerciseUnavailable": "Diese Übung ist in dieser Sprache noch nicht verfügbar.",

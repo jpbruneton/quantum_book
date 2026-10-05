@@ -19,35 +19,11 @@
       "aboutBook": "Kuhusu kitabu",
       "chapterPrefix": "Sura",
       "themePrefix": "Mada",
-      "stats": {
-        "chapters": "Mada",
-        "edition": "Toleo",
-        "format": "Muundo",
-        "formatValue": "Wavuti + PDF"
-      },
       "contentsLabel": "Yaliyomo",
       "exploreTitle": "Chunguza mada",
       "readTheme": "Fungua mada →",
       "readLesson": "Soma somo →",
-      "readChapter": "Soma sura →",
-      "fullBookDownload": "Pakua toleo kamili (linakuja)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Uonyeshaji kamili wa hisabati",
-          "body": "Milinganyo yote inaonyeshwa kwa KaTeX — hisabati yenye ubora wa LaTeX katika kivinjari chako."
-        },
-        {
-          "icon": "⬇",
-          "title": "Vipakuliwa vya PDF",
-          "body": "Kila sura inapatikana kupakuliwa kama PDF kwa kujifunza bila mtandao."
-        },
-        {
-          "icon": "◎",
-          "title": "Ufikiaji wazi na wa bure",
-          "body": "Maandishi yote yanapatikana bure mtandaoni. Hakuna usajili wala ada ya uanachama."
-        }
-      ]
+      "readChapter": "Soma sura →"
     },
     "chapters": {
       "label": "MADA",
@@ -58,14 +34,11 @@
       "chapterLabel": "SOMO",
       "themeLabel": "MADA",
       "lessonLabel": "SOMO",
-      "downloadPdf": "↓ Pakua PDF",
       "breadcrumbHome": "Mwanzo",
       "breadcrumbChapters": "Mada",
       "breadcrumbThemes": "Mada",
       "prev": "← Iliyotangulia",
       "next": "Inayofuata →",
-      "noteTitle": "Tanbihi:",
-      "noteBody": "Hiki ni kipande cha hakikisho. Pakua PDF kamili kupata sura nzima, mazoezi na suluhisho.",
       "tabOnline": "Soma mtandaoni",
       "tabReferences": "Marejeo",
       "tocTitle": "Yaliyomo",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Marejeo ya Kifaransa",
       "refsSectionEmpty": "Bado hakuna kiungo kilichoongezwa katika sehemu hii.",
       "contentUnavailable": "Maudhui ya somo hili bado hayapatikani katika lugha hii.",
-      "downloadBtn": "↓ Pakua",
       "noLessonTitle": "Hakuna somo linalopatikana",
       "noLessonBody": "Mada hii ipo katika muundo wa kitabu, lakini maudhui ya somo lake bado hayajachapishwa.",
       "readTime": "Muda wa kusoma: {time}"
@@ -150,9 +122,6 @@
       "noMatch": "Hakuna zoezi linalolingana na utafutaji huu.",
       "keywordsLabel": "Maneno muhimu",
       "exercisePrefix": "Zoezi",
-      "pdfFull": "Mazoezi yote ya mada — maswali, vidokezo na suluhisho (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "maswali + suluhisho",
       "unavailable": "Bado hakuna mazoezi katika lugha hii.",
       "themeUnavailable": "Mazoezi ya mada hii bado hayapatikani katika lugha hii.",
       "exerciseUnavailable": "Zoezi hili bado halipatikani katika lugha hii.",

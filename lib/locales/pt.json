@@ -19,35 +19,11 @@
       "aboutBook": "Sobre o livro",
       "chapterPrefix": "Cap.",
       "themePrefix": "Tema",
-      "stats": {
-        "chapters": "Temas",
-        "edition": "Edição",
-        "format": "Formato",
-        "formatValue": "Web + PDF"
-      },
       "contentsLabel": "Índice",
       "exploreTitle": "Explorar os temas",
       "readTheme": "Abrir o tema →",
       "readLesson": "Ler a lição →",
-      "readChapter": "Ler o capítulo →",
-      "fullBookDownload": "Descarregar a edição completa (em breve)",
-      "features": [
-        {
-          "icon": "∫",
-          "title": "Apresentação matemática completa",
-          "body": "Todas as equações são apresentadas com KaTeX — matemática com qualidade LaTeX no navegador."
-        },
-        {
-          "icon": "⬇",
-          "title": "Transferências em PDF",
-          "body": "Cada capítulo está disponível para descarregar em PDF e estudar sem ligação à Internet."
-        },
-        {
-          "icon": "◎",
-          "title": "Acesso livre e gratuito",
-          "body": "Texto integral disponível gratuitamente em linha. Sem subscrição nem registo."
-        }
-      ]
+      "readChapter": "Ler o capítulo →"
     },
     "chapters": {
       "label": "TEMAS",
@@ -58,14 +34,11 @@
       "chapterLabel": "LIÇÃO",
       "themeLabel": "TEMA",
       "lessonLabel": "LIÇÃO",
-      "downloadPdf": "↓ Descarregar PDF",
       "breadcrumbHome": "Início",
       "breadcrumbChapters": "Temas",
       "breadcrumbThemes": "Temas",
       "prev": "← Anterior",
       "next": "Seguinte →",
-      "noteTitle": "Nota:",
-      "noteBody": "Este é um excerto de pré-visualização. Descarregue o PDF completo para obter o capítulo integral, os exercícios e as soluções.",
       "tabOnline": "Ler em linha",
       "tabReferences": "Referências",
       "tocTitle": "Índice de conteúdos",
@@ -76,7 +49,6 @@
       "refsFrenchTitle": "Referências em francês",
       "refsSectionEmpty": "Ainda não foram acrescentadas ligações nesta secção.",
       "contentUnavailable": "O conteúdo desta lição ainda não está disponível nesta língua.",
-      "downloadBtn": "↓ Descarregar",
       "noLessonTitle": "Nenhuma lição disponível",
       "noLessonBody": "Este tema consta da estrutura, mas o conteúdo das suas lições ainda não foi publicado.",
       "readTime": "{time} de leitura"
@@ -150,9 +122,6 @@
       "noMatch": "Nenhum exercício corresponde a esta pesquisa.",
       "keywordsLabel": "Palavras-chave",
       "exercisePrefix": "Exercício",
-      "pdfFull": "Todos os exercícios do tema — enunciados, indicações e soluções (PDF)",
-      "pdfLabel": "PDF",
-      "pdfSub": "enunciados + soluções",
       "unavailable": "Ainda não há exercícios disponíveis nesta língua.",
       "themeUnavailable": "Os exercícios deste tema ainda não estão disponíveis nesta língua.",
       "exerciseUnavailable": "Este exercício ainda não está disponível nesta língua.",

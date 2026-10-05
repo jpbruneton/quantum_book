@@ -6,11 +6,10 @@ A free, rigorous yet accessible course on quantum mechanics, bridging classical
 physical intuition with the mathematical formalism of Hilbert spaces, linear
 operators, and measurement theory. Written for advanced undergraduates and
 graduate students, and freely readable in the browser (French and English),
-with KaTeX-rendered mathematics and downloadable per-theme PDFs.
+with KaTeX-rendered mathematics.
 
 Each lesson is paired with a library of worked exercises — statements,
-hints, and full solutions — also available as a single downloadable PDF per
-theme.
+hints, and full solutions.
 
 ## Contents so far
 
