@@ -1,5 +1,18 @@
 # Notes et suivi des traductions Quantum
 
+## Thème 2, exercices en anglais — 5 octobre 2026
+
+Les 32 exercices de `exos_fr/exo_theme2.tex` ont été traduits directement en
+anglais académique britannique dans `exos_en/exo_theme2.tex`, sans API de
+traduction externe. L'ordre, les identifiants stables, rattachements de leçon,
+environnements, macros et 1 823 segments mathématiques ont été conservés. La
+banque ne contient ni figure TikZ ni indice descriptif à adapter.
+
+Aucun marqueur `\seoready{true}` n'a été ajouté : cette traduction ne constitue
+pas une validation éditoriale ou scientifique des exercices. Les calculs et
+conclusions de la source française ont été traduits sans correction de fond.
+Une relecture humaine native reste à effectuer.
+
 ## Thème 3, exercices en anglais — 5 octobre 2026
 
 Les 16 exercices de `exos_fr/exo_theme3.tex` ont été traduits directement en

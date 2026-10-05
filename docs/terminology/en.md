@@ -138,6 +138,33 @@ restent inchangés : leurs abréviations conviennent également à `classical`,
 `incident`, `reflected`, `transmitted` et `external`. Les indices d'axes, d'états
 et de sommation ainsi que les autres symboles conventionnels restent inchangés.
 
+## Theme 2 exercises — 2026-10-05
+
+| Français / concept | Anglais retenu | Précision |
+|---|---|---|
+| espace pré-hilbertien ; norme sup | pre-Hilbert space; supremum norm | Avec `parallelogram identity` pour le critère associé |
+| opérateur de décalage à droite | right-shift operator | `shift operator` admis dans les titres courts |
+| représentant de Riesz ; forme linéaire | Riesz representative; linear functional | Convention du produit scalaire antilinéaire dans le premier argument |
+| opérateurs de création et d'annihilation ; opérateur nombre | creation and annihilation operators; number operator | Terminologie de l'oscillateur harmonique |
+| transconjuguée ; adjoint | conjugate transpose; adjoint | `self-adjoint operator`, mais `Hermitian matrix` dans le contexte matriciel |
+| projecteur orthogonal ; projecteur oblique | orthogonal projector; oblique projector | Avec `complementary projector` et `best approximation` |
+| procédé de Gram--Schmidt | Gram--Schmidt procedure | Orthographe et double trait d'union LaTeX conservés |
+| relation de fermeture | closure relation | Résolution de l'identité dans une base orthonormée |
+| réflexion de Householder | Householder reflection | `orthogonal reflection` pour la transformation géométrique |
+| rotation du plan ; axe de rotation | plane rotation; rotation axis | Avec `circular polarisation`, orthographe britannique |
+| croisement évité ; répulsion des niveaux | avoided crossing; level repulsion | Diagonalisation d'une matrice hermitienne dépendant d'un paramètre |
+| bloc de Jordan ; matrice nilpotente | Jordan block; nilpotent matrix | Avec `nondiagonalisable matrix` dans la prose |
+| calcul fonctionnel ; polynôme minimal | functional calculus; minimal polynomial | Fonctions polynomiales et exponentielle d'une matrice |
+| ensemble complet d'observables qui commutent | complete set of commuting observables | Forme développée conservée ; sigle `CSCO` non ajouté |
+| produit scalaire / norme de Hilbert--Schmidt | Hilbert--Schmidt inner product / norm | `Frobenius norm` comme synonyme de la norme matricielle |
+| opérateur positif ; valeurs singulières | positive operator; singular values | Avec `positive square root` et `operator norm` |
+| base hilbertienne ; identité de Parseval | Hilbert basis; Parseval's identity | Avec `Bessel's inequality` et `Fourier series` |
+
+Registre : anglais académique britannique (`diagonalise`, `normalised`,
+`polarisation`). Les 32 exercices conservent toutes les expressions mathématiques
+de la source ; aucun indice descriptif n'a dû être traduit et aucune entrée n'est
+donc ajoutée à `math-indices.json`.
+
 ## Theme 3 exercises — 2026-10-05
 
 | Français / concept | Anglais retenu | Précision |
