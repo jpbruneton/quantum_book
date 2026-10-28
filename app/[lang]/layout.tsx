@@ -7,7 +7,7 @@ import { FloatingShareButton } from "@/app/components/FloatingShareButton";
 import { VercelInstrumentation } from "@/app/components/VercelInstrumentation";
 import { isSiteLang, SITE_LANGS } from "@/lib/localeRoutes";
 import { getTranslations } from "@/lib/translations.server";
-import { getCatalog } from "@/lib/catalog";
+import { getClientUi } from "@/lib/catalog";
 import { isInterfaceTranslated } from "@/lib/catalog";
 export const dynamic = "error";
 export function generateStaticParams() { return SITE_LANGS.map(lang => ({lang})); }
@@ -24,7 +24,7 @@ export function generateMetadata({params}: {params: {lang: string}}) {
 }
 export default function LangLayout({children, params}: {children: React.ReactNode; params: {lang: string}}) {
   if (!isSiteLang(params.lang)) notFound();
-  return <SiteDocument lang={params.lang}><LangProvider initialLang={params.lang} initialUi={getCatalog(params.lang).ui}>
+  return <SiteDocument lang={params.lang}><LangProvider initialLang={params.lang} initialUi={getClientUi(params.lang)}>
     <NavBar /><main>{children}</main><Footer /><FloatingShareButton /><VercelInstrumentation />
   </LangProvider></SiteDocument>;
 }

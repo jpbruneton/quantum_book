@@ -1,4 +1,4 @@
-import type { Catalog } from "@/lib/catalog";
+import type { ClientUi } from "@/lib/catalog";
 export type Lang =
   | "fr"
   | "en"
@@ -156,7 +156,7 @@ function formatText(template: string, values: Record<string, string>) {
   return template.replace(/\{([a-zA-Z]+)\}/g, (match, key: string) => values[key] ?? match);
 }
 
-export function translationsFromUi(ui: Catalog["ui"]) {
+export function translationsFromUi(ui: ClientUi) {
   return {
     ...ui,
     chapter: {...ui.chapter, readTime: (time: string) => formatText(ui.chapter.readTime, {time})},

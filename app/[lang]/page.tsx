@@ -6,6 +6,8 @@ import { isSiteLang } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
 import { getWebThemes } from "@/lib/localizedChapters.server";
 import { notFound } from "next/navigation";
+import { homeJsonLd } from "@/lib/structuredData";
+import { JsonLd } from "@/app/components/JsonLd";
 
 interface Props {
   params: { lang: string };
@@ -29,5 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function HomePage({ params }: Props) {
   if (!isSiteLang(params.lang)) notFound();
-  return <HomePageClient webThemes={getWebThemes(params.lang)} />;
+  return <>
+    <JsonLd data={homeJsonLd(params.lang)} />
+    <HomePageClient webThemes={getWebThemes(params.lang)} />
+  </>;
 }

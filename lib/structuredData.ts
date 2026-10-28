@@ -1,4 +1,6 @@
-import { absoluteUrl } from "@/lib/siteUrl";
+import { absoluteUrl, getSiteUrl } from "@/lib/siteUrl";
+import { bookMeta } from "@/lib/chapters";
+import { getTranslations } from "@/lib/translations.server";
 import { localizedPath, type SiteLang } from "@/lib/localeRoutes";
 
 export interface BreadcrumbSegment {
@@ -37,4 +39,41 @@ export function itemListJsonLd(lang: SiteLang, entries: ItemListEntry[]) {
       url: absoluteUrl(localizedPath(lang, entry.logicalPath)),
     })),
   };
+}
+
+/**
+ * Book and WebSite JSON-LD, rendered on the home page only: placed in the
+ * layout, they were repeated (HTML + RSC payload) in every page of the site.
+ */
+export function homeJsonLd(lang: SiteLang) {
+  const t = getTranslations(lang);
+  const siteUrl = getSiteUrl();
+  const url = `${siteUrl}/${lang}`;
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      name: t.book.title,
+      description: t.book.description,
+      author: {
+        "@type": "Person",
+        name: bookMeta.author,
+        affiliation: {
+          "@type": "Organization",
+          name: bookMeta.affiliation,
+        },
+      },
+      datePublished: bookMeta.year,
+      inLanguage: lang,
+      url,
+      image: `${siteUrl}/figs/front.png`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: t.book.title,
+      url,
+      inLanguage: lang,
+    },
+  ];
 }

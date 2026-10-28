@@ -1,4 +1,3 @@
-import { getTranslations } from "@/lib/translations.server";
 import type { Metadata } from "next";
 import { isRtlLang, type Lang } from "@/lib/i18n";
 import { fontVariables } from "@/app/fonts";
@@ -9,33 +8,6 @@ import { bookMeta, bookMetaDisplayTitle } from "@/lib/chapters";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const SITE_URL = getSiteUrl();
-
-const bookJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Book",
-  name: bookMetaDisplayTitle(),
-  description: bookMeta.description,
-  author: {
-    "@type": "Person",
-    name: bookMeta.author,
-    affiliation: {
-      "@type": "Organization",
-      name: bookMeta.affiliation,
-    },
-  },
-  datePublished: bookMeta.year,
-  inLanguage: ["en", "fr"],
-  url: SITE_URL,
-  image: `${SITE_URL}/figs/front.png`,
-};
-
-const websiteJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: bookMetaDisplayTitle(),
-  url: SITE_URL,
-  inLanguage: ["en", "fr"],
-};
 
 // Set BING_SITE_VERIFICATION in Vercel env vars once the Bing Webmaster
 // property is created; no code change needed after that.
@@ -80,19 +52,8 @@ export const metadata: Metadata = {
 };
 
 export default function SiteDocument({ children, lang }: { children: React.ReactNode; lang: Lang }) {
-  const t = getTranslations(lang);
   return (
     <html lang={lang} dir={isRtlLang(lang) ? "rtl" : "ltr"} className={fontVariables} suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({...bookJsonLd, name: t.book.title, description: t.book.description, inLanguage: lang, url: `${SITE_URL}/${lang}`}).replace(/</g, "\\u003c") }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({...websiteJsonLd, name: t.book.title, inLanguage: lang, url: `${SITE_URL}/${lang}`}).replace(/</g, "\\u003c") }}
-        />
-      </head>
       <body>
         <Providers>{children}</Providers>
       </body>

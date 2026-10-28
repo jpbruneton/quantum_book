@@ -7,8 +7,6 @@ import {
   chapterLessonPath,
   lessonDisplayLabel,
   findLessonIndexByRef,
-  getFirstLessonRef,
-  lessonToPathSegment,
 } from "@/lib/lessonRoutes";
 import { ChapterContent } from "../ChapterContent";
 import { useLang } from "@/app/context/LangContext";
@@ -24,10 +22,16 @@ type ThemeWithLocalizedLessonContent = Omit<Theme, "lessons"> & {
   lessons: LocalizedLesson[];
 };
 
+/** Neighbouring theme, reduced to what the prev/next cards display. */
+export interface ThemeNavTarget {
+  title: string;
+  href: string;
+}
+
 interface Props {
   theme: ThemeWithLocalizedLessonContent;
-  prev: Theme | null;
-  next: Theme | null;
+  prev: ThemeNavTarget | null;
+  next: ThemeNavTarget | null;
   activeLessonRef: string;
 }
 
@@ -263,46 +267,22 @@ function ChapterContentAndPrevNext({ theme, prev, next, activeLessonRef }: Props
       ? theme.lessons[activeLessonIndex + 1]
       : null;
 
-  const prevFirstRef = prev ? getFirstLessonRef(prev.lessons) : null;
-  const prevFirstLesson =
-    prev && prevFirstRef
-      ? prev.lessons.find((lesson) => lessonToPathSegment(lesson) === prevFirstRef)
-      : null;
-  const nextFirstRef = next ? getFirstLessonRef(next.lessons) : null;
-  const nextFirstLesson =
-    next && nextFirstRef
-      ? next.lessons.find((lesson) => lessonToPathSegment(lesson) === nextFirstRef)
-      : null;
-
-  const prevThemeHref =
-    prev && prevFirstLesson ? chapterLessonPath(lang, prev.slug, prevFirstLesson) : null;
-  const nextThemeHref =
-    next && nextFirstLesson ? chapterLessonPath(lang, next.slug, nextFirstLesson) : null;
-
   const previousLabel = t.chapter.prev;
   const nextLabel = t.chapter.next;
 
   const previousTitle = previousLesson
     ? lessonDisplayLabel(previousLesson, lang)
-    : prev
-      ? lang === "fr"
-        ? prev.titleFr
-        : prev.titleEn
-      : null;
+    : prev?.title ?? null;
   const nextTitle = nextLesson
     ? lessonDisplayLabel(nextLesson, lang)
-    : next
-      ? lang === "fr"
-        ? next.titleFr
-        : next.titleEn
-      : null;
+    : next?.title ?? null;
 
   const previousHref = previousLesson
     ? chapterLessonPath(lang, theme.slug, previousLesson)
-    : prevThemeHref;
+    : prev?.href ?? null;
   const nextHref = nextLesson
     ? chapterLessonPath(lang, theme.slug, nextLesson)
-    : nextThemeHref;
+    : next?.href ?? null;
 
   const compactNavRow = (
     <LessonNavRow

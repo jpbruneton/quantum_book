@@ -3,14 +3,15 @@ import type { Metadata } from "next";
 import { getWebTheme, getWebThemes } from "@/lib/localizedChapters.server";
 import { bookMeta } from "@/lib/chapters";
 import { buildThemeWithLocalizedContent, hasLessonWebContent } from "@/lib/chapterPage.server";
-import { findLessonIndexByRef, lessonDisplayLabel, lessonToPathSegment } from "@/lib/lessonRoutes";
+import { chapterLessonPath, findLessonIndexByRef, getFirstLessonRef, lessonDisplayLabel, lessonToPathSegment } from "@/lib/lessonRoutes";
 import { localeAlternates } from "@/lib/metadataAlternates";
-import { isSiteLang, localizedPath, SITE_LANGS } from "@/lib/localeRoutes";
+import { isSiteLang, localizedPath, SITE_LANGS, type SiteLang } from "@/lib/localeRoutes";
 import { absoluteUrl } from "@/lib/siteUrl";
 import { getTranslations } from "@/lib/translations.server";
 import { breadcrumbListJsonLd } from "@/lib/structuredData";
 import { JsonLd } from "@/app/components/JsonLd";
-import { ChapterPageClient } from "../ChapterPageClient";
+import { ChapterPageClient, type ThemeNavTarget } from "../ChapterPageClient";
+import type { Theme } from "@/lib/chapters";
 interface Props { params: {lang: string; slug: string; lessonRef: string} }
 export function generateStaticParams() {
   return SITE_LANGS.flatMap(lang => getWebThemes(lang).flatMap(theme => theme.lessons.map(lesson => ({lang, slug: theme.slug, lessonRef: lessonToPathSegment(lesson)}))));
@@ -27,6 +28,14 @@ function resolvePage(params: Props["params"]) {
   const title = `${t.common.theme} ${theme.number}, ${lessonDisplayLabel(lesson, lang)}`;
   const path = `/chapters/${theme.slug}/${lessonToPathSegment(lesson)}`;
   return {lang, theme, index, lesson, t, title, path};
+}
+/** Only the title and link of a neighbouring theme reach the client payload. */
+function themeNavTarget(theme: Theme | undefined, lang: SiteLang): ThemeNavTarget | null {
+  if (!theme) return null;
+  const firstRef = getFirstLessonRef(theme.lessons);
+  const firstLesson = firstRef ? theme.lessons.find(lesson => lessonToPathSegment(lesson) === firstRef) : undefined;
+  if (!firstLesson) return null;
+  return {title: lang === "fr" ? theme.titleFr : theme.titleEn, href: chapterLessonPath(lang, theme.slug, firstLesson)};
 }
 export function generateMetadata({params}: Props): Metadata {
   const {lang, theme, lesson, title, path} = resolvePage(params);
@@ -54,6 +63,6 @@ export default function ChapterLessonPage({params}: Props) {
   ];
   return <>
     {hasLessonWebContent(lesson.texFile, lang) && <JsonLd data={jsonLd} />}
-    <ChapterPageClient theme={buildThemeWithLocalizedContent(theme, lang, index)} prev={webThemes[position - 1] ?? null} next={webThemes[position + 1] ?? null} activeLessonRef={lessonToPathSegment(lesson)} />
+    <ChapterPageClient theme={buildThemeWithLocalizedContent(theme, lang, index)} prev={themeNavTarget(webThemes[position - 1], lang)} next={themeNavTarget(webThemes[position + 1], lang)} activeLessonRef={lessonToPathSegment(lesson)} />
   </>;
 }

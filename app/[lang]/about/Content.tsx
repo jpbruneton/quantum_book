@@ -1,6 +1,7 @@
 "use client";
 import { bookMeta } from "@/lib/chapters";
 import { useLang } from "@/app/context/LangContext";
+import type { Catalog } from "@/lib/catalog";
 
 const AUTHOR_EXTERNAL_LINKS = [
   {
@@ -17,9 +18,8 @@ const AUTHOR_EXTERNAL_LINKS = [
   },
 ];
 
-export default function AboutPage() {
+export default function AboutPage({ copy: at }: { copy: Catalog["ui"]["about"] }) {
   const { t, lang } = useLang();
-  const at = t.about;
   const book = t.book;
   const detailItems = [
     { label: at.detailLabels.author, value: bookMeta.author },

@@ -25,7 +25,20 @@ export function buildThemeWithLocalizedContent(
     ...theme,
     lessons: theme.lessons.map((lesson, index) => {
       if (index !== activeLessonIndex) {
-        return { ...lesson, content: "", contentLang: "", renderedLang: "", toc: [], references: [] };
+        // Lesson tabs only need the labels and the route of the other lessons.
+        return {
+          ...lesson,
+          descriptionFr: "",
+          descriptionEn: "",
+          topicsFr: [],
+          topicsEn: [],
+          texFile: "",
+          content: "",
+          contentLang: "",
+          renderedLang: "",
+          toc: [],
+          references: [],
+        };
       }
       const langTexFile = getTexFilePathForLang(lesson.texFile, lang);
       const resolvedReferences = getLessonReferences(

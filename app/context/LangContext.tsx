@@ -2,12 +2,12 @@
 import {createContext, useContext, useMemo} from "react";
 import {useRouter} from "next/navigation";
 import {translationsFromUi, type Lang, type Translations} from "@/lib/i18n";
-import type {Catalog} from "@/lib/catalog";
+import type {ClientUi} from "@/lib/catalog";
 import {swapLocaleInPath} from "@/lib/localeRoutes";
 interface LangContextValue {lang: Lang; setLang: (lang: Lang) => void; t: Translations}
 const LangContext = createContext<LangContextValue | null>(null);
 export function LangProvider({children, initialLang, initialUi}: {
-  children: React.ReactNode; initialLang: Lang; initialUi: Catalog["ui"];
+  children: React.ReactNode; initialLang: Lang; initialUi: ClientUi;
 }) {
   const router = useRouter();
   const t = useMemo(() => translationsFromUi(initialUi), [initialUi]);
