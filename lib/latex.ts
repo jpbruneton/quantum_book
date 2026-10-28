@@ -90,6 +90,9 @@ export function processLatex(html: string): string {
   // Empty display pairs break non-greedy $$...$$ (first match closes on second line, leaves \begin{aligned} raw).
   normalizedHtml = normalizedHtml.replace(/\$\$\s*\n+\s*\$\$/g, "");
 
+  // KaTeX renders with output: "html" (no MathML copy): about -15 % of page
+  // weight, at the cost of formula accessibility for screen readers.
+
   // 1. Display math: $$...$$
   let result = normalizedHtml.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {
     const safeMath = sanitizeDisplayMath(math.trim());
@@ -99,6 +102,7 @@ export function processLatex(html: string): string {
         throwOnError: false,
         trust: false,
         macros: KATEX_MACROS,
+        output: "html",
       });
     } catch {
       return match;
@@ -118,6 +122,7 @@ export function processLatex(html: string): string {
         throwOnError: false,
         trust: false,
         macros: KATEX_MACROS,
+        output: "html",
       });
       // Thermo's closing punctuation rule, extended to opening parentheses and
       // punctuation separated from math by a (possibly nonbreaking) space.

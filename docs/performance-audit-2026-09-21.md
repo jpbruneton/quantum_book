@@ -112,6 +112,8 @@ trois endroits signalés, après chargement et après le nouveau déploiement :
 4. Si le chargement initial domine, évaluer une frontière serveur/client plus
    fine et le poids des données React. Ne pas retirer le MathML accessible ni
    charger les formules à la demande pour gagner artificiellement des points.
+   (Révisé le 28 octobre 2026 : le MathML est retiré pour réduire le poids des
+   pages ; voir `architecture.md`.)
 
 Le contrôle HTTP ne remplace pas cette trace. Aucun gain de FPS n'est revendiqué.
 

@@ -46,6 +46,11 @@ centaines de Ko par visite comptés dans les quotas Vercel ISR Reads et Fast
 Origin Transfer. Ce réglage remplace celui du 22 septembre 2026 et rejoint
 l'[audit Quantum / Thermo](performance-audit-2026-09-21.md).
 
+Depuis la même date, KaTeX rend les formules avec `output: "html"`, sans copie
+MathML : environ −15 % de poids par page, au prix de l'accessibilité des
+formules aux lecteurs d'écran. C'est un choix assumé pour rester dans les
+quotas Vercel.
+
 Le glossaire public et son index par mots-clés ont été retirés. Les mots-clés
 restent affichés en texte simple dans les leçons ; ils servent toujours aux
 métadonnées et à la recherche d'exercices. Les lexiques de `docs/terminology`
