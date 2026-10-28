@@ -72,7 +72,7 @@ export function Footer() {
             { href: lp("/about"), label: t.footer.aboutBook },
           ].map((l) => (
             <div key={l.href} style={{ marginBottom: "0.4rem" }}>
-              <Link
+              <Link prefetch={false}
                 href={l.href}
                 style={{
                   color: "var(--text-secondary)",

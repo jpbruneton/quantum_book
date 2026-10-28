@@ -50,7 +50,7 @@ export default function NotFound() {
       >
         {t.common.notFoundBody}
       </p>
-      <Link
+      <Link prefetch={false}
         href={`/${lang}`}
         style={{
           background: "var(--amber)",

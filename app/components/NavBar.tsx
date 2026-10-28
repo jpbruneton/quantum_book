@@ -290,7 +290,7 @@ export function NavBar() {
             </div>
 
             {desktopLinks.map((link) => (
-              <Link
+              <Link prefetch={false}
                 key={link.href}
                 href={link.href}
                 className={`nav-link${pathname === link.href ? " nav-link-active" : ""}`}
@@ -435,7 +435,7 @@ export function NavBar() {
             }}
           >
             {mobileLinks.map((link) => (
-              <Link
+              <Link prefetch={false}
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}

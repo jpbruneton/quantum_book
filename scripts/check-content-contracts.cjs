@@ -167,9 +167,10 @@ assert.ok(eighthLessonTheme.lessons.every((lesson, index) => index === 7 ||
   'Opening lesson 8 does not load the content, TOC or references of other lessons');
 const lessonRoutes = load('lib/lessonRoutes.ts');
 for (const file of ['app/[lang]/HomePageClient.tsx', 'app/[lang]/chapters/ChapterList.tsx',
-  'app/[lang]/chapters/[slug]/ChapterPageClient.tsx']) {
-  assert.doesNotMatch(fs.readFileSync(file, 'utf8'), /prefetch=\{false\}/,
-    `${file}: course navigation keeps automatic prefetching, like Thermo`);
+  'app/[lang]/chapters/[slug]/ChapterPageClient.tsx', 'app/components/NavBar.tsx', 'app/components/Footer.tsx']) {
+  const links = fs.readFileSync(file, 'utf8').match(/<Link\b[^>]*/g) ?? [];
+  assert.ok(links.every(link => link.includes('prefetch={false}')),
+    `${file}: links do not prefetch the RSC payload of every visible page, like Thermo`);
 }
 for (const lang of SUPPORTED_LANGS) {
   for (const theme of getWebThemes(lang)) {

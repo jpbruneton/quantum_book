@@ -46,7 +46,7 @@ export default function NotFound() {
       >
         The wavefunction collapsed. This page does not exist in the observable universe.
       </p>
-      <Link
+      <Link prefetch={false}
         href="/en"
         style={{
           background: "var(--amber)",

@@ -62,11 +62,11 @@ function ChapterThemeHeadingBlock({ theme }: { theme: ThemeWithLocalizedLessonCo
   const lp = useLocalizedPath();
   return (
     <nav className="chapter-location" aria-label={t.chapter.breadcrumbThemes} tabIndex={0}>
-      <Link href={lp("/")}>
+      <Link prefetch={false} href={lp("/")}>
         {t.chapter.breadcrumbHome}
       </Link>
       <span aria-hidden="true">/</span>
-      <Link href={lp("/chapters")}>
+      <Link prefetch={false} href={lp("/chapters")}>
         {t.chapter.breadcrumbThemes}
       </Link>
       <span aria-hidden="true">/</span>
@@ -107,7 +107,7 @@ function ChapterLessonTabButtons({
           const href = chapterLessonPath(lang, theme.slug, lesson);
           const active = href.endsWith(`/${activeLessonRef}`);
           return (
-            <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
+            <Link prefetch={false} key={lesson.slug} href={href} style={lessonTabStyle(active)}>
               {lessonDisplayLabel(lesson, lang)}
             </Link>
           );
@@ -119,7 +119,7 @@ function ChapterLessonTabButtons({
             const href = chapterLessonPath(lang, theme.slug, lesson);
             const active = href.endsWith(`/${activeLessonRef}`);
             return (
-              <Link key={lesson.slug} href={href} style={lessonTabStyle(active)}>
+              <Link prefetch={false} key={lesson.slug} href={href} style={lessonTabStyle(active)}>
                 {lessonDisplayLabel(lesson, lang)}
               </Link>
             );
@@ -140,7 +140,7 @@ interface NavCardProps {
 
 function NavCard({ label, title, href, align, compact }: NavCardProps) {
   return (
-    <Link href={href} style={{ textDecoration: "none", minWidth: 0, overflowWrap: "anywhere" }}>
+    <Link prefetch={false} href={href} style={{ textDecoration: "none", minWidth: 0, overflowWrap: "anywhere" }}>
       <div
         className="chapter-card"
         style={{

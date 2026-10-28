@@ -23,6 +23,6 @@ export default function QuizHome({params}: {params: {lang: string}}) {
   }));
   return <div style={{maxWidth: 860, margin: "4rem auto", padding: "1.5rem"}}><h1>{t.hubTitle}</h1>
     {!quizzes.length && <p>{getTranslations(lang).common.quizPending}</p>}
-    {quizzes.map(({theme, lesson, ref, count}) => <p key={`${theme.number}/${ref}`}><Link href={localizedPath(lang, `/quiz/${theme.slug}/${ref}`)}>{lang === "fr" ? theme.titleFr : theme.titleEn} · {t.lessonLabel(lesson.number)} · {t.questionCount(count)}</Link></p>)}
+    {quizzes.map(({theme, lesson, ref, count}) => <p key={`${theme.number}/${ref}`}><Link prefetch={false} href={localizedPath(lang, `/quiz/${theme.slug}/${ref}`)}>{lang === "fr" ? theme.titleFr : theme.titleEn} · {t.lessonLabel(lesson.number)} · {t.questionCount(count)}</Link></p>)}
   </div>;
 }
