@@ -122,6 +122,8 @@
       "noMatch": "इस खोज से मेल खाने वाला कोई अभ्यास नहीं है।",
       "keywordsLabel": "मुख्य शब्द",
       "exercisePrefix": "अभ्यास",
+      "finiteDimension": "परिमित विमा",
+      "infiniteDimension": "अनंत विमा",
       "unavailable": "अभी इस भाषा में कोई अभ्यास उपलब्ध नहीं है।",
       "themeUnavailable": "इस विषय के अभ्यास अभी इस भाषा में उपलब्ध नहीं हैं।",
       "exerciseUnavailable": "यह अभ्यास अभी इस भाषा में उपलब्ध नहीं है।",

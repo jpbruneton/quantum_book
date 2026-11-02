@@ -122,6 +122,8 @@
       "noMatch": "この検索に一致する演習はありません。",
       "keywordsLabel": "キーワード",
       "exercisePrefix": "演習",
+      "finiteDimension": "有限次元",
+      "infiniteDimension": "無限次元",
       "unavailable": "この言語の演習はまだありません。",
       "themeUnavailable": "このテーマの演習は、まだこの言語では利用できません。",
       "exerciseUnavailable": "この演習は、まだこの言語では利用できません。",

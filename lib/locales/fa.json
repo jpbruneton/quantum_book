@@ -122,6 +122,8 @@
       "noMatch": "تمرینی مطابق این جست‌وجو وجود ندارد.",
       "keywordsLabel": "کلیدواژه‌ها",
       "exercisePrefix": "تمرین",
+      "finiteDimension": "بعد متناهی",
+      "infiniteDimension": "بعد نامتناهی",
       "unavailable": "هنوز تمرینی به این زبان در دسترس نیست.",
       "themeUnavailable": "تمرین‌های این موضوع هنوز به این زبان در دسترس نیستند.",
       "exerciseUnavailable": "این تمرین هنوز به این زبان در دسترس نیست.",

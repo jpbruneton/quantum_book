@@ -122,6 +122,8 @@
       "noMatch": "এই অনুসন্ধানের সঙ্গে মেলে এমন কোনো অনুশীলনী নেই।",
       "keywordsLabel": "মূল শব্দ",
       "exercisePrefix": "অনুশীলনী",
+      "finiteDimension": "সসীম মাত্রা",
+      "infiniteDimension": "অসীম মাত্রা",
       "unavailable": "এখনও এই ভাষায় কোনো অনুশীলনী উপলব্ধ নেই।",
       "themeUnavailable": "এই বিষয়ের অনুশীলনী এখনও এই ভাষায় পাওয়া যাচ্ছে না।",
       "exerciseUnavailable": "এই অনুশীলনীটি এখনও এই ভাষায় পাওয়া যাচ্ছে না।",

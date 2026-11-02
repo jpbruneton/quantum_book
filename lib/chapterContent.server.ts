@@ -1138,6 +1138,7 @@ function normalizeLatexBlocks(
   result = stripLatexCommandsWithSimpleArg(result, "seoready");
   result = stripLatexCommandsWithSimpleArg(result, "lecon");
   result = stripLatexCommandsWithSimpleArg(result, "theme");
+  result = stripLatexCommandsWithSimpleArg(result, "dimension");
 
   // Support command-style theorem blocks such as \proposition{...}.
   result = replaceCommandBlock(result, "proposition", "latex-block-proposition", labels.proposition);

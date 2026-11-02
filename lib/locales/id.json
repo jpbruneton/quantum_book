@@ -122,6 +122,8 @@
       "noMatch": "Tidak ada latihan yang cocok dengan pencarian ini.",
       "keywordsLabel": "Kata kunci",
       "exercisePrefix": "Latihan",
+      "finiteDimension": "Dimensi hingga",
+      "infiniteDimension": "Dimensi tak hingga",
       "unavailable": "Belum ada latihan dalam bahasa ini.",
       "themeUnavailable": "Latihan untuk tema ini belum tersedia dalam bahasa ini.",
       "exerciseUnavailable": "Latihan ini belum tersedia dalam bahasa ini.",

@@ -122,6 +122,8 @@
       "noMatch": "Żadne zadanie nie pasuje do tego zapytania.",
       "keywordsLabel": "Słowa kluczowe",
       "exercisePrefix": "Zadanie",
+      "finiteDimension": "Wymiar skończony",
+      "infiniteDimension": "Wymiar nieskończony",
       "unavailable": "W tym języku nie ma jeszcze dostępnych zadań.",
       "themeUnavailable": "Zadania z tego tematu nie są jeszcze dostępne w tym języku.",
       "exerciseUnavailable": "To zadanie nie jest jeszcze dostępne w tym języku.",

@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { cache } from "react";
 import { SUPPORTED_LANGS, type Lang } from "@/lib/i18n";
 export type ExerciseIndexSource = "library" | "legacy";
+export type ExerciseDimension = "finite" | "infinite";
 export interface ExerciseIndexEntry {
   source: ExerciseIndexSource;
   id: string;
@@ -11,8 +12,18 @@ export interface ExerciseIndexEntry {
   keywords: string[];
   themeNumber: number;
   lessonNumber: number | null;
+  dimension: ExerciseDimension | null;
   seoReady: boolean;
   libraryRelPath: string | undefined;
+}
+const DIMENSION_VALUES: Record<string, ExerciseDimension> = {
+  finie: "finite",
+  finite: "finite",
+  infinie: "infinite",
+  infinite: "infinite",
+};
+function parseDimension(raw: string | null): ExerciseDimension | null {
+  return raw ? DIMENSION_VALUES[raw.toLowerCase()] ?? null : null;
 }
 function texRoot() { return join(process.cwd(), "content", "tex"); }
 function libraryDir(lang: Lang) { return join(texRoot(), `exos_${lang}`); }
@@ -118,6 +129,7 @@ export const buildAllExerciseIndexEntries = cache((lang: Lang): ExerciseIndexEnt
       return {source: "library" as const, id: block.id, titleTex: block.titleTex,
         keywords: parseKeywordsList(extractCommandArg(block.source, "keywords") ?? ""),
         themeNumber, lessonNumber: lesson ? Number(lesson) : null,
+        dimension: parseDimension(extractCommandArg(block.source, "dimension")),
         seoReady: extractCommandArg(block.source, "seoready") === "true",
         libraryRelPath: `exos_${lang}/${name}`};
     });

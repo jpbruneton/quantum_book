@@ -122,6 +122,8 @@
       "noMatch": "Bu aramayla eşleşen alıştırma yok.",
       "keywordsLabel": "Anahtar kelimeler",
       "exercisePrefix": "Alıştırma",
+      "finiteDimension": "Sonlu boyut",
+      "infiniteDimension": "Sonsuz boyut",
       "unavailable": "Bu dilde henüz alıştırma yok.",
       "themeUnavailable": "Bu konunun alıştırmaları henüz bu dilde mevcut değil.",
       "exerciseUnavailable": "Bu alıştırma henüz bu dilde mevcut değil.",

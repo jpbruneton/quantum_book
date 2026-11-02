@@ -122,6 +122,8 @@
       "noMatch": "Hakuna zoezi linalolingana na utafutaji huu.",
       "keywordsLabel": "Maneno muhimu",
       "exercisePrefix": "Zoezi",
+      "finiteDimension": "Dimensheni yenye kikomo",
+      "infiniteDimension": "Dimensheni isiyo na kikomo",
       "unavailable": "Bado hakuna mazoezi katika lugha hii.",
       "themeUnavailable": "Mazoezi ya mada hii bado hayapatikani katika lugha hii.",
       "exerciseUnavailable": "Zoezi hili bado halipatikani katika lugha hii.",

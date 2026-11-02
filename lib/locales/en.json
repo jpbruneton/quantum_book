@@ -122,6 +122,8 @@
       "noMatch": "No exercises match this query.",
       "keywordsLabel": "Keywords",
       "exercisePrefix": "Exercise",
+      "finiteDimension": "Finite dimension",
+      "infiniteDimension": "Infinite dimension",
       "unavailable": "No exercises are available in this language yet.",
       "themeUnavailable": "Exercises for this theme are not yet available in this language.",
       "exerciseUnavailable": "This exercise is not yet available in this language.",

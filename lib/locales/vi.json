@@ -122,6 +122,8 @@
       "noMatch": "Không có bài tập phù hợp với truy vấn này.",
       "keywordsLabel": "Từ khóa",
       "exercisePrefix": "Bài tập",
+      "finiteDimension": "Chiều hữu hạn",
+      "infiniteDimension": "Chiều vô hạn",
       "unavailable": "Chưa có bài tập bằng ngôn ngữ này.",
       "themeUnavailable": "Các bài tập của chủ đề này chưa có bằng ngôn ngữ này.",
       "exerciseUnavailable": "Bài tập này chưa có bằng ngôn ngữ này.",

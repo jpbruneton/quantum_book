@@ -122,6 +122,8 @@
       "noMatch": "이 검색에 맞는 연습문제가 없습니다.",
       "keywordsLabel": "핵심어",
       "exercisePrefix": "연습문제",
+      "finiteDimension": "유한 차원",
+      "infiniteDimension": "무한 차원",
       "unavailable": "이 언어로 제공되는 연습문제가 아직 없습니다.",
       "themeUnavailable": "이 주제의 연습문제는 아직 이 언어로 제공되지 않습니다.",
       "exerciseUnavailable": "이 연습문제는 아직 이 언어로 제공되지 않습니다.",

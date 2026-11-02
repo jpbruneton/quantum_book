@@ -122,6 +122,8 @@
       "noMatch": "لا يوجد تمرين يطابق هذا البحث.",
       "keywordsLabel": "الكلمات المفتاحية",
       "exercisePrefix": "التمرين",
+      "finiteDimension": "البعد المنتهي",
+      "infiniteDimension": "البعد اللامنتهي",
       "unavailable": "لا توجد تمارين متاحة بهذه اللغة حتى الآن.",
       "themeUnavailable": "تمارين هذا المحور غير متاحة بهذه اللغة حتى الآن.",
       "exerciseUnavailable": "هذا التمرين غير متاح بهذه اللغة حتى الآن.",

@@ -12,6 +12,7 @@ export interface ThemeExerciseCard {
   displayNumber: number;
   titleHtml: string;
   keywords: string[];
+  dimension: "finite" | "infinite" | null;
 }
 
 interface Props {
@@ -51,9 +52,85 @@ export function ExerciseThemeClient({
     router.replace(exerciseDetailPath(lang, themeSlug, id));
   }, [router, lang, themeSlug]);
 
+  const finiteCards = exercises.filter((card) => card.dimension === "finite");
+  const infiniteCards = exercises.filter((card) => card.dimension === "infinite");
+  const otherCards = exercises.filter((card) => card.dimension === null);
+  const grouped = finiteCards.length > 0 || infiniteCards.length > 0;
+
+  const renderCard = (card: ThemeExerciseCard) => (
+    <Link
+      key={card.id}
+      prefetch={false}
+      href={exerciseDetailPath(lang, themeSlug, card.id)}
+      style={{
+        border: "1px solid var(--border)",
+        borderRadius: "6px",
+        padding: "0.9rem 1.1rem",
+        background: "var(--bg-primary)",
+        display: "block",
+        textDecoration: "none",
+        color: "inherit",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "var(--font-crimson)",
+          fontSize: "0.95rem",
+          color: "var(--text-heading)",
+          lineHeight: 1.5,
+        }}
+      >
+        <span style={{ color: "var(--accent)", fontWeight: 600 }}>
+          {exercisePrefix} {card.displayNumber}
+        </span>
+        <span style={{ color: "var(--text-secondary)", margin: "0 0.35rem" }}>—</span>
+        <span
+          style={{ fontWeight: 600 }}
+          dangerouslySetInnerHTML={{ __html: card.titleHtml }}
+        />
+      </div>
+      {card.keywords.length > 0 ? (
+        <div
+          style={{
+            fontFamily: "var(--font-crimson)",
+            fontSize: "0.85rem",
+            color: "var(--text-secondary)",
+            marginTop: "0.45rem",
+            lineHeight: 1.45,
+          }}
+        >
+          <span style={{ fontWeight: 600 }}>{keywordsLabel}: </span>
+          {card.keywords.join(" · ")}
+        </div>
+      ) : null}
+    </Link>
+  );
+
+  const renderColumn = (heading: string, cards: ThemeExerciseCard[]) => (
+    <section>
+      <h2
+        style={{
+          fontFamily: "var(--font-crimson)",
+          fontSize: "0.9rem",
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          color: "var(--text-secondary)",
+          borderBottom: "1px solid var(--border)",
+          paddingBottom: "0.5rem",
+          margin: "0 0 0.9rem",
+        }}
+      >
+        {heading}
+      </h2>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+        {cards.map(renderCard)}
+      </div>
+    </section>
+  );
+
   return (
     <div style={{ position: "relative", zIndex: 1, padding: "5rem 1.5rem" }}>
-      <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+      <div style={{ maxWidth: grouped ? "1160px" : "860px", margin: "0 auto" }}>
         <div style={{ marginBottom: "2rem" }}>
           <Link prefetch={false}
             href={lp("/exercises")}
@@ -106,56 +183,41 @@ export function ExerciseThemeClient({
         </div>
 
         {exercises.length > 0 ? (
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-            {exercises.map((card) => (
-              <Link
-                key={card.id}
-                prefetch={false}
-                href={exerciseDetailPath(lang, themeSlug, card.id)}
+          grouped ? (
+            <>
+              <div
                 style={{
-                  border: "1px solid var(--border)",
-                  borderRadius: "6px",
-                  padding: "0.9rem 1.1rem",
-                  background: "var(--bg-primary)",
-                  display: "block",
-                  textDecoration: "none",
-                  color: "inherit",
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(330px, 1fr))",
+                  gap: "2.5rem",
+                  alignItems: "start",
                 }}
               >
+                {finiteCards.length > 0
+                  ? renderColumn(t.exercises.finiteDimension, finiteCards)
+                  : null}
+                {infiniteCards.length > 0
+                  ? renderColumn(t.exercises.infiniteDimension, infiniteCards)
+                  : null}
+              </div>
+              {otherCards.length > 0 ? (
                 <div
                   style={{
-                    fontFamily: "var(--font-crimson)",
-                    fontSize: "0.95rem",
-                    color: "var(--text-heading)",
-                    lineHeight: 1.5,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.65rem",
+                    marginTop: "2.5rem",
                   }}
                 >
-                  <span style={{ color: "var(--accent)", fontWeight: 600 }}>
-                    {exercisePrefix} {card.displayNumber}
-                  </span>
-                  <span style={{ color: "var(--text-secondary)", margin: "0 0.35rem" }}>—</span>
-                  <span
-                    style={{ fontWeight: 600 }}
-                    dangerouslySetInnerHTML={{ __html: card.titleHtml }}
-                  />
+                  {otherCards.map(renderCard)}
                 </div>
-                {card.keywords.length > 0 ? (
-                  <div
-                    style={{
-                      fontFamily: "var(--font-crimson)",
-                      fontSize: "0.85rem",
-                      color: "var(--text-secondary)",
-                      marginTop: "0.45rem",
-                      lineHeight: 1.45,
-                    }}
-                  >
-                    <span style={{ fontWeight: 600 }}>{keywordsLabel}: </span>
-                    {card.keywords.join(" · ")}
-                  </div>
-                ) : null}
-              </Link>
-            ))}
-          </div>
+              ) : null}
+            </>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+              {exercises.map(renderCard)}
+            </div>
+          )
         ) : (
           <p
             style={{

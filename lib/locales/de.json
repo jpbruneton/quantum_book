@@ -122,6 +122,8 @@
       "noMatch": "Keine Übung entspricht dieser Suche.",
       "keywordsLabel": "Stichwörter",
       "exercisePrefix": "Übung",
+      "finiteDimension": "Endliche Dimension",
+      "infiniteDimension": "Unendliche Dimension",
       "unavailable": "In dieser Sprache sind noch keine Übungen verfügbar.",
       "themeUnavailable": "Die Übungen zu diesem Thema sind in dieser Sprache noch nicht verfügbar.",
       "exerciseUnavailable": "Diese Übung ist in dieser Sprache noch nicht verfügbar.",

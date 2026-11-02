@@ -122,6 +122,8 @@
       "noMatch": "Ningún ejercicio coincide con esta búsqueda.",
       "keywordsLabel": "Palabras clave",
       "exercisePrefix": "Ejercicio",
+      "finiteDimension": "Dimensión finita",
+      "infiniteDimension": "Dimensión infinita",
       "unavailable": "Todavía no hay ejercicios disponibles en este idioma.",
       "themeUnavailable": "Los ejercicios de este tema aún no están disponibles en este idioma.",
       "exerciseUnavailable": "Este ejercicio aún no está disponible en este idioma.",

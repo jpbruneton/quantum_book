@@ -122,6 +122,8 @@
       "noMatch": "没有与本次搜索匹配的习题。",
       "keywordsLabel": "关键词",
       "exercisePrefix": "习题",
+      "finiteDimension": "有限维",
+      "infiniteDimension": "无限维",
       "unavailable": "尚无此语言的习题。",
       "themeUnavailable": "本主题习题尚未提供此语言版本。",
       "exerciseUnavailable": "本题尚未提供此语言版本。",
