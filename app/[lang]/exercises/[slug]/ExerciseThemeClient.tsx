@@ -13,6 +13,7 @@ export interface ThemeExerciseCard {
   titleHtml: string;
   keywords: string[];
   dimension: "finite" | "infinite" | null;
+  difficulty: number | null;
 }
 
 interface Props {
@@ -88,6 +89,20 @@ export function ExerciseThemeClient({
           style={{ fontWeight: 600 }}
           dangerouslySetInnerHTML={{ __html: card.titleHtml }}
         />
+        {card.difficulty ? (
+          <span
+            aria-label={`${card.difficulty}/3`}
+            style={{
+              color: "var(--accent)",
+              marginLeft: "0.5rem",
+              fontSize: "0.8rem",
+              letterSpacing: "0.1em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {"★".repeat(card.difficulty)}
+          </span>
+        ) : null}
       </div>
       {card.keywords.length > 0 ? (
         <div

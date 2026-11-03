@@ -39,6 +39,7 @@ function buildThemeExerciseCards(themeNumber: number, lang: import("@/lib/i18n")
       titleHtml: exerciseTitleToPlainHtml(entry.titleTex),
       keywords: entry.keywords,
       dimension: entry.dimension,
+      difficulty: entry.difficulty,
     });
   }
   for (const entry of (lang !== "fr" ? buildAllExerciseIndexEntries(lang) : [])) {
@@ -50,6 +51,7 @@ function buildThemeExerciseCards(themeNumber: number, lang: import("@/lib/i18n")
       titleHtml: exerciseTitleToPlainHtml(entry.titleTex),
       keywords: entry.keywords,
       dimension: entry.dimension,
+      difficulty: entry.difficulty,
     });
   }
   return { exercisesFr, exercisesEn };

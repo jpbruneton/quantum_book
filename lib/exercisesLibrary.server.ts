@@ -13,6 +13,7 @@ export interface ExerciseIndexEntry {
   themeNumber: number;
   lessonNumber: number | null;
   dimension: ExerciseDimension | null;
+  difficulty: number | null;
   seoReady: boolean;
   libraryRelPath: string | undefined;
 }
@@ -24,6 +25,10 @@ const DIMENSION_VALUES: Record<string, ExerciseDimension> = {
 };
 function parseDimension(raw: string | null): ExerciseDimension | null {
   return raw ? DIMENSION_VALUES[raw.toLowerCase()] ?? null : null;
+}
+function parseDifficulty(raw: string | null): number | null {
+  const value = raw ? Number(raw) : NaN;
+  return Number.isInteger(value) && value >= 1 && value <= 3 ? value : null;
 }
 function texRoot() { return join(process.cwd(), "content", "tex"); }
 function libraryDir(lang: Lang) { return join(texRoot(), `exos_${lang}`); }
@@ -130,6 +135,7 @@ export const buildAllExerciseIndexEntries = cache((lang: Lang): ExerciseIndexEnt
         keywords: parseKeywordsList(extractCommandArg(block.source, "keywords") ?? ""),
         themeNumber, lessonNumber: lesson ? Number(lesson) : null,
         dimension: parseDimension(extractCommandArg(block.source, "dimension")),
+        difficulty: parseDifficulty(extractCommandArg(block.source, "difficulte")),
         seoReady: extractCommandArg(block.source, "seoready") === "true",
         libraryRelPath: `exos_${lang}/${name}`};
     });
