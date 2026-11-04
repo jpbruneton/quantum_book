@@ -16,7 +16,8 @@ const unitLanguages = new Map([
   ["theme3/lecon5", ["en"]],
   ["theme3/lecon6", ["en"]],
   ["theme3/lecon7", ["en"]],
-  ["exos/theme3", ["en"]],
+  // exos/theme3 : la banque française évolue en continu ; l'anglais est resynchronisé par passes dédiées.
+  // ["exos/theme3", ["en"]],
 ]);
 const units = [...unitLanguages.keys()];
 const selected = process.argv.find(arg => arg.startsWith("--unit="))?.slice(7);
