@@ -240,7 +240,9 @@ function cleanLatexInline(text: string): string {
   result = result.replace(/\\og(?:\{\})?\s*/g, "« ");
   result = result.replace(/\s*\\fg(?:\{\})?/g, " »");
   result = result.replace(/---/g, "—");
-  result = result.replace(/--/g, "—");
+  // En LaTeX, -- est un demi-cadratin (plus court que le cadratin de ---) :
+  // noms composés, plages de pages 777--785.
+  result = result.replace(/--/g, "–");
   // Keep French typography groups unbreakable around guillemets and high punctuation.
   result = result.replace(/«\s+/g, `«${nbsp}`);
   result = result.replace(/\s+»/g, `${nbsp}»`);
