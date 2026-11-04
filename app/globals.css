@@ -215,6 +215,22 @@ body::before {
   color: var(--text-primary);
 }
 
+/* Longues leçons : le navigateur ne calcule le layout et la peinture d'un
+   bloc sous la ligne de flottaison qu'à l'approche du scroll. Le HTML complet
+   reste dans le document (référencement et recherche dans la page intacts) ;
+   seul le travail de rendu est différé. `auto 150px` réserve une hauteur
+   estimée par bloc jusqu'au premier rendu, puis mémorise la taille réelle. */
+.prose-quantum > * {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 150px;
+}
+
+@media print {
+  .prose-quantum > * {
+    content-visibility: visible;
+  }
+}
+
 .lesson-toc {
   padding: 1rem 1.1rem;
   border: 1px solid var(--accent-border-sm);

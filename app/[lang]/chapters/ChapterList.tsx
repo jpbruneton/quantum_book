@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 import { useLang } from "@/app/context/LangContext";
 import { chapterThemePath } from "@/lib/lessonRoutes";
 import type { Theme } from "@/lib/chapters";
@@ -10,6 +12,16 @@ interface Props {
 
 export function ChapterList({ webThemes }: Props) {
   const { t, lang } = useLang();
+  const router = useRouter();
+  // Pas de préchargement au viewport (trop lourd pour le transfert Vercel) :
+  // on précharge à l'intention, seulement la ligne que le lecteur est sur le
+  // point de cliquer, quelques dizaines de millisecondes avant la navigation.
+  const prefetchedHrefs = useRef<Set<string>>(new Set());
+  const prefetchOnIntent = (href: string) => {
+    if (prefetchedHrefs.current.has(href)) return;
+    prefetchedHrefs.current.add(href);
+    router.prefetch(href);
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
@@ -51,6 +63,9 @@ export function ChapterList({ webThemes }: Props) {
           <Link prefetch={false}
             href={chapterThemePath(lang, theme)}
             style={{ textDecoration: "none", display: "block" }}
+            onMouseEnter={() => prefetchOnIntent(chapterThemePath(lang, theme))}
+            onTouchStart={() => prefetchOnIntent(chapterThemePath(lang, theme))}
+            onFocus={() => prefetchOnIntent(chapterThemePath(lang, theme))}
           >
             <div
               className="chapter-list-row"
