@@ -41,3 +41,7 @@ next-env.d.ts
 
 # Generated from the private content submodule at prebuild
 /public/figs/
+
+# Advanced treatise and its compiled PDFs: kept in the private content repo
+/advanced/
+/output/
